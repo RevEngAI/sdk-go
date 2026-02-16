@@ -115,7 +115,7 @@ jobs:
         rm -Rf docs && mv go-client/docs .
         rm -Rf test && mv go-client/test .
         rm -Rf README.md && mv go-client/README.md .
-        rm -Rf *.go && mv go-client/*.go .
+        rm -Rf v3/*.go && mv go-client/*.go v3/
         rm -Rf go-client
 
         # Store the SDK version
