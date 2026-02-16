@@ -1,4 +1,4 @@
-module github.com/RevEngAI/sdk-go
+module github.com/RevEngAI/sdk-go/v3
 
 go 1.23
 
