@@ -1,4 +1,4 @@
-# \CollectionsAPI
+# CollectionsAPI
 
 All URIs are relative to *https://api.reveng.ai*
 
@@ -31,14 +31,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
-	collectionCreateRequest := *openapiclient.NewCollectionCreateRequest("CollectionName_example", "Description_example", int32(123)) // CollectionCreateRequest | 
+	collectionCreateRequest := *revengai.NewCollectionCreateRequest("CollectionName_example", "Description_example", int32(123)) // CollectionCreateRequest | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.CollectionsAPI.CreateCollection(context.Background()).CollectionCreateRequest(collectionCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.CreateCollection``: %v\n", err)
@@ -97,14 +97,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	collectionId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.CollectionsAPI.DeleteCollection(context.Background(), collectionId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.DeleteCollection``: %v\n", err)
@@ -167,7 +167,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
@@ -178,8 +178,8 @@ func main() {
 	pageNumber := int32(56) // int32 |  (optional) (default to 1)
 	binarySearchStr := "binarySearchStr_example" // string |  (optional)
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.CollectionsAPI.GetCollection(context.Background(), collectionId).IncludeTags(includeTags).IncludeBinaries(includeBinaries).PageSize(pageSize).PageNumber(pageNumber).BinarySearchStr(binarySearchStr).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.GetCollection``: %v\n", err)
@@ -247,19 +247,19 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	searchTerm := "searchTerm_example" // string |  (optional) (default to "")
-	filters := []openapiclient.Filters{openapiclient.Filters("official_only")} // []Filters |  (optional) (default to {})
+	filters := []revengai.Filters{revengai.Filters("official_only")} // []Filters |  (optional) (default to {})
 	limit := int32(56) // int32 |  (optional) (default to 20)
 	offset := int32(56) // int32 |  (optional) (default to 0)
-	orderBy := openapiclient.app__api__rest__v2__collections__enums__OrderBy("created") // AppApiRestV2CollectionsEnumsOrderBy |  (optional) (default to "collection")
-	order := openapiclient.Order("ASC") // Order |  (optional) (default to "ASC")
+	orderBy := revengai.app__api__rest__v2__collections__enums__OrderBy("created") // AppApiRestV2CollectionsEnumsOrderBy |  (optional) (default to "collection")
+	order := revengai.Order("ASC") // Order |  (optional) (default to "ASC")
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.CollectionsAPI.ListCollections(context.Background()).SearchTerm(searchTerm).Filters(filters).Limit(limit).Offset(offset).OrderBy(orderBy).Order(order).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.ListCollections``: %v\n", err)
@@ -323,15 +323,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	collectionId := int32(56) // int32 | 
-	collectionUpdateRequest := *openapiclient.NewCollectionUpdateRequest() // CollectionUpdateRequest | 
+	collectionUpdateRequest := *revengai.NewCollectionUpdateRequest() // CollectionUpdateRequest | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.CollectionsAPI.UpdateCollection(context.Background(), collectionId).CollectionUpdateRequest(collectionUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.UpdateCollection``: %v\n", err)
@@ -395,15 +395,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	collectionId := int32(56) // int32 | 
-	collectionBinariesUpdateRequest := *openapiclient.NewCollectionBinariesUpdateRequest([]int32{int32(123)}) // CollectionBinariesUpdateRequest | 
+	collectionBinariesUpdateRequest := *revengai.NewCollectionBinariesUpdateRequest([]int32{int32(123)}) // CollectionBinariesUpdateRequest | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.CollectionsAPI.UpdateCollectionBinaries(context.Background(), collectionId).CollectionBinariesUpdateRequest(collectionBinariesUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.UpdateCollectionBinaries``: %v\n", err)
@@ -467,15 +467,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	collectionId := int32(56) // int32 | 
-	collectionTagsUpdateRequest := *openapiclient.NewCollectionTagsUpdateRequest([]string{"Tags_example"}) // CollectionTagsUpdateRequest | 
+	collectionTagsUpdateRequest := *revengai.NewCollectionTagsUpdateRequest([]string{"Tags_example"}) // CollectionTagsUpdateRequest | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.CollectionsAPI.UpdateCollectionTags(context.Background(), collectionId).CollectionTagsUpdateRequest(collectionTagsUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.UpdateCollectionTags``: %v\n", err)

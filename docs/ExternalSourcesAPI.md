@@ -1,4 +1,4 @@
-# \ExternalSourcesAPI
+# ExternalSourcesAPI
 
 All URIs are relative to *https://api.reveng.ai*
 
@@ -25,14 +25,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	analysisId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.ExternalSourcesAPI.CreateExternalTaskVt(context.Background(), analysisId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ExternalSourcesAPI.CreateExternalTaskVt``: %v\n", err)
@@ -93,14 +93,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	analysisId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.ExternalSourcesAPI.GetVtData(context.Background(), analysisId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ExternalSourcesAPI.GetVtData``: %v\n", err)
@@ -161,14 +161,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	analysisId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.ExternalSourcesAPI.GetVtTaskStatus(context.Background(), analysisId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ExternalSourcesAPI.GetVtTaskStatus``: %v\n", err)

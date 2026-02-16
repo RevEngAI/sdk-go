@@ -1,4 +1,4 @@
-# \AnalysesCommentsAPI
+# AnalysesCommentsAPI
 
 All URIs are relative to *https://api.reveng.ai*
 
@@ -28,15 +28,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	analysisId := int32(56) // int32 | 
-	commentBase := *openapiclient.NewCommentBase("Content_example") // CommentBase | 
+	commentBase := *revengai.NewCommentBase("Content_example") // CommentBase | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.AnalysesCommentsAPI.CreateAnalysisComment(context.Background(), analysisId).CommentBase(commentBase).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCommentsAPI.CreateAnalysisComment``: %v\n", err)
@@ -100,15 +100,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	commentId := int32(56) // int32 | 
 	analysisId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.AnalysesCommentsAPI.DeleteAnalysisComment(context.Background(), commentId, analysisId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCommentsAPI.DeleteAnalysisComment``: %v\n", err)
@@ -173,14 +173,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	analysisId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.AnalysesCommentsAPI.GetAnalysisComments(context.Background(), analysisId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCommentsAPI.GetAnalysisComments``: %v\n", err)
@@ -243,16 +243,16 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	commentId := int32(56) // int32 | 
 	analysisId := int32(56) // int32 | 
-	commentUpdateRequest := *openapiclient.NewCommentUpdateRequest("Content_example") // CommentUpdateRequest | 
+	commentUpdateRequest := *revengai.NewCommentUpdateRequest("Content_example") // CommentUpdateRequest | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.AnalysesCommentsAPI.UpdateAnalysisComment(context.Background(), commentId, analysisId).CommentUpdateRequest(commentUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCommentsAPI.UpdateAnalysisComment``: %v\n", err)

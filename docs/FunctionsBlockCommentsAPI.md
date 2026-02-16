@@ -1,4 +1,4 @@
-# \FunctionsBlockCommentsAPI
+# FunctionsBlockCommentsAPI
 
 All URIs are relative to *https://api.reveng.ai*
 
@@ -25,15 +25,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	functionId := int32(56) // int32 | 
-	block := *openapiclient.NewBlock(int32(123)) // Block | 
+	block := *revengai.NewBlock(int32(123)) // Block | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsBlockCommentsAPI.GenerateBlockCommentsForBlockInFunction(context.Background(), functionId).Block(block).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsBlockCommentsAPI.GenerateBlockCommentsForBlockInFunction``: %v\n", err)
@@ -95,14 +95,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	functionId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsBlockCommentsAPI.GenerateBlockCommentsForFunction(context.Background(), functionId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsBlockCommentsAPI.GenerateBlockCommentsForFunction``: %v\n", err)
@@ -163,14 +163,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	functionId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsBlockCommentsAPI.GenerateOverviewCommentForFunction(context.Background(), functionId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsBlockCommentsAPI.GenerateOverviewCommentForFunction``: %v\n", err)

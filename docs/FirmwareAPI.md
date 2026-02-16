@@ -1,4 +1,4 @@
-# \FirmwareAPI
+# FirmwareAPI
 
 All URIs are relative to *https://api.reveng.ai*
 
@@ -26,14 +26,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	taskId := "taskId_example" // string | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FirmwareAPI.GetBinariesForFirmwareTask(context.Background(), taskId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareAPI.GetBinariesForFirmwareTask``: %v\n", err)
@@ -96,15 +96,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	file := os.NewFile(1234, "some_file") // *os.File | 
 	password := "password_example" // string |  (optional)
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FirmwareAPI.UploadFirmware(context.Background()).File(file).Password(password).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareAPI.UploadFirmware``: %v\n", err)

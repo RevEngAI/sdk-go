@@ -1,4 +1,4 @@
-# \AnalysesSecurityChecksAPI
+# AnalysesSecurityChecksAPI
 
 All URIs are relative to *https://api.reveng.ai*
 
@@ -25,14 +25,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	analysisId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.AnalysesSecurityChecksAPI.CreateScurityChecksTask(context.Background(), analysisId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesSecurityChecksAPI.CreateScurityChecksTask``: %v\n", err)
@@ -95,7 +95,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
@@ -103,8 +103,8 @@ func main() {
 	page := int32(56) // int32 | The page number to retrieve.
 	pageSize := int32(56) // int32 | Number of items per page.
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.AnalysesSecurityChecksAPI.GetSecurityChecks(context.Background(), analysisId).Page(page).PageSize(pageSize).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesSecurityChecksAPI.GetSecurityChecks``: %v\n", err)
@@ -167,14 +167,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	analysisId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.AnalysesSecurityChecksAPI.GetSecurityChecksTaskStatus(context.Background(), analysisId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesSecurityChecksAPI.GetSecurityChecksTaskStatus``: %v\n", err)

@@ -3,3 +3,5 @@ gitUserId: RevEngAI
 gitRepoId: sdk-go
 enumClassPrefix: true
 withGoMod: false
+additionalProperties:
+   goImportAlias: revengai

@@ -1,4 +1,4 @@
-# \FunctionsAIDecompilationAPI
+# FunctionsAIDecompilationAPI
 
 All URIs are relative to *https://api.reveng.ai*
 
@@ -33,15 +33,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	functionId := int32(56) // int32 | 
-	functionCommentCreateRequest := *openapiclient.NewFunctionCommentCreateRequest("Content_example") // FunctionCommentCreateRequest | 
+	functionCommentCreateRequest := *revengai.NewFunctionCommentCreateRequest("Content_example") // FunctionCommentCreateRequest | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsAIDecompilationAPI.CreateAiDecompilationComment(context.Background(), functionId).FunctionCommentCreateRequest(functionCommentCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.CreateAiDecompilationComment``: %v\n", err)
@@ -105,14 +105,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	functionId := int64(789) // int64 | The ID of the function for which we are creating the decompilation task
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsAIDecompilationAPI.CreateAiDecompilationTask(context.Background(), functionId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.CreateAiDecompilationTask``: %v\n", err)
@@ -175,15 +175,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	commentId := int32(56) // int32 | 
 	functionId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsAIDecompilationAPI.DeleteAiDecompilationComment(context.Background(), commentId, functionId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.DeleteAiDecompilationComment``: %v\n", err)
@@ -248,14 +248,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	functionId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilationComments(context.Background(), functionId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilationComments``: %v\n", err)
@@ -316,14 +316,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	functionId := int64(789) // int64 | The ID of the function for which to get the rating
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilationRating(context.Background(), functionId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilationRating``: %v\n", err)
@@ -386,7 +386,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
@@ -394,8 +394,8 @@ func main() {
 	summarise := true // bool | Generate a summary for the decompilation (optional) (default to true)
 	generateInlineComments := true // bool | Generate inline comments for the decompilation (only works if summarise is enabled) (optional) (default to true)
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilationTaskResult(context.Background(), functionId).Summarise(summarise).GenerateInlineComments(generateInlineComments).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilationTaskResult``: %v\n", err)
@@ -458,14 +458,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	functionId := int64(789) // int64 | The ID of the function being checked
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilationTaskStatus(context.Background(), functionId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilationTaskStatus``: %v\n", err)
@@ -528,16 +528,16 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	commentId := int32(56) // int32 | 
 	functionId := int32(56) // int32 | 
-	commentUpdateRequest := *openapiclient.NewCommentUpdateRequest("Content_example") // CommentUpdateRequest | 
+	commentUpdateRequest := *revengai.NewCommentUpdateRequest("Content_example") // CommentUpdateRequest | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsAIDecompilationAPI.UpdateAiDecompilationComment(context.Background(), commentId, functionId).CommentUpdateRequest(commentUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.UpdateAiDecompilationComment``: %v\n", err)
@@ -601,15 +601,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	functionId := int64(789) // int64 | The ID of the function being rated
-	upsertAiDecomplationRatingRequest := *openapiclient.NewUpsertAiDecomplationRatingRequest(openapiclient.AiDecompilationRating("POSITIVE"), "Reason_example") // UpsertAiDecomplationRatingRequest | 
+	upsertAiDecomplationRatingRequest := *revengai.NewUpsertAiDecomplationRatingRequest(revengai.AiDecompilationRating("POSITIVE"), "Reason_example") // UpsertAiDecomplationRatingRequest | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsAIDecompilationAPI.UpsertAiDecompilationRating(context.Background(), functionId).UpsertAiDecomplationRatingRequest(upsertAiDecomplationRatingRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.UpsertAiDecompilationRating``: %v\n", err)

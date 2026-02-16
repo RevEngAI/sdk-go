@@ -1,4 +1,4 @@
-# \FunctionsDataTypesAPI
+# FunctionsDataTypesAPI
 
 All URIs are relative to *https://api.reveng.ai*
 
@@ -30,15 +30,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	analysisId := int32(56) // int32 | 
-	functionDataTypesParams := *openapiclient.NewFunctionDataTypesParams([]int64{int64(123)}) // FunctionDataTypesParams | 
+	functionDataTypesParams := *revengai.NewFunctionDataTypesParams([]int64{int64(123)}) // FunctionDataTypesParams | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsDataTypesAPI.GenerateFunctionDataTypesForAnalysis(context.Background(), analysisId).FunctionDataTypesParams(functionDataTypesParams).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsDataTypesAPI.GenerateFunctionDataTypesForAnalysis``: %v\n", err)
@@ -102,14 +102,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
-	functionDataTypesParams := *openapiclient.NewFunctionDataTypesParams([]int64{int64(123)}) // FunctionDataTypesParams | 
+	functionDataTypesParams := *revengai.NewFunctionDataTypesParams([]int64{int64(123)}) // FunctionDataTypesParams | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsDataTypesAPI.GenerateFunctionDataTypesForFunctions(context.Background()).FunctionDataTypesParams(functionDataTypesParams).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsDataTypesAPI.GenerateFunctionDataTypesForFunctions``: %v\n", err)
@@ -168,15 +168,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	analysisId := int32(56) // int32 | 
 	functionId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsDataTypesAPI.GetFunctionDataTypes(context.Background(), analysisId, functionId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsDataTypesAPI.GetFunctionDataTypes``: %v\n", err)
@@ -241,15 +241,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	analysisId := int32(56) // int32 | 
 	functionIds := []*int32{int32(123)} // []*int32 |  (optional)
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsDataTypesAPI.ListFunctionDataTypesForAnalysis(context.Background(), analysisId).FunctionIds(functionIds).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsDataTypesAPI.ListFunctionDataTypesForAnalysis``: %v\n", err)
@@ -313,14 +313,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	functionIds := []*int32{int32(123)} // []*int32 |  (optional)
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsDataTypesAPI.ListFunctionDataTypesForFunctions(context.Background()).FunctionIds(functionIds).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsDataTypesAPI.ListFunctionDataTypesForFunctions``: %v\n", err)
@@ -379,16 +379,16 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	analysisId := int32(56) // int32 | 
 	functionId := int32(56) // int32 | 
-	updateFunctionDataTypes := *openapiclient.NewUpdateFunctionDataTypes(int32(123), *openapiclient.NewFunctionInfoInput([]openapiclient.FuncDepsInner{*openapiclient.NewFuncDepsInner("Name_example", int32(123), map[string]int32{"key": int32(123)}, "Type_example", int32(123))})) // UpdateFunctionDataTypes | 
+	updateFunctionDataTypes := *revengai.NewUpdateFunctionDataTypes(int32(123), *revengai.NewFunctionInfoInput([]revengai.FuncDepsInner{*revengai.NewFuncDepsInner("Name_example", int32(123), map[string]int32{"key": int32(123)}, "Type_example", int32(123))})) // UpdateFunctionDataTypes | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsDataTypesAPI.UpdateFunctionDataTypes(context.Background(), analysisId, functionId).UpdateFunctionDataTypes(updateFunctionDataTypes).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsDataTypesAPI.UpdateFunctionDataTypes``: %v\n", err)

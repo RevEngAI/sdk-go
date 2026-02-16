@@ -1,4 +1,4 @@
-# \FunctionsRenamingHistoryAPI
+# FunctionsRenamingHistoryAPI
 
 All URIs are relative to *https://api.reveng.ai*
 
@@ -28,14 +28,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
-	functionsListRename := *openapiclient.NewFunctionsListRename([]openapiclient.FunctionRenameMap{*openapiclient.NewFunctionRenameMap(int64(123), "NewName_example", "NewMangledName_example")}) // FunctionsListRename | 
+	functionsListRename := *revengai.NewFunctionsListRename([]revengai.FunctionRenameMap{*revengai.NewFunctionRenameMap(int64(123), "NewName_example", "NewMangledName_example")}) // FunctionsListRename | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsRenamingHistoryAPI.BatchRenameFunction(context.Background()).FunctionsListRename(functionsListRename).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsRenamingHistoryAPI.BatchRenameFunction``: %v\n", err)
@@ -94,14 +94,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	functionId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsRenamingHistoryAPI.GetFunctionNameHistory(context.Background(), functionId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsRenamingHistoryAPI.GetFunctionNameHistory``: %v\n", err)
@@ -164,15 +164,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	functionId := int32(56) // int32 | 
-	functionRename := *openapiclient.NewFunctionRename("NewName_example", "NewMangledName_example") // FunctionRename | 
+	functionRename := *revengai.NewFunctionRename("NewName_example", "NewMangledName_example") // FunctionRename | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsRenamingHistoryAPI.RenameFunctionId(context.Background(), functionId).FunctionRename(functionRename).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsRenamingHistoryAPI.RenameFunctionId``: %v\n", err)
@@ -236,15 +236,15 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	functionId := int32(56) // int32 | 
 	historyId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.FunctionsRenamingHistoryAPI.RevertFunctionName(context.Background(), functionId, historyId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsRenamingHistoryAPI.RevertFunctionName``: %v\n", err)

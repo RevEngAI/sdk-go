@@ -1,4 +1,4 @@
-# \BinariesAPI
+# BinariesAPI
 
 All URIs are relative to *https://api.reveng.ai*
 
@@ -30,14 +30,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	binaryId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.BinariesAPI.DownloadZippedBinary(context.Background(), binaryId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.DownloadZippedBinary``: %v\n", err)
@@ -98,14 +98,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	binaryId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.BinariesAPI.GetBinaryAdditionalDetails(context.Background(), binaryId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryAdditionalDetails``: %v\n", err)
@@ -166,14 +166,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	binaryId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.BinariesAPI.GetBinaryAdditionalDetailsStatus(context.Background(), binaryId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryAdditionalDetailsStatus``: %v\n", err)
@@ -234,14 +234,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	binaryId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.BinariesAPI.GetBinaryDetails(context.Background(), binaryId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryDetails``: %v\n", err)
@@ -302,14 +302,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	binaryId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.BinariesAPI.GetBinaryDieInfo(context.Background(), binaryId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryDieInfo``: %v\n", err)
@@ -370,14 +370,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	binaryId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.BinariesAPI.GetBinaryExternals(context.Background(), binaryId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryExternals``: %v\n", err)
@@ -438,14 +438,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	binaryId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.BinariesAPI.GetBinaryRelatedStatus(context.Background(), binaryId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryRelatedStatus``: %v\n", err)
@@ -506,14 +506,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func main() {
 	binaryId := int32(56) // int32 | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 	resp, r, err := apiClient.BinariesAPI.GetRelatedBinaries(context.Background(), binaryId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetRelatedBinaries``: %v\n", err)
