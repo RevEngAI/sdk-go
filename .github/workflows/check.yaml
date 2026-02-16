@@ -86,9 +86,11 @@ jobs:
                 f.write(f"should_generate=false\n")
         else:
             print("✅ No existing PRs found, proceeding with SDK generation")
+            major_version = openapi_version.split('.')[0]
             with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
                 f.write(f"should_generate=true\n")
                 f.write(f"openapi_version={openapi_version}\n")
+                f.write(f"major_version={major_version}\n")
 
         print("✅ Check completed")
         EOF
@@ -112,11 +114,34 @@ jobs:
       id: check_changes
       run: |
         # Move generated files to the correct locations and clean up
+        MAJOR_VERSION="v${{ steps.version_check.outputs.major_version }}"
+
+        # Remove old major version directories (vN) that differ from the current one
+        for dir in v[0-9]*; do
+          if [ -d "$dir" ] && [ "$dir" != "$MAJOR_VERSION" ]; then
+            echo "Removing old version directory: $dir"
+            rm -Rf "$dir"
+          fi
+        done
+
+        # Create the new version directory if it doesn't exist
+        mkdir -p "$MAJOR_VERSION"
+
         rm -Rf docs && mv go-client/docs .
         rm -Rf test && mv go-client/test .
         rm -Rf README.md && mv go-client/README.md .
-        rm -Rf v3/*.go && mv go-client/*.go v3/
+        rm -Rf "$MAJOR_VERSION"/*.go && mv go-client/*.go "$MAJOR_VERSION"/
         rm -Rf go-client
+
+        # Ensure go.mod exists and has the correct module path
+        if [ ! -f "$MAJOR_VERSION/go.mod" ]; then
+          cd "$MAJOR_VERSION"
+          go mod init "github.com/RevEngAI/sdk-go/$MAJOR_VERSION"
+          cd ..
+        else
+          # Update the module path in go.mod if it doesn't match
+          sed -i "s|^module github.com/RevEngAI/sdk-go/v[0-9]*|module github.com/RevEngAI/sdk-go/$MAJOR_VERSION|" "$MAJOR_VERSION/go.mod"
+        fi
 
         # Store the SDK version
         echo ${{ steps.version_check.outputs.openapi_version }} > .sdk-version
