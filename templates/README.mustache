@@ -6,44 +6,63 @@ To use the SDK you will first need to obtain an API key from [https://reveng.ai]
 
 ## Installation
 
-Install the following dependencies:
-
-```sh
-go get github.com/stretchr/testify/assert
-{{#hasOAuthMethods}}
-go get golang.org/x/oauth2
-{{/hasOAuthMethods}}
-go get golang.org/x/net/context
+Once you have the API key you can install the SDK using:
+```shell
+go get github.com/RevEngAI/sdk-go
 ```
 
-Put the package under your project folder and add the following in import:
+## Usage
+
+The following is an example of how to use the SDK to get the logs of an analysis:
 
 ```go
-import {{packageName}} "{{gitHost}}/{{gitUserId}}/{{gitRepoId}}{{#isGoSubmodule}}/{{packageName}}{{/isGoSubmodule}}"
-```
+package main
 
-```
+import (
+	"context"
+	"fmt"
+	"os"
 
-## Configuration of Server URL
+	sdk "github.com/RevEngAI/sdk-go"
+)
 
-Default configuration comes with `Servers` field that contains server objects as defined in the OpenAPI specification.
+func main() {
+	// Create a new configuration with default settings
+	cfg := sdk.NewConfiguration()
 
-### Select Server Configuration
+	// Create a new API client
+	client := sdk.NewAPIClient(cfg)
 
-For using other server than the one defined on index 0 set context value `{{packageName}}.ContextServerIndex` of type `int`.
+	// Configure API key authorization via context
+	ctx := context.WithValue(context.Background(), sdk.ContextAPIKeys, map[string]sdk.APIKey{
+		"APIKey": {Key: os.Getenv("API_KEY")},
+	})
 
-```go
-ctx := context.WithValue(context.Background(), {{packageName}}.ContextServerIndex, 1)
-```
+	analysisId := int32(715320)
 
-### Templated Server URL
+	// Call GetAnalysisLogs on the AnalysesCoreAPI service
+	result, httpResp, err := client.AnalysesCoreAPI.GetAnalysisLogs(ctx, analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Exception when calling AnalysesCoreAPI#GetAnalysisLogs\n")
+		fmt.Fprintf(os.Stderr, "Status code: %d\n", httpResp.StatusCode)
 
-Templated server URL is formatted using default variables from configuration or from context value `{{packageName}}.ContextServerVariables` of type `map[string]string`.
+		// Check if the error is a GenericOpenAPIError for more details
+		if apiErr, ok := err.(*sdk.GenericOpenAPIError); ok {
+			fmt.Fprintf(os.Stderr, "Reason: %s\n", string(apiErr.Body()))
+		}
 
-```go
-ctx := context.WithValue(context.Background(), {{packageName}}.ContextServerVariables, map[string]string{
-	"basePath": "v2",
-})
+		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Unwrap the response: BaseResponseLogs -> Logs (Data) -> string
+	if result.HasData() {
+		data := result.GetData()
+		fmt.Println(data.GetLogs())
+	} else {
+		fmt.Println("No logs available")
+	}
+}
 ```
 
 ## Documentation for API Endpoints
@@ -60,123 +79,6 @@ Class | Method | HTTP request | Description
 {{#models}}{{#model}} - [{{{classname}}}]({{modelDocPath}}{{{classname}}}.md)
 {{/model}}{{/models}}
 
-## Documentation For Authorization
-
-{{^authMethods}}Endpoints do not require authorization.{{/authMethods}}
-{{#hasAuthMethods}}Authentication schemes defined for the API:{{/hasAuthMethods}}
-{{#authMethods}}
-### {{{name}}}
-
-{{#isApiKey}}
-- **Type**: API key
-- **API key parameter name**: {{{keyParamName}}}
-- **Location**: {{#isKeyInQuery}}URL query string{{/isKeyInQuery}}{{#isKeyInHeader}}HTTP header{{/isKeyInHeader}}
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: {{name}} and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		{{packageName}}.ContextAPIKeys,
-		map[string]{{packageName}}.APIKey{
-			"{{name}}": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
-
-{{/isApiKey}}
-{{#isBasic}}
-{{#isBasicBearer}}
-- **Type**: HTTP Bearer token authentication
-
-Example
-
-```go
-auth := context.WithValue(context.Background(), {{packageName}}.ContextAccessToken, "BEARER_TOKEN_STRING")
-r, err := client.Service.Operation(auth, args)
-```
-
-{{/isBasicBearer}}
-{{#isBasicBasic}}
-- **Type**: HTTP basic authentication
-
-Example
-
-```go
-auth := context.WithValue(context.Background(), {{packageName}}.ContextBasicAuth, {{packageName}}.BasicAuth{
-	UserName: "username",
-	Password: "password",
-})
-r, err := client.Service.Operation(auth, args)
-```
-
-{{/isBasicBasic}}
-{{#isHttpSignature}}
-- **Type**: HTTP signature authentication
-
-Example
-
-```go
-	authConfig := {{packageName}}.HttpSignatureAuth{
-		KeyId:                "my-key-id",
-		PrivateKeyPath:       "rsa.pem",
-		Passphrase:           "my-passphrase",
-		SigningScheme:        {{packageName}}.HttpSigningSchemeHs2019,
-		SignedHeaders:        []string{
-			{{packageName}}.HttpSignatureParameterRequestTarget, // The special (request-target) parameter expresses the HTTP request target.
-			{{packageName}}.HttpSignatureParameterCreated,       // Time when request was signed, formatted as a Unix timestamp integer value.
-			"Host",                                 // The Host request header specifies the domain name of the server, and optionally the TCP port number.
-			"Date",                                 // The date and time at which the message was originated.
-			"Content-Type",                         // The Media type of the body of the request.
-			"Digest",                               // A cryptographic digest of the request body.
-		},
-		SigningAlgorithm:     {{packageName}}.HttpSigningAlgorithmRsaPSS,
-		SignatureMaxValidity: 5 * time.Minute,
-	}
-	var authCtx context.Context
-	var err error
-	if authCtx, err = authConfig.ContextWithValue(context.Background()); err != nil {
-		// Process error
-	}
-	r, err = client.Service.Operation(auth, args)
-
-```
-{{/isHttpSignature}}
-{{/isBasic}}
-{{#isOAuth}}
-
-- **Type**: OAuth
-- **Flow**: {{{flow}}}
-- **Authorization URL**: {{{authorizationUrl}}}
-- **Scopes**: {{^scopes}}N/A{{/scopes}}
-{{#scopes}} - **{{{scope}}}**: {{{description}}}
-{{/scopes}}
-
-Example
-
-```go
-auth := context.WithValue(context.Background(), {{packageName}}.ContextAccessToken, "ACCESSTOKENSTRING")
-r, err := client.Service.Operation(auth, args)
-```
-
-Or via OAuth2 module to automatically refresh tokens and perform user authentication.
-
-```go
-import "golang.org/x/oauth2"
-
-/* Perform OAuth2 round trip request and obtain a token */
-
-tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
-auth := context.WithValue(oauth2.NoContext, {{packageName}}.ContextOAuth2, tokenSource)
-r, err := client.Service.Operation(auth, args)
-```
-
-{{/isOAuth}}
-{{/authMethods}}
-
 ## Documentation for Utility Methods
 
 Due to the fact that model structure members are all pointers, this package contains
@@ -192,8 +94,3 @@ Each of these functions takes a value of the given basic type and returns a poin
 * `PtrFloat64`
 * `PtrString`
 * `PtrTime`
-
-## Author
-
-{{#apiInfo}}{{#apis}}{{#-last}}{{infoEmail}}
-{{/-last}}{{/apis}}{{/apiInfo}}

@@ -2,3 +2,4 @@ packageName: sdk
 gitUserId: RevEngAI
 gitRepoId: sdk-go
 enumClassPrefix: true
+withGoMod: false

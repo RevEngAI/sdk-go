@@ -6,64 +6,63 @@ To use the SDK you will first need to obtain an API key from [https://reveng.ai]
 
 ## Installation
 
-Install the following dependencies:
-
-```sh
-go get github.com/stretchr/testify/assert
-go get golang.org/x/net/context
+Once you have the API key you can install the SDK using:
+```shell
+go get github.com/RevEngAI/sdk-go
 ```
 
-Put the package under your project folder and add the following in import:
+## Usage
+
+The following is an example of how to use the SDK to get the logs of an analysis:
 
 ```go
-import sdk "github.com/RevEngAI/sdk-go"
-```
+package main
 
-To use a proxy, set the environment variable `HTTP_PROXY`:
+import (
+	"context"
+	"fmt"
+	"os"
 
-```go
-os.Setenv("HTTP_PROXY", "http://proxy_name:proxy_port")
-```
+	sdk "github.com/RevEngAI/sdk-go"
+)
 
-## Configuration of Server URL
+func main() {
+	// Create a new configuration with default settings
+	cfg := sdk.NewConfiguration()
 
-Default configuration comes with `Servers` field that contains server objects as defined in the OpenAPI specification.
+	// Create a new API client
+	client := sdk.NewAPIClient(cfg)
 
-### Select Server Configuration
+	// Configure API key authorization via context
+	ctx := context.WithValue(context.Background(), sdk.ContextAPIKeys, map[string]sdk.APIKey{
+		"APIKey": {Key: os.Getenv("API_KEY")},
+	})
 
-For using other server than the one defined on index 0 set context value `sdk.ContextServerIndex` of type `int`.
+	analysisId := int32(715320)
 
-```go
-ctx := context.WithValue(context.Background(), sdk.ContextServerIndex, 1)
-```
+	// Call GetAnalysisLogs on the AnalysesCoreAPI service
+	result, httpResp, err := client.AnalysesCoreAPI.GetAnalysisLogs(ctx, analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Exception when calling AnalysesCoreAPI#GetAnalysisLogs\n")
+		fmt.Fprintf(os.Stderr, "Status code: %d\n", httpResp.StatusCode)
 
-### Templated Server URL
+		// Check if the error is a GenericOpenAPIError for more details
+		if apiErr, ok := err.(*sdk.GenericOpenAPIError); ok {
+			fmt.Fprintf(os.Stderr, "Reason: %s\n", string(apiErr.Body()))
+		}
 
-Templated server URL is formatted using default variables from configuration or from context value `sdk.ContextServerVariables` of type `map[string]string`.
+		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+		os.Exit(1)
+	}
 
-```go
-ctx := context.WithValue(context.Background(), sdk.ContextServerVariables, map[string]string{
-	"basePath": "v2",
-})
-```
-
-Note, enum values are always validated and all unused variables are silently ignored.
-
-### URLs Configuration per Operation
-
-Each operation can use different server URL defined using `OperationServers` map in the `Configuration`.
-An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
-Similar rules for overriding default operation server index and variables applies by using `sdk.ContextOperationServerIndices` and `sdk.ContextOperationServerVariables` context maps.
-
-```go
-ctx := context.WithValue(context.Background(), sdk.ContextOperationServerIndices, map[string]int{
-	"{classname}Service.{nickname}": 2,
-})
-ctx = context.WithValue(context.Background(), sdk.ContextOperationServerVariables, map[string]map[string]string{
-	"{classname}Service.{nickname}": {
-		"port": "8443",
-	},
-})
+	// Unwrap the response: BaseResponseLogs -> Logs (Data) -> string
+	if result.HasData() {
+		data := result.GetData()
+		fmt.Println(data.GetLogs())
+	} else {
+		fmt.Println("No logs available")
+	}
+}
 ```
 
 ## Documentation for API Endpoints
@@ -478,32 +477,6 @@ Class | Method | HTTP request | Description
  - [Workspace](docs/Workspace.md)
 
 
-## Documentation For Authorization
-
-
-Authentication schemes defined for the API:
-### APIKey
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: APIKey and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		sdk.ContextAPIKeys,
-		map[string]sdk.APIKey{
-			"APIKey": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
-
-
 ## Documentation for Utility Methods
 
 Due to the fact that model structure members are all pointers, this package contains
@@ -519,8 +492,3 @@ Each of these functions takes a value of the given basic type and returns a poin
 * `PtrFloat64`
 * `PtrString`
 * `PtrTime`
-
-## Author
-
-
-
