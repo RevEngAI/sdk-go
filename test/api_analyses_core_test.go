@@ -118,6 +118,20 @@ func Test_sdk_AnalysesCoreAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AnalysesCoreAPIService InsertAnalysisLog", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var analysisId int32
+
+		resp, httpRes, err := apiClient.AnalysesCoreAPI.InsertAnalysisLog(context.Background(), analysisId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AnalysesCoreAPIService ListAnalyses", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
