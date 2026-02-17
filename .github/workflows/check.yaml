@@ -129,7 +129,7 @@ jobs:
 
         rm -Rf docs && mv go-client/docs .
         rm -Rf README.md && mv go-client/README.md .
-        rm -Rf test && mv go-client/test "$MAJOR_VERSION"/
+        rm -Rf "$MAJOR_VERSION"/test && mv go-client/test "$MAJOR_VERSION"/
         rm -Rf "$MAJOR_VERSION"/*.go && mv go-client/*.go "$MAJOR_VERSION"/
         rm -Rf go-client
 
