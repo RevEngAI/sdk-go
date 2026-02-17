@@ -14,13 +14,13 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go"
 )
 
 func Test_sdk_ConfigAPIService(t *testing.T) {
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 
 	t.Run("Test ConfigAPIService GetConfig", func(t *testing.T) {
 
