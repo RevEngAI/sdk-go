@@ -1,6 +1,6 @@
 packageName: sdk
 gitUserId: RevEngAI
-gitRepoId: sdk-go
+gitRepoId: sdk-go/v3
 enumClassPrefix: true
 withGoMod: false
 additionalProperties:

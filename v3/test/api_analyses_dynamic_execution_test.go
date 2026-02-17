@@ -14,13 +14,13 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go/v3"
 )
 
 func Test_sdk_AnalysesDynamicExecutionAPIService(t *testing.T) {
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 
 	t.Run("Test AnalysesDynamicExecutionAPIService GetDynamicExecutionStatus", func(t *testing.T) {
 

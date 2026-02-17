@@ -14,13 +14,13 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/RevEngAI/sdk-go"
+	revengai "github.com/RevEngAI/sdk-go/v3"
 )
 
 func Test_sdk_AnalysesCommentsAPIService(t *testing.T) {
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
 
 	t.Run("Test AnalysesCommentsAPIService CreateAnalysisComment", func(t *testing.T) {
 
