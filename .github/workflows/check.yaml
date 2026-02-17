@@ -114,7 +114,7 @@ jobs:
       id: check_changes
       run: |
         # Move generated files to the correct locations and clean up
-        MAJOR_VERSION="v${{ steps.version_check.outputs.major_version }}"
+        MAJOR_VERSION="${{ steps.version_check.outputs.major_version }}"
 
         # Remove old major version directories (vN) that differ from the current one
         for dir in v[0-9]*; do
