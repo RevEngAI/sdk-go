@@ -39,7 +39,7 @@ type BinaryDetailsResponse struct {
 	Sha1 string `json:"sha1"`
 	// SHA256 hash of the binary
 	Sha256 string `json:"sha256"`
-	Ssdeep string `json:"ssdeep"`
+	Ssdeep NullableString `json:"ssdeep"`
 	Static bool `json:"static"`
 	Stripped bool `json:"stripped"`
 	SubSys string `json:"sub_sys"`
@@ -55,7 +55,7 @@ type _BinaryDetailsResponse BinaryDetailsResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBinaryDetailsResponse(arch string, bits int32, crc32 string, class string, entropy float32, fileSize int32, language string, md5 string, machine string, os string, sha1 string, sha256 string, ssdeep string, static bool, stripped bool, subSys string, tlsh string, type_ string, debug bool, firstSeen time.Time) *BinaryDetailsResponse {
+func NewBinaryDetailsResponse(arch string, bits int32, crc32 string, class string, entropy float32, fileSize int32, language string, md5 string, machine string, os string, sha1 string, sha256 string, ssdeep NullableString, static bool, stripped bool, subSys string, tlsh string, type_ string, debug bool, firstSeen time.Time) *BinaryDetailsResponse {
 	this := BinaryDetailsResponse{}
 	this.Arch = arch
 	this.Bits = bits
@@ -377,27 +377,29 @@ func (o *BinaryDetailsResponse) SetSha256(v string) {
 }
 
 // GetSsdeep returns the Ssdeep field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *BinaryDetailsResponse) GetSsdeep() string {
-	if o == nil {
+	if o == nil || o.Ssdeep.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Ssdeep
+	return *o.Ssdeep.Get()
 }
 
 // GetSsdeepOk returns a tuple with the Ssdeep field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BinaryDetailsResponse) GetSsdeepOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Ssdeep, true
+	return o.Ssdeep.Get(), o.Ssdeep.IsSet()
 }
 
 // SetSsdeep sets field value
 func (o *BinaryDetailsResponse) SetSsdeep(v string) {
-	o.Ssdeep = v
+	o.Ssdeep.Set(&v)
 }
 
 // GetStatic returns the Static field value
@@ -590,7 +592,7 @@ func (o BinaryDetailsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["os"] = o.Os
 	toSerialize["sha1"] = o.Sha1
 	toSerialize["sha256"] = o.Sha256
-	toSerialize["ssdeep"] = o.Ssdeep
+	toSerialize["ssdeep"] = o.Ssdeep.Get()
 	toSerialize["static"] = o.Static
 	toSerialize["stripped"] = o.Stripped
 	toSerialize["sub_sys"] = o.SubSys

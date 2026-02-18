@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **Os** | **string** | OS target of the binary | 
 **Sha1** | **string** | SHA1 hash of the binary | 
 **Sha256** | **string** | SHA256 hash of the binary | 
-**Ssdeep** | **string** |  | 
+**Ssdeep** | **NullableString** |  | 
 **Static** | **bool** |  | 
 **Stripped** | **bool** |  | 
 **SubSys** | **string** |  | 
@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewBinaryDetailsResponse
 
-`func NewBinaryDetailsResponse(arch string, bits int32, crc32 string, class string, entropy float32, fileSize int32, language string, md5 string, machine string, os string, sha1 string, sha256 string, ssdeep string, static bool, stripped bool, subSys string, tlsh string, type_ string, debug bool, firstSeen time.Time, ) *BinaryDetailsResponse`
+`func NewBinaryDetailsResponse(arch string, bits int32, crc32 string, class string, entropy float32, fileSize int32, language string, md5 string, machine string, os string, sha1 string, sha256 string, ssdeep NullableString, static bool, stripped bool, subSys string, tlsh string, type_ string, debug bool, firstSeen time.Time, ) *BinaryDetailsResponse`
 
 NewBinaryDetailsResponse instantiates a new BinaryDetailsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -304,6 +304,16 @@ and a boolean to check if the value has been set.
 SetSsdeep sets Ssdeep field to given value.
 
 
+### SetSsdeepNil
+
+`func (o *BinaryDetailsResponse) SetSsdeepNil(b bool)`
+
+ SetSsdeepNil sets the value for Ssdeep to be an explicit nil
+
+### UnsetSsdeep
+`func (o *BinaryDetailsResponse) UnsetSsdeep()`
+
+UnsetSsdeep ensures that no value is present for Ssdeep, not even an explicit nil
 ### GetStatic
 
 `func (o *BinaryDetailsResponse) GetStatic() bool`
