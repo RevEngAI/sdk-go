@@ -88,7 +88,7 @@ jobs:
       env:
         REPO_URL: "${{github.server_url}}/${{github.repository}}"
         RELEASE_URL: "${{github.server_url}}/${{github.repository}}/releases/tag/${{ steps.version.outputs.version }}"
-	SDK_VERSION: ${{ steps.version.outputs.version }}
+        SDK_VERSION: ${{ steps.version.outputs.version }}
       with:
         webhook: ${{ secrets.RELEASES_SLACK_WEBHOOK }}
         webhook-type: incoming-webhook
