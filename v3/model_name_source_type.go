@@ -24,6 +24,7 @@ type NameSourceType struct {
 	Type string `json:"type"`
 	FunctionId NullableInt32 `json:"function_id,omitempty"`
 	BinaryId NullableInt32 `json:"binary_id,omitempty"`
+	AnalysisId NullableInt32 `json:"analysis_id,omitempty"`
 }
 
 type _NameSourceType NameSourceType
@@ -154,6 +155,48 @@ func (o *NameSourceType) UnsetBinaryId() {
 	o.BinaryId.Unset()
 }
 
+// GetAnalysisId returns the AnalysisId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NameSourceType) GetAnalysisId() int32 {
+	if o == nil || IsNil(o.AnalysisId.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.AnalysisId.Get()
+}
+
+// GetAnalysisIdOk returns a tuple with the AnalysisId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NameSourceType) GetAnalysisIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AnalysisId.Get(), o.AnalysisId.IsSet()
+}
+
+// HasAnalysisId returns a boolean if a field has been set.
+func (o *NameSourceType) HasAnalysisId() bool {
+	if o != nil && o.AnalysisId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAnalysisId gets a reference to the given NullableInt32 and assigns it to the AnalysisId field.
+func (o *NameSourceType) SetAnalysisId(v int32) {
+	o.AnalysisId.Set(&v)
+}
+// SetAnalysisIdNil sets the value for AnalysisId to be an explicit nil
+func (o *NameSourceType) SetAnalysisIdNil() {
+	o.AnalysisId.Set(nil)
+}
+
+// UnsetAnalysisId ensures that no value is present for AnalysisId, not even an explicit nil
+func (o *NameSourceType) UnsetAnalysisId() {
+	o.AnalysisId.Unset()
+}
+
 func (o NameSourceType) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -170,6 +213,9 @@ func (o NameSourceType) ToMap() (map[string]interface{}, error) {
 	}
 	if o.BinaryId.IsSet() {
 		toSerialize["binary_id"] = o.BinaryId.Get()
+	}
+	if o.AnalysisId.IsSet() {
+		toSerialize["analysis_id"] = o.AnalysisId.Get()
 	}
 	return toSerialize, nil
 }

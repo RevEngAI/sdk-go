@@ -30,6 +30,8 @@ type AnalysisDetailResponse struct {
 	BinarySize int32 `json:"binary_size"`
 	BinaryType string `json:"binary_type"`
 	Creation string `json:"creation"`
+	// URL to view this analysis in the dashboard
+	DashboardUrl string `json:"dashboard_url"`
 	Debug bool `json:"debug"`
 	ModelName string `json:"model_name"`
 	Sbom map[string]interface{} `json:"sbom,omitempty"`
@@ -42,7 +44,7 @@ type _AnalysisDetailResponse AnalysisDetailResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, analysisScope string, architecture string, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int32, binaryType string, creation string, debug bool, modelName string, sha256Hash string) *AnalysisDetailResponse {
+func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, analysisScope string, architecture string, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int32, binaryType string, creation string, dashboardUrl string, debug bool, modelName string, sha256Hash string) *AnalysisDetailResponse {
 	this := AnalysisDetailResponse{}
 	this.Access = access
 	this.AnalysisId = analysisId
@@ -54,6 +56,7 @@ func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, anal
 	this.BinarySize = binarySize
 	this.BinaryType = binaryType
 	this.Creation = creation
+	this.DashboardUrl = dashboardUrl
 	this.Debug = debug
 	this.ModelName = modelName
 	this.Sha256Hash = sha256Hash
@@ -308,6 +311,30 @@ func (o *AnalysisDetailResponse) SetCreation(v string) {
 	o.Creation = v
 }
 
+// GetDashboardUrl returns the DashboardUrl field value
+func (o *AnalysisDetailResponse) GetDashboardUrl() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.DashboardUrl
+}
+
+// GetDashboardUrlOk returns a tuple with the DashboardUrl field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisDetailResponse) GetDashboardUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DashboardUrl, true
+}
+
+// SetDashboardUrl sets field value
+func (o *AnalysisDetailResponse) SetDashboardUrl(v string) {
+	o.DashboardUrl = v
+}
+
 // GetDebug returns the Debug field value
 func (o *AnalysisDetailResponse) GetDebug() bool {
 	if o == nil {
@@ -433,6 +460,7 @@ func (o AnalysisDetailResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["binary_size"] = o.BinarySize
 	toSerialize["binary_type"] = o.BinaryType
 	toSerialize["creation"] = o.Creation
+	toSerialize["dashboard_url"] = o.DashboardUrl
 	toSerialize["debug"] = o.Debug
 	toSerialize["model_name"] = o.ModelName
 	if o.Sbom != nil {
@@ -457,6 +485,7 @@ func (o *AnalysisDetailResponse) UnmarshalJSON(data []byte) (err error) {
 		"binary_size",
 		"binary_type",
 		"creation",
+		"dashboard_url",
 		"debug",
 		"model_name",
 		"sha_256_hash",

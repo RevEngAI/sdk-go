@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BinaryId** | **int32** | ID of the relative binary | 
+**AnalysisId** | Pointer to **NullableInt32** |  | [optional] 
 **Name** | **string** | Name of the relative binary | 
 **Sha256** | **string** | SHA256 hash of the relative binary | 
 
@@ -47,6 +48,41 @@ and a boolean to check if the value has been set.
 SetBinaryId sets BinaryId field to given value.
 
 
+### GetAnalysisId
+
+`func (o *RelativeBinaryResponse) GetAnalysisId() int32`
+
+GetAnalysisId returns the AnalysisId field if non-nil, zero value otherwise.
+
+### GetAnalysisIdOk
+
+`func (o *RelativeBinaryResponse) GetAnalysisIdOk() (*int32, bool)`
+
+GetAnalysisIdOk returns a tuple with the AnalysisId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAnalysisId
+
+`func (o *RelativeBinaryResponse) SetAnalysisId(v int32)`
+
+SetAnalysisId sets AnalysisId field to given value.
+
+### HasAnalysisId
+
+`func (o *RelativeBinaryResponse) HasAnalysisId() bool`
+
+HasAnalysisId returns a boolean if a field has been set.
+
+### SetAnalysisIdNil
+
+`func (o *RelativeBinaryResponse) SetAnalysisIdNil(b bool)`
+
+ SetAnalysisIdNil sets the value for AnalysisId to be an explicit nil
+
+### UnsetAnalysisId
+`func (o *RelativeBinaryResponse) UnsetAnalysisId()`
+
+UnsetAnalysisId ensures that no value is present for AnalysisId, not even an explicit nil
 ### GetName
 
 `func (o *RelativeBinaryResponse) GetName() string`

@@ -22,6 +22,7 @@ var _ MappedNullable = &RelativeBinaryResponse{}
 type RelativeBinaryResponse struct {
 	// ID of the relative binary
 	BinaryId int32 `json:"binary_id"`
+	AnalysisId NullableInt32 `json:"analysis_id,omitempty"`
 	// Name of the relative binary
 	Name string `json:"name"`
 	// SHA256 hash of the relative binary
@@ -72,6 +73,48 @@ func (o *RelativeBinaryResponse) GetBinaryIdOk() (*int32, bool) {
 // SetBinaryId sets field value
 func (o *RelativeBinaryResponse) SetBinaryId(v int32) {
 	o.BinaryId = v
+}
+
+// GetAnalysisId returns the AnalysisId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RelativeBinaryResponse) GetAnalysisId() int32 {
+	if o == nil || IsNil(o.AnalysisId.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.AnalysisId.Get()
+}
+
+// GetAnalysisIdOk returns a tuple with the AnalysisId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RelativeBinaryResponse) GetAnalysisIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AnalysisId.Get(), o.AnalysisId.IsSet()
+}
+
+// HasAnalysisId returns a boolean if a field has been set.
+func (o *RelativeBinaryResponse) HasAnalysisId() bool {
+	if o != nil && o.AnalysisId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAnalysisId gets a reference to the given NullableInt32 and assigns it to the AnalysisId field.
+func (o *RelativeBinaryResponse) SetAnalysisId(v int32) {
+	o.AnalysisId.Set(&v)
+}
+// SetAnalysisIdNil sets the value for AnalysisId to be an explicit nil
+func (o *RelativeBinaryResponse) SetAnalysisIdNil() {
+	o.AnalysisId.Set(nil)
+}
+
+// UnsetAnalysisId ensures that no value is present for AnalysisId, not even an explicit nil
+func (o *RelativeBinaryResponse) UnsetAnalysisId() {
+	o.AnalysisId.Unset()
 }
 
 // GetName returns the Name field value
@@ -133,6 +176,9 @@ func (o RelativeBinaryResponse) MarshalJSON() ([]byte, error) {
 func (o RelativeBinaryResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["binary_id"] = o.BinaryId
+	if o.AnalysisId.IsSet() {
+		toSerialize["analysis_id"] = o.AnalysisId.Get()
+	}
 	toSerialize["name"] = o.Name
 	toSerialize["sha256"] = o.Sha256
 	return toSerialize, nil

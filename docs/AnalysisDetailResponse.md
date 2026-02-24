@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **BinarySize** | **int32** |  | 
 **BinaryType** | **string** |  | 
 **Creation** | **string** |  | 
+**DashboardUrl** | **string** | URL to view this analysis in the dashboard | 
 **Debug** | **bool** |  | 
 **ModelName** | **string** |  | 
 **Sbom** | Pointer to **map[string]interface{}** |  | [optional] 
@@ -23,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewAnalysisDetailResponse
 
-`func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, analysisScope string, architecture string, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int32, binaryType string, creation string, debug bool, modelName string, sha256Hash string, ) *AnalysisDetailResponse`
+`func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, analysisScope string, architecture string, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int32, binaryType string, creation string, dashboardUrl string, debug bool, modelName string, sha256Hash string, ) *AnalysisDetailResponse`
 
 NewAnalysisDetailResponse instantiates a new AnalysisDetailResponse object
 This constructor will assign default values to properties that have it defined,
@@ -236,6 +237,26 @@ and a boolean to check if the value has been set.
 `func (o *AnalysisDetailResponse) SetCreation(v string)`
 
 SetCreation sets Creation field to given value.
+
+
+### GetDashboardUrl
+
+`func (o *AnalysisDetailResponse) GetDashboardUrl() string`
+
+GetDashboardUrl returns the DashboardUrl field if non-nil, zero value otherwise.
+
+### GetDashboardUrlOk
+
+`func (o *AnalysisDetailResponse) GetDashboardUrlOk() (*string, bool)`
+
+GetDashboardUrlOk returns a tuple with the DashboardUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDashboardUrl
+
+`func (o *AnalysisDetailResponse) SetDashboardUrl(v string)`
+
+SetDashboardUrl sets DashboardUrl field to given value.
 
 
 ### GetDebug

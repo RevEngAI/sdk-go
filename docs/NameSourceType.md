@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Type** | **string** | The source (process) the function name came from | 
 **FunctionId** | Pointer to **NullableInt32** |  | [optional] 
 **BinaryId** | Pointer to **NullableInt32** |  | [optional] 
+**AnalysisId** | Pointer to **NullableInt32** |  | [optional] 
 
 ## Methods
 
@@ -117,6 +118,41 @@ HasBinaryId returns a boolean if a field has been set.
 `func (o *NameSourceType) UnsetBinaryId()`
 
 UnsetBinaryId ensures that no value is present for BinaryId, not even an explicit nil
+### GetAnalysisId
+
+`func (o *NameSourceType) GetAnalysisId() int32`
+
+GetAnalysisId returns the AnalysisId field if non-nil, zero value otherwise.
+
+### GetAnalysisIdOk
+
+`func (o *NameSourceType) GetAnalysisIdOk() (*int32, bool)`
+
+GetAnalysisIdOk returns a tuple with the AnalysisId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAnalysisId
+
+`func (o *NameSourceType) SetAnalysisId(v int32)`
+
+SetAnalysisId sets AnalysisId field to given value.
+
+### HasAnalysisId
+
+`func (o *NameSourceType) HasAnalysisId() bool`
+
+HasAnalysisId returns a boolean if a field has been set.
+
+### SetAnalysisIdNil
+
+`func (o *NameSourceType) SetAnalysisIdNil(b bool)`
+
+ SetAnalysisIdNil sets the value for AnalysisId to be an explicit nil
+
+### UnsetAnalysisId
+`func (o *NameSourceType) UnsetAnalysisId()`
+
+UnsetAnalysisId ensures that no value is present for AnalysisId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
