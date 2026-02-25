@@ -1,0 +1,70 @@
+{
+  "status": true,
+  "data": {
+    "status": "success",
+    "decompilation": "void\npre_cpp_init(\n   void\n)\n{\n   // Assign the value of global_var_1 to global_var_0.\n   global_var_0 = global_var_1;\n   // Assign the value of global_var_3 to global_var_2.\n   global_var_2 = global_var_3;\n   // Call an unknown function, passing a global variable and pointers to three other global variables.\n   // The purpose of unknown_func_1 and the manipulation of global_var_5_ptr, global_var_6_ptr, and global_var_7_ptr are unclear without further analysis.\n   unknown_func_1(global_var_4, &global_var_5_ptr, &global_var_6_ptr, &global_var_7_ptr);\n}\n",
+    "raw_decompilation": "void\nDISASM_FUNCTION_0(\n   void\n)\n{\n   // Assign the value of global_var_1 to global_var_0.\n   GLOBAL_VAR_0 = GLOBAL_VAR_1;\n   // Assign the value of global_var_3 to global_var_2.\n   GLOBAL_VAR_2 = GLOBAL_VAR_3;\n   // Call an unknown function, passing a global variable and pointers to three other global variables.\n   // The purpose of unknown_func_1 and the manipulation of global_var_5_ptr, global_var_6_ptr, and global_var_7_ptr are unclear without further analysis.\n   UNMATCHED_FUNCTION_0(GLOBAL_VAR_4, &GLOBAL_VAR_5, &GLOBAL_VAR_6, &GLOBAL_VAR_7);\n}",
+    "function_mapping": {
+      "DISASM_FUNCTION_0": {
+        "name": "pre_cpp_init",
+        "addr": 12345,
+        "is_external": false
+      }
+    },
+    "function_mapping_full": {
+      "inverse_string_map": {},
+      "inverse_function_map": {
+        "DISASM_FUNCTION_0": {
+          "name": "pre_cpp_init",
+          "addr": 12345,
+          "is_external": false
+        }
+      },
+      "unmatched_functions": {},
+      "unmatched_custom_types": {},
+      "unmatched_strings": {},
+      "unmatched_vars": {},
+      "unmatched_go_to_labels": {},
+      "unmatched_custom_function_pointers": {},
+      "unmatched_variadic_lists": {},
+      "unmatched_enums": {},
+      "unmatched_global_vars": {
+        "GLOBAL_VAR_0": {
+          "value": "global_var_0"
+        },
+        "GLOBAL_VAR_1": {
+          "value": "global_var_1"
+        },
+        "GLOBAL_VAR_2": {
+          "value": "global_var_2"
+        },
+        "GLOBAL_VAR_3": {
+          "value": "global_var_3"
+        },
+        "GLOBAL_VAR_4": {
+          "value": "global_var_4"
+        },
+        "GLOBAL_VAR_5": {
+          "value": "global_var_5_ptr"
+        },
+        "GLOBAL_VAR_6": {
+          "value": "global_var_6_ptr"
+        },
+        "GLOBAL_VAR_7": {
+          "value": "global_var_7_ptr"
+        }
+      },
+      "fields": {},
+      "unmatched_external_vars": {}
+    },
+    "summary": "This function, <code>pre_cpp_init</code>, initializes two global variables, <code>global_var_0</code> and <code>global_var_2</code>, by assigning them values from other global variables, <code>global_var_1</code> and <code>global_var_3</code>, respectively. It then calls an unknown function, <code>unknown_func_1</code>, passing it a global variable <code>global_var_4</code> and pointers to three other global variables, <code>global_var_5_ptr</code>, <code>global_var_6_ptr</code>, and <code>global_var_7_ptr</code>.",
+    "ai_summary": "This function, pre_cpp_init, initializes two global variables, global_var_0 and global_var_2, by assigning them values from other global variables, global_var_1 and global_var_3, respectively. It then calls an unknown function, unknown_func_1, passing it a global variable global_var_4 and pointers to three other global variables, global_var_5_ptr, global_var_6_ptr, and global_var_7_ptr.",
+    "raw_ai_summary": "This function, <code>pre_cpp_init</code>, initializes two global variables, <code>global_var_0</code> and <code>global_var_2</code>, by assigning them values from other global variables, <code>global_var_1</code> and <code>global_var_3</code>, respectively. It then calls an unknown function, <code>unknown_func_1</code>, passing it a global variable <code>global_var_4</code> and pointers to three other global variables, <code>global_var_5_ptr</code>, <code>global_var_6_ptr</code>, and <code>global_var_7_ptr</code>.",
+    "predicted_function_name": "pre_initialization"
+  },
+  "message": null,
+  "errors": null,
+  "meta": {
+    "pagination": null
+  }
+}
