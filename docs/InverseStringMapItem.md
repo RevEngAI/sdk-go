@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **String** | **string** |  | 
-**Addr** | **NullableInt32** |  | 
+**Addr** | **NullableInt64** |  | 
 
 ## Methods
 
 ### NewInverseStringMapItem
 
-`func NewInverseStringMapItem(string_ string, addr NullableInt32, ) *InverseStringMapItem`
+`func NewInverseStringMapItem(string_ string, addr NullableInt64, ) *InverseStringMapItem`
 
 NewInverseStringMapItem instantiates a new InverseStringMapItem object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetString sets String field to given value.
 
 ### GetAddr
 
-`func (o *InverseStringMapItem) GetAddr() int32`
+`func (o *InverseStringMapItem) GetAddr() int64`
 
 GetAddr returns the Addr field if non-nil, zero value otherwise.
 
 ### GetAddrOk
 
-`func (o *InverseStringMapItem) GetAddrOk() (*int32, bool)`
+`func (o *InverseStringMapItem) GetAddrOk() (*int64, bool)`
 
 GetAddrOk returns a tuple with the Addr field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAddr
 
-`func (o *InverseStringMapItem) SetAddr(v int32)`
+`func (o *InverseStringMapItem) SetAddr(v int64)`
 
 SetAddr sets Addr field to given value.
 
