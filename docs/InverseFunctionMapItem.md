@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** |  | 
-**Addr** | [**NullableAddr**](Addr.md) |  | 
+**Addr** | Pointer to [**NullableAddr**](Addr.md) |  | [optional] 
 **IsExternal** | Pointer to **bool** |  | [optional] [default to false]
 
 ## Methods
 
 ### NewInverseFunctionMapItem
 
-`func NewInverseFunctionMapItem(name string, addr NullableAddr, ) *InverseFunctionMapItem`
+`func NewInverseFunctionMapItem(name string, ) *InverseFunctionMapItem`
 
 NewInverseFunctionMapItem instantiates a new InverseFunctionMapItem object
 This constructor will assign default values to properties that have it defined,
@@ -66,6 +66,11 @@ and a boolean to check if the value has been set.
 
 SetAddr sets Addr field to given value.
 
+### HasAddr
+
+`func (o *InverseFunctionMapItem) HasAddr() bool`
+
+HasAddr returns a boolean if a field has been set.
 
 ### SetAddrNil
 

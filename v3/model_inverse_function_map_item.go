@@ -21,7 +21,7 @@ var _ MappedNullable = &InverseFunctionMapItem{}
 // InverseFunctionMapItem struct for InverseFunctionMapItem
 type InverseFunctionMapItem struct {
 	Name string `json:"name"`
-	Addr NullableAddr `json:"addr"`
+	Addr NullableAddr `json:"addr,omitempty"`
 	IsExternal *bool `json:"is_external,omitempty"`
 }
 
@@ -31,10 +31,9 @@ type _InverseFunctionMapItem InverseFunctionMapItem
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInverseFunctionMapItem(name string, addr NullableAddr) *InverseFunctionMapItem {
+func NewInverseFunctionMapItem(name string) *InverseFunctionMapItem {
 	this := InverseFunctionMapItem{}
 	this.Name = name
-	this.Addr = addr
 	var isExternal bool = false
 	this.IsExternal = &isExternal
 	return &this
@@ -74,18 +73,16 @@ func (o *InverseFunctionMapItem) SetName(v string) {
 	o.Name = v
 }
 
-// GetAddr returns the Addr field value
-// If the value is explicit nil, the zero value for Addr will be returned
+// GetAddr returns the Addr field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InverseFunctionMapItem) GetAddr() Addr {
-	if o == nil || o.Addr.Get() == nil {
+	if o == nil || IsNil(o.Addr.Get()) {
 		var ret Addr
 		return ret
 	}
-
 	return *o.Addr.Get()
 }
 
-// GetAddrOk returns a tuple with the Addr field value
+// GetAddrOk returns a tuple with the Addr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InverseFunctionMapItem) GetAddrOk() (*Addr, bool) {
@@ -95,9 +92,27 @@ func (o *InverseFunctionMapItem) GetAddrOk() (*Addr, bool) {
 	return o.Addr.Get(), o.Addr.IsSet()
 }
 
-// SetAddr sets field value
+// HasAddr returns a boolean if a field has been set.
+func (o *InverseFunctionMapItem) HasAddr() bool {
+	if o != nil && o.Addr.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAddr gets a reference to the given NullableAddr and assigns it to the Addr field.
 func (o *InverseFunctionMapItem) SetAddr(v Addr) {
 	o.Addr.Set(&v)
+}
+// SetAddrNil sets the value for Addr to be an explicit nil
+func (o *InverseFunctionMapItem) SetAddrNil() {
+	o.Addr.Set(nil)
+}
+
+// UnsetAddr ensures that no value is present for Addr, not even an explicit nil
+func (o *InverseFunctionMapItem) UnsetAddr() {
+	o.Addr.Unset()
 }
 
 // GetIsExternal returns the IsExternal field value if set, zero value otherwise.
@@ -143,7 +158,9 @@ func (o InverseFunctionMapItem) MarshalJSON() ([]byte, error) {
 func (o InverseFunctionMapItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
-	toSerialize["addr"] = o.Addr.Get()
+	if o.Addr.IsSet() {
+		toSerialize["addr"] = o.Addr.Get()
+	}
 	if !IsNil(o.IsExternal) {
 		toSerialize["is_external"] = o.IsExternal
 	}
@@ -156,7 +173,6 @@ func (o *InverseFunctionMapItem) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"addr",
 	}
 
 	allProperties := make(map[string]interface{})

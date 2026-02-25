@@ -21,7 +21,7 @@ var _ MappedNullable = &InverseStringMapItem{}
 // InverseStringMapItem struct for InverseStringMapItem
 type InverseStringMapItem struct {
 	String string `json:"string"`
-	Addr NullableInt32 `json:"addr"`
+	Addr NullableInt32 `json:"addr,omitempty"`
 }
 
 type _InverseStringMapItem InverseStringMapItem
@@ -30,10 +30,9 @@ type _InverseStringMapItem InverseStringMapItem
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInverseStringMapItem(string_ string, addr NullableInt32) *InverseStringMapItem {
+func NewInverseStringMapItem(string_ string) *InverseStringMapItem {
 	this := InverseStringMapItem{}
 	this.String = string_
-	this.Addr = addr
 	return &this
 }
 
@@ -69,18 +68,16 @@ func (o *InverseStringMapItem) SetString(v string) {
 	o.String = v
 }
 
-// GetAddr returns the Addr field value
-// If the value is explicit nil, the zero value for int32 will be returned
+// GetAddr returns the Addr field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InverseStringMapItem) GetAddr() int32 {
-	if o == nil || o.Addr.Get() == nil {
+	if o == nil || IsNil(o.Addr.Get()) {
 		var ret int32
 		return ret
 	}
-
 	return *o.Addr.Get()
 }
 
-// GetAddrOk returns a tuple with the Addr field value
+// GetAddrOk returns a tuple with the Addr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InverseStringMapItem) GetAddrOk() (*int32, bool) {
@@ -90,9 +87,27 @@ func (o *InverseStringMapItem) GetAddrOk() (*int32, bool) {
 	return o.Addr.Get(), o.Addr.IsSet()
 }
 
-// SetAddr sets field value
+// HasAddr returns a boolean if a field has been set.
+func (o *InverseStringMapItem) HasAddr() bool {
+	if o != nil && o.Addr.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAddr gets a reference to the given NullableInt32 and assigns it to the Addr field.
 func (o *InverseStringMapItem) SetAddr(v int32) {
 	o.Addr.Set(&v)
+}
+// SetAddrNil sets the value for Addr to be an explicit nil
+func (o *InverseStringMapItem) SetAddrNil() {
+	o.Addr.Set(nil)
+}
+
+// UnsetAddr ensures that no value is present for Addr, not even an explicit nil
+func (o *InverseStringMapItem) UnsetAddr() {
+	o.Addr.Unset()
 }
 
 func (o InverseStringMapItem) MarshalJSON() ([]byte, error) {
@@ -106,7 +121,9 @@ func (o InverseStringMapItem) MarshalJSON() ([]byte, error) {
 func (o InverseStringMapItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["string"] = o.String
-	toSerialize["addr"] = o.Addr.Get()
+	if o.Addr.IsSet() {
+		toSerialize["addr"] = o.Addr.Get()
+	}
 	return toSerialize, nil
 }
 
@@ -116,7 +133,6 @@ func (o *InverseStringMapItem) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"string",
-		"addr",
 	}
 
 	allProperties := make(map[string]interface{})
