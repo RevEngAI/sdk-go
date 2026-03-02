@@ -444,7 +444,7 @@ Name | Type | Description  | Notes
 
 ## GetAnalysisStrings
 
-> BaseResponseAnalysisStringsResponse GetAnalysisStrings(ctx, analysisId).Page(page).PageSize(pageSize).Search(search).FunctionSearch(functionSearch).Execute()
+> BaseResponseAnalysisStringsResponse GetAnalysisStrings(ctx, analysisId).Page(page).PageSize(pageSize).Search(search).FunctionSearch(functionSearch).OrderBy(orderBy).SortOrder(sortOrder).Execute()
 
 Get string information found in the Analysis
 
@@ -468,10 +468,12 @@ func main() {
 	pageSize := int32(56) // int32 | Number of items per page. (optional) (default to 100)
 	search := "search_example" // string | Search is applied to string value (optional)
 	functionSearch := "functionSearch_example" // string | Search is applied to function names (optional)
+	orderBy := "orderBy_example" // string | Order by field (optional) (default to "value")
+	sortOrder := "sortOrder_example" // string | Sort order for the results (optional) (default to "ASC")
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsCoreAPI.GetAnalysisStrings(context.Background(), analysisId).Page(page).PageSize(pageSize).Search(search).FunctionSearch(functionSearch).Execute()
+	resp, r, err := apiClient.FunctionsCoreAPI.GetAnalysisStrings(context.Background(), analysisId).Page(page).PageSize(pageSize).Search(search).FunctionSearch(functionSearch).OrderBy(orderBy).SortOrder(sortOrder).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.GetAnalysisStrings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -501,6 +503,8 @@ Name | Type | Description  | Notes
  **pageSize** | **int32** | Number of items per page. | [default to 100]
  **search** | **string** | Search is applied to string value | 
  **functionSearch** | **string** | Search is applied to function names | 
+ **orderBy** | **string** | Order by field | [default to &quot;value&quot;]
+ **sortOrder** | **string** | Sort order for the results | [default to &quot;ASC&quot;]
 
 ### Return type
 
