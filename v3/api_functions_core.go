@@ -832,6 +832,8 @@ type ApiGetAnalysisStringsRequest struct {
 	pageSize *int32
 	search *string
 	functionSearch *string
+	orderBy *string
+	sortOrder *string
 }
 
 // The page number to retrieve.
@@ -855,6 +857,18 @@ func (r ApiGetAnalysisStringsRequest) Search(search string) ApiGetAnalysisString
 // Search is applied to function names
 func (r ApiGetAnalysisStringsRequest) FunctionSearch(functionSearch string) ApiGetAnalysisStringsRequest {
 	r.functionSearch = &functionSearch
+	return r
+}
+
+// Order by field
+func (r ApiGetAnalysisStringsRequest) OrderBy(orderBy string) ApiGetAnalysisStringsRequest {
+	r.orderBy = &orderBy
+	return r
+}
+
+// Sort order for the results
+func (r ApiGetAnalysisStringsRequest) SortOrder(sortOrder string) ApiGetAnalysisStringsRequest {
+	r.sortOrder = &sortOrder
 	return r
 }
 
@@ -920,6 +934,20 @@ func (a *FunctionsCoreAPIService) GetAnalysisStringsExecute(r ApiGetAnalysisStri
 	}
 	if r.functionSearch != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "function_search", r.functionSearch, "form", "")
+	}
+	if r.orderBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "order_by", r.orderBy, "form", "")
+	} else {
+		var defaultValue string = "value"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "order_by", defaultValue, "form", "")
+		r.orderBy = &defaultValue
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "form", "")
+	} else {
+		var defaultValue string = "ASC"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", defaultValue, "form", "")
+		r.sortOrder = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
