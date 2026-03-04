@@ -37,7 +37,7 @@ func Test_GetAiDecompilationTaskResult_Parse(t *testing.T) {
 		require.True(t, result.HasData())
 		data := result.GetData()
 
-		assert.Equal(t, "success", data.Status)
+		assert.Equal(t, revengai.AIDECOMPILATIONTASKSTATUS_SUCCESS, data.Status)
 
 		// Decompilation
 		decompilation := data.Decompilation.Get()
@@ -191,7 +191,7 @@ func Test_GetAiDecompilationTaskResult_Parse(t *testing.T) {
 		require.NoError(t, err)
 
 		data := result.GetData()
-		assert.Equal(t, "pending", data.Status)
+		assert.Equal(t, revengai.AIDECOMPILATIONTASKSTATUS_PENDING, data.Status)
 
 		// Decompilation and raw_decompilation are explicit null
 		assert.True(t, data.Decompilation.IsSet())
