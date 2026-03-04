@@ -51,6 +51,8 @@ type AnalysisRecord struct {
 	DynamicExecutionTaskId NullableInt32 `json:"dynamic_execution_task_id,omitempty"`
 	// The base address of the binary
 	BaseAddress int32 `json:"base_address"`
+	// List of tags associated with the analysis
+	Tags []TagItem `json:"tags,omitempty"`
 }
 
 type _AnalysisRecord AnalysisRecord
@@ -506,6 +508,38 @@ func (o *AnalysisRecord) SetBaseAddress(v int32) {
 	o.BaseAddress = v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *AnalysisRecord) GetTags() []TagItem {
+	if o == nil || IsNil(o.Tags) {
+		var ret []TagItem
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalysisRecord) GetTagsOk() ([]TagItem, bool) {
+	if o == nil || IsNil(o.Tags) {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *AnalysisRecord) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []TagItem and assigns it to the Tags field.
+func (o *AnalysisRecord) SetTags(v []TagItem) {
+	o.Tags = v
+}
+
 func (o AnalysisRecord) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -536,6 +570,9 @@ func (o AnalysisRecord) ToMap() (map[string]interface{}, error) {
 		toSerialize["dynamic_execution_task_id"] = o.DynamicExecutionTaskId.Get()
 	}
 	toSerialize["base_address"] = o.BaseAddress
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
+	}
 	return toSerialize, nil
 }
 

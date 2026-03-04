@@ -20,7 +20,8 @@ var _ MappedNullable = &GetAiDecompilationTask{}
 
 // GetAiDecompilationTask struct for GetAiDecompilationTask
 type GetAiDecompilationTask struct {
-	Status string `json:"status"`
+	// The status of the AI decompilation task
+	Status AiDecompilationTaskStatus `json:"status"`
 	Decompilation NullableString `json:"decompilation"`
 	RawDecompilation NullableString `json:"raw_decompilation"`
 	FunctionMapping map[string]InverseFunctionMapItem `json:"function_mapping"`
@@ -37,7 +38,7 @@ type _GetAiDecompilationTask GetAiDecompilationTask
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAiDecompilationTask(status string, decompilation NullableString, rawDecompilation NullableString, functionMapping map[string]InverseFunctionMapItem, functionMappingFull NullableFunctionMappingFull) *GetAiDecompilationTask {
+func NewGetAiDecompilationTask(status AiDecompilationTaskStatus, decompilation NullableString, rawDecompilation NullableString, functionMapping map[string]InverseFunctionMapItem, functionMappingFull NullableFunctionMappingFull) *GetAiDecompilationTask {
 	this := GetAiDecompilationTask{}
 	this.Status = status
 	this.Decompilation = decompilation
@@ -56,9 +57,9 @@ func NewGetAiDecompilationTaskWithDefaults() *GetAiDecompilationTask {
 }
 
 // GetStatus returns the Status field value
-func (o *GetAiDecompilationTask) GetStatus() string {
+func (o *GetAiDecompilationTask) GetStatus() AiDecompilationTaskStatus {
 	if o == nil {
-		var ret string
+		var ret AiDecompilationTaskStatus
 		return ret
 	}
 
@@ -67,7 +68,7 @@ func (o *GetAiDecompilationTask) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *GetAiDecompilationTask) GetStatusOk() (*string, bool) {
+func (o *GetAiDecompilationTask) GetStatusOk() (*AiDecompilationTaskStatus, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -75,7 +76,7 @@ func (o *GetAiDecompilationTask) GetStatusOk() (*string, bool) {
 }
 
 // SetStatus sets field value
-func (o *GetAiDecompilationTask) SetStatus(v string) {
+func (o *GetAiDecompilationTask) SetStatus(v AiDecompilationTaskStatus) {
 	o.Status = v
 }
 
