@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **DynamicExecutionStatus** | Pointer to [**NullableAppApiRestV2AnalysesEnumsDynamicExecutionStatus**](AppApiRestV2AnalysesEnumsDynamicExecutionStatus.md) |  | [optional] 
 **DynamicExecutionTaskId** | Pointer to **NullableInt32** |  | [optional] 
 **BaseAddress** | **int32** | The base address of the binary | 
+**Tags** | Pointer to [**[]TagItem**](TagItem.md) | List of tags associated with the analysis | [optional] 
 
 ## Methods
 
@@ -389,6 +390,31 @@ and a boolean to check if the value has been set.
 
 SetBaseAddress sets BaseAddress field to given value.
 
+
+### GetTags
+
+`func (o *AnalysisRecord) GetTags() []TagItem`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *AnalysisRecord) GetTagsOk() (*[]TagItem, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *AnalysisRecord) SetTags(v []TagItem)`
+
+SetTags sets Tags field to given value.
+
+### HasTags
+
+`func (o *AnalysisRecord) HasTags() bool`
+
+HasTags returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

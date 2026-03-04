@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | **string** |  | 
+**Status** | [**AiDecompilationTaskStatus**](AiDecompilationTaskStatus.md) | The status of the AI decompilation task | 
 **Decompilation** | **NullableString** |  | 
 **RawDecompilation** | **NullableString** |  | 
 **FunctionMapping** | [**map[string]InverseFunctionMapItem**](InverseFunctionMapItem.md) |  | 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewGetAiDecompilationTask
 
-`func NewGetAiDecompilationTask(status string, decompilation NullableString, rawDecompilation NullableString, functionMapping map[string]InverseFunctionMapItem, functionMappingFull NullableFunctionMappingFull, ) *GetAiDecompilationTask`
+`func NewGetAiDecompilationTask(status AiDecompilationTaskStatus, decompilation NullableString, rawDecompilation NullableString, functionMapping map[string]InverseFunctionMapItem, functionMappingFull NullableFunctionMappingFull, ) *GetAiDecompilationTask`
 
 NewGetAiDecompilationTask instantiates a new GetAiDecompilationTask object
 This constructor will assign default values to properties that have it defined,
@@ -35,20 +35,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetStatus
 
-`func (o *GetAiDecompilationTask) GetStatus() string`
+`func (o *GetAiDecompilationTask) GetStatus() AiDecompilationTaskStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *GetAiDecompilationTask) GetStatusOk() (*string, bool)`
+`func (o *GetAiDecompilationTask) GetStatusOk() (*AiDecompilationTaskStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *GetAiDecompilationTask) SetStatus(v string)`
+`func (o *GetAiDecompilationTask) SetStatus(v AiDecompilationTaskStatus)`
 
 SetStatus sets Status field to given value.
 
