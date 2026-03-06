@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **DebugHash** | Pointer to **NullableString** |  | [optional] 
 **AnalysisConfig** | Pointer to [**AnalysisConfig**](AnalysisConfig.md) | The analysis config enables the configuration of optional analysis stages | [optional] 
 **BinaryConfig** | Pointer to [**BinaryConfig**](BinaryConfig.md) | The binary config can override automatically determined values such as ISA, Platform, File Format, etc | [optional] 
+**AutoRunAgents** | Pointer to [**AutoRunAgents**](AutoRunAgents.md) |  | [optional] 
 
 ## Methods
 
@@ -241,6 +242,31 @@ SetBinaryConfig sets BinaryConfig field to given value.
 `func (o *AnalysisCreateRequest) HasBinaryConfig() bool`
 
 HasBinaryConfig returns a boolean if a field has been set.
+
+### GetAutoRunAgents
+
+`func (o *AnalysisCreateRequest) GetAutoRunAgents() AutoRunAgents`
+
+GetAutoRunAgents returns the AutoRunAgents field if non-nil, zero value otherwise.
+
+### GetAutoRunAgentsOk
+
+`func (o *AnalysisCreateRequest) GetAutoRunAgentsOk() (*AutoRunAgents, bool)`
+
+GetAutoRunAgentsOk returns a tuple with the AutoRunAgents field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoRunAgents
+
+`func (o *AnalysisCreateRequest) SetAutoRunAgents(v AutoRunAgents)`
+
+SetAutoRunAgents sets AutoRunAgents field to given value.
+
+### HasAutoRunAgents
+
+`func (o *AnalysisCreateRequest) HasAutoRunAgents() bool`
+
+HasAutoRunAgents returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

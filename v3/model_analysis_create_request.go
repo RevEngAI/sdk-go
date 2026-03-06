@@ -34,6 +34,7 @@ type AnalysisCreateRequest struct {
 	AnalysisConfig *AnalysisConfig `json:"analysis_config,omitempty"`
 	// The binary config can override automatically determined values such as ISA, Platform, File Format, etc
 	BinaryConfig *BinaryConfig `json:"binary_config,omitempty"`
+	AutoRunAgents *AutoRunAgents `json:"auto_run_agents,omitempty"`
 }
 
 type _AnalysisCreateRequest AnalysisCreateRequest
@@ -321,6 +322,38 @@ func (o *AnalysisCreateRequest) SetBinaryConfig(v BinaryConfig) {
 	o.BinaryConfig = &v
 }
 
+// GetAutoRunAgents returns the AutoRunAgents field value if set, zero value otherwise.
+func (o *AnalysisCreateRequest) GetAutoRunAgents() AutoRunAgents {
+	if o == nil || IsNil(o.AutoRunAgents) {
+		var ret AutoRunAgents
+		return ret
+	}
+	return *o.AutoRunAgents
+}
+
+// GetAutoRunAgentsOk returns a tuple with the AutoRunAgents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalysisCreateRequest) GetAutoRunAgentsOk() (*AutoRunAgents, bool) {
+	if o == nil || IsNil(o.AutoRunAgents) {
+		return nil, false
+	}
+	return o.AutoRunAgents, true
+}
+
+// HasAutoRunAgents returns a boolean if a field has been set.
+func (o *AnalysisCreateRequest) HasAutoRunAgents() bool {
+	if o != nil && !IsNil(o.AutoRunAgents) {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoRunAgents gets a reference to the given AutoRunAgents and assigns it to the AutoRunAgents field.
+func (o *AnalysisCreateRequest) SetAutoRunAgents(v AutoRunAgents) {
+	o.AutoRunAgents = &v
+}
+
 func (o AnalysisCreateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -350,6 +383,9 @@ func (o AnalysisCreateRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.BinaryConfig) {
 		toSerialize["binary_config"] = o.BinaryConfig
+	}
+	if !IsNil(o.AutoRunAgents) {
+		toSerialize["auto_run_agents"] = o.AutoRunAgents
 	}
 	return toSerialize, nil
 }

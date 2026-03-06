@@ -19,12 +19,13 @@ Name | Type | Description | Notes
 **ModelName** | **string** |  | 
 **Sbom** | Pointer to **map[string]interface{}** |  | [optional] 
 **Sha256Hash** | **string** |  | 
+**AutoRunAgents** | [**AutoRunAgents**](AutoRunAgents.md) |  | 
 
 ## Methods
 
 ### NewAnalysisDetailResponse
 
-`func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, analysisScope string, architecture string, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int32, binaryType string, creation string, dashboardUrl string, debug bool, modelName string, sha256Hash string, ) *AnalysisDetailResponse`
+`func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, analysisScope string, architecture string, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int32, binaryType string, creation string, dashboardUrl string, debug bool, modelName string, sha256Hash string, autoRunAgents AutoRunAgents, ) *AnalysisDetailResponse`
 
 NewAnalysisDetailResponse instantiates a new AnalysisDetailResponse object
 This constructor will assign default values to properties that have it defined,
@@ -352,6 +353,26 @@ and a boolean to check if the value has been set.
 `func (o *AnalysisDetailResponse) SetSha256Hash(v string)`
 
 SetSha256Hash sets Sha256Hash field to given value.
+
+
+### GetAutoRunAgents
+
+`func (o *AnalysisDetailResponse) GetAutoRunAgents() AutoRunAgents`
+
+GetAutoRunAgents returns the AutoRunAgents field if non-nil, zero value otherwise.
+
+### GetAutoRunAgentsOk
+
+`func (o *AnalysisDetailResponse) GetAutoRunAgentsOk() (*AutoRunAgents, bool)`
+
+GetAutoRunAgentsOk returns a tuple with the AutoRunAgents field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoRunAgents
+
+`func (o *AnalysisDetailResponse) SetAutoRunAgents(v AutoRunAgents)`
+
+SetAutoRunAgents sets AutoRunAgents field to given value.
 
 
 
