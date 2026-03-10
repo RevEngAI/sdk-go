@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type UpdateFunctionDataTypes struct {
 	DataTypesVersion int32 `json:"data_types_version"`
 	// Function data types information to update
 	DataTypes FunctionInfoInput `json:"data_types"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateFunctionDataTypes UpdateFunctionDataTypes
@@ -107,6 +107,11 @@ func (o UpdateFunctionDataTypes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["data_types_version"] = o.DataTypesVersion
 	toSerialize["data_types"] = o.DataTypes
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *UpdateFunctionDataTypes) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateFunctionDataTypes := _UpdateFunctionDataTypes{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateFunctionDataTypes)
+	err = json.Unmarshal(data, &varUpdateFunctionDataTypes)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateFunctionDataTypes(varUpdateFunctionDataTypes)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data_types_version")
+		delete(additionalProperties, "data_types")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ProcessTree{}
 type ProcessTree struct {
 	Success bool `json:"success"`
 	Data []Process `json:"data"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProcessTree ProcessTree
@@ -105,6 +105,11 @@ func (o ProcessTree) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["success"] = o.Success
 	toSerialize["data"] = o.Data
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *ProcessTree) UnmarshalJSON(data []byte) (err error) {
 
 	varProcessTree := _ProcessTree{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProcessTree)
+	err = json.Unmarshal(data, &varProcessTree)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProcessTree(varProcessTree)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "success")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

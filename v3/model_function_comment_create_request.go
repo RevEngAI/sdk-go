@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type FunctionCommentCreateRequest struct {
 	Content string `json:"content"`
 	// Comment context for a function decompilation
 	Context *DecompilationCommentContext `json:"context,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionCommentCreateRequest FunctionCommentCreateRequest
@@ -116,6 +116,11 @@ func (o FunctionCommentCreateRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Context) {
 		toSerialize["context"] = o.Context
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,15 +148,21 @@ func (o *FunctionCommentCreateRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionCommentCreateRequest := _FunctionCommentCreateRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionCommentCreateRequest)
+	err = json.Unmarshal(data, &varFunctionCommentCreateRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionCommentCreateRequest(varFunctionCommentCreateRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content")
+		delete(additionalProperties, "context")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

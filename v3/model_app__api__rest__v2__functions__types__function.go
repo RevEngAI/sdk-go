@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type AppApiRestV2FunctionsTypesFunction struct {
 	Debug bool `json:"debug"`
 	Embedding3d []float32 `json:"embedding_3d,omitempty"`
 	Embedding1d []float32 `json:"embedding_1d,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AppApiRestV2FunctionsTypesFunction AppApiRestV2FunctionsTypesFunction
@@ -293,6 +293,11 @@ func (o AppApiRestV2FunctionsTypesFunction) ToMap() (map[string]interface{}, err
 	if o.Embedding1d != nil {
 		toSerialize["embedding_1d"] = o.Embedding1d
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -325,15 +330,27 @@ func (o *AppApiRestV2FunctionsTypesFunction) UnmarshalJSON(data []byte) (err err
 
 	varAppApiRestV2FunctionsTypesFunction := _AppApiRestV2FunctionsTypesFunction{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAppApiRestV2FunctionsTypesFunction)
+	err = json.Unmarshal(data, &varAppApiRestV2FunctionsTypesFunction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AppApiRestV2FunctionsTypesFunction(varAppApiRestV2FunctionsTypesFunction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "function_mangled_name")
+		delete(additionalProperties, "function_vaddr")
+		delete(additionalProperties, "function_size")
+		delete(additionalProperties, "debug")
+		delete(additionalProperties, "embedding_3d")
+		delete(additionalProperties, "embedding_1d")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

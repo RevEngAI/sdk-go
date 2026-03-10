@@ -24,9 +24,14 @@ type FunctionMatchingFilters struct {
 	CollectionIds []int32 `json:"collection_ids,omitempty"`
 	// ID's of functions to limit the search to, if empty, search all scoped functions
 	FunctionIds []int64 `json:"function_ids,omitempty"`
+	// ID's of users to limit the search to, if empty, search all scoped users
+	UserIds []int32 `json:"user_ids,omitempty"`
 	// Limit the search to specific debug types, if empty, search all scoped debug & non-debug functions
 	DebugTypes []string `json:"debug_types,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FunctionMatchingFilters FunctionMatchingFilters
 
 // NewFunctionMatchingFilters instantiates a new FunctionMatchingFilters object
 // This constructor will assign default values to properties that have it defined,
@@ -141,6 +146,38 @@ func (o *FunctionMatchingFilters) SetFunctionIds(v []int64) {
 	o.FunctionIds = v
 }
 
+// GetUserIds returns the UserIds field value if set, zero value otherwise.
+func (o *FunctionMatchingFilters) GetUserIds() []int32 {
+	if o == nil || IsNil(o.UserIds) {
+		var ret []int32
+		return ret
+	}
+	return o.UserIds
+}
+
+// GetUserIdsOk returns a tuple with the UserIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionMatchingFilters) GetUserIdsOk() ([]int32, bool) {
+	if o == nil || IsNil(o.UserIds) {
+		return nil, false
+	}
+	return o.UserIds, true
+}
+
+// HasUserIds returns a boolean if a field has been set.
+func (o *FunctionMatchingFilters) HasUserIds() bool {
+	if o != nil && !IsNil(o.UserIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserIds gets a reference to the given []int32 and assigns it to the UserIds field.
+func (o *FunctionMatchingFilters) SetUserIds(v []int32) {
+	o.UserIds = v
+}
+
 // GetDebugTypes returns the DebugTypes field value if set, zero value otherwise.
 func (o *FunctionMatchingFilters) GetDebugTypes() []string {
 	if o == nil || IsNil(o.DebugTypes) {
@@ -192,10 +229,43 @@ func (o FunctionMatchingFilters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FunctionIds) {
 		toSerialize["function_ids"] = o.FunctionIds
 	}
+	if !IsNil(o.UserIds) {
+		toSerialize["user_ids"] = o.UserIds
+	}
 	if !IsNil(o.DebugTypes) {
 		toSerialize["debug_types"] = o.DebugTypes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FunctionMatchingFilters) UnmarshalJSON(data []byte) (err error) {
+	varFunctionMatchingFilters := _FunctionMatchingFilters{}
+
+	err = json.Unmarshal(data, &varFunctionMatchingFilters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FunctionMatchingFilters(varFunctionMatchingFilters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binary_ids")
+		delete(additionalProperties, "collection_ids")
+		delete(additionalProperties, "function_ids")
+		delete(additionalProperties, "user_ids")
+		delete(additionalProperties, "debug_types")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFunctionMatchingFilters struct {

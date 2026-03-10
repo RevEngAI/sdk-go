@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type CalleeFunctionInfo struct {
 	CalleeName string `json:"callee_name"`
 	// Virtual address of the called function
 	CalleeVaddr string `json:"callee_vaddr"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CalleeFunctionInfo CalleeFunctionInfo
@@ -234,6 +234,11 @@ func (o CalleeFunctionInfo) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["callee_name"] = o.CalleeName
 	toSerialize["callee_vaddr"] = o.CalleeVaddr
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -265,15 +270,25 @@ func (o *CalleeFunctionInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varCalleeFunctionInfo := _CalleeFunctionInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCalleeFunctionInfo)
+	err = json.Unmarshal(data, &varCalleeFunctionInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CalleeFunctionInfo(varCalleeFunctionInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "matched_function_id")
+		delete(additionalProperties, "dashboard_url")
+		delete(additionalProperties, "is_external")
+		delete(additionalProperties, "callee_name")
+		delete(additionalProperties, "callee_vaddr")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

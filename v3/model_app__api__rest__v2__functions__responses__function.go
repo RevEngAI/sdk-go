@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type AppApiRestV2FunctionsResponsesFunction struct {
 	FunctionId NullableInt32 `json:"function_id,omitempty"`
 	// Function virtual address
 	FunctionVaddr int64 `json:"function_vaddr"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AppApiRestV2FunctionsResponsesFunction AppApiRestV2FunctionsResponsesFunction
@@ -125,6 +125,11 @@ func (o AppApiRestV2FunctionsResponsesFunction) ToMap() (map[string]interface{},
 		toSerialize["function_id"] = o.FunctionId.Get()
 	}
 	toSerialize["function_vaddr"] = o.FunctionVaddr
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -152,15 +157,21 @@ func (o *AppApiRestV2FunctionsResponsesFunction) UnmarshalJSON(data []byte) (err
 
 	varAppApiRestV2FunctionsResponsesFunction := _AppApiRestV2FunctionsResponsesFunction{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAppApiRestV2FunctionsResponsesFunction)
+	err = json.Unmarshal(data, &varAppApiRestV2FunctionsResponsesFunction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AppApiRestV2FunctionsResponsesFunction(varAppApiRestV2FunctionsResponsesFunction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_vaddr")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

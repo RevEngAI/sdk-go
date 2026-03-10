@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type Structure struct {
 	Members map[string]StructureMember `json:"members"`
 	// Type of artifact that the structure is associated with
 	ArtifactType *string `json:"artifact_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Structure Structure
@@ -236,6 +236,11 @@ func (o Structure) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ArtifactType) {
 		toSerialize["artifact_type"] = o.ArtifactType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -264,15 +269,24 @@ func (o *Structure) UnmarshalJSON(data []byte) (err error) {
 
 	varStructure := _Structure{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStructure)
+	err = json.Unmarshal(data, &varStructure)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Structure(varStructure)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "last_change")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "members")
+		delete(additionalProperties, "artifact_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

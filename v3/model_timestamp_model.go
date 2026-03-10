@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type TimestampModel struct {
 	PeTimestamp int32 `json:"pe_timestamp"`
 	ExportTimestamp int32 `json:"export_timestamp"`
 	DebugTimestamp int32 `json:"debug_timestamp"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TimestampModel TimestampModel
@@ -132,6 +132,11 @@ func (o TimestampModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["pe_timestamp"] = o.PeTimestamp
 	toSerialize["export_timestamp"] = o.ExportTimestamp
 	toSerialize["debug_timestamp"] = o.DebugTimestamp
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -161,15 +166,22 @@ func (o *TimestampModel) UnmarshalJSON(data []byte) (err error) {
 
 	varTimestampModel := _TimestampModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTimestampModel)
+	err = json.Unmarshal(data, &varTimestampModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TimestampModel(varTimestampModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pe_timestamp")
+		delete(additionalProperties, "export_timestamp")
+		delete(additionalProperties, "debug_timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

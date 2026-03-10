@@ -32,7 +32,10 @@ type AnalysisConfig struct {
 	AdvancedAnalysis *bool `json:"advanced_analysis,omitempty"`
 	// Including a sandbox config enables the dynamic execution sandbox
 	SandboxConfig *SandboxOptions `json:"sandbox_config,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AnalysisConfig AnalysisConfig
 
 // NewAnalysisConfig instantiates a new AnalysisConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -326,7 +329,39 @@ func (o AnalysisConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SandboxConfig) {
 		toSerialize["sandbox_config"] = o.SandboxConfig
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AnalysisConfig) UnmarshalJSON(data []byte) (err error) {
+	varAnalysisConfig := _AnalysisConfig{}
+
+	err = json.Unmarshal(data, &varAnalysisConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AnalysisConfig(varAnalysisConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "scrape_third_party_config")
+		delete(additionalProperties, "generate_cves")
+		delete(additionalProperties, "generate_sbom")
+		delete(additionalProperties, "generate_capabilities")
+		delete(additionalProperties, "no_cache")
+		delete(additionalProperties, "advanced_analysis")
+		delete(additionalProperties, "sandbox_config")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAnalysisConfig struct {

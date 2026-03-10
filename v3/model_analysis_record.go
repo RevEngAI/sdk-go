@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -53,6 +52,7 @@ type AnalysisRecord struct {
 	BaseAddress int32 `json:"base_address"`
 	// List of tags associated with the analysis
 	Tags []TagItem `json:"tags,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisRecord AnalysisRecord
@@ -573,6 +573,11 @@ func (o AnalysisRecord) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -613,15 +618,36 @@ func (o *AnalysisRecord) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisRecord := _AnalysisRecord{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisRecord)
+	err = json.Unmarshal(data, &varAnalysisRecord)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisRecord(varAnalysisRecord)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "analysis_scope")
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "model_name")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "creation")
+		delete(additionalProperties, "is_owner")
+		delete(additionalProperties, "binary_name")
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "function_boundaries_hash")
+		delete(additionalProperties, "binary_size")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "dynamic_execution_status")
+		delete(additionalProperties, "dynamic_execution_task_id")
+		delete(additionalProperties, "base_address")
+		delete(additionalProperties, "tags")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

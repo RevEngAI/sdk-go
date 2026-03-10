@@ -30,7 +30,10 @@ type ReAnalysisForm struct {
 	ModelName NullableString `json:"model_name,omitempty"`
 	// When enabled, skips using cached data within the processing.
 	NoCache *bool `json:"no_cache,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReAnalysisForm ReAnalysisForm
 
 // NewReAnalysisForm instantiates a new ReAnalysisForm object
 // This constructor will assign default values to properties that have it defined,
@@ -298,7 +301,38 @@ func (o ReAnalysisForm) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NoCache) {
 		toSerialize["no_cache"] = o.NoCache
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReAnalysisForm) UnmarshalJSON(data []byte) (err error) {
+	varReAnalysisForm := _ReAnalysisForm{}
+
+	err = json.Unmarshal(data, &varReAnalysisForm)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReAnalysisForm(varReAnalysisForm)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "command_line_args")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "essential")
+		delete(additionalProperties, "model_name")
+		delete(additionalProperties, "no_cache")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReAnalysisForm struct {

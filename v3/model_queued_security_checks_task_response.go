@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &QueuedSecurityChecksTaskResponse{}
 // QueuedSecurityChecksTaskResponse struct for QueuedSecurityChecksTaskResponse
 type QueuedSecurityChecksTaskResponse struct {
 	TaskId string `json:"task_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _QueuedSecurityChecksTaskResponse QueuedSecurityChecksTaskResponse
@@ -78,6 +78,11 @@ func (o QueuedSecurityChecksTaskResponse) MarshalJSON() ([]byte, error) {
 func (o QueuedSecurityChecksTaskResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["task_id"] = o.TaskId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -105,15 +110,20 @@ func (o *QueuedSecurityChecksTaskResponse) UnmarshalJSON(data []byte) (err error
 
 	varQueuedSecurityChecksTaskResponse := _QueuedSecurityChecksTaskResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varQueuedSecurityChecksTaskResponse)
+	err = json.Unmarshal(data, &varQueuedSecurityChecksTaskResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = QueuedSecurityChecksTaskResponse(varQueuedSecurityChecksTaskResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "task_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

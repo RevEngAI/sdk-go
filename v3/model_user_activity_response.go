@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type UserActivityResponse struct {
 	Message string `json:"message"`
 	Sources string `json:"sources"`
 	Username string `json:"username"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UserActivityResponse UserActivityResponse
@@ -214,6 +214,11 @@ func (o UserActivityResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["message"] = o.Message
 	toSerialize["sources"] = o.Sources
 	toSerialize["username"] = o.Username
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -246,15 +251,25 @@ func (o *UserActivityResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varUserActivityResponse := _UserActivityResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUserActivityResponse)
+	err = json.Unmarshal(data, &varUserActivityResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UserActivityResponse(varUserActivityResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actions")
+		delete(additionalProperties, "activity_scope")
+		delete(additionalProperties, "creation")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "sources")
+		delete(additionalProperties, "username")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

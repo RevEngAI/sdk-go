@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type FunctionParamResponse struct {
 	Addr string `json:"addr"`
 	Length int32 `json:"length"`
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionParamResponse FunctionParamResponse
@@ -186,6 +186,11 @@ func (o FunctionParamResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["addr"] = o.Addr
 	toSerialize["length"] = o.Length
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -217,15 +222,24 @@ func (o *FunctionParamResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionParamResponse := _FunctionParamResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionParamResponse)
+	err = json.Unmarshal(data, &varFunctionParamResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionParamResponse(varFunctionParamResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "d_type")
+		delete(additionalProperties, "loc")
+		delete(additionalProperties, "addr")
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

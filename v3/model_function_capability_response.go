@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &FunctionCapabilityResponse{}
 type FunctionCapabilityResponse struct {
 	// The capabilities of the function
 	Capabilities []string `json:"capabilities"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionCapabilityResponse FunctionCapabilityResponse
@@ -79,6 +79,11 @@ func (o FunctionCapabilityResponse) MarshalJSON() ([]byte, error) {
 func (o FunctionCapabilityResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["capabilities"] = o.Capabilities
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *FunctionCapabilityResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionCapabilityResponse := _FunctionCapabilityResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionCapabilityResponse)
+	err = json.Unmarshal(data, &varFunctionCapabilityResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionCapabilityResponse(varFunctionCapabilityResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "capabilities")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

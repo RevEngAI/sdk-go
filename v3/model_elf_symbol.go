@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ELFSymbol struct {
 	Binding string `json:"binding"`
 	Visibility string `json:"visibility"`
 	SectionIndex int32 `json:"section_index"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ELFSymbol ELFSymbol
@@ -240,6 +240,11 @@ func (o ELFSymbol) ToMap() (map[string]interface{}, error) {
 	toSerialize["binding"] = o.Binding
 	toSerialize["visibility"] = o.Visibility
 	toSerialize["section_index"] = o.SectionIndex
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -273,15 +278,26 @@ func (o *ELFSymbol) UnmarshalJSON(data []byte) (err error) {
 
 	varELFSymbol := _ELFSymbol{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varELFSymbol)
+	err = json.Unmarshal(data, &varELFSymbol)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ELFSymbol(varELFSymbol)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "binding")
+		delete(additionalProperties, "visibility")
+		delete(additionalProperties, "section_index")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

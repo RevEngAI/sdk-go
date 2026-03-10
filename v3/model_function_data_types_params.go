@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &FunctionDataTypesParams{}
 type FunctionDataTypesParams struct {
 	// The function ID's to generate/get data types for
 	FunctionIds []int64 `json:"function_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionDataTypesParams FunctionDataTypesParams
@@ -79,6 +79,11 @@ func (o FunctionDataTypesParams) MarshalJSON() ([]byte, error) {
 func (o FunctionDataTypesParams) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["function_ids"] = o.FunctionIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *FunctionDataTypesParams) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionDataTypesParams := _FunctionDataTypesParams{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionDataTypesParams)
+	err = json.Unmarshal(data, &varFunctionDataTypesParams)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionDataTypesParams(varFunctionDataTypesParams)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

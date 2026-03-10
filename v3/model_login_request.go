@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type LoginRequest struct {
 	Username string `json:"username"`
 	// User's password
 	Password string `json:"password"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LoginRequest LoginRequest
@@ -107,6 +107,11 @@ func (o LoginRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["username"] = o.Username
 	toSerialize["password"] = o.Password
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *LoginRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varLoginRequest := _LoginRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLoginRequest)
+	err = json.Unmarshal(data, &varLoginRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = LoginRequest(varLoginRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

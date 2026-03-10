@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type ELFModel struct {
 	Notes []map[string]interface{} `json:"notes"`
 	DebugInfo map[string]interface{} `json:"debug_info"`
 	VersionInfo map[string]interface{} `json:"version_info"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ELFModel ELFModel
@@ -591,6 +591,11 @@ func (o ELFModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["notes"] = o.Notes
 	toSerialize["debug_info"] = o.DebugInfo
 	toSerialize["version_info"] = o.VersionInfo
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -637,15 +642,39 @@ func (o *ELFModel) UnmarshalJSON(data []byte) (err error) {
 
 	varELFModel := _ELFModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varELFModel)
+	err = json.Unmarshal(data, &varELFModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ELFModel(varELFModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "file_type")
+		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "endianness")
+		delete(additionalProperties, "entry_point")
+		delete(additionalProperties, "entry_point_bytes")
+		delete(additionalProperties, "import_hash")
+		delete(additionalProperties, "export_hash")
+		delete(additionalProperties, "build_id")
+		delete(additionalProperties, "security")
+		delete(additionalProperties, "sections")
+		delete(additionalProperties, "segments")
+		delete(additionalProperties, "symbols")
+		delete(additionalProperties, "dynamic_symbols")
+		delete(additionalProperties, "relocations")
+		delete(additionalProperties, "imports")
+		delete(additionalProperties, "exported_functions")
+		delete(additionalProperties, "dynamic_entries")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "debug_info")
+		delete(additionalProperties, "version_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

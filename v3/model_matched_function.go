@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type MatchedFunction struct {
 	AnalysisId int32 `json:"analysis_id"`
 	Similarity NullableFloat32 `json:"similarity,omitempty"`
 	Confidence NullableFloat32 `json:"confidence,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MatchedFunction MatchedFunction
@@ -387,6 +387,11 @@ func (o MatchedFunction) ToMap() (map[string]interface{}, error) {
 	if o.Confidence.IsSet() {
 		toSerialize["confidence"] = o.Confidence.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -422,15 +427,30 @@ func (o *MatchedFunction) UnmarshalJSON(data []byte) (err error) {
 
 	varMatchedFunction := _MatchedFunction{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMatchedFunction)
+	err = json.Unmarshal(data, &varMatchedFunction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MatchedFunction(varMatchedFunction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "function_vaddr")
+		delete(additionalProperties, "mangled_name")
+		delete(additionalProperties, "debug")
+		delete(additionalProperties, "binary_name")
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "similarity")
+		delete(additionalProperties, "confidence")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

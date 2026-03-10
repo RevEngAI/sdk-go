@@ -25,7 +25,10 @@ type BaseResponseCommunities struct {
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
 	Meta *MetaModel `json:"meta,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BaseResponseCommunities BaseResponseCommunities
 
 // NewBaseResponseCommunities instantiates a new BaseResponseCommunities object
 // This constructor will assign default values to properties that have it defined,
@@ -254,7 +257,37 @@ func (o BaseResponseCommunities) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BaseResponseCommunities) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseCommunities := _BaseResponseCommunities{}
+
+	err = json.Unmarshal(data, &varBaseResponseCommunities)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BaseResponseCommunities(varBaseResponseCommunities)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "meta")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBaseResponseCommunities struct {

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type AnalysisStringsResponse struct {
 	Strings []StringFunctions `json:"strings"`
 	// The total number of strings associated with this analysis
 	TotalStrings int32 `json:"total_strings"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisStringsResponse AnalysisStringsResponse
@@ -107,6 +107,11 @@ func (o AnalysisStringsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["strings"] = o.Strings
 	toSerialize["total_strings"] = o.TotalStrings
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *AnalysisStringsResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisStringsResponse := _AnalysisStringsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisStringsResponse)
+	err = json.Unmarshal(data, &varAnalysisStringsResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisStringsResponse(varAnalysisStringsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "strings")
+		delete(additionalProperties, "total_strings")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

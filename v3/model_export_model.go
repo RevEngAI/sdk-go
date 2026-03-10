@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ExportModel{}
 type ExportModel struct {
 	NumberOfExports int32 `json:"number_of_exports"`
 	Exports []map[string]int32 `json:"exports"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExportModel ExportModel
@@ -105,6 +105,11 @@ func (o ExportModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["number_of_exports"] = o.NumberOfExports
 	toSerialize["exports"] = o.Exports
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *ExportModel) UnmarshalJSON(data []byte) (err error) {
 
 	varExportModel := _ExportModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExportModel)
+	err = json.Unmarshal(data, &varExportModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExportModel(varExportModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "number_of_exports")
+		delete(additionalProperties, "exports")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

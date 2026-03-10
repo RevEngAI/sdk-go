@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type Process struct {
 	TsFrom float32 `json:"ts_from"`
 	TsTo NullableFloat32 `json:"ts_to"`
 	Children []interface{} `json:"children"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Process Process
@@ -242,6 +242,11 @@ func (o Process) ToMap() (map[string]interface{}, error) {
 	toSerialize["ts_from"] = o.TsFrom
 	toSerialize["ts_to"] = o.TsTo.Get()
 	toSerialize["children"] = o.Children
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -275,15 +280,26 @@ func (o *Process) UnmarshalJSON(data []byte) (err error) {
 
 	varProcess := _Process{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProcess)
+	err = json.Unmarshal(data, &varProcess)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Process(varProcess)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pid")
+		delete(additionalProperties, "procname")
+		delete(additionalProperties, "executable_name")
+		delete(additionalProperties, "args")
+		delete(additionalProperties, "ts_from")
+		delete(additionalProperties, "ts_to")
+		delete(additionalProperties, "children")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

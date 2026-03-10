@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type SBOMPackage struct {
 	Name string `json:"name"`
 	// The version of the package
 	Version string `json:"version"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SBOMPackage SBOMPackage
@@ -107,6 +107,11 @@ func (o SBOMPackage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["version"] = o.Version
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *SBOMPackage) UnmarshalJSON(data []byte) (err error) {
 
 	varSBOMPackage := _SBOMPackage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSBOMPackage)
+	err = json.Unmarshal(data, &varSBOMPackage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SBOMPackage(varSBOMPackage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

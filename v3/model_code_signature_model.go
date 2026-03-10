@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type CodeSignatureModel struct {
 	Signed bool `json:"signed"`
 	ValidSignature bool `json:"valid_signature"`
 	Signatures []SingleCodeSignatureModel `json:"signatures"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CodeSignatureModel CodeSignatureModel
@@ -132,6 +132,11 @@ func (o CodeSignatureModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["signed"] = o.Signed
 	toSerialize["valid_signature"] = o.ValidSignature
 	toSerialize["signatures"] = o.Signatures
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -161,15 +166,22 @@ func (o *CodeSignatureModel) UnmarshalJSON(data []byte) (err error) {
 
 	varCodeSignatureModel := _CodeSignatureModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCodeSignatureModel)
+	err = json.Unmarshal(data, &varCodeSignatureModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CodeSignatureModel(varCodeSignatureModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "signed")
+		delete(additionalProperties, "valid_signature")
+		delete(additionalProperties, "signatures")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

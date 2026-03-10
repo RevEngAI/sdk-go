@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &BlockCommentsGenerationForFunctionResponse{}
 // BlockCommentsGenerationForFunctionResponse struct for BlockCommentsGenerationForFunctionResponse
 type BlockCommentsGenerationForFunctionResponse struct {
 	UpdatedBlocks int32 `json:"updated_blocks"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BlockCommentsGenerationForFunctionResponse BlockCommentsGenerationForFunctionResponse
@@ -78,6 +78,11 @@ func (o BlockCommentsGenerationForFunctionResponse) MarshalJSON() ([]byte, error
 func (o BlockCommentsGenerationForFunctionResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["updated_blocks"] = o.UpdatedBlocks
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -105,15 +110,20 @@ func (o *BlockCommentsGenerationForFunctionResponse) UnmarshalJSON(data []byte) 
 
 	varBlockCommentsGenerationForFunctionResponse := _BlockCommentsGenerationForFunctionResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBlockCommentsGenerationForFunctionResponse)
+	err = json.Unmarshal(data, &varBlockCommentsGenerationForFunctionResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BlockCommentsGenerationForFunctionResponse(varBlockCommentsGenerationForFunctionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "updated_blocks")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

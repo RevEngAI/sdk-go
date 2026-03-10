@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type Argument struct {
 	Type string `json:"type"`
 	// Size of the argument in bytes
 	Size int32 `json:"size"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Argument Argument
@@ -209,6 +209,11 @@ func (o Argument) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["type"] = o.Type
 	toSerialize["size"] = o.Size
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -239,15 +244,24 @@ func (o *Argument) UnmarshalJSON(data []byte) (err error) {
 
 	varArgument := _Argument{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varArgument)
+	err = json.Unmarshal(data, &varArgument)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Argument(varArgument)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "last_change")
+		delete(additionalProperties, "offset")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "size")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -25,7 +25,10 @@ type BaseResponseProcessTree struct {
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
 	Meta *MetaModel `json:"meta,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BaseResponseProcessTree BaseResponseProcessTree
 
 // NewBaseResponseProcessTree instantiates a new BaseResponseProcessTree object
 // This constructor will assign default values to properties that have it defined,
@@ -254,7 +257,37 @@ func (o BaseResponseProcessTree) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BaseResponseProcessTree) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseProcessTree := _BaseResponseProcessTree{}
+
+	err = json.Unmarshal(data, &varBaseResponseProcessTree)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BaseResponseProcessTree(varBaseResponseProcessTree)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "meta")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBaseResponseProcessTree struct {

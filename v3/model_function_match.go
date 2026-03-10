@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type FunctionMatch struct {
 	FunctionId int64 `json:"function_id"`
 	MatchedFunctions []MatchedFunction `json:"matched_functions"`
 	Confidences []NameConfidence `json:"confidences,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionMatch FunctionMatch
@@ -143,6 +143,11 @@ func (o FunctionMatch) ToMap() (map[string]interface{}, error) {
 	if o.Confidences != nil {
 		toSerialize["confidences"] = o.Confidences
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -171,15 +176,22 @@ func (o *FunctionMatch) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionMatch := _FunctionMatch{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionMatch)
+	err = json.Unmarshal(data, &varFunctionMatch)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionMatch(varFunctionMatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "matched_functions")
+		delete(additionalProperties, "confidences")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

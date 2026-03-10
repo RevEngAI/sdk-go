@@ -13,14 +13,14 @@ import (
 	"encoding/json"
 )
 
-// checks if the BaseResponseBinaryExternalsResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &BaseResponseBinaryExternalsResponse{}
+// checks if the BaseResponseListCalleesCallerFunctionsResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BaseResponseListCalleesCallerFunctionsResponse{}
 
-// BaseResponseBinaryExternalsResponse struct for BaseResponseBinaryExternalsResponse
-type BaseResponseBinaryExternalsResponse struct {
+// BaseResponseListCalleesCallerFunctionsResponse struct for BaseResponseListCalleesCallerFunctionsResponse
+type BaseResponseListCalleesCallerFunctionsResponse struct {
 	// Response status on whether the request succeeded
 	Status *bool `json:"status,omitempty"`
-	Data NullableBinaryExternalsResponse `json:"data,omitempty"`
+	Data []CalleesCallerFunctionsResponse `json:"data,omitempty"`
 	Message NullableString `json:"message,omitempty"`
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
@@ -28,31 +28,31 @@ type BaseResponseBinaryExternalsResponse struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _BaseResponseBinaryExternalsResponse BaseResponseBinaryExternalsResponse
+type _BaseResponseListCalleesCallerFunctionsResponse BaseResponseListCalleesCallerFunctionsResponse
 
-// NewBaseResponseBinaryExternalsResponse instantiates a new BaseResponseBinaryExternalsResponse object
+// NewBaseResponseListCalleesCallerFunctionsResponse instantiates a new BaseResponseListCalleesCallerFunctionsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBaseResponseBinaryExternalsResponse() *BaseResponseBinaryExternalsResponse {
-	this := BaseResponseBinaryExternalsResponse{}
+func NewBaseResponseListCalleesCallerFunctionsResponse() *BaseResponseListCalleesCallerFunctionsResponse {
+	this := BaseResponseListCalleesCallerFunctionsResponse{}
 	var status bool = true
 	this.Status = &status
 	return &this
 }
 
-// NewBaseResponseBinaryExternalsResponseWithDefaults instantiates a new BaseResponseBinaryExternalsResponse object
+// NewBaseResponseListCalleesCallerFunctionsResponseWithDefaults instantiates a new BaseResponseListCalleesCallerFunctionsResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBaseResponseBinaryExternalsResponseWithDefaults() *BaseResponseBinaryExternalsResponse {
-	this := BaseResponseBinaryExternalsResponse{}
+func NewBaseResponseListCalleesCallerFunctionsResponseWithDefaults() *BaseResponseListCalleesCallerFunctionsResponse {
+	this := BaseResponseListCalleesCallerFunctionsResponse{}
 	var status bool = true
 	this.Status = &status
 	return &this
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *BaseResponseBinaryExternalsResponse) GetStatus() bool {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) GetStatus() bool {
 	if o == nil || IsNil(o.Status) {
 		var ret bool
 		return ret
@@ -62,7 +62,7 @@ func (o *BaseResponseBinaryExternalsResponse) GetStatus() bool {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BaseResponseBinaryExternalsResponse) GetStatusOk() (*bool, bool) {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) GetStatusOk() (*bool, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *BaseResponseBinaryExternalsResponse) GetStatusOk() (*bool, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *BaseResponseBinaryExternalsResponse) HasStatus() bool {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) HasStatus() bool {
 	if o != nil && !IsNil(o.Status) {
 		return true
 	}
@@ -79,54 +79,45 @@ func (o *BaseResponseBinaryExternalsResponse) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given bool and assigns it to the Status field.
-func (o *BaseResponseBinaryExternalsResponse) SetStatus(v bool) {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) SetStatus(v bool) {
 	o.Status = &v
 }
 
 // GetData returns the Data field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseResponseBinaryExternalsResponse) GetData() BinaryExternalsResponse {
-	if o == nil || IsNil(o.Data.Get()) {
-		var ret BinaryExternalsResponse
+func (o *BaseResponseListCalleesCallerFunctionsResponse) GetData() []CalleesCallerFunctionsResponse {
+	if o == nil {
+		var ret []CalleesCallerFunctionsResponse
 		return ret
 	}
-	return *o.Data.Get()
+	return o.Data
 }
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseResponseBinaryExternalsResponse) GetDataOk() (*BinaryExternalsResponse, bool) {
-	if o == nil {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) GetDataOk() ([]CalleesCallerFunctionsResponse, bool) {
+	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
-	return o.Data.Get(), o.Data.IsSet()
+	return o.Data, true
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *BaseResponseBinaryExternalsResponse) HasData() bool {
-	if o != nil && o.Data.IsSet() {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) HasData() bool {
+	if o != nil && !IsNil(o.Data) {
 		return true
 	}
 
 	return false
 }
 
-// SetData gets a reference to the given NullableBinaryExternalsResponse and assigns it to the Data field.
-func (o *BaseResponseBinaryExternalsResponse) SetData(v BinaryExternalsResponse) {
-	o.Data.Set(&v)
-}
-// SetDataNil sets the value for Data to be an explicit nil
-func (o *BaseResponseBinaryExternalsResponse) SetDataNil() {
-	o.Data.Set(nil)
-}
-
-// UnsetData ensures that no value is present for Data, not even an explicit nil
-func (o *BaseResponseBinaryExternalsResponse) UnsetData() {
-	o.Data.Unset()
+// SetData gets a reference to the given []CalleesCallerFunctionsResponse and assigns it to the Data field.
+func (o *BaseResponseListCalleesCallerFunctionsResponse) SetData(v []CalleesCallerFunctionsResponse) {
+	o.Data = v
 }
 
 // GetMessage returns the Message field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseResponseBinaryExternalsResponse) GetMessage() string {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) GetMessage() string {
 	if o == nil || IsNil(o.Message.Get()) {
 		var ret string
 		return ret
@@ -137,7 +128,7 @@ func (o *BaseResponseBinaryExternalsResponse) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseResponseBinaryExternalsResponse) GetMessageOk() (*string, bool) {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -145,7 +136,7 @@ func (o *BaseResponseBinaryExternalsResponse) GetMessageOk() (*string, bool) {
 }
 
 // HasMessage returns a boolean if a field has been set.
-func (o *BaseResponseBinaryExternalsResponse) HasMessage() bool {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) HasMessage() bool {
 	if o != nil && o.Message.IsSet() {
 		return true
 	}
@@ -154,21 +145,21 @@ func (o *BaseResponseBinaryExternalsResponse) HasMessage() bool {
 }
 
 // SetMessage gets a reference to the given NullableString and assigns it to the Message field.
-func (o *BaseResponseBinaryExternalsResponse) SetMessage(v string) {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) SetMessage(v string) {
 	o.Message.Set(&v)
 }
 // SetMessageNil sets the value for Message to be an explicit nil
-func (o *BaseResponseBinaryExternalsResponse) SetMessageNil() {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) SetMessageNil() {
 	o.Message.Set(nil)
 }
 
 // UnsetMessage ensures that no value is present for Message, not even an explicit nil
-func (o *BaseResponseBinaryExternalsResponse) UnsetMessage() {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) UnsetMessage() {
 	o.Message.Unset()
 }
 
 // GetErrors returns the Errors field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseResponseBinaryExternalsResponse) GetErrors() []ErrorModel {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) GetErrors() []ErrorModel {
 	if o == nil {
 		var ret []ErrorModel
 		return ret
@@ -179,7 +170,7 @@ func (o *BaseResponseBinaryExternalsResponse) GetErrors() []ErrorModel {
 // GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseResponseBinaryExternalsResponse) GetErrorsOk() ([]ErrorModel, bool) {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) GetErrorsOk() ([]ErrorModel, bool) {
 	if o == nil || IsNil(o.Errors) {
 		return nil, false
 	}
@@ -187,7 +178,7 @@ func (o *BaseResponseBinaryExternalsResponse) GetErrorsOk() ([]ErrorModel, bool)
 }
 
 // HasErrors returns a boolean if a field has been set.
-func (o *BaseResponseBinaryExternalsResponse) HasErrors() bool {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) HasErrors() bool {
 	if o != nil && !IsNil(o.Errors) {
 		return true
 	}
@@ -196,12 +187,12 @@ func (o *BaseResponseBinaryExternalsResponse) HasErrors() bool {
 }
 
 // SetErrors gets a reference to the given []ErrorModel and assigns it to the Errors field.
-func (o *BaseResponseBinaryExternalsResponse) SetErrors(v []ErrorModel) {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) SetErrors(v []ErrorModel) {
 	o.Errors = v
 }
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
-func (o *BaseResponseBinaryExternalsResponse) GetMeta() MetaModel {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) GetMeta() MetaModel {
 	if o == nil || IsNil(o.Meta) {
 		var ret MetaModel
 		return ret
@@ -211,7 +202,7 @@ func (o *BaseResponseBinaryExternalsResponse) GetMeta() MetaModel {
 
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BaseResponseBinaryExternalsResponse) GetMetaOk() (*MetaModel, bool) {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) GetMetaOk() (*MetaModel, bool) {
 	if o == nil || IsNil(o.Meta) {
 		return nil, false
 	}
@@ -219,7 +210,7 @@ func (o *BaseResponseBinaryExternalsResponse) GetMetaOk() (*MetaModel, bool) {
 }
 
 // HasMeta returns a boolean if a field has been set.
-func (o *BaseResponseBinaryExternalsResponse) HasMeta() bool {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) HasMeta() bool {
 	if o != nil && !IsNil(o.Meta) {
 		return true
 	}
@@ -228,11 +219,11 @@ func (o *BaseResponseBinaryExternalsResponse) HasMeta() bool {
 }
 
 // SetMeta gets a reference to the given MetaModel and assigns it to the Meta field.
-func (o *BaseResponseBinaryExternalsResponse) SetMeta(v MetaModel) {
+func (o *BaseResponseListCalleesCallerFunctionsResponse) SetMeta(v MetaModel) {
 	o.Meta = &v
 }
 
-func (o BaseResponseBinaryExternalsResponse) MarshalJSON() ([]byte, error) {
+func (o BaseResponseListCalleesCallerFunctionsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -240,13 +231,13 @@ func (o BaseResponseBinaryExternalsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BaseResponseBinaryExternalsResponse) ToMap() (map[string]interface{}, error) {
+func (o BaseResponseListCalleesCallerFunctionsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if o.Data.IsSet() {
-		toSerialize["data"] = o.Data.Get()
+	if o.Data != nil {
+		toSerialize["data"] = o.Data
 	}
 	if o.Message.IsSet() {
 		toSerialize["message"] = o.Message.Get()
@@ -265,16 +256,16 @@ func (o BaseResponseBinaryExternalsResponse) ToMap() (map[string]interface{}, er
 	return toSerialize, nil
 }
 
-func (o *BaseResponseBinaryExternalsResponse) UnmarshalJSON(data []byte) (err error) {
-	varBaseResponseBinaryExternalsResponse := _BaseResponseBinaryExternalsResponse{}
+func (o *BaseResponseListCalleesCallerFunctionsResponse) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseListCalleesCallerFunctionsResponse := _BaseResponseListCalleesCallerFunctionsResponse{}
 
-	err = json.Unmarshal(data, &varBaseResponseBinaryExternalsResponse)
+	err = json.Unmarshal(data, &varBaseResponseListCalleesCallerFunctionsResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = BaseResponseBinaryExternalsResponse(varBaseResponseBinaryExternalsResponse)
+	*o = BaseResponseListCalleesCallerFunctionsResponse(varBaseResponseListCalleesCallerFunctionsResponse)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -290,38 +281,38 @@ func (o *BaseResponseBinaryExternalsResponse) UnmarshalJSON(data []byte) (err er
 	return err
 }
 
-type NullableBaseResponseBinaryExternalsResponse struct {
-	value *BaseResponseBinaryExternalsResponse
+type NullableBaseResponseListCalleesCallerFunctionsResponse struct {
+	value *BaseResponseListCalleesCallerFunctionsResponse
 	isSet bool
 }
 
-func (v NullableBaseResponseBinaryExternalsResponse) Get() *BaseResponseBinaryExternalsResponse {
+func (v NullableBaseResponseListCalleesCallerFunctionsResponse) Get() *BaseResponseListCalleesCallerFunctionsResponse {
 	return v.value
 }
 
-func (v *NullableBaseResponseBinaryExternalsResponse) Set(val *BaseResponseBinaryExternalsResponse) {
+func (v *NullableBaseResponseListCalleesCallerFunctionsResponse) Set(val *BaseResponseListCalleesCallerFunctionsResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBaseResponseBinaryExternalsResponse) IsSet() bool {
+func (v NullableBaseResponseListCalleesCallerFunctionsResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBaseResponseBinaryExternalsResponse) Unset() {
+func (v *NullableBaseResponseListCalleesCallerFunctionsResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBaseResponseBinaryExternalsResponse(val *BaseResponseBinaryExternalsResponse) *NullableBaseResponseBinaryExternalsResponse {
-	return &NullableBaseResponseBinaryExternalsResponse{value: val, isSet: true}
+func NewNullableBaseResponseListCalleesCallerFunctionsResponse(val *BaseResponseListCalleesCallerFunctionsResponse) *NullableBaseResponseListCalleesCallerFunctionsResponse {
+	return &NullableBaseResponseListCalleesCallerFunctionsResponse{value: val, isSet: true}
 }
 
-func (v NullableBaseResponseBinaryExternalsResponse) MarshalJSON() ([]byte, error) {
+func (v NullableBaseResponseListCalleesCallerFunctionsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBaseResponseBinaryExternalsResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableBaseResponseListCalleesCallerFunctionsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

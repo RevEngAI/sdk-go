@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &TTPS{}
 type TTPS struct {
 	Success bool `json:"success"`
 	Data TTPSData `json:"data"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TTPS TTPS
@@ -105,6 +105,11 @@ func (o TTPS) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["success"] = o.Success
 	toSerialize["data"] = o.Data
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *TTPS) UnmarshalJSON(data []byte) (err error) {
 
 	varTTPS := _TTPS{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTTPS)
+	err = json.Unmarshal(data, &varTTPS)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TTPS(varTTPS)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "success")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ImportModel{}
 type ImportModel struct {
 	NumberOfImports int32 `json:"number_of_imports"`
 	Imports []map[string]map[string]int32 `json:"imports"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ImportModel ImportModel
@@ -105,6 +105,11 @@ func (o ImportModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["number_of_imports"] = o.NumberOfImports
 	toSerialize["imports"] = o.Imports
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *ImportModel) UnmarshalJSON(data []byte) (err error) {
 
 	varImportModel := _ImportModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varImportModel)
+	err = json.Unmarshal(data, &varImportModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ImportModel(varImportModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "number_of_imports")
+		delete(additionalProperties, "imports")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

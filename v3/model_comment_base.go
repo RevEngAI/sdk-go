@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &CommentBase{}
 type CommentBase struct {
 	// Comment text content
 	Content string `json:"content"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CommentBase CommentBase
@@ -79,6 +79,11 @@ func (o CommentBase) MarshalJSON() ([]byte, error) {
 func (o CommentBase) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["content"] = o.Content
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *CommentBase) UnmarshalJSON(data []byte) (err error) {
 
 	varCommentBase := _CommentBase{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCommentBase)
+	err = json.Unmarshal(data, &varCommentBase)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CommentBase(varCommentBase)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

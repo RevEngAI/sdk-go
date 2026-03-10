@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type FunctionBlockResponse struct {
 	// The potential execution flow destinations from this block
 	Destinations []FunctionBlockDestinationResponse `json:"destinations"`
 	Comment NullableString `json:"comment,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionBlockResponse FunctionBlockResponse
@@ -237,6 +237,11 @@ func (o FunctionBlockResponse) ToMap() (map[string]interface{}, error) {
 	if o.Comment.IsSet() {
 		toSerialize["comment"] = o.Comment.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -268,15 +273,25 @@ func (o *FunctionBlockResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionBlockResponse := _FunctionBlockResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionBlockResponse)
+	err = json.Unmarshal(data, &varFunctionBlockResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionBlockResponse(varFunctionBlockResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "asm")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "min_addr")
+		delete(additionalProperties, "max_addr")
+		delete(additionalProperties, "destinations")
+		delete(additionalProperties, "comment")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

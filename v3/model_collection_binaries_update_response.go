@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &CollectionBinariesUpdateResponse{}
 type CollectionBinariesUpdateResponse struct {
 	// Collection binaries
 	Binaries []CollectionBinaryResponse `json:"binaries"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CollectionBinariesUpdateResponse CollectionBinariesUpdateResponse
@@ -79,6 +79,11 @@ func (o CollectionBinariesUpdateResponse) MarshalJSON() ([]byte, error) {
 func (o CollectionBinariesUpdateResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["binaries"] = o.Binaries
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *CollectionBinariesUpdateResponse) UnmarshalJSON(data []byte) (err error
 
 	varCollectionBinariesUpdateResponse := _CollectionBinariesUpdateResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCollectionBinariesUpdateResponse)
+	err = json.Unmarshal(data, &varCollectionBinariesUpdateResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CollectionBinariesUpdateResponse(varCollectionBinariesUpdateResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binaries")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

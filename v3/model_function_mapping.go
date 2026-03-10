@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type FunctionMapping struct {
 	InverseFunctionMap map[string]int32 `json:"inverse_function_map"`
 	// Mapping of local function addresses to mangled names
 	NameMap map[string]string `json:"name_map"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionMapping FunctionMapping
@@ -135,6 +135,11 @@ func (o FunctionMapping) ToMap() (map[string]interface{}, error) {
 	toSerialize["function_map"] = o.FunctionMap
 	toSerialize["inverse_function_map"] = o.InverseFunctionMap
 	toSerialize["name_map"] = o.NameMap
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -164,15 +169,22 @@ func (o *FunctionMapping) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionMapping := _FunctionMapping{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionMapping)
+	err = json.Unmarshal(data, &varFunctionMapping)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionMapping(varFunctionMapping)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_map")
+		delete(additionalProperties, "inverse_function_map")
+		delete(additionalProperties, "name_map")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

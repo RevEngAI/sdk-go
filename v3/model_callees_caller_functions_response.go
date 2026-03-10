@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CalleesCallerFunctionsResponse struct {
 	Callees []CalleeFunctionInfo `json:"callees"`
 	// List of functions that call the target function
 	Callers []CallerFunctionInfo `json:"callers"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CalleesCallerFunctionsResponse CalleesCallerFunctionsResponse
@@ -135,6 +135,11 @@ func (o CalleesCallerFunctionsResponse) ToMap() (map[string]interface{}, error) 
 	toSerialize["base_address"] = o.BaseAddress
 	toSerialize["callees"] = o.Callees
 	toSerialize["callers"] = o.Callers
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -164,15 +169,22 @@ func (o *CalleesCallerFunctionsResponse) UnmarshalJSON(data []byte) (err error) 
 
 	varCalleesCallerFunctionsResponse := _CalleesCallerFunctionsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCalleesCallerFunctionsResponse)
+	err = json.Unmarshal(data, &varCalleesCallerFunctionsResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CalleesCallerFunctionsResponse(varCalleesCallerFunctionsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "base_address")
+		delete(additionalProperties, "callees")
+		delete(additionalProperties, "callers")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

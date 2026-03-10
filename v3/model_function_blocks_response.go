@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type FunctionBlocksResponse struct {
 	// Params associated with this function
 	Params []FunctionParamResponse `json:"params"`
 	OverviewComment NullableString `json:"overview_comment"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionBlocksResponse FunctionBlocksResponse
@@ -164,6 +164,11 @@ func (o FunctionBlocksResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["local_variables"] = o.LocalVariables
 	toSerialize["params"] = o.Params
 	toSerialize["overview_comment"] = o.OverviewComment.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *FunctionBlocksResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionBlocksResponse := _FunctionBlocksResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionBlocksResponse)
+	err = json.Unmarshal(data, &varFunctionBlocksResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionBlocksResponse(varFunctionBlocksResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "blocks")
+		delete(additionalProperties, "local_variables")
+		delete(additionalProperties, "params")
+		delete(additionalProperties, "overview_comment")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type GetAiDecompilationRatingResponse struct {
 	// The rating the user has given to the AI decompilation response
 	Rating AiDecompilationRating `json:"rating"`
 	Reason NullableString `json:"reason"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetAiDecompilationRatingResponse GetAiDecompilationRatingResponse
@@ -108,6 +108,11 @@ func (o GetAiDecompilationRatingResponse) ToMap() (map[string]interface{}, error
 	toSerialize := map[string]interface{}{}
 	toSerialize["rating"] = o.Rating
 	toSerialize["reason"] = o.Reason.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *GetAiDecompilationRatingResponse) UnmarshalJSON(data []byte) (err error
 
 	varGetAiDecompilationRatingResponse := _GetAiDecompilationRatingResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetAiDecompilationRatingResponse)
+	err = json.Unmarshal(data, &varGetAiDecompilationRatingResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetAiDecompilationRatingResponse(varGetAiDecompilationRatingResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rating")
+		delete(additionalProperties, "reason")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

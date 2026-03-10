@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -36,6 +35,7 @@ type FunctionListItem struct {
 	Size int32 `json:"size"`
 	// Whether the function has debug information
 	Debug bool `json:"debug"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionListItem FunctionListItem
@@ -275,6 +275,11 @@ func (o FunctionListItem) ToMap() (map[string]interface{}, error) {
 	toSerialize["vaddr"] = o.Vaddr
 	toSerialize["size"] = o.Size
 	toSerialize["debug"] = o.Debug
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -309,15 +314,27 @@ func (o *FunctionListItem) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionListItem := _FunctionListItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionListItem)
+	err = json.Unmarshal(data, &varFunctionListItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionListItem(varFunctionListItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "name_source_type")
+		delete(additionalProperties, "name_source")
+		delete(additionalProperties, "mangled_name")
+		delete(additionalProperties, "vaddr")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "debug")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

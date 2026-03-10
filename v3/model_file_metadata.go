@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type FileMetadata struct {
 	FriendlySize string `json:"friendly_size"`
 	Entropy float32 `json:"entropy"`
 	Hashes FileHashes `json:"hashes"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FileMetadata FileMetadata
@@ -159,6 +159,11 @@ func (o FileMetadata) ToMap() (map[string]interface{}, error) {
 	toSerialize["friendly_size"] = o.FriendlySize
 	toSerialize["entropy"] = o.Entropy
 	toSerialize["hashes"] = o.Hashes
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -189,15 +194,23 @@ func (o *FileMetadata) UnmarshalJSON(data []byte) (err error) {
 
 	varFileMetadata := _FileMetadata{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFileMetadata)
+	err = json.Unmarshal(data, &varFileMetadata)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FileMetadata(varFileMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "friendly_size")
+		delete(additionalProperties, "entropy")
+		delete(additionalProperties, "hashes")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

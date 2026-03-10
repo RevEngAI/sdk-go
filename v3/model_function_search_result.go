@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type FunctionSearchResult struct {
 	ModelName string `json:"model_name"`
 	// The owner of the binary the function belongs to
 	OwnedBy string `json:"owned_by"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionSearchResult FunctionSearchResult
@@ -248,6 +248,11 @@ func (o FunctionSearchResult) ToMap() (map[string]interface{}, error) {
 	toSerialize["model_id"] = o.ModelId
 	toSerialize["model_name"] = o.ModelName
 	toSerialize["owned_by"] = o.OwnedBy
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -281,15 +286,26 @@ func (o *FunctionSearchResult) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionSearchResult := _FunctionSearchResult{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionSearchResult)
+	err = json.Unmarshal(data, &varFunctionSearchResult)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionSearchResult(varFunctionSearchResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "binary_name")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "model_name")
+		delete(additionalProperties, "owned_by")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

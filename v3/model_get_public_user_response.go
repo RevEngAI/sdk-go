@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &GetPublicUserResponse{}
 type GetPublicUserResponse struct {
 	Username string `json:"username"`
 	UserId int32 `json:"user_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetPublicUserResponse GetPublicUserResponse
@@ -105,6 +105,11 @@ func (o GetPublicUserResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["username"] = o.Username
 	toSerialize["user_id"] = o.UserId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *GetPublicUserResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varGetPublicUserResponse := _GetPublicUserResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetPublicUserResponse)
+	err = json.Unmarshal(data, &varGetPublicUserResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetPublicUserResponse(varGetPublicUserResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "user_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

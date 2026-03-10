@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ELFRelocation struct {
 	SymbolName string `json:"symbol_name"`
 	IsDynamic bool `json:"is_dynamic"`
 	IsPltgot bool `json:"is_pltgot"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ELFRelocation ELFRelocation
@@ -240,6 +240,11 @@ func (o ELFRelocation) ToMap() (map[string]interface{}, error) {
 	toSerialize["symbol_name"] = o.SymbolName
 	toSerialize["is_dynamic"] = o.IsDynamic
 	toSerialize["is_pltgot"] = o.IsPltgot
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -273,15 +278,26 @@ func (o *ELFRelocation) UnmarshalJSON(data []byte) (err error) {
 
 	varELFRelocation := _ELFRelocation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varELFRelocation)
+	err = json.Unmarshal(data, &varELFRelocation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ELFRelocation(varELFRelocation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "addend")
+		delete(additionalProperties, "symbol_name")
+		delete(additionalProperties, "is_dynamic")
+		delete(additionalProperties, "is_pltgot")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

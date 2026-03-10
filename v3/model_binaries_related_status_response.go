@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &BinariesRelatedStatusResponse{}
 type BinariesRelatedStatusResponse struct {
 	// The current status of the unpack binary task
 	Status string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BinariesRelatedStatusResponse BinariesRelatedStatusResponse
@@ -79,6 +79,11 @@ func (o BinariesRelatedStatusResponse) MarshalJSON() ([]byte, error) {
 func (o BinariesRelatedStatusResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *BinariesRelatedStatusResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varBinariesRelatedStatusResponse := _BinariesRelatedStatusResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBinariesRelatedStatusResponse)
+	err = json.Unmarshal(data, &varBinariesRelatedStatusResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BinariesRelatedStatusResponse(varBinariesRelatedStatusResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

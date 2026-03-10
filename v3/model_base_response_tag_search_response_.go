@@ -25,7 +25,10 @@ type BaseResponseTagSearchResponse struct {
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
 	Meta *MetaModel `json:"meta,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BaseResponseTagSearchResponse BaseResponseTagSearchResponse
 
 // NewBaseResponseTagSearchResponse instantiates a new BaseResponseTagSearchResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -254,7 +257,37 @@ func (o BaseResponseTagSearchResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BaseResponseTagSearchResponse) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseTagSearchResponse := _BaseResponseTagSearchResponse{}
+
+	err = json.Unmarshal(data, &varBaseResponseTagSearchResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BaseResponseTagSearchResponse(varBaseResponseTagSearchResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "meta")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBaseResponseTagSearchResponse struct {

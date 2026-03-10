@@ -38,7 +38,10 @@ type AutoUnstripRequest struct {
 	NoCache *bool `json:"no_cache,omitempty"`
 	// Whether to use canonical function names during matching for auto-unstrip, default is False
 	UseCanonicalNames *bool `json:"use_canonical_names,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AutoUnstripRequest AutoUnstripRequest
 
 // NewAutoUnstripRequest instantiates a new AutoUnstripRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -358,7 +361,39 @@ func (o AutoUnstripRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UseCanonicalNames) {
 		toSerialize["use_canonical_names"] = o.UseCanonicalNames
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AutoUnstripRequest) UnmarshalJSON(data []byte) (err error) {
+	varAutoUnstripRequest := _AutoUnstripRequest{}
+
+	err = json.Unmarshal(data, &varAutoUnstripRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AutoUnstripRequest(varAutoUnstripRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_similarity")
+		delete(additionalProperties, "apply")
+		delete(additionalProperties, "confidence_threshold")
+		delete(additionalProperties, "min_group_size")
+		delete(additionalProperties, "status_only")
+		delete(additionalProperties, "no_cache")
+		delete(additionalProperties, "use_canonical_names")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAutoUnstripRequest struct {

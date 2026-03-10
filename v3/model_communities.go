@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type Communities struct {
 	DirectCommunityMatchPercentages []CommunityMatchPercentages `json:"direct_community_match_percentages"`
 	// The top components of the binary
 	TopComponents []map[string]interface{} `json:"top_components"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Communities Communities
@@ -163,6 +163,11 @@ func (o Communities) ToMap() (map[string]interface{}, error) {
 	toSerialize["total_matched_functions"] = o.TotalMatchedFunctions
 	toSerialize["direct_community_match_percentages"] = o.DirectCommunityMatchPercentages
 	toSerialize["top_components"] = o.TopComponents
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -193,15 +198,23 @@ func (o *Communities) UnmarshalJSON(data []byte) (err error) {
 
 	varCommunities := _Communities{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCommunities)
+	err = json.Unmarshal(data, &varCommunities)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Communities(varCommunities)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_functions")
+		delete(additionalProperties, "total_matched_functions")
+		delete(additionalProperties, "direct_community_match_percentages")
+		delete(additionalProperties, "top_components")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

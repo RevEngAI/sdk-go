@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ElfDynamicEntry{}
 type ElfDynamicEntry struct {
 	Tag string `json:"tag"`
 	Value int32 `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ElfDynamicEntry ElfDynamicEntry
@@ -105,6 +105,11 @@ func (o ElfDynamicEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["tag"] = o.Tag
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *ElfDynamicEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varElfDynamicEntry := _ElfDynamicEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varElfDynamicEntry)
+	err = json.Unmarshal(data, &varElfDynamicEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ElfDynamicEntry(varElfDynamicEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tag")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

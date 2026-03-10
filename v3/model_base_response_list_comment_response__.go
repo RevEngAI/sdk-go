@@ -25,7 +25,10 @@ type BaseResponseListCommentResponse struct {
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
 	Meta *MetaModel `json:"meta,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BaseResponseListCommentResponse BaseResponseListCommentResponse
 
 // NewBaseResponseListCommentResponse instantiates a new BaseResponseListCommentResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -245,7 +248,37 @@ func (o BaseResponseListCommentResponse) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BaseResponseListCommentResponse) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseListCommentResponse := _BaseResponseListCommentResponse{}
+
+	err = json.Unmarshal(data, &varBaseResponseListCommentResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BaseResponseListCommentResponse(varBaseResponseListCommentResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "meta")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBaseResponseListCommentResponse struct {

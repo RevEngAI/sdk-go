@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type RelativeBinaryResponse struct {
 	Name string `json:"name"`
 	// SHA256 hash of the relative binary
 	Sha256 string `json:"sha256"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RelativeBinaryResponse RelativeBinaryResponse
@@ -181,6 +181,11 @@ func (o RelativeBinaryResponse) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["name"] = o.Name
 	toSerialize["sha256"] = o.Sha256
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -210,15 +215,23 @@ func (o *RelativeBinaryResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varRelativeBinaryResponse := _RelativeBinaryResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRelativeBinaryResponse)
+	err = json.Unmarshal(data, &varRelativeBinaryResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RelativeBinaryResponse(varRelativeBinaryResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sha256")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

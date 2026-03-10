@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &PDBDebugModel{}
 // PDBDebugModel struct for PDBDebugModel
 type PDBDebugModel struct {
 	DebugEntries []SinglePDBEntryModel `json:"debug_entries"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PDBDebugModel PDBDebugModel
@@ -78,6 +78,11 @@ func (o PDBDebugModel) MarshalJSON() ([]byte, error) {
 func (o PDBDebugModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["debug_entries"] = o.DebugEntries
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -105,15 +110,20 @@ func (o *PDBDebugModel) UnmarshalJSON(data []byte) (err error) {
 
 	varPDBDebugModel := _PDBDebugModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPDBDebugModel)
+	err = json.Unmarshal(data, &varPDBDebugModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PDBDebugModel(varPDBDebugModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "debug_entries")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

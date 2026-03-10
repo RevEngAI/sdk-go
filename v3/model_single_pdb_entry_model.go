@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type SinglePDBEntryModel struct {
 	Guid string `json:"guid"`
 	Age int32 `json:"age"`
 	Path string `json:"path"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SinglePDBEntryModel SinglePDBEntryModel
@@ -132,6 +132,11 @@ func (o SinglePDBEntryModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["guid"] = o.Guid
 	toSerialize["age"] = o.Age
 	toSerialize["path"] = o.Path
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -161,15 +166,22 @@ func (o *SinglePDBEntryModel) UnmarshalJSON(data []byte) (err error) {
 
 	varSinglePDBEntryModel := _SinglePDBEntryModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSinglePDBEntryModel)
+	err = json.Unmarshal(data, &varSinglePDBEntryModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SinglePDBEntryModel(varSinglePDBEntryModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "guid")
+		delete(additionalProperties, "age")
+		delete(additionalProperties, "path")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

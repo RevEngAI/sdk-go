@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &EntrypointModel{}
 type EntrypointModel struct {
 	Address int32 `json:"address"`
 	FirstBytes string `json:"first_bytes"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EntrypointModel EntrypointModel
@@ -105,6 +105,11 @@ func (o EntrypointModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["address"] = o.Address
 	toSerialize["first_bytes"] = o.FirstBytes
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *EntrypointModel) UnmarshalJSON(data []byte) (err error) {
 
 	varEntrypointModel := _EntrypointModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEntrypointModel)
+	err = json.Unmarshal(data, &varEntrypointModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EntrypointModel(varEntrypointModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "first_bytes")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

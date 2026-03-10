@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type StackVariable struct {
 	Size int32 `json:"size"`
 	// Memory address of the stack variable
 	Addr int32 `json:"addr"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StackVariable StackVariable
@@ -237,6 +237,11 @@ func (o StackVariable) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	toSerialize["size"] = o.Size
 	toSerialize["addr"] = o.Addr
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -268,15 +273,25 @@ func (o *StackVariable) UnmarshalJSON(data []byte) (err error) {
 
 	varStackVariable := _StackVariable{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStackVariable)
+	err = json.Unmarshal(data, &varStackVariable)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StackVariable(varStackVariable)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "last_change")
+		delete(additionalProperties, "offset")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "addr")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

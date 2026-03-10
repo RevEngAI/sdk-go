@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &AnalysisFunctionMapping{}
 type AnalysisFunctionMapping struct {
 	// A map of function ids to function addresses for the analysis, and it's inverse.
 	FunctionMaps FunctionMapping `json:"function_maps"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisFunctionMapping AnalysisFunctionMapping
@@ -79,6 +79,11 @@ func (o AnalysisFunctionMapping) MarshalJSON() ([]byte, error) {
 func (o AnalysisFunctionMapping) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["function_maps"] = o.FunctionMaps
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *AnalysisFunctionMapping) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisFunctionMapping := _AnalysisFunctionMapping{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisFunctionMapping)
+	err = json.Unmarshal(data, &varAnalysisFunctionMapping)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisFunctionMapping(varAnalysisFunctionMapping)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_maps")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

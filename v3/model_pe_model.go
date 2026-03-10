@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type PEModel struct {
 	Imports NullableImportModel `json:"imports"`
 	Exports NullableExportModel `json:"exports"`
 	IconData NullableIconModel `json:"icon_data"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PEModel PEModel
@@ -615,6 +615,11 @@ func (o PEModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["imports"] = o.Imports.Get()
 	toSerialize["exports"] = o.Exports.Get()
 	toSerialize["icon_data"] = o.IconData.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -661,15 +666,39 @@ func (o *PEModel) UnmarshalJSON(data []byte) (err error) {
 
 	varPEModel := _PEModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPEModel)
+	err = json.Unmarshal(data, &varPEModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PEModel(varPEModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "timestamps")
+		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "checksum")
+		delete(additionalProperties, "image_base")
+		delete(additionalProperties, "security")
+		delete(additionalProperties, "version_info")
+		delete(additionalProperties, "debug_info")
+		delete(additionalProperties, "number_of_resources")
+		delete(additionalProperties, "entry_point")
+		delete(additionalProperties, "signature")
+		delete(additionalProperties, "dotnet")
+		delete(additionalProperties, "debug_stripped")
+		delete(additionalProperties, "import_hash")
+		delete(additionalProperties, "export_hash")
+		delete(additionalProperties, "rich_header_hash")
+		delete(additionalProperties, "sections")
+		delete(additionalProperties, "imports")
+		delete(additionalProperties, "exports")
+		delete(additionalProperties, "icon_data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

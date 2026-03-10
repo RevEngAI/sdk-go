@@ -20,7 +20,10 @@ var _ MappedNullable = &TaskResponse{}
 type TaskResponse struct {
 	Status *TaskStatus `json:"status,omitempty"`
 	ErrorMessage NullableString `json:"error_message,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TaskResponse TaskResponse
 
 // NewTaskResponse instantiates a new TaskResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -133,7 +136,34 @@ func (o TaskResponse) ToMap() (map[string]interface{}, error) {
 	if o.ErrorMessage.IsSet() {
 		toSerialize["error_message"] = o.ErrorMessage.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TaskResponse) UnmarshalJSON(data []byte) (err error) {
+	varTaskResponse := _TaskResponse{}
+
+	err = json.Unmarshal(data, &varTaskResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TaskResponse(varTaskResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "error_message")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTaskResponse struct {

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &InverseValue{}
 // InverseValue struct for InverseValue
 type InverseValue struct {
 	Value string `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InverseValue InverseValue
@@ -78,6 +78,11 @@ func (o InverseValue) MarshalJSON() ([]byte, error) {
 func (o InverseValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -105,15 +110,20 @@ func (o *InverseValue) UnmarshalJSON(data []byte) (err error) {
 
 	varInverseValue := _InverseValue{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInverseValue)
+	err = json.Unmarshal(data, &varInverseValue)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InverseValue(varInverseValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

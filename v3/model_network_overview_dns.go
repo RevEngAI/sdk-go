@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type NetworkOverviewDns struct {
 	Host string `json:"host"`
 	Type string `json:"type"`
 	Answers []NetworkOverviewDnsAnswer `json:"answers"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _NetworkOverviewDns NetworkOverviewDns
@@ -132,6 +132,11 @@ func (o NetworkOverviewDns) ToMap() (map[string]interface{}, error) {
 	toSerialize["host"] = o.Host
 	toSerialize["type"] = o.Type
 	toSerialize["answers"] = o.Answers
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -161,15 +166,22 @@ func (o *NetworkOverviewDns) UnmarshalJSON(data []byte) (err error) {
 
 	varNetworkOverviewDns := _NetworkOverviewDns{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varNetworkOverviewDns)
+	err = json.Unmarshal(data, &varNetworkOverviewDns)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NetworkOverviewDns(varNetworkOverviewDns)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "host")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "answers")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

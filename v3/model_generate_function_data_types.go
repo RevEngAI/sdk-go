@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type GenerateFunctionDataTypes struct {
 	Reference string `json:"reference"`
 	// List of function data types information that are either already generated, or now queued for generation
 	DataTypesList GenerationStatusList `json:"data_types_list"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GenerateFunctionDataTypes GenerateFunctionDataTypes
@@ -143,6 +143,11 @@ func (o GenerateFunctionDataTypes) ToMap() (map[string]interface{}, error) {
 	toSerialize["queued"] = o.Queued
 	toSerialize["reference"] = o.Reference
 	toSerialize["data_types_list"] = o.DataTypesList
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -172,15 +177,22 @@ func (o *GenerateFunctionDataTypes) UnmarshalJSON(data []byte) (err error) {
 
 	varGenerateFunctionDataTypes := _GenerateFunctionDataTypes{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGenerateFunctionDataTypes)
+	err = json.Unmarshal(data, &varGenerateFunctionDataTypes)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GenerateFunctionDataTypes(varGenerateFunctionDataTypes)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "queued")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "data_types_list")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

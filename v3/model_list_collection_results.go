@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ListCollectionResults{}
 type ListCollectionResults struct {
 	// Page containing the results of the collections search
 	Results []CollectionListItem `json:"results"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListCollectionResults ListCollectionResults
@@ -79,6 +79,11 @@ func (o ListCollectionResults) MarshalJSON() ([]byte, error) {
 func (o ListCollectionResults) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["results"] = o.Results
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *ListCollectionResults) UnmarshalJSON(data []byte) (err error) {
 
 	varListCollectionResults := _ListCollectionResults{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListCollectionResults)
+	err = json.Unmarshal(data, &varListCollectionResults)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListCollectionResults(varListCollectionResults)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

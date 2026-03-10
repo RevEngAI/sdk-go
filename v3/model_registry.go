@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type Registry struct {
 	Key string `json:"key"`
 	ValueName NullableString `json:"value_name"`
 	Value NullableString `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Registry Registry
@@ -163,6 +163,11 @@ func (o Registry) ToMap() (map[string]interface{}, error) {
 	toSerialize["key"] = o.Key
 	toSerialize["value_name"] = o.ValueName.Get()
 	toSerialize["value"] = o.Value.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -193,15 +198,23 @@ func (o *Registry) UnmarshalJSON(data []byte) (err error) {
 
 	varRegistry := _Registry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRegistry)
+	err = json.Unmarshal(data, &varRegistry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Registry(varRegistry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value_name")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

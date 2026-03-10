@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type NetworkOverviewMetadata struct {
 	CountryCode string `json:"country_code"`
 	ASN string `json:"ASN"`
 	Type string `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _NetworkOverviewMetadata NetworkOverviewMetadata
@@ -159,6 +159,11 @@ func (o NetworkOverviewMetadata) ToMap() (map[string]interface{}, error) {
 	toSerialize["country_code"] = o.CountryCode
 	toSerialize["ASN"] = o.ASN
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -189,15 +194,23 @@ func (o *NetworkOverviewMetadata) UnmarshalJSON(data []byte) (err error) {
 
 	varNetworkOverviewMetadata := _NetworkOverviewMetadata{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varNetworkOverviewMetadata)
+	err = json.Unmarshal(data, &varNetworkOverviewMetadata)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NetworkOverviewMetadata(varNetworkOverviewMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "host")
+		delete(additionalProperties, "country_code")
+		delete(additionalProperties, "ASN")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

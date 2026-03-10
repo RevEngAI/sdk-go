@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &InverseStringMapItem{}
 type InverseStringMapItem struct {
 	String string `json:"string"`
 	Addr NullableInt64 `json:"addr"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InverseStringMapItem InverseStringMapItem
@@ -107,6 +107,11 @@ func (o InverseStringMapItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["string"] = o.String
 	toSerialize["addr"] = o.Addr.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *InverseStringMapItem) UnmarshalJSON(data []byte) (err error) {
 
 	varInverseStringMapItem := _InverseStringMapItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInverseStringMapItem)
+	err = json.Unmarshal(data, &varInverseStringMapItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InverseStringMapItem(varInverseStringMapItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "string")
+		delete(additionalProperties, "addr")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

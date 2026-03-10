@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type TypeDefinition struct {
 	Type string `json:"type"`
 	// Type of artifact the type definition is associated with
 	ArtifactType *string `json:"artifact_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TypeDefinition TypeDefinition
@@ -190,6 +190,11 @@ func (o TypeDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ArtifactType) {
 		toSerialize["artifact_type"] = o.ArtifactType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *TypeDefinition) UnmarshalJSON(data []byte) (err error) {
 
 	varTypeDefinition := _TypeDefinition{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTypeDefinition)
+	err = json.Unmarshal(data, &varTypeDefinition)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TypeDefinition(varTypeDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "last_change")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "artifact_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

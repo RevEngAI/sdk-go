@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type TTPSElement struct {
 	Attack []TTPSAttack `json:"attack"`
 	Occurrences []TTPSOccurance `json:"occurrences"`
 	Score int32 `json:"score"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TTPSElement TTPSElement
@@ -159,6 +159,11 @@ func (o TTPSElement) ToMap() (map[string]interface{}, error) {
 	toSerialize["attack"] = o.Attack
 	toSerialize["occurrences"] = o.Occurrences
 	toSerialize["score"] = o.Score
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -189,15 +194,23 @@ func (o *TTPSElement) UnmarshalJSON(data []byte) (err error) {
 
 	varTTPSElement := _TTPSElement{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTTPSElement)
+	err = json.Unmarshal(data, &varTTPSElement)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TTPSElement(varTTPSElement)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "attack")
+		delete(additionalProperties, "occurrences")
+		delete(additionalProperties, "score")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

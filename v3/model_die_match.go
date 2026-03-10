@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type DieMatch struct {
 	Display string `json:"display"`
 	// Extracted version string when available; may be empty/None if unknown.
 	Version string `json:"version"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DieMatch DieMatch
@@ -163,6 +163,11 @@ func (o DieMatch) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	toSerialize["display"] = o.Display
 	toSerialize["version"] = o.Version
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -193,15 +198,23 @@ func (o *DieMatch) UnmarshalJSON(data []byte) (err error) {
 
 	varDieMatch := _DieMatch{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDieMatch)
+	err = json.Unmarshal(data, &varDieMatch)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DieMatch(varDieMatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "display")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

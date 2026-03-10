@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **BinaryIds** | Pointer to **[]int32** | ID&#39;s of binaries to limit the search to, if empty, search all scoped binaries | [optional] [default to {}]
 **CollectionIds** | Pointer to **[]int32** | ID&#39;s of collections to limit the search to, if empty, search all scoped collections | [optional] [default to {}]
 **FunctionIds** | Pointer to **[]int64** | ID&#39;s of functions to limit the search to, if empty, search all scoped functions | [optional] [default to {}]
+**UserIds** | Pointer to **[]int32** | ID&#39;s of users to limit the search to, if empty, search all scoped users | [optional] [default to {}]
 **DebugTypes** | Pointer to **[]string** | Limit the search to specific debug types, if empty, search all scoped debug &amp; non-debug functions | [optional] [default to {}]
 
 ## Methods
@@ -102,6 +103,31 @@ SetFunctionIds sets FunctionIds field to given value.
 `func (o *FunctionMatchingFilters) HasFunctionIds() bool`
 
 HasFunctionIds returns a boolean if a field has been set.
+
+### GetUserIds
+
+`func (o *FunctionMatchingFilters) GetUserIds() []int32`
+
+GetUserIds returns the UserIds field if non-nil, zero value otherwise.
+
+### GetUserIdsOk
+
+`func (o *FunctionMatchingFilters) GetUserIdsOk() (*[]int32, bool)`
+
+GetUserIdsOk returns a tuple with the UserIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserIds
+
+`func (o *FunctionMatchingFilters) SetUserIds(v []int32)`
+
+SetUserIds sets UserIds field to given value.
+
+### HasUserIds
+
+`func (o *FunctionMatchingFilters) HasUserIds() bool`
+
+HasUserIds returns a boolean if a field has been set.
 
 ### GetDebugTypes
 

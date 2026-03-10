@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &DecompilationCommentContext{}
 type DecompilationCommentContext struct {
 	StartLine NullableInt32 `json:"start_line"`
 	EndLine NullableInt32 `json:"end_line"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DecompilationCommentContext DecompilationCommentContext
@@ -109,6 +109,11 @@ func (o DecompilationCommentContext) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["start_line"] = o.StartLine.Get()
 	toSerialize["end_line"] = o.EndLine.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +142,21 @@ func (o *DecompilationCommentContext) UnmarshalJSON(data []byte) (err error) {
 
 	varDecompilationCommentContext := _DecompilationCommentContext{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDecompilationCommentContext)
+	err = json.Unmarshal(data, &varDecompilationCommentContext)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DecompilationCommentContext(varDecompilationCommentContext)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "start_line")
+		delete(additionalProperties, "end_line")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

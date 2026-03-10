@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &Logs{}
 type Logs struct {
 	// Full logs of an analysis of an analysis_id
 	Logs string `json:"logs"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Logs Logs
@@ -79,6 +79,11 @@ func (o Logs) MarshalJSON() ([]byte, error) {
 func (o Logs) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["logs"] = o.Logs
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *Logs) UnmarshalJSON(data []byte) (err error) {
 
 	varLogs := _Logs{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogs)
+	err = json.Unmarshal(data, &varLogs)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Logs(varLogs)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logs")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

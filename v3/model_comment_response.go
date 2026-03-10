@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type CommentResponse struct {
 	Context NullableContext `json:"context,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CommentResponse CommentResponse
@@ -288,6 +288,11 @@ func (o CommentResponse) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["updated_at"] = o.UpdatedAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -321,15 +326,27 @@ func (o *CommentResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varCommentResponse := _CommentResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCommentResponse)
+	err = json.Unmarshal(data, &varCommentResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CommentResponse(varCommentResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "resource_type")
+		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "context")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

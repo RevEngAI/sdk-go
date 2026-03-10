@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type Symbols struct {
 	BaseAddress int32 `json:"base_address"`
 	// List of user defined function boundaries
 	FunctionBoundaries []FunctionBoundary `json:"function_boundaries,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Symbols Symbols
@@ -116,6 +116,11 @@ func (o Symbols) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FunctionBoundaries) {
 		toSerialize["function_boundaries"] = o.FunctionBoundaries
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,15 +148,21 @@ func (o *Symbols) UnmarshalJSON(data []byte) (err error) {
 
 	varSymbols := _Symbols{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSymbols)
+	err = json.Unmarshal(data, &varSymbols)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Symbols(varSymbols)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "base_address")
+		delete(additionalProperties, "function_boundaries")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -19,7 +19,10 @@ var _ MappedNullable = &AutoRunAgents{}
 // AutoRunAgents struct for AutoRunAgents
 type AutoRunAgents struct {
 	Triage *bool `json:"triage,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AutoRunAgents AutoRunAgents
 
 // NewAutoRunAgents instantiates a new AutoRunAgents object
 // This constructor will assign default values to properties that have it defined,
@@ -87,7 +90,33 @@ func (o AutoRunAgents) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Triage) {
 		toSerialize["triage"] = o.Triage
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AutoRunAgents) UnmarshalJSON(data []byte) (err error) {
+	varAutoRunAgents := _AutoRunAgents{}
+
+	err = json.Unmarshal(data, &varAutoRunAgents)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AutoRunAgents(varAutoRunAgents)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "triage")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAutoRunAgents struct {

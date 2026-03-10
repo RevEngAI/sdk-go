@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type NameSourceType struct {
 	FunctionId NullableInt32 `json:"function_id,omitempty"`
 	BinaryId NullableInt32 `json:"binary_id,omitempty"`
 	AnalysisId NullableInt32 `json:"analysis_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _NameSourceType NameSourceType
@@ -217,6 +217,11 @@ func (o NameSourceType) ToMap() (map[string]interface{}, error) {
 	if o.AnalysisId.IsSet() {
 		toSerialize["analysis_id"] = o.AnalysisId.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -244,15 +249,23 @@ func (o *NameSourceType) UnmarshalJSON(data []byte) (err error) {
 
 	varNameSourceType := _NameSourceType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varNameSourceType)
+	err = json.Unmarshal(data, &varNameSourceType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NameSourceType(varNameSourceType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "analysis_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

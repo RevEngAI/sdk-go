@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type ProcessDumpMetadata struct {
 	Sha256 string `json:"sha256"`
 	Type string `json:"type"`
 	Size int32 `json:"size"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProcessDumpMetadata ProcessDumpMetadata
@@ -132,6 +132,11 @@ func (o ProcessDumpMetadata) ToMap() (map[string]interface{}, error) {
 	toSerialize["sha256"] = o.Sha256
 	toSerialize["type"] = o.Type
 	toSerialize["size"] = o.Size
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -161,15 +166,22 @@ func (o *ProcessDumpMetadata) UnmarshalJSON(data []byte) (err error) {
 
 	varProcessDumpMetadata := _ProcessDumpMetadata{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProcessDumpMetadata)
+	err = json.Unmarshal(data, &varProcessDumpMetadata)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProcessDumpMetadata(varProcessDumpMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sha256")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "size")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

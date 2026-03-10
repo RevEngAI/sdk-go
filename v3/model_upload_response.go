@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type UploadResponse struct {
 	Sha256Hash string `json:"sha_256_hash"`
 	FileType UploadFileType `json:"file_type"`
 	Filename string `json:"filename"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UploadResponse UploadResponse
@@ -132,6 +132,11 @@ func (o UploadResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["sha_256_hash"] = o.Sha256Hash
 	toSerialize["file_type"] = o.FileType
 	toSerialize["filename"] = o.Filename
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -161,15 +166,22 @@ func (o *UploadResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varUploadResponse := _UploadResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUploadResponse)
+	err = json.Unmarshal(data, &varUploadResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UploadResponse(varUploadResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "file_type")
+		delete(additionalProperties, "filename")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

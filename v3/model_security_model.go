@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type SecurityModel struct {
 	HighEntropy bool `json:"high_entropy"`
 	Seh bool `json:"seh"`
 	BoundImage bool `json:"bound_image"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SecurityModel SecurityModel
@@ -348,6 +348,11 @@ func (o SecurityModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["high_entropy"] = o.HighEntropy
 	toSerialize["seh"] = o.Seh
 	toSerialize["bound_image"] = o.BoundImage
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -385,15 +390,30 @@ func (o *SecurityModel) UnmarshalJSON(data []byte) (err error) {
 
 	varSecurityModel := _SecurityModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSecurityModel)
+	err = json.Unmarshal(data, &varSecurityModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SecurityModel(varSecurityModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aslr")
+		delete(additionalProperties, "dep")
+		delete(additionalProperties, "cfg")
+		delete(additionalProperties, "driver_model")
+		delete(additionalProperties, "app_container")
+		delete(additionalProperties, "terminal_server_aware")
+		delete(additionalProperties, "image_isolation")
+		delete(additionalProperties, "code_integrity")
+		delete(additionalProperties, "high_entropy")
+		delete(additionalProperties, "seh")
+		delete(additionalProperties, "bound_image")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type ELFSegment struct {
 	Flags string `json:"flags"`
 	FlagsRaw int32 `json:"flags_raw"`
 	Alignment int32 `json:"alignment"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ELFSegment ELFSegment
@@ -294,6 +294,11 @@ func (o ELFSegment) ToMap() (map[string]interface{}, error) {
 	toSerialize["flags"] = o.Flags
 	toSerialize["flags_raw"] = o.FlagsRaw
 	toSerialize["alignment"] = o.Alignment
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -329,15 +334,28 @@ func (o *ELFSegment) UnmarshalJSON(data []byte) (err error) {
 
 	varELFSegment := _ELFSegment{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varELFSegment)
+	err = json.Unmarshal(data, &varELFSegment)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ELFSegment(varELFSegment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "virtual_address")
+		delete(additionalProperties, "virtual_size")
+		delete(additionalProperties, "physical_address")
+		delete(additionalProperties, "physical_size")
+		delete(additionalProperties, "file_offset")
+		delete(additionalProperties, "flags")
+		delete(additionalProperties, "flags_raw")
+		delete(additionalProperties, "alignment")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

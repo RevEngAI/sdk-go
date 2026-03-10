@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type SingleCodeCertificateModel struct {
 	IssuerName string `json:"issuer_name"`
 	SerialNumber string `json:"serial_number"`
 	SubjectName string `json:"subject_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SingleCodeCertificateModel SingleCodeCertificateModel
@@ -213,6 +213,11 @@ func (o SingleCodeCertificateModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["issuer_name"] = o.IssuerName
 	toSerialize["serial_number"] = o.SerialNumber
 	toSerialize["subject_name"] = o.SubjectName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -245,15 +250,25 @@ func (o *SingleCodeCertificateModel) UnmarshalJSON(data []byte) (err error) {
 
 	varSingleCodeCertificateModel := _SingleCodeCertificateModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSingleCodeCertificateModel)
+	err = json.Unmarshal(data, &varSingleCodeCertificateModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SingleCodeCertificateModel(varSingleCodeCertificateModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "issued_on")
+		delete(additionalProperties, "expires_on")
+		delete(additionalProperties, "issuer_name")
+		delete(additionalProperties, "serial_number")
+		delete(additionalProperties, "subject_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

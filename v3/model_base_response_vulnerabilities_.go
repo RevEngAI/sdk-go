@@ -25,7 +25,10 @@ type BaseResponseVulnerabilities struct {
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
 	Meta *MetaModel `json:"meta,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BaseResponseVulnerabilities BaseResponseVulnerabilities
 
 // NewBaseResponseVulnerabilities instantiates a new BaseResponseVulnerabilities object
 // This constructor will assign default values to properties that have it defined,
@@ -254,7 +257,37 @@ func (o BaseResponseVulnerabilities) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BaseResponseVulnerabilities) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseVulnerabilities := _BaseResponseVulnerabilities{}
+
+	err = json.Unmarshal(data, &varBaseResponseVulnerabilities)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BaseResponseVulnerabilities(varBaseResponseVulnerabilities)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "meta")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBaseResponseVulnerabilities struct {

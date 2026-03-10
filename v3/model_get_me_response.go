@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type GetMeResponse struct {
 	Creation time.Time `json:"creation"`
 	TutorialSeen bool `json:"tutorial_seen"`
 	Role string `json:"role"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetMeResponse GetMeResponse
@@ -268,6 +268,11 @@ func (o GetMeResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["creation"] = o.Creation
 	toSerialize["tutorial_seen"] = o.TutorialSeen
 	toSerialize["role"] = o.Role
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -302,15 +307,27 @@ func (o *GetMeResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varGetMeResponse := _GetMeResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetMeResponse)
+	err = json.Unmarshal(data, &varGetMeResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetMeResponse(varGetMeResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "creation")
+		delete(additionalProperties, "tutorial_seen")
+		delete(additionalProperties, "role")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

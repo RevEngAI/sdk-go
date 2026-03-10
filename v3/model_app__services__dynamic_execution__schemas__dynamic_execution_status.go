@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &AppServicesDynamicExecutionSchemasDynamicExecutionStatus
 // AppServicesDynamicExecutionSchemasDynamicExecutionStatus struct for AppServicesDynamicExecutionSchemasDynamicExecutionStatus
 type AppServicesDynamicExecutionSchemasDynamicExecutionStatus struct {
 	Status string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AppServicesDynamicExecutionSchemasDynamicExecutionStatus AppServicesDynamicExecutionSchemasDynamicExecutionStatus
@@ -78,6 +78,11 @@ func (o AppServicesDynamicExecutionSchemasDynamicExecutionStatus) MarshalJSON() 
 func (o AppServicesDynamicExecutionSchemasDynamicExecutionStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -105,15 +110,20 @@ func (o *AppServicesDynamicExecutionSchemasDynamicExecutionStatus) UnmarshalJSON
 
 	varAppServicesDynamicExecutionSchemasDynamicExecutionStatus := _AppServicesDynamicExecutionSchemasDynamicExecutionStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAppServicesDynamicExecutionSchemasDynamicExecutionStatus)
+	err = json.Unmarshal(data, &varAppServicesDynamicExecutionSchemasDynamicExecutionStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AppServicesDynamicExecutionSchemasDynamicExecutionStatus(varAppServicesDynamicExecutionSchemasDynamicExecutionStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

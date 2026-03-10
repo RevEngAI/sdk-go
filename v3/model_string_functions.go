@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type StringFunctions struct {
 	Value string `json:"value"`
 	// The function ids the string literal was found within
 	Functions []AppApiRestV2FunctionsResponsesFunction `json:"functions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StringFunctions StringFunctions
@@ -107,6 +107,11 @@ func (o StringFunctions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
 	toSerialize["functions"] = o.Functions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *StringFunctions) UnmarshalJSON(data []byte) (err error) {
 
 	varStringFunctions := _StringFunctions{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStringFunctions)
+	err = json.Unmarshal(data, &varStringFunctions)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StringFunctions(varStringFunctions)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "functions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

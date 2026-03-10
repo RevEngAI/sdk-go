@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ELFSecurity struct {
 	Canary bool `json:"canary"`
 	Nx bool `json:"nx"`
 	Relo bool `json:"relo"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ELFSecurity ELFSecurity
@@ -186,6 +186,11 @@ func (o ELFSecurity) ToMap() (map[string]interface{}, error) {
 	toSerialize["canary"] = o.Canary
 	toSerialize["nx"] = o.Nx
 	toSerialize["relo"] = o.Relo
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -217,15 +222,24 @@ func (o *ELFSecurity) UnmarshalJSON(data []byte) (err error) {
 
 	varELFSecurity := _ELFSecurity{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varELFSecurity)
+	err = json.Unmarshal(data, &varELFSecurity)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ELFSecurity(varELFSecurity)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pie")
+		delete(additionalProperties, "stripped")
+		delete(additionalProperties, "canary")
+		delete(additionalProperties, "nx")
+		delete(additionalProperties, "relo")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

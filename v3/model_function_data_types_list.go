@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type FunctionDataTypesList struct {
 	TotalDataTypesCount *int32 `json:"total_data_types_count,omitempty"`
 	// List of function data types information
 	Items []FunctionDataTypesListItem `json:"items"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionDataTypesList FunctionDataTypesList
@@ -161,6 +161,11 @@ func (o FunctionDataTypesList) ToMap() (map[string]interface{}, error) {
 		toSerialize["total_data_types_count"] = o.TotalDataTypesCount
 	}
 	toSerialize["items"] = o.Items
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -188,15 +193,22 @@ func (o *FunctionDataTypesList) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionDataTypesList := _FunctionDataTypesList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionDataTypesList)
+	err = json.Unmarshal(data, &varFunctionDataTypesList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionDataTypesList(varFunctionDataTypesList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "total_data_types_count")
+		delete(additionalProperties, "items")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

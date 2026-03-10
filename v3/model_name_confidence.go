@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type NameConfidence struct {
 	Name string `json:"name"`
 	// Confidence score as a percentage
 	Confidence float32 `json:"confidence"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _NameConfidence NameConfidence
@@ -107,6 +107,11 @@ func (o NameConfidence) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["confidence"] = o.Confidence
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *NameConfidence) UnmarshalJSON(data []byte) (err error) {
 
 	varNameConfidence := _NameConfidence{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varNameConfidence)
+	err = json.Unmarshal(data, &varNameConfidence)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NameConfidence(varNameConfidence)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "confidence")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

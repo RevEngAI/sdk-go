@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type ChildBinariesResponse struct {
 	// List of child binaries associated with the parent binary
 	Children []RelativeBinaryResponse `json:"children"`
 	Parent NullableRelativeBinaryResponse `json:"parent,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ChildBinariesResponse ChildBinariesResponse
@@ -125,6 +125,11 @@ func (o ChildBinariesResponse) ToMap() (map[string]interface{}, error) {
 	if o.Parent.IsSet() {
 		toSerialize["parent"] = o.Parent.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -152,15 +157,21 @@ func (o *ChildBinariesResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varChildBinariesResponse := _ChildBinariesResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varChildBinariesResponse)
+	err = json.Unmarshal(data, &varChildBinariesResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ChildBinariesResponse(varChildBinariesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "children")
+		delete(additionalProperties, "parent")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

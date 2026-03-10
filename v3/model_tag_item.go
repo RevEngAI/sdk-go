@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type TagItem struct {
 	Name string `json:"name"`
 	Origin string `json:"origin"`
 	CollectionId NullableInt32 `json:"collection_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TagItem TagItem
@@ -151,6 +151,11 @@ func (o TagItem) ToMap() (map[string]interface{}, error) {
 	if o.CollectionId.IsSet() {
 		toSerialize["collection_id"] = o.CollectionId.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -179,15 +184,22 @@ func (o *TagItem) UnmarshalJSON(data []byte) (err error) {
 
 	varTagItem := _TagItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTagItem)
+	err = json.Unmarshal(data, &varTagItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TagItem(varTagItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "origin")
+		delete(additionalProperties, "collection_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

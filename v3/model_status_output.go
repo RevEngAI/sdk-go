@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type StatusOutput struct {
 	AnalysisId int32 `json:"analysis_id"`
 	// The status of the checked analysis
 	AnalysisStatus string `json:"analysis_status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StatusOutput StatusOutput
@@ -107,6 +107,11 @@ func (o StatusOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["analysis_id"] = o.AnalysisId
 	toSerialize["analysis_status"] = o.AnalysisStatus
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *StatusOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varStatusOutput := _StatusOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStatusOutput)
+	err = json.Unmarshal(data, &varStatusOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StatusOutput(varStatusOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "analysis_status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
