@@ -5,3 +5,5 @@ enumClassPrefix: true
 withGoMod: false
 additionalProperties:
    goImportAlias: revengai
+# Allow unknown properties to avoid breaking when the API adds new fields, and we haven't updated the SDK yet
+disallowAdditionalPropertiesIfNotPresent: false
