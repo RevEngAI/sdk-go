@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &SectionModel{}
 type SectionModel struct {
 	NumberOfSections int32 `json:"number_of_sections"`
 	Sections []SingleSectionModel `json:"sections"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SectionModel SectionModel
@@ -105,6 +105,11 @@ func (o SectionModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["number_of_sections"] = o.NumberOfSections
 	toSerialize["sections"] = o.Sections
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *SectionModel) UnmarshalJSON(data []byte) (err error) {
 
 	varSectionModel := _SectionModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSectionModel)
+	err = json.Unmarshal(data, &varSectionModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SectionModel(varSectionModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "number_of_sections")
+		delete(additionalProperties, "sections")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

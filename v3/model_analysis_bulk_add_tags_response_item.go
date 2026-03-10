@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type AnalysisBulkAddTagsResponseItem struct {
 	AnalysisId int32 `json:"analysis_id"`
 	Message NullableString `json:"message"`
 	Error NullableString `json:"error,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisBulkAddTagsResponseItem AnalysisBulkAddTagsResponseItem
@@ -153,6 +153,11 @@ func (o AnalysisBulkAddTagsResponseItem) ToMap() (map[string]interface{}, error)
 	if o.Error.IsSet() {
 		toSerialize["error"] = o.Error.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *AnalysisBulkAddTagsResponseItem) UnmarshalJSON(data []byte) (err error)
 
 	varAnalysisBulkAddTagsResponseItem := _AnalysisBulkAddTagsResponseItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisBulkAddTagsResponseItem)
+	err = json.Unmarshal(data, &varAnalysisBulkAddTagsResponseItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisBulkAddTagsResponseItem(varAnalysisBulkAddTagsResponseItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "error")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

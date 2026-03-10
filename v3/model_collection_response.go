@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type CollectionResponse struct {
 	UpdatedAt time.Time `json:"updated_at"`
 	Tags []string `json:"tags,omitempty"`
 	Binaries []CollectionResponseBinariesInner `json:"binaries,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CollectionResponse CollectionResponse
@@ -396,6 +396,11 @@ func (o CollectionResponse) ToMap() (map[string]interface{}, error) {
 	if o.Binaries != nil {
 		toSerialize["binaries"] = o.Binaries
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -430,15 +435,30 @@ func (o *CollectionResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varCollectionResponse := _CollectionResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCollectionResponse)
+	err = json.Unmarshal(data, &varCollectionResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CollectionResponse(varCollectionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "collection_id")
+		delete(additionalProperties, "collection_name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "team_id")
+		delete(additionalProperties, "collection_scope")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "binaries")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

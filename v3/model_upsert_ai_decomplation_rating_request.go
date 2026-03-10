@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type UpsertAiDecomplationRatingRequest struct {
 	// The rating for the AI decompilation response
 	Rating AiDecompilationRating `json:"rating"`
 	Reason NullableString `json:"reason"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpsertAiDecomplationRatingRequest UpsertAiDecomplationRatingRequest
@@ -108,6 +108,11 @@ func (o UpsertAiDecomplationRatingRequest) ToMap() (map[string]interface{}, erro
 	toSerialize := map[string]interface{}{}
 	toSerialize["rating"] = o.Rating
 	toSerialize["reason"] = o.Reason.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *UpsertAiDecomplationRatingRequest) UnmarshalJSON(data []byte) (err erro
 
 	varUpsertAiDecomplationRatingRequest := _UpsertAiDecomplationRatingRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpsertAiDecomplationRatingRequest)
+	err = json.Unmarshal(data, &varUpsertAiDecomplationRatingRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpsertAiDecomplationRatingRequest(varUpsertAiDecomplationRatingRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rating")
+		delete(additionalProperties, "reason")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type AnalysisCreateRequest struct {
 	// The binary config can override automatically determined values such as ISA, Platform, File Format, etc
 	BinaryConfig *BinaryConfig `json:"binary_config,omitempty"`
 	AutoRunAgents *AutoRunAgents `json:"auto_run_agents,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisCreateRequest AnalysisCreateRequest
@@ -387,6 +387,11 @@ func (o AnalysisCreateRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AutoRunAgents) {
 		toSerialize["auto_run_agents"] = o.AutoRunAgents
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -415,15 +420,28 @@ func (o *AnalysisCreateRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisCreateRequest := _AnalysisCreateRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisCreateRequest)
+	err = json.Unmarshal(data, &varAnalysisCreateRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisCreateRequest(varAnalysisCreateRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filename")
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "analysis_scope")
+		delete(additionalProperties, "symbols")
+		delete(additionalProperties, "debug_hash")
+		delete(additionalProperties, "analysis_config")
+		delete(additionalProperties, "binary_config")
+		delete(additionalProperties, "auto_run_agents")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

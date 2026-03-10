@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &AnalysisFunctionsList{}
 type AnalysisFunctionsList struct {
 	// The functions associated with the analysis
 	Functions []FunctionListItem `json:"functions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisFunctionsList AnalysisFunctionsList
@@ -79,6 +79,11 @@ func (o AnalysisFunctionsList) MarshalJSON() ([]byte, error) {
 func (o AnalysisFunctionsList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["functions"] = o.Functions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *AnalysisFunctionsList) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisFunctionsList := _AnalysisFunctionsList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisFunctionsList)
+	err = json.Unmarshal(data, &varAnalysisFunctionsList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisFunctionsList(varAnalysisFunctionsList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "functions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

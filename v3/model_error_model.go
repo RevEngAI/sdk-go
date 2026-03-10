@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ErrorModel{}
 type ErrorModel struct {
 	Code string `json:"code"`
 	Message string `json:"message"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ErrorModel ErrorModel
@@ -105,6 +105,11 @@ func (o ErrorModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["code"] = o.Code
 	toSerialize["message"] = o.Message
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *ErrorModel) UnmarshalJSON(data []byte) (err error) {
 
 	varErrorModel := _ErrorModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varErrorModel)
+	err = json.Unmarshal(data, &varErrorModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ErrorModel(varErrorModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

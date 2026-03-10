@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type ExternalResponse struct {
 	Sha256Hash string `json:"sha_256_hash"`
 	Data map[string]interface{} `json:"data"`
 	LastUpdated time.Time `json:"last_updated"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExternalResponse ExternalResponse
@@ -133,6 +133,11 @@ func (o ExternalResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["sha_256_hash"] = o.Sha256Hash
 	toSerialize["data"] = o.Data
 	toSerialize["last_updated"] = o.LastUpdated
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -162,15 +167,22 @@ func (o *ExternalResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varExternalResponse := _ExternalResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExternalResponse)
+	err = json.Unmarshal(data, &varExternalResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalResponse(varExternalResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "last_updated")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

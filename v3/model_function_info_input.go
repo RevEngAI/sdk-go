@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type FunctionInfoInput struct {
 	FuncTypes NullableFunctionTypeInput `json:"func_types,omitempty"`
 	// List of function dependencies
 	FuncDeps []FuncDepsInner `json:"func_deps"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionInfoInput FunctionInfoInput
@@ -125,6 +125,11 @@ func (o FunctionInfoInput) ToMap() (map[string]interface{}, error) {
 		toSerialize["func_types"] = o.FuncTypes.Get()
 	}
 	toSerialize["func_deps"] = o.FuncDeps
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -152,15 +157,21 @@ func (o *FunctionInfoInput) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionInfoInput := _FunctionInfoInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionInfoInput)
+	err = json.Unmarshal(data, &varFunctionInfoInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionInfoInput(varFunctionInfoInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "func_types")
+		delete(additionalProperties, "func_deps")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

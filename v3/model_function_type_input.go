@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type FunctionTypeInput struct {
 	Type string `json:"type"`
 	// Type of artifact that the structure is associated with
 	ArtifactType *string `json:"artifact_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionTypeInput FunctionTypeInput
@@ -315,6 +315,11 @@ func (o FunctionTypeInput) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ArtifactType) {
 		toSerialize["artifact_type"] = o.ArtifactType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -346,15 +351,27 @@ func (o *FunctionTypeInput) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionTypeInput := _FunctionTypeInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionTypeInput)
+	err = json.Unmarshal(data, &varFunctionTypeInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionTypeInput(varFunctionTypeInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "last_change")
+		delete(additionalProperties, "addr")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "header")
+		delete(additionalProperties, "stack_vars")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "artifact_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

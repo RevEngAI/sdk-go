@@ -19,7 +19,10 @@ var _ MappedNullable = &MetaModel{}
 // MetaModel struct for MetaModel
 type MetaModel struct {
 	Pagination NullablePaginationModel `json:"pagination,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetaModel MetaModel
 
 // NewMetaModel instantiates a new MetaModel object
 // This constructor will assign default values to properties that have it defined,
@@ -93,7 +96,33 @@ func (o MetaModel) ToMap() (map[string]interface{}, error) {
 	if o.Pagination.IsSet() {
 		toSerialize["pagination"] = o.Pagination.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetaModel) UnmarshalJSON(data []byte) (err error) {
+	varMetaModel := _MetaModel{}
+
+	err = json.Unmarshal(data, &varMetaModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetaModel(varMetaModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pagination")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetaModel struct {

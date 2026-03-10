@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type PaginationModel struct {
 	PageSize int32 `json:"page_size"`
 	PageNumber int32 `json:"page_number"`
 	HasNextPage bool `json:"has_next_page"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PaginationModel PaginationModel
@@ -132,6 +132,11 @@ func (o PaginationModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["page_size"] = o.PageSize
 	toSerialize["page_number"] = o.PageNumber
 	toSerialize["has_next_page"] = o.HasNextPage
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -161,15 +166,22 @@ func (o *PaginationModel) UnmarshalJSON(data []byte) (err error) {
 
 	varPaginationModel := _PaginationModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPaginationModel)
+	err = json.Unmarshal(data, &varPaginationModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PaginationModel(varPaginationModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "page_size")
+		delete(additionalProperties, "page_number")
+		delete(additionalProperties, "has_next_page")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

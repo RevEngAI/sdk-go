@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**GetAnalysisStringsStatus**](FunctionsCoreAPI.md#GetAnalysisStringsStatus) | **Get** /v2/analyses/{analysis_id}/functions/strings/status | Get string processing state for the Analysis
 [**GetFunctionBlocks**](FunctionsCoreAPI.md#GetFunctionBlocks) | **Get** /v2/functions/{function_id}/blocks | Get disassembly blocks related to the function
 [**GetFunctionCalleesCallers**](FunctionsCoreAPI.md#GetFunctionCalleesCallers) | **Get** /v2/functions/{function_id}/callees_callers | Get list of functions that call or are called by the specified function
+[**GetFunctionCalleesCallersBulk**](FunctionsCoreAPI.md#GetFunctionCalleesCallersBulk) | **Get** /v2/functions/callees_callers | Get list of functions that call or are called for a list of functions
 [**GetFunctionCapabilities**](FunctionsCoreAPI.md#GetFunctionCapabilities) | **Get** /v2/functions/{function_id}/capabilities | Retrieve a functions capabilities
 [**GetFunctionDetails**](FunctionsCoreAPI.md#GetFunctionDetails) | **Get** /v2/functions/{function_id} | Get function details
 [**GetFunctionStrings**](FunctionsCoreAPI.md#GetFunctionStrings) | **Get** /v2/functions/{function_id}/strings | Get string information found in the function
@@ -717,6 +718,70 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseCalleesCallerFunctionsResponse**](BaseResponseCalleesCallerFunctionsResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetFunctionCalleesCallersBulk
+
+> BaseResponseListCalleesCallerFunctionsResponse GetFunctionCalleesCallersBulk(ctx).FunctionIds(functionIds).Execute()
+
+Get list of functions that call or are called for a list of functions
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionIds := []*int32{int32(123)} // []*int32 | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsCoreAPI.GetFunctionCalleesCallersBulk(context.Background()).FunctionIds(functionIds).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.GetFunctionCalleesCallersBulk``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetFunctionCalleesCallersBulk`: BaseResponseListCalleesCallerFunctionsResponse
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.GetFunctionCalleesCallersBulk`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetFunctionCalleesCallersBulkRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **functionIds** | **[]int32** |  | 
+
+### Return type
+
+[**BaseResponseListCalleesCallerFunctionsResponse**](BaseResponseListCalleesCallerFunctionsResponse.md)
 
 ### Authorization
 

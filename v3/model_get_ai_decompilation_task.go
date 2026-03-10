@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type GetAiDecompilationTask struct {
 	AiSummary NullableString `json:"ai_summary,omitempty"`
 	RawAiSummary NullableString `json:"raw_ai_summary,omitempty"`
 	PredictedFunctionName NullableString `json:"predicted_function_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetAiDecompilationTask GetAiDecompilationTask
@@ -381,6 +381,11 @@ func (o GetAiDecompilationTask) ToMap() (map[string]interface{}, error) {
 	if o.PredictedFunctionName.IsSet() {
 		toSerialize["predicted_function_name"] = o.PredictedFunctionName.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -412,15 +417,28 @@ func (o *GetAiDecompilationTask) UnmarshalJSON(data []byte) (err error) {
 
 	varGetAiDecompilationTask := _GetAiDecompilationTask{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetAiDecompilationTask)
+	err = json.Unmarshal(data, &varGetAiDecompilationTask)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetAiDecompilationTask(varGetAiDecompilationTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "decompilation")
+		delete(additionalProperties, "raw_decompilation")
+		delete(additionalProperties, "function_mapping")
+		delete(additionalProperties, "function_mapping_full")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "ai_summary")
+		delete(additionalProperties, "raw_ai_summary")
+		delete(additionalProperties, "predicted_function_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

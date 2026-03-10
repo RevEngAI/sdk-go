@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -42,6 +41,7 @@ type CollectionListItem struct {
 	// The model being used for the collection
 	ModelName string `json:"model_name"`
 	TeamId NullableInt32 `json:"team_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CollectionListItem CollectionListItem
@@ -387,6 +387,11 @@ func (o CollectionListItem) ToMap() (map[string]interface{}, error) {
 	if o.TeamId.IsSet() {
 		toSerialize["team_id"] = o.TeamId.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -422,15 +427,30 @@ func (o *CollectionListItem) UnmarshalJSON(data []byte) (err error) {
 
 	varCollectionListItem := _CollectionListItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCollectionListItem)
+	err = json.Unmarshal(data, &varCollectionListItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CollectionListItem(varCollectionListItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "collection_name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "collection_scope")
+		delete(additionalProperties, "collection_owner")
+		delete(additionalProperties, "official_collection")
+		delete(additionalProperties, "collection_tags")
+		delete(additionalProperties, "collection_size")
+		delete(additionalProperties, "collection_id")
+		delete(additionalProperties, "creation")
+		delete(additionalProperties, "model_name")
+		delete(additionalProperties, "team_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

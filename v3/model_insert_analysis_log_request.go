@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &InsertAnalysisLogRequest{}
 type InsertAnalysisLogRequest struct {
 	// The log message to insert for the analysis
 	Log string `json:"log"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InsertAnalysisLogRequest InsertAnalysisLogRequest
@@ -79,6 +79,11 @@ func (o InsertAnalysisLogRequest) MarshalJSON() ([]byte, error) {
 func (o InsertAnalysisLogRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["log"] = o.Log
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *InsertAnalysisLogRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varInsertAnalysisLogRequest := _InsertAnalysisLogRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInsertAnalysisLogRequest)
+	err = json.Unmarshal(data, &varInsertAnalysisLogRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InsertAnalysisLogRequest(varInsertAnalysisLogRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "log")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

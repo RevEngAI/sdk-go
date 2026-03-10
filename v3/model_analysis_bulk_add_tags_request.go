@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &AnalysisBulkAddTagsRequest{}
 type AnalysisBulkAddTagsRequest struct {
 	Tags []string `json:"tags"`
 	AnalysisIds []int32 `json:"analysis_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisBulkAddTagsRequest AnalysisBulkAddTagsRequest
@@ -105,6 +105,11 @@ func (o AnalysisBulkAddTagsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["tags"] = o.Tags
 	toSerialize["analysis_ids"] = o.AnalysisIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *AnalysisBulkAddTagsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisBulkAddTagsRequest := _AnalysisBulkAddTagsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisBulkAddTagsRequest)
+	err = json.Unmarshal(data, &varAnalysisBulkAddTagsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisBulkAddTagsRequest(varAnalysisBulkAddTagsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "analysis_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

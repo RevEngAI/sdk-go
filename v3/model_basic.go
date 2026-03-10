@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -52,6 +51,7 @@ type Basic struct {
 	BaseAddress NullableInt32 `json:"base_address"`
 	BinaryUuid NullableString `json:"binary_uuid,omitempty"`
 	SequencerVersion NullableString `json:"sequencer_version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Basic Basic
@@ -565,6 +565,11 @@ func (o Basic) ToMap() (map[string]interface{}, error) {
 	if o.SequencerVersion.IsSet() {
 		toSerialize["sequencer_version"] = o.SequencerVersion.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -606,15 +611,36 @@ func (o *Basic) UnmarshalJSON(data []byte) (err error) {
 
 	varBasic := _Basic{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBasic)
+	err = json.Unmarshal(data, &varBasic)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Basic(varBasic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "binary_name")
+		delete(additionalProperties, "binary_size")
+		delete(additionalProperties, "creation")
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "model_name")
+		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "owner_username")
+		delete(additionalProperties, "is_system")
+		delete(additionalProperties, "analysis_scope")
+		delete(additionalProperties, "is_owner")
+		delete(additionalProperties, "debug")
+		delete(additionalProperties, "function_count")
+		delete(additionalProperties, "is_advanced")
+		delete(additionalProperties, "base_address")
+		delete(additionalProperties, "binary_uuid")
+		delete(additionalProperties, "sequencer_version")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

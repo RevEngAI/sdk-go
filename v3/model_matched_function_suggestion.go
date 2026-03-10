@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type MatchedFunctionSuggestion struct {
 	SuggestedName NullableString `json:"suggested_name,omitempty"`
 	// De-mangled name of the function group that contains the matched functions
 	SuggestedDemangledName string `json:"suggested_demangled_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MatchedFunctionSuggestion MatchedFunctionSuggestion
@@ -181,6 +181,11 @@ func (o MatchedFunctionSuggestion) ToMap() (map[string]interface{}, error) {
 		toSerialize["suggested_name"] = o.SuggestedName.Get()
 	}
 	toSerialize["suggested_demangled_name"] = o.SuggestedDemangledName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -210,15 +215,23 @@ func (o *MatchedFunctionSuggestion) UnmarshalJSON(data []byte) (err error) {
 
 	varMatchedFunctionSuggestion := _MatchedFunctionSuggestion{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMatchedFunctionSuggestion)
+	err = json.Unmarshal(data, &varMatchedFunctionSuggestion)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MatchedFunctionSuggestion(varMatchedFunctionSuggestion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_vaddr")
+		delete(additionalProperties, "suggested_name")
+		delete(additionalProperties, "suggested_demangled_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

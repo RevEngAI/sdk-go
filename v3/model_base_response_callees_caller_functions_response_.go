@@ -25,7 +25,10 @@ type BaseResponseCalleesCallerFunctionsResponse struct {
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
 	Meta *MetaModel `json:"meta,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BaseResponseCalleesCallerFunctionsResponse BaseResponseCalleesCallerFunctionsResponse
 
 // NewBaseResponseCalleesCallerFunctionsResponse instantiates a new BaseResponseCalleesCallerFunctionsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -254,7 +257,37 @@ func (o BaseResponseCalleesCallerFunctionsResponse) ToMap() (map[string]interfac
 	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BaseResponseCalleesCallerFunctionsResponse) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseCalleesCallerFunctionsResponse := _BaseResponseCalleesCallerFunctionsResponse{}
+
+	err = json.Unmarshal(data, &varBaseResponseCalleesCallerFunctionsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BaseResponseCalleesCallerFunctionsResponse(varBaseResponseCalleesCallerFunctionsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "meta")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBaseResponseCalleesCallerFunctionsResponse struct {

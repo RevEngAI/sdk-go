@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type FunctionDataTypesStatus struct {
 	Completed bool `json:"completed"`
 	// The current status of the data types service
 	Status string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionDataTypesStatus FunctionDataTypesStatus
@@ -135,6 +135,11 @@ func (o FunctionDataTypesStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize["function_id"] = o.FunctionId
 	toSerialize["completed"] = o.Completed
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -164,15 +169,22 @@ func (o *FunctionDataTypesStatus) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionDataTypesStatus := _FunctionDataTypesStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionDataTypesStatus)
+	err = json.Unmarshal(data, &varFunctionDataTypesStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionDataTypesStatus(varFunctionDataTypesStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "completed")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -21,7 +21,10 @@ type CollectionUpdateRequest struct {
 	CollectionName NullableString `json:"collection_name,omitempty"`
 	Description NullableString `json:"description,omitempty"`
 	CollectionScope NullableCollectionScope `json:"collection_scope,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CollectionUpdateRequest CollectionUpdateRequest
 
 // NewCollectionUpdateRequest instantiates a new CollectionUpdateRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -185,7 +188,35 @@ func (o CollectionUpdateRequest) ToMap() (map[string]interface{}, error) {
 	if o.CollectionScope.IsSet() {
 		toSerialize["collection_scope"] = o.CollectionScope.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CollectionUpdateRequest) UnmarshalJSON(data []byte) (err error) {
+	varCollectionUpdateRequest := _CollectionUpdateRequest{}
+
+	err = json.Unmarshal(data, &varCollectionUpdateRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CollectionUpdateRequest(varCollectionUpdateRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "collection_name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "collection_scope")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCollectionUpdateRequest struct {

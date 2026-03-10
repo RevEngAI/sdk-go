@@ -25,7 +25,10 @@ type BaseResponseListFunctionNameHistory struct {
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
 	Meta *MetaModel `json:"meta,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BaseResponseListFunctionNameHistory BaseResponseListFunctionNameHistory
 
 // NewBaseResponseListFunctionNameHistory instantiates a new BaseResponseListFunctionNameHistory object
 // This constructor will assign default values to properties that have it defined,
@@ -245,7 +248,37 @@ func (o BaseResponseListFunctionNameHistory) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BaseResponseListFunctionNameHistory) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseListFunctionNameHistory := _BaseResponseListFunctionNameHistory{}
+
+	err = json.Unmarshal(data, &varBaseResponseListFunctionNameHistory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BaseResponseListFunctionNameHistory(varBaseResponseListFunctionNameHistory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "meta")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBaseResponseListFunctionNameHistory struct {

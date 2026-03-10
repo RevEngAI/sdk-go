@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type FunctionsDetailResponse struct {
 	Debug bool `json:"debug"`
 	Embedding3d []float32 `json:"embedding_3d,omitempty"`
 	Embedding1d []float32 `json:"embedding_1d,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionsDetailResponse FunctionsDetailResponse
@@ -425,6 +425,11 @@ func (o FunctionsDetailResponse) ToMap() (map[string]interface{}, error) {
 	if o.Embedding1d != nil {
 		toSerialize["embedding_1d"] = o.Embedding1d
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -462,15 +467,32 @@ func (o *FunctionsDetailResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionsDetailResponse := _FunctionsDetailResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionsDetailResponse)
+	err = json.Unmarshal(data, &varFunctionsDetailResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionsDetailResponse(varFunctionsDetailResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "function_name_mangled")
+		delete(additionalProperties, "function_vaddr")
+		delete(additionalProperties, "function_size")
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "binary_name")
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "debug_hash")
+		delete(additionalProperties, "debug")
+		delete(additionalProperties, "embedding_3d")
+		delete(additionalProperties, "embedding_1d")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

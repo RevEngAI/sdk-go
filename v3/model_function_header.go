@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type FunctionHeader struct {
 	Type string `json:"type"`
 	// Dictionary of function arguments
 	Args map[string]Argument `json:"args"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionHeader FunctionHeader
@@ -209,6 +209,11 @@ func (o FunctionHeader) ToMap() (map[string]interface{}, error) {
 	toSerialize["addr"] = o.Addr
 	toSerialize["type"] = o.Type
 	toSerialize["args"] = o.Args
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -239,15 +244,24 @@ func (o *FunctionHeader) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionHeader := _FunctionHeader{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionHeader)
+	err = json.Unmarshal(data, &varFunctionHeader)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionHeader(varFunctionHeader)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "last_change")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "addr")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "args")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

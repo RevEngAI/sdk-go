@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type FileHashes struct {
 	Sha3256 NullableString `json:"sha3_256"`
 	Sha3384 NullableString `json:"sha3_384"`
 	Sha3512 NullableString `json:"sha3_512"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FileHashes FileHashes
@@ -283,6 +283,11 @@ func (o FileHashes) ToMap() (map[string]interface{}, error) {
 	toSerialize["sha3_256"] = o.Sha3256.Get()
 	toSerialize["sha3_384"] = o.Sha3384.Get()
 	toSerialize["sha3_512"] = o.Sha3512.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -317,15 +322,27 @@ func (o *FileHashes) UnmarshalJSON(data []byte) (err error) {
 
 	varFileHashes := _FileHashes{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFileHashes)
+	err = json.Unmarshal(data, &varFileHashes)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FileHashes(varFileHashes)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "md5")
+		delete(additionalProperties, "sha1")
+		delete(additionalProperties, "sha256")
+		delete(additionalProperties, "sha512")
+		delete(additionalProperties, "sha3_224")
+		delete(additionalProperties, "sha3_256")
+		delete(additionalProperties, "sha3_384")
+		delete(additionalProperties, "sha3_512")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

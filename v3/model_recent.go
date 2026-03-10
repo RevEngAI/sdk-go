@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &Recent{}
 type Recent struct {
 	// 2D List containing the results of the analysis
 	Results []AnalysisRecord `json:"results"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Recent Recent
@@ -79,6 +79,11 @@ func (o Recent) MarshalJSON() ([]byte, error) {
 func (o Recent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["results"] = o.Results
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *Recent) UnmarshalJSON(data []byte) (err error) {
 
 	varRecent := _Recent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRecent)
+	err = json.Unmarshal(data, &varRecent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Recent(varRecent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

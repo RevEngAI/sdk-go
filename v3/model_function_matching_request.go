@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -42,6 +41,7 @@ type FunctionMatchingRequest struct {
 	NoCache *bool `json:"no_cache,omitempty"`
 	// Whether to use canonical function names during function matching for confidence results, default is False
 	UseCanonicalNames *bool `json:"use_canonical_names,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionMatchingRequest FunctionMatchingRequest
@@ -452,6 +452,11 @@ func (o FunctionMatchingRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UseCanonicalNames) {
 		toSerialize["use_canonical_names"] = o.UseCanonicalNames
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -480,15 +485,29 @@ func (o *FunctionMatchingRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionMatchingRequest := _FunctionMatchingRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionMatchingRequest)
+	err = json.Unmarshal(data, &varFunctionMatchingRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionMatchingRequest(varFunctionMatchingRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "function_ids")
+		delete(additionalProperties, "min_similarity")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "results_per_function")
+		delete(additionalProperties, "page")
+		delete(additionalProperties, "page_size")
+		delete(additionalProperties, "status_only")
+		delete(additionalProperties, "no_cache")
+		delete(additionalProperties, "use_canonical_names")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

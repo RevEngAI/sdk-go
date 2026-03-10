@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type GenerationStatusList struct {
 	TotalDataTypesCount *int32 `json:"total_data_types_count,omitempty"`
 	// List of function data types information
 	Items []FunctionDataTypesStatus `json:"items"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GenerationStatusList GenerationStatusList
@@ -161,6 +161,11 @@ func (o GenerationStatusList) ToMap() (map[string]interface{}, error) {
 		toSerialize["total_data_types_count"] = o.TotalDataTypesCount
 	}
 	toSerialize["items"] = o.Items
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -188,15 +193,22 @@ func (o *GenerationStatusList) UnmarshalJSON(data []byte) (err error) {
 
 	varGenerationStatusList := _GenerationStatusList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGenerationStatusList)
+	err = json.Unmarshal(data, &varGenerationStatusList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GenerationStatusList(varGenerationStatusList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "total_data_types_count")
+		delete(additionalProperties, "items")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

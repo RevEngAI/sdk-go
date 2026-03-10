@@ -25,7 +25,10 @@ type BaseResponseBlockCommentsOverviewGenerationResponse struct {
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
 	Meta *MetaModel `json:"meta,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BaseResponseBlockCommentsOverviewGenerationResponse BaseResponseBlockCommentsOverviewGenerationResponse
 
 // NewBaseResponseBlockCommentsOverviewGenerationResponse instantiates a new BaseResponseBlockCommentsOverviewGenerationResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -245,7 +248,37 @@ func (o BaseResponseBlockCommentsOverviewGenerationResponse) ToMap() (map[string
 	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BaseResponseBlockCommentsOverviewGenerationResponse) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseBlockCommentsOverviewGenerationResponse := _BaseResponseBlockCommentsOverviewGenerationResponse{}
+
+	err = json.Unmarshal(data, &varBaseResponseBlockCommentsOverviewGenerationResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BaseResponseBlockCommentsOverviewGenerationResponse(varBaseResponseBlockCommentsOverviewGenerationResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "meta")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBaseResponseBlockCommentsOverviewGenerationResponse struct {

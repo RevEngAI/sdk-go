@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CommunityMatchPercentages struct {
 	BinaryId int32 `json:"binary_id"`
 	MatchedCommunitiesPercent float32 `json:"matched_communities_percent"`
 	UnmatchedCommunitiesPercent float32 `json:"unmatched_communities_percent"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CommunityMatchPercentages CommunityMatchPercentages
@@ -159,6 +159,11 @@ func (o CommunityMatchPercentages) ToMap() (map[string]interface{}, error) {
 	toSerialize["binary_id"] = o.BinaryId
 	toSerialize["matched_communities_percent"] = o.MatchedCommunitiesPercent
 	toSerialize["unmatched_communities_percent"] = o.UnmatchedCommunitiesPercent
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -189,15 +194,23 @@ func (o *CommunityMatchPercentages) UnmarshalJSON(data []byte) (err error) {
 
 	varCommunityMatchPercentages := _CommunityMatchPercentages{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCommunityMatchPercentages)
+	err = json.Unmarshal(data, &varCommunityMatchPercentages)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CommunityMatchPercentages(varCommunityMatchPercentages)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binary_name")
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "matched_communities_percent")
+		delete(additionalProperties, "unmatched_communities_percent")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

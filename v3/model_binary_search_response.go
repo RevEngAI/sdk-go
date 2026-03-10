@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &BinarySearchResponse{}
 type BinarySearchResponse struct {
 	// The results of the search
 	Results []BinarySearchResult `json:"results"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BinarySearchResponse BinarySearchResponse
@@ -79,6 +79,11 @@ func (o BinarySearchResponse) MarshalJSON() ([]byte, error) {
 func (o BinarySearchResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["results"] = o.Results
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *BinarySearchResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varBinarySearchResponse := _BinarySearchResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBinarySearchResponse)
+	err = json.Unmarshal(data, &varBinarySearchResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BinarySearchResponse(varBinarySearchResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

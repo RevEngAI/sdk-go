@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type TagResponse struct {
 	Name string `json:"name"`
 	// Origin of tag
 	Origin string `json:"origin"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TagResponse TagResponse
@@ -107,6 +107,11 @@ func (o TagResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["origin"] = o.Origin
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *TagResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varTagResponse := _TagResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTagResponse)
+	err = json.Unmarshal(data, &varTagResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TagResponse(varTagResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "origin")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

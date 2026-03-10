@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type FunctionMappingFull struct {
 	// No longer provided.
 	// Deprecated
 	UnmatchedExternalVars map[string]InverseValue `json:"unmatched_external_vars,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionMappingFull FunctionMappingFull
@@ -416,6 +416,11 @@ func (o FunctionMappingFull) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UnmatchedExternalVars) {
 		toSerialize["unmatched_external_vars"] = o.UnmatchedExternalVars
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -454,15 +459,32 @@ func (o *FunctionMappingFull) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionMappingFull := _FunctionMappingFull{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionMappingFull)
+	err = json.Unmarshal(data, &varFunctionMappingFull)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionMappingFull(varFunctionMappingFull)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inverse_string_map")
+		delete(additionalProperties, "inverse_function_map")
+		delete(additionalProperties, "unmatched_functions")
+		delete(additionalProperties, "unmatched_custom_types")
+		delete(additionalProperties, "unmatched_strings")
+		delete(additionalProperties, "unmatched_vars")
+		delete(additionalProperties, "unmatched_go_to_labels")
+		delete(additionalProperties, "unmatched_custom_function_pointers")
+		delete(additionalProperties, "unmatched_variadic_lists")
+		delete(additionalProperties, "unmatched_enums")
+		delete(additionalProperties, "unmatched_global_vars")
+		delete(additionalProperties, "fields")
+		delete(additionalProperties, "unmatched_external_vars")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

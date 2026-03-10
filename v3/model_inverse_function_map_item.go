@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type InverseFunctionMapItem struct {
 	Name string `json:"name"`
 	Addr NullableAddr `json:"addr"`
 	IsExternal *bool `json:"is_external,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InverseFunctionMapItem InverseFunctionMapItem
@@ -147,6 +147,11 @@ func (o InverseFunctionMapItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsExternal) {
 		toSerialize["is_external"] = o.IsExternal
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -175,15 +180,22 @@ func (o *InverseFunctionMapItem) UnmarshalJSON(data []byte) (err error) {
 
 	varInverseFunctionMapItem := _InverseFunctionMapItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInverseFunctionMapItem)
+	err = json.Unmarshal(data, &varInverseFunctionMapItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InverseFunctionMapItem(varInverseFunctionMapItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "addr")
+		delete(additionalProperties, "is_external")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

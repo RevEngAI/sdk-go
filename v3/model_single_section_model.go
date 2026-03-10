@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type SingleSectionModel struct {
 	RawSize int32 `json:"raw_size"`
 	Entropy float32 `json:"entropy"`
 	Sha3256 string `json:"sha3_256"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SingleSectionModel SingleSectionModel
@@ -240,6 +240,11 @@ func (o SingleSectionModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["raw_size"] = o.RawSize
 	toSerialize["entropy"] = o.Entropy
 	toSerialize["sha3_256"] = o.Sha3256
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -273,15 +278,26 @@ func (o *SingleSectionModel) UnmarshalJSON(data []byte) (err error) {
 
 	varSingleSectionModel := _SingleSectionModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSingleSectionModel)
+	err = json.Unmarshal(data, &varSingleSectionModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SingleSectionModel(varSingleSectionModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "virtual_address")
+		delete(additionalProperties, "virtual_size")
+		delete(additionalProperties, "characteristics")
+		delete(additionalProperties, "raw_size")
+		delete(additionalProperties, "entropy")
+		delete(additionalProperties, "sha3_256")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &AdditionalDetailsStatusResponse{}
 type AdditionalDetailsStatusResponse struct {
 	// The current status of the additional details task
 	Status string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AdditionalDetailsStatusResponse AdditionalDetailsStatusResponse
@@ -79,6 +79,11 @@ func (o AdditionalDetailsStatusResponse) MarshalJSON() ([]byte, error) {
 func (o AdditionalDetailsStatusResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *AdditionalDetailsStatusResponse) UnmarshalJSON(data []byte) (err error)
 
 	varAdditionalDetailsStatusResponse := _AdditionalDetailsStatusResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAdditionalDetailsStatusResponse)
+	err = json.Unmarshal(data, &varAdditionalDetailsStatusResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AdditionalDetailsStatusResponse(varAdditionalDetailsStatusResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

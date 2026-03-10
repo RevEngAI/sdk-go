@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type Enumeration struct {
 	Members map[string]int32 `json:"members"`
 	// Type of artifact that the enumeration is associated with
 	ArtifactType *string `json:"artifact_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Enumeration Enumeration
@@ -190,6 +190,11 @@ func (o Enumeration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ArtifactType) {
 		toSerialize["artifact_type"] = o.ArtifactType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *Enumeration) UnmarshalJSON(data []byte) (err error) {
 
 	varEnumeration := _Enumeration{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEnumeration)
+	err = json.Unmarshal(data, &varEnumeration)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Enumeration(varEnumeration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "last_change")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "members")
+		delete(additionalProperties, "artifact_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

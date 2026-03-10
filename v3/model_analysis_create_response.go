@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type AnalysisCreateResponse struct {
 	AnalysisId int32 `json:"analysis_id"`
 	// ID of created binary
 	BinaryId int32 `json:"binary_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisCreateResponse AnalysisCreateResponse
@@ -107,6 +107,11 @@ func (o AnalysisCreateResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["analysis_id"] = o.AnalysisId
 	toSerialize["binary_id"] = o.BinaryId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *AnalysisCreateResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisCreateResponse := _AnalysisCreateResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisCreateResponse)
+	err = json.Unmarshal(data, &varAnalysisCreateResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisCreateResponse(varAnalysisCreateResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "binary_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

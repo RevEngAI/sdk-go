@@ -25,7 +25,10 @@ type BaseResponseGetAiDecompilationTask struct {
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
 	Meta *MetaModel `json:"meta,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BaseResponseGetAiDecompilationTask BaseResponseGetAiDecompilationTask
 
 // NewBaseResponseGetAiDecompilationTask instantiates a new BaseResponseGetAiDecompilationTask object
 // This constructor will assign default values to properties that have it defined,
@@ -254,7 +257,37 @@ func (o BaseResponseGetAiDecompilationTask) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BaseResponseGetAiDecompilationTask) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseGetAiDecompilationTask := _BaseResponseGetAiDecompilationTask{}
+
+	err = json.Unmarshal(data, &varBaseResponseGetAiDecompilationTask)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BaseResponseGetAiDecompilationTask(varBaseResponseGetAiDecompilationTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "meta")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBaseResponseGetAiDecompilationTask struct {

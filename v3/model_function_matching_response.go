@@ -29,7 +29,10 @@ type FunctionMatchingResponse struct {
 	NumMatches NullableInt32 `json:"num_matches,omitempty"`
 	NumDebugMatches NullableInt32 `json:"num_debug_matches,omitempty"`
 	UpdatedAt NullableString `json:"updated_at,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FunctionMatchingResponse FunctionMatchingResponse
 
 // NewFunctionMatchingResponse instantiates a new FunctionMatchingResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -493,7 +496,42 @@ func (o FunctionMatchingResponse) ToMap() (map[string]interface{}, error) {
 	if o.UpdatedAt.IsSet() {
 		toSerialize["updated_at"] = o.UpdatedAt.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FunctionMatchingResponse) UnmarshalJSON(data []byte) (err error) {
+	varFunctionMatchingResponse := _FunctionMatchingResponse{}
+
+	err = json.Unmarshal(data, &varFunctionMatchingResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FunctionMatchingResponse(varFunctionMatchingResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "progress")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "total_time")
+		delete(additionalProperties, "error_message")
+		delete(additionalProperties, "current_page")
+		delete(additionalProperties, "total_pages")
+		delete(additionalProperties, "matches")
+		delete(additionalProperties, "num_matches")
+		delete(additionalProperties, "num_debug_matches")
+		delete(additionalProperties, "updated_at")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFunctionMatchingResponse struct {

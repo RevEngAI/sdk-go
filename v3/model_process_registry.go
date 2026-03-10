@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ProcessRegistry{}
 type ProcessRegistry struct {
 	Success bool `json:"success"`
 	Data map[string][]Registry `json:"data"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProcessRegistry ProcessRegistry
@@ -105,6 +105,11 @@ func (o ProcessRegistry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["success"] = o.Success
 	toSerialize["data"] = o.Data
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *ProcessRegistry) UnmarshalJSON(data []byte) (err error) {
 
 	varProcessRegistry := _ProcessRegistry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProcessRegistry)
+	err = json.Unmarshal(data, &varProcessRegistry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProcessRegistry(varProcessRegistry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "success")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

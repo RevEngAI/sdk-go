@@ -20,7 +20,10 @@ var _ MappedNullable = &AiUnstripRequest{}
 type AiUnstripRequest struct {
 	// Whether to apply the suggested function names to the target functions, default is False
 	Apply *bool `json:"apply,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AiUnstripRequest AiUnstripRequest
 
 // NewAiUnstripRequest instantiates a new AiUnstripRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -88,7 +91,33 @@ func (o AiUnstripRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Apply) {
 		toSerialize["apply"] = o.Apply
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AiUnstripRequest) UnmarshalJSON(data []byte) (err error) {
+	varAiUnstripRequest := _AiUnstripRequest{}
+
+	err = json.Unmarshal(data, &varAiUnstripRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AiUnstripRequest(varAiUnstripRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "apply")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAiUnstripRequest struct {

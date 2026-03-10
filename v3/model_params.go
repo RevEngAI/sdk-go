@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type Params struct {
 	BinaryDynamic bool `json:"binary_dynamic"`
 	// The name of the model
 	ModelName string `json:"model_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Params Params
@@ -248,6 +248,11 @@ func (o Params) ToMap() (map[string]interface{}, error) {
 	toSerialize["binary_format"] = o.BinaryFormat
 	toSerialize["binary_dynamic"] = o.BinaryDynamic
 	toSerialize["model_name"] = o.ModelName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -281,15 +286,26 @@ func (o *Params) UnmarshalJSON(data []byte) (err error) {
 
 	varParams := _Params{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varParams)
+	err = json.Unmarshal(data, &varParams)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Params(varParams)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "debug_hash")
+		delete(additionalProperties, "binary_size")
+		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "binary_type")
+		delete(additionalProperties, "binary_format")
+		delete(additionalProperties, "binary_dynamic")
+		delete(additionalProperties, "model_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -25,7 +25,10 @@ type BaseResponseCollectionBinariesUpdateResponse struct {
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
 	Meta *MetaModel `json:"meta,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BaseResponseCollectionBinariesUpdateResponse BaseResponseCollectionBinariesUpdateResponse
 
 // NewBaseResponseCollectionBinariesUpdateResponse instantiates a new BaseResponseCollectionBinariesUpdateResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -254,7 +257,37 @@ func (o BaseResponseCollectionBinariesUpdateResponse) ToMap() (map[string]interf
 	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BaseResponseCollectionBinariesUpdateResponse) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseCollectionBinariesUpdateResponse := _BaseResponseCollectionBinariesUpdateResponse{}
+
+	err = json.Unmarshal(data, &varBaseResponseCollectionBinariesUpdateResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BaseResponseCollectionBinariesUpdateResponse(varBaseResponseCollectionBinariesUpdateResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "meta")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBaseResponseCollectionBinariesUpdateResponse struct {

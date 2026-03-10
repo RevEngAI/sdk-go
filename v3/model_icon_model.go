@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &IconModel{}
 // IconModel struct for IconModel
 type IconModel struct {
 	Content NullableString `json:"content"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IconModel IconModel
@@ -80,6 +80,11 @@ func (o IconModel) MarshalJSON() ([]byte, error) {
 func (o IconModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["content"] = o.Content.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *IconModel) UnmarshalJSON(data []byte) (err error) {
 
 	varIconModel := _IconModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIconModel)
+	err = json.Unmarshal(data, &varIconModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = IconModel(varIconModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -25,7 +25,10 @@ type BaseResponseExternalResponse struct {
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
 	Meta *MetaModel `json:"meta,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BaseResponseExternalResponse BaseResponseExternalResponse
 
 // NewBaseResponseExternalResponse instantiates a new BaseResponseExternalResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -254,7 +257,37 @@ func (o BaseResponseExternalResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BaseResponseExternalResponse) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseExternalResponse := _BaseResponseExternalResponse{}
+
+	err = json.Unmarshal(data, &varBaseResponseExternalResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BaseResponseExternalResponse(varBaseResponseExternalResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "meta")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBaseResponseExternalResponse struct {

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type FunctionRenameMap struct {
 	NewName string `json:"new_name"`
 	// The new mangled name for the function
 	NewMangledName string `json:"new_mangled_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionRenameMap FunctionRenameMap
@@ -135,6 +135,11 @@ func (o FunctionRenameMap) ToMap() (map[string]interface{}, error) {
 	toSerialize["function_id"] = o.FunctionId
 	toSerialize["new_name"] = o.NewName
 	toSerialize["new_mangled_name"] = o.NewMangledName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -164,15 +169,22 @@ func (o *FunctionRenameMap) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionRenameMap := _FunctionRenameMap{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionRenameMap)
+	err = json.Unmarshal(data, &varFunctionRenameMap)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionRenameMap(varFunctionRenameMap)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "new_name")
+		delete(additionalProperties, "new_mangled_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

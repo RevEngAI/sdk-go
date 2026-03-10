@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type FunctionDataTypes struct {
 	Status string `json:"status"`
 	DataTypes NullableFunctionInfoOutput `json:"data_types,omitempty"`
 	DataTypesVersion NullableInt32 `json:"data_types_version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionDataTypes FunctionDataTypes
@@ -199,6 +199,11 @@ func (o FunctionDataTypes) ToMap() (map[string]interface{}, error) {
 	if o.DataTypesVersion.IsSet() {
 		toSerialize["data_types_version"] = o.DataTypesVersion.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -227,15 +232,23 @@ func (o *FunctionDataTypes) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionDataTypes := _FunctionDataTypes{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionDataTypes)
+	err = json.Unmarshal(data, &varFunctionDataTypes)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionDataTypes(varFunctionDataTypes)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "completed")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "data_types")
+		delete(additionalProperties, "data_types_version")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &TTPSOccurance{}
 type TTPSOccurance struct {
 	Ppid int32 `json:"ppid"`
 	Pid int32 `json:"pid"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TTPSOccurance TTPSOccurance
@@ -105,6 +105,11 @@ func (o TTPSOccurance) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ppid"] = o.Ppid
 	toSerialize["pid"] = o.Pid
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *TTPSOccurance) UnmarshalJSON(data []byte) (err error) {
 
 	varTTPSOccurance := _TTPSOccurance{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTTPSOccurance)
+	err = json.Unmarshal(data, &varTTPSOccurance)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TTPSOccurance(varTTPSOccurance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ppid")
+		delete(additionalProperties, "pid")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

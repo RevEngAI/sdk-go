@@ -21,7 +21,10 @@ type BinaryConfig struct {
 	Isa NullableISA `json:"isa,omitempty"`
 	Platform NullablePlatform `json:"platform,omitempty"`
 	FileFormat NullableFileFormat `json:"file_format,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BinaryConfig BinaryConfig
 
 // NewBinaryConfig instantiates a new BinaryConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -185,7 +188,35 @@ func (o BinaryConfig) ToMap() (map[string]interface{}, error) {
 	if o.FileFormat.IsSet() {
 		toSerialize["file_format"] = o.FileFormat.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BinaryConfig) UnmarshalJSON(data []byte) (err error) {
+	varBinaryConfig := _BinaryConfig{}
+
+	err = json.Unmarshal(data, &varBinaryConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BinaryConfig(varBinaryConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "isa")
+		delete(additionalProperties, "platform")
+		delete(additionalProperties, "file_format")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBinaryConfig struct {

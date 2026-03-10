@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type SecurityChecksResult struct {
 	Remediation string `json:"remediation"`
 	Confidence ConfidenceType `json:"confidence"`
 	Severity SeverityType `json:"severity"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SecurityChecksResult SecurityChecksResult
@@ -267,6 +267,11 @@ func (o SecurityChecksResult) ToMap() (map[string]interface{}, error) {
 	toSerialize["remediation"] = o.Remediation
 	toSerialize["confidence"] = o.Confidence
 	toSerialize["severity"] = o.Severity
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -301,15 +306,27 @@ func (o *SecurityChecksResult) UnmarshalJSON(data []byte) (err error) {
 
 	varSecurityChecksResult := _SecurityChecksResult{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSecurityChecksResult)
+	err = json.Unmarshal(data, &varSecurityChecksResult)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SecurityChecksResult(varSecurityChecksResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "vuln_class")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "remediation")
+		delete(additionalProperties, "confidence")
+		delete(additionalProperties, "severity")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

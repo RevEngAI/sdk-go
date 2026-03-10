@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type CallerFunctionInfo struct {
 	CallerName string `json:"caller_name"`
 	// Virtual address of the calling function
 	CallerVaddr string `json:"caller_vaddr"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CallerFunctionInfo CallerFunctionInfo
@@ -234,6 +234,11 @@ func (o CallerFunctionInfo) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["caller_name"] = o.CallerName
 	toSerialize["caller_vaddr"] = o.CallerVaddr
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -265,15 +270,25 @@ func (o *CallerFunctionInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varCallerFunctionInfo := _CallerFunctionInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCallerFunctionInfo)
+	err = json.Unmarshal(data, &varCallerFunctionInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CallerFunctionInfo(varCallerFunctionInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "matched_function_id")
+		delete(additionalProperties, "dashboard_url")
+		delete(additionalProperties, "is_external")
+		delete(additionalProperties, "caller_name")
+		delete(additionalProperties, "caller_vaddr")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

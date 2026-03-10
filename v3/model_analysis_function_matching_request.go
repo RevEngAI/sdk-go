@@ -36,7 +36,10 @@ type AnalysisFunctionMatchingRequest struct {
 	NoCache *bool `json:"no_cache,omitempty"`
 	// Whether to use canonical function names during function matching for confidence results, default is False
 	UseCanonicalNames *bool `json:"use_canonical_names,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AnalysisFunctionMatchingRequest AnalysisFunctionMatchingRequest
 
 // NewAnalysisFunctionMatchingRequest instantiates a new AnalysisFunctionMatchingRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -392,7 +395,40 @@ func (o AnalysisFunctionMatchingRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.UseCanonicalNames) {
 		toSerialize["use_canonical_names"] = o.UseCanonicalNames
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AnalysisFunctionMatchingRequest) UnmarshalJSON(data []byte) (err error) {
+	varAnalysisFunctionMatchingRequest := _AnalysisFunctionMatchingRequest{}
+
+	err = json.Unmarshal(data, &varAnalysisFunctionMatchingRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AnalysisFunctionMatchingRequest(varAnalysisFunctionMatchingRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_similarity")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "results_per_function")
+		delete(additionalProperties, "page")
+		delete(additionalProperties, "page_size")
+		delete(additionalProperties, "status_only")
+		delete(additionalProperties, "no_cache")
+		delete(additionalProperties, "use_canonical_names")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAnalysisFunctionMatchingRequest struct {

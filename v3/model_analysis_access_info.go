@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &AnalysisAccessInfo{}
 type AnalysisAccessInfo struct {
 	Owner bool `json:"owner"`
 	Username string `json:"username"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisAccessInfo AnalysisAccessInfo
@@ -105,6 +105,11 @@ func (o AnalysisAccessInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["owner"] = o.Owner
 	toSerialize["username"] = o.Username
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *AnalysisAccessInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisAccessInfo := _AnalysisAccessInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisAccessInfo)
+	err = json.Unmarshal(data, &varAnalysisAccessInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisAccessInfo(varAnalysisAccessInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "owner")
+		delete(additionalProperties, "username")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

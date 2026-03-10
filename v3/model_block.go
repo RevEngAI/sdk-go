@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &Block{}
 // Block struct for Block
 type Block struct {
 	VirtualAddress int32 `json:"virtual_address"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Block Block
@@ -78,6 +78,11 @@ func (o Block) MarshalJSON() ([]byte, error) {
 func (o Block) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["virtual_address"] = o.VirtualAddress
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -105,15 +110,20 @@ func (o *Block) UnmarshalJSON(data []byte) (err error) {
 
 	varBlock := _Block{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBlock)
+	err = json.Unmarshal(data, &varBlock)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Block(varBlock)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "virtual_address")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ELFImportModel{}
 type ELFImportModel struct {
 	NumberOfImports int32 `json:"number_of_imports"`
 	Imports []string `json:"imports"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ELFImportModel ELFImportModel
@@ -105,6 +105,11 @@ func (o ELFImportModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["number_of_imports"] = o.NumberOfImports
 	toSerialize["imports"] = o.Imports
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *ELFImportModel) UnmarshalJSON(data []byte) (err error) {
 
 	varELFImportModel := _ELFImportModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varELFImportModel)
+	err = json.Unmarshal(data, &varELFImportModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ELFImportModel(varELFImportModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "number_of_imports")
+		delete(additionalProperties, "imports")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

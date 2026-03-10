@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type GlobalVariable struct {
 	Size int32 `json:"size"`
 	// Type of artifact that the global variable is associated with
 	ArtifactType *string `json:"artifact_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GlobalVariable GlobalVariable
@@ -246,6 +246,11 @@ func (o GlobalVariable) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ArtifactType) {
 		toSerialize["artifact_type"] = o.ArtifactType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -276,15 +281,25 @@ func (o *GlobalVariable) UnmarshalJSON(data []byte) (err error) {
 
 	varGlobalVariable := _GlobalVariable{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGlobalVariable)
+	err = json.Unmarshal(data, &varGlobalVariable)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GlobalVariable(varGlobalVariable)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "last_change")
+		delete(additionalProperties, "addr")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "artifact_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

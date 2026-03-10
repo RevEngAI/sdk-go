@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type CollectionBinaryResponse struct {
 	CreatedAt time.Time `json:"created_at"`
 	// Is the analysis owned by a RevEng.AI account
 	IsSystemAnalysis bool `json:"is_system_analysis"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CollectionBinaryResponse CollectionBinaryResponse
@@ -248,6 +248,11 @@ func (o CollectionBinaryResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["sha_256_hash"] = o.Sha256Hash
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["is_system_analysis"] = o.IsSystemAnalysis
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -281,15 +286,26 @@ func (o *CollectionBinaryResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varCollectionBinaryResponse := _CollectionBinaryResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCollectionBinaryResponse)
+	err = json.Unmarshal(data, &varCollectionBinaryResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CollectionBinaryResponse(varCollectionBinaryResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "binary_name")
+		delete(additionalProperties, "owner_id")
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "is_system_analysis")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

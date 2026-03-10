@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type FunctionBlockDestinationResponse struct {
 	Flowtype string `json:"flowtype"`
 	// The vaddr of the destination where the execution flow continues from
 	Vaddr string `json:"vaddr"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionBlockDestinationResponse FunctionBlockDestinationResponse
@@ -136,6 +136,11 @@ func (o FunctionBlockDestinationResponse) ToMap() (map[string]interface{}, error
 	toSerialize["destination_block_id"] = o.DestinationBlockId.Get()
 	toSerialize["flowtype"] = o.Flowtype
 	toSerialize["vaddr"] = o.Vaddr
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *FunctionBlockDestinationResponse) UnmarshalJSON(data []byte) (err error
 
 	varFunctionBlockDestinationResponse := _FunctionBlockDestinationResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionBlockDestinationResponse)
+	err = json.Unmarshal(data, &varFunctionBlockDestinationResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionBlockDestinationResponse(varFunctionBlockDestinationResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "destination_block_id")
+		delete(additionalProperties, "flowtype")
+		delete(additionalProperties, "vaddr")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

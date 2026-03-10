@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &Vulnerabilities{}
 // Vulnerabilities struct for Vulnerabilities
 type Vulnerabilities struct {
 	Vulnerabilities []Vulnerability `json:"vulnerabilities"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Vulnerabilities Vulnerabilities
@@ -78,6 +78,11 @@ func (o Vulnerabilities) MarshalJSON() ([]byte, error) {
 func (o Vulnerabilities) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["vulnerabilities"] = o.Vulnerabilities
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -105,15 +110,20 @@ func (o *Vulnerabilities) UnmarshalJSON(data []byte) (err error) {
 
 	varVulnerabilities := _Vulnerabilities{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varVulnerabilities)
+	err = json.Unmarshal(data, &varVulnerabilities)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Vulnerabilities(varVulnerabilities)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "vulnerabilities")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

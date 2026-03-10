@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type SecurityChecksResponse struct {
 	BinaryId int32 `json:"binary_id"`
 	TotalResults int32 `json:"total_results"`
 	Results []SecurityChecksResult `json:"results"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SecurityChecksResponse SecurityChecksResponse
@@ -132,6 +132,11 @@ func (o SecurityChecksResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["binary_id"] = o.BinaryId
 	toSerialize["total_results"] = o.TotalResults
 	toSerialize["results"] = o.Results
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -161,15 +166,22 @@ func (o *SecurityChecksResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varSecurityChecksResponse := _SecurityChecksResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSecurityChecksResponse)
+	err = json.Unmarshal(data, &varSecurityChecksResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SecurityChecksResponse(varSecurityChecksResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "total_results")
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

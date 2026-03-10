@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &SingleCodeSignatureModel{}
 type SingleCodeSignatureModel struct {
 	Certificates []SingleCodeCertificateModel `json:"certificates"`
 	AuthenticodeDigest string `json:"authenticode_digest"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SingleCodeSignatureModel SingleCodeSignatureModel
@@ -105,6 +105,11 @@ func (o SingleCodeSignatureModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["certificates"] = o.Certificates
 	toSerialize["authenticode_digest"] = o.AuthenticodeDigest
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *SingleCodeSignatureModel) UnmarshalJSON(data []byte) (err error) {
 
 	varSingleCodeSignatureModel := _SingleCodeSignatureModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSingleCodeSignatureModel)
+	err = json.Unmarshal(data, &varSingleCodeSignatureModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SingleCodeSignatureModel(varSingleCodeSignatureModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "certificates")
+		delete(additionalProperties, "authenticode_digest")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

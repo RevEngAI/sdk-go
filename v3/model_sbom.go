@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type SBOM struct {
 	Packages []SBOMPackage `json:"packages"`
 	// The import libraries found
 	ImportedLibs []string `json:"imported_libs"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SBOM SBOM
@@ -107,6 +107,11 @@ func (o SBOM) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["packages"] = o.Packages
 	toSerialize["imported_libs"] = o.ImportedLibs
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *SBOM) UnmarshalJSON(data []byte) (err error) {
 
 	varSBOM := _SBOM{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSBOM)
+	err = json.Unmarshal(data, &varSBOM)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SBOM(varSBOM)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "packages")
+		delete(additionalProperties, "imported_libs")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

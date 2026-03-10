@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type TagSearchResult struct {
 	TagId int32 `json:"tag_id"`
 	// The name of the tag
 	Tag string `json:"tag"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TagSearchResult TagSearchResult
@@ -107,6 +107,11 @@ func (o TagSearchResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["tag_id"] = o.TagId
 	toSerialize["tag"] = o.Tag
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *TagSearchResult) UnmarshalJSON(data []byte) (err error) {
 
 	varTagSearchResult := _TagSearchResult{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTagSearchResult)
+	err = json.Unmarshal(data, &varTagSearchResult)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TagSearchResult(varTagSearchResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tag_id")
+		delete(additionalProperties, "tag")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

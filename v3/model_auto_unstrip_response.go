@@ -26,7 +26,10 @@ type AutoUnstripResponse struct {
 	Matches []MatchedFunctionSuggestion `json:"matches,omitempty"`
 	Applied NullableBool `json:"applied,omitempty"`
 	ErrorMessage NullableString `json:"error_message,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AutoUnstripResponse AutoUnstripResponse
 
 // NewAutoUnstripResponse instantiates a new AutoUnstripResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -313,7 +316,38 @@ func (o AutoUnstripResponse) ToMap() (map[string]interface{}, error) {
 	if o.ErrorMessage.IsSet() {
 		toSerialize["error_message"] = o.ErrorMessage.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AutoUnstripResponse) UnmarshalJSON(data []byte) (err error) {
+	varAutoUnstripResponse := _AutoUnstripResponse{}
+
+	err = json.Unmarshal(data, &varAutoUnstripResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AutoUnstripResponse(varAutoUnstripResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "progress")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "total_time")
+		delete(additionalProperties, "matches")
+		delete(additionalProperties, "applied")
+		delete(additionalProperties, "error_message")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAutoUnstripResponse struct {

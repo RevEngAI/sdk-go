@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type BinaryAdditionalResponse struct {
 	BinaryId int32 `json:"binary_id"`
 	Details NullableBinaryAdditionalDetailsDataResponse `json:"details"`
 	Creation NullableTime `json:"creation,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BinaryAdditionalResponse BinaryAdditionalResponse
@@ -154,6 +154,11 @@ func (o BinaryAdditionalResponse) ToMap() (map[string]interface{}, error) {
 	if o.Creation.IsSet() {
 		toSerialize["creation"] = o.Creation.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -182,15 +187,22 @@ func (o *BinaryAdditionalResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varBinaryAdditionalResponse := _BinaryAdditionalResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBinaryAdditionalResponse)
+	err = json.Unmarshal(data, &varBinaryAdditionalResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BinaryAdditionalResponse(varBinaryAdditionalResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "details")
+		delete(additionalProperties, "creation")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

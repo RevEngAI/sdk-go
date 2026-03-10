@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &FunctionsListRename{}
 type FunctionsListRename struct {
 	// A list of functions to rename
 	Functions []FunctionRenameMap `json:"functions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionsListRename FunctionsListRename
@@ -79,6 +79,11 @@ func (o FunctionsListRename) MarshalJSON() ([]byte, error) {
 func (o FunctionsListRename) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["functions"] = o.Functions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *FunctionsListRename) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionsListRename := _FunctionsListRename{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionsListRename)
+	err = json.Unmarshal(data, &varFunctionsListRename)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionsListRename(varFunctionsListRename)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "functions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

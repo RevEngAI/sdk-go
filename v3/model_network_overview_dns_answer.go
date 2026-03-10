@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &NetworkOverviewDnsAnswer{}
 type NetworkOverviewDnsAnswer struct {
 	Type string `json:"type"`
 	Data string `json:"data"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _NetworkOverviewDnsAnswer NetworkOverviewDnsAnswer
@@ -105,6 +105,11 @@ func (o NetworkOverviewDnsAnswer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
 	toSerialize["data"] = o.Data
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *NetworkOverviewDnsAnswer) UnmarshalJSON(data []byte) (err error) {
 
 	varNetworkOverviewDnsAnswer := _NetworkOverviewDnsAnswer{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varNetworkOverviewDnsAnswer)
+	err = json.Unmarshal(data, &varNetworkOverviewDnsAnswer)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NetworkOverviewDnsAnswer(varNetworkOverviewDnsAnswer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

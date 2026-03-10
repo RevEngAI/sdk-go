@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type FunctionLocalVariableResponse struct {
 	Size int32 `json:"size"`
 	Loc string `json:"loc"`
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionLocalVariableResponse FunctionLocalVariableResponse
@@ -186,6 +186,11 @@ func (o FunctionLocalVariableResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["size"] = o.Size
 	toSerialize["loc"] = o.Loc
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -217,15 +222,24 @@ func (o *FunctionLocalVariableResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionLocalVariableResponse := _FunctionLocalVariableResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionLocalVariableResponse)
+	err = json.Unmarshal(data, &varFunctionLocalVariableResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionLocalVariableResponse(varFunctionLocalVariableResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "d_type")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "loc")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

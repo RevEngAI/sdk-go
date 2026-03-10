@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type ELFSection struct {
 	FlagsRaw int32 `json:"flags_raw"`
 	Entropy float32 `json:"entropy"`
 	Alignment int32 `json:"alignment"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ELFSection ELFSection
@@ -321,6 +321,11 @@ func (o ELFSection) ToMap() (map[string]interface{}, error) {
 	toSerialize["flags_raw"] = o.FlagsRaw
 	toSerialize["entropy"] = o.Entropy
 	toSerialize["alignment"] = o.Alignment
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -357,15 +362,29 @@ func (o *ELFSection) UnmarshalJSON(data []byte) (err error) {
 
 	varELFSection := _ELFSection{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varELFSection)
+	err = json.Unmarshal(data, &varELFSection)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ELFSection(varELFSection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "virtual_address")
+		delete(additionalProperties, "virtual_size")
+		delete(additionalProperties, "raw_size")
+		delete(additionalProperties, "file_offset")
+		delete(additionalProperties, "flags")
+		delete(additionalProperties, "flags_raw")
+		delete(additionalProperties, "entropy")
+		delete(additionalProperties, "alignment")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type ProcessDump struct {
 	ActualFilename string `json:"actual_filename"`
 	FilenameFriendly string `json:"filename_friendly"`
 	ExtendedMetadata ProcessDumpMetadata `json:"extended_metadata"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProcessDump ProcessDump
@@ -159,6 +159,11 @@ func (o ProcessDump) ToMap() (map[string]interface{}, error) {
 	toSerialize["actual_filename"] = o.ActualFilename
 	toSerialize["filename_friendly"] = o.FilenameFriendly
 	toSerialize["extended_metadata"] = o.ExtendedMetadata
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -189,15 +194,23 @@ func (o *ProcessDump) UnmarshalJSON(data []byte) (err error) {
 
 	varProcessDump := _ProcessDump{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProcessDump)
+	err = json.Unmarshal(data, &varProcessDump)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProcessDump(varProcessDump)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "base_address")
+		delete(additionalProperties, "actual_filename")
+		delete(additionalProperties, "filename_friendly")
+		delete(additionalProperties, "extended_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

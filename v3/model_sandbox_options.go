@@ -21,7 +21,10 @@ type SandboxOptions struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	// The command line parameters to pass to the dynamic execution sandbox. Requires `sandbox` to be True.
 	CommandLineArgs *string `json:"command_line_args,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SandboxOptions SandboxOptions
 
 // NewSandboxOptions instantiates a new SandboxOptions object
 // This constructor will assign default values to properties that have it defined,
@@ -128,7 +131,34 @@ func (o SandboxOptions) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CommandLineArgs) {
 		toSerialize["command_line_args"] = o.CommandLineArgs
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SandboxOptions) UnmarshalJSON(data []byte) (err error) {
+	varSandboxOptions := _SandboxOptions{}
+
+	err = json.Unmarshal(data, &varSandboxOptions)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SandboxOptions(varSandboxOptions)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "command_line_args")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSandboxOptions struct {

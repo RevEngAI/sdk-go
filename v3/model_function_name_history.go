@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type FunctionNameHistory struct {
 	SourceType FunctionSourceType `json:"source_type"`
 	// The timestamp when the function name was created
 	CreatedAt string `json:"created_at"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionNameHistory FunctionNameHistory
@@ -247,6 +247,11 @@ func (o FunctionNameHistory) ToMap() (map[string]interface{}, error) {
 	toSerialize["is_debug"] = o.IsDebug
 	toSerialize["source_type"] = o.SourceType
 	toSerialize["created_at"] = o.CreatedAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -280,15 +285,26 @@ func (o *FunctionNameHistory) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionNameHistory := _FunctionNameHistory{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionNameHistory)
+	err = json.Unmarshal(data, &varFunctionNameHistory)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionNameHistory(varFunctionNameHistory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "history_id")
+		delete(additionalProperties, "change_made_by")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "mangled_name")
+		delete(additionalProperties, "is_debug")
+		delete(additionalProperties, "source_type")
+		delete(additionalProperties, "created_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

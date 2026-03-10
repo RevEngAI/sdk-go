@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ConfigResponse struct {
 	AiDecompilerUnsupportedLanguages []string `json:"ai_decompiler_unsupported_languages"`
 	// List of models that support AI decompilation
 	AiDecompilerSupportedModels []string `json:"ai_decompiler_supported_models"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConfigResponse ConfigResponse
@@ -176,6 +176,11 @@ func (o ConfigResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["max_file_size_bytes"] = o.MaxFileSizeBytes
 	toSerialize["ai_decompiler_unsupported_languages"] = o.AiDecompilerUnsupportedLanguages
 	toSerialize["ai_decompiler_supported_models"] = o.AiDecompilerSupportedModels
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -205,15 +210,23 @@ func (o *ConfigResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varConfigResponse := _ConfigResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConfigResponse)
+	err = json.Unmarshal(data, &varConfigResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConfigResponse(varConfigResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dashboard_url")
+		delete(additionalProperties, "max_file_size_bytes")
+		delete(additionalProperties, "ai_decompiler_unsupported_languages")
+		delete(additionalProperties, "ai_decompiler_supported_models")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

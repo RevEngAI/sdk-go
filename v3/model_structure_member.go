@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type StructureMember struct {
 	Type string `json:"type"`
 	// Size of the structure member in bytes
 	Size int32 `json:"size"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StructureMember StructureMember
@@ -209,6 +209,11 @@ func (o StructureMember) ToMap() (map[string]interface{}, error) {
 	toSerialize["offset"] = o.Offset
 	toSerialize["type"] = o.Type
 	toSerialize["size"] = o.Size
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -239,15 +244,24 @@ func (o *StructureMember) UnmarshalJSON(data []byte) (err error) {
 
 	varStructureMember := _StructureMember{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStructureMember)
+	err = json.Unmarshal(data, &varStructureMember)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StructureMember(varStructureMember)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "last_change")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "offset")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "size")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

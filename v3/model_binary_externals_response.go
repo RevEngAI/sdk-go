@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type BinaryExternalsResponse struct {
 	Mb map[string]interface{} `json:"mb"`
 	// MalwareBazaar last updated date
 	MbLastUpdated time.Time `json:"mb_last_updated"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BinaryExternalsResponse BinaryExternalsResponse
@@ -192,6 +192,11 @@ func (o BinaryExternalsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["vt_last_updated"] = o.VtLastUpdated
 	toSerialize["mb"] = o.Mb
 	toSerialize["mb_last_updated"] = o.MbLastUpdated
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -223,15 +228,24 @@ func (o *BinaryExternalsResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varBinaryExternalsResponse := _BinaryExternalsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBinaryExternalsResponse)
+	err = json.Unmarshal(data, &varBinaryExternalsResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BinaryExternalsResponse(varBinaryExternalsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "vt")
+		delete(additionalProperties, "vt_last_updated")
+		delete(additionalProperties, "mb")
+		delete(additionalProperties, "mb_last_updated")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

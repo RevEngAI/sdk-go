@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -37,6 +36,7 @@ type AnalysisDetailResponse struct {
 	Sbom map[string]interface{} `json:"sbom,omitempty"`
 	Sha256Hash string `json:"sha_256_hash"`
 	AutoRunAgents AutoRunAgents `json:"auto_run_agents"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisDetailResponse AnalysisDetailResponse
@@ -494,6 +494,11 @@ func (o AnalysisDetailResponse) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["sha_256_hash"] = o.Sha256Hash
 	toSerialize["auto_run_agents"] = o.AutoRunAgents
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -535,15 +540,35 @@ func (o *AnalysisDetailResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisDetailResponse := _AnalysisDetailResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisDetailResponse)
+	err = json.Unmarshal(data, &varAnalysisDetailResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisDetailResponse(varAnalysisDetailResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access")
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "analysis_scope")
+		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "binary_dynamic")
+		delete(additionalProperties, "binary_format")
+		delete(additionalProperties, "binary_name")
+		delete(additionalProperties, "binary_size")
+		delete(additionalProperties, "binary_type")
+		delete(additionalProperties, "creation")
+		delete(additionalProperties, "dashboard_url")
+		delete(additionalProperties, "debug")
+		delete(additionalProperties, "model_name")
+		delete(additionalProperties, "sbom")
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "auto_run_agents")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

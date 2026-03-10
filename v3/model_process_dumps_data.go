@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ProcessDumpsData{}
 type ProcessDumpsData struct {
 	Count int32 `json:"count"`
 	Dumps []ProcessDump `json:"dumps"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProcessDumpsData ProcessDumpsData
@@ -105,6 +105,11 @@ func (o ProcessDumpsData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["count"] = o.Count
 	toSerialize["dumps"] = o.Dumps
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *ProcessDumpsData) UnmarshalJSON(data []byte) (err error) {
 
 	varProcessDumpsData := _ProcessDumpsData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProcessDumpsData)
+	err = json.Unmarshal(data, &varProcessDumpsData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProcessDumpsData(varProcessDumpsData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "dumps")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

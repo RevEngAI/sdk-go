@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type BinaryAdditionalDetailsDataResponse struct {
 	File FileMetadata `json:"file"`
 	Pe NullablePEModel `json:"pe,omitempty"`
 	Elf NullableELFModel `json:"elf,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BinaryAdditionalDetailsDataResponse BinaryAdditionalDetailsDataResponse
@@ -170,6 +170,11 @@ func (o BinaryAdditionalDetailsDataResponse) ToMap() (map[string]interface{}, er
 	if o.Elf.IsSet() {
 		toSerialize["elf"] = o.Elf.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -197,15 +202,22 @@ func (o *BinaryAdditionalDetailsDataResponse) UnmarshalJSON(data []byte) (err er
 
 	varBinaryAdditionalDetailsDataResponse := _BinaryAdditionalDetailsDataResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBinaryAdditionalDetailsDataResponse)
+	err = json.Unmarshal(data, &varBinaryAdditionalDetailsDataResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BinaryAdditionalDetailsDataResponse(varBinaryAdditionalDetailsDataResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "file")
+		delete(additionalProperties, "pe")
+		delete(additionalProperties, "elf")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

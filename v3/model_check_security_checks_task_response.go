@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &CheckSecurityChecksTaskResponse{}
 // CheckSecurityChecksTaskResponse struct for CheckSecurityChecksTaskResponse
 type CheckSecurityChecksTaskResponse struct {
 	Status BinaryTaskStatus `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CheckSecurityChecksTaskResponse CheckSecurityChecksTaskResponse
@@ -78,6 +78,11 @@ func (o CheckSecurityChecksTaskResponse) MarshalJSON() ([]byte, error) {
 func (o CheckSecurityChecksTaskResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -105,15 +110,20 @@ func (o *CheckSecurityChecksTaskResponse) UnmarshalJSON(data []byte) (err error)
 
 	varCheckSecurityChecksTaskResponse := _CheckSecurityChecksTaskResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCheckSecurityChecksTaskResponse)
+	err = json.Unmarshal(data, &varCheckSecurityChecksTaskResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CheckSecurityChecksTaskResponse(varCheckSecurityChecksTaskResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &Tag{}
 // Tag struct for Tag
 type Tag struct {
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Tag Tag
@@ -78,6 +78,11 @@ func (o Tag) MarshalJSON() ([]byte, error) {
 func (o Tag) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -105,15 +110,20 @@ func (o *Tag) UnmarshalJSON(data []byte) (err error) {
 
 	varTag := _Tag{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTag)
+	err = json.Unmarshal(data, &varTag)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Tag(varTag)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

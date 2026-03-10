@@ -25,7 +25,10 @@ type BaseResponseGenerationStatusList struct {
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
 	Meta *MetaModel `json:"meta,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BaseResponseGenerationStatusList BaseResponseGenerationStatusList
 
 // NewBaseResponseGenerationStatusList instantiates a new BaseResponseGenerationStatusList object
 // This constructor will assign default values to properties that have it defined,
@@ -254,7 +257,37 @@ func (o BaseResponseGenerationStatusList) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BaseResponseGenerationStatusList) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseGenerationStatusList := _BaseResponseGenerationStatusList{}
+
+	err = json.Unmarshal(data, &varBaseResponseGenerationStatusList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BaseResponseGenerationStatusList(varBaseResponseGenerationStatusList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "meta")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBaseResponseGenerationStatusList struct {

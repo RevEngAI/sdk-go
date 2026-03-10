@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ModelsResponse{}
 type ModelsResponse struct {
 	// List of active models available analysis.
 	Models []string `json:"models"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ModelsResponse ModelsResponse
@@ -79,6 +79,11 @@ func (o ModelsResponse) MarshalJSON() ([]byte, error) {
 func (o ModelsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["models"] = o.Models
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *ModelsResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varModelsResponse := _ModelsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varModelsResponse)
+	err = json.Unmarshal(data, &varModelsResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ModelsResponse(varModelsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "models")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &AnalysisStringsStatusResponse{}
 type AnalysisStringsStatusResponse struct {
 	// The current status of the strings extraction task
 	Status BinariesTaskStatus `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisStringsStatusResponse AnalysisStringsStatusResponse
@@ -79,6 +79,11 @@ func (o AnalysisStringsStatusResponse) MarshalJSON() ([]byte, error) {
 func (o AnalysisStringsStatusResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *AnalysisStringsStatusResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisStringsStatusResponse := _AnalysisStringsStatusResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisStringsStatusResponse)
+	err = json.Unmarshal(data, &varAnalysisStringsStatusResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisStringsStatusResponse(varAnalysisStringsStatusResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

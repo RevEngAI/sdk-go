@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -47,6 +46,7 @@ type BinaryDetailsResponse struct {
 	Type string `json:"type"`
 	Debug bool `json:"debug"`
 	FirstSeen time.Time `json:"first_seen"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BinaryDetailsResponse BinaryDetailsResponse
@@ -600,6 +600,11 @@ func (o BinaryDetailsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	toSerialize["debug"] = o.Debug
 	toSerialize["first_seen"] = o.FirstSeen
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -646,15 +651,39 @@ func (o *BinaryDetailsResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varBinaryDetailsResponse := _BinaryDetailsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBinaryDetailsResponse)
+	err = json.Unmarshal(data, &varBinaryDetailsResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BinaryDetailsResponse(varBinaryDetailsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "arch")
+		delete(additionalProperties, "bits")
+		delete(additionalProperties, "crc32")
+		delete(additionalProperties, "Class")
+		delete(additionalProperties, "entropy")
+		delete(additionalProperties, "file_size")
+		delete(additionalProperties, "language")
+		delete(additionalProperties, "md5")
+		delete(additionalProperties, "machine")
+		delete(additionalProperties, "os")
+		delete(additionalProperties, "sha1")
+		delete(additionalProperties, "sha256")
+		delete(additionalProperties, "ssdeep")
+		delete(additionalProperties, "static")
+		delete(additionalProperties, "stripped")
+		delete(additionalProperties, "sub_sys")
+		delete(additionalProperties, "tlsh")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "debug")
+		delete(additionalProperties, "first_seen")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -20,7 +20,10 @@ var _ MappedNullable = &AnalysisUpdateRequest{}
 type AnalysisUpdateRequest struct {
 	BinaryName NullableString `json:"binary_name,omitempty"`
 	AnalysisScope NullableString `json:"analysis_scope,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AnalysisUpdateRequest AnalysisUpdateRequest
 
 // NewAnalysisUpdateRequest instantiates a new AnalysisUpdateRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -139,7 +142,34 @@ func (o AnalysisUpdateRequest) ToMap() (map[string]interface{}, error) {
 	if o.AnalysisScope.IsSet() {
 		toSerialize["analysis_scope"] = o.AnalysisScope.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AnalysisUpdateRequest) UnmarshalJSON(data []byte) (err error) {
+	varAnalysisUpdateRequest := _AnalysisUpdateRequest{}
+
+	err = json.Unmarshal(data, &varAnalysisUpdateRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AnalysisUpdateRequest(varAnalysisUpdateRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binary_name")
+		delete(additionalProperties, "analysis_scope")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAnalysisUpdateRequest struct {

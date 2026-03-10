@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CollectionCreateRequest struct {
 	Tags []string `json:"tags,omitempty"`
 	Binaries []int32 `json:"binaries,omitempty"`
 	ModelId int32 `json:"model_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CollectionCreateRequest CollectionCreateRequest
@@ -246,6 +246,11 @@ func (o CollectionCreateRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["binaries"] = o.Binaries
 	}
 	toSerialize["model_id"] = o.ModelId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -275,15 +280,25 @@ func (o *CollectionCreateRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCollectionCreateRequest := _CollectionCreateRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCollectionCreateRequest)
+	err = json.Unmarshal(data, &varCollectionCreateRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CollectionCreateRequest(varCollectionCreateRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "collection_name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "collection_scope")
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "binaries")
+		delete(additionalProperties, "model_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

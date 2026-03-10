@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type Created struct {
 	// Deprecated will always be empty string
 	// Deprecated
 	Reference string `json:"reference"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Created Created
@@ -139,6 +139,11 @@ func (o Created) ToMap() (map[string]interface{}, error) {
 	toSerialize["analysis_id"] = o.AnalysisId
 	toSerialize["binary_id"] = o.BinaryId
 	toSerialize["reference"] = o.Reference
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -168,15 +173,22 @@ func (o *Created) UnmarshalJSON(data []byte) (err error) {
 
 	varCreated := _Created{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreated)
+	err = json.Unmarshal(data, &varCreated)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Created(varCreated)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "reference")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
