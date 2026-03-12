@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **CollectionTags** | Pointer to **[]string** | The tags of the collection | [optional] [default to {}]
 **CollectionSize** | **int32** | The size of the collection | 
 **CollectionId** | **int32** | The ID of the collection | 
-**Creation** | **time.Time** | The current status of analysis | 
+**Creation** | **time.Time** | The datetime of when the collection was created | 
 **ModelName** | **string** | The model being used for the collection | 
 **TeamId** | Pointer to **NullableInt32** |  | [optional] 
 
