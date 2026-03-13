@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **ModelId** | **int32** | ID to identify the model used for analysis | 
 **ModelName** | **string** | Name of the model used for analysis | 
 **Status** | **string** | The current status of analysis | 
-**Creation** | **time.Time** | The current status of analysis | 
+**Creation** | **time.Time** | The datetime of when the analysis was created | 
 **IsOwner** | **bool** | Whether the current user is the owner of a binary | 
 **BinaryName** | **string** | The name of the file uploaded | 
 **Sha256Hash** | **string** | The hash of the binary | 

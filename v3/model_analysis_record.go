@@ -1,7 +1,7 @@
 /*
 RevEng.AI API
 
-RevEng.AI is Similarity Search Engine for executable binaries
+RevEng.AI is an AI-powered binary analysis platform for reverse engineering and malware analysis. It provides similarity search across executable binaries and functions, AI-driven decompilation, dynamic execution analysis, firmware unpacking, and integration with external threat intelligence sources like VirusTotal.
 
 */
 
@@ -32,7 +32,7 @@ type AnalysisRecord struct {
 	ModelName string `json:"model_name"`
 	// The current status of analysis
 	Status string `json:"status"`
-	// The current status of analysis
+	// The datetime of when the analysis was created
 	Creation time.Time `json:"creation"`
 	// Whether the current user is the owner of a binary
 	IsOwner bool `json:"is_owner"`
