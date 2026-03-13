@@ -1,7 +1,7 @@
 /*
 RevEng.AI API
 
-RevEng.AI is Similarity Search Engine for executable binaries
+RevEng.AI is an AI-powered binary analysis platform for reverse engineering and malware analysis. It provides similarity search across executable binaries and functions, AI-driven decompilation, dynamic execution analysis, firmware unpacking, and integration with external threat intelligence sources like VirusTotal.
 
 */
 
@@ -40,7 +40,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the RevEng.AI API API vv3.34.0
+// APIClient manages communication with the RevEng.AI API API vv3.39.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration

@@ -1,7 +1,7 @@
 /*
 RevEng.AI API
 
-RevEng.AI is Similarity Search Engine for executable binaries
+RevEng.AI is an AI-powered binary analysis platform for reverse engineering and malware analysis. It provides similarity search across executable binaries and functions, AI-driven decompilation, dynamic execution analysis, firmware unpacking, and integration with external threat intelligence sources like VirusTotal.
 
 */
 
@@ -88,7 +88,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
-		UserAgent:        "OpenAPI-Generator/v3.34.0/go",
+		UserAgent:        "OpenAPI-Generator/v3.39.0/go",
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
