@@ -13,14 +13,14 @@ import (
 	"encoding/json"
 )
 
-// checks if the BaseResponseXRefResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &BaseResponseXRefResponse{}
+// checks if the BaseResponseXrefResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BaseResponseXrefResponse{}
 
-// BaseResponseXRefResponse struct for BaseResponseXRefResponse
-type BaseResponseXRefResponse struct {
+// BaseResponseXrefResponse struct for BaseResponseXrefResponse
+type BaseResponseXrefResponse struct {
 	// Response status on whether the request succeeded
 	Status *bool `json:"status,omitempty"`
-	Data NullableXRefResponse `json:"data,omitempty"`
+	Data NullableXrefResponse `json:"data,omitempty"`
 	Message NullableString `json:"message,omitempty"`
 	Errors []ErrorModel `json:"errors,omitempty"`
 	// Metadata
@@ -28,31 +28,31 @@ type BaseResponseXRefResponse struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _BaseResponseXRefResponse BaseResponseXRefResponse
+type _BaseResponseXrefResponse BaseResponseXrefResponse
 
-// NewBaseResponseXRefResponse instantiates a new BaseResponseXRefResponse object
+// NewBaseResponseXrefResponse instantiates a new BaseResponseXrefResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBaseResponseXRefResponse() *BaseResponseXRefResponse {
-	this := BaseResponseXRefResponse{}
+func NewBaseResponseXrefResponse() *BaseResponseXrefResponse {
+	this := BaseResponseXrefResponse{}
 	var status bool = true
 	this.Status = &status
 	return &this
 }
 
-// NewBaseResponseXRefResponseWithDefaults instantiates a new BaseResponseXRefResponse object
+// NewBaseResponseXrefResponseWithDefaults instantiates a new BaseResponseXrefResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBaseResponseXRefResponseWithDefaults() *BaseResponseXRefResponse {
-	this := BaseResponseXRefResponse{}
+func NewBaseResponseXrefResponseWithDefaults() *BaseResponseXrefResponse {
+	this := BaseResponseXrefResponse{}
 	var status bool = true
 	this.Status = &status
 	return &this
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *BaseResponseXRefResponse) GetStatus() bool {
+func (o *BaseResponseXrefResponse) GetStatus() bool {
 	if o == nil || IsNil(o.Status) {
 		var ret bool
 		return ret
@@ -62,7 +62,7 @@ func (o *BaseResponseXRefResponse) GetStatus() bool {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BaseResponseXRefResponse) GetStatusOk() (*bool, bool) {
+func (o *BaseResponseXrefResponse) GetStatusOk() (*bool, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *BaseResponseXRefResponse) GetStatusOk() (*bool, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *BaseResponseXRefResponse) HasStatus() bool {
+func (o *BaseResponseXrefResponse) HasStatus() bool {
 	if o != nil && !IsNil(o.Status) {
 		return true
 	}
@@ -79,14 +79,14 @@ func (o *BaseResponseXRefResponse) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given bool and assigns it to the Status field.
-func (o *BaseResponseXRefResponse) SetStatus(v bool) {
+func (o *BaseResponseXrefResponse) SetStatus(v bool) {
 	o.Status = &v
 }
 
 // GetData returns the Data field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseResponseXRefResponse) GetData() XRefResponse {
+func (o *BaseResponseXrefResponse) GetData() XrefResponse {
 	if o == nil || IsNil(o.Data.Get()) {
-		var ret XRefResponse
+		var ret XrefResponse
 		return ret
 	}
 	return *o.Data.Get()
@@ -95,7 +95,7 @@ func (o *BaseResponseXRefResponse) GetData() XRefResponse {
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseResponseXRefResponse) GetDataOk() (*XRefResponse, bool) {
+func (o *BaseResponseXrefResponse) GetDataOk() (*XrefResponse, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,7 +103,7 @@ func (o *BaseResponseXRefResponse) GetDataOk() (*XRefResponse, bool) {
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *BaseResponseXRefResponse) HasData() bool {
+func (o *BaseResponseXrefResponse) HasData() bool {
 	if o != nil && o.Data.IsSet() {
 		return true
 	}
@@ -111,22 +111,22 @@ func (o *BaseResponseXRefResponse) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given NullableXRefResponse and assigns it to the Data field.
-func (o *BaseResponseXRefResponse) SetData(v XRefResponse) {
+// SetData gets a reference to the given NullableXrefResponse and assigns it to the Data field.
+func (o *BaseResponseXrefResponse) SetData(v XrefResponse) {
 	o.Data.Set(&v)
 }
 // SetDataNil sets the value for Data to be an explicit nil
-func (o *BaseResponseXRefResponse) SetDataNil() {
+func (o *BaseResponseXrefResponse) SetDataNil() {
 	o.Data.Set(nil)
 }
 
 // UnsetData ensures that no value is present for Data, not even an explicit nil
-func (o *BaseResponseXRefResponse) UnsetData() {
+func (o *BaseResponseXrefResponse) UnsetData() {
 	o.Data.Unset()
 }
 
 // GetMessage returns the Message field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseResponseXRefResponse) GetMessage() string {
+func (o *BaseResponseXrefResponse) GetMessage() string {
 	if o == nil || IsNil(o.Message.Get()) {
 		var ret string
 		return ret
@@ -137,7 +137,7 @@ func (o *BaseResponseXRefResponse) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseResponseXRefResponse) GetMessageOk() (*string, bool) {
+func (o *BaseResponseXrefResponse) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -145,7 +145,7 @@ func (o *BaseResponseXRefResponse) GetMessageOk() (*string, bool) {
 }
 
 // HasMessage returns a boolean if a field has been set.
-func (o *BaseResponseXRefResponse) HasMessage() bool {
+func (o *BaseResponseXrefResponse) HasMessage() bool {
 	if o != nil && o.Message.IsSet() {
 		return true
 	}
@@ -154,21 +154,21 @@ func (o *BaseResponseXRefResponse) HasMessage() bool {
 }
 
 // SetMessage gets a reference to the given NullableString and assigns it to the Message field.
-func (o *BaseResponseXRefResponse) SetMessage(v string) {
+func (o *BaseResponseXrefResponse) SetMessage(v string) {
 	o.Message.Set(&v)
 }
 // SetMessageNil sets the value for Message to be an explicit nil
-func (o *BaseResponseXRefResponse) SetMessageNil() {
+func (o *BaseResponseXrefResponse) SetMessageNil() {
 	o.Message.Set(nil)
 }
 
 // UnsetMessage ensures that no value is present for Message, not even an explicit nil
-func (o *BaseResponseXRefResponse) UnsetMessage() {
+func (o *BaseResponseXrefResponse) UnsetMessage() {
 	o.Message.Unset()
 }
 
 // GetErrors returns the Errors field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseResponseXRefResponse) GetErrors() []ErrorModel {
+func (o *BaseResponseXrefResponse) GetErrors() []ErrorModel {
 	if o == nil {
 		var ret []ErrorModel
 		return ret
@@ -179,7 +179,7 @@ func (o *BaseResponseXRefResponse) GetErrors() []ErrorModel {
 // GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseResponseXRefResponse) GetErrorsOk() ([]ErrorModel, bool) {
+func (o *BaseResponseXrefResponse) GetErrorsOk() ([]ErrorModel, bool) {
 	if o == nil || IsNil(o.Errors) {
 		return nil, false
 	}
@@ -187,7 +187,7 @@ func (o *BaseResponseXRefResponse) GetErrorsOk() ([]ErrorModel, bool) {
 }
 
 // HasErrors returns a boolean if a field has been set.
-func (o *BaseResponseXRefResponse) HasErrors() bool {
+func (o *BaseResponseXrefResponse) HasErrors() bool {
 	if o != nil && !IsNil(o.Errors) {
 		return true
 	}
@@ -196,12 +196,12 @@ func (o *BaseResponseXRefResponse) HasErrors() bool {
 }
 
 // SetErrors gets a reference to the given []ErrorModel and assigns it to the Errors field.
-func (o *BaseResponseXRefResponse) SetErrors(v []ErrorModel) {
+func (o *BaseResponseXrefResponse) SetErrors(v []ErrorModel) {
 	o.Errors = v
 }
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
-func (o *BaseResponseXRefResponse) GetMeta() MetaModel {
+func (o *BaseResponseXrefResponse) GetMeta() MetaModel {
 	if o == nil || IsNil(o.Meta) {
 		var ret MetaModel
 		return ret
@@ -211,7 +211,7 @@ func (o *BaseResponseXRefResponse) GetMeta() MetaModel {
 
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BaseResponseXRefResponse) GetMetaOk() (*MetaModel, bool) {
+func (o *BaseResponseXrefResponse) GetMetaOk() (*MetaModel, bool) {
 	if o == nil || IsNil(o.Meta) {
 		return nil, false
 	}
@@ -219,7 +219,7 @@ func (o *BaseResponseXRefResponse) GetMetaOk() (*MetaModel, bool) {
 }
 
 // HasMeta returns a boolean if a field has been set.
-func (o *BaseResponseXRefResponse) HasMeta() bool {
+func (o *BaseResponseXrefResponse) HasMeta() bool {
 	if o != nil && !IsNil(o.Meta) {
 		return true
 	}
@@ -228,11 +228,11 @@ func (o *BaseResponseXRefResponse) HasMeta() bool {
 }
 
 // SetMeta gets a reference to the given MetaModel and assigns it to the Meta field.
-func (o *BaseResponseXRefResponse) SetMeta(v MetaModel) {
+func (o *BaseResponseXrefResponse) SetMeta(v MetaModel) {
 	o.Meta = &v
 }
 
-func (o BaseResponseXRefResponse) MarshalJSON() ([]byte, error) {
+func (o BaseResponseXrefResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -240,7 +240,7 @@ func (o BaseResponseXRefResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BaseResponseXRefResponse) ToMap() (map[string]interface{}, error) {
+func (o BaseResponseXrefResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
@@ -265,16 +265,16 @@ func (o BaseResponseXRefResponse) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *BaseResponseXRefResponse) UnmarshalJSON(data []byte) (err error) {
-	varBaseResponseXRefResponse := _BaseResponseXRefResponse{}
+func (o *BaseResponseXrefResponse) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseXrefResponse := _BaseResponseXrefResponse{}
 
-	err = json.Unmarshal(data, &varBaseResponseXRefResponse)
+	err = json.Unmarshal(data, &varBaseResponseXrefResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = BaseResponseXRefResponse(varBaseResponseXRefResponse)
+	*o = BaseResponseXrefResponse(varBaseResponseXrefResponse)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -290,38 +290,38 @@ func (o *BaseResponseXRefResponse) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableBaseResponseXRefResponse struct {
-	value *BaseResponseXRefResponse
+type NullableBaseResponseXrefResponse struct {
+	value *BaseResponseXrefResponse
 	isSet bool
 }
 
-func (v NullableBaseResponseXRefResponse) Get() *BaseResponseXRefResponse {
+func (v NullableBaseResponseXrefResponse) Get() *BaseResponseXrefResponse {
 	return v.value
 }
 
-func (v *NullableBaseResponseXRefResponse) Set(val *BaseResponseXRefResponse) {
+func (v *NullableBaseResponseXrefResponse) Set(val *BaseResponseXrefResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBaseResponseXRefResponse) IsSet() bool {
+func (v NullableBaseResponseXrefResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBaseResponseXRefResponse) Unset() {
+func (v *NullableBaseResponseXrefResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBaseResponseXRefResponse(val *BaseResponseXRefResponse) *NullableBaseResponseXRefResponse {
-	return &NullableBaseResponseXRefResponse{value: val, isSet: true}
+func NewNullableBaseResponseXrefResponse(val *BaseResponseXrefResponse) *NullableBaseResponseXrefResponse {
+	return &NullableBaseResponseXrefResponse{value: val, isSet: true}
 }
 
-func (v NullableBaseResponseXRefResponse) MarshalJSON() ([]byte, error) {
+func (v NullableBaseResponseXrefResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBaseResponseXRefResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableBaseResponseXrefResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

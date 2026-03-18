@@ -29,18 +29,18 @@ type ApiGetXrefByVaddrRequest struct {
 	vaddr int32
 }
 
-func (r ApiGetXrefByVaddrRequest) Execute() (*BaseResponseXRefResponse, *http.Response, error) {
+func (r ApiGetXrefByVaddrRequest) Execute() (*BaseResponseXrefResponse, *http.Response, error) {
 	return r.ApiService.GetXrefByVaddrExecute(r)
 }
 
 /*
-GetXrefByVaddr [Beta] Look up an xref by virtual address
+GetXrefByVaddr [Beta] Look up xrefs by virtual address
 
 **This endpoint is in beta and may change without notice.**
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
- @param vaddr Virtual address to match against xref_to
+ @param vaddr Virtual address to match against xrefs
  @return ApiGetXrefByVaddrRequest
 */
 func (a *AnalysesXRefsAPIService) GetXrefByVaddr(ctx context.Context, analysisId int32, vaddr int32) ApiGetXrefByVaddrRequest {
@@ -53,13 +53,13 @@ func (a *AnalysesXRefsAPIService) GetXrefByVaddr(ctx context.Context, analysisId
 }
 
 // Execute executes the request
-//  @return BaseResponseXRefResponse
-func (a *AnalysesXRefsAPIService) GetXrefByVaddrExecute(r ApiGetXrefByVaddrRequest) (*BaseResponseXRefResponse, *http.Response, error) {
+//  @return BaseResponseXrefResponse
+func (a *AnalysesXRefsAPIService) GetXrefByVaddrExecute(r ApiGetXrefByVaddrRequest) (*BaseResponseXrefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *BaseResponseXRefResponse
+		localVarReturnValue  *BaseResponseXrefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesXRefsAPIService.GetXrefByVaddr")

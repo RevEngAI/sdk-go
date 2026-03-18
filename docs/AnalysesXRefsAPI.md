@@ -4,15 +4,15 @@ All URIs are relative to *https://api.reveng.ai*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetXrefByVaddr**](AnalysesXRefsAPI.md#GetXrefByVaddr) | **Get** /v2/analyses/{analysis_id}/xrefs/{vaddr} | [Beta] Look up an xref by virtual address
+[**GetXrefByVaddr**](AnalysesXRefsAPI.md#GetXrefByVaddr) | **Get** /v2/analyses/{analysis_id}/xrefs/{vaddr} | [Beta] Look up xrefs by virtual address
 
 
 
 ## GetXrefByVaddr
 
-> BaseResponseXRefResponse GetXrefByVaddr(ctx, analysisId, vaddr).Execute()
+> BaseResponseXrefResponse GetXrefByVaddr(ctx, analysisId, vaddr).Execute()
 
-[Beta] Look up an xref by virtual address
+[Beta] Look up xrefs by virtual address
 
 
 
@@ -30,7 +30,7 @@ import (
 
 func main() {
 	analysisId := int32(56) // int32 | 
-	vaddr := int32(56) // int32 | Virtual address to match against xref_to
+	vaddr := int32(56) // int32 | Virtual address to match against xrefs
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
@@ -39,7 +39,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesXRefsAPI.GetXrefByVaddr``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetXrefByVaddr`: BaseResponseXRefResponse
+	// response from `GetXrefByVaddr`: BaseResponseXrefResponse
 	fmt.Fprintf(os.Stdout, "Response from `AnalysesXRefsAPI.GetXrefByVaddr`: %v\n", resp)
 }
 ```
@@ -51,7 +51,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **analysisId** | **int32** |  | 
-**vaddr** | **int32** | Virtual address to match against xref_to | 
+**vaddr** | **int32** | Virtual address to match against xrefs | 
 
 ### Other Parameters
 
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BaseResponseXRefResponse**](BaseResponseXRefResponse.md)
+[**BaseResponseXrefResponse**](BaseResponseXrefResponse.md)
 
 ### Authorization
 
