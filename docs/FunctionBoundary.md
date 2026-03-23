@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **MangledName** | **string** |  | 
 **StartAddress** | **int64** |  | 
 **EndAddress** | **int64** |  | 
+**IncludeInAnalysis** | Pointer to **NullableBool** |  | [optional] 
 
 ## Methods
 
@@ -87,6 +88,41 @@ and a boolean to check if the value has been set.
 SetEndAddress sets EndAddress field to given value.
 
 
+### GetIncludeInAnalysis
+
+`func (o *FunctionBoundary) GetIncludeInAnalysis() bool`
+
+GetIncludeInAnalysis returns the IncludeInAnalysis field if non-nil, zero value otherwise.
+
+### GetIncludeInAnalysisOk
+
+`func (o *FunctionBoundary) GetIncludeInAnalysisOk() (*bool, bool)`
+
+GetIncludeInAnalysisOk returns a tuple with the IncludeInAnalysis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIncludeInAnalysis
+
+`func (o *FunctionBoundary) SetIncludeInAnalysis(v bool)`
+
+SetIncludeInAnalysis sets IncludeInAnalysis field to given value.
+
+### HasIncludeInAnalysis
+
+`func (o *FunctionBoundary) HasIncludeInAnalysis() bool`
+
+HasIncludeInAnalysis returns a boolean if a field has been set.
+
+### SetIncludeInAnalysisNil
+
+`func (o *FunctionBoundary) SetIncludeInAnalysisNil(b bool)`
+
+ SetIncludeInAnalysisNil sets the value for IncludeInAnalysis to be an explicit nil
+
+### UnsetIncludeInAnalysis
+`func (o *FunctionBoundary) UnsetIncludeInAnalysis()`
+
+UnsetIncludeInAnalysis ensures that no value is present for IncludeInAnalysis, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
