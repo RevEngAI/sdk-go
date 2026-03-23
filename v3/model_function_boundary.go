@@ -22,6 +22,7 @@ type FunctionBoundary struct {
 	MangledName string `json:"mangled_name"`
 	StartAddress int64 `json:"start_address"`
 	EndAddress int64 `json:"end_address"`
+	IncludeInAnalysis NullableBool `json:"include_in_analysis,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,6 +120,48 @@ func (o *FunctionBoundary) SetEndAddress(v int64) {
 	o.EndAddress = v
 }
 
+// GetIncludeInAnalysis returns the IncludeInAnalysis field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FunctionBoundary) GetIncludeInAnalysis() bool {
+	if o == nil || IsNil(o.IncludeInAnalysis.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.IncludeInAnalysis.Get()
+}
+
+// GetIncludeInAnalysisOk returns a tuple with the IncludeInAnalysis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FunctionBoundary) GetIncludeInAnalysisOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IncludeInAnalysis.Get(), o.IncludeInAnalysis.IsSet()
+}
+
+// HasIncludeInAnalysis returns a boolean if a field has been set.
+func (o *FunctionBoundary) HasIncludeInAnalysis() bool {
+	if o != nil && o.IncludeInAnalysis.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIncludeInAnalysis gets a reference to the given NullableBool and assigns it to the IncludeInAnalysis field.
+func (o *FunctionBoundary) SetIncludeInAnalysis(v bool) {
+	o.IncludeInAnalysis.Set(&v)
+}
+// SetIncludeInAnalysisNil sets the value for IncludeInAnalysis to be an explicit nil
+func (o *FunctionBoundary) SetIncludeInAnalysisNil() {
+	o.IncludeInAnalysis.Set(nil)
+}
+
+// UnsetIncludeInAnalysis ensures that no value is present for IncludeInAnalysis, not even an explicit nil
+func (o *FunctionBoundary) UnsetIncludeInAnalysis() {
+	o.IncludeInAnalysis.Unset()
+}
+
 func (o FunctionBoundary) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -132,6 +175,9 @@ func (o FunctionBoundary) ToMap() (map[string]interface{}, error) {
 	toSerialize["mangled_name"] = o.MangledName
 	toSerialize["start_address"] = o.StartAddress
 	toSerialize["end_address"] = o.EndAddress
+	if o.IncludeInAnalysis.IsSet() {
+		toSerialize["include_in_analysis"] = o.IncludeInAnalysis.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -180,6 +226,7 @@ func (o *FunctionBoundary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "mangled_name")
 		delete(additionalProperties, "start_address")
 		delete(additionalProperties, "end_address")
+		delete(additionalProperties, "include_in_analysis")
 		o.AdditionalProperties = additionalProperties
 	}
 
