@@ -49,11 +49,11 @@ type _AutoUnstripRequest AutoUnstripRequest
 // will change when the set of required properties is changed
 func NewAutoUnstripRequest() *AutoUnstripRequest {
 	this := AutoUnstripRequest{}
-	var minSimilarity float32 = 90.0
+	var minSimilarity float32 = 90
 	this.MinSimilarity = &minSimilarity
 	var apply bool = false
 	this.Apply = &apply
-	var confidenceThreshold float32 = 90.0
+	var confidenceThreshold float32 = 90
 	this.ConfidenceThreshold = &confidenceThreshold
 	var minGroupSize int32 = 10
 	this.MinGroupSize = &minGroupSize
@@ -71,11 +71,11 @@ func NewAutoUnstripRequest() *AutoUnstripRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewAutoUnstripRequestWithDefaults() *AutoUnstripRequest {
 	this := AutoUnstripRequest{}
-	var minSimilarity float32 = 90.0
+	var minSimilarity float32 = 90
 	this.MinSimilarity = &minSimilarity
 	var apply bool = false
 	this.Apply = &apply
-	var confidenceThreshold float32 = 90.0
+	var confidenceThreshold float32 = 90
 	this.ConfidenceThreshold = &confidenceThreshold
 	var minGroupSize int32 = 10
 	this.MinGroupSize = &minGroupSize

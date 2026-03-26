@@ -47,7 +47,7 @@ type _AnalysisFunctionMatchingRequest AnalysisFunctionMatchingRequest
 // will change when the set of required properties is changed
 func NewAnalysisFunctionMatchingRequest() *AnalysisFunctionMatchingRequest {
 	this := AnalysisFunctionMatchingRequest{}
-	var minSimilarity float32 = 90.0
+	var minSimilarity float32 = 90
 	this.MinSimilarity = &minSimilarity
 	var resultsPerFunction int32 = 1
 	this.ResultsPerFunction = &resultsPerFunction
@@ -69,7 +69,7 @@ func NewAnalysisFunctionMatchingRequest() *AnalysisFunctionMatchingRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewAnalysisFunctionMatchingRequestWithDefaults() *AnalysisFunctionMatchingRequest {
 	this := AnalysisFunctionMatchingRequest{}
-	var minSimilarity float32 = 90.0
+	var minSimilarity float32 = 90
 	this.MinSimilarity = &minSimilarity
 	var resultsPerFunction int32 = 1
 	this.ResultsPerFunction = &resultsPerFunction
