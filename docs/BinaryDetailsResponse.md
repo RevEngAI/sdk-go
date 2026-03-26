@@ -4,15 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Class** | **string** |  | 
 **Arch** | **string** | The architecture of the binary | 
 **Bits** | **int32** | The size of the binary in bits | 
 **Crc32** | **string** |  | 
-**Class** | **string** |  | 
+**Debug** | **bool** |  | 
 **Entropy** | **float32** |  | 
 **FileSize** | **int32** |  | 
+**FirstSeen** | **time.Time** |  | 
 **Language** | **string** |  | 
-**Md5** | **string** |  | 
 **Machine** | **string** |  | 
+**Md5** | **string** |  | 
 **Os** | **string** | OS target of the binary | 
 **Sha1** | **string** | SHA1 hash of the binary | 
 **Sha256** | **string** | SHA256 hash of the binary | 
@@ -22,14 +24,12 @@ Name | Type | Description | Notes
 **SubSys** | **string** |  | 
 **Tlsh** | **string** |  | 
 **Type** | **string** |  | 
-**Debug** | **bool** |  | 
-**FirstSeen** | **time.Time** |  | 
 
 ## Methods
 
 ### NewBinaryDetailsResponse
 
-`func NewBinaryDetailsResponse(arch string, bits int32, crc32 string, class string, entropy float32, fileSize int32, language string, md5 string, machine string, os string, sha1 string, sha256 string, ssdeep NullableString, static bool, stripped bool, subSys string, tlsh string, type_ string, debug bool, firstSeen time.Time, ) *BinaryDetailsResponse`
+`func NewBinaryDetailsResponse(class string, arch string, bits int32, crc32 string, debug bool, entropy float32, fileSize int32, firstSeen time.Time, language string, machine string, md5 string, os string, sha1 string, sha256 string, ssdeep NullableString, static bool, stripped bool, subSys string, tlsh string, type_ string, ) *BinaryDetailsResponse`
 
 NewBinaryDetailsResponse instantiates a new BinaryDetailsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -43,6 +43,26 @@ will change when the set of required properties is changed
 NewBinaryDetailsResponseWithDefaults instantiates a new BinaryDetailsResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClass
+
+`func (o *BinaryDetailsResponse) GetClass() string`
+
+GetClass returns the Class field if non-nil, zero value otherwise.
+
+### GetClassOk
+
+`func (o *BinaryDetailsResponse) GetClassOk() (*string, bool)`
+
+GetClassOk returns a tuple with the Class field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClass
+
+`func (o *BinaryDetailsResponse) SetClass(v string)`
+
+SetClass sets Class field to given value.
+
 
 ### GetArch
 
@@ -104,24 +124,24 @@ and a boolean to check if the value has been set.
 SetCrc32 sets Crc32 field to given value.
 
 
-### GetClass
+### GetDebug
 
-`func (o *BinaryDetailsResponse) GetClass() string`
+`func (o *BinaryDetailsResponse) GetDebug() bool`
 
-GetClass returns the Class field if non-nil, zero value otherwise.
+GetDebug returns the Debug field if non-nil, zero value otherwise.
 
-### GetClassOk
+### GetDebugOk
 
-`func (o *BinaryDetailsResponse) GetClassOk() (*string, bool)`
+`func (o *BinaryDetailsResponse) GetDebugOk() (*bool, bool)`
 
-GetClassOk returns a tuple with the Class field if it's non-nil, zero value otherwise
+GetDebugOk returns a tuple with the Debug field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetClass
+### SetDebug
 
-`func (o *BinaryDetailsResponse) SetClass(v string)`
+`func (o *BinaryDetailsResponse) SetDebug(v bool)`
 
-SetClass sets Class field to given value.
+SetDebug sets Debug field to given value.
 
 
 ### GetEntropy
@@ -164,6 +184,26 @@ and a boolean to check if the value has been set.
 SetFileSize sets FileSize field to given value.
 
 
+### GetFirstSeen
+
+`func (o *BinaryDetailsResponse) GetFirstSeen() time.Time`
+
+GetFirstSeen returns the FirstSeen field if non-nil, zero value otherwise.
+
+### GetFirstSeenOk
+
+`func (o *BinaryDetailsResponse) GetFirstSeenOk() (*time.Time, bool)`
+
+GetFirstSeenOk returns a tuple with the FirstSeen field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFirstSeen
+
+`func (o *BinaryDetailsResponse) SetFirstSeen(v time.Time)`
+
+SetFirstSeen sets FirstSeen field to given value.
+
+
 ### GetLanguage
 
 `func (o *BinaryDetailsResponse) GetLanguage() string`
@@ -184,26 +224,6 @@ and a boolean to check if the value has been set.
 SetLanguage sets Language field to given value.
 
 
-### GetMd5
-
-`func (o *BinaryDetailsResponse) GetMd5() string`
-
-GetMd5 returns the Md5 field if non-nil, zero value otherwise.
-
-### GetMd5Ok
-
-`func (o *BinaryDetailsResponse) GetMd5Ok() (*string, bool)`
-
-GetMd5Ok returns a tuple with the Md5 field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMd5
-
-`func (o *BinaryDetailsResponse) SetMd5(v string)`
-
-SetMd5 sets Md5 field to given value.
-
-
 ### GetMachine
 
 `func (o *BinaryDetailsResponse) GetMachine() string`
@@ -222,6 +242,26 @@ and a boolean to check if the value has been set.
 `func (o *BinaryDetailsResponse) SetMachine(v string)`
 
 SetMachine sets Machine field to given value.
+
+
+### GetMd5
+
+`func (o *BinaryDetailsResponse) GetMd5() string`
+
+GetMd5 returns the Md5 field if non-nil, zero value otherwise.
+
+### GetMd5Ok
+
+`func (o *BinaryDetailsResponse) GetMd5Ok() (*string, bool)`
+
+GetMd5Ok returns a tuple with the Md5 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMd5
+
+`func (o *BinaryDetailsResponse) SetMd5(v string)`
+
+SetMd5 sets Md5 field to given value.
 
 
 ### GetOs
@@ -412,46 +452,6 @@ and a boolean to check if the value has been set.
 `func (o *BinaryDetailsResponse) SetType(v string)`
 
 SetType sets Type field to given value.
-
-
-### GetDebug
-
-`func (o *BinaryDetailsResponse) GetDebug() bool`
-
-GetDebug returns the Debug field if non-nil, zero value otherwise.
-
-### GetDebugOk
-
-`func (o *BinaryDetailsResponse) GetDebugOk() (*bool, bool)`
-
-GetDebugOk returns a tuple with the Debug field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDebug
-
-`func (o *BinaryDetailsResponse) SetDebug(v bool)`
-
-SetDebug sets Debug field to given value.
-
-
-### GetFirstSeen
-
-`func (o *BinaryDetailsResponse) GetFirstSeen() time.Time`
-
-GetFirstSeen returns the FirstSeen field if non-nil, zero value otherwise.
-
-### GetFirstSeenOk
-
-`func (o *BinaryDetailsResponse) GetFirstSeenOk() (*time.Time, bool)`
-
-GetFirstSeenOk returns a tuple with the FirstSeen field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFirstSeen
-
-`func (o *BinaryDetailsResponse) SetFirstSeen(v time.Time)`
-
-SetFirstSeen sets FirstSeen field to given value.
 
 
 

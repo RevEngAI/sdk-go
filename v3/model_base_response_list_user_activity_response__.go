@@ -18,13 +18,13 @@ var _ MappedNullable = &BaseResponseListUserActivityResponse{}
 
 // BaseResponseListUserActivityResponse struct for BaseResponseListUserActivityResponse
 type BaseResponseListUserActivityResponse struct {
-	// Response status on whether the request succeeded
-	Status *bool `json:"status,omitempty"`
 	Data []UserActivityResponse `json:"data,omitempty"`
-	Message NullableString `json:"message,omitempty"`
 	Errors []ErrorModel `json:"errors,omitempty"`
+	Message NullableString `json:"message,omitempty"`
 	// Metadata
 	Meta *MetaModel `json:"meta,omitempty"`
+	// Response status on whether the request succeeded
+	Status *bool `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -49,38 +49,6 @@ func NewBaseResponseListUserActivityResponseWithDefaults() *BaseResponseListUser
 	var status bool = true
 	this.Status = &status
 	return &this
-}
-
-// GetStatus returns the Status field value if set, zero value otherwise.
-func (o *BaseResponseListUserActivityResponse) GetStatus() bool {
-	if o == nil || IsNil(o.Status) {
-		var ret bool
-		return ret
-	}
-	return *o.Status
-}
-
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BaseResponseListUserActivityResponse) GetStatusOk() (*bool, bool) {
-	if o == nil || IsNil(o.Status) {
-		return nil, false
-	}
-	return o.Status, true
-}
-
-// HasStatus returns a boolean if a field has been set.
-func (o *BaseResponseListUserActivityResponse) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given bool and assigns it to the Status field.
-func (o *BaseResponseListUserActivityResponse) SetStatus(v bool) {
-	o.Status = &v
 }
 
 // GetData returns the Data field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -114,6 +82,39 @@ func (o *BaseResponseListUserActivityResponse) HasData() bool {
 // SetData gets a reference to the given []UserActivityResponse and assigns it to the Data field.
 func (o *BaseResponseListUserActivityResponse) SetData(v []UserActivityResponse) {
 	o.Data = v
+}
+
+// GetErrors returns the Errors field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseResponseListUserActivityResponse) GetErrors() []ErrorModel {
+	if o == nil {
+		var ret []ErrorModel
+		return ret
+	}
+	return o.Errors
+}
+
+// GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseResponseListUserActivityResponse) GetErrorsOk() ([]ErrorModel, bool) {
+	if o == nil || IsNil(o.Errors) {
+		return nil, false
+	}
+	return o.Errors, true
+}
+
+// HasErrors returns a boolean if a field has been set.
+func (o *BaseResponseListUserActivityResponse) HasErrors() bool {
+	if o != nil && !IsNil(o.Errors) {
+		return true
+	}
+
+	return false
+}
+
+// SetErrors gets a reference to the given []ErrorModel and assigns it to the Errors field.
+func (o *BaseResponseListUserActivityResponse) SetErrors(v []ErrorModel) {
+	o.Errors = v
 }
 
 // GetMessage returns the Message field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -158,39 +159,6 @@ func (o *BaseResponseListUserActivityResponse) UnsetMessage() {
 	o.Message.Unset()
 }
 
-// GetErrors returns the Errors field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseResponseListUserActivityResponse) GetErrors() []ErrorModel {
-	if o == nil {
-		var ret []ErrorModel
-		return ret
-	}
-	return o.Errors
-}
-
-// GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseResponseListUserActivityResponse) GetErrorsOk() ([]ErrorModel, bool) {
-	if o == nil || IsNil(o.Errors) {
-		return nil, false
-	}
-	return o.Errors, true
-}
-
-// HasErrors returns a boolean if a field has been set.
-func (o *BaseResponseListUserActivityResponse) HasErrors() bool {
-	if o != nil && !IsNil(o.Errors) {
-		return true
-	}
-
-	return false
-}
-
-// SetErrors gets a reference to the given []ErrorModel and assigns it to the Errors field.
-func (o *BaseResponseListUserActivityResponse) SetErrors(v []ErrorModel) {
-	o.Errors = v
-}
-
 // GetMeta returns the Meta field value if set, zero value otherwise.
 func (o *BaseResponseListUserActivityResponse) GetMeta() MetaModel {
 	if o == nil || IsNil(o.Meta) {
@@ -223,6 +191,38 @@ func (o *BaseResponseListUserActivityResponse) SetMeta(v MetaModel) {
 	o.Meta = &v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *BaseResponseListUserActivityResponse) GetStatus() bool {
+	if o == nil || IsNil(o.Status) {
+		var ret bool
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BaseResponseListUserActivityResponse) GetStatusOk() (*bool, bool) {
+	if o == nil || IsNil(o.Status) {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *BaseResponseListUserActivityResponse) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given bool and assigns it to the Status field.
+func (o *BaseResponseListUserActivityResponse) SetStatus(v bool) {
+	o.Status = &v
+}
+
 func (o BaseResponseListUserActivityResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -233,20 +233,20 @@ func (o BaseResponseListUserActivityResponse) MarshalJSON() ([]byte, error) {
 
 func (o BaseResponseListUserActivityResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
 	if o.Data != nil {
 		toSerialize["data"] = o.Data
-	}
-	if o.Message.IsSet() {
-		toSerialize["message"] = o.Message.Get()
 	}
 	if o.Errors != nil {
 		toSerialize["errors"] = o.Errors
 	}
+	if o.Message.IsSet() {
+		toSerialize["message"] = o.Message.Get()
+	}
 	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
+	}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -270,11 +270,11 @@ func (o *BaseResponseListUserActivityResponse) UnmarshalJSON(data []byte) (err e
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "status")
 		delete(additionalProperties, "data")
-		delete(additionalProperties, "message")
 		delete(additionalProperties, "errors")
+		delete(additionalProperties, "message")
 		delete(additionalProperties, "meta")
+		delete(additionalProperties, "status")
 		o.AdditionalProperties = additionalProperties
 	}
 

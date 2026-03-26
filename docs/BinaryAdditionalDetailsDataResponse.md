@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Elf** | Pointer to [**NullableELFModel**](ELFModel.md) |  | [optional] 
 **File** | [**FileMetadata**](FileMetadata.md) |  | 
 **Pe** | Pointer to [**NullablePEModel**](PEModel.md) |  | [optional] 
-**Elf** | Pointer to [**NullableELFModel**](ELFModel.md) |  | [optional] 
 
 ## Methods
 
@@ -27,6 +27,41 @@ NewBinaryAdditionalDetailsDataResponseWithDefaults instantiates a new BinaryAddi
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetElf
+
+`func (o *BinaryAdditionalDetailsDataResponse) GetElf() ELFModel`
+
+GetElf returns the Elf field if non-nil, zero value otherwise.
+
+### GetElfOk
+
+`func (o *BinaryAdditionalDetailsDataResponse) GetElfOk() (*ELFModel, bool)`
+
+GetElfOk returns a tuple with the Elf field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetElf
+
+`func (o *BinaryAdditionalDetailsDataResponse) SetElf(v ELFModel)`
+
+SetElf sets Elf field to given value.
+
+### HasElf
+
+`func (o *BinaryAdditionalDetailsDataResponse) HasElf() bool`
+
+HasElf returns a boolean if a field has been set.
+
+### SetElfNil
+
+`func (o *BinaryAdditionalDetailsDataResponse) SetElfNil(b bool)`
+
+ SetElfNil sets the value for Elf to be an explicit nil
+
+### UnsetElf
+`func (o *BinaryAdditionalDetailsDataResponse) UnsetElf()`
+
+UnsetElf ensures that no value is present for Elf, not even an explicit nil
 ### GetFile
 
 `func (o *BinaryAdditionalDetailsDataResponse) GetFile() FileMetadata`
@@ -82,41 +117,6 @@ HasPe returns a boolean if a field has been set.
 `func (o *BinaryAdditionalDetailsDataResponse) UnsetPe()`
 
 UnsetPe ensures that no value is present for Pe, not even an explicit nil
-### GetElf
-
-`func (o *BinaryAdditionalDetailsDataResponse) GetElf() ELFModel`
-
-GetElf returns the Elf field if non-nil, zero value otherwise.
-
-### GetElfOk
-
-`func (o *BinaryAdditionalDetailsDataResponse) GetElfOk() (*ELFModel, bool)`
-
-GetElfOk returns a tuple with the Elf field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetElf
-
-`func (o *BinaryAdditionalDetailsDataResponse) SetElf(v ELFModel)`
-
-SetElf sets Elf field to given value.
-
-### HasElf
-
-`func (o *BinaryAdditionalDetailsDataResponse) HasElf() bool`
-
-HasElf returns a boolean if a field has been set.
-
-### SetElfNil
-
-`func (o *BinaryAdditionalDetailsDataResponse) SetElfNil(b bool)`
-
- SetElfNil sets the value for Elf to be an explicit nil
-
-### UnsetElf
-`func (o *BinaryAdditionalDetailsDataResponse) UnsetElf()`
-
-UnsetElf ensures that no value is present for Elf, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

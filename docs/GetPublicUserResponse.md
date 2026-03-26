@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Username** | **string** |  | 
 **UserId** | **int32** |  | 
+**Username** | **string** |  | 
 
 ## Methods
 
 ### NewGetPublicUserResponse
 
-`func NewGetPublicUserResponse(username string, userId int32, ) *GetPublicUserResponse`
+`func NewGetPublicUserResponse(userId int32, username string, ) *GetPublicUserResponse`
 
 NewGetPublicUserResponse instantiates a new GetPublicUserResponse object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewGetPublicUserResponseWithDefaults instantiates a new GetPublicUserResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetUsername
-
-`func (o *GetPublicUserResponse) GetUsername() string`
-
-GetUsername returns the Username field if non-nil, zero value otherwise.
-
-### GetUsernameOk
-
-`func (o *GetPublicUserResponse) GetUsernameOk() (*string, bool)`
-
-GetUsernameOk returns a tuple with the Username field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUsername
-
-`func (o *GetPublicUserResponse) SetUsername(v string)`
-
-SetUsername sets Username field to given value.
-
 
 ### GetUserId
 
@@ -64,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *GetPublicUserResponse) SetUserId(v int32)`
 
 SetUserId sets UserId field to given value.
+
+
+### GetUsername
+
+`func (o *GetPublicUserResponse) GetUsername() string`
+
+GetUsername returns the Username field if non-nil, zero value otherwise.
+
+### GetUsernameOk
+
+`func (o *GetPublicUserResponse) GetUsernameOk() (*string, bool)`
+
+GetUsernameOk returns a tuple with the Username field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsername
+
+`func (o *GetPublicUserResponse) SetUsername(v string)`
+
+SetUsername sets Username field to given value.
 
 
 

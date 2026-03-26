@@ -6,15 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Address** | **string** |  | 
 **DType** | **string** |  | 
-**Size** | **int32** |  | 
 **Loc** | **string** |  | 
 **Name** | **string** |  | 
+**Size** | **int32** |  | 
 
 ## Methods
 
 ### NewFunctionLocalVariableResponse
 
-`func NewFunctionLocalVariableResponse(address string, dType string, size int32, loc string, name string, ) *FunctionLocalVariableResponse`
+`func NewFunctionLocalVariableResponse(address string, dType string, loc string, name string, size int32, ) *FunctionLocalVariableResponse`
 
 NewFunctionLocalVariableResponse instantiates a new FunctionLocalVariableResponse object
 This constructor will assign default values to properties that have it defined,
@@ -69,26 +69,6 @@ and a boolean to check if the value has been set.
 SetDType sets DType field to given value.
 
 
-### GetSize
-
-`func (o *FunctionLocalVariableResponse) GetSize() int32`
-
-GetSize returns the Size field if non-nil, zero value otherwise.
-
-### GetSizeOk
-
-`func (o *FunctionLocalVariableResponse) GetSizeOk() (*int32, bool)`
-
-GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSize
-
-`func (o *FunctionLocalVariableResponse) SetSize(v int32)`
-
-SetSize sets Size field to given value.
-
-
 ### GetLoc
 
 `func (o *FunctionLocalVariableResponse) GetLoc() string`
@@ -127,6 +107,26 @@ and a boolean to check if the value has been set.
 `func (o *FunctionLocalVariableResponse) SetName(v string)`
 
 SetName sets Name field to given value.
+
+
+### GetSize
+
+`func (o *FunctionLocalVariableResponse) GetSize() int32`
+
+GetSize returns the Size field if non-nil, zero value otherwise.
+
+### GetSizeOk
+
+`func (o *FunctionLocalVariableResponse) GetSizeOk() (*int32, bool)`
+
+GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSize
+
+`func (o *FunctionLocalVariableResponse) SetSize(v int32)`
+
+SetSize sets Size field to given value.
 
 
 

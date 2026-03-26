@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Host** | **string** |  | 
-**CountryCode** | **string** |  | 
 **ASN** | **string** |  | 
+**CountryCode** | **string** |  | 
+**Host** | **string** |  | 
 **Type** | **string** |  | 
 
 ## Methods
 
 ### NewNetworkOverviewMetadata
 
-`func NewNetworkOverviewMetadata(host string, countryCode string, aSN string, type_ string, ) *NetworkOverviewMetadata`
+`func NewNetworkOverviewMetadata(aSN string, countryCode string, host string, type_ string, ) *NetworkOverviewMetadata`
 
 NewNetworkOverviewMetadata instantiates a new NetworkOverviewMetadata object
 This constructor will assign default values to properties that have it defined,
@@ -28,24 +28,24 @@ NewNetworkOverviewMetadataWithDefaults instantiates a new NetworkOverviewMetadat
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetHost
+### GetASN
 
-`func (o *NetworkOverviewMetadata) GetHost() string`
+`func (o *NetworkOverviewMetadata) GetASN() string`
 
-GetHost returns the Host field if non-nil, zero value otherwise.
+GetASN returns the ASN field if non-nil, zero value otherwise.
 
-### GetHostOk
+### GetASNOk
 
-`func (o *NetworkOverviewMetadata) GetHostOk() (*string, bool)`
+`func (o *NetworkOverviewMetadata) GetASNOk() (*string, bool)`
 
-GetHostOk returns a tuple with the Host field if it's non-nil, zero value otherwise
+GetASNOk returns a tuple with the ASN field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHost
+### SetASN
 
-`func (o *NetworkOverviewMetadata) SetHost(v string)`
+`func (o *NetworkOverviewMetadata) SetASN(v string)`
 
-SetHost sets Host field to given value.
+SetASN sets ASN field to given value.
 
 
 ### GetCountryCode
@@ -68,24 +68,24 @@ and a boolean to check if the value has been set.
 SetCountryCode sets CountryCode field to given value.
 
 
-### GetASN
+### GetHost
 
-`func (o *NetworkOverviewMetadata) GetASN() string`
+`func (o *NetworkOverviewMetadata) GetHost() string`
 
-GetASN returns the ASN field if non-nil, zero value otherwise.
+GetHost returns the Host field if non-nil, zero value otherwise.
 
-### GetASNOk
+### GetHostOk
 
-`func (o *NetworkOverviewMetadata) GetASNOk() (*string, bool)`
+`func (o *NetworkOverviewMetadata) GetHostOk() (*string, bool)`
 
-GetASNOk returns a tuple with the ASN field if it's non-nil, zero value otherwise
+GetHostOk returns a tuple with the Host field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetASN
+### SetHost
 
-`func (o *NetworkOverviewMetadata) SetASN(v string)`
+`func (o *NetworkOverviewMetadata) SetHost(v string)`
 
-SetASN sets ASN field to given value.
+SetHost sets Host field to given value.
 
 
 ### GetType

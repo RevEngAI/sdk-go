@@ -19,10 +19,10 @@ var _ MappedNullable = &TagSearchResult{}
 
 // TagSearchResult struct for TagSearchResult
 type TagSearchResult struct {
-	// The ID of the tag
-	TagId int32 `json:"tag_id"`
 	// The name of the tag
 	Tag string `json:"tag"`
+	// The ID of the tag
+	TagId int32 `json:"tag_id"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,10 +32,10 @@ type _TagSearchResult TagSearchResult
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTagSearchResult(tagId int32, tag string) *TagSearchResult {
+func NewTagSearchResult(tag string, tagId int32) *TagSearchResult {
 	this := TagSearchResult{}
-	this.TagId = tagId
 	this.Tag = tag
+	this.TagId = tagId
 	return &this
 }
 
@@ -45,30 +45,6 @@ func NewTagSearchResult(tagId int32, tag string) *TagSearchResult {
 func NewTagSearchResultWithDefaults() *TagSearchResult {
 	this := TagSearchResult{}
 	return &this
-}
-
-// GetTagId returns the TagId field value
-func (o *TagSearchResult) GetTagId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.TagId
-}
-
-// GetTagIdOk returns a tuple with the TagId field value
-// and a boolean to check if the value has been set.
-func (o *TagSearchResult) GetTagIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TagId, true
-}
-
-// SetTagId sets field value
-func (o *TagSearchResult) SetTagId(v int32) {
-	o.TagId = v
 }
 
 // GetTag returns the Tag field value
@@ -95,6 +71,30 @@ func (o *TagSearchResult) SetTag(v string) {
 	o.Tag = v
 }
 
+// GetTagId returns the TagId field value
+func (o *TagSearchResult) GetTagId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.TagId
+}
+
+// GetTagIdOk returns a tuple with the TagId field value
+// and a boolean to check if the value has been set.
+func (o *TagSearchResult) GetTagIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TagId, true
+}
+
+// SetTagId sets field value
+func (o *TagSearchResult) SetTagId(v int32) {
+	o.TagId = v
+}
+
 func (o TagSearchResult) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -105,8 +105,8 @@ func (o TagSearchResult) MarshalJSON() ([]byte, error) {
 
 func (o TagSearchResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["tag_id"] = o.TagId
 	toSerialize["tag"] = o.Tag
+	toSerialize["tag_id"] = o.TagId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -120,8 +120,8 @@ func (o *TagSearchResult) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"tag_id",
 		"tag",
+		"tag_id",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -151,8 +151,8 @@ func (o *TagSearchResult) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "tag_id")
 		delete(additionalProperties, "tag")
+		delete(additionalProperties, "tag_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

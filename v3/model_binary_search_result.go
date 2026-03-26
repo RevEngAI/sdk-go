@@ -20,15 +20,12 @@ var _ MappedNullable = &BinarySearchResult{}
 
 // BinarySearchResult struct for BinarySearchResult
 type BinarySearchResult struct {
+	// The analysis ID
+	AnalysisId int32 `json:"analysis_id"`
 	// The binary ID
 	BinaryId int32 `json:"binary_id"`
 	// The name of the binary
 	BinaryName string `json:"binary_name"`
-	// The analysis ID
-	AnalysisId int32 `json:"analysis_id"`
-	// The SHA-256 hash of the binary
-	Sha256Hash string `json:"sha_256_hash"`
-	Tags []string `json:"tags"`
 	// The creation date of the binary
 	CreatedAt time.Time `json:"created_at"`
 	// The model ID of the binary
@@ -37,6 +34,9 @@ type BinarySearchResult struct {
 	ModelName string `json:"model_name"`
 	// The owner of the binary
 	OwnedBy string `json:"owned_by"`
+	// The SHA-256 hash of the binary
+	Sha256Hash string `json:"sha_256_hash"`
+	Tags []string `json:"tags"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -46,17 +46,17 @@ type _BinarySearchResult BinarySearchResult
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBinarySearchResult(binaryId int32, binaryName string, analysisId int32, sha256Hash string, tags []string, createdAt time.Time, modelId int32, modelName string, ownedBy string) *BinarySearchResult {
+func NewBinarySearchResult(analysisId int32, binaryId int32, binaryName string, createdAt time.Time, modelId int32, modelName string, ownedBy string, sha256Hash string, tags []string) *BinarySearchResult {
 	this := BinarySearchResult{}
+	this.AnalysisId = analysisId
 	this.BinaryId = binaryId
 	this.BinaryName = binaryName
-	this.AnalysisId = analysisId
-	this.Sha256Hash = sha256Hash
-	this.Tags = tags
 	this.CreatedAt = createdAt
 	this.ModelId = modelId
 	this.ModelName = modelName
 	this.OwnedBy = ownedBy
+	this.Sha256Hash = sha256Hash
+	this.Tags = tags
 	return &this
 }
 
@@ -66,6 +66,30 @@ func NewBinarySearchResult(binaryId int32, binaryName string, analysisId int32, 
 func NewBinarySearchResultWithDefaults() *BinarySearchResult {
 	this := BinarySearchResult{}
 	return &this
+}
+
+// GetAnalysisId returns the AnalysisId field value
+func (o *BinarySearchResult) GetAnalysisId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.AnalysisId
+}
+
+// GetAnalysisIdOk returns a tuple with the AnalysisId field value
+// and a boolean to check if the value has been set.
+func (o *BinarySearchResult) GetAnalysisIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AnalysisId, true
+}
+
+// SetAnalysisId sets field value
+func (o *BinarySearchResult) SetAnalysisId(v int32) {
+	o.AnalysisId = v
 }
 
 // GetBinaryId returns the BinaryId field value
@@ -114,80 +138,6 @@ func (o *BinarySearchResult) GetBinaryNameOk() (*string, bool) {
 // SetBinaryName sets field value
 func (o *BinarySearchResult) SetBinaryName(v string) {
 	o.BinaryName = v
-}
-
-// GetAnalysisId returns the AnalysisId field value
-func (o *BinarySearchResult) GetAnalysisId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.AnalysisId
-}
-
-// GetAnalysisIdOk returns a tuple with the AnalysisId field value
-// and a boolean to check if the value has been set.
-func (o *BinarySearchResult) GetAnalysisIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.AnalysisId, true
-}
-
-// SetAnalysisId sets field value
-func (o *BinarySearchResult) SetAnalysisId(v int32) {
-	o.AnalysisId = v
-}
-
-// GetSha256Hash returns the Sha256Hash field value
-func (o *BinarySearchResult) GetSha256Hash() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Sha256Hash
-}
-
-// GetSha256HashOk returns a tuple with the Sha256Hash field value
-// and a boolean to check if the value has been set.
-func (o *BinarySearchResult) GetSha256HashOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Sha256Hash, true
-}
-
-// SetSha256Hash sets field value
-func (o *BinarySearchResult) SetSha256Hash(v string) {
-	o.Sha256Hash = v
-}
-
-// GetTags returns the Tags field value
-// If the value is explicit nil, the zero value for []string will be returned
-func (o *BinarySearchResult) GetTags() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BinarySearchResult) GetTagsOk() ([]string, bool) {
-	if o == nil || IsNil(o.Tags) {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// SetTags sets field value
-func (o *BinarySearchResult) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetCreatedAt returns the CreatedAt field value
@@ -286,6 +236,56 @@ func (o *BinarySearchResult) SetOwnedBy(v string) {
 	o.OwnedBy = v
 }
 
+// GetSha256Hash returns the Sha256Hash field value
+func (o *BinarySearchResult) GetSha256Hash() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Sha256Hash
+}
+
+// GetSha256HashOk returns a tuple with the Sha256Hash field value
+// and a boolean to check if the value has been set.
+func (o *BinarySearchResult) GetSha256HashOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Sha256Hash, true
+}
+
+// SetSha256Hash sets field value
+func (o *BinarySearchResult) SetSha256Hash(v string) {
+	o.Sha256Hash = v
+}
+
+// GetTags returns the Tags field value
+// If the value is explicit nil, the zero value for []string will be returned
+func (o *BinarySearchResult) GetTags() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BinarySearchResult) GetTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Tags) {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// SetTags sets field value
+func (o *BinarySearchResult) SetTags(v []string) {
+	o.Tags = v
+}
+
 func (o BinarySearchResult) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -296,17 +296,17 @@ func (o BinarySearchResult) MarshalJSON() ([]byte, error) {
 
 func (o BinarySearchResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["analysis_id"] = o.AnalysisId
 	toSerialize["binary_id"] = o.BinaryId
 	toSerialize["binary_name"] = o.BinaryName
-	toSerialize["analysis_id"] = o.AnalysisId
-	toSerialize["sha_256_hash"] = o.Sha256Hash
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["model_id"] = o.ModelId
 	toSerialize["model_name"] = o.ModelName
 	toSerialize["owned_by"] = o.OwnedBy
+	toSerialize["sha_256_hash"] = o.Sha256Hash
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -320,15 +320,15 @@ func (o *BinarySearchResult) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"analysis_id",
 		"binary_id",
 		"binary_name",
-		"analysis_id",
-		"sha_256_hash",
-		"tags",
 		"created_at",
 		"model_id",
 		"model_name",
 		"owned_by",
+		"sha_256_hash",
+		"tags",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -358,15 +358,15 @@ func (o *BinarySearchResult) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
 		delete(additionalProperties, "binary_id")
 		delete(additionalProperties, "binary_name")
-		delete(additionalProperties, "analysis_id")
-		delete(additionalProperties, "sha_256_hash")
-		delete(additionalProperties, "tags")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "model_id")
 		delete(additionalProperties, "model_name")
 		delete(additionalProperties, "owned_by")
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "tags")
 		o.AdditionalProperties = additionalProperties
 	}
 

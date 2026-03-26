@@ -19,26 +19,26 @@ var _ MappedNullable = &FunctionMatchingRequest{}
 
 // FunctionMatchingRequest struct for FunctionMatchingRequest
 type FunctionMatchingRequest struct {
-	// ID of the model used for function matching, used to determine the embedding model
-	ModelId int32 `json:"model_id"`
+	Filters NullableFunctionMatchingFilters `json:"filters,omitempty"`
 	// ID's of functions to find matches for, must be at least one function ID
 	FunctionIds []int64 `json:"function_ids"`
 	// Minimum similarity expected for a match as a percentage, default is 90
 	MinSimilarity *float32 `json:"min_similarity,omitempty"`
-	Filters NullableFunctionMatchingFilters `json:"filters,omitempty"`
-	// Maximum number of matches to return per function, default is 1, max is 50
-	ResultsPerFunction *int32 `json:"results_per_function,omitempty"`
+	// ID of the model used for function matching, used to determine the embedding model
+	ModelId int32 `json:"model_id"`
+	// If set to true, forces the system to bypass any cached results and perform a fresh computation
+	NoCache *bool `json:"no_cache,omitempty"`
 	// Page number for paginated results, default is 1 (first page)
 	// Deprecated
 	Page *int32 `json:"page,omitempty"`
 	// Number of functions to return per page, default is 0 (all functions), max is 1000
 	// Deprecated
 	PageSize *int32 `json:"page_size,omitempty"`
+	// Maximum number of matches to return per function, default is 1, max is 50
+	ResultsPerFunction *int32 `json:"results_per_function,omitempty"`
 	// If set to true, only returns the status of the matching operation without the actual results
 	// Deprecated
 	StatusOnly *bool `json:"status_only,omitempty"`
-	// If set to true, forces the system to bypass any cached results and perform a fresh computation
-	NoCache *bool `json:"no_cache,omitempty"`
 	// Whether to use canonical function names during function matching for confidence results, default is False
 	UseCanonicalNames *bool `json:"use_canonical_names,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -50,22 +50,22 @@ type _FunctionMatchingRequest FunctionMatchingRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionMatchingRequest(modelId int32, functionIds []int64) *FunctionMatchingRequest {
+func NewFunctionMatchingRequest(functionIds []int64, modelId int32) *FunctionMatchingRequest {
 	this := FunctionMatchingRequest{}
-	this.ModelId = modelId
 	this.FunctionIds = functionIds
-	var minSimilarity float32 = 90.0
+	var minSimilarity float32 = 90
 	this.MinSimilarity = &minSimilarity
-	var resultsPerFunction int32 = 1
-	this.ResultsPerFunction = &resultsPerFunction
+	this.ModelId = modelId
+	var noCache bool = false
+	this.NoCache = &noCache
 	var page int32 = 1
 	this.Page = &page
 	var pageSize int32 = 0
 	this.PageSize = &pageSize
+	var resultsPerFunction int32 = 1
+	this.ResultsPerFunction = &resultsPerFunction
 	var statusOnly bool = false
 	this.StatusOnly = &statusOnly
-	var noCache bool = false
-	this.NoCache = &noCache
 	var useCanonicalNames bool = false
 	this.UseCanonicalNames = &useCanonicalNames
 	return &this
@@ -76,45 +76,63 @@ func NewFunctionMatchingRequest(modelId int32, functionIds []int64) *FunctionMat
 // but it doesn't guarantee that properties required by API are set
 func NewFunctionMatchingRequestWithDefaults() *FunctionMatchingRequest {
 	this := FunctionMatchingRequest{}
-	var minSimilarity float32 = 90.0
+	var minSimilarity float32 = 90
 	this.MinSimilarity = &minSimilarity
-	var resultsPerFunction int32 = 1
-	this.ResultsPerFunction = &resultsPerFunction
+	var noCache bool = false
+	this.NoCache = &noCache
 	var page int32 = 1
 	this.Page = &page
 	var pageSize int32 = 0
 	this.PageSize = &pageSize
+	var resultsPerFunction int32 = 1
+	this.ResultsPerFunction = &resultsPerFunction
 	var statusOnly bool = false
 	this.StatusOnly = &statusOnly
-	var noCache bool = false
-	this.NoCache = &noCache
 	var useCanonicalNames bool = false
 	this.UseCanonicalNames = &useCanonicalNames
 	return &this
 }
 
-// GetModelId returns the ModelId field value
-func (o *FunctionMatchingRequest) GetModelId() int32 {
-	if o == nil {
-		var ret int32
+// GetFilters returns the Filters field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FunctionMatchingRequest) GetFilters() FunctionMatchingFilters {
+	if o == nil || IsNil(o.Filters.Get()) {
+		var ret FunctionMatchingFilters
 		return ret
 	}
-
-	return o.ModelId
+	return *o.Filters.Get()
 }
 
-// GetModelIdOk returns a tuple with the ModelId field value
+// GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FunctionMatchingRequest) GetModelIdOk() (*int32, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FunctionMatchingRequest) GetFiltersOk() (*FunctionMatchingFilters, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ModelId, true
+	return o.Filters.Get(), o.Filters.IsSet()
 }
 
-// SetModelId sets field value
-func (o *FunctionMatchingRequest) SetModelId(v int32) {
-	o.ModelId = v
+// HasFilters returns a boolean if a field has been set.
+func (o *FunctionMatchingRequest) HasFilters() bool {
+	if o != nil && o.Filters.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFilters gets a reference to the given NullableFunctionMatchingFilters and assigns it to the Filters field.
+func (o *FunctionMatchingRequest) SetFilters(v FunctionMatchingFilters) {
+	o.Filters.Set(&v)
+}
+// SetFiltersNil sets the value for Filters to be an explicit nil
+func (o *FunctionMatchingRequest) SetFiltersNil() {
+	o.Filters.Set(nil)
+}
+
+// UnsetFilters ensures that no value is present for Filters, not even an explicit nil
+func (o *FunctionMatchingRequest) UnsetFilters() {
+	o.Filters.Unset()
 }
 
 // GetFunctionIds returns the FunctionIds field value
@@ -173,78 +191,60 @@ func (o *FunctionMatchingRequest) SetMinSimilarity(v float32) {
 	o.MinSimilarity = &v
 }
 
-// GetFilters returns the Filters field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionMatchingRequest) GetFilters() FunctionMatchingFilters {
-	if o == nil || IsNil(o.Filters.Get()) {
-		var ret FunctionMatchingFilters
-		return ret
-	}
-	return *o.Filters.Get()
-}
-
-// GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionMatchingRequest) GetFiltersOk() (*FunctionMatchingFilters, bool) {
+// GetModelId returns the ModelId field value
+func (o *FunctionMatchingRequest) GetModelId() int32 {
 	if o == nil {
-		return nil, false
-	}
-	return o.Filters.Get(), o.Filters.IsSet()
-}
-
-// HasFilters returns a boolean if a field has been set.
-func (o *FunctionMatchingRequest) HasFilters() bool {
-	if o != nil && o.Filters.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFilters gets a reference to the given NullableFunctionMatchingFilters and assigns it to the Filters field.
-func (o *FunctionMatchingRequest) SetFilters(v FunctionMatchingFilters) {
-	o.Filters.Set(&v)
-}
-// SetFiltersNil sets the value for Filters to be an explicit nil
-func (o *FunctionMatchingRequest) SetFiltersNil() {
-	o.Filters.Set(nil)
-}
-
-// UnsetFilters ensures that no value is present for Filters, not even an explicit nil
-func (o *FunctionMatchingRequest) UnsetFilters() {
-	o.Filters.Unset()
-}
-
-// GetResultsPerFunction returns the ResultsPerFunction field value if set, zero value otherwise.
-func (o *FunctionMatchingRequest) GetResultsPerFunction() int32 {
-	if o == nil || IsNil(o.ResultsPerFunction) {
 		var ret int32
 		return ret
 	}
-	return *o.ResultsPerFunction
+
+	return o.ModelId
 }
 
-// GetResultsPerFunctionOk returns a tuple with the ResultsPerFunction field value if set, nil otherwise
+// GetModelIdOk returns a tuple with the ModelId field value
 // and a boolean to check if the value has been set.
-func (o *FunctionMatchingRequest) GetResultsPerFunctionOk() (*int32, bool) {
-	if o == nil || IsNil(o.ResultsPerFunction) {
+func (o *FunctionMatchingRequest) GetModelIdOk() (*int32, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ResultsPerFunction, true
+	return &o.ModelId, true
 }
 
-// HasResultsPerFunction returns a boolean if a field has been set.
-func (o *FunctionMatchingRequest) HasResultsPerFunction() bool {
-	if o != nil && !IsNil(o.ResultsPerFunction) {
+// SetModelId sets field value
+func (o *FunctionMatchingRequest) SetModelId(v int32) {
+	o.ModelId = v
+}
+
+// GetNoCache returns the NoCache field value if set, zero value otherwise.
+func (o *FunctionMatchingRequest) GetNoCache() bool {
+	if o == nil || IsNil(o.NoCache) {
+		var ret bool
+		return ret
+	}
+	return *o.NoCache
+}
+
+// GetNoCacheOk returns a tuple with the NoCache field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionMatchingRequest) GetNoCacheOk() (*bool, bool) {
+	if o == nil || IsNil(o.NoCache) {
+		return nil, false
+	}
+	return o.NoCache, true
+}
+
+// HasNoCache returns a boolean if a field has been set.
+func (o *FunctionMatchingRequest) HasNoCache() bool {
+	if o != nil && !IsNil(o.NoCache) {
 		return true
 	}
 
 	return false
 }
 
-// SetResultsPerFunction gets a reference to the given int32 and assigns it to the ResultsPerFunction field.
-func (o *FunctionMatchingRequest) SetResultsPerFunction(v int32) {
-	o.ResultsPerFunction = &v
+// SetNoCache gets a reference to the given bool and assigns it to the NoCache field.
+func (o *FunctionMatchingRequest) SetNoCache(v bool) {
+	o.NoCache = &v
 }
 
 // GetPage returns the Page field value if set, zero value otherwise.
@@ -317,6 +317,38 @@ func (o *FunctionMatchingRequest) SetPageSize(v int32) {
 	o.PageSize = &v
 }
 
+// GetResultsPerFunction returns the ResultsPerFunction field value if set, zero value otherwise.
+func (o *FunctionMatchingRequest) GetResultsPerFunction() int32 {
+	if o == nil || IsNil(o.ResultsPerFunction) {
+		var ret int32
+		return ret
+	}
+	return *o.ResultsPerFunction
+}
+
+// GetResultsPerFunctionOk returns a tuple with the ResultsPerFunction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionMatchingRequest) GetResultsPerFunctionOk() (*int32, bool) {
+	if o == nil || IsNil(o.ResultsPerFunction) {
+		return nil, false
+	}
+	return o.ResultsPerFunction, true
+}
+
+// HasResultsPerFunction returns a boolean if a field has been set.
+func (o *FunctionMatchingRequest) HasResultsPerFunction() bool {
+	if o != nil && !IsNil(o.ResultsPerFunction) {
+		return true
+	}
+
+	return false
+}
+
+// SetResultsPerFunction gets a reference to the given int32 and assigns it to the ResultsPerFunction field.
+func (o *FunctionMatchingRequest) SetResultsPerFunction(v int32) {
+	o.ResultsPerFunction = &v
+}
+
 // GetStatusOnly returns the StatusOnly field value if set, zero value otherwise.
 // Deprecated
 func (o *FunctionMatchingRequest) GetStatusOnly() bool {
@@ -350,38 +382,6 @@ func (o *FunctionMatchingRequest) HasStatusOnly() bool {
 // Deprecated
 func (o *FunctionMatchingRequest) SetStatusOnly(v bool) {
 	o.StatusOnly = &v
-}
-
-// GetNoCache returns the NoCache field value if set, zero value otherwise.
-func (o *FunctionMatchingRequest) GetNoCache() bool {
-	if o == nil || IsNil(o.NoCache) {
-		var ret bool
-		return ret
-	}
-	return *o.NoCache
-}
-
-// GetNoCacheOk returns a tuple with the NoCache field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FunctionMatchingRequest) GetNoCacheOk() (*bool, bool) {
-	if o == nil || IsNil(o.NoCache) {
-		return nil, false
-	}
-	return o.NoCache, true
-}
-
-// HasNoCache returns a boolean if a field has been set.
-func (o *FunctionMatchingRequest) HasNoCache() bool {
-	if o != nil && !IsNil(o.NoCache) {
-		return true
-	}
-
-	return false
-}
-
-// SetNoCache gets a reference to the given bool and assigns it to the NoCache field.
-func (o *FunctionMatchingRequest) SetNoCache(v bool) {
-	o.NoCache = &v
 }
 
 // GetUseCanonicalNames returns the UseCanonicalNames field value if set, zero value otherwise.
@@ -426,16 +426,16 @@ func (o FunctionMatchingRequest) MarshalJSON() ([]byte, error) {
 
 func (o FunctionMatchingRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["model_id"] = o.ModelId
+	if o.Filters.IsSet() {
+		toSerialize["filters"] = o.Filters.Get()
+	}
 	toSerialize["function_ids"] = o.FunctionIds
 	if !IsNil(o.MinSimilarity) {
 		toSerialize["min_similarity"] = o.MinSimilarity
 	}
-	if o.Filters.IsSet() {
-		toSerialize["filters"] = o.Filters.Get()
-	}
-	if !IsNil(o.ResultsPerFunction) {
-		toSerialize["results_per_function"] = o.ResultsPerFunction
+	toSerialize["model_id"] = o.ModelId
+	if !IsNil(o.NoCache) {
+		toSerialize["no_cache"] = o.NoCache
 	}
 	if !IsNil(o.Page) {
 		toSerialize["page"] = o.Page
@@ -443,11 +443,11 @@ func (o FunctionMatchingRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PageSize) {
 		toSerialize["page_size"] = o.PageSize
 	}
+	if !IsNil(o.ResultsPerFunction) {
+		toSerialize["results_per_function"] = o.ResultsPerFunction
+	}
 	if !IsNil(o.StatusOnly) {
 		toSerialize["status_only"] = o.StatusOnly
-	}
-	if !IsNil(o.NoCache) {
-		toSerialize["no_cache"] = o.NoCache
 	}
 	if !IsNil(o.UseCanonicalNames) {
 		toSerialize["use_canonical_names"] = o.UseCanonicalNames
@@ -465,8 +465,8 @@ func (o *FunctionMatchingRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"model_id",
 		"function_ids",
+		"model_id",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -496,15 +496,15 @@ func (o *FunctionMatchingRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "filters")
 		delete(additionalProperties, "function_ids")
 		delete(additionalProperties, "min_similarity")
-		delete(additionalProperties, "filters")
-		delete(additionalProperties, "results_per_function")
+		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "no_cache")
 		delete(additionalProperties, "page")
 		delete(additionalProperties, "page_size")
+		delete(additionalProperties, "results_per_function")
 		delete(additionalProperties, "status_only")
-		delete(additionalProperties, "no_cache")
 		delete(additionalProperties, "use_canonical_names")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ppid** | **int32** |  | 
 **Pid** | **int32** |  | 
+**Ppid** | **int32** |  | 
 
 ## Methods
 
 ### NewTTPSOccurance
 
-`func NewTTPSOccurance(ppid int32, pid int32, ) *TTPSOccurance`
+`func NewTTPSOccurance(pid int32, ppid int32, ) *TTPSOccurance`
 
 NewTTPSOccurance instantiates a new TTPSOccurance object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewTTPSOccuranceWithDefaults instantiates a new TTPSOccurance object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetPpid
-
-`func (o *TTPSOccurance) GetPpid() int32`
-
-GetPpid returns the Ppid field if non-nil, zero value otherwise.
-
-### GetPpidOk
-
-`func (o *TTPSOccurance) GetPpidOk() (*int32, bool)`
-
-GetPpidOk returns a tuple with the Ppid field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPpid
-
-`func (o *TTPSOccurance) SetPpid(v int32)`
-
-SetPpid sets Ppid field to given value.
-
 
 ### GetPid
 
@@ -64,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *TTPSOccurance) SetPid(v int32)`
 
 SetPid sets Pid field to given value.
+
+
+### GetPpid
+
+`func (o *TTPSOccurance) GetPpid() int32`
+
+GetPpid returns the Ppid field if non-nil, zero value otherwise.
+
+### GetPpidOk
+
+`func (o *TTPSOccurance) GetPpidOk() (*int32, bool)`
+
+GetPpidOk returns a tuple with the Ppid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPpid
+
+`func (o *TTPSOccurance) SetPpid(v int32)`
+
+SetPpid sets Ppid field to given value.
 
 
 

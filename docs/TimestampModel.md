@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PeTimestamp** | **int32** |  | 
-**ExportTimestamp** | **int32** |  | 
 **DebugTimestamp** | **int32** |  | 
+**ExportTimestamp** | **int32** |  | 
+**PeTimestamp** | **int32** |  | 
 
 ## Methods
 
 ### NewTimestampModel
 
-`func NewTimestampModel(peTimestamp int32, exportTimestamp int32, debugTimestamp int32, ) *TimestampModel`
+`func NewTimestampModel(debugTimestamp int32, exportTimestamp int32, peTimestamp int32, ) *TimestampModel`
 
 NewTimestampModel instantiates a new TimestampModel object
 This constructor will assign default values to properties that have it defined,
@@ -27,24 +27,24 @@ NewTimestampModelWithDefaults instantiates a new TimestampModel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetPeTimestamp
+### GetDebugTimestamp
 
-`func (o *TimestampModel) GetPeTimestamp() int32`
+`func (o *TimestampModel) GetDebugTimestamp() int32`
 
-GetPeTimestamp returns the PeTimestamp field if non-nil, zero value otherwise.
+GetDebugTimestamp returns the DebugTimestamp field if non-nil, zero value otherwise.
 
-### GetPeTimestampOk
+### GetDebugTimestampOk
 
-`func (o *TimestampModel) GetPeTimestampOk() (*int32, bool)`
+`func (o *TimestampModel) GetDebugTimestampOk() (*int32, bool)`
 
-GetPeTimestampOk returns a tuple with the PeTimestamp field if it's non-nil, zero value otherwise
+GetDebugTimestampOk returns a tuple with the DebugTimestamp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPeTimestamp
+### SetDebugTimestamp
 
-`func (o *TimestampModel) SetPeTimestamp(v int32)`
+`func (o *TimestampModel) SetDebugTimestamp(v int32)`
 
-SetPeTimestamp sets PeTimestamp field to given value.
+SetDebugTimestamp sets DebugTimestamp field to given value.
 
 
 ### GetExportTimestamp
@@ -67,24 +67,24 @@ and a boolean to check if the value has been set.
 SetExportTimestamp sets ExportTimestamp field to given value.
 
 
-### GetDebugTimestamp
+### GetPeTimestamp
 
-`func (o *TimestampModel) GetDebugTimestamp() int32`
+`func (o *TimestampModel) GetPeTimestamp() int32`
 
-GetDebugTimestamp returns the DebugTimestamp field if non-nil, zero value otherwise.
+GetPeTimestamp returns the PeTimestamp field if non-nil, zero value otherwise.
 
-### GetDebugTimestampOk
+### GetPeTimestampOk
 
-`func (o *TimestampModel) GetDebugTimestampOk() (*int32, bool)`
+`func (o *TimestampModel) GetPeTimestampOk() (*int32, bool)`
 
-GetDebugTimestampOk returns a tuple with the DebugTimestamp field if it's non-nil, zero value otherwise
+GetPeTimestampOk returns a tuple with the PeTimestamp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDebugTimestamp
+### SetPeTimestamp
 
-`func (o *TimestampModel) SetDebugTimestamp(v int32)`
+`func (o *TimestampModel) SetPeTimestamp(v int32)`
 
-SetDebugTimestamp sets DebugTimestamp field to given value.
+SetPeTimestamp sets PeTimestamp field to given value.
 
 
 

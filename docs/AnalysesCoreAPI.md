@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**InsertAnalysisLog**](AnalysesCoreAPI.md#InsertAnalysisLog) | **Post** /v2/analyses/{analysis_id}/logs | Insert a log entry for an analysis
 [**ListAnalyses**](AnalysesCoreAPI.md#ListAnalyses) | **Get** /v2/analyses/list | Gets the most recent analyses
 [**LookupBinaryId**](AnalysesCoreAPI.md#LookupBinaryId) | **Get** /v2/analyses/lookup/{binary_id} | Gets the analysis ID from binary ID
+[**PutAnalysisStrings**](AnalysesCoreAPI.md#PutAnalysisStrings) | **Put** /v2/analyses/{analysis_id}/strings | Add strings to the analysis
 [**RequeueAnalysis**](AnalysesCoreAPI.md#RequeueAnalysis) | **Post** /v2/analyses/{analysis_id}/requeue | Requeue Analysis
 [**UpdateAnalysis**](AnalysesCoreAPI.md#UpdateAnalysis) | **Patch** /v2/analyses/{analysis_id} | Update Analysis
 [**UpdateAnalysisTags**](AnalysesCoreAPI.md#UpdateAnalysisTags) | **Patch** /v2/analyses/{analysis_id}/tags | Update Analysis Tags
@@ -43,7 +44,7 @@ import (
 )
 
 func main() {
-	analysisBulkAddTagsRequest := *revengai.NewAnalysisBulkAddTagsRequest([]string{"Tags_example"}, []int32{int32(123)}) // AnalysisBulkAddTagsRequest | 
+	analysisBulkAddTagsRequest := *revengai.NewAnalysisBulkAddTagsRequest([]int32{int32(123)}, []string{"Tags_example"}) // AnalysisBulkAddTagsRequest | 
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
@@ -804,6 +805,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PutAnalysisStrings
+
+> BaseResponse PutAnalysisStrings(ctx, analysisId).PutAnalysisStringsRequest(putAnalysisStringsRequest).Execute()
+
+Add strings to the analysis
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	analysisId := int32(56) // int32 | 
+	putAnalysisStringsRequest := *revengai.NewPutAnalysisStringsRequest([]revengai.AnalysisStringInput{*revengai.NewAnalysisStringInput(revengai.StringSource("SYSTEM"), int32(123), "Value_example")}) // PutAnalysisStringsRequest | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.PutAnalysisStrings(context.Background(), analysisId).PutAnalysisStringsRequest(putAnalysisStringsRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.PutAnalysisStrings``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PutAnalysisStrings`: BaseResponse
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.PutAnalysisStrings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPutAnalysisStringsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **putAnalysisStringsRequest** | [**PutAnalysisStringsRequest**](PutAnalysisStringsRequest.md) |  | 
+
+### Return type
+
+[**BaseResponse**](BaseResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## RequeueAnalysis
 
 > BaseResponseCreated RequeueAnalysis(ctx, analysisId).ReAnalysisForm(reAnalysisForm).XRevEngApplication(xRevEngApplication).Execute()
@@ -1024,7 +1097,7 @@ Name | Type | Description  | Notes
 
 ## UploadFile
 
-> BaseResponseUploadResponse UploadFile(ctx).UploadFileType(uploadFileType).File(file).PackedPassword(packedPassword).ForceOverwrite(forceOverwrite).Execute()
+> BaseResponseUploadResponse UploadFile(ctx).File(file).UploadFileType(uploadFileType).PackedPassword(packedPassword).ForceOverwrite(forceOverwrite).Execute()
 
 Upload File
 
@@ -1041,14 +1114,14 @@ import (
 )
 
 func main() {
-	uploadFileType := revengai.UploadFileType("BINARY") // UploadFileType | 
 	file := os.NewFile(1234, "some_file") // *os.File | 
+	uploadFileType := revengai.UploadFileType("BINARY") // UploadFileType | 
 	packedPassword := "packedPassword_example" // string |  (optional)
 	forceOverwrite := true // bool |  (optional) (default to false)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.UploadFile(context.Background()).UploadFileType(uploadFileType).File(file).PackedPassword(packedPassword).ForceOverwrite(forceOverwrite).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.UploadFile(context.Background()).File(file).UploadFileType(uploadFileType).PackedPassword(packedPassword).ForceOverwrite(forceOverwrite).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.UploadFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1069,8 +1142,8 @@ Other parameters are passed through a pointer to a apiUploadFileRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uploadFileType** | [**UploadFileType**](UploadFileType.md) |  | 
  **file** | ***os.File** |  | 
+ **uploadFileType** | [**UploadFileType**](UploadFileType.md) |  | 
  **packedPassword** | **string** |  | 
  **forceOverwrite** | **bool** |  | [default to false]
 

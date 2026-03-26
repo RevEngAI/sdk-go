@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Blocks** | [**[]FunctionBlockResponse**](FunctionBlockResponse.md) | Disassembly is broken into control flow blocks | 
 **LocalVariables** | [**[]FunctionLocalVariableResponse**](FunctionLocalVariableResponse.md) | Local variables associated with this function | 
-**Params** | [**[]FunctionParamResponse**](FunctionParamResponse.md) | Params associated with this function | 
 **OverviewComment** | **NullableString** |  | 
+**Params** | [**[]FunctionParamResponse**](FunctionParamResponse.md) | Params associated with this function | 
 
 ## Methods
 
 ### NewFunctionBlocksResponse
 
-`func NewFunctionBlocksResponse(blocks []FunctionBlockResponse, localVariables []FunctionLocalVariableResponse, params []FunctionParamResponse, overviewComment NullableString, ) *FunctionBlocksResponse`
+`func NewFunctionBlocksResponse(blocks []FunctionBlockResponse, localVariables []FunctionLocalVariableResponse, overviewComment NullableString, params []FunctionParamResponse, ) *FunctionBlocksResponse`
 
 NewFunctionBlocksResponse instantiates a new FunctionBlocksResponse object
 This constructor will assign default values to properties that have it defined,
@@ -68,26 +68,6 @@ and a boolean to check if the value has been set.
 SetLocalVariables sets LocalVariables field to given value.
 
 
-### GetParams
-
-`func (o *FunctionBlocksResponse) GetParams() []FunctionParamResponse`
-
-GetParams returns the Params field if non-nil, zero value otherwise.
-
-### GetParamsOk
-
-`func (o *FunctionBlocksResponse) GetParamsOk() (*[]FunctionParamResponse, bool)`
-
-GetParamsOk returns a tuple with the Params field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetParams
-
-`func (o *FunctionBlocksResponse) SetParams(v []FunctionParamResponse)`
-
-SetParams sets Params field to given value.
-
-
 ### GetOverviewComment
 
 `func (o *FunctionBlocksResponse) GetOverviewComment() string`
@@ -118,6 +98,26 @@ SetOverviewComment sets OverviewComment field to given value.
 `func (o *FunctionBlocksResponse) UnsetOverviewComment()`
 
 UnsetOverviewComment ensures that no value is present for OverviewComment, not even an explicit nil
+### GetParams
+
+`func (o *FunctionBlocksResponse) GetParams() []FunctionParamResponse`
+
+GetParams returns the Params field if non-nil, zero value otherwise.
+
+### GetParamsOk
+
+`func (o *FunctionBlocksResponse) GetParamsOk() (*[]FunctionParamResponse, bool)`
+
+GetParamsOk returns a tuple with the Params field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParams
+
+`func (o *FunctionBlocksResponse) SetParams(v []FunctionParamResponse)`
+
+SetParams sets Params field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

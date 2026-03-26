@@ -19,9 +19,9 @@ var _ MappedNullable = &TimestampModel{}
 
 // TimestampModel struct for TimestampModel
 type TimestampModel struct {
-	PeTimestamp int32 `json:"pe_timestamp"`
-	ExportTimestamp int32 `json:"export_timestamp"`
 	DebugTimestamp int32 `json:"debug_timestamp"`
+	ExportTimestamp int32 `json:"export_timestamp"`
+	PeTimestamp int32 `json:"pe_timestamp"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,11 +31,11 @@ type _TimestampModel TimestampModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTimestampModel(peTimestamp int32, exportTimestamp int32, debugTimestamp int32) *TimestampModel {
+func NewTimestampModel(debugTimestamp int32, exportTimestamp int32, peTimestamp int32) *TimestampModel {
 	this := TimestampModel{}
-	this.PeTimestamp = peTimestamp
-	this.ExportTimestamp = exportTimestamp
 	this.DebugTimestamp = debugTimestamp
+	this.ExportTimestamp = exportTimestamp
+	this.PeTimestamp = peTimestamp
 	return &this
 }
 
@@ -45,54 +45,6 @@ func NewTimestampModel(peTimestamp int32, exportTimestamp int32, debugTimestamp 
 func NewTimestampModelWithDefaults() *TimestampModel {
 	this := TimestampModel{}
 	return &this
-}
-
-// GetPeTimestamp returns the PeTimestamp field value
-func (o *TimestampModel) GetPeTimestamp() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.PeTimestamp
-}
-
-// GetPeTimestampOk returns a tuple with the PeTimestamp field value
-// and a boolean to check if the value has been set.
-func (o *TimestampModel) GetPeTimestampOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PeTimestamp, true
-}
-
-// SetPeTimestamp sets field value
-func (o *TimestampModel) SetPeTimestamp(v int32) {
-	o.PeTimestamp = v
-}
-
-// GetExportTimestamp returns the ExportTimestamp field value
-func (o *TimestampModel) GetExportTimestamp() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.ExportTimestamp
-}
-
-// GetExportTimestampOk returns a tuple with the ExportTimestamp field value
-// and a boolean to check if the value has been set.
-func (o *TimestampModel) GetExportTimestampOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ExportTimestamp, true
-}
-
-// SetExportTimestamp sets field value
-func (o *TimestampModel) SetExportTimestamp(v int32) {
-	o.ExportTimestamp = v
 }
 
 // GetDebugTimestamp returns the DebugTimestamp field value
@@ -119,6 +71,54 @@ func (o *TimestampModel) SetDebugTimestamp(v int32) {
 	o.DebugTimestamp = v
 }
 
+// GetExportTimestamp returns the ExportTimestamp field value
+func (o *TimestampModel) GetExportTimestamp() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.ExportTimestamp
+}
+
+// GetExportTimestampOk returns a tuple with the ExportTimestamp field value
+// and a boolean to check if the value has been set.
+func (o *TimestampModel) GetExportTimestampOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ExportTimestamp, true
+}
+
+// SetExportTimestamp sets field value
+func (o *TimestampModel) SetExportTimestamp(v int32) {
+	o.ExportTimestamp = v
+}
+
+// GetPeTimestamp returns the PeTimestamp field value
+func (o *TimestampModel) GetPeTimestamp() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.PeTimestamp
+}
+
+// GetPeTimestampOk returns a tuple with the PeTimestamp field value
+// and a boolean to check if the value has been set.
+func (o *TimestampModel) GetPeTimestampOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PeTimestamp, true
+}
+
+// SetPeTimestamp sets field value
+func (o *TimestampModel) SetPeTimestamp(v int32) {
+	o.PeTimestamp = v
+}
+
 func (o TimestampModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -129,9 +129,9 @@ func (o TimestampModel) MarshalJSON() ([]byte, error) {
 
 func (o TimestampModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["pe_timestamp"] = o.PeTimestamp
-	toSerialize["export_timestamp"] = o.ExportTimestamp
 	toSerialize["debug_timestamp"] = o.DebugTimestamp
+	toSerialize["export_timestamp"] = o.ExportTimestamp
+	toSerialize["pe_timestamp"] = o.PeTimestamp
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -145,9 +145,9 @@ func (o *TimestampModel) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"pe_timestamp",
-		"export_timestamp",
 		"debug_timestamp",
+		"export_timestamp",
+		"pe_timestamp",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -177,9 +177,9 @@ func (o *TimestampModel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "pe_timestamp")
-		delete(additionalProperties, "export_timestamp")
 		delete(additionalProperties, "debug_timestamp")
+		delete(additionalProperties, "export_timestamp")
+		delete(additionalProperties, "pe_timestamp")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -19,9 +19,9 @@ var _ MappedNullable = &TagItem{}
 
 // TagItem struct for TagItem
 type TagItem struct {
+	CollectionId NullableInt32 `json:"collection_id,omitempty"`
 	Name string `json:"name"`
 	Origin string `json:"origin"`
-	CollectionId NullableInt32 `json:"collection_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,6 +44,48 @@ func NewTagItem(name string, origin string) *TagItem {
 func NewTagItemWithDefaults() *TagItem {
 	this := TagItem{}
 	return &this
+}
+
+// GetCollectionId returns the CollectionId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TagItem) GetCollectionId() int32 {
+	if o == nil || IsNil(o.CollectionId.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.CollectionId.Get()
+}
+
+// GetCollectionIdOk returns a tuple with the CollectionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TagItem) GetCollectionIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CollectionId.Get(), o.CollectionId.IsSet()
+}
+
+// HasCollectionId returns a boolean if a field has been set.
+func (o *TagItem) HasCollectionId() bool {
+	if o != nil && o.CollectionId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCollectionId gets a reference to the given NullableInt32 and assigns it to the CollectionId field.
+func (o *TagItem) SetCollectionId(v int32) {
+	o.CollectionId.Set(&v)
+}
+// SetCollectionIdNil sets the value for CollectionId to be an explicit nil
+func (o *TagItem) SetCollectionIdNil() {
+	o.CollectionId.Set(nil)
+}
+
+// UnsetCollectionId ensures that no value is present for CollectionId, not even an explicit nil
+func (o *TagItem) UnsetCollectionId() {
+	o.CollectionId.Unset()
 }
 
 // GetName returns the Name field value
@@ -94,48 +136,6 @@ func (o *TagItem) SetOrigin(v string) {
 	o.Origin = v
 }
 
-// GetCollectionId returns the CollectionId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *TagItem) GetCollectionId() int32 {
-	if o == nil || IsNil(o.CollectionId.Get()) {
-		var ret int32
-		return ret
-	}
-	return *o.CollectionId.Get()
-}
-
-// GetCollectionIdOk returns a tuple with the CollectionId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *TagItem) GetCollectionIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.CollectionId.Get(), o.CollectionId.IsSet()
-}
-
-// HasCollectionId returns a boolean if a field has been set.
-func (o *TagItem) HasCollectionId() bool {
-	if o != nil && o.CollectionId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCollectionId gets a reference to the given NullableInt32 and assigns it to the CollectionId field.
-func (o *TagItem) SetCollectionId(v int32) {
-	o.CollectionId.Set(&v)
-}
-// SetCollectionIdNil sets the value for CollectionId to be an explicit nil
-func (o *TagItem) SetCollectionIdNil() {
-	o.CollectionId.Set(nil)
-}
-
-// UnsetCollectionId ensures that no value is present for CollectionId, not even an explicit nil
-func (o *TagItem) UnsetCollectionId() {
-	o.CollectionId.Unset()
-}
-
 func (o TagItem) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -146,11 +146,11 @@ func (o TagItem) MarshalJSON() ([]byte, error) {
 
 func (o TagItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	toSerialize["origin"] = o.Origin
 	if o.CollectionId.IsSet() {
 		toSerialize["collection_id"] = o.CollectionId.Get()
 	}
+	toSerialize["name"] = o.Name
+	toSerialize["origin"] = o.Origin
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -195,9 +195,9 @@ func (o *TagItem) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "collection_id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "origin")
-		delete(additionalProperties, "collection_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

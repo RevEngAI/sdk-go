@@ -5,16 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Completed** | **bool** | Whether the service has completed data types generation | 
-**Status** | **string** | The current status of the data types service | 
 **DataTypes** | Pointer to [**NullableFunctionInfoOutput**](FunctionInfoOutput.md) |  | [optional] 
 **DataTypesVersion** | Pointer to **NullableInt32** |  | [optional] 
 **FunctionId** | **int64** | Function id | 
+**Status** | **string** | The current status of the data types service | 
 
 ## Methods
 
 ### NewFunctionDataTypesListItem
 
-`func NewFunctionDataTypesListItem(completed bool, status string, functionId int64, ) *FunctionDataTypesListItem`
+`func NewFunctionDataTypesListItem(completed bool, functionId int64, status string, ) *FunctionDataTypesListItem`
 
 NewFunctionDataTypesListItem instantiates a new FunctionDataTypesListItem object
 This constructor will assign default values to properties that have it defined,
@@ -47,26 +47,6 @@ and a boolean to check if the value has been set.
 `func (o *FunctionDataTypesListItem) SetCompleted(v bool)`
 
 SetCompleted sets Completed field to given value.
-
-
-### GetStatus
-
-`func (o *FunctionDataTypesListItem) GetStatus() string`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *FunctionDataTypesListItem) GetStatusOk() (*string, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *FunctionDataTypesListItem) SetStatus(v string)`
-
-SetStatus sets Status field to given value.
 
 
 ### GetDataTypes
@@ -157,6 +137,26 @@ and a boolean to check if the value has been set.
 `func (o *FunctionDataTypesListItem) SetFunctionId(v int64)`
 
 SetFunctionId sets FunctionId field to given value.
+
+
+### GetStatus
+
+`func (o *FunctionDataTypesListItem) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *FunctionDataTypesListItem) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *FunctionDataTypesListItem) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
 
 
 

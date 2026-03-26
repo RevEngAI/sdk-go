@@ -6,22 +6,22 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CollectionId** | **int32** | The ID of the collection | 
 **CollectionName** | **string** | The name of the collection | 
-**Scope** | **string** | The scope of the collection | 
-**LastUpdatedAt** | **time.Time** | The last update date of the collection | 
 **CreatedAt** | **time.Time** | The creation date of the collection | 
+**Description** | **string** | The description of the collection | 
+**LastUpdatedAt** | **time.Time** | The last update date of the collection | 
 **ModelId** | **int32** | The model ID of the binary | 
 **ModelName** | **string** | The name of the model | 
 **OwnedBy** | **string** | The owner of the collection | 
-**Tags** | Pointer to **[]string** |  | [optional] 
+**Scope** | **string** | The scope of the collection | 
 **Size** | Pointer to **NullableInt32** |  | [optional] 
-**Description** | **string** | The description of the collection | 
+**Tags** | Pointer to **[]string** |  | [optional] 
 **TeamId** | Pointer to **NullableInt32** |  | [optional] 
 
 ## Methods
 
 ### NewCollectionSearchResult
 
-`func NewCollectionSearchResult(collectionId int32, collectionName string, scope string, lastUpdatedAt time.Time, createdAt time.Time, modelId int32, modelName string, ownedBy string, description string, ) *CollectionSearchResult`
+`func NewCollectionSearchResult(collectionId int32, collectionName string, createdAt time.Time, description string, lastUpdatedAt time.Time, modelId int32, modelName string, ownedBy string, scope string, ) *CollectionSearchResult`
 
 NewCollectionSearchResult instantiates a new CollectionSearchResult object
 This constructor will assign default values to properties that have it defined,
@@ -76,24 +76,44 @@ and a boolean to check if the value has been set.
 SetCollectionName sets CollectionName field to given value.
 
 
-### GetScope
+### GetCreatedAt
 
-`func (o *CollectionSearchResult) GetScope() string`
+`func (o *CollectionSearchResult) GetCreatedAt() time.Time`
 
-GetScope returns the Scope field if non-nil, zero value otherwise.
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
-### GetScopeOk
+### GetCreatedAtOk
 
-`func (o *CollectionSearchResult) GetScopeOk() (*string, bool)`
+`func (o *CollectionSearchResult) GetCreatedAtOk() (*time.Time, bool)`
 
-GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetScope
+### SetCreatedAt
 
-`func (o *CollectionSearchResult) SetScope(v string)`
+`func (o *CollectionSearchResult) SetCreatedAt(v time.Time)`
 
-SetScope sets Scope field to given value.
+SetCreatedAt sets CreatedAt field to given value.
+
+
+### GetDescription
+
+`func (o *CollectionSearchResult) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *CollectionSearchResult) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *CollectionSearchResult) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
 
 
 ### GetLastUpdatedAt
@@ -114,26 +134,6 @@ and a boolean to check if the value has been set.
 `func (o *CollectionSearchResult) SetLastUpdatedAt(v time.Time)`
 
 SetLastUpdatedAt sets LastUpdatedAt field to given value.
-
-
-### GetCreatedAt
-
-`func (o *CollectionSearchResult) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *CollectionSearchResult) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *CollectionSearchResult) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
 
 
 ### GetModelId
@@ -196,41 +196,26 @@ and a boolean to check if the value has been set.
 SetOwnedBy sets OwnedBy field to given value.
 
 
-### GetTags
+### GetScope
 
-`func (o *CollectionSearchResult) GetTags() []string`
+`func (o *CollectionSearchResult) GetScope() string`
 
-GetTags returns the Tags field if non-nil, zero value otherwise.
+GetScope returns the Scope field if non-nil, zero value otherwise.
 
-### GetTagsOk
+### GetScopeOk
 
-`func (o *CollectionSearchResult) GetTagsOk() (*[]string, bool)`
+`func (o *CollectionSearchResult) GetScopeOk() (*string, bool)`
 
-GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTags
+### SetScope
 
-`func (o *CollectionSearchResult) SetTags(v []string)`
+`func (o *CollectionSearchResult) SetScope(v string)`
 
-SetTags sets Tags field to given value.
+SetScope sets Scope field to given value.
 
-### HasTags
 
-`func (o *CollectionSearchResult) HasTags() bool`
-
-HasTags returns a boolean if a field has been set.
-
-### SetTagsNil
-
-`func (o *CollectionSearchResult) SetTagsNil(b bool)`
-
- SetTagsNil sets the value for Tags to be an explicit nil
-
-### UnsetTags
-`func (o *CollectionSearchResult) UnsetTags()`
-
-UnsetTags ensures that no value is present for Tags, not even an explicit nil
 ### GetSize
 
 `func (o *CollectionSearchResult) GetSize() int32`
@@ -266,26 +251,41 @@ HasSize returns a boolean if a field has been set.
 `func (o *CollectionSearchResult) UnsetSize()`
 
 UnsetSize ensures that no value is present for Size, not even an explicit nil
-### GetDescription
+### GetTags
 
-`func (o *CollectionSearchResult) GetDescription() string`
+`func (o *CollectionSearchResult) GetTags() []string`
 
-GetDescription returns the Description field if non-nil, zero value otherwise.
+GetTags returns the Tags field if non-nil, zero value otherwise.
 
-### GetDescriptionOk
+### GetTagsOk
 
-`func (o *CollectionSearchResult) GetDescriptionOk() (*string, bool)`
+`func (o *CollectionSearchResult) GetTagsOk() (*[]string, bool)`
 
-GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDescription
+### SetTags
 
-`func (o *CollectionSearchResult) SetDescription(v string)`
+`func (o *CollectionSearchResult) SetTags(v []string)`
 
-SetDescription sets Description field to given value.
+SetTags sets Tags field to given value.
 
+### HasTags
 
+`func (o *CollectionSearchResult) HasTags() bool`
+
+HasTags returns a boolean if a field has been set.
+
+### SetTagsNil
+
+`func (o *CollectionSearchResult) SetTagsNil(b bool)`
+
+ SetTagsNil sets the value for Tags to be an explicit nil
+
+### UnsetTags
+`func (o *CollectionSearchResult) UnsetTags()`
+
+UnsetTags ensures that no value is present for Tags, not even an explicit nil
 ### GetTeamId
 
 `func (o *CollectionSearchResult) GetTeamId() int32`

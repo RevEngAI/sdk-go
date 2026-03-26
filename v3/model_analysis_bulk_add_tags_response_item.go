@@ -20,8 +20,8 @@ var _ MappedNullable = &AnalysisBulkAddTagsResponseItem{}
 // AnalysisBulkAddTagsResponseItem struct for AnalysisBulkAddTagsResponseItem
 type AnalysisBulkAddTagsResponseItem struct {
 	AnalysisId int32 `json:"analysis_id"`
-	Message NullableString `json:"message"`
 	Error NullableString `json:"error,omitempty"`
+	Message NullableString `json:"message"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,32 +70,6 @@ func (o *AnalysisBulkAddTagsResponseItem) SetAnalysisId(v int32) {
 	o.AnalysisId = v
 }
 
-// GetMessage returns the Message field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *AnalysisBulkAddTagsResponseItem) GetMessage() string {
-	if o == nil || o.Message.Get() == nil {
-		var ret string
-		return ret
-	}
-
-	return *o.Message.Get()
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AnalysisBulkAddTagsResponseItem) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Message.Get(), o.Message.IsSet()
-}
-
-// SetMessage sets field value
-func (o *AnalysisBulkAddTagsResponseItem) SetMessage(v string) {
-	o.Message.Set(&v)
-}
-
 // GetError returns the Error field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AnalysisBulkAddTagsResponseItem) GetError() string {
 	if o == nil || IsNil(o.Error.Get()) {
@@ -138,6 +112,32 @@ func (o *AnalysisBulkAddTagsResponseItem) UnsetError() {
 	o.Error.Unset()
 }
 
+// GetMessage returns the Message field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *AnalysisBulkAddTagsResponseItem) GetMessage() string {
+	if o == nil || o.Message.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.Message.Get()
+}
+
+// GetMessageOk returns a tuple with the Message field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AnalysisBulkAddTagsResponseItem) GetMessageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Message.Get(), o.Message.IsSet()
+}
+
+// SetMessage sets field value
+func (o *AnalysisBulkAddTagsResponseItem) SetMessage(v string) {
+	o.Message.Set(&v)
+}
+
 func (o AnalysisBulkAddTagsResponseItem) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -149,10 +149,10 @@ func (o AnalysisBulkAddTagsResponseItem) MarshalJSON() ([]byte, error) {
 func (o AnalysisBulkAddTagsResponseItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["analysis_id"] = o.AnalysisId
-	toSerialize["message"] = o.Message.Get()
 	if o.Error.IsSet() {
 		toSerialize["error"] = o.Error.Get()
 	}
+	toSerialize["message"] = o.Message.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -198,8 +198,8 @@ func (o *AnalysisBulkAddTagsResponseItem) UnmarshalJSON(data []byte) (err error)
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "analysis_id")
-		delete(additionalProperties, "message")
 		delete(additionalProperties, "error")
+		delete(additionalProperties, "message")
 		o.AdditionalProperties = additionalProperties
 	}
 

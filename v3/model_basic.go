@@ -20,37 +20,37 @@ var _ MappedNullable = &Basic{}
 
 // Basic struct for Basic
 type Basic struct {
+	// The scope of the analysis
+	AnalysisScope string `json:"analysis_scope"`
+	BaseAddress NullableInt32 `json:"base_address"`
 	// The ID of the binary
 	BinaryId int32 `json:"binary_id"`
 	// The name of the binary uploaded
 	BinaryName string `json:"binary_name"`
 	// The size of the binary uploaded (bytes)
 	BinarySize int32 `json:"binary_size"`
+	BinaryUuid NullableString `json:"binary_uuid,omitempty"`
 	// When the binary was uploaded
 	Creation time.Time `json:"creation"`
-	// The hash of the binary uploaded
-	Sha256Hash string `json:"sha_256_hash"`
-	// The model name used for analysis
-	ModelName string `json:"model_name"`
-	// The model ID used for analysis
-	ModelId int32 `json:"model_id"`
-	// The name of the owner of the binary
-	OwnerUsername string `json:"owner_username"`
-	// Whether the analysis is a system analysis
-	IsSystem bool `json:"is_system"`
-	// The scope of the analysis
-	AnalysisScope string `json:"analysis_scope"`
-	// Whether the current user is the owner
-	IsOwner bool `json:"is_owner"`
 	// Whether the current analysis was analysed with debug symbols
 	Debug bool `json:"debug"`
 	// The number of functions in the binary
 	FunctionCount int32 `json:"function_count"`
 	// Whether the analysis was advanced
 	IsAdvanced bool `json:"is_advanced"`
-	BaseAddress NullableInt32 `json:"base_address"`
-	BinaryUuid NullableString `json:"binary_uuid,omitempty"`
+	// Whether the current user is the owner
+	IsOwner bool `json:"is_owner"`
+	// Whether the analysis is a system analysis
+	IsSystem bool `json:"is_system"`
+	// The model ID used for analysis
+	ModelId int32 `json:"model_id"`
+	// The model name used for analysis
+	ModelName string `json:"model_name"`
+	// The name of the owner of the binary
+	OwnerUsername string `json:"owner_username"`
 	SequencerVersion NullableString `json:"sequencer_version,omitempty"`
+	// The hash of the binary uploaded
+	Sha256Hash string `json:"sha_256_hash"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -60,23 +60,23 @@ type _Basic Basic
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time.Time, sha256Hash string, modelName string, modelId int32, ownerUsername string, isSystem bool, analysisScope string, isOwner bool, debug bool, functionCount int32, isAdvanced bool, baseAddress NullableInt32) *Basic {
+func NewBasic(analysisScope string, baseAddress NullableInt32, binaryId int32, binaryName string, binarySize int32, creation time.Time, debug bool, functionCount int32, isAdvanced bool, isOwner bool, isSystem bool, modelId int32, modelName string, ownerUsername string, sha256Hash string) *Basic {
 	this := Basic{}
+	this.AnalysisScope = analysisScope
+	this.BaseAddress = baseAddress
 	this.BinaryId = binaryId
 	this.BinaryName = binaryName
 	this.BinarySize = binarySize
 	this.Creation = creation
-	this.Sha256Hash = sha256Hash
-	this.ModelName = modelName
-	this.ModelId = modelId
-	this.OwnerUsername = ownerUsername
-	this.IsSystem = isSystem
-	this.AnalysisScope = analysisScope
-	this.IsOwner = isOwner
 	this.Debug = debug
 	this.FunctionCount = functionCount
 	this.IsAdvanced = isAdvanced
-	this.BaseAddress = baseAddress
+	this.IsOwner = isOwner
+	this.IsSystem = isSystem
+	this.ModelId = modelId
+	this.ModelName = modelName
+	this.OwnerUsername = ownerUsername
+	this.Sha256Hash = sha256Hash
 	return &this
 }
 
@@ -86,6 +86,56 @@ func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time
 func NewBasicWithDefaults() *Basic {
 	this := Basic{}
 	return &this
+}
+
+// GetAnalysisScope returns the AnalysisScope field value
+func (o *Basic) GetAnalysisScope() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AnalysisScope
+}
+
+// GetAnalysisScopeOk returns a tuple with the AnalysisScope field value
+// and a boolean to check if the value has been set.
+func (o *Basic) GetAnalysisScopeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AnalysisScope, true
+}
+
+// SetAnalysisScope sets field value
+func (o *Basic) SetAnalysisScope(v string) {
+	o.AnalysisScope = v
+}
+
+// GetBaseAddress returns the BaseAddress field value
+// If the value is explicit nil, the zero value for int32 will be returned
+func (o *Basic) GetBaseAddress() int32 {
+	if o == nil || o.BaseAddress.Get() == nil {
+		var ret int32
+		return ret
+	}
+
+	return *o.BaseAddress.Get()
+}
+
+// GetBaseAddressOk returns a tuple with the BaseAddress field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Basic) GetBaseAddressOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BaseAddress.Get(), o.BaseAddress.IsSet()
+}
+
+// SetBaseAddress sets field value
+func (o *Basic) SetBaseAddress(v int32) {
+	o.BaseAddress.Set(&v)
 }
 
 // GetBinaryId returns the BinaryId field value
@@ -160,6 +210,48 @@ func (o *Basic) SetBinarySize(v int32) {
 	o.BinarySize = v
 }
 
+// GetBinaryUuid returns the BinaryUuid field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Basic) GetBinaryUuid() string {
+	if o == nil || IsNil(o.BinaryUuid.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BinaryUuid.Get()
+}
+
+// GetBinaryUuidOk returns a tuple with the BinaryUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Basic) GetBinaryUuidOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BinaryUuid.Get(), o.BinaryUuid.IsSet()
+}
+
+// HasBinaryUuid returns a boolean if a field has been set.
+func (o *Basic) HasBinaryUuid() bool {
+	if o != nil && o.BinaryUuid.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBinaryUuid gets a reference to the given NullableString and assigns it to the BinaryUuid field.
+func (o *Basic) SetBinaryUuid(v string) {
+	o.BinaryUuid.Set(&v)
+}
+// SetBinaryUuidNil sets the value for BinaryUuid to be an explicit nil
+func (o *Basic) SetBinaryUuidNil() {
+	o.BinaryUuid.Set(nil)
+}
+
+// UnsetBinaryUuid ensures that no value is present for BinaryUuid, not even an explicit nil
+func (o *Basic) UnsetBinaryUuid() {
+	o.BinaryUuid.Unset()
+}
+
 // GetCreation returns the Creation field value
 func (o *Basic) GetCreation() time.Time {
 	if o == nil {
@@ -182,174 +274,6 @@ func (o *Basic) GetCreationOk() (*time.Time, bool) {
 // SetCreation sets field value
 func (o *Basic) SetCreation(v time.Time) {
 	o.Creation = v
-}
-
-// GetSha256Hash returns the Sha256Hash field value
-func (o *Basic) GetSha256Hash() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Sha256Hash
-}
-
-// GetSha256HashOk returns a tuple with the Sha256Hash field value
-// and a boolean to check if the value has been set.
-func (o *Basic) GetSha256HashOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Sha256Hash, true
-}
-
-// SetSha256Hash sets field value
-func (o *Basic) SetSha256Hash(v string) {
-	o.Sha256Hash = v
-}
-
-// GetModelName returns the ModelName field value
-func (o *Basic) GetModelName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ModelName
-}
-
-// GetModelNameOk returns a tuple with the ModelName field value
-// and a boolean to check if the value has been set.
-func (o *Basic) GetModelNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelName, true
-}
-
-// SetModelName sets field value
-func (o *Basic) SetModelName(v string) {
-	o.ModelName = v
-}
-
-// GetModelId returns the ModelId field value
-func (o *Basic) GetModelId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.ModelId
-}
-
-// GetModelIdOk returns a tuple with the ModelId field value
-// and a boolean to check if the value has been set.
-func (o *Basic) GetModelIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelId, true
-}
-
-// SetModelId sets field value
-func (o *Basic) SetModelId(v int32) {
-	o.ModelId = v
-}
-
-// GetOwnerUsername returns the OwnerUsername field value
-func (o *Basic) GetOwnerUsername() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.OwnerUsername
-}
-
-// GetOwnerUsernameOk returns a tuple with the OwnerUsername field value
-// and a boolean to check if the value has been set.
-func (o *Basic) GetOwnerUsernameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.OwnerUsername, true
-}
-
-// SetOwnerUsername sets field value
-func (o *Basic) SetOwnerUsername(v string) {
-	o.OwnerUsername = v
-}
-
-// GetIsSystem returns the IsSystem field value
-func (o *Basic) GetIsSystem() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.IsSystem
-}
-
-// GetIsSystemOk returns a tuple with the IsSystem field value
-// and a boolean to check if the value has been set.
-func (o *Basic) GetIsSystemOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.IsSystem, true
-}
-
-// SetIsSystem sets field value
-func (o *Basic) SetIsSystem(v bool) {
-	o.IsSystem = v
-}
-
-// GetAnalysisScope returns the AnalysisScope field value
-func (o *Basic) GetAnalysisScope() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.AnalysisScope
-}
-
-// GetAnalysisScopeOk returns a tuple with the AnalysisScope field value
-// and a boolean to check if the value has been set.
-func (o *Basic) GetAnalysisScopeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.AnalysisScope, true
-}
-
-// SetAnalysisScope sets field value
-func (o *Basic) SetAnalysisScope(v string) {
-	o.AnalysisScope = v
-}
-
-// GetIsOwner returns the IsOwner field value
-func (o *Basic) GetIsOwner() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.IsOwner
-}
-
-// GetIsOwnerOk returns a tuple with the IsOwner field value
-// and a boolean to check if the value has been set.
-func (o *Basic) GetIsOwnerOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.IsOwner, true
-}
-
-// SetIsOwner sets field value
-func (o *Basic) SetIsOwner(v bool) {
-	o.IsOwner = v
 }
 
 // GetDebug returns the Debug field value
@@ -424,72 +348,124 @@ func (o *Basic) SetIsAdvanced(v bool) {
 	o.IsAdvanced = v
 }
 
-// GetBaseAddress returns the BaseAddress field value
-// If the value is explicit nil, the zero value for int32 will be returned
-func (o *Basic) GetBaseAddress() int32 {
-	if o == nil || o.BaseAddress.Get() == nil {
+// GetIsOwner returns the IsOwner field value
+func (o *Basic) GetIsOwner() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsOwner
+}
+
+// GetIsOwnerOk returns a tuple with the IsOwner field value
+// and a boolean to check if the value has been set.
+func (o *Basic) GetIsOwnerOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsOwner, true
+}
+
+// SetIsOwner sets field value
+func (o *Basic) SetIsOwner(v bool) {
+	o.IsOwner = v
+}
+
+// GetIsSystem returns the IsSystem field value
+func (o *Basic) GetIsSystem() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsSystem
+}
+
+// GetIsSystemOk returns a tuple with the IsSystem field value
+// and a boolean to check if the value has been set.
+func (o *Basic) GetIsSystemOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsSystem, true
+}
+
+// SetIsSystem sets field value
+func (o *Basic) SetIsSystem(v bool) {
+	o.IsSystem = v
+}
+
+// GetModelId returns the ModelId field value
+func (o *Basic) GetModelId() int32 {
+	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return *o.BaseAddress.Get()
+	return o.ModelId
 }
 
-// GetBaseAddressOk returns a tuple with the BaseAddress field value
+// GetModelIdOk returns a tuple with the ModelId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Basic) GetBaseAddressOk() (*int32, bool) {
+func (o *Basic) GetModelIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.BaseAddress.Get(), o.BaseAddress.IsSet()
+	return &o.ModelId, true
 }
 
-// SetBaseAddress sets field value
-func (o *Basic) SetBaseAddress(v int32) {
-	o.BaseAddress.Set(&v)
+// SetModelId sets field value
+func (o *Basic) SetModelId(v int32) {
+	o.ModelId = v
 }
 
-// GetBinaryUuid returns the BinaryUuid field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Basic) GetBinaryUuid() string {
-	if o == nil || IsNil(o.BinaryUuid.Get()) {
+// GetModelName returns the ModelName field value
+func (o *Basic) GetModelName() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.BinaryUuid.Get()
+
+	return o.ModelName
 }
 
-// GetBinaryUuidOk returns a tuple with the BinaryUuid field value if set, nil otherwise
+// GetModelNameOk returns a tuple with the ModelName field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Basic) GetBinaryUuidOk() (*string, bool) {
+func (o *Basic) GetModelNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.BinaryUuid.Get(), o.BinaryUuid.IsSet()
+	return &o.ModelName, true
 }
 
-// HasBinaryUuid returns a boolean if a field has been set.
-func (o *Basic) HasBinaryUuid() bool {
-	if o != nil && o.BinaryUuid.IsSet() {
-		return true
+// SetModelName sets field value
+func (o *Basic) SetModelName(v string) {
+	o.ModelName = v
+}
+
+// GetOwnerUsername returns the OwnerUsername field value
+func (o *Basic) GetOwnerUsername() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	return false
+	return o.OwnerUsername
 }
 
-// SetBinaryUuid gets a reference to the given NullableString and assigns it to the BinaryUuid field.
-func (o *Basic) SetBinaryUuid(v string) {
-	o.BinaryUuid.Set(&v)
-}
-// SetBinaryUuidNil sets the value for BinaryUuid to be an explicit nil
-func (o *Basic) SetBinaryUuidNil() {
-	o.BinaryUuid.Set(nil)
+// GetOwnerUsernameOk returns a tuple with the OwnerUsername field value
+// and a boolean to check if the value has been set.
+func (o *Basic) GetOwnerUsernameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OwnerUsername, true
 }
 
-// UnsetBinaryUuid ensures that no value is present for BinaryUuid, not even an explicit nil
-func (o *Basic) UnsetBinaryUuid() {
-	o.BinaryUuid.Unset()
+// SetOwnerUsername sets field value
+func (o *Basic) SetOwnerUsername(v string) {
+	o.OwnerUsername = v
 }
 
 // GetSequencerVersion returns the SequencerVersion field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -534,6 +510,30 @@ func (o *Basic) UnsetSequencerVersion() {
 	o.SequencerVersion.Unset()
 }
 
+// GetSha256Hash returns the Sha256Hash field value
+func (o *Basic) GetSha256Hash() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Sha256Hash
+}
+
+// GetSha256HashOk returns a tuple with the Sha256Hash field value
+// and a boolean to check if the value has been set.
+func (o *Basic) GetSha256HashOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Sha256Hash, true
+}
+
+// SetSha256Hash sets field value
+func (o *Basic) SetSha256Hash(v string) {
+	o.Sha256Hash = v
+}
+
 func (o Basic) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -544,27 +544,27 @@ func (o Basic) MarshalJSON() ([]byte, error) {
 
 func (o Basic) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["analysis_scope"] = o.AnalysisScope
+	toSerialize["base_address"] = o.BaseAddress.Get()
 	toSerialize["binary_id"] = o.BinaryId
 	toSerialize["binary_name"] = o.BinaryName
 	toSerialize["binary_size"] = o.BinarySize
-	toSerialize["creation"] = o.Creation
-	toSerialize["sha_256_hash"] = o.Sha256Hash
-	toSerialize["model_name"] = o.ModelName
-	toSerialize["model_id"] = o.ModelId
-	toSerialize["owner_username"] = o.OwnerUsername
-	toSerialize["is_system"] = o.IsSystem
-	toSerialize["analysis_scope"] = o.AnalysisScope
-	toSerialize["is_owner"] = o.IsOwner
-	toSerialize["debug"] = o.Debug
-	toSerialize["function_count"] = o.FunctionCount
-	toSerialize["is_advanced"] = o.IsAdvanced
-	toSerialize["base_address"] = o.BaseAddress.Get()
 	if o.BinaryUuid.IsSet() {
 		toSerialize["binary_uuid"] = o.BinaryUuid.Get()
 	}
+	toSerialize["creation"] = o.Creation
+	toSerialize["debug"] = o.Debug
+	toSerialize["function_count"] = o.FunctionCount
+	toSerialize["is_advanced"] = o.IsAdvanced
+	toSerialize["is_owner"] = o.IsOwner
+	toSerialize["is_system"] = o.IsSystem
+	toSerialize["model_id"] = o.ModelId
+	toSerialize["model_name"] = o.ModelName
+	toSerialize["owner_username"] = o.OwnerUsername
 	if o.SequencerVersion.IsSet() {
 		toSerialize["sequencer_version"] = o.SequencerVersion.Get()
 	}
+	toSerialize["sha_256_hash"] = o.Sha256Hash
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -578,21 +578,21 @@ func (o *Basic) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"analysis_scope",
+		"base_address",
 		"binary_id",
 		"binary_name",
 		"binary_size",
 		"creation",
-		"sha_256_hash",
-		"model_name",
-		"model_id",
-		"owner_username",
-		"is_system",
-		"analysis_scope",
-		"is_owner",
 		"debug",
 		"function_count",
 		"is_advanced",
-		"base_address",
+		"is_owner",
+		"is_system",
+		"model_id",
+		"model_name",
+		"owner_username",
+		"sha_256_hash",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -622,23 +622,23 @@ func (o *Basic) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_scope")
+		delete(additionalProperties, "base_address")
 		delete(additionalProperties, "binary_id")
 		delete(additionalProperties, "binary_name")
 		delete(additionalProperties, "binary_size")
+		delete(additionalProperties, "binary_uuid")
 		delete(additionalProperties, "creation")
-		delete(additionalProperties, "sha_256_hash")
-		delete(additionalProperties, "model_name")
-		delete(additionalProperties, "model_id")
-		delete(additionalProperties, "owner_username")
-		delete(additionalProperties, "is_system")
-		delete(additionalProperties, "analysis_scope")
-		delete(additionalProperties, "is_owner")
 		delete(additionalProperties, "debug")
 		delete(additionalProperties, "function_count")
 		delete(additionalProperties, "is_advanced")
-		delete(additionalProperties, "base_address")
-		delete(additionalProperties, "binary_uuid")
+		delete(additionalProperties, "is_owner")
+		delete(additionalProperties, "is_system")
+		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "model_name")
+		delete(additionalProperties, "owner_username")
 		delete(additionalProperties, "sequencer_version")
+		delete(additionalProperties, "sha_256_hash")
 		o.AdditionalProperties = additionalProperties
 	}
 

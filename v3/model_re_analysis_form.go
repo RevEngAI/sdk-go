@@ -18,18 +18,18 @@ var _ MappedNullable = &ReAnalysisForm{}
 
 // ReAnalysisForm Form Model for receiving the analysis request
 type ReAnalysisForm struct {
-	// Tags associated with the analysis
-	Tags []string `json:"tags,omitempty"`
 	// Command line arguments for dynamic execution
 	CommandLineArgs *string `json:"command_line_args,omitempty"`
-	// Priority of the analysis
-	// Deprecated
-	Priority *int32 `json:"priority,omitempty"`
 	// Only runs essential parts of the analysis, skips tags/sbom/cves etc.
 	Essential *bool `json:"essential,omitempty"`
 	ModelName NullableString `json:"model_name,omitempty"`
 	// When enabled, skips using cached data within the processing.
 	NoCache *bool `json:"no_cache,omitempty"`
+	// Priority of the analysis
+	// Deprecated
+	Priority *int32 `json:"priority,omitempty"`
+	// Tags associated with the analysis
+	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,12 +43,12 @@ func NewReAnalysisForm() *ReAnalysisForm {
 	this := ReAnalysisForm{}
 	var commandLineArgs string = ""
 	this.CommandLineArgs = &commandLineArgs
-	var priority int32 = 0
-	this.Priority = &priority
 	var essential bool = true
 	this.Essential = &essential
 	var noCache bool = false
 	this.NoCache = &noCache
+	var priority int32 = 0
+	this.Priority = &priority
 	return &this
 }
 
@@ -59,45 +59,13 @@ func NewReAnalysisFormWithDefaults() *ReAnalysisForm {
 	this := ReAnalysisForm{}
 	var commandLineArgs string = ""
 	this.CommandLineArgs = &commandLineArgs
-	var priority int32 = 0
-	this.Priority = &priority
 	var essential bool = true
 	this.Essential = &essential
 	var noCache bool = false
 	this.NoCache = &noCache
+	var priority int32 = 0
+	this.Priority = &priority
 	return &this
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *ReAnalysisForm) GetTags() []string {
-	if o == nil || IsNil(o.Tags) {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ReAnalysisForm) GetTagsOk() ([]string, bool) {
-	if o == nil || IsNil(o.Tags) {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *ReAnalysisForm) HasTags() bool {
-	if o != nil && !IsNil(o.Tags) {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *ReAnalysisForm) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetCommandLineArgs returns the CommandLineArgs field value if set, zero value otherwise.
@@ -130,41 +98,6 @@ func (o *ReAnalysisForm) HasCommandLineArgs() bool {
 // SetCommandLineArgs gets a reference to the given string and assigns it to the CommandLineArgs field.
 func (o *ReAnalysisForm) SetCommandLineArgs(v string) {
 	o.CommandLineArgs = &v
-}
-
-// GetPriority returns the Priority field value if set, zero value otherwise.
-// Deprecated
-func (o *ReAnalysisForm) GetPriority() int32 {
-	if o == nil || IsNil(o.Priority) {
-		var ret int32
-		return ret
-	}
-	return *o.Priority
-}
-
-// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *ReAnalysisForm) GetPriorityOk() (*int32, bool) {
-	if o == nil || IsNil(o.Priority) {
-		return nil, false
-	}
-	return o.Priority, true
-}
-
-// HasPriority returns a boolean if a field has been set.
-func (o *ReAnalysisForm) HasPriority() bool {
-	if o != nil && !IsNil(o.Priority) {
-		return true
-	}
-
-	return false
-}
-
-// SetPriority gets a reference to the given int32 and assigns it to the Priority field.
-// Deprecated
-func (o *ReAnalysisForm) SetPriority(v int32) {
-	o.Priority = &v
 }
 
 // GetEssential returns the Essential field value if set, zero value otherwise.
@@ -273,6 +206,73 @@ func (o *ReAnalysisForm) SetNoCache(v bool) {
 	o.NoCache = &v
 }
 
+// GetPriority returns the Priority field value if set, zero value otherwise.
+// Deprecated
+func (o *ReAnalysisForm) GetPriority() int32 {
+	if o == nil || IsNil(o.Priority) {
+		var ret int32
+		return ret
+	}
+	return *o.Priority
+}
+
+// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *ReAnalysisForm) GetPriorityOk() (*int32, bool) {
+	if o == nil || IsNil(o.Priority) {
+		return nil, false
+	}
+	return o.Priority, true
+}
+
+// HasPriority returns a boolean if a field has been set.
+func (o *ReAnalysisForm) HasPriority() bool {
+	if o != nil && !IsNil(o.Priority) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriority gets a reference to the given int32 and assigns it to the Priority field.
+// Deprecated
+func (o *ReAnalysisForm) SetPriority(v int32) {
+	o.Priority = &v
+}
+
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *ReAnalysisForm) GetTags() []string {
+	if o == nil || IsNil(o.Tags) {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReAnalysisForm) GetTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Tags) {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *ReAnalysisForm) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *ReAnalysisForm) SetTags(v []string) {
+	o.Tags = v
+}
+
 func (o ReAnalysisForm) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -283,14 +283,8 @@ func (o ReAnalysisForm) MarshalJSON() ([]byte, error) {
 
 func (o ReAnalysisForm) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Tags) {
-		toSerialize["tags"] = o.Tags
-	}
 	if !IsNil(o.CommandLineArgs) {
 		toSerialize["command_line_args"] = o.CommandLineArgs
-	}
-	if !IsNil(o.Priority) {
-		toSerialize["priority"] = o.Priority
 	}
 	if !IsNil(o.Essential) {
 		toSerialize["essential"] = o.Essential
@@ -300,6 +294,12 @@ func (o ReAnalysisForm) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NoCache) {
 		toSerialize["no_cache"] = o.NoCache
+	}
+	if !IsNil(o.Priority) {
+		toSerialize["priority"] = o.Priority
+	}
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -323,12 +323,12 @@ func (o *ReAnalysisForm) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "tags")
 		delete(additionalProperties, "command_line_args")
-		delete(additionalProperties, "priority")
 		delete(additionalProperties, "essential")
 		delete(additionalProperties, "model_name")
 		delete(additionalProperties, "no_cache")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "tags")
 		o.AdditionalProperties = additionalProperties
 	}
 

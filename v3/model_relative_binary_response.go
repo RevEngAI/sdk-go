@@ -19,9 +19,9 @@ var _ MappedNullable = &RelativeBinaryResponse{}
 
 // RelativeBinaryResponse struct for RelativeBinaryResponse
 type RelativeBinaryResponse struct {
+	AnalysisId NullableInt32 `json:"analysis_id,omitempty"`
 	// ID of the relative binary
 	BinaryId int32 `json:"binary_id"`
-	AnalysisId NullableInt32 `json:"analysis_id,omitempty"`
 	// Name of the relative binary
 	Name string `json:"name"`
 	// SHA256 hash of the relative binary
@@ -49,30 +49,6 @@ func NewRelativeBinaryResponse(binaryId int32, name string, sha256 string) *Rela
 func NewRelativeBinaryResponseWithDefaults() *RelativeBinaryResponse {
 	this := RelativeBinaryResponse{}
 	return &this
-}
-
-// GetBinaryId returns the BinaryId field value
-func (o *RelativeBinaryResponse) GetBinaryId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.BinaryId
-}
-
-// GetBinaryIdOk returns a tuple with the BinaryId field value
-// and a boolean to check if the value has been set.
-func (o *RelativeBinaryResponse) GetBinaryIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.BinaryId, true
-}
-
-// SetBinaryId sets field value
-func (o *RelativeBinaryResponse) SetBinaryId(v int32) {
-	o.BinaryId = v
 }
 
 // GetAnalysisId returns the AnalysisId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -115,6 +91,30 @@ func (o *RelativeBinaryResponse) SetAnalysisIdNil() {
 // UnsetAnalysisId ensures that no value is present for AnalysisId, not even an explicit nil
 func (o *RelativeBinaryResponse) UnsetAnalysisId() {
 	o.AnalysisId.Unset()
+}
+
+// GetBinaryId returns the BinaryId field value
+func (o *RelativeBinaryResponse) GetBinaryId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.BinaryId
+}
+
+// GetBinaryIdOk returns a tuple with the BinaryId field value
+// and a boolean to check if the value has been set.
+func (o *RelativeBinaryResponse) GetBinaryIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.BinaryId, true
+}
+
+// SetBinaryId sets field value
+func (o *RelativeBinaryResponse) SetBinaryId(v int32) {
+	o.BinaryId = v
 }
 
 // GetName returns the Name field value
@@ -175,10 +175,10 @@ func (o RelativeBinaryResponse) MarshalJSON() ([]byte, error) {
 
 func (o RelativeBinaryResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["binary_id"] = o.BinaryId
 	if o.AnalysisId.IsSet() {
 		toSerialize["analysis_id"] = o.AnalysisId.Get()
 	}
+	toSerialize["binary_id"] = o.BinaryId
 	toSerialize["name"] = o.Name
 	toSerialize["sha256"] = o.Sha256
 
@@ -226,8 +226,8 @@ func (o *RelativeBinaryResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "binary_id")
 		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "binary_id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "sha256")
 		o.AdditionalProperties = additionalProperties

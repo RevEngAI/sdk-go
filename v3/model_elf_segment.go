@@ -19,15 +19,15 @@ var _ MappedNullable = &ELFSegment{}
 
 // ELFSegment struct for ELFSegment
 type ELFSegment struct {
-	Type string `json:"type"`
-	VirtualAddress int32 `json:"virtual_address"`
-	VirtualSize int32 `json:"virtual_size"`
-	PhysicalAddress int32 `json:"physical_address"`
-	PhysicalSize int32 `json:"physical_size"`
+	Alignment int32 `json:"alignment"`
 	FileOffset int32 `json:"file_offset"`
 	Flags string `json:"flags"`
 	FlagsRaw int32 `json:"flags_raw"`
-	Alignment int32 `json:"alignment"`
+	PhysicalAddress int32 `json:"physical_address"`
+	PhysicalSize int32 `json:"physical_size"`
+	Type string `json:"type"`
+	VirtualAddress int32 `json:"virtual_address"`
+	VirtualSize int32 `json:"virtual_size"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,17 +37,17 @@ type _ELFSegment ELFSegment
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewELFSegment(type_ string, virtualAddress int32, virtualSize int32, physicalAddress int32, physicalSize int32, fileOffset int32, flags string, flagsRaw int32, alignment int32) *ELFSegment {
+func NewELFSegment(alignment int32, fileOffset int32, flags string, flagsRaw int32, physicalAddress int32, physicalSize int32, type_ string, virtualAddress int32, virtualSize int32) *ELFSegment {
 	this := ELFSegment{}
-	this.Type = type_
-	this.VirtualAddress = virtualAddress
-	this.VirtualSize = virtualSize
-	this.PhysicalAddress = physicalAddress
-	this.PhysicalSize = physicalSize
+	this.Alignment = alignment
 	this.FileOffset = fileOffset
 	this.Flags = flags
 	this.FlagsRaw = flagsRaw
-	this.Alignment = alignment
+	this.PhysicalAddress = physicalAddress
+	this.PhysicalSize = physicalSize
+	this.Type = type_
+	this.VirtualAddress = virtualAddress
+	this.VirtualSize = virtualSize
 	return &this
 }
 
@@ -59,124 +59,28 @@ func NewELFSegmentWithDefaults() *ELFSegment {
 	return &this
 }
 
-// GetType returns the Type field value
-func (o *ELFSegment) GetType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *ELFSegment) GetTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *ELFSegment) SetType(v string) {
-	o.Type = v
-}
-
-// GetVirtualAddress returns the VirtualAddress field value
-func (o *ELFSegment) GetVirtualAddress() int32 {
+// GetAlignment returns the Alignment field value
+func (o *ELFSegment) GetAlignment() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.VirtualAddress
+	return o.Alignment
 }
 
-// GetVirtualAddressOk returns a tuple with the VirtualAddress field value
+// GetAlignmentOk returns a tuple with the Alignment field value
 // and a boolean to check if the value has been set.
-func (o *ELFSegment) GetVirtualAddressOk() (*int32, bool) {
+func (o *ELFSegment) GetAlignmentOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.VirtualAddress, true
+	return &o.Alignment, true
 }
 
-// SetVirtualAddress sets field value
-func (o *ELFSegment) SetVirtualAddress(v int32) {
-	o.VirtualAddress = v
-}
-
-// GetVirtualSize returns the VirtualSize field value
-func (o *ELFSegment) GetVirtualSize() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.VirtualSize
-}
-
-// GetVirtualSizeOk returns a tuple with the VirtualSize field value
-// and a boolean to check if the value has been set.
-func (o *ELFSegment) GetVirtualSizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.VirtualSize, true
-}
-
-// SetVirtualSize sets field value
-func (o *ELFSegment) SetVirtualSize(v int32) {
-	o.VirtualSize = v
-}
-
-// GetPhysicalAddress returns the PhysicalAddress field value
-func (o *ELFSegment) GetPhysicalAddress() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.PhysicalAddress
-}
-
-// GetPhysicalAddressOk returns a tuple with the PhysicalAddress field value
-// and a boolean to check if the value has been set.
-func (o *ELFSegment) GetPhysicalAddressOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PhysicalAddress, true
-}
-
-// SetPhysicalAddress sets field value
-func (o *ELFSegment) SetPhysicalAddress(v int32) {
-	o.PhysicalAddress = v
-}
-
-// GetPhysicalSize returns the PhysicalSize field value
-func (o *ELFSegment) GetPhysicalSize() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.PhysicalSize
-}
-
-// GetPhysicalSizeOk returns a tuple with the PhysicalSize field value
-// and a boolean to check if the value has been set.
-func (o *ELFSegment) GetPhysicalSizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PhysicalSize, true
-}
-
-// SetPhysicalSize sets field value
-func (o *ELFSegment) SetPhysicalSize(v int32) {
-	o.PhysicalSize = v
+// SetAlignment sets field value
+func (o *ELFSegment) SetAlignment(v int32) {
+	o.Alignment = v
 }
 
 // GetFileOffset returns the FileOffset field value
@@ -251,28 +155,124 @@ func (o *ELFSegment) SetFlagsRaw(v int32) {
 	o.FlagsRaw = v
 }
 
-// GetAlignment returns the Alignment field value
-func (o *ELFSegment) GetAlignment() int32 {
+// GetPhysicalAddress returns the PhysicalAddress field value
+func (o *ELFSegment) GetPhysicalAddress() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.Alignment
+	return o.PhysicalAddress
 }
 
-// GetAlignmentOk returns a tuple with the Alignment field value
+// GetPhysicalAddressOk returns a tuple with the PhysicalAddress field value
 // and a boolean to check if the value has been set.
-func (o *ELFSegment) GetAlignmentOk() (*int32, bool) {
+func (o *ELFSegment) GetPhysicalAddressOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Alignment, true
+	return &o.PhysicalAddress, true
 }
 
-// SetAlignment sets field value
-func (o *ELFSegment) SetAlignment(v int32) {
-	o.Alignment = v
+// SetPhysicalAddress sets field value
+func (o *ELFSegment) SetPhysicalAddress(v int32) {
+	o.PhysicalAddress = v
+}
+
+// GetPhysicalSize returns the PhysicalSize field value
+func (o *ELFSegment) GetPhysicalSize() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.PhysicalSize
+}
+
+// GetPhysicalSizeOk returns a tuple with the PhysicalSize field value
+// and a boolean to check if the value has been set.
+func (o *ELFSegment) GetPhysicalSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PhysicalSize, true
+}
+
+// SetPhysicalSize sets field value
+func (o *ELFSegment) SetPhysicalSize(v int32) {
+	o.PhysicalSize = v
+}
+
+// GetType returns the Type field value
+func (o *ELFSegment) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *ELFSegment) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *ELFSegment) SetType(v string) {
+	o.Type = v
+}
+
+// GetVirtualAddress returns the VirtualAddress field value
+func (o *ELFSegment) GetVirtualAddress() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.VirtualAddress
+}
+
+// GetVirtualAddressOk returns a tuple with the VirtualAddress field value
+// and a boolean to check if the value has been set.
+func (o *ELFSegment) GetVirtualAddressOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.VirtualAddress, true
+}
+
+// SetVirtualAddress sets field value
+func (o *ELFSegment) SetVirtualAddress(v int32) {
+	o.VirtualAddress = v
+}
+
+// GetVirtualSize returns the VirtualSize field value
+func (o *ELFSegment) GetVirtualSize() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.VirtualSize
+}
+
+// GetVirtualSizeOk returns a tuple with the VirtualSize field value
+// and a boolean to check if the value has been set.
+func (o *ELFSegment) GetVirtualSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.VirtualSize, true
+}
+
+// SetVirtualSize sets field value
+func (o *ELFSegment) SetVirtualSize(v int32) {
+	o.VirtualSize = v
 }
 
 func (o ELFSegment) MarshalJSON() ([]byte, error) {
@@ -285,15 +285,15 @@ func (o ELFSegment) MarshalJSON() ([]byte, error) {
 
 func (o ELFSegment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["type"] = o.Type
-	toSerialize["virtual_address"] = o.VirtualAddress
-	toSerialize["virtual_size"] = o.VirtualSize
-	toSerialize["physical_address"] = o.PhysicalAddress
-	toSerialize["physical_size"] = o.PhysicalSize
+	toSerialize["alignment"] = o.Alignment
 	toSerialize["file_offset"] = o.FileOffset
 	toSerialize["flags"] = o.Flags
 	toSerialize["flags_raw"] = o.FlagsRaw
-	toSerialize["alignment"] = o.Alignment
+	toSerialize["physical_address"] = o.PhysicalAddress
+	toSerialize["physical_size"] = o.PhysicalSize
+	toSerialize["type"] = o.Type
+	toSerialize["virtual_address"] = o.VirtualAddress
+	toSerialize["virtual_size"] = o.VirtualSize
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -307,15 +307,15 @@ func (o *ELFSegment) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"type",
-		"virtual_address",
-		"virtual_size",
-		"physical_address",
-		"physical_size",
+		"alignment",
 		"file_offset",
 		"flags",
 		"flags_raw",
-		"alignment",
+		"physical_address",
+		"physical_size",
+		"type",
+		"virtual_address",
+		"virtual_size",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -345,15 +345,15 @@ func (o *ELFSegment) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "virtual_address")
-		delete(additionalProperties, "virtual_size")
-		delete(additionalProperties, "physical_address")
-		delete(additionalProperties, "physical_size")
+		delete(additionalProperties, "alignment")
 		delete(additionalProperties, "file_offset")
 		delete(additionalProperties, "flags")
 		delete(additionalProperties, "flags_raw")
-		delete(additionalProperties, "alignment")
+		delete(additionalProperties, "physical_address")
+		delete(additionalProperties, "physical_size")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "virtual_address")
+		delete(additionalProperties, "virtual_size")
 		o.AdditionalProperties = additionalProperties
 	}
 

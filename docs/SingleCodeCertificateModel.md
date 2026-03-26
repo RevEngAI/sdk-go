@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Version** | **int32** |  | 
-**IssuedOn** | **string** |  | 
 **ExpiresOn** | **string** |  | 
+**IssuedOn** | **string** |  | 
 **IssuerName** | **string** |  | 
 **SerialNumber** | **string** |  | 
 **SubjectName** | **string** |  | 
+**Version** | **int32** |  | 
 
 ## Methods
 
 ### NewSingleCodeCertificateModel
 
-`func NewSingleCodeCertificateModel(version int32, issuedOn string, expiresOn string, issuerName string, serialNumber string, subjectName string, ) *SingleCodeCertificateModel`
+`func NewSingleCodeCertificateModel(expiresOn string, issuedOn string, issuerName string, serialNumber string, subjectName string, version int32, ) *SingleCodeCertificateModel`
 
 NewSingleCodeCertificateModel instantiates a new SingleCodeCertificateModel object
 This constructor will assign default values to properties that have it defined,
@@ -30,24 +30,24 @@ NewSingleCodeCertificateModelWithDefaults instantiates a new SingleCodeCertifica
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetVersion
+### GetExpiresOn
 
-`func (o *SingleCodeCertificateModel) GetVersion() int32`
+`func (o *SingleCodeCertificateModel) GetExpiresOn() string`
 
-GetVersion returns the Version field if non-nil, zero value otherwise.
+GetExpiresOn returns the ExpiresOn field if non-nil, zero value otherwise.
 
-### GetVersionOk
+### GetExpiresOnOk
 
-`func (o *SingleCodeCertificateModel) GetVersionOk() (*int32, bool)`
+`func (o *SingleCodeCertificateModel) GetExpiresOnOk() (*string, bool)`
 
-GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+GetExpiresOnOk returns a tuple with the ExpiresOn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVersion
+### SetExpiresOn
 
-`func (o *SingleCodeCertificateModel) SetVersion(v int32)`
+`func (o *SingleCodeCertificateModel) SetExpiresOn(v string)`
 
-SetVersion sets Version field to given value.
+SetExpiresOn sets ExpiresOn field to given value.
 
 
 ### GetIssuedOn
@@ -68,26 +68,6 @@ and a boolean to check if the value has been set.
 `func (o *SingleCodeCertificateModel) SetIssuedOn(v string)`
 
 SetIssuedOn sets IssuedOn field to given value.
-
-
-### GetExpiresOn
-
-`func (o *SingleCodeCertificateModel) GetExpiresOn() string`
-
-GetExpiresOn returns the ExpiresOn field if non-nil, zero value otherwise.
-
-### GetExpiresOnOk
-
-`func (o *SingleCodeCertificateModel) GetExpiresOnOk() (*string, bool)`
-
-GetExpiresOnOk returns a tuple with the ExpiresOn field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExpiresOn
-
-`func (o *SingleCodeCertificateModel) SetExpiresOn(v string)`
-
-SetExpiresOn sets ExpiresOn field to given value.
 
 
 ### GetIssuerName
@@ -148,6 +128,26 @@ and a boolean to check if the value has been set.
 `func (o *SingleCodeCertificateModel) SetSubjectName(v string)`
 
 SetSubjectName sets SubjectName field to given value.
+
+
+### GetVersion
+
+`func (o *SingleCodeCertificateModel) GetVersion() int32`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *SingleCodeCertificateModel) GetVersionOk() (*int32, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *SingleCodeCertificateModel) SetVersion(v int32)`
+
+SetVersion sets Version field to given value.
 
 
 

@@ -24,10 +24,10 @@ type StructureMember struct {
 	Name string `json:"name"`
 	// Offset of the member within the structure
 	Offset int32 `json:"offset"`
-	// Data type of the structure member
-	Type string `json:"type"`
 	// Size of the structure member in bytes
 	Size int32 `json:"size"`
+	// Data type of the structure member
+	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,12 +37,12 @@ type _StructureMember StructureMember
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStructureMember(name string, offset int32, type_ string, size int32) *StructureMember {
+func NewStructureMember(name string, offset int32, size int32, type_ string) *StructureMember {
 	this := StructureMember{}
 	this.Name = name
 	this.Offset = offset
-	this.Type = type_
 	this.Size = size
+	this.Type = type_
 	return &this
 }
 
@@ -144,30 +144,6 @@ func (o *StructureMember) SetOffset(v int32) {
 	o.Offset = v
 }
 
-// GetType returns the Type field value
-func (o *StructureMember) GetType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *StructureMember) GetTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *StructureMember) SetType(v string) {
-	o.Type = v
-}
-
 // GetSize returns the Size field value
 func (o *StructureMember) GetSize() int32 {
 	if o == nil {
@@ -192,6 +168,30 @@ func (o *StructureMember) SetSize(v int32) {
 	o.Size = v
 }
 
+// GetType returns the Type field value
+func (o *StructureMember) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *StructureMember) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *StructureMember) SetType(v string) {
+	o.Type = v
+}
+
 func (o StructureMember) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -207,8 +207,8 @@ func (o StructureMember) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["name"] = o.Name
 	toSerialize["offset"] = o.Offset
-	toSerialize["type"] = o.Type
 	toSerialize["size"] = o.Size
+	toSerialize["type"] = o.Type
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -224,8 +224,8 @@ func (o *StructureMember) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"name",
 		"offset",
-		"type",
 		"size",
+		"type",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -258,8 +258,8 @@ func (o *StructureMember) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "last_change")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "offset")
-		delete(additionalProperties, "type")
 		delete(additionalProperties, "size")
+		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
 	}
 

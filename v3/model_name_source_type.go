@@ -19,11 +19,11 @@ var _ MappedNullable = &NameSourceType{}
 
 // NameSourceType struct for NameSourceType
 type NameSourceType struct {
+	AnalysisId NullableInt32 `json:"analysis_id,omitempty"`
+	BinaryId NullableInt32 `json:"binary_id,omitempty"`
+	FunctionId NullableInt32 `json:"function_id,omitempty"`
 	// The source (process) the function name came from
 	Type string `json:"type"`
-	FunctionId NullableInt32 `json:"function_id,omitempty"`
-	BinaryId NullableInt32 `json:"binary_id,omitempty"`
-	AnalysisId NullableInt32 `json:"analysis_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,114 +45,6 @@ func NewNameSourceType(type_ string) *NameSourceType {
 func NewNameSourceTypeWithDefaults() *NameSourceType {
 	this := NameSourceType{}
 	return &this
-}
-
-// GetType returns the Type field value
-func (o *NameSourceType) GetType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *NameSourceType) GetTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *NameSourceType) SetType(v string) {
-	o.Type = v
-}
-
-// GetFunctionId returns the FunctionId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *NameSourceType) GetFunctionId() int32 {
-	if o == nil || IsNil(o.FunctionId.Get()) {
-		var ret int32
-		return ret
-	}
-	return *o.FunctionId.Get()
-}
-
-// GetFunctionIdOk returns a tuple with the FunctionId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NameSourceType) GetFunctionIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.FunctionId.Get(), o.FunctionId.IsSet()
-}
-
-// HasFunctionId returns a boolean if a field has been set.
-func (o *NameSourceType) HasFunctionId() bool {
-	if o != nil && o.FunctionId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFunctionId gets a reference to the given NullableInt32 and assigns it to the FunctionId field.
-func (o *NameSourceType) SetFunctionId(v int32) {
-	o.FunctionId.Set(&v)
-}
-// SetFunctionIdNil sets the value for FunctionId to be an explicit nil
-func (o *NameSourceType) SetFunctionIdNil() {
-	o.FunctionId.Set(nil)
-}
-
-// UnsetFunctionId ensures that no value is present for FunctionId, not even an explicit nil
-func (o *NameSourceType) UnsetFunctionId() {
-	o.FunctionId.Unset()
-}
-
-// GetBinaryId returns the BinaryId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *NameSourceType) GetBinaryId() int32 {
-	if o == nil || IsNil(o.BinaryId.Get()) {
-		var ret int32
-		return ret
-	}
-	return *o.BinaryId.Get()
-}
-
-// GetBinaryIdOk returns a tuple with the BinaryId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NameSourceType) GetBinaryIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.BinaryId.Get(), o.BinaryId.IsSet()
-}
-
-// HasBinaryId returns a boolean if a field has been set.
-func (o *NameSourceType) HasBinaryId() bool {
-	if o != nil && o.BinaryId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetBinaryId gets a reference to the given NullableInt32 and assigns it to the BinaryId field.
-func (o *NameSourceType) SetBinaryId(v int32) {
-	o.BinaryId.Set(&v)
-}
-// SetBinaryIdNil sets the value for BinaryId to be an explicit nil
-func (o *NameSourceType) SetBinaryIdNil() {
-	o.BinaryId.Set(nil)
-}
-
-// UnsetBinaryId ensures that no value is present for BinaryId, not even an explicit nil
-func (o *NameSourceType) UnsetBinaryId() {
-	o.BinaryId.Unset()
 }
 
 // GetAnalysisId returns the AnalysisId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -197,6 +89,114 @@ func (o *NameSourceType) UnsetAnalysisId() {
 	o.AnalysisId.Unset()
 }
 
+// GetBinaryId returns the BinaryId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NameSourceType) GetBinaryId() int32 {
+	if o == nil || IsNil(o.BinaryId.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.BinaryId.Get()
+}
+
+// GetBinaryIdOk returns a tuple with the BinaryId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NameSourceType) GetBinaryIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BinaryId.Get(), o.BinaryId.IsSet()
+}
+
+// HasBinaryId returns a boolean if a field has been set.
+func (o *NameSourceType) HasBinaryId() bool {
+	if o != nil && o.BinaryId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBinaryId gets a reference to the given NullableInt32 and assigns it to the BinaryId field.
+func (o *NameSourceType) SetBinaryId(v int32) {
+	o.BinaryId.Set(&v)
+}
+// SetBinaryIdNil sets the value for BinaryId to be an explicit nil
+func (o *NameSourceType) SetBinaryIdNil() {
+	o.BinaryId.Set(nil)
+}
+
+// UnsetBinaryId ensures that no value is present for BinaryId, not even an explicit nil
+func (o *NameSourceType) UnsetBinaryId() {
+	o.BinaryId.Unset()
+}
+
+// GetFunctionId returns the FunctionId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NameSourceType) GetFunctionId() int32 {
+	if o == nil || IsNil(o.FunctionId.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.FunctionId.Get()
+}
+
+// GetFunctionIdOk returns a tuple with the FunctionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NameSourceType) GetFunctionIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FunctionId.Get(), o.FunctionId.IsSet()
+}
+
+// HasFunctionId returns a boolean if a field has been set.
+func (o *NameSourceType) HasFunctionId() bool {
+	if o != nil && o.FunctionId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFunctionId gets a reference to the given NullableInt32 and assigns it to the FunctionId field.
+func (o *NameSourceType) SetFunctionId(v int32) {
+	o.FunctionId.Set(&v)
+}
+// SetFunctionIdNil sets the value for FunctionId to be an explicit nil
+func (o *NameSourceType) SetFunctionIdNil() {
+	o.FunctionId.Set(nil)
+}
+
+// UnsetFunctionId ensures that no value is present for FunctionId, not even an explicit nil
+func (o *NameSourceType) UnsetFunctionId() {
+	o.FunctionId.Unset()
+}
+
+// GetType returns the Type field value
+func (o *NameSourceType) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *NameSourceType) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *NameSourceType) SetType(v string) {
+	o.Type = v
+}
+
 func (o NameSourceType) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -207,16 +207,16 @@ func (o NameSourceType) MarshalJSON() ([]byte, error) {
 
 func (o NameSourceType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["type"] = o.Type
-	if o.FunctionId.IsSet() {
-		toSerialize["function_id"] = o.FunctionId.Get()
+	if o.AnalysisId.IsSet() {
+		toSerialize["analysis_id"] = o.AnalysisId.Get()
 	}
 	if o.BinaryId.IsSet() {
 		toSerialize["binary_id"] = o.BinaryId.Get()
 	}
-	if o.AnalysisId.IsSet() {
-		toSerialize["analysis_id"] = o.AnalysisId.Get()
+	if o.FunctionId.IsSet() {
+		toSerialize["function_id"] = o.FunctionId.Get()
 	}
+	toSerialize["type"] = o.Type
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -260,10 +260,10 @@ func (o *NameSourceType) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "function_id")
-		delete(additionalProperties, "binary_id")
 		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
 	}
 

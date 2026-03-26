@@ -19,21 +19,21 @@ var _ MappedNullable = &AnalysisCreateRequest{}
 
 // AnalysisCreateRequest struct for AnalysisCreateRequest
 type AnalysisCreateRequest struct {
+	// The analysis config enables the configuration of optional analysis stages
+	AnalysisConfig *AnalysisConfig `json:"analysis_config,omitempty"`
+	// The scope of the analysis determines who can access it
+	AnalysisScope *AnalysisScope `json:"analysis_scope,omitempty"`
+	AutoRunAgents *AutoRunAgents `json:"auto_run_agents,omitempty"`
+	// The binary config can override automatically determined values such as ISA, Platform, File Format, etc
+	BinaryConfig *BinaryConfig `json:"binary_config,omitempty"`
+	DebugHash NullableString `json:"debug_hash,omitempty"`
 	// The name of the file
 	Filename string `json:"filename"`
 	// The name of the file
 	Sha256Hash string `json:"sha_256_hash"`
+	Symbols NullableSymbols `json:"symbols,omitempty"`
 	// List of community tags to assign to an analysis
 	Tags []Tag `json:"tags,omitempty"`
-	// The scope of the analysis determines who can access it
-	AnalysisScope *AnalysisScope `json:"analysis_scope,omitempty"`
-	Symbols NullableSymbols `json:"symbols,omitempty"`
-	DebugHash NullableString `json:"debug_hash,omitempty"`
-	// The analysis config enables the configuration of optional analysis stages
-	AnalysisConfig *AnalysisConfig `json:"analysis_config,omitempty"`
-	// The binary config can override automatically determined values such as ISA, Platform, File Format, etc
-	BinaryConfig *BinaryConfig `json:"binary_config,omitempty"`
-	AutoRunAgents *AutoRunAgents `json:"auto_run_agents,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,10 +45,10 @@ type _AnalysisCreateRequest AnalysisCreateRequest
 // will change when the set of required properties is changed
 func NewAnalysisCreateRequest(filename string, sha256Hash string) *AnalysisCreateRequest {
 	this := AnalysisCreateRequest{}
-	this.Filename = filename
-	this.Sha256Hash = sha256Hash
 	var analysisScope AnalysisScope = ANALYSISSCOPE_PRIVATE
 	this.AnalysisScope = &analysisScope
+	this.Filename = filename
+	this.Sha256Hash = sha256Hash
 	return &this
 }
 
@@ -60,6 +60,176 @@ func NewAnalysisCreateRequestWithDefaults() *AnalysisCreateRequest {
 	var analysisScope AnalysisScope = ANALYSISSCOPE_PRIVATE
 	this.AnalysisScope = &analysisScope
 	return &this
+}
+
+// GetAnalysisConfig returns the AnalysisConfig field value if set, zero value otherwise.
+func (o *AnalysisCreateRequest) GetAnalysisConfig() AnalysisConfig {
+	if o == nil || IsNil(o.AnalysisConfig) {
+		var ret AnalysisConfig
+		return ret
+	}
+	return *o.AnalysisConfig
+}
+
+// GetAnalysisConfigOk returns a tuple with the AnalysisConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalysisCreateRequest) GetAnalysisConfigOk() (*AnalysisConfig, bool) {
+	if o == nil || IsNil(o.AnalysisConfig) {
+		return nil, false
+	}
+	return o.AnalysisConfig, true
+}
+
+// HasAnalysisConfig returns a boolean if a field has been set.
+func (o *AnalysisCreateRequest) HasAnalysisConfig() bool {
+	if o != nil && !IsNil(o.AnalysisConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetAnalysisConfig gets a reference to the given AnalysisConfig and assigns it to the AnalysisConfig field.
+func (o *AnalysisCreateRequest) SetAnalysisConfig(v AnalysisConfig) {
+	o.AnalysisConfig = &v
+}
+
+// GetAnalysisScope returns the AnalysisScope field value if set, zero value otherwise.
+func (o *AnalysisCreateRequest) GetAnalysisScope() AnalysisScope {
+	if o == nil || IsNil(o.AnalysisScope) {
+		var ret AnalysisScope
+		return ret
+	}
+	return *o.AnalysisScope
+}
+
+// GetAnalysisScopeOk returns a tuple with the AnalysisScope field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalysisCreateRequest) GetAnalysisScopeOk() (*AnalysisScope, bool) {
+	if o == nil || IsNil(o.AnalysisScope) {
+		return nil, false
+	}
+	return o.AnalysisScope, true
+}
+
+// HasAnalysisScope returns a boolean if a field has been set.
+func (o *AnalysisCreateRequest) HasAnalysisScope() bool {
+	if o != nil && !IsNil(o.AnalysisScope) {
+		return true
+	}
+
+	return false
+}
+
+// SetAnalysisScope gets a reference to the given AnalysisScope and assigns it to the AnalysisScope field.
+func (o *AnalysisCreateRequest) SetAnalysisScope(v AnalysisScope) {
+	o.AnalysisScope = &v
+}
+
+// GetAutoRunAgents returns the AutoRunAgents field value if set, zero value otherwise.
+func (o *AnalysisCreateRequest) GetAutoRunAgents() AutoRunAgents {
+	if o == nil || IsNil(o.AutoRunAgents) {
+		var ret AutoRunAgents
+		return ret
+	}
+	return *o.AutoRunAgents
+}
+
+// GetAutoRunAgentsOk returns a tuple with the AutoRunAgents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalysisCreateRequest) GetAutoRunAgentsOk() (*AutoRunAgents, bool) {
+	if o == nil || IsNil(o.AutoRunAgents) {
+		return nil, false
+	}
+	return o.AutoRunAgents, true
+}
+
+// HasAutoRunAgents returns a boolean if a field has been set.
+func (o *AnalysisCreateRequest) HasAutoRunAgents() bool {
+	if o != nil && !IsNil(o.AutoRunAgents) {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoRunAgents gets a reference to the given AutoRunAgents and assigns it to the AutoRunAgents field.
+func (o *AnalysisCreateRequest) SetAutoRunAgents(v AutoRunAgents) {
+	o.AutoRunAgents = &v
+}
+
+// GetBinaryConfig returns the BinaryConfig field value if set, zero value otherwise.
+func (o *AnalysisCreateRequest) GetBinaryConfig() BinaryConfig {
+	if o == nil || IsNil(o.BinaryConfig) {
+		var ret BinaryConfig
+		return ret
+	}
+	return *o.BinaryConfig
+}
+
+// GetBinaryConfigOk returns a tuple with the BinaryConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalysisCreateRequest) GetBinaryConfigOk() (*BinaryConfig, bool) {
+	if o == nil || IsNil(o.BinaryConfig) {
+		return nil, false
+	}
+	return o.BinaryConfig, true
+}
+
+// HasBinaryConfig returns a boolean if a field has been set.
+func (o *AnalysisCreateRequest) HasBinaryConfig() bool {
+	if o != nil && !IsNil(o.BinaryConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetBinaryConfig gets a reference to the given BinaryConfig and assigns it to the BinaryConfig field.
+func (o *AnalysisCreateRequest) SetBinaryConfig(v BinaryConfig) {
+	o.BinaryConfig = &v
+}
+
+// GetDebugHash returns the DebugHash field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AnalysisCreateRequest) GetDebugHash() string {
+	if o == nil || IsNil(o.DebugHash.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DebugHash.Get()
+}
+
+// GetDebugHashOk returns a tuple with the DebugHash field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AnalysisCreateRequest) GetDebugHashOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DebugHash.Get(), o.DebugHash.IsSet()
+}
+
+// HasDebugHash returns a boolean if a field has been set.
+func (o *AnalysisCreateRequest) HasDebugHash() bool {
+	if o != nil && o.DebugHash.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDebugHash gets a reference to the given NullableString and assigns it to the DebugHash field.
+func (o *AnalysisCreateRequest) SetDebugHash(v string) {
+	o.DebugHash.Set(&v)
+}
+// SetDebugHashNil sets the value for DebugHash to be an explicit nil
+func (o *AnalysisCreateRequest) SetDebugHashNil() {
+	o.DebugHash.Set(nil)
+}
+
+// UnsetDebugHash ensures that no value is present for DebugHash, not even an explicit nil
+func (o *AnalysisCreateRequest) UnsetDebugHash() {
+	o.DebugHash.Unset()
 }
 
 // GetFilename returns the Filename field value
@@ -110,70 +280,6 @@ func (o *AnalysisCreateRequest) SetSha256Hash(v string) {
 	o.Sha256Hash = v
 }
 
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *AnalysisCreateRequest) GetTags() []Tag {
-	if o == nil || IsNil(o.Tags) {
-		var ret []Tag
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AnalysisCreateRequest) GetTagsOk() ([]Tag, bool) {
-	if o == nil || IsNil(o.Tags) {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *AnalysisCreateRequest) HasTags() bool {
-	if o != nil && !IsNil(o.Tags) {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []Tag and assigns it to the Tags field.
-func (o *AnalysisCreateRequest) SetTags(v []Tag) {
-	o.Tags = v
-}
-
-// GetAnalysisScope returns the AnalysisScope field value if set, zero value otherwise.
-func (o *AnalysisCreateRequest) GetAnalysisScope() AnalysisScope {
-	if o == nil || IsNil(o.AnalysisScope) {
-		var ret AnalysisScope
-		return ret
-	}
-	return *o.AnalysisScope
-}
-
-// GetAnalysisScopeOk returns a tuple with the AnalysisScope field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AnalysisCreateRequest) GetAnalysisScopeOk() (*AnalysisScope, bool) {
-	if o == nil || IsNil(o.AnalysisScope) {
-		return nil, false
-	}
-	return o.AnalysisScope, true
-}
-
-// HasAnalysisScope returns a boolean if a field has been set.
-func (o *AnalysisCreateRequest) HasAnalysisScope() bool {
-	if o != nil && !IsNil(o.AnalysisScope) {
-		return true
-	}
-
-	return false
-}
-
-// SetAnalysisScope gets a reference to the given AnalysisScope and assigns it to the AnalysisScope field.
-func (o *AnalysisCreateRequest) SetAnalysisScope(v AnalysisScope) {
-	o.AnalysisScope = &v
-}
-
 // GetSymbols returns the Symbols field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AnalysisCreateRequest) GetSymbols() Symbols {
 	if o == nil || IsNil(o.Symbols.Get()) {
@@ -216,142 +322,36 @@ func (o *AnalysisCreateRequest) UnsetSymbols() {
 	o.Symbols.Unset()
 }
 
-// GetDebugHash returns the DebugHash field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AnalysisCreateRequest) GetDebugHash() string {
-	if o == nil || IsNil(o.DebugHash.Get()) {
-		var ret string
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *AnalysisCreateRequest) GetTags() []Tag {
+	if o == nil || IsNil(o.Tags) {
+		var ret []Tag
 		return ret
 	}
-	return *o.DebugHash.Get()
+	return o.Tags
 }
 
-// GetDebugHashOk returns a tuple with the DebugHash field value if set, nil otherwise
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AnalysisCreateRequest) GetDebugHashOk() (*string, bool) {
-	if o == nil {
+func (o *AnalysisCreateRequest) GetTagsOk() ([]Tag, bool) {
+	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
-	return o.DebugHash.Get(), o.DebugHash.IsSet()
+	return o.Tags, true
 }
 
-// HasDebugHash returns a boolean if a field has been set.
-func (o *AnalysisCreateRequest) HasDebugHash() bool {
-	if o != nil && o.DebugHash.IsSet() {
+// HasTags returns a boolean if a field has been set.
+func (o *AnalysisCreateRequest) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
 		return true
 	}
 
 	return false
 }
 
-// SetDebugHash gets a reference to the given NullableString and assigns it to the DebugHash field.
-func (o *AnalysisCreateRequest) SetDebugHash(v string) {
-	o.DebugHash.Set(&v)
-}
-// SetDebugHashNil sets the value for DebugHash to be an explicit nil
-func (o *AnalysisCreateRequest) SetDebugHashNil() {
-	o.DebugHash.Set(nil)
-}
-
-// UnsetDebugHash ensures that no value is present for DebugHash, not even an explicit nil
-func (o *AnalysisCreateRequest) UnsetDebugHash() {
-	o.DebugHash.Unset()
-}
-
-// GetAnalysisConfig returns the AnalysisConfig field value if set, zero value otherwise.
-func (o *AnalysisCreateRequest) GetAnalysisConfig() AnalysisConfig {
-	if o == nil || IsNil(o.AnalysisConfig) {
-		var ret AnalysisConfig
-		return ret
-	}
-	return *o.AnalysisConfig
-}
-
-// GetAnalysisConfigOk returns a tuple with the AnalysisConfig field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AnalysisCreateRequest) GetAnalysisConfigOk() (*AnalysisConfig, bool) {
-	if o == nil || IsNil(o.AnalysisConfig) {
-		return nil, false
-	}
-	return o.AnalysisConfig, true
-}
-
-// HasAnalysisConfig returns a boolean if a field has been set.
-func (o *AnalysisCreateRequest) HasAnalysisConfig() bool {
-	if o != nil && !IsNil(o.AnalysisConfig) {
-		return true
-	}
-
-	return false
-}
-
-// SetAnalysisConfig gets a reference to the given AnalysisConfig and assigns it to the AnalysisConfig field.
-func (o *AnalysisCreateRequest) SetAnalysisConfig(v AnalysisConfig) {
-	o.AnalysisConfig = &v
-}
-
-// GetBinaryConfig returns the BinaryConfig field value if set, zero value otherwise.
-func (o *AnalysisCreateRequest) GetBinaryConfig() BinaryConfig {
-	if o == nil || IsNil(o.BinaryConfig) {
-		var ret BinaryConfig
-		return ret
-	}
-	return *o.BinaryConfig
-}
-
-// GetBinaryConfigOk returns a tuple with the BinaryConfig field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AnalysisCreateRequest) GetBinaryConfigOk() (*BinaryConfig, bool) {
-	if o == nil || IsNil(o.BinaryConfig) {
-		return nil, false
-	}
-	return o.BinaryConfig, true
-}
-
-// HasBinaryConfig returns a boolean if a field has been set.
-func (o *AnalysisCreateRequest) HasBinaryConfig() bool {
-	if o != nil && !IsNil(o.BinaryConfig) {
-		return true
-	}
-
-	return false
-}
-
-// SetBinaryConfig gets a reference to the given BinaryConfig and assigns it to the BinaryConfig field.
-func (o *AnalysisCreateRequest) SetBinaryConfig(v BinaryConfig) {
-	o.BinaryConfig = &v
-}
-
-// GetAutoRunAgents returns the AutoRunAgents field value if set, zero value otherwise.
-func (o *AnalysisCreateRequest) GetAutoRunAgents() AutoRunAgents {
-	if o == nil || IsNil(o.AutoRunAgents) {
-		var ret AutoRunAgents
-		return ret
-	}
-	return *o.AutoRunAgents
-}
-
-// GetAutoRunAgentsOk returns a tuple with the AutoRunAgents field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AnalysisCreateRequest) GetAutoRunAgentsOk() (*AutoRunAgents, bool) {
-	if o == nil || IsNil(o.AutoRunAgents) {
-		return nil, false
-	}
-	return o.AutoRunAgents, true
-}
-
-// HasAutoRunAgents returns a boolean if a field has been set.
-func (o *AnalysisCreateRequest) HasAutoRunAgents() bool {
-	if o != nil && !IsNil(o.AutoRunAgents) {
-		return true
-	}
-
-	return false
-}
-
-// SetAutoRunAgents gets a reference to the given AutoRunAgents and assigns it to the AutoRunAgents field.
-func (o *AnalysisCreateRequest) SetAutoRunAgents(v AutoRunAgents) {
-	o.AutoRunAgents = &v
+// SetTags gets a reference to the given []Tag and assigns it to the Tags field.
+func (o *AnalysisCreateRequest) SetTags(v []Tag) {
+	o.Tags = v
 }
 
 func (o AnalysisCreateRequest) MarshalJSON() ([]byte, error) {
@@ -364,28 +364,28 @@ func (o AnalysisCreateRequest) MarshalJSON() ([]byte, error) {
 
 func (o AnalysisCreateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["filename"] = o.Filename
-	toSerialize["sha_256_hash"] = o.Sha256Hash
-	if !IsNil(o.Tags) {
-		toSerialize["tags"] = o.Tags
+	if !IsNil(o.AnalysisConfig) {
+		toSerialize["analysis_config"] = o.AnalysisConfig
 	}
 	if !IsNil(o.AnalysisScope) {
 		toSerialize["analysis_scope"] = o.AnalysisScope
 	}
-	if o.Symbols.IsSet() {
-		toSerialize["symbols"] = o.Symbols.Get()
-	}
-	if o.DebugHash.IsSet() {
-		toSerialize["debug_hash"] = o.DebugHash.Get()
-	}
-	if !IsNil(o.AnalysisConfig) {
-		toSerialize["analysis_config"] = o.AnalysisConfig
+	if !IsNil(o.AutoRunAgents) {
+		toSerialize["auto_run_agents"] = o.AutoRunAgents
 	}
 	if !IsNil(o.BinaryConfig) {
 		toSerialize["binary_config"] = o.BinaryConfig
 	}
-	if !IsNil(o.AutoRunAgents) {
-		toSerialize["auto_run_agents"] = o.AutoRunAgents
+	if o.DebugHash.IsSet() {
+		toSerialize["debug_hash"] = o.DebugHash.Get()
+	}
+	toSerialize["filename"] = o.Filename
+	toSerialize["sha_256_hash"] = o.Sha256Hash
+	if o.Symbols.IsSet() {
+		toSerialize["symbols"] = o.Symbols.Get()
+	}
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -431,15 +431,15 @@ func (o *AnalysisCreateRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_config")
+		delete(additionalProperties, "analysis_scope")
+		delete(additionalProperties, "auto_run_agents")
+		delete(additionalProperties, "binary_config")
+		delete(additionalProperties, "debug_hash")
 		delete(additionalProperties, "filename")
 		delete(additionalProperties, "sha_256_hash")
-		delete(additionalProperties, "tags")
-		delete(additionalProperties, "analysis_scope")
 		delete(additionalProperties, "symbols")
-		delete(additionalProperties, "debug_hash")
-		delete(additionalProperties, "analysis_config")
-		delete(additionalProperties, "binary_config")
-		delete(additionalProperties, "auto_run_agents")
+		delete(additionalProperties, "tags")
 		o.AdditionalProperties = additionalProperties
 	}
 

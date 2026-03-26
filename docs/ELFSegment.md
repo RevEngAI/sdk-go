@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | 
-**VirtualAddress** | **int32** |  | 
-**VirtualSize** | **int32** |  | 
-**PhysicalAddress** | **int32** |  | 
-**PhysicalSize** | **int32** |  | 
+**Alignment** | **int32** |  | 
 **FileOffset** | **int32** |  | 
 **Flags** | **string** |  | 
 **FlagsRaw** | **int32** |  | 
-**Alignment** | **int32** |  | 
+**PhysicalAddress** | **int32** |  | 
+**PhysicalSize** | **int32** |  | 
+**Type** | **string** |  | 
+**VirtualAddress** | **int32** |  | 
+**VirtualSize** | **int32** |  | 
 
 ## Methods
 
 ### NewELFSegment
 
-`func NewELFSegment(type_ string, virtualAddress int32, virtualSize int32, physicalAddress int32, physicalSize int32, fileOffset int32, flags string, flagsRaw int32, alignment int32, ) *ELFSegment`
+`func NewELFSegment(alignment int32, fileOffset int32, flags string, flagsRaw int32, physicalAddress int32, physicalSize int32, type_ string, virtualAddress int32, virtualSize int32, ) *ELFSegment`
 
 NewELFSegment instantiates a new ELFSegment object
 This constructor will assign default values to properties that have it defined,
@@ -33,104 +33,24 @@ NewELFSegmentWithDefaults instantiates a new ELFSegment object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetType
+### GetAlignment
 
-`func (o *ELFSegment) GetType() string`
+`func (o *ELFSegment) GetAlignment() int32`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetAlignment returns the Alignment field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetAlignmentOk
 
-`func (o *ELFSegment) GetTypeOk() (*string, bool)`
+`func (o *ELFSegment) GetAlignmentOk() (*int32, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetAlignmentOk returns a tuple with the Alignment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetAlignment
 
-`func (o *ELFSegment) SetType(v string)`
+`func (o *ELFSegment) SetAlignment(v int32)`
 
-SetType sets Type field to given value.
-
-
-### GetVirtualAddress
-
-`func (o *ELFSegment) GetVirtualAddress() int32`
-
-GetVirtualAddress returns the VirtualAddress field if non-nil, zero value otherwise.
-
-### GetVirtualAddressOk
-
-`func (o *ELFSegment) GetVirtualAddressOk() (*int32, bool)`
-
-GetVirtualAddressOk returns a tuple with the VirtualAddress field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVirtualAddress
-
-`func (o *ELFSegment) SetVirtualAddress(v int32)`
-
-SetVirtualAddress sets VirtualAddress field to given value.
-
-
-### GetVirtualSize
-
-`func (o *ELFSegment) GetVirtualSize() int32`
-
-GetVirtualSize returns the VirtualSize field if non-nil, zero value otherwise.
-
-### GetVirtualSizeOk
-
-`func (o *ELFSegment) GetVirtualSizeOk() (*int32, bool)`
-
-GetVirtualSizeOk returns a tuple with the VirtualSize field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVirtualSize
-
-`func (o *ELFSegment) SetVirtualSize(v int32)`
-
-SetVirtualSize sets VirtualSize field to given value.
-
-
-### GetPhysicalAddress
-
-`func (o *ELFSegment) GetPhysicalAddress() int32`
-
-GetPhysicalAddress returns the PhysicalAddress field if non-nil, zero value otherwise.
-
-### GetPhysicalAddressOk
-
-`func (o *ELFSegment) GetPhysicalAddressOk() (*int32, bool)`
-
-GetPhysicalAddressOk returns a tuple with the PhysicalAddress field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPhysicalAddress
-
-`func (o *ELFSegment) SetPhysicalAddress(v int32)`
-
-SetPhysicalAddress sets PhysicalAddress field to given value.
-
-
-### GetPhysicalSize
-
-`func (o *ELFSegment) GetPhysicalSize() int32`
-
-GetPhysicalSize returns the PhysicalSize field if non-nil, zero value otherwise.
-
-### GetPhysicalSizeOk
-
-`func (o *ELFSegment) GetPhysicalSizeOk() (*int32, bool)`
-
-GetPhysicalSizeOk returns a tuple with the PhysicalSize field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPhysicalSize
-
-`func (o *ELFSegment) SetPhysicalSize(v int32)`
-
-SetPhysicalSize sets PhysicalSize field to given value.
+SetAlignment sets Alignment field to given value.
 
 
 ### GetFileOffset
@@ -193,24 +113,104 @@ and a boolean to check if the value has been set.
 SetFlagsRaw sets FlagsRaw field to given value.
 
 
-### GetAlignment
+### GetPhysicalAddress
 
-`func (o *ELFSegment) GetAlignment() int32`
+`func (o *ELFSegment) GetPhysicalAddress() int32`
 
-GetAlignment returns the Alignment field if non-nil, zero value otherwise.
+GetPhysicalAddress returns the PhysicalAddress field if non-nil, zero value otherwise.
 
-### GetAlignmentOk
+### GetPhysicalAddressOk
 
-`func (o *ELFSegment) GetAlignmentOk() (*int32, bool)`
+`func (o *ELFSegment) GetPhysicalAddressOk() (*int32, bool)`
 
-GetAlignmentOk returns a tuple with the Alignment field if it's non-nil, zero value otherwise
+GetPhysicalAddressOk returns a tuple with the PhysicalAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAlignment
+### SetPhysicalAddress
 
-`func (o *ELFSegment) SetAlignment(v int32)`
+`func (o *ELFSegment) SetPhysicalAddress(v int32)`
 
-SetAlignment sets Alignment field to given value.
+SetPhysicalAddress sets PhysicalAddress field to given value.
+
+
+### GetPhysicalSize
+
+`func (o *ELFSegment) GetPhysicalSize() int32`
+
+GetPhysicalSize returns the PhysicalSize field if non-nil, zero value otherwise.
+
+### GetPhysicalSizeOk
+
+`func (o *ELFSegment) GetPhysicalSizeOk() (*int32, bool)`
+
+GetPhysicalSizeOk returns a tuple with the PhysicalSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPhysicalSize
+
+`func (o *ELFSegment) SetPhysicalSize(v int32)`
+
+SetPhysicalSize sets PhysicalSize field to given value.
+
+
+### GetType
+
+`func (o *ELFSegment) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *ELFSegment) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *ELFSegment) SetType(v string)`
+
+SetType sets Type field to given value.
+
+
+### GetVirtualAddress
+
+`func (o *ELFSegment) GetVirtualAddress() int32`
+
+GetVirtualAddress returns the VirtualAddress field if non-nil, zero value otherwise.
+
+### GetVirtualAddressOk
+
+`func (o *ELFSegment) GetVirtualAddressOk() (*int32, bool)`
+
+GetVirtualAddressOk returns a tuple with the VirtualAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVirtualAddress
+
+`func (o *ELFSegment) SetVirtualAddress(v int32)`
+
+SetVirtualAddress sets VirtualAddress field to given value.
+
+
+### GetVirtualSize
+
+`func (o *ELFSegment) GetVirtualSize() int32`
+
+GetVirtualSize returns the VirtualSize field if non-nil, zero value otherwise.
+
+### GetVirtualSizeOk
+
+`func (o *ELFSegment) GetVirtualSizeOk() (*int32, bool)`
+
+GetVirtualSizeOk returns a tuple with the VirtualSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVirtualSize
+
+`func (o *ELFSegment) SetVirtualSize(v int32)`
+
+SetVirtualSize sets VirtualSize field to given value.
 
 
 

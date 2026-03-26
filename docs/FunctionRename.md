@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**NewName** | **string** | The new name for the function | 
 **NewMangledName** | **string** | The new mangled name for the function | 
+**NewName** | **string** | The new name for the function | 
 
 ## Methods
 
 ### NewFunctionRename
 
-`func NewFunctionRename(newName string, newMangledName string, ) *FunctionRename`
+`func NewFunctionRename(newMangledName string, newName string, ) *FunctionRename`
 
 NewFunctionRename instantiates a new FunctionRename object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewFunctionRenameWithDefaults instantiates a new FunctionRename object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetNewName
-
-`func (o *FunctionRename) GetNewName() string`
-
-GetNewName returns the NewName field if non-nil, zero value otherwise.
-
-### GetNewNameOk
-
-`func (o *FunctionRename) GetNewNameOk() (*string, bool)`
-
-GetNewNameOk returns a tuple with the NewName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNewName
-
-`func (o *FunctionRename) SetNewName(v string)`
-
-SetNewName sets NewName field to given value.
-
 
 ### GetNewMangledName
 
@@ -64,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *FunctionRename) SetNewMangledName(v string)`
 
 SetNewMangledName sets NewMangledName field to given value.
+
+
+### GetNewName
+
+`func (o *FunctionRename) GetNewName() string`
+
+GetNewName returns the NewName field if non-nil, zero value otherwise.
+
+### GetNewNameOk
+
+`func (o *FunctionRename) GetNewNameOk() (*string, bool)`
+
+GetNewNameOk returns a tuple with the NewName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNewName
+
+`func (o *FunctionRename) SetNewName(v string)`
+
+SetNewName sets NewName field to given value.
 
 
 

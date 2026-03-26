@@ -19,12 +19,12 @@ var _ MappedNullable = &CollectionCreateRequest{}
 
 // CollectionCreateRequest struct for CollectionCreateRequest
 type CollectionCreateRequest struct {
-	CollectionName string `json:"collection_name"`
-	Description string `json:"description"`
-	CollectionScope *CollectionScope `json:"collection_scope,omitempty"`
-	Tags []string `json:"tags,omitempty"`
 	Binaries []int32 `json:"binaries,omitempty"`
+	CollectionName string `json:"collection_name"`
+	CollectionScope *CollectionScope `json:"collection_scope,omitempty"`
+	Description string `json:"description"`
 	ModelId int32 `json:"model_id"`
+	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,9 +37,9 @@ type _CollectionCreateRequest CollectionCreateRequest
 func NewCollectionCreateRequest(collectionName string, description string, modelId int32) *CollectionCreateRequest {
 	this := CollectionCreateRequest{}
 	this.CollectionName = collectionName
-	this.Description = description
 	var collectionScope CollectionScope = COLLECTIONSCOPE_PRIVATE
 	this.CollectionScope = &collectionScope
+	this.Description = description
 	this.ModelId = modelId
 	return &this
 }
@@ -52,119 +52,6 @@ func NewCollectionCreateRequestWithDefaults() *CollectionCreateRequest {
 	var collectionScope CollectionScope = COLLECTIONSCOPE_PRIVATE
 	this.CollectionScope = &collectionScope
 	return &this
-}
-
-// GetCollectionName returns the CollectionName field value
-func (o *CollectionCreateRequest) GetCollectionName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.CollectionName
-}
-
-// GetCollectionNameOk returns a tuple with the CollectionName field value
-// and a boolean to check if the value has been set.
-func (o *CollectionCreateRequest) GetCollectionNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CollectionName, true
-}
-
-// SetCollectionName sets field value
-func (o *CollectionCreateRequest) SetCollectionName(v string) {
-	o.CollectionName = v
-}
-
-// GetDescription returns the Description field value
-func (o *CollectionCreateRequest) GetDescription() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value
-// and a boolean to check if the value has been set.
-func (o *CollectionCreateRequest) GetDescriptionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Description, true
-}
-
-// SetDescription sets field value
-func (o *CollectionCreateRequest) SetDescription(v string) {
-	o.Description = v
-}
-
-// GetCollectionScope returns the CollectionScope field value if set, zero value otherwise.
-func (o *CollectionCreateRequest) GetCollectionScope() CollectionScope {
-	if o == nil || IsNil(o.CollectionScope) {
-		var ret CollectionScope
-		return ret
-	}
-	return *o.CollectionScope
-}
-
-// GetCollectionScopeOk returns a tuple with the CollectionScope field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CollectionCreateRequest) GetCollectionScopeOk() (*CollectionScope, bool) {
-	if o == nil || IsNil(o.CollectionScope) {
-		return nil, false
-	}
-	return o.CollectionScope, true
-}
-
-// HasCollectionScope returns a boolean if a field has been set.
-func (o *CollectionCreateRequest) HasCollectionScope() bool {
-	if o != nil && !IsNil(o.CollectionScope) {
-		return true
-	}
-
-	return false
-}
-
-// SetCollectionScope gets a reference to the given CollectionScope and assigns it to the CollectionScope field.
-func (o *CollectionCreateRequest) SetCollectionScope(v CollectionScope) {
-	o.CollectionScope = &v
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CollectionCreateRequest) GetTags() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CollectionCreateRequest) GetTagsOk() ([]string, bool) {
-	if o == nil || IsNil(o.Tags) {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *CollectionCreateRequest) HasTags() bool {
-	if o != nil && !IsNil(o.Tags) {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *CollectionCreateRequest) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetBinaries returns the Binaries field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -200,6 +87,86 @@ func (o *CollectionCreateRequest) SetBinaries(v []int32) {
 	o.Binaries = v
 }
 
+// GetCollectionName returns the CollectionName field value
+func (o *CollectionCreateRequest) GetCollectionName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.CollectionName
+}
+
+// GetCollectionNameOk returns a tuple with the CollectionName field value
+// and a boolean to check if the value has been set.
+func (o *CollectionCreateRequest) GetCollectionNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CollectionName, true
+}
+
+// SetCollectionName sets field value
+func (o *CollectionCreateRequest) SetCollectionName(v string) {
+	o.CollectionName = v
+}
+
+// GetCollectionScope returns the CollectionScope field value if set, zero value otherwise.
+func (o *CollectionCreateRequest) GetCollectionScope() CollectionScope {
+	if o == nil || IsNil(o.CollectionScope) {
+		var ret CollectionScope
+		return ret
+	}
+	return *o.CollectionScope
+}
+
+// GetCollectionScopeOk returns a tuple with the CollectionScope field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CollectionCreateRequest) GetCollectionScopeOk() (*CollectionScope, bool) {
+	if o == nil || IsNil(o.CollectionScope) {
+		return nil, false
+	}
+	return o.CollectionScope, true
+}
+
+// HasCollectionScope returns a boolean if a field has been set.
+func (o *CollectionCreateRequest) HasCollectionScope() bool {
+	if o != nil && !IsNil(o.CollectionScope) {
+		return true
+	}
+
+	return false
+}
+
+// SetCollectionScope gets a reference to the given CollectionScope and assigns it to the CollectionScope field.
+func (o *CollectionCreateRequest) SetCollectionScope(v CollectionScope) {
+	o.CollectionScope = &v
+}
+
+// GetDescription returns the Description field value
+func (o *CollectionCreateRequest) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *CollectionCreateRequest) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *CollectionCreateRequest) SetDescription(v string) {
+	o.Description = v
+}
+
 // GetModelId returns the ModelId field value
 func (o *CollectionCreateRequest) GetModelId() int32 {
 	if o == nil {
@@ -224,6 +191,39 @@ func (o *CollectionCreateRequest) SetModelId(v int32) {
 	o.ModelId = v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CollectionCreateRequest) GetTags() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CollectionCreateRequest) GetTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Tags) {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *CollectionCreateRequest) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *CollectionCreateRequest) SetTags(v []string) {
+	o.Tags = v
+}
+
 func (o CollectionCreateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -234,18 +234,18 @@ func (o CollectionCreateRequest) MarshalJSON() ([]byte, error) {
 
 func (o CollectionCreateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["collection_name"] = o.CollectionName
-	toSerialize["description"] = o.Description
-	if !IsNil(o.CollectionScope) {
-		toSerialize["collection_scope"] = o.CollectionScope
-	}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if o.Binaries != nil {
 		toSerialize["binaries"] = o.Binaries
 	}
+	toSerialize["collection_name"] = o.CollectionName
+	if !IsNil(o.CollectionScope) {
+		toSerialize["collection_scope"] = o.CollectionScope
+	}
+	toSerialize["description"] = o.Description
 	toSerialize["model_id"] = o.ModelId
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -291,12 +291,12 @@ func (o *CollectionCreateRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "collection_name")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "collection_scope")
-		delete(additionalProperties, "tags")
 		delete(additionalProperties, "binaries")
+		delete(additionalProperties, "collection_name")
+		delete(additionalProperties, "collection_scope")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "tags")
 		o.AdditionalProperties = additionalProperties
 	}
 

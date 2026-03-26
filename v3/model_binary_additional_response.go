@@ -21,8 +21,8 @@ var _ MappedNullable = &BinaryAdditionalResponse{}
 // BinaryAdditionalResponse struct for BinaryAdditionalResponse
 type BinaryAdditionalResponse struct {
 	BinaryId int32 `json:"binary_id"`
-	Details NullableBinaryAdditionalDetailsDataResponse `json:"details"`
 	Creation NullableTime `json:"creation,omitempty"`
+	Details NullableBinaryAdditionalDetailsDataResponse `json:"details"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -71,32 +71,6 @@ func (o *BinaryAdditionalResponse) SetBinaryId(v int32) {
 	o.BinaryId = v
 }
 
-// GetDetails returns the Details field value
-// If the value is explicit nil, the zero value for BinaryAdditionalDetailsDataResponse will be returned
-func (o *BinaryAdditionalResponse) GetDetails() BinaryAdditionalDetailsDataResponse {
-	if o == nil || o.Details.Get() == nil {
-		var ret BinaryAdditionalDetailsDataResponse
-		return ret
-	}
-
-	return *o.Details.Get()
-}
-
-// GetDetailsOk returns a tuple with the Details field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BinaryAdditionalResponse) GetDetailsOk() (*BinaryAdditionalDetailsDataResponse, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Details.Get(), o.Details.IsSet()
-}
-
-// SetDetails sets field value
-func (o *BinaryAdditionalResponse) SetDetails(v BinaryAdditionalDetailsDataResponse) {
-	o.Details.Set(&v)
-}
-
 // GetCreation returns the Creation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BinaryAdditionalResponse) GetCreation() time.Time {
 	if o == nil || IsNil(o.Creation.Get()) {
@@ -139,6 +113,32 @@ func (o *BinaryAdditionalResponse) UnsetCreation() {
 	o.Creation.Unset()
 }
 
+// GetDetails returns the Details field value
+// If the value is explicit nil, the zero value for BinaryAdditionalDetailsDataResponse will be returned
+func (o *BinaryAdditionalResponse) GetDetails() BinaryAdditionalDetailsDataResponse {
+	if o == nil || o.Details.Get() == nil {
+		var ret BinaryAdditionalDetailsDataResponse
+		return ret
+	}
+
+	return *o.Details.Get()
+}
+
+// GetDetailsOk returns a tuple with the Details field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BinaryAdditionalResponse) GetDetailsOk() (*BinaryAdditionalDetailsDataResponse, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Details.Get(), o.Details.IsSet()
+}
+
+// SetDetails sets field value
+func (o *BinaryAdditionalResponse) SetDetails(v BinaryAdditionalDetailsDataResponse) {
+	o.Details.Set(&v)
+}
+
 func (o BinaryAdditionalResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -150,10 +150,10 @@ func (o BinaryAdditionalResponse) MarshalJSON() ([]byte, error) {
 func (o BinaryAdditionalResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["binary_id"] = o.BinaryId
-	toSerialize["details"] = o.Details.Get()
 	if o.Creation.IsSet() {
 		toSerialize["creation"] = o.Creation.Get()
 	}
+	toSerialize["details"] = o.Details.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -199,8 +199,8 @@ func (o *BinaryAdditionalResponse) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "binary_id")
-		delete(additionalProperties, "details")
 		delete(additionalProperties, "creation")
+		delete(additionalProperties, "details")
 		o.AdditionalProperties = additionalProperties
 	}
 

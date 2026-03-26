@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to [**TaskStatus**](TaskStatus.md) |  | [optional] [default to TASKSTATUS_UNINITIALISED]
 **ErrorMessage** | Pointer to **NullableString** |  | [optional] 
+**Status** | Pointer to [**TaskStatus**](TaskStatus.md) |  | [optional] [default to TASKSTATUS_UNINITIALISED]
 
 ## Methods
 
@@ -25,31 +25,6 @@ will change when the set of required properties is changed
 NewTaskResponseWithDefaults instantiates a new TaskResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetStatus
-
-`func (o *TaskResponse) GetStatus() TaskStatus`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *TaskResponse) GetStatusOk() (*TaskStatus, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *TaskResponse) SetStatus(v TaskStatus)`
-
-SetStatus sets Status field to given value.
-
-### HasStatus
-
-`func (o *TaskResponse) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 ### GetErrorMessage
 
@@ -86,6 +61,31 @@ HasErrorMessage returns a boolean if a field has been set.
 `func (o *TaskResponse) UnsetErrorMessage()`
 
 UnsetErrorMessage ensures that no value is present for ErrorMessage, not even an explicit nil
+### GetStatus
+
+`func (o *TaskResponse) GetStatus() TaskStatus`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *TaskResponse) GetStatusOk() (*TaskStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *TaskResponse) SetStatus(v TaskStatus)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *TaskResponse) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

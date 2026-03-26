@@ -7,14 +7,14 @@ Name | Type | Description | Notes
 **LastChange** | Pointer to **NullableString** |  | [optional] 
 **Name** | **string** | Name of the structure member | 
 **Offset** | **int32** | Offset of the member within the structure | 
-**Type** | **string** | Data type of the structure member | 
 **Size** | **int32** | Size of the structure member in bytes | 
+**Type** | **string** | Data type of the structure member | 
 
 ## Methods
 
 ### NewStructureMember
 
-`func NewStructureMember(name string, offset int32, type_ string, size int32, ) *StructureMember`
+`func NewStructureMember(name string, offset int32, size int32, type_ string, ) *StructureMember`
 
 NewStructureMember instantiates a new StructureMember object
 This constructor will assign default values to properties that have it defined,
@@ -104,26 +104,6 @@ and a boolean to check if the value has been set.
 SetOffset sets Offset field to given value.
 
 
-### GetType
-
-`func (o *StructureMember) GetType() string`
-
-GetType returns the Type field if non-nil, zero value otherwise.
-
-### GetTypeOk
-
-`func (o *StructureMember) GetTypeOk() (*string, bool)`
-
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetType
-
-`func (o *StructureMember) SetType(v string)`
-
-SetType sets Type field to given value.
-
-
 ### GetSize
 
 `func (o *StructureMember) GetSize() int32`
@@ -142,6 +122,26 @@ and a boolean to check if the value has been set.
 `func (o *StructureMember) SetSize(v int32)`
 
 SetSize sets Size field to given value.
+
+
+### GetType
+
+`func (o *StructureMember) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *StructureMember) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *StructureMember) SetType(v string)`
+
+SetType sets Type field to given value.
 
 
 

@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Signatures** | [**[]SingleCodeSignatureModel**](SingleCodeSignatureModel.md) |  | 
 **Signed** | **bool** |  | 
 **ValidSignature** | **bool** |  | 
-**Signatures** | [**[]SingleCodeSignatureModel**](SingleCodeSignatureModel.md) |  | 
 
 ## Methods
 
 ### NewCodeSignatureModel
 
-`func NewCodeSignatureModel(signed bool, validSignature bool, signatures []SingleCodeSignatureModel, ) *CodeSignatureModel`
+`func NewCodeSignatureModel(signatures []SingleCodeSignatureModel, signed bool, validSignature bool, ) *CodeSignatureModel`
 
 NewCodeSignatureModel instantiates a new CodeSignatureModel object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +26,26 @@ will change when the set of required properties is changed
 NewCodeSignatureModelWithDefaults instantiates a new CodeSignatureModel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetSignatures
+
+`func (o *CodeSignatureModel) GetSignatures() []SingleCodeSignatureModel`
+
+GetSignatures returns the Signatures field if non-nil, zero value otherwise.
+
+### GetSignaturesOk
+
+`func (o *CodeSignatureModel) GetSignaturesOk() (*[]SingleCodeSignatureModel, bool)`
+
+GetSignaturesOk returns a tuple with the Signatures field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSignatures
+
+`func (o *CodeSignatureModel) SetSignatures(v []SingleCodeSignatureModel)`
+
+SetSignatures sets Signatures field to given value.
+
 
 ### GetSigned
 
@@ -65,26 +85,6 @@ and a boolean to check if the value has been set.
 `func (o *CodeSignatureModel) SetValidSignature(v bool)`
 
 SetValidSignature sets ValidSignature field to given value.
-
-
-### GetSignatures
-
-`func (o *CodeSignatureModel) GetSignatures() []SingleCodeSignatureModel`
-
-GetSignatures returns the Signatures field if non-nil, zero value otherwise.
-
-### GetSignaturesOk
-
-`func (o *CodeSignatureModel) GetSignaturesOk() (*[]SingleCodeSignatureModel, bool)`
-
-GetSignaturesOk returns a tuple with the Signatures field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSignatures
-
-`func (o *CodeSignatureModel) SetSignatures(v []SingleCodeSignatureModel)`
-
-SetSignatures sets Signatures field to given value.
 
 
 

@@ -18,9 +18,6 @@ var _ MappedNullable = &AutoUnstripRequest{}
 
 // AutoUnstripRequest struct for AutoUnstripRequest
 type AutoUnstripRequest struct {
-	// Minimum similarity expected for a match as a percentage, default is 90
-	// Deprecated
-	MinSimilarity *float32 `json:"min_similarity,omitempty"`
 	// Whether to apply the matched function names to the target binary, default is False
 	// Deprecated
 	Apply *bool `json:"apply,omitempty"`
@@ -30,12 +27,15 @@ type AutoUnstripRequest struct {
 	// Minimum number of matching functions required to consider for a match, default is 10
 	// Deprecated
 	MinGroupSize *int32 `json:"min_group_size,omitempty"`
-	// If set to true, only returns the status of the auto-unstrip operation without the actual results
+	// Minimum similarity expected for a match as a percentage, default is 90
 	// Deprecated
-	StatusOnly *bool `json:"status_only,omitempty"`
+	MinSimilarity *float32 `json:"min_similarity,omitempty"`
 	// If set to true, forces the system to bypass any cached results and perform a fresh computation
 	// Deprecated
 	NoCache *bool `json:"no_cache,omitempty"`
+	// If set to true, only returns the status of the auto-unstrip operation without the actual results
+	// Deprecated
+	StatusOnly *bool `json:"status_only,omitempty"`
 	// Whether to use canonical function names during matching for auto-unstrip, default is False
 	UseCanonicalNames *bool `json:"use_canonical_names,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -49,18 +49,18 @@ type _AutoUnstripRequest AutoUnstripRequest
 // will change when the set of required properties is changed
 func NewAutoUnstripRequest() *AutoUnstripRequest {
 	this := AutoUnstripRequest{}
-	var minSimilarity float32 = 90.0
-	this.MinSimilarity = &minSimilarity
 	var apply bool = false
 	this.Apply = &apply
-	var confidenceThreshold float32 = 90.0
+	var confidenceThreshold float32 = 90
 	this.ConfidenceThreshold = &confidenceThreshold
 	var minGroupSize int32 = 10
 	this.MinGroupSize = &minGroupSize
-	var statusOnly bool = false
-	this.StatusOnly = &statusOnly
+	var minSimilarity float32 = 90
+	this.MinSimilarity = &minSimilarity
 	var noCache bool = false
 	this.NoCache = &noCache
+	var statusOnly bool = false
+	this.StatusOnly = &statusOnly
 	var useCanonicalNames bool = false
 	this.UseCanonicalNames = &useCanonicalNames
 	return &this
@@ -71,56 +71,21 @@ func NewAutoUnstripRequest() *AutoUnstripRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewAutoUnstripRequestWithDefaults() *AutoUnstripRequest {
 	this := AutoUnstripRequest{}
-	var minSimilarity float32 = 90.0
-	this.MinSimilarity = &minSimilarity
 	var apply bool = false
 	this.Apply = &apply
-	var confidenceThreshold float32 = 90.0
+	var confidenceThreshold float32 = 90
 	this.ConfidenceThreshold = &confidenceThreshold
 	var minGroupSize int32 = 10
 	this.MinGroupSize = &minGroupSize
-	var statusOnly bool = false
-	this.StatusOnly = &statusOnly
+	var minSimilarity float32 = 90
+	this.MinSimilarity = &minSimilarity
 	var noCache bool = false
 	this.NoCache = &noCache
+	var statusOnly bool = false
+	this.StatusOnly = &statusOnly
 	var useCanonicalNames bool = false
 	this.UseCanonicalNames = &useCanonicalNames
 	return &this
-}
-
-// GetMinSimilarity returns the MinSimilarity field value if set, zero value otherwise.
-// Deprecated
-func (o *AutoUnstripRequest) GetMinSimilarity() float32 {
-	if o == nil || IsNil(o.MinSimilarity) {
-		var ret float32
-		return ret
-	}
-	return *o.MinSimilarity
-}
-
-// GetMinSimilarityOk returns a tuple with the MinSimilarity field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *AutoUnstripRequest) GetMinSimilarityOk() (*float32, bool) {
-	if o == nil || IsNil(o.MinSimilarity) {
-		return nil, false
-	}
-	return o.MinSimilarity, true
-}
-
-// HasMinSimilarity returns a boolean if a field has been set.
-func (o *AutoUnstripRequest) HasMinSimilarity() bool {
-	if o != nil && !IsNil(o.MinSimilarity) {
-		return true
-	}
-
-	return false
-}
-
-// SetMinSimilarity gets a reference to the given float32 and assigns it to the MinSimilarity field.
-// Deprecated
-func (o *AutoUnstripRequest) SetMinSimilarity(v float32) {
-	o.MinSimilarity = &v
 }
 
 // GetApply returns the Apply field value if set, zero value otherwise.
@@ -228,39 +193,39 @@ func (o *AutoUnstripRequest) SetMinGroupSize(v int32) {
 	o.MinGroupSize = &v
 }
 
-// GetStatusOnly returns the StatusOnly field value if set, zero value otherwise.
+// GetMinSimilarity returns the MinSimilarity field value if set, zero value otherwise.
 // Deprecated
-func (o *AutoUnstripRequest) GetStatusOnly() bool {
-	if o == nil || IsNil(o.StatusOnly) {
-		var ret bool
+func (o *AutoUnstripRequest) GetMinSimilarity() float32 {
+	if o == nil || IsNil(o.MinSimilarity) {
+		var ret float32
 		return ret
 	}
-	return *o.StatusOnly
+	return *o.MinSimilarity
 }
 
-// GetStatusOnlyOk returns a tuple with the StatusOnly field value if set, nil otherwise
+// GetMinSimilarityOk returns a tuple with the MinSimilarity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *AutoUnstripRequest) GetStatusOnlyOk() (*bool, bool) {
-	if o == nil || IsNil(o.StatusOnly) {
+func (o *AutoUnstripRequest) GetMinSimilarityOk() (*float32, bool) {
+	if o == nil || IsNil(o.MinSimilarity) {
 		return nil, false
 	}
-	return o.StatusOnly, true
+	return o.MinSimilarity, true
 }
 
-// HasStatusOnly returns a boolean if a field has been set.
-func (o *AutoUnstripRequest) HasStatusOnly() bool {
-	if o != nil && !IsNil(o.StatusOnly) {
+// HasMinSimilarity returns a boolean if a field has been set.
+func (o *AutoUnstripRequest) HasMinSimilarity() bool {
+	if o != nil && !IsNil(o.MinSimilarity) {
 		return true
 	}
 
 	return false
 }
 
-// SetStatusOnly gets a reference to the given bool and assigns it to the StatusOnly field.
+// SetMinSimilarity gets a reference to the given float32 and assigns it to the MinSimilarity field.
 // Deprecated
-func (o *AutoUnstripRequest) SetStatusOnly(v bool) {
-	o.StatusOnly = &v
+func (o *AutoUnstripRequest) SetMinSimilarity(v float32) {
+	o.MinSimilarity = &v
 }
 
 // GetNoCache returns the NoCache field value if set, zero value otherwise.
@@ -296,6 +261,41 @@ func (o *AutoUnstripRequest) HasNoCache() bool {
 // Deprecated
 func (o *AutoUnstripRequest) SetNoCache(v bool) {
 	o.NoCache = &v
+}
+
+// GetStatusOnly returns the StatusOnly field value if set, zero value otherwise.
+// Deprecated
+func (o *AutoUnstripRequest) GetStatusOnly() bool {
+	if o == nil || IsNil(o.StatusOnly) {
+		var ret bool
+		return ret
+	}
+	return *o.StatusOnly
+}
+
+// GetStatusOnlyOk returns a tuple with the StatusOnly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *AutoUnstripRequest) GetStatusOnlyOk() (*bool, bool) {
+	if o == nil || IsNil(o.StatusOnly) {
+		return nil, false
+	}
+	return o.StatusOnly, true
+}
+
+// HasStatusOnly returns a boolean if a field has been set.
+func (o *AutoUnstripRequest) HasStatusOnly() bool {
+	if o != nil && !IsNil(o.StatusOnly) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatusOnly gets a reference to the given bool and assigns it to the StatusOnly field.
+// Deprecated
+func (o *AutoUnstripRequest) SetStatusOnly(v bool) {
+	o.StatusOnly = &v
 }
 
 // GetUseCanonicalNames returns the UseCanonicalNames field value if set, zero value otherwise.
@@ -340,9 +340,6 @@ func (o AutoUnstripRequest) MarshalJSON() ([]byte, error) {
 
 func (o AutoUnstripRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MinSimilarity) {
-		toSerialize["min_similarity"] = o.MinSimilarity
-	}
 	if !IsNil(o.Apply) {
 		toSerialize["apply"] = o.Apply
 	}
@@ -352,11 +349,14 @@ func (o AutoUnstripRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MinGroupSize) {
 		toSerialize["min_group_size"] = o.MinGroupSize
 	}
-	if !IsNil(o.StatusOnly) {
-		toSerialize["status_only"] = o.StatusOnly
+	if !IsNil(o.MinSimilarity) {
+		toSerialize["min_similarity"] = o.MinSimilarity
 	}
 	if !IsNil(o.NoCache) {
 		toSerialize["no_cache"] = o.NoCache
+	}
+	if !IsNil(o.StatusOnly) {
+		toSerialize["status_only"] = o.StatusOnly
 	}
 	if !IsNil(o.UseCanonicalNames) {
 		toSerialize["use_canonical_names"] = o.UseCanonicalNames
@@ -383,12 +383,12 @@ func (o *AutoUnstripRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "min_similarity")
 		delete(additionalProperties, "apply")
 		delete(additionalProperties, "confidence_threshold")
 		delete(additionalProperties, "min_group_size")
-		delete(additionalProperties, "status_only")
+		delete(additionalProperties, "min_similarity")
 		delete(additionalProperties, "no_cache")
+		delete(additionalProperties, "status_only")
 		delete(additionalProperties, "use_canonical_names")
 		o.AdditionalProperties = additionalProperties
 	}

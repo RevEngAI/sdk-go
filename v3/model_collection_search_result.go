@@ -24,22 +24,22 @@ type CollectionSearchResult struct {
 	CollectionId int32 `json:"collection_id"`
 	// The name of the collection
 	CollectionName string `json:"collection_name"`
-	// The scope of the collection
-	Scope string `json:"scope"`
-	// The last update date of the collection
-	LastUpdatedAt time.Time `json:"last_updated_at"`
 	// The creation date of the collection
 	CreatedAt time.Time `json:"created_at"`
+	// The description of the collection
+	Description string `json:"description"`
+	// The last update date of the collection
+	LastUpdatedAt time.Time `json:"last_updated_at"`
 	// The model ID of the binary
 	ModelId int32 `json:"model_id"`
 	// The name of the model
 	ModelName string `json:"model_name"`
 	// The owner of the collection
 	OwnedBy string `json:"owned_by"`
-	Tags []string `json:"tags,omitempty"`
+	// The scope of the collection
+	Scope string `json:"scope"`
 	Size NullableInt32 `json:"size,omitempty"`
-	// The description of the collection
-	Description string `json:"description"`
+	Tags []string `json:"tags,omitempty"`
 	TeamId NullableInt32 `json:"team_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -50,17 +50,17 @@ type _CollectionSearchResult CollectionSearchResult
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCollectionSearchResult(collectionId int32, collectionName string, scope string, lastUpdatedAt time.Time, createdAt time.Time, modelId int32, modelName string, ownedBy string, description string) *CollectionSearchResult {
+func NewCollectionSearchResult(collectionId int32, collectionName string, createdAt time.Time, description string, lastUpdatedAt time.Time, modelId int32, modelName string, ownedBy string, scope string) *CollectionSearchResult {
 	this := CollectionSearchResult{}
 	this.CollectionId = collectionId
 	this.CollectionName = collectionName
-	this.Scope = scope
-	this.LastUpdatedAt = lastUpdatedAt
 	this.CreatedAt = createdAt
+	this.Description = description
+	this.LastUpdatedAt = lastUpdatedAt
 	this.ModelId = modelId
 	this.ModelName = modelName
 	this.OwnedBy = ownedBy
-	this.Description = description
+	this.Scope = scope
 	return &this
 }
 
@@ -120,28 +120,52 @@ func (o *CollectionSearchResult) SetCollectionName(v string) {
 	o.CollectionName = v
 }
 
-// GetScope returns the Scope field value
-func (o *CollectionSearchResult) GetScope() string {
+// GetCreatedAt returns the CreatedAt field value
+func (o *CollectionSearchResult) GetCreatedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+func (o *CollectionSearchResult) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CreatedAt, true
+}
+
+// SetCreatedAt sets field value
+func (o *CollectionSearchResult) SetCreatedAt(v time.Time) {
+	o.CreatedAt = v
+}
+
+// GetDescription returns the Description field value
+func (o *CollectionSearchResult) GetDescription() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Scope
+	return o.Description
 }
 
-// GetScopeOk returns a tuple with the Scope field value
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
-func (o *CollectionSearchResult) GetScopeOk() (*string, bool) {
+func (o *CollectionSearchResult) GetDescriptionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Scope, true
+	return &o.Description, true
 }
 
-// SetScope sets field value
-func (o *CollectionSearchResult) SetScope(v string) {
-	o.Scope = v
+// SetDescription sets field value
+func (o *CollectionSearchResult) SetDescription(v string) {
+	o.Description = v
 }
 
 // GetLastUpdatedAt returns the LastUpdatedAt field value
@@ -166,30 +190,6 @@ func (o *CollectionSearchResult) GetLastUpdatedAtOk() (*time.Time, bool) {
 // SetLastUpdatedAt sets field value
 func (o *CollectionSearchResult) SetLastUpdatedAt(v time.Time) {
 	o.LastUpdatedAt = v
-}
-
-// GetCreatedAt returns the CreatedAt field value
-func (o *CollectionSearchResult) GetCreatedAt() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value
-// and a boolean to check if the value has been set.
-func (o *CollectionSearchResult) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CreatedAt, true
-}
-
-// SetCreatedAt sets field value
-func (o *CollectionSearchResult) SetCreatedAt(v time.Time) {
-	o.CreatedAt = v
 }
 
 // GetModelId returns the ModelId field value
@@ -264,37 +264,28 @@ func (o *CollectionSearchResult) SetOwnedBy(v string) {
 	o.OwnedBy = v
 }
 
-// GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CollectionSearchResult) GetTags() []string {
+// GetScope returns the Scope field value
+func (o *CollectionSearchResult) GetScope() string {
 	if o == nil {
-		var ret []string
+		var ret string
 		return ret
 	}
-	return o.Tags
+
+	return o.Scope
 }
 
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// GetScopeOk returns a tuple with the Scope field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CollectionSearchResult) GetTagsOk() ([]string, bool) {
-	if o == nil || IsNil(o.Tags) {
+func (o *CollectionSearchResult) GetScopeOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tags, true
+	return &o.Scope, true
 }
 
-// HasTags returns a boolean if a field has been set.
-func (o *CollectionSearchResult) HasTags() bool {
-	if o != nil && !IsNil(o.Tags) {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *CollectionSearchResult) SetTags(v []string) {
-	o.Tags = v
+// SetScope sets field value
+func (o *CollectionSearchResult) SetScope(v string) {
+	o.Scope = v
 }
 
 // GetSize returns the Size field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -339,28 +330,37 @@ func (o *CollectionSearchResult) UnsetSize() {
 	o.Size.Unset()
 }
 
-// GetDescription returns the Description field value
-func (o *CollectionSearchResult) GetDescription() string {
+// GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CollectionSearchResult) GetTags() []string {
 	if o == nil {
-		var ret string
+		var ret []string
 		return ret
 	}
-
-	return o.Description
+	return o.Tags
 }
 
-// GetDescriptionOk returns a tuple with the Description field value
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CollectionSearchResult) GetDescriptionOk() (*string, bool) {
-	if o == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CollectionSearchResult) GetTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
-	return &o.Description, true
+	return o.Tags, true
 }
 
-// SetDescription sets field value
-func (o *CollectionSearchResult) SetDescription(v string) {
-	o.Description = v
+// HasTags returns a boolean if a field has been set.
+func (o *CollectionSearchResult) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *CollectionSearchResult) SetTags(v []string) {
+	o.Tags = v
 }
 
 // GetTeamId returns the TeamId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -417,19 +417,19 @@ func (o CollectionSearchResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["collection_id"] = o.CollectionId
 	toSerialize["collection_name"] = o.CollectionName
-	toSerialize["scope"] = o.Scope
-	toSerialize["last_updated_at"] = o.LastUpdatedAt
 	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["description"] = o.Description
+	toSerialize["last_updated_at"] = o.LastUpdatedAt
 	toSerialize["model_id"] = o.ModelId
 	toSerialize["model_name"] = o.ModelName
 	toSerialize["owned_by"] = o.OwnedBy
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
+	toSerialize["scope"] = o.Scope
 	if o.Size.IsSet() {
 		toSerialize["size"] = o.Size.Get()
 	}
-	toSerialize["description"] = o.Description
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
+	}
 	if o.TeamId.IsSet() {
 		toSerialize["team_id"] = o.TeamId.Get()
 	}
@@ -448,13 +448,13 @@ func (o *CollectionSearchResult) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"collection_id",
 		"collection_name",
-		"scope",
-		"last_updated_at",
 		"created_at",
+		"description",
+		"last_updated_at",
 		"model_id",
 		"model_name",
 		"owned_by",
-		"description",
+		"scope",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -486,15 +486,15 @@ func (o *CollectionSearchResult) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "collection_id")
 		delete(additionalProperties, "collection_name")
-		delete(additionalProperties, "scope")
-		delete(additionalProperties, "last_updated_at")
 		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "last_updated_at")
 		delete(additionalProperties, "model_id")
 		delete(additionalProperties, "model_name")
 		delete(additionalProperties, "owned_by")
-		delete(additionalProperties, "tags")
+		delete(additionalProperties, "scope")
 		delete(additionalProperties, "size")
-		delete(additionalProperties, "description")
+		delete(additionalProperties, "tags")
 		delete(additionalProperties, "team_id")
 		o.AdditionalProperties = additionalProperties
 	}

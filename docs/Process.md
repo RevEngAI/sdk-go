@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Args** | **[]string** |  | 
+**Children** | **[]interface{}** |  | 
+**ExecutableName** | **string** |  | 
 **Pid** | **int32** |  | 
 **Procname** | **string** |  | 
-**ExecutableName** | **string** |  | 
-**Args** | **[]string** |  | 
 **TsFrom** | **float32** |  | 
 **TsTo** | **NullableFloat32** |  | 
-**Children** | **[]interface{}** |  | 
 
 ## Methods
 
 ### NewProcess
 
-`func NewProcess(pid int32, procname string, executableName string, args []string, tsFrom float32, tsTo NullableFloat32, children []interface{}, ) *Process`
+`func NewProcess(args []string, children []interface{}, executableName string, pid int32, procname string, tsFrom float32, tsTo NullableFloat32, ) *Process`
 
 NewProcess instantiates a new Process object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +30,66 @@ will change when the set of required properties is changed
 NewProcessWithDefaults instantiates a new Process object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetArgs
+
+`func (o *Process) GetArgs() []string`
+
+GetArgs returns the Args field if non-nil, zero value otherwise.
+
+### GetArgsOk
+
+`func (o *Process) GetArgsOk() (*[]string, bool)`
+
+GetArgsOk returns a tuple with the Args field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArgs
+
+`func (o *Process) SetArgs(v []string)`
+
+SetArgs sets Args field to given value.
+
+
+### GetChildren
+
+`func (o *Process) GetChildren() []interface{}`
+
+GetChildren returns the Children field if non-nil, zero value otherwise.
+
+### GetChildrenOk
+
+`func (o *Process) GetChildrenOk() (*[]interface{}, bool)`
+
+GetChildrenOk returns a tuple with the Children field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChildren
+
+`func (o *Process) SetChildren(v []interface{})`
+
+SetChildren sets Children field to given value.
+
+
+### GetExecutableName
+
+`func (o *Process) GetExecutableName() string`
+
+GetExecutableName returns the ExecutableName field if non-nil, zero value otherwise.
+
+### GetExecutableNameOk
+
+`func (o *Process) GetExecutableNameOk() (*string, bool)`
+
+GetExecutableNameOk returns a tuple with the ExecutableName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutableName
+
+`func (o *Process) SetExecutableName(v string)`
+
+SetExecutableName sets ExecutableName field to given value.
+
 
 ### GetPid
 
@@ -69,46 +129,6 @@ and a boolean to check if the value has been set.
 `func (o *Process) SetProcname(v string)`
 
 SetProcname sets Procname field to given value.
-
-
-### GetExecutableName
-
-`func (o *Process) GetExecutableName() string`
-
-GetExecutableName returns the ExecutableName field if non-nil, zero value otherwise.
-
-### GetExecutableNameOk
-
-`func (o *Process) GetExecutableNameOk() (*string, bool)`
-
-GetExecutableNameOk returns a tuple with the ExecutableName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExecutableName
-
-`func (o *Process) SetExecutableName(v string)`
-
-SetExecutableName sets ExecutableName field to given value.
-
-
-### GetArgs
-
-`func (o *Process) GetArgs() []string`
-
-GetArgs returns the Args field if non-nil, zero value otherwise.
-
-### GetArgsOk
-
-`func (o *Process) GetArgsOk() (*[]string, bool)`
-
-GetArgsOk returns a tuple with the Args field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetArgs
-
-`func (o *Process) SetArgs(v []string)`
-
-SetArgs sets Args field to given value.
 
 
 ### GetTsFrom
@@ -161,26 +181,6 @@ SetTsTo sets TsTo field to given value.
 `func (o *Process) UnsetTsTo()`
 
 UnsetTsTo ensures that no value is present for TsTo, not even an explicit nil
-### GetChildren
-
-`func (o *Process) GetChildren() []interface{}`
-
-GetChildren returns the Children field if non-nil, zero value otherwise.
-
-### GetChildrenOk
-
-`func (o *Process) GetChildrenOk() (*[]interface{}, bool)`
-
-GetChildrenOk returns a tuple with the Children field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChildren
-
-`func (o *Process) SetChildren(v []interface{})`
-
-SetChildren sets Children field to given value.
-
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

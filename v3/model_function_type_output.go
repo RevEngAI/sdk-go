@@ -19,20 +19,20 @@ var _ MappedNullable = &FunctionTypeOutput{}
 
 // FunctionTypeOutput struct for FunctionTypeOutput
 type FunctionTypeOutput struct {
-	LastChange NullableString `json:"last_change,omitempty"`
 	// Memory address of the function
 	Addr int32 `json:"addr"`
-	// Size of the function in bytes
-	Size int32 `json:"size"`
-	// Function header information
-	Header FunctionHeader `json:"header"`
-	StackVars map[string]StackVariable `json:"stack_vars,omitempty"`
-	// Name of the function
-	Name string `json:"name"`
-	// Return type of the function
-	Type string `json:"type"`
 	// Type of artifact that the structure is associated with
 	ArtifactType *string `json:"artifact_type,omitempty"`
+	// Function header information
+	Header FunctionHeader `json:"header"`
+	LastChange NullableString `json:"last_change,omitempty"`
+	// Name of the function
+	Name string `json:"name"`
+	// Size of the function in bytes
+	Size int32 `json:"size"`
+	StackVars map[string]StackVariable `json:"stack_vars,omitempty"`
+	// Return type of the function
+	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -42,15 +42,15 @@ type _FunctionTypeOutput FunctionTypeOutput
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionTypeOutput(addr int32, size int32, header FunctionHeader, name string, type_ string) *FunctionTypeOutput {
+func NewFunctionTypeOutput(addr int32, header FunctionHeader, name string, size int32, type_ string) *FunctionTypeOutput {
 	this := FunctionTypeOutput{}
 	this.Addr = addr
-	this.Size = size
-	this.Header = header
-	this.Name = name
-	this.Type = type_
 	var artifactType string = "Function"
 	this.ArtifactType = &artifactType
+	this.Header = header
+	this.Name = name
+	this.Size = size
+	this.Type = type_
 	return &this
 }
 
@@ -62,6 +62,86 @@ func NewFunctionTypeOutputWithDefaults() *FunctionTypeOutput {
 	var artifactType string = "Function"
 	this.ArtifactType = &artifactType
 	return &this
+}
+
+// GetAddr returns the Addr field value
+func (o *FunctionTypeOutput) GetAddr() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Addr
+}
+
+// GetAddrOk returns a tuple with the Addr field value
+// and a boolean to check if the value has been set.
+func (o *FunctionTypeOutput) GetAddrOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Addr, true
+}
+
+// SetAddr sets field value
+func (o *FunctionTypeOutput) SetAddr(v int32) {
+	o.Addr = v
+}
+
+// GetArtifactType returns the ArtifactType field value if set, zero value otherwise.
+func (o *FunctionTypeOutput) GetArtifactType() string {
+	if o == nil || IsNil(o.ArtifactType) {
+		var ret string
+		return ret
+	}
+	return *o.ArtifactType
+}
+
+// GetArtifactTypeOk returns a tuple with the ArtifactType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionTypeOutput) GetArtifactTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.ArtifactType) {
+		return nil, false
+	}
+	return o.ArtifactType, true
+}
+
+// HasArtifactType returns a boolean if a field has been set.
+func (o *FunctionTypeOutput) HasArtifactType() bool {
+	if o != nil && !IsNil(o.ArtifactType) {
+		return true
+	}
+
+	return false
+}
+
+// SetArtifactType gets a reference to the given string and assigns it to the ArtifactType field.
+func (o *FunctionTypeOutput) SetArtifactType(v string) {
+	o.ArtifactType = &v
+}
+
+// GetHeader returns the Header field value
+func (o *FunctionTypeOutput) GetHeader() FunctionHeader {
+	if o == nil {
+		var ret FunctionHeader
+		return ret
+	}
+
+	return o.Header
+}
+
+// GetHeaderOk returns a tuple with the Header field value
+// and a boolean to check if the value has been set.
+func (o *FunctionTypeOutput) GetHeaderOk() (*FunctionHeader, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Header, true
+}
+
+// SetHeader sets field value
+func (o *FunctionTypeOutput) SetHeader(v FunctionHeader) {
+	o.Header = v
 }
 
 // GetLastChange returns the LastChange field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -106,28 +186,28 @@ func (o *FunctionTypeOutput) UnsetLastChange() {
 	o.LastChange.Unset()
 }
 
-// GetAddr returns the Addr field value
-func (o *FunctionTypeOutput) GetAddr() int32 {
+// GetName returns the Name field value
+func (o *FunctionTypeOutput) GetName() string {
 	if o == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 
-	return o.Addr
+	return o.Name
 }
 
-// GetAddrOk returns a tuple with the Addr field value
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *FunctionTypeOutput) GetAddrOk() (*int32, bool) {
+func (o *FunctionTypeOutput) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Addr, true
+	return &o.Name, true
 }
 
-// SetAddr sets field value
-func (o *FunctionTypeOutput) SetAddr(v int32) {
-	o.Addr = v
+// SetName sets field value
+func (o *FunctionTypeOutput) SetName(v string) {
+	o.Name = v
 }
 
 // GetSize returns the Size field value
@@ -152,30 +232,6 @@ func (o *FunctionTypeOutput) GetSizeOk() (*int32, bool) {
 // SetSize sets field value
 func (o *FunctionTypeOutput) SetSize(v int32) {
 	o.Size = v
-}
-
-// GetHeader returns the Header field value
-func (o *FunctionTypeOutput) GetHeader() FunctionHeader {
-	if o == nil {
-		var ret FunctionHeader
-		return ret
-	}
-
-	return o.Header
-}
-
-// GetHeaderOk returns a tuple with the Header field value
-// and a boolean to check if the value has been set.
-func (o *FunctionTypeOutput) GetHeaderOk() (*FunctionHeader, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Header, true
-}
-
-// SetHeader sets field value
-func (o *FunctionTypeOutput) SetHeader(v FunctionHeader) {
-	o.Header = v
 }
 
 // GetStackVars returns the StackVars field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -211,30 +267,6 @@ func (o *FunctionTypeOutput) SetStackVars(v map[string]StackVariable) {
 	o.StackVars = v
 }
 
-// GetName returns the Name field value
-func (o *FunctionTypeOutput) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *FunctionTypeOutput) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *FunctionTypeOutput) SetName(v string) {
-	o.Name = v
-}
-
 // GetType returns the Type field value
 func (o *FunctionTypeOutput) GetType() string {
 	if o == nil {
@@ -259,38 +291,6 @@ func (o *FunctionTypeOutput) SetType(v string) {
 	o.Type = v
 }
 
-// GetArtifactType returns the ArtifactType field value if set, zero value otherwise.
-func (o *FunctionTypeOutput) GetArtifactType() string {
-	if o == nil || IsNil(o.ArtifactType) {
-		var ret string
-		return ret
-	}
-	return *o.ArtifactType
-}
-
-// GetArtifactTypeOk returns a tuple with the ArtifactType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FunctionTypeOutput) GetArtifactTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.ArtifactType) {
-		return nil, false
-	}
-	return o.ArtifactType, true
-}
-
-// HasArtifactType returns a boolean if a field has been set.
-func (o *FunctionTypeOutput) HasArtifactType() bool {
-	if o != nil && !IsNil(o.ArtifactType) {
-		return true
-	}
-
-	return false
-}
-
-// SetArtifactType gets a reference to the given string and assigns it to the ArtifactType field.
-func (o *FunctionTypeOutput) SetArtifactType(v string) {
-	o.ArtifactType = &v
-}
-
 func (o FunctionTypeOutput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -301,20 +301,20 @@ func (o FunctionTypeOutput) MarshalJSON() ([]byte, error) {
 
 func (o FunctionTypeOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.LastChange.IsSet() {
-		toSerialize["last_change"] = o.LastChange.Get()
-	}
 	toSerialize["addr"] = o.Addr
-	toSerialize["size"] = o.Size
-	toSerialize["header"] = o.Header
-	if o.StackVars != nil {
-		toSerialize["stack_vars"] = o.StackVars
-	}
-	toSerialize["name"] = o.Name
-	toSerialize["type"] = o.Type
 	if !IsNil(o.ArtifactType) {
 		toSerialize["artifact_type"] = o.ArtifactType
 	}
+	toSerialize["header"] = o.Header
+	if o.LastChange.IsSet() {
+		toSerialize["last_change"] = o.LastChange.Get()
+	}
+	toSerialize["name"] = o.Name
+	toSerialize["size"] = o.Size
+	if o.StackVars != nil {
+		toSerialize["stack_vars"] = o.StackVars
+	}
+	toSerialize["type"] = o.Type
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -329,9 +329,9 @@ func (o *FunctionTypeOutput) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"addr",
-		"size",
 		"header",
 		"name",
+		"size",
 		"type",
 	}
 
@@ -362,14 +362,14 @@ func (o *FunctionTypeOutput) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "last_change")
 		delete(additionalProperties, "addr")
-		delete(additionalProperties, "size")
-		delete(additionalProperties, "header")
-		delete(additionalProperties, "stack_vars")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "type")
 		delete(additionalProperties, "artifact_type")
+		delete(additionalProperties, "header")
+		delete(additionalProperties, "last_change")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "stack_vars")
+		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
 	}
 

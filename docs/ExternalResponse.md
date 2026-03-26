@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Sha256Hash** | **string** |  | 
 **Data** | **map[string]interface{}** |  | 
 **LastUpdated** | **time.Time** |  | 
+**Sha256Hash** | **string** |  | 
 
 ## Methods
 
 ### NewExternalResponse
 
-`func NewExternalResponse(sha256Hash string, data map[string]interface{}, lastUpdated time.Time, ) *ExternalResponse`
+`func NewExternalResponse(data map[string]interface{}, lastUpdated time.Time, sha256Hash string, ) *ExternalResponse`
 
 NewExternalResponse instantiates a new ExternalResponse object
 This constructor will assign default values to properties that have it defined,
@@ -26,26 +26,6 @@ will change when the set of required properties is changed
 NewExternalResponseWithDefaults instantiates a new ExternalResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetSha256Hash
-
-`func (o *ExternalResponse) GetSha256Hash() string`
-
-GetSha256Hash returns the Sha256Hash field if non-nil, zero value otherwise.
-
-### GetSha256HashOk
-
-`func (o *ExternalResponse) GetSha256HashOk() (*string, bool)`
-
-GetSha256HashOk returns a tuple with the Sha256Hash field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSha256Hash
-
-`func (o *ExternalResponse) SetSha256Hash(v string)`
-
-SetSha256Hash sets Sha256Hash field to given value.
-
 
 ### GetData
 
@@ -85,6 +65,26 @@ and a boolean to check if the value has been set.
 `func (o *ExternalResponse) SetLastUpdated(v time.Time)`
 
 SetLastUpdated sets LastUpdated field to given value.
+
+
+### GetSha256Hash
+
+`func (o *ExternalResponse) GetSha256Hash() string`
+
+GetSha256Hash returns the Sha256Hash field if non-nil, zero value otherwise.
+
+### GetSha256HashOk
+
+`func (o *ExternalResponse) GetSha256HashOk() (*string, bool)`
+
+GetSha256HashOk returns a tuple with the Sha256Hash field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSha256Hash
+
+`func (o *ExternalResponse) SetSha256Hash(v string)`
+
+SetSha256Hash sets Sha256Hash field to given value.
 
 
 

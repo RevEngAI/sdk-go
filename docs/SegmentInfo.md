@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**End** | Pointer to **int32** |  | [optional] [default to 0]
 **Name** | Pointer to **string** |  | [optional] [default to ""]
 **R** | Pointer to **NullableBool** |  | [optional] 
+**Start** | Pointer to **int32** |  | [optional] [default to 0]
 **W** | Pointer to **NullableBool** |  | [optional] 
 **X** | Pointer to **NullableBool** |  | [optional] 
-**Start** | Pointer to **int32** |  | [optional] [default to 0]
-**End** | Pointer to **int32** |  | [optional] [default to 0]
 
 ## Methods
 
@@ -29,6 +29,31 @@ will change when the set of required properties is changed
 NewSegmentInfoWithDefaults instantiates a new SegmentInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetEnd
+
+`func (o *SegmentInfo) GetEnd() int32`
+
+GetEnd returns the End field if non-nil, zero value otherwise.
+
+### GetEndOk
+
+`func (o *SegmentInfo) GetEndOk() (*int32, bool)`
+
+GetEndOk returns a tuple with the End field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnd
+
+`func (o *SegmentInfo) SetEnd(v int32)`
+
+SetEnd sets End field to given value.
+
+### HasEnd
+
+`func (o *SegmentInfo) HasEnd() bool`
+
+HasEnd returns a boolean if a field has been set.
 
 ### GetName
 
@@ -90,6 +115,31 @@ HasR returns a boolean if a field has been set.
 `func (o *SegmentInfo) UnsetR()`
 
 UnsetR ensures that no value is present for R, not even an explicit nil
+### GetStart
+
+`func (o *SegmentInfo) GetStart() int32`
+
+GetStart returns the Start field if non-nil, zero value otherwise.
+
+### GetStartOk
+
+`func (o *SegmentInfo) GetStartOk() (*int32, bool)`
+
+GetStartOk returns a tuple with the Start field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStart
+
+`func (o *SegmentInfo) SetStart(v int32)`
+
+SetStart sets Start field to given value.
+
+### HasStart
+
+`func (o *SegmentInfo) HasStart() bool`
+
+HasStart returns a boolean if a field has been set.
+
 ### GetW
 
 `func (o *SegmentInfo) GetW() bool`
@@ -160,56 +210,6 @@ HasX returns a boolean if a field has been set.
 `func (o *SegmentInfo) UnsetX()`
 
 UnsetX ensures that no value is present for X, not even an explicit nil
-### GetStart
-
-`func (o *SegmentInfo) GetStart() int32`
-
-GetStart returns the Start field if non-nil, zero value otherwise.
-
-### GetStartOk
-
-`func (o *SegmentInfo) GetStartOk() (*int32, bool)`
-
-GetStartOk returns a tuple with the Start field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStart
-
-`func (o *SegmentInfo) SetStart(v int32)`
-
-SetStart sets Start field to given value.
-
-### HasStart
-
-`func (o *SegmentInfo) HasStart() bool`
-
-HasStart returns a boolean if a field has been set.
-
-### GetEnd
-
-`func (o *SegmentInfo) GetEnd() int32`
-
-GetEnd returns the End field if non-nil, zero value otherwise.
-
-### GetEndOk
-
-`func (o *SegmentInfo) GetEndOk() (*int32, bool)`
-
-GetEndOk returns a tuple with the End field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnd
-
-`func (o *SegmentInfo) SetEnd(v int32)`
-
-SetEnd sets End field to given value.
-
-### HasEnd
-
-`func (o *SegmentInfo) HasEnd() bool`
-
-HasEnd returns a boolean if a field has been set.
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

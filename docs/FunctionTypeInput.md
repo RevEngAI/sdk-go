@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LastChange** | Pointer to **NullableString** |  | [optional] 
 **Addr** | **int32** | Memory address of the function | 
-**Size** | **int32** | Size of the function in bytes | 
-**Header** | [**FunctionHeader**](FunctionHeader.md) | Function header information | 
-**StackVars** | Pointer to [**map[string]StackVariable**](StackVariable.md) |  | [optional] 
-**Name** | **string** | Name of the function | 
-**Type** | **string** | Return type of the function | 
 **ArtifactType** | Pointer to **string** | Type of artifact that the structure is associated with | [optional] [default to "Function"]
+**Header** | [**FunctionHeader**](FunctionHeader.md) | Function header information | 
+**LastChange** | Pointer to **NullableString** |  | [optional] 
+**Name** | **string** | Name of the function | 
+**Size** | **int32** | Size of the function in bytes | 
+**StackVars** | Pointer to [**map[string]StackVariable**](StackVariable.md) |  | [optional] 
+**Type** | **string** | Return type of the function | 
 
 ## Methods
 
 ### NewFunctionTypeInput
 
-`func NewFunctionTypeInput(addr int32, size int32, header FunctionHeader, name string, type_ string, ) *FunctionTypeInput`
+`func NewFunctionTypeInput(addr int32, header FunctionHeader, name string, size int32, type_ string, ) *FunctionTypeInput`
 
 NewFunctionTypeInput instantiates a new FunctionTypeInput object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +31,71 @@ will change when the set of required properties is changed
 NewFunctionTypeInputWithDefaults instantiates a new FunctionTypeInput object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAddr
+
+`func (o *FunctionTypeInput) GetAddr() int32`
+
+GetAddr returns the Addr field if non-nil, zero value otherwise.
+
+### GetAddrOk
+
+`func (o *FunctionTypeInput) GetAddrOk() (*int32, bool)`
+
+GetAddrOk returns a tuple with the Addr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAddr
+
+`func (o *FunctionTypeInput) SetAddr(v int32)`
+
+SetAddr sets Addr field to given value.
+
+
+### GetArtifactType
+
+`func (o *FunctionTypeInput) GetArtifactType() string`
+
+GetArtifactType returns the ArtifactType field if non-nil, zero value otherwise.
+
+### GetArtifactTypeOk
+
+`func (o *FunctionTypeInput) GetArtifactTypeOk() (*string, bool)`
+
+GetArtifactTypeOk returns a tuple with the ArtifactType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArtifactType
+
+`func (o *FunctionTypeInput) SetArtifactType(v string)`
+
+SetArtifactType sets ArtifactType field to given value.
+
+### HasArtifactType
+
+`func (o *FunctionTypeInput) HasArtifactType() bool`
+
+HasArtifactType returns a boolean if a field has been set.
+
+### GetHeader
+
+`func (o *FunctionTypeInput) GetHeader() FunctionHeader`
+
+GetHeader returns the Header field if non-nil, zero value otherwise.
+
+### GetHeaderOk
+
+`func (o *FunctionTypeInput) GetHeaderOk() (*FunctionHeader, bool)`
+
+GetHeaderOk returns a tuple with the Header field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHeader
+
+`func (o *FunctionTypeInput) SetHeader(v FunctionHeader)`
+
+SetHeader sets Header field to given value.
+
 
 ### GetLastChange
 
@@ -67,24 +132,24 @@ HasLastChange returns a boolean if a field has been set.
 `func (o *FunctionTypeInput) UnsetLastChange()`
 
 UnsetLastChange ensures that no value is present for LastChange, not even an explicit nil
-### GetAddr
+### GetName
 
-`func (o *FunctionTypeInput) GetAddr() int32`
+`func (o *FunctionTypeInput) GetName() string`
 
-GetAddr returns the Addr field if non-nil, zero value otherwise.
+GetName returns the Name field if non-nil, zero value otherwise.
 
-### GetAddrOk
+### GetNameOk
 
-`func (o *FunctionTypeInput) GetAddrOk() (*int32, bool)`
+`func (o *FunctionTypeInput) GetNameOk() (*string, bool)`
 
-GetAddrOk returns a tuple with the Addr field if it's non-nil, zero value otherwise
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAddr
+### SetName
 
-`func (o *FunctionTypeInput) SetAddr(v int32)`
+`func (o *FunctionTypeInput) SetName(v string)`
 
-SetAddr sets Addr field to given value.
+SetName sets Name field to given value.
 
 
 ### GetSize
@@ -105,26 +170,6 @@ and a boolean to check if the value has been set.
 `func (o *FunctionTypeInput) SetSize(v int32)`
 
 SetSize sets Size field to given value.
-
-
-### GetHeader
-
-`func (o *FunctionTypeInput) GetHeader() FunctionHeader`
-
-GetHeader returns the Header field if non-nil, zero value otherwise.
-
-### GetHeaderOk
-
-`func (o *FunctionTypeInput) GetHeaderOk() (*FunctionHeader, bool)`
-
-GetHeaderOk returns a tuple with the Header field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHeader
-
-`func (o *FunctionTypeInput) SetHeader(v FunctionHeader)`
-
-SetHeader sets Header field to given value.
 
 
 ### GetStackVars
@@ -162,26 +207,6 @@ HasStackVars returns a boolean if a field has been set.
 `func (o *FunctionTypeInput) UnsetStackVars()`
 
 UnsetStackVars ensures that no value is present for StackVars, not even an explicit nil
-### GetName
-
-`func (o *FunctionTypeInput) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *FunctionTypeInput) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *FunctionTypeInput) SetName(v string)`
-
-SetName sets Name field to given value.
-
-
 ### GetType
 
 `func (o *FunctionTypeInput) GetType() string`
@@ -201,31 +226,6 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
-
-### GetArtifactType
-
-`func (o *FunctionTypeInput) GetArtifactType() string`
-
-GetArtifactType returns the ArtifactType field if non-nil, zero value otherwise.
-
-### GetArtifactTypeOk
-
-`func (o *FunctionTypeInput) GetArtifactTypeOk() (*string, bool)`
-
-GetArtifactTypeOk returns a tuple with the ArtifactType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetArtifactType
-
-`func (o *FunctionTypeInput) SetArtifactType(v string)`
-
-SetArtifactType sets ArtifactType field to given value.
-
-### HasArtifactType
-
-`func (o *FunctionTypeInput) HasArtifactType() bool`
-
-HasArtifactType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

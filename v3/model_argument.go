@@ -20,14 +20,14 @@ var _ MappedNullable = &Argument{}
 // Argument struct for Argument
 type Argument struct {
 	LastChange NullableString `json:"last_change,omitempty"`
-	// Offset of the argument in the function signature
-	Offset int32 `json:"offset"`
 	// Name of the argument
 	Name string `json:"name"`
-	// Data type of the argument
-	Type string `json:"type"`
+	// Offset of the argument in the function signature
+	Offset int32 `json:"offset"`
 	// Size of the argument in bytes
 	Size int32 `json:"size"`
+	// Data type of the argument
+	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,12 +37,12 @@ type _Argument Argument
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewArgument(offset int32, name string, type_ string, size int32) *Argument {
+func NewArgument(name string, offset int32, size int32, type_ string) *Argument {
 	this := Argument{}
-	this.Offset = offset
 	this.Name = name
-	this.Type = type_
+	this.Offset = offset
 	this.Size = size
+	this.Type = type_
 	return &this
 }
 
@@ -96,30 +96,6 @@ func (o *Argument) UnsetLastChange() {
 	o.LastChange.Unset()
 }
 
-// GetOffset returns the Offset field value
-func (o *Argument) GetOffset() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Offset
-}
-
-// GetOffsetOk returns a tuple with the Offset field value
-// and a boolean to check if the value has been set.
-func (o *Argument) GetOffsetOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Offset, true
-}
-
-// SetOffset sets field value
-func (o *Argument) SetOffset(v int32) {
-	o.Offset = v
-}
-
 // GetName returns the Name field value
 func (o *Argument) GetName() string {
 	if o == nil {
@@ -144,28 +120,28 @@ func (o *Argument) SetName(v string) {
 	o.Name = v
 }
 
-// GetType returns the Type field value
-func (o *Argument) GetType() string {
+// GetOffset returns the Offset field value
+func (o *Argument) GetOffset() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
-	return o.Type
+	return o.Offset
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetOffsetOk returns a tuple with the Offset field value
 // and a boolean to check if the value has been set.
-func (o *Argument) GetTypeOk() (*string, bool) {
+func (o *Argument) GetOffsetOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Type, true
+	return &o.Offset, true
 }
 
-// SetType sets field value
-func (o *Argument) SetType(v string) {
-	o.Type = v
+// SetOffset sets field value
+func (o *Argument) SetOffset(v int32) {
+	o.Offset = v
 }
 
 // GetSize returns the Size field value
@@ -192,6 +168,30 @@ func (o *Argument) SetSize(v int32) {
 	o.Size = v
 }
 
+// GetType returns the Type field value
+func (o *Argument) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *Argument) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *Argument) SetType(v string) {
+	o.Type = v
+}
+
 func (o Argument) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -205,10 +205,10 @@ func (o Argument) ToMap() (map[string]interface{}, error) {
 	if o.LastChange.IsSet() {
 		toSerialize["last_change"] = o.LastChange.Get()
 	}
-	toSerialize["offset"] = o.Offset
 	toSerialize["name"] = o.Name
-	toSerialize["type"] = o.Type
+	toSerialize["offset"] = o.Offset
 	toSerialize["size"] = o.Size
+	toSerialize["type"] = o.Type
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -222,10 +222,10 @@ func (o *Argument) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"offset",
 		"name",
-		"type",
+		"offset",
 		"size",
+		"type",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -256,10 +256,10 @@ func (o *Argument) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "last_change")
-		delete(additionalProperties, "offset")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "type")
+		delete(additionalProperties, "offset")
 		delete(additionalProperties, "size")
+		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
 	}
 

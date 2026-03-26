@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PageSize** | **int32** |  | 
-**PageNumber** | **int32** |  | 
 **HasNextPage** | **bool** |  | 
+**PageNumber** | **int32** |  | 
+**PageSize** | **int32** |  | 
 
 ## Methods
 
 ### NewPaginationModel
 
-`func NewPaginationModel(pageSize int32, pageNumber int32, hasNextPage bool, ) *PaginationModel`
+`func NewPaginationModel(hasNextPage bool, pageNumber int32, pageSize int32, ) *PaginationModel`
 
 NewPaginationModel instantiates a new PaginationModel object
 This constructor will assign default values to properties that have it defined,
@@ -27,24 +27,24 @@ NewPaginationModelWithDefaults instantiates a new PaginationModel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetPageSize
+### GetHasNextPage
 
-`func (o *PaginationModel) GetPageSize() int32`
+`func (o *PaginationModel) GetHasNextPage() bool`
 
-GetPageSize returns the PageSize field if non-nil, zero value otherwise.
+GetHasNextPage returns the HasNextPage field if non-nil, zero value otherwise.
 
-### GetPageSizeOk
+### GetHasNextPageOk
 
-`func (o *PaginationModel) GetPageSizeOk() (*int32, bool)`
+`func (o *PaginationModel) GetHasNextPageOk() (*bool, bool)`
 
-GetPageSizeOk returns a tuple with the PageSize field if it's non-nil, zero value otherwise
+GetHasNextPageOk returns a tuple with the HasNextPage field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPageSize
+### SetHasNextPage
 
-`func (o *PaginationModel) SetPageSize(v int32)`
+`func (o *PaginationModel) SetHasNextPage(v bool)`
 
-SetPageSize sets PageSize field to given value.
+SetHasNextPage sets HasNextPage field to given value.
 
 
 ### GetPageNumber
@@ -67,24 +67,24 @@ and a boolean to check if the value has been set.
 SetPageNumber sets PageNumber field to given value.
 
 
-### GetHasNextPage
+### GetPageSize
 
-`func (o *PaginationModel) GetHasNextPage() bool`
+`func (o *PaginationModel) GetPageSize() int32`
 
-GetHasNextPage returns the HasNextPage field if non-nil, zero value otherwise.
+GetPageSize returns the PageSize field if non-nil, zero value otherwise.
 
-### GetHasNextPageOk
+### GetPageSizeOk
 
-`func (o *PaginationModel) GetHasNextPageOk() (*bool, bool)`
+`func (o *PaginationModel) GetPageSizeOk() (*int32, bool)`
 
-GetHasNextPageOk returns a tuple with the HasNextPage field if it's non-nil, zero value otherwise
+GetPageSizeOk returns a tuple with the PageSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHasNextPage
+### SetPageSize
 
-`func (o *PaginationModel) SetHasNextPage(v bool)`
+`func (o *PaginationModel) SetPageSize(v int32)`
 
-SetHasNextPage sets HasNextPage field to given value.
+SetPageSize sets PageSize field to given value.
 
 
 

@@ -19,10 +19,10 @@ var _ MappedNullable = &FunctionDataTypesStatus{}
 
 // FunctionDataTypesStatus struct for FunctionDataTypesStatus
 type FunctionDataTypesStatus struct {
-	// Function id
-	FunctionId int64 `json:"function_id"`
 	// Whether the service has completed data types generation
 	Completed bool `json:"completed"`
+	// Function id
+	FunctionId int64 `json:"function_id"`
 	// The current status of the data types service
 	Status string `json:"status"`
 	AdditionalProperties map[string]interface{}
@@ -34,10 +34,10 @@ type _FunctionDataTypesStatus FunctionDataTypesStatus
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionDataTypesStatus(functionId int64, completed bool, status string) *FunctionDataTypesStatus {
+func NewFunctionDataTypesStatus(completed bool, functionId int64, status string) *FunctionDataTypesStatus {
 	this := FunctionDataTypesStatus{}
-	this.FunctionId = functionId
 	this.Completed = completed
+	this.FunctionId = functionId
 	this.Status = status
 	return &this
 }
@@ -48,30 +48,6 @@ func NewFunctionDataTypesStatus(functionId int64, completed bool, status string)
 func NewFunctionDataTypesStatusWithDefaults() *FunctionDataTypesStatus {
 	this := FunctionDataTypesStatus{}
 	return &this
-}
-
-// GetFunctionId returns the FunctionId field value
-func (o *FunctionDataTypesStatus) GetFunctionId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.FunctionId
-}
-
-// GetFunctionIdOk returns a tuple with the FunctionId field value
-// and a boolean to check if the value has been set.
-func (o *FunctionDataTypesStatus) GetFunctionIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionId, true
-}
-
-// SetFunctionId sets field value
-func (o *FunctionDataTypesStatus) SetFunctionId(v int64) {
-	o.FunctionId = v
 }
 
 // GetCompleted returns the Completed field value
@@ -96,6 +72,30 @@ func (o *FunctionDataTypesStatus) GetCompletedOk() (*bool, bool) {
 // SetCompleted sets field value
 func (o *FunctionDataTypesStatus) SetCompleted(v bool) {
 	o.Completed = v
+}
+
+// GetFunctionId returns the FunctionId field value
+func (o *FunctionDataTypesStatus) GetFunctionId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.FunctionId
+}
+
+// GetFunctionIdOk returns a tuple with the FunctionId field value
+// and a boolean to check if the value has been set.
+func (o *FunctionDataTypesStatus) GetFunctionIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionId, true
+}
+
+// SetFunctionId sets field value
+func (o *FunctionDataTypesStatus) SetFunctionId(v int64) {
+	o.FunctionId = v
 }
 
 // GetStatus returns the Status field value
@@ -132,8 +132,8 @@ func (o FunctionDataTypesStatus) MarshalJSON() ([]byte, error) {
 
 func (o FunctionDataTypesStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["function_id"] = o.FunctionId
 	toSerialize["completed"] = o.Completed
+	toSerialize["function_id"] = o.FunctionId
 	toSerialize["status"] = o.Status
 
 	for key, value := range o.AdditionalProperties {
@@ -148,8 +148,8 @@ func (o *FunctionDataTypesStatus) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"function_id",
 		"completed",
+		"function_id",
 		"status",
 	}
 
@@ -180,8 +180,8 @@ func (o *FunctionDataTypesStatus) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "function_id")
 		delete(additionalProperties, "completed")
+		delete(additionalProperties, "function_id")
 		delete(additionalProperties, "status")
 		o.AdditionalProperties = additionalProperties
 	}

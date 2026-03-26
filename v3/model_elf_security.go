@@ -19,11 +19,11 @@ var _ MappedNullable = &ELFSecurity{}
 
 // ELFSecurity struct for ELFSecurity
 type ELFSecurity struct {
-	Pie bool `json:"pie"`
-	Stripped bool `json:"stripped"`
 	Canary bool `json:"canary"`
 	Nx bool `json:"nx"`
+	Pie bool `json:"pie"`
 	Relo bool `json:"relo"`
+	Stripped bool `json:"stripped"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,13 +33,13 @@ type _ELFSecurity ELFSecurity
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewELFSecurity(pie bool, stripped bool, canary bool, nx bool, relo bool) *ELFSecurity {
+func NewELFSecurity(canary bool, nx bool, pie bool, relo bool, stripped bool) *ELFSecurity {
 	this := ELFSecurity{}
-	this.Pie = pie
-	this.Stripped = stripped
 	this.Canary = canary
 	this.Nx = nx
+	this.Pie = pie
 	this.Relo = relo
+	this.Stripped = stripped
 	return &this
 }
 
@@ -49,54 +49,6 @@ func NewELFSecurity(pie bool, stripped bool, canary bool, nx bool, relo bool) *E
 func NewELFSecurityWithDefaults() *ELFSecurity {
 	this := ELFSecurity{}
 	return &this
-}
-
-// GetPie returns the Pie field value
-func (o *ELFSecurity) GetPie() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Pie
-}
-
-// GetPieOk returns a tuple with the Pie field value
-// and a boolean to check if the value has been set.
-func (o *ELFSecurity) GetPieOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Pie, true
-}
-
-// SetPie sets field value
-func (o *ELFSecurity) SetPie(v bool) {
-	o.Pie = v
-}
-
-// GetStripped returns the Stripped field value
-func (o *ELFSecurity) GetStripped() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Stripped
-}
-
-// GetStrippedOk returns a tuple with the Stripped field value
-// and a boolean to check if the value has been set.
-func (o *ELFSecurity) GetStrippedOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Stripped, true
-}
-
-// SetStripped sets field value
-func (o *ELFSecurity) SetStripped(v bool) {
-	o.Stripped = v
 }
 
 // GetCanary returns the Canary field value
@@ -147,6 +99,30 @@ func (o *ELFSecurity) SetNx(v bool) {
 	o.Nx = v
 }
 
+// GetPie returns the Pie field value
+func (o *ELFSecurity) GetPie() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Pie
+}
+
+// GetPieOk returns a tuple with the Pie field value
+// and a boolean to check if the value has been set.
+func (o *ELFSecurity) GetPieOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Pie, true
+}
+
+// SetPie sets field value
+func (o *ELFSecurity) SetPie(v bool) {
+	o.Pie = v
+}
+
 // GetRelo returns the Relo field value
 func (o *ELFSecurity) GetRelo() bool {
 	if o == nil {
@@ -171,6 +147,30 @@ func (o *ELFSecurity) SetRelo(v bool) {
 	o.Relo = v
 }
 
+// GetStripped returns the Stripped field value
+func (o *ELFSecurity) GetStripped() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Stripped
+}
+
+// GetStrippedOk returns a tuple with the Stripped field value
+// and a boolean to check if the value has been set.
+func (o *ELFSecurity) GetStrippedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Stripped, true
+}
+
+// SetStripped sets field value
+func (o *ELFSecurity) SetStripped(v bool) {
+	o.Stripped = v
+}
+
 func (o ELFSecurity) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -181,11 +181,11 @@ func (o ELFSecurity) MarshalJSON() ([]byte, error) {
 
 func (o ELFSecurity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["pie"] = o.Pie
-	toSerialize["stripped"] = o.Stripped
 	toSerialize["canary"] = o.Canary
 	toSerialize["nx"] = o.Nx
+	toSerialize["pie"] = o.Pie
 	toSerialize["relo"] = o.Relo
+	toSerialize["stripped"] = o.Stripped
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -199,11 +199,11 @@ func (o *ELFSecurity) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"pie",
-		"stripped",
 		"canary",
 		"nx",
+		"pie",
 		"relo",
+		"stripped",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -233,11 +233,11 @@ func (o *ELFSecurity) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "pie")
-		delete(additionalProperties, "stripped")
 		delete(additionalProperties, "canary")
 		delete(additionalProperties, "nx")
+		delete(additionalProperties, "pie")
 		delete(additionalProperties, "relo")
+		delete(additionalProperties, "stripped")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Pie** | **bool** |  | 
-**Stripped** | **bool** |  | 
 **Canary** | **bool** |  | 
 **Nx** | **bool** |  | 
+**Pie** | **bool** |  | 
 **Relo** | **bool** |  | 
+**Stripped** | **bool** |  | 
 
 ## Methods
 
 ### NewELFSecurity
 
-`func NewELFSecurity(pie bool, stripped bool, canary bool, nx bool, relo bool, ) *ELFSecurity`
+`func NewELFSecurity(canary bool, nx bool, pie bool, relo bool, stripped bool, ) *ELFSecurity`
 
 NewELFSecurity instantiates a new ELFSecurity object
 This constructor will assign default values to properties that have it defined,
@@ -28,46 +28,6 @@ will change when the set of required properties is changed
 NewELFSecurityWithDefaults instantiates a new ELFSecurity object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetPie
-
-`func (o *ELFSecurity) GetPie() bool`
-
-GetPie returns the Pie field if non-nil, zero value otherwise.
-
-### GetPieOk
-
-`func (o *ELFSecurity) GetPieOk() (*bool, bool)`
-
-GetPieOk returns a tuple with the Pie field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPie
-
-`func (o *ELFSecurity) SetPie(v bool)`
-
-SetPie sets Pie field to given value.
-
-
-### GetStripped
-
-`func (o *ELFSecurity) GetStripped() bool`
-
-GetStripped returns the Stripped field if non-nil, zero value otherwise.
-
-### GetStrippedOk
-
-`func (o *ELFSecurity) GetStrippedOk() (*bool, bool)`
-
-GetStrippedOk returns a tuple with the Stripped field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStripped
-
-`func (o *ELFSecurity) SetStripped(v bool)`
-
-SetStripped sets Stripped field to given value.
-
 
 ### GetCanary
 
@@ -109,6 +69,26 @@ and a boolean to check if the value has been set.
 SetNx sets Nx field to given value.
 
 
+### GetPie
+
+`func (o *ELFSecurity) GetPie() bool`
+
+GetPie returns the Pie field if non-nil, zero value otherwise.
+
+### GetPieOk
+
+`func (o *ELFSecurity) GetPieOk() (*bool, bool)`
+
+GetPieOk returns a tuple with the Pie field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPie
+
+`func (o *ELFSecurity) SetPie(v bool)`
+
+SetPie sets Pie field to given value.
+
+
 ### GetRelo
 
 `func (o *ELFSecurity) GetRelo() bool`
@@ -127,6 +107,26 @@ and a boolean to check if the value has been set.
 `func (o *ELFSecurity) SetRelo(v bool)`
 
 SetRelo sets Relo field to given value.
+
+
+### GetStripped
+
+`func (o *ELFSecurity) GetStripped() bool`
+
+GetStripped returns the Stripped field if non-nil, zero value otherwise.
+
+### GetStrippedOk
+
+`func (o *ELFSecurity) GetStrippedOk() (*bool, bool)`
+
+GetStrippedOk returns a tuple with the Stripped field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStripped
+
+`func (o *ELFSecurity) SetStripped(v bool)`
+
+SetStripped sets Stripped field to given value.
 
 
 

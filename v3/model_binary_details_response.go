@@ -20,18 +20,20 @@ var _ MappedNullable = &BinaryDetailsResponse{}
 
 // BinaryDetailsResponse struct for BinaryDetailsResponse
 type BinaryDetailsResponse struct {
+	Class string `json:"Class"`
 	// The architecture of the binary
 	Arch string `json:"arch"`
 	// The size of the binary in bits
 	Bits int32 `json:"bits"`
 	Crc32 string `json:"crc32"`
-	Class string `json:"Class"`
+	Debug bool `json:"debug"`
 	Entropy float32 `json:"entropy"`
 	FileSize int32 `json:"file_size"`
+	FirstSeen time.Time `json:"first_seen"`
 	// 
 	Language string `json:"language"`
-	Md5 string `json:"md5"`
 	Machine string `json:"machine"`
+	Md5 string `json:"md5"`
 	// OS target of the binary
 	Os string `json:"os"`
 	// SHA1 hash of the binary
@@ -44,8 +46,6 @@ type BinaryDetailsResponse struct {
 	SubSys string `json:"sub_sys"`
 	Tlsh string `json:"tlsh"`
 	Type string `json:"type"`
-	Debug bool `json:"debug"`
-	FirstSeen time.Time `json:"first_seen"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -55,17 +55,19 @@ type _BinaryDetailsResponse BinaryDetailsResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBinaryDetailsResponse(arch string, bits int32, crc32 string, class string, entropy float32, fileSize int32, language string, md5 string, machine string, os string, sha1 string, sha256 string, ssdeep NullableString, static bool, stripped bool, subSys string, tlsh string, type_ string, debug bool, firstSeen time.Time) *BinaryDetailsResponse {
+func NewBinaryDetailsResponse(class string, arch string, bits int32, crc32 string, debug bool, entropy float32, fileSize int32, firstSeen time.Time, language string, machine string, md5 string, os string, sha1 string, sha256 string, ssdeep NullableString, static bool, stripped bool, subSys string, tlsh string, type_ string) *BinaryDetailsResponse {
 	this := BinaryDetailsResponse{}
+	this.Class = class
 	this.Arch = arch
 	this.Bits = bits
 	this.Crc32 = crc32
-	this.Class = class
+	this.Debug = debug
 	this.Entropy = entropy
 	this.FileSize = fileSize
+	this.FirstSeen = firstSeen
 	this.Language = language
-	this.Md5 = md5
 	this.Machine = machine
+	this.Md5 = md5
 	this.Os = os
 	this.Sha1 = sha1
 	this.Sha256 = sha256
@@ -75,8 +77,6 @@ func NewBinaryDetailsResponse(arch string, bits int32, crc32 string, class strin
 	this.SubSys = subSys
 	this.Tlsh = tlsh
 	this.Type = type_
-	this.Debug = debug
-	this.FirstSeen = firstSeen
 	return &this
 }
 
@@ -86,6 +86,30 @@ func NewBinaryDetailsResponse(arch string, bits int32, crc32 string, class strin
 func NewBinaryDetailsResponseWithDefaults() *BinaryDetailsResponse {
 	this := BinaryDetailsResponse{}
 	return &this
+}
+
+// GetClass returns the Class field value
+func (o *BinaryDetailsResponse) GetClass() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Class
+}
+
+// GetClassOk returns a tuple with the Class field value
+// and a boolean to check if the value has been set.
+func (o *BinaryDetailsResponse) GetClassOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Class, true
+}
+
+// SetClass sets field value
+func (o *BinaryDetailsResponse) SetClass(v string) {
+	o.Class = v
 }
 
 // GetArch returns the Arch field value
@@ -160,28 +184,28 @@ func (o *BinaryDetailsResponse) SetCrc32(v string) {
 	o.Crc32 = v
 }
 
-// GetClass returns the Class field value
-func (o *BinaryDetailsResponse) GetClass() string {
+// GetDebug returns the Debug field value
+func (o *BinaryDetailsResponse) GetDebug() bool {
 	if o == nil {
-		var ret string
+		var ret bool
 		return ret
 	}
 
-	return o.Class
+	return o.Debug
 }
 
-// GetClassOk returns a tuple with the Class field value
+// GetDebugOk returns a tuple with the Debug field value
 // and a boolean to check if the value has been set.
-func (o *BinaryDetailsResponse) GetClassOk() (*string, bool) {
+func (o *BinaryDetailsResponse) GetDebugOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Class, true
+	return &o.Debug, true
 }
 
-// SetClass sets field value
-func (o *BinaryDetailsResponse) SetClass(v string) {
-	o.Class = v
+// SetDebug sets field value
+func (o *BinaryDetailsResponse) SetDebug(v bool) {
+	o.Debug = v
 }
 
 // GetEntropy returns the Entropy field value
@@ -232,6 +256,30 @@ func (o *BinaryDetailsResponse) SetFileSize(v int32) {
 	o.FileSize = v
 }
 
+// GetFirstSeen returns the FirstSeen field value
+func (o *BinaryDetailsResponse) GetFirstSeen() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.FirstSeen
+}
+
+// GetFirstSeenOk returns a tuple with the FirstSeen field value
+// and a boolean to check if the value has been set.
+func (o *BinaryDetailsResponse) GetFirstSeenOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FirstSeen, true
+}
+
+// SetFirstSeen sets field value
+func (o *BinaryDetailsResponse) SetFirstSeen(v time.Time) {
+	o.FirstSeen = v
+}
+
 // GetLanguage returns the Language field value
 func (o *BinaryDetailsResponse) GetLanguage() string {
 	if o == nil {
@@ -256,30 +304,6 @@ func (o *BinaryDetailsResponse) SetLanguage(v string) {
 	o.Language = v
 }
 
-// GetMd5 returns the Md5 field value
-func (o *BinaryDetailsResponse) GetMd5() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Md5
-}
-
-// GetMd5Ok returns a tuple with the Md5 field value
-// and a boolean to check if the value has been set.
-func (o *BinaryDetailsResponse) GetMd5Ok() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Md5, true
-}
-
-// SetMd5 sets field value
-func (o *BinaryDetailsResponse) SetMd5(v string) {
-	o.Md5 = v
-}
-
 // GetMachine returns the Machine field value
 func (o *BinaryDetailsResponse) GetMachine() string {
 	if o == nil {
@@ -302,6 +326,30 @@ func (o *BinaryDetailsResponse) GetMachineOk() (*string, bool) {
 // SetMachine sets field value
 func (o *BinaryDetailsResponse) SetMachine(v string) {
 	o.Machine = v
+}
+
+// GetMd5 returns the Md5 field value
+func (o *BinaryDetailsResponse) GetMd5() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Md5
+}
+
+// GetMd5Ok returns a tuple with the Md5 field value
+// and a boolean to check if the value has been set.
+func (o *BinaryDetailsResponse) GetMd5Ok() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Md5, true
+}
+
+// SetMd5 sets field value
+func (o *BinaryDetailsResponse) SetMd5(v string) {
+	o.Md5 = v
 }
 
 // GetOs returns the Os field value
@@ -522,54 +570,6 @@ func (o *BinaryDetailsResponse) SetType(v string) {
 	o.Type = v
 }
 
-// GetDebug returns the Debug field value
-func (o *BinaryDetailsResponse) GetDebug() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Debug
-}
-
-// GetDebugOk returns a tuple with the Debug field value
-// and a boolean to check if the value has been set.
-func (o *BinaryDetailsResponse) GetDebugOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Debug, true
-}
-
-// SetDebug sets field value
-func (o *BinaryDetailsResponse) SetDebug(v bool) {
-	o.Debug = v
-}
-
-// GetFirstSeen returns the FirstSeen field value
-func (o *BinaryDetailsResponse) GetFirstSeen() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.FirstSeen
-}
-
-// GetFirstSeenOk returns a tuple with the FirstSeen field value
-// and a boolean to check if the value has been set.
-func (o *BinaryDetailsResponse) GetFirstSeenOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FirstSeen, true
-}
-
-// SetFirstSeen sets field value
-func (o *BinaryDetailsResponse) SetFirstSeen(v time.Time) {
-	o.FirstSeen = v
-}
-
 func (o BinaryDetailsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -580,15 +580,17 @@ func (o BinaryDetailsResponse) MarshalJSON() ([]byte, error) {
 
 func (o BinaryDetailsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["Class"] = o.Class
 	toSerialize["arch"] = o.Arch
 	toSerialize["bits"] = o.Bits
 	toSerialize["crc32"] = o.Crc32
-	toSerialize["Class"] = o.Class
+	toSerialize["debug"] = o.Debug
 	toSerialize["entropy"] = o.Entropy
 	toSerialize["file_size"] = o.FileSize
+	toSerialize["first_seen"] = o.FirstSeen
 	toSerialize["language"] = o.Language
-	toSerialize["md5"] = o.Md5
 	toSerialize["machine"] = o.Machine
+	toSerialize["md5"] = o.Md5
 	toSerialize["os"] = o.Os
 	toSerialize["sha1"] = o.Sha1
 	toSerialize["sha256"] = o.Sha256
@@ -598,8 +600,6 @@ func (o BinaryDetailsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["sub_sys"] = o.SubSys
 	toSerialize["tlsh"] = o.Tlsh
 	toSerialize["type"] = o.Type
-	toSerialize["debug"] = o.Debug
-	toSerialize["first_seen"] = o.FirstSeen
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -613,15 +613,17 @@ func (o *BinaryDetailsResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"Class",
 		"arch",
 		"bits",
 		"crc32",
-		"Class",
+		"debug",
 		"entropy",
 		"file_size",
+		"first_seen",
 		"language",
-		"md5",
 		"machine",
+		"md5",
 		"os",
 		"sha1",
 		"sha256",
@@ -631,8 +633,6 @@ func (o *BinaryDetailsResponse) UnmarshalJSON(data []byte) (err error) {
 		"sub_sys",
 		"tlsh",
 		"type",
-		"debug",
-		"first_seen",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -662,15 +662,17 @@ func (o *BinaryDetailsResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "Class")
 		delete(additionalProperties, "arch")
 		delete(additionalProperties, "bits")
 		delete(additionalProperties, "crc32")
-		delete(additionalProperties, "Class")
+		delete(additionalProperties, "debug")
 		delete(additionalProperties, "entropy")
 		delete(additionalProperties, "file_size")
+		delete(additionalProperties, "first_seen")
 		delete(additionalProperties, "language")
-		delete(additionalProperties, "md5")
 		delete(additionalProperties, "machine")
+		delete(additionalProperties, "md5")
 		delete(additionalProperties, "os")
 		delete(additionalProperties, "sha1")
 		delete(additionalProperties, "sha256")
@@ -680,8 +682,6 @@ func (o *BinaryDetailsResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "sub_sys")
 		delete(additionalProperties, "tlsh")
 		delete(additionalProperties, "type")
-		delete(additionalProperties, "debug")
-		delete(additionalProperties, "first_seen")
 		o.AdditionalProperties = additionalProperties
 	}
 

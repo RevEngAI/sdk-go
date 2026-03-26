@@ -19,9 +19,9 @@ var _ MappedNullable = &StageStatus{}
 
 // StageStatus struct for StageStatus
 type StageStatus struct {
+	NumAhead int32 `json:"num_ahead"`
 	Stage AnalysisStage `json:"stage"`
 	Status PipelineStageStatus `json:"status"`
-	NumAhead int32 `json:"num_ahead"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,11 +31,11 @@ type _StageStatus StageStatus
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStageStatus(stage AnalysisStage, status PipelineStageStatus, numAhead int32) *StageStatus {
+func NewStageStatus(numAhead int32, stage AnalysisStage, status PipelineStageStatus) *StageStatus {
 	this := StageStatus{}
+	this.NumAhead = numAhead
 	this.Stage = stage
 	this.Status = status
-	this.NumAhead = numAhead
 	return &this
 }
 
@@ -45,6 +45,30 @@ func NewStageStatus(stage AnalysisStage, status PipelineStageStatus, numAhead in
 func NewStageStatusWithDefaults() *StageStatus {
 	this := StageStatus{}
 	return &this
+}
+
+// GetNumAhead returns the NumAhead field value
+func (o *StageStatus) GetNumAhead() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.NumAhead
+}
+
+// GetNumAheadOk returns a tuple with the NumAhead field value
+// and a boolean to check if the value has been set.
+func (o *StageStatus) GetNumAheadOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.NumAhead, true
+}
+
+// SetNumAhead sets field value
+func (o *StageStatus) SetNumAhead(v int32) {
+	o.NumAhead = v
 }
 
 // GetStage returns the Stage field value
@@ -95,30 +119,6 @@ func (o *StageStatus) SetStatus(v PipelineStageStatus) {
 	o.Status = v
 }
 
-// GetNumAhead returns the NumAhead field value
-func (o *StageStatus) GetNumAhead() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.NumAhead
-}
-
-// GetNumAheadOk returns a tuple with the NumAhead field value
-// and a boolean to check if the value has been set.
-func (o *StageStatus) GetNumAheadOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.NumAhead, true
-}
-
-// SetNumAhead sets field value
-func (o *StageStatus) SetNumAhead(v int32) {
-	o.NumAhead = v
-}
-
 func (o StageStatus) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -129,9 +129,9 @@ func (o StageStatus) MarshalJSON() ([]byte, error) {
 
 func (o StageStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["num_ahead"] = o.NumAhead
 	toSerialize["stage"] = o.Stage
 	toSerialize["status"] = o.Status
-	toSerialize["num_ahead"] = o.NumAhead
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -145,9 +145,9 @@ func (o *StageStatus) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"num_ahead",
 		"stage",
 		"status",
-		"num_ahead",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -177,9 +177,9 @@ func (o *StageStatus) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "num_ahead")
 		delete(additionalProperties, "stage")
 		delete(additionalProperties, "status")
-		delete(additionalProperties, "num_ahead")
 		o.AdditionalProperties = additionalProperties
 	}
 

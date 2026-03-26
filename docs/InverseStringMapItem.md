@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**String** | **string** |  | 
 **Addr** | **NullableInt64** |  | 
+**String** | **string** |  | 
 
 ## Methods
 
 ### NewInverseStringMapItem
 
-`func NewInverseStringMapItem(string_ string, addr NullableInt64, ) *InverseStringMapItem`
+`func NewInverseStringMapItem(addr NullableInt64, string_ string, ) *InverseStringMapItem`
 
 NewInverseStringMapItem instantiates a new InverseStringMapItem object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewInverseStringMapItemWithDefaults instantiates a new InverseStringMapItem object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetString
-
-`func (o *InverseStringMapItem) GetString() string`
-
-GetString returns the String field if non-nil, zero value otherwise.
-
-### GetStringOk
-
-`func (o *InverseStringMapItem) GetStringOk() (*string, bool)`
-
-GetStringOk returns a tuple with the String field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetString
-
-`func (o *InverseStringMapItem) SetString(v string)`
-
-SetString sets String field to given value.
-
 
 ### GetAddr
 
@@ -76,6 +56,26 @@ SetAddr sets Addr field to given value.
 `func (o *InverseStringMapItem) UnsetAddr()`
 
 UnsetAddr ensures that no value is present for Addr, not even an explicit nil
+### GetString
+
+`func (o *InverseStringMapItem) GetString() string`
+
+GetString returns the String field if non-nil, zero value otherwise.
+
+### GetStringOk
+
+`func (o *InverseStringMapItem) GetStringOk() (*string, bool)`
+
+GetStringOk returns a tuple with the String field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetString
+
+`func (o *InverseStringMapItem) SetString(v string)`
+
+SetString sets String field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

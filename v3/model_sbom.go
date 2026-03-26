@@ -19,10 +19,10 @@ var _ MappedNullable = &SBOM{}
 
 // SBOM struct for SBOM
 type SBOM struct {
-	// The packages found
-	Packages []SBOMPackage `json:"packages"`
 	// The import libraries found
 	ImportedLibs []string `json:"imported_libs"`
+	// The packages found
+	Packages []SBOMPackage `json:"packages"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,10 +32,10 @@ type _SBOM SBOM
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSBOM(packages []SBOMPackage, importedLibs []string) *SBOM {
+func NewSBOM(importedLibs []string, packages []SBOMPackage) *SBOM {
 	this := SBOM{}
-	this.Packages = packages
 	this.ImportedLibs = importedLibs
+	this.Packages = packages
 	return &this
 }
 
@@ -45,30 +45,6 @@ func NewSBOM(packages []SBOMPackage, importedLibs []string) *SBOM {
 func NewSBOMWithDefaults() *SBOM {
 	this := SBOM{}
 	return &this
-}
-
-// GetPackages returns the Packages field value
-func (o *SBOM) GetPackages() []SBOMPackage {
-	if o == nil {
-		var ret []SBOMPackage
-		return ret
-	}
-
-	return o.Packages
-}
-
-// GetPackagesOk returns a tuple with the Packages field value
-// and a boolean to check if the value has been set.
-func (o *SBOM) GetPackagesOk() ([]SBOMPackage, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Packages, true
-}
-
-// SetPackages sets field value
-func (o *SBOM) SetPackages(v []SBOMPackage) {
-	o.Packages = v
 }
 
 // GetImportedLibs returns the ImportedLibs field value
@@ -95,6 +71,30 @@ func (o *SBOM) SetImportedLibs(v []string) {
 	o.ImportedLibs = v
 }
 
+// GetPackages returns the Packages field value
+func (o *SBOM) GetPackages() []SBOMPackage {
+	if o == nil {
+		var ret []SBOMPackage
+		return ret
+	}
+
+	return o.Packages
+}
+
+// GetPackagesOk returns a tuple with the Packages field value
+// and a boolean to check if the value has been set.
+func (o *SBOM) GetPackagesOk() ([]SBOMPackage, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Packages, true
+}
+
+// SetPackages sets field value
+func (o *SBOM) SetPackages(v []SBOMPackage) {
+	o.Packages = v
+}
+
 func (o SBOM) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -105,8 +105,8 @@ func (o SBOM) MarshalJSON() ([]byte, error) {
 
 func (o SBOM) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["packages"] = o.Packages
 	toSerialize["imported_libs"] = o.ImportedLibs
+	toSerialize["packages"] = o.Packages
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -120,8 +120,8 @@ func (o *SBOM) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"packages",
 		"imported_libs",
+		"packages",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -151,8 +151,8 @@ func (o *SBOM) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "packages")
 		delete(additionalProperties, "imported_libs")
+		delete(additionalProperties, "packages")
 		o.AdditionalProperties = additionalProperties
 	}
 

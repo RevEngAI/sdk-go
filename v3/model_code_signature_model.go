@@ -19,9 +19,9 @@ var _ MappedNullable = &CodeSignatureModel{}
 
 // CodeSignatureModel struct for CodeSignatureModel
 type CodeSignatureModel struct {
+	Signatures []SingleCodeSignatureModel `json:"signatures"`
 	Signed bool `json:"signed"`
 	ValidSignature bool `json:"valid_signature"`
-	Signatures []SingleCodeSignatureModel `json:"signatures"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,11 +31,11 @@ type _CodeSignatureModel CodeSignatureModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCodeSignatureModel(signed bool, validSignature bool, signatures []SingleCodeSignatureModel) *CodeSignatureModel {
+func NewCodeSignatureModel(signatures []SingleCodeSignatureModel, signed bool, validSignature bool) *CodeSignatureModel {
 	this := CodeSignatureModel{}
+	this.Signatures = signatures
 	this.Signed = signed
 	this.ValidSignature = validSignature
-	this.Signatures = signatures
 	return &this
 }
 
@@ -45,6 +45,30 @@ func NewCodeSignatureModel(signed bool, validSignature bool, signatures []Single
 func NewCodeSignatureModelWithDefaults() *CodeSignatureModel {
 	this := CodeSignatureModel{}
 	return &this
+}
+
+// GetSignatures returns the Signatures field value
+func (o *CodeSignatureModel) GetSignatures() []SingleCodeSignatureModel {
+	if o == nil {
+		var ret []SingleCodeSignatureModel
+		return ret
+	}
+
+	return o.Signatures
+}
+
+// GetSignaturesOk returns a tuple with the Signatures field value
+// and a boolean to check if the value has been set.
+func (o *CodeSignatureModel) GetSignaturesOk() ([]SingleCodeSignatureModel, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Signatures, true
+}
+
+// SetSignatures sets field value
+func (o *CodeSignatureModel) SetSignatures(v []SingleCodeSignatureModel) {
+	o.Signatures = v
 }
 
 // GetSigned returns the Signed field value
@@ -95,30 +119,6 @@ func (o *CodeSignatureModel) SetValidSignature(v bool) {
 	o.ValidSignature = v
 }
 
-// GetSignatures returns the Signatures field value
-func (o *CodeSignatureModel) GetSignatures() []SingleCodeSignatureModel {
-	if o == nil {
-		var ret []SingleCodeSignatureModel
-		return ret
-	}
-
-	return o.Signatures
-}
-
-// GetSignaturesOk returns a tuple with the Signatures field value
-// and a boolean to check if the value has been set.
-func (o *CodeSignatureModel) GetSignaturesOk() ([]SingleCodeSignatureModel, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Signatures, true
-}
-
-// SetSignatures sets field value
-func (o *CodeSignatureModel) SetSignatures(v []SingleCodeSignatureModel) {
-	o.Signatures = v
-}
-
 func (o CodeSignatureModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -129,9 +129,9 @@ func (o CodeSignatureModel) MarshalJSON() ([]byte, error) {
 
 func (o CodeSignatureModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["signatures"] = o.Signatures
 	toSerialize["signed"] = o.Signed
 	toSerialize["valid_signature"] = o.ValidSignature
-	toSerialize["signatures"] = o.Signatures
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -145,9 +145,9 @@ func (o *CodeSignatureModel) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"signatures",
 		"signed",
 		"valid_signature",
-		"signatures",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -177,9 +177,9 @@ func (o *CodeSignatureModel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "signatures")
 		delete(additionalProperties, "signed")
 		delete(additionalProperties, "valid_signature")
-		delete(additionalProperties, "signatures")
 		o.AdditionalProperties = additionalProperties
 	}
 

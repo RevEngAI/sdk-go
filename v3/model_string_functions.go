@@ -19,10 +19,12 @@ var _ MappedNullable = &StringFunctions{}
 
 // StringFunctions This is a string with the functions where the string is used.  A function string is a string literal referenced within a function. When analyzing stripped or obfuscated binaries, function strings can help identify the function’s purpose.
 type StringFunctions struct {
-	// The value of the string literal
-	Value string `json:"value"`
 	// The function ids the string literal was found within
 	Functions []AppApiRestV2FunctionsResponsesFunction `json:"functions"`
+	// The source of the string
+	Source *StringSource `json:"source,omitempty"`
+	// The value of the string literal
+	Value string `json:"value"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,10 +34,12 @@ type _StringFunctions StringFunctions
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStringFunctions(value string, functions []AppApiRestV2FunctionsResponsesFunction) *StringFunctions {
+func NewStringFunctions(functions []AppApiRestV2FunctionsResponsesFunction, value string) *StringFunctions {
 	this := StringFunctions{}
-	this.Value = value
 	this.Functions = functions
+	var source StringSource = STRINGSOURCE_SYSTEM
+	this.Source = &source
+	this.Value = value
 	return &this
 }
 
@@ -44,31 +48,9 @@ func NewStringFunctions(value string, functions []AppApiRestV2FunctionsResponses
 // but it doesn't guarantee that properties required by API are set
 func NewStringFunctionsWithDefaults() *StringFunctions {
 	this := StringFunctions{}
+	var source StringSource = STRINGSOURCE_SYSTEM
+	this.Source = &source
 	return &this
-}
-
-// GetValue returns the Value field value
-func (o *StringFunctions) GetValue() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Value
-}
-
-// GetValueOk returns a tuple with the Value field value
-// and a boolean to check if the value has been set.
-func (o *StringFunctions) GetValueOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Value, true
-}
-
-// SetValue sets field value
-func (o *StringFunctions) SetValue(v string) {
-	o.Value = v
 }
 
 // GetFunctions returns the Functions field value
@@ -95,6 +77,62 @@ func (o *StringFunctions) SetFunctions(v []AppApiRestV2FunctionsResponsesFunctio
 	o.Functions = v
 }
 
+// GetSource returns the Source field value if set, zero value otherwise.
+func (o *StringFunctions) GetSource() StringSource {
+	if o == nil || IsNil(o.Source) {
+		var ret StringSource
+		return ret
+	}
+	return *o.Source
+}
+
+// GetSourceOk returns a tuple with the Source field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StringFunctions) GetSourceOk() (*StringSource, bool) {
+	if o == nil || IsNil(o.Source) {
+		return nil, false
+	}
+	return o.Source, true
+}
+
+// HasSource returns a boolean if a field has been set.
+func (o *StringFunctions) HasSource() bool {
+	if o != nil && !IsNil(o.Source) {
+		return true
+	}
+
+	return false
+}
+
+// SetSource gets a reference to the given StringSource and assigns it to the Source field.
+func (o *StringFunctions) SetSource(v StringSource) {
+	o.Source = &v
+}
+
+// GetValue returns the Value field value
+func (o *StringFunctions) GetValue() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Value
+}
+
+// GetValueOk returns a tuple with the Value field value
+// and a boolean to check if the value has been set.
+func (o *StringFunctions) GetValueOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Value, true
+}
+
+// SetValue sets field value
+func (o *StringFunctions) SetValue(v string) {
+	o.Value = v
+}
+
 func (o StringFunctions) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -105,8 +143,11 @@ func (o StringFunctions) MarshalJSON() ([]byte, error) {
 
 func (o StringFunctions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["value"] = o.Value
 	toSerialize["functions"] = o.Functions
+	if !IsNil(o.Source) {
+		toSerialize["source"] = o.Source
+	}
+	toSerialize["value"] = o.Value
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -120,8 +161,8 @@ func (o *StringFunctions) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"value",
 		"functions",
+		"value",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -151,8 +192,9 @@ func (o *StringFunctions) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "value")
 		delete(additionalProperties, "functions")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
 	}
 

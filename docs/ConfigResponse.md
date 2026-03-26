@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AiDecompilerSupportedModels** | **[]string** | List of models that support AI decompilation | 
+**AiDecompilerUnsupportedLanguages** | **[]string** | List of programming languages that are not supported for AI decompilation | 
 **DashboardUrl** | Pointer to **string** | The domain of the RevEng.AI platform you are connected to | [optional] [default to ""]
 **MaxFileSizeBytes** | **int32** | Maximum file size (in bytes) that can be uploaded for analysis | 
-**AiDecompilerUnsupportedLanguages** | **[]string** | List of programming languages that are not supported for AI decompilation | 
-**AiDecompilerSupportedModels** | **[]string** | List of models that support AI decompilation | 
 
 ## Methods
 
 ### NewConfigResponse
 
-`func NewConfigResponse(maxFileSizeBytes int32, aiDecompilerUnsupportedLanguages []string, aiDecompilerSupportedModels []string, ) *ConfigResponse`
+`func NewConfigResponse(aiDecompilerSupportedModels []string, aiDecompilerUnsupportedLanguages []string, maxFileSizeBytes int32, ) *ConfigResponse`
 
 NewConfigResponse instantiates a new ConfigResponse object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +27,46 @@ will change when the set of required properties is changed
 NewConfigResponseWithDefaults instantiates a new ConfigResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAiDecompilerSupportedModels
+
+`func (o *ConfigResponse) GetAiDecompilerSupportedModels() []string`
+
+GetAiDecompilerSupportedModels returns the AiDecompilerSupportedModels field if non-nil, zero value otherwise.
+
+### GetAiDecompilerSupportedModelsOk
+
+`func (o *ConfigResponse) GetAiDecompilerSupportedModelsOk() (*[]string, bool)`
+
+GetAiDecompilerSupportedModelsOk returns a tuple with the AiDecompilerSupportedModels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAiDecompilerSupportedModels
+
+`func (o *ConfigResponse) SetAiDecompilerSupportedModels(v []string)`
+
+SetAiDecompilerSupportedModels sets AiDecompilerSupportedModels field to given value.
+
+
+### GetAiDecompilerUnsupportedLanguages
+
+`func (o *ConfigResponse) GetAiDecompilerUnsupportedLanguages() []string`
+
+GetAiDecompilerUnsupportedLanguages returns the AiDecompilerUnsupportedLanguages field if non-nil, zero value otherwise.
+
+### GetAiDecompilerUnsupportedLanguagesOk
+
+`func (o *ConfigResponse) GetAiDecompilerUnsupportedLanguagesOk() (*[]string, bool)`
+
+GetAiDecompilerUnsupportedLanguagesOk returns a tuple with the AiDecompilerUnsupportedLanguages field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAiDecompilerUnsupportedLanguages
+
+`func (o *ConfigResponse) SetAiDecompilerUnsupportedLanguages(v []string)`
+
+SetAiDecompilerUnsupportedLanguages sets AiDecompilerUnsupportedLanguages field to given value.
+
 
 ### GetDashboardUrl
 
@@ -71,46 +111,6 @@ and a boolean to check if the value has been set.
 `func (o *ConfigResponse) SetMaxFileSizeBytes(v int32)`
 
 SetMaxFileSizeBytes sets MaxFileSizeBytes field to given value.
-
-
-### GetAiDecompilerUnsupportedLanguages
-
-`func (o *ConfigResponse) GetAiDecompilerUnsupportedLanguages() []string`
-
-GetAiDecompilerUnsupportedLanguages returns the AiDecompilerUnsupportedLanguages field if non-nil, zero value otherwise.
-
-### GetAiDecompilerUnsupportedLanguagesOk
-
-`func (o *ConfigResponse) GetAiDecompilerUnsupportedLanguagesOk() (*[]string, bool)`
-
-GetAiDecompilerUnsupportedLanguagesOk returns a tuple with the AiDecompilerUnsupportedLanguages field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAiDecompilerUnsupportedLanguages
-
-`func (o *ConfigResponse) SetAiDecompilerUnsupportedLanguages(v []string)`
-
-SetAiDecompilerUnsupportedLanguages sets AiDecompilerUnsupportedLanguages field to given value.
-
-
-### GetAiDecompilerSupportedModels
-
-`func (o *ConfigResponse) GetAiDecompilerSupportedModels() []string`
-
-GetAiDecompilerSupportedModels returns the AiDecompilerSupportedModels field if non-nil, zero value otherwise.
-
-### GetAiDecompilerSupportedModelsOk
-
-`func (o *ConfigResponse) GetAiDecompilerSupportedModelsOk() (*[]string, bool)`
-
-GetAiDecompilerSupportedModelsOk returns a tuple with the AiDecompilerSupportedModels field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAiDecompilerSupportedModels
-
-`func (o *ConfigResponse) SetAiDecompilerSupportedModels(v []string)`
-
-SetAiDecompilerSupportedModels sets AiDecompilerSupportedModels field to given value.
 
 
 

@@ -20,14 +20,14 @@ var _ MappedNullable = &FunctionSearchResult{}
 
 // FunctionSearchResult struct for FunctionSearchResult
 type FunctionSearchResult struct {
-	// The function ID
-	FunctionId int64 `json:"function_id"`
-	// The name of the function
-	FunctionName string `json:"function_name"`
 	// The name of the binary the function belongs to
 	BinaryName string `json:"binary_name"`
 	// The creation date of the function
 	CreatedAt time.Time `json:"created_at"`
+	// The function ID
+	FunctionId int64 `json:"function_id"`
+	// The name of the function
+	FunctionName string `json:"function_name"`
 	// The model ID used to analyze the binary the function belongs to
 	ModelId int32 `json:"model_id"`
 	// The name of the model used to analyze the binary the function belongs to
@@ -43,12 +43,12 @@ type _FunctionSearchResult FunctionSearchResult
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionSearchResult(functionId int64, functionName string, binaryName string, createdAt time.Time, modelId int32, modelName string, ownedBy string) *FunctionSearchResult {
+func NewFunctionSearchResult(binaryName string, createdAt time.Time, functionId int64, functionName string, modelId int32, modelName string, ownedBy string) *FunctionSearchResult {
 	this := FunctionSearchResult{}
-	this.FunctionId = functionId
-	this.FunctionName = functionName
 	this.BinaryName = binaryName
 	this.CreatedAt = createdAt
+	this.FunctionId = functionId
+	this.FunctionName = functionName
 	this.ModelId = modelId
 	this.ModelName = modelName
 	this.OwnedBy = ownedBy
@@ -61,54 +61,6 @@ func NewFunctionSearchResult(functionId int64, functionName string, binaryName s
 func NewFunctionSearchResultWithDefaults() *FunctionSearchResult {
 	this := FunctionSearchResult{}
 	return &this
-}
-
-// GetFunctionId returns the FunctionId field value
-func (o *FunctionSearchResult) GetFunctionId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.FunctionId
-}
-
-// GetFunctionIdOk returns a tuple with the FunctionId field value
-// and a boolean to check if the value has been set.
-func (o *FunctionSearchResult) GetFunctionIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionId, true
-}
-
-// SetFunctionId sets field value
-func (o *FunctionSearchResult) SetFunctionId(v int64) {
-	o.FunctionId = v
-}
-
-// GetFunctionName returns the FunctionName field value
-func (o *FunctionSearchResult) GetFunctionName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.FunctionName
-}
-
-// GetFunctionNameOk returns a tuple with the FunctionName field value
-// and a boolean to check if the value has been set.
-func (o *FunctionSearchResult) GetFunctionNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionName, true
-}
-
-// SetFunctionName sets field value
-func (o *FunctionSearchResult) SetFunctionName(v string) {
-	o.FunctionName = v
 }
 
 // GetBinaryName returns the BinaryName field value
@@ -157,6 +109,54 @@ func (o *FunctionSearchResult) GetCreatedAtOk() (*time.Time, bool) {
 // SetCreatedAt sets field value
 func (o *FunctionSearchResult) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
+}
+
+// GetFunctionId returns the FunctionId field value
+func (o *FunctionSearchResult) GetFunctionId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.FunctionId
+}
+
+// GetFunctionIdOk returns a tuple with the FunctionId field value
+// and a boolean to check if the value has been set.
+func (o *FunctionSearchResult) GetFunctionIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionId, true
+}
+
+// SetFunctionId sets field value
+func (o *FunctionSearchResult) SetFunctionId(v int64) {
+	o.FunctionId = v
+}
+
+// GetFunctionName returns the FunctionName field value
+func (o *FunctionSearchResult) GetFunctionName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FunctionName
+}
+
+// GetFunctionNameOk returns a tuple with the FunctionName field value
+// and a boolean to check if the value has been set.
+func (o *FunctionSearchResult) GetFunctionNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionName, true
+}
+
+// SetFunctionName sets field value
+func (o *FunctionSearchResult) SetFunctionName(v string) {
+	o.FunctionName = v
 }
 
 // GetModelId returns the ModelId field value
@@ -241,10 +241,10 @@ func (o FunctionSearchResult) MarshalJSON() ([]byte, error) {
 
 func (o FunctionSearchResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["function_id"] = o.FunctionId
-	toSerialize["function_name"] = o.FunctionName
 	toSerialize["binary_name"] = o.BinaryName
 	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["function_id"] = o.FunctionId
+	toSerialize["function_name"] = o.FunctionName
 	toSerialize["model_id"] = o.ModelId
 	toSerialize["model_name"] = o.ModelName
 	toSerialize["owned_by"] = o.OwnedBy
@@ -261,10 +261,10 @@ func (o *FunctionSearchResult) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"function_id",
-		"function_name",
 		"binary_name",
 		"created_at",
+		"function_id",
+		"function_name",
 		"model_id",
 		"model_name",
 		"owned_by",
@@ -297,10 +297,10 @@ func (o *FunctionSearchResult) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "function_id")
-		delete(additionalProperties, "function_name")
 		delete(additionalProperties, "binary_name")
 		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
 		delete(additionalProperties, "model_id")
 		delete(additionalProperties, "model_name")
 		delete(additionalProperties, "owned_by")

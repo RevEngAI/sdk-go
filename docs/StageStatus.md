@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**NumAhead** | **int32** |  | 
 **Stage** | [**AnalysisStage**](AnalysisStage.md) |  | 
 **Status** | [**PipelineStageStatus**](PipelineStageStatus.md) |  | 
-**NumAhead** | **int32** |  | 
 
 ## Methods
 
 ### NewStageStatus
 
-`func NewStageStatus(stage AnalysisStage, status PipelineStageStatus, numAhead int32, ) *StageStatus`
+`func NewStageStatus(numAhead int32, stage AnalysisStage, status PipelineStageStatus, ) *StageStatus`
 
 NewStageStatus instantiates a new StageStatus object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +26,26 @@ will change when the set of required properties is changed
 NewStageStatusWithDefaults instantiates a new StageStatus object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetNumAhead
+
+`func (o *StageStatus) GetNumAhead() int32`
+
+GetNumAhead returns the NumAhead field if non-nil, zero value otherwise.
+
+### GetNumAheadOk
+
+`func (o *StageStatus) GetNumAheadOk() (*int32, bool)`
+
+GetNumAheadOk returns a tuple with the NumAhead field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumAhead
+
+`func (o *StageStatus) SetNumAhead(v int32)`
+
+SetNumAhead sets NumAhead field to given value.
+
 
 ### GetStage
 
@@ -65,26 +85,6 @@ and a boolean to check if the value has been set.
 `func (o *StageStatus) SetStatus(v PipelineStageStatus)`
 
 SetStatus sets Status field to given value.
-
-
-### GetNumAhead
-
-`func (o *StageStatus) GetNumAhead() int32`
-
-GetNumAhead returns the NumAhead field if non-nil, zero value otherwise.
-
-### GetNumAheadOk
-
-`func (o *StageStatus) GetNumAheadOk() (*int32, bool)`
-
-GetNumAheadOk returns a tuple with the NumAhead field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNumAhead
-
-`func (o *StageStatus) SetNumAhead(v int32)`
-
-SetNumAhead sets NumAhead field to given value.
 
 
 

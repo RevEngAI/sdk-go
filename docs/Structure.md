@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ArtifactType** | Pointer to **string** | Type of artifact that the structure is associated with | [optional] 
 **LastChange** | Pointer to **NullableString** |  | [optional] 
+**Members** | [**map[string]StructureMember**](StructureMember.md) | Dictionary of structure members | 
 **Name** | **string** | Name of the structure | 
 **Size** | Pointer to **NullableInt32** |  | [optional] 
-**Members** | [**map[string]StructureMember**](StructureMember.md) | Dictionary of structure members | 
-**ArtifactType** | Pointer to **string** | Type of artifact that the structure is associated with | [optional] 
 
 ## Methods
 
 ### NewStructure
 
-`func NewStructure(name string, members map[string]StructureMember, ) *Structure`
+`func NewStructure(members map[string]StructureMember, name string, ) *Structure`
 
 NewStructure instantiates a new Structure object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +28,31 @@ will change when the set of required properties is changed
 NewStructureWithDefaults instantiates a new Structure object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetArtifactType
+
+`func (o *Structure) GetArtifactType() string`
+
+GetArtifactType returns the ArtifactType field if non-nil, zero value otherwise.
+
+### GetArtifactTypeOk
+
+`func (o *Structure) GetArtifactTypeOk() (*string, bool)`
+
+GetArtifactTypeOk returns a tuple with the ArtifactType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArtifactType
+
+`func (o *Structure) SetArtifactType(v string)`
+
+SetArtifactType sets ArtifactType field to given value.
+
+### HasArtifactType
+
+`func (o *Structure) HasArtifactType() bool`
+
+HasArtifactType returns a boolean if a field has been set.
 
 ### GetLastChange
 
@@ -64,6 +89,26 @@ HasLastChange returns a boolean if a field has been set.
 `func (o *Structure) UnsetLastChange()`
 
 UnsetLastChange ensures that no value is present for LastChange, not even an explicit nil
+### GetMembers
+
+`func (o *Structure) GetMembers() map[string]StructureMember`
+
+GetMembers returns the Members field if non-nil, zero value otherwise.
+
+### GetMembersOk
+
+`func (o *Structure) GetMembersOk() (*map[string]StructureMember, bool)`
+
+GetMembersOk returns a tuple with the Members field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMembers
+
+`func (o *Structure) SetMembers(v map[string]StructureMember)`
+
+SetMembers sets Members field to given value.
+
+
 ### GetName
 
 `func (o *Structure) GetName() string`
@@ -119,51 +164,6 @@ HasSize returns a boolean if a field has been set.
 `func (o *Structure) UnsetSize()`
 
 UnsetSize ensures that no value is present for Size, not even an explicit nil
-### GetMembers
-
-`func (o *Structure) GetMembers() map[string]StructureMember`
-
-GetMembers returns the Members field if non-nil, zero value otherwise.
-
-### GetMembersOk
-
-`func (o *Structure) GetMembersOk() (*map[string]StructureMember, bool)`
-
-GetMembersOk returns a tuple with the Members field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMembers
-
-`func (o *Structure) SetMembers(v map[string]StructureMember)`
-
-SetMembers sets Members field to given value.
-
-
-### GetArtifactType
-
-`func (o *Structure) GetArtifactType() string`
-
-GetArtifactType returns the ArtifactType field if non-nil, zero value otherwise.
-
-### GetArtifactTypeOk
-
-`func (o *Structure) GetArtifactTypeOk() (*string, bool)`
-
-GetArtifactTypeOk returns a tuple with the ArtifactType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetArtifactType
-
-`func (o *Structure) SetArtifactType(v string)`
-
-SetArtifactType sets ArtifactType field to given value.
-
-### HasArtifactType
-
-`func (o *Structure) HasArtifactType() bool`
-
-HasArtifactType returns a boolean if a field has been set.
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

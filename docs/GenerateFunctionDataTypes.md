@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**DataTypesList** | [**GenerationStatusList**](GenerationStatusList.md) | List of function data types information that are either already generated, or now queued for generation | 
 **Queued** | **bool** | [DEPRECATED] This value has been replaced with the &#x60;data_types_list&#x60; field | 
 **Reference** | **string** | [DEPRECATED] This value has been replaced with the &#x60;data_types_list&#x60; field | 
-**DataTypesList** | [**GenerationStatusList**](GenerationStatusList.md) | List of function data types information that are either already generated, or now queued for generation | 
 
 ## Methods
 
 ### NewGenerateFunctionDataTypes
 
-`func NewGenerateFunctionDataTypes(queued bool, reference string, dataTypesList GenerationStatusList, ) *GenerateFunctionDataTypes`
+`func NewGenerateFunctionDataTypes(dataTypesList GenerationStatusList, queued bool, reference string, ) *GenerateFunctionDataTypes`
 
 NewGenerateFunctionDataTypes instantiates a new GenerateFunctionDataTypes object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +26,26 @@ will change when the set of required properties is changed
 NewGenerateFunctionDataTypesWithDefaults instantiates a new GenerateFunctionDataTypes object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetDataTypesList
+
+`func (o *GenerateFunctionDataTypes) GetDataTypesList() GenerationStatusList`
+
+GetDataTypesList returns the DataTypesList field if non-nil, zero value otherwise.
+
+### GetDataTypesListOk
+
+`func (o *GenerateFunctionDataTypes) GetDataTypesListOk() (*GenerationStatusList, bool)`
+
+GetDataTypesListOk returns a tuple with the DataTypesList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDataTypesList
+
+`func (o *GenerateFunctionDataTypes) SetDataTypesList(v GenerationStatusList)`
+
+SetDataTypesList sets DataTypesList field to given value.
+
 
 ### GetQueued
 
@@ -65,26 +85,6 @@ and a boolean to check if the value has been set.
 `func (o *GenerateFunctionDataTypes) SetReference(v string)`
 
 SetReference sets Reference field to given value.
-
-
-### GetDataTypesList
-
-`func (o *GenerateFunctionDataTypes) GetDataTypesList() GenerationStatusList`
-
-GetDataTypesList returns the DataTypesList field if non-nil, zero value otherwise.
-
-### GetDataTypesListOk
-
-`func (o *GenerateFunctionDataTypes) GetDataTypesListOk() (*GenerationStatusList, bool)`
-
-GetDataTypesListOk returns a tuple with the DataTypesList field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDataTypesList
-
-`func (o *GenerateFunctionDataTypes) SetDataTypesList(v GenerationStatusList)`
-
-SetDataTypesList sets DataTypesList field to given value.
 
 
 

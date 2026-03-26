@@ -19,25 +19,25 @@ var _ MappedNullable = &ELFModel{}
 
 // ELFModel struct for ELFModel
 type ELFModel struct {
-	FileType string `json:"file_type"`
 	Architecture string `json:"architecture"`
+	BuildId string `json:"build_id"`
+	DebugInfo map[string]interface{} `json:"debug_info"`
+	DynamicEntries []ElfDynamicEntry `json:"dynamic_entries"`
+	DynamicSymbols []ELFSymbol `json:"dynamic_symbols"`
 	Endianness string `json:"endianness"`
 	EntryPoint int32 `json:"entry_point"`
 	EntryPointBytes string `json:"entry_point_bytes"`
-	ImportHash string `json:"import_hash"`
 	ExportHash string `json:"export_hash"`
-	BuildId string `json:"build_id"`
-	Security ELFSecurity `json:"security"`
+	ExportedFunctions []string `json:"exported_functions"`
+	FileType string `json:"file_type"`
+	ImportHash string `json:"import_hash"`
+	Imports ELFImportModel `json:"imports"`
+	Notes []map[string]interface{} `json:"notes"`
+	Relocations []ELFRelocation `json:"relocations"`
 	Sections []ELFSection `json:"sections"`
+	Security ELFSecurity `json:"security"`
 	Segments []ELFSegment `json:"segments"`
 	Symbols []ELFSymbol `json:"symbols"`
-	DynamicSymbols []ELFSymbol `json:"dynamic_symbols"`
-	Relocations []ELFRelocation `json:"relocations"`
-	Imports ELFImportModel `json:"imports"`
-	ExportedFunctions []string `json:"exported_functions"`
-	DynamicEntries []ElfDynamicEntry `json:"dynamic_entries"`
-	Notes []map[string]interface{} `json:"notes"`
-	DebugInfo map[string]interface{} `json:"debug_info"`
 	VersionInfo map[string]interface{} `json:"version_info"`
 	AdditionalProperties map[string]interface{}
 }
@@ -48,27 +48,27 @@ type _ELFModel ELFModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewELFModel(fileType string, architecture string, endianness string, entryPoint int32, entryPointBytes string, importHash string, exportHash string, buildId string, security ELFSecurity, sections []ELFSection, segments []ELFSegment, symbols []ELFSymbol, dynamicSymbols []ELFSymbol, relocations []ELFRelocation, imports ELFImportModel, exportedFunctions []string, dynamicEntries []ElfDynamicEntry, notes []map[string]interface{}, debugInfo map[string]interface{}, versionInfo map[string]interface{}) *ELFModel {
+func NewELFModel(architecture string, buildId string, debugInfo map[string]interface{}, dynamicEntries []ElfDynamicEntry, dynamicSymbols []ELFSymbol, endianness string, entryPoint int32, entryPointBytes string, exportHash string, exportedFunctions []string, fileType string, importHash string, imports ELFImportModel, notes []map[string]interface{}, relocations []ELFRelocation, sections []ELFSection, security ELFSecurity, segments []ELFSegment, symbols []ELFSymbol, versionInfo map[string]interface{}) *ELFModel {
 	this := ELFModel{}
-	this.FileType = fileType
 	this.Architecture = architecture
+	this.BuildId = buildId
+	this.DebugInfo = debugInfo
+	this.DynamicEntries = dynamicEntries
+	this.DynamicSymbols = dynamicSymbols
 	this.Endianness = endianness
 	this.EntryPoint = entryPoint
 	this.EntryPointBytes = entryPointBytes
-	this.ImportHash = importHash
 	this.ExportHash = exportHash
-	this.BuildId = buildId
-	this.Security = security
+	this.ExportedFunctions = exportedFunctions
+	this.FileType = fileType
+	this.ImportHash = importHash
+	this.Imports = imports
+	this.Notes = notes
+	this.Relocations = relocations
 	this.Sections = sections
+	this.Security = security
 	this.Segments = segments
 	this.Symbols = symbols
-	this.DynamicSymbols = dynamicSymbols
-	this.Relocations = relocations
-	this.Imports = imports
-	this.ExportedFunctions = exportedFunctions
-	this.DynamicEntries = dynamicEntries
-	this.Notes = notes
-	this.DebugInfo = debugInfo
 	this.VersionInfo = versionInfo
 	return &this
 }
@@ -79,30 +79,6 @@ func NewELFModel(fileType string, architecture string, endianness string, entryP
 func NewELFModelWithDefaults() *ELFModel {
 	this := ELFModel{}
 	return &this
-}
-
-// GetFileType returns the FileType field value
-func (o *ELFModel) GetFileType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.FileType
-}
-
-// GetFileTypeOk returns a tuple with the FileType field value
-// and a boolean to check if the value has been set.
-func (o *ELFModel) GetFileTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FileType, true
-}
-
-// SetFileType sets field value
-func (o *ELFModel) SetFileType(v string) {
-	o.FileType = v
 }
 
 // GetArchitecture returns the Architecture field value
@@ -127,6 +103,102 @@ func (o *ELFModel) GetArchitectureOk() (*string, bool) {
 // SetArchitecture sets field value
 func (o *ELFModel) SetArchitecture(v string) {
 	o.Architecture = v
+}
+
+// GetBuildId returns the BuildId field value
+func (o *ELFModel) GetBuildId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.BuildId
+}
+
+// GetBuildIdOk returns a tuple with the BuildId field value
+// and a boolean to check if the value has been set.
+func (o *ELFModel) GetBuildIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.BuildId, true
+}
+
+// SetBuildId sets field value
+func (o *ELFModel) SetBuildId(v string) {
+	o.BuildId = v
+}
+
+// GetDebugInfo returns the DebugInfo field value
+func (o *ELFModel) GetDebugInfo() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+
+	return o.DebugInfo
+}
+
+// GetDebugInfoOk returns a tuple with the DebugInfo field value
+// and a boolean to check if the value has been set.
+func (o *ELFModel) GetDebugInfoOk() (map[string]interface{}, bool) {
+	if o == nil {
+		return map[string]interface{}{}, false
+	}
+	return o.DebugInfo, true
+}
+
+// SetDebugInfo sets field value
+func (o *ELFModel) SetDebugInfo(v map[string]interface{}) {
+	o.DebugInfo = v
+}
+
+// GetDynamicEntries returns the DynamicEntries field value
+func (o *ELFModel) GetDynamicEntries() []ElfDynamicEntry {
+	if o == nil {
+		var ret []ElfDynamicEntry
+		return ret
+	}
+
+	return o.DynamicEntries
+}
+
+// GetDynamicEntriesOk returns a tuple with the DynamicEntries field value
+// and a boolean to check if the value has been set.
+func (o *ELFModel) GetDynamicEntriesOk() ([]ElfDynamicEntry, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DynamicEntries, true
+}
+
+// SetDynamicEntries sets field value
+func (o *ELFModel) SetDynamicEntries(v []ElfDynamicEntry) {
+	o.DynamicEntries = v
+}
+
+// GetDynamicSymbols returns the DynamicSymbols field value
+func (o *ELFModel) GetDynamicSymbols() []ELFSymbol {
+	if o == nil {
+		var ret []ELFSymbol
+		return ret
+	}
+
+	return o.DynamicSymbols
+}
+
+// GetDynamicSymbolsOk returns a tuple with the DynamicSymbols field value
+// and a boolean to check if the value has been set.
+func (o *ELFModel) GetDynamicSymbolsOk() ([]ELFSymbol, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DynamicSymbols, true
+}
+
+// SetDynamicSymbols sets field value
+func (o *ELFModel) SetDynamicSymbols(v []ELFSymbol) {
+	o.DynamicSymbols = v
 }
 
 // GetEndianness returns the Endianness field value
@@ -201,30 +273,6 @@ func (o *ELFModel) SetEntryPointBytes(v string) {
 	o.EntryPointBytes = v
 }
 
-// GetImportHash returns the ImportHash field value
-func (o *ELFModel) GetImportHash() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ImportHash
-}
-
-// GetImportHashOk returns a tuple with the ImportHash field value
-// and a boolean to check if the value has been set.
-func (o *ELFModel) GetImportHashOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ImportHash, true
-}
-
-// SetImportHash sets field value
-func (o *ELFModel) SetImportHash(v string) {
-	o.ImportHash = v
-}
-
 // GetExportHash returns the ExportHash field value
 func (o *ELFModel) GetExportHash() string {
 	if o == nil {
@@ -249,52 +297,148 @@ func (o *ELFModel) SetExportHash(v string) {
 	o.ExportHash = v
 }
 
-// GetBuildId returns the BuildId field value
-func (o *ELFModel) GetBuildId() string {
+// GetExportedFunctions returns the ExportedFunctions field value
+func (o *ELFModel) GetExportedFunctions() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.ExportedFunctions
+}
+
+// GetExportedFunctionsOk returns a tuple with the ExportedFunctions field value
+// and a boolean to check if the value has been set.
+func (o *ELFModel) GetExportedFunctionsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ExportedFunctions, true
+}
+
+// SetExportedFunctions sets field value
+func (o *ELFModel) SetExportedFunctions(v []string) {
+	o.ExportedFunctions = v
+}
+
+// GetFileType returns the FileType field value
+func (o *ELFModel) GetFileType() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.BuildId
+	return o.FileType
 }
 
-// GetBuildIdOk returns a tuple with the BuildId field value
+// GetFileTypeOk returns a tuple with the FileType field value
 // and a boolean to check if the value has been set.
-func (o *ELFModel) GetBuildIdOk() (*string, bool) {
+func (o *ELFModel) GetFileTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.BuildId, true
+	return &o.FileType, true
 }
 
-// SetBuildId sets field value
-func (o *ELFModel) SetBuildId(v string) {
-	o.BuildId = v
+// SetFileType sets field value
+func (o *ELFModel) SetFileType(v string) {
+	o.FileType = v
 }
 
-// GetSecurity returns the Security field value
-func (o *ELFModel) GetSecurity() ELFSecurity {
+// GetImportHash returns the ImportHash field value
+func (o *ELFModel) GetImportHash() string {
 	if o == nil {
-		var ret ELFSecurity
+		var ret string
 		return ret
 	}
 
-	return o.Security
+	return o.ImportHash
 }
 
-// GetSecurityOk returns a tuple with the Security field value
+// GetImportHashOk returns a tuple with the ImportHash field value
 // and a boolean to check if the value has been set.
-func (o *ELFModel) GetSecurityOk() (*ELFSecurity, bool) {
+func (o *ELFModel) GetImportHashOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Security, true
+	return &o.ImportHash, true
 }
 
-// SetSecurity sets field value
-func (o *ELFModel) SetSecurity(v ELFSecurity) {
-	o.Security = v
+// SetImportHash sets field value
+func (o *ELFModel) SetImportHash(v string) {
+	o.ImportHash = v
+}
+
+// GetImports returns the Imports field value
+func (o *ELFModel) GetImports() ELFImportModel {
+	if o == nil {
+		var ret ELFImportModel
+		return ret
+	}
+
+	return o.Imports
+}
+
+// GetImportsOk returns a tuple with the Imports field value
+// and a boolean to check if the value has been set.
+func (o *ELFModel) GetImportsOk() (*ELFImportModel, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Imports, true
+}
+
+// SetImports sets field value
+func (o *ELFModel) SetImports(v ELFImportModel) {
+	o.Imports = v
+}
+
+// GetNotes returns the Notes field value
+func (o *ELFModel) GetNotes() []map[string]interface{} {
+	if o == nil {
+		var ret []map[string]interface{}
+		return ret
+	}
+
+	return o.Notes
+}
+
+// GetNotesOk returns a tuple with the Notes field value
+// and a boolean to check if the value has been set.
+func (o *ELFModel) GetNotesOk() ([]map[string]interface{}, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Notes, true
+}
+
+// SetNotes sets field value
+func (o *ELFModel) SetNotes(v []map[string]interface{}) {
+	o.Notes = v
+}
+
+// GetRelocations returns the Relocations field value
+func (o *ELFModel) GetRelocations() []ELFRelocation {
+	if o == nil {
+		var ret []ELFRelocation
+		return ret
+	}
+
+	return o.Relocations
+}
+
+// GetRelocationsOk returns a tuple with the Relocations field value
+// and a boolean to check if the value has been set.
+func (o *ELFModel) GetRelocationsOk() ([]ELFRelocation, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Relocations, true
+}
+
+// SetRelocations sets field value
+func (o *ELFModel) SetRelocations(v []ELFRelocation) {
+	o.Relocations = v
 }
 
 // GetSections returns the Sections field value
@@ -319,6 +463,30 @@ func (o *ELFModel) GetSectionsOk() ([]ELFSection, bool) {
 // SetSections sets field value
 func (o *ELFModel) SetSections(v []ELFSection) {
 	o.Sections = v
+}
+
+// GetSecurity returns the Security field value
+func (o *ELFModel) GetSecurity() ELFSecurity {
+	if o == nil {
+		var ret ELFSecurity
+		return ret
+	}
+
+	return o.Security
+}
+
+// GetSecurityOk returns a tuple with the Security field value
+// and a boolean to check if the value has been set.
+func (o *ELFModel) GetSecurityOk() (*ELFSecurity, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Security, true
+}
+
+// SetSecurity sets field value
+func (o *ELFModel) SetSecurity(v ELFSecurity) {
+	o.Security = v
 }
 
 // GetSegments returns the Segments field value
@@ -369,174 +537,6 @@ func (o *ELFModel) SetSymbols(v []ELFSymbol) {
 	o.Symbols = v
 }
 
-// GetDynamicSymbols returns the DynamicSymbols field value
-func (o *ELFModel) GetDynamicSymbols() []ELFSymbol {
-	if o == nil {
-		var ret []ELFSymbol
-		return ret
-	}
-
-	return o.DynamicSymbols
-}
-
-// GetDynamicSymbolsOk returns a tuple with the DynamicSymbols field value
-// and a boolean to check if the value has been set.
-func (o *ELFModel) GetDynamicSymbolsOk() ([]ELFSymbol, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.DynamicSymbols, true
-}
-
-// SetDynamicSymbols sets field value
-func (o *ELFModel) SetDynamicSymbols(v []ELFSymbol) {
-	o.DynamicSymbols = v
-}
-
-// GetRelocations returns the Relocations field value
-func (o *ELFModel) GetRelocations() []ELFRelocation {
-	if o == nil {
-		var ret []ELFRelocation
-		return ret
-	}
-
-	return o.Relocations
-}
-
-// GetRelocationsOk returns a tuple with the Relocations field value
-// and a boolean to check if the value has been set.
-func (o *ELFModel) GetRelocationsOk() ([]ELFRelocation, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Relocations, true
-}
-
-// SetRelocations sets field value
-func (o *ELFModel) SetRelocations(v []ELFRelocation) {
-	o.Relocations = v
-}
-
-// GetImports returns the Imports field value
-func (o *ELFModel) GetImports() ELFImportModel {
-	if o == nil {
-		var ret ELFImportModel
-		return ret
-	}
-
-	return o.Imports
-}
-
-// GetImportsOk returns a tuple with the Imports field value
-// and a boolean to check if the value has been set.
-func (o *ELFModel) GetImportsOk() (*ELFImportModel, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Imports, true
-}
-
-// SetImports sets field value
-func (o *ELFModel) SetImports(v ELFImportModel) {
-	o.Imports = v
-}
-
-// GetExportedFunctions returns the ExportedFunctions field value
-func (o *ELFModel) GetExportedFunctions() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.ExportedFunctions
-}
-
-// GetExportedFunctionsOk returns a tuple with the ExportedFunctions field value
-// and a boolean to check if the value has been set.
-func (o *ELFModel) GetExportedFunctionsOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ExportedFunctions, true
-}
-
-// SetExportedFunctions sets field value
-func (o *ELFModel) SetExportedFunctions(v []string) {
-	o.ExportedFunctions = v
-}
-
-// GetDynamicEntries returns the DynamicEntries field value
-func (o *ELFModel) GetDynamicEntries() []ElfDynamicEntry {
-	if o == nil {
-		var ret []ElfDynamicEntry
-		return ret
-	}
-
-	return o.DynamicEntries
-}
-
-// GetDynamicEntriesOk returns a tuple with the DynamicEntries field value
-// and a boolean to check if the value has been set.
-func (o *ELFModel) GetDynamicEntriesOk() ([]ElfDynamicEntry, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.DynamicEntries, true
-}
-
-// SetDynamicEntries sets field value
-func (o *ELFModel) SetDynamicEntries(v []ElfDynamicEntry) {
-	o.DynamicEntries = v
-}
-
-// GetNotes returns the Notes field value
-func (o *ELFModel) GetNotes() []map[string]interface{} {
-	if o == nil {
-		var ret []map[string]interface{}
-		return ret
-	}
-
-	return o.Notes
-}
-
-// GetNotesOk returns a tuple with the Notes field value
-// and a boolean to check if the value has been set.
-func (o *ELFModel) GetNotesOk() ([]map[string]interface{}, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Notes, true
-}
-
-// SetNotes sets field value
-func (o *ELFModel) SetNotes(v []map[string]interface{}) {
-	o.Notes = v
-}
-
-// GetDebugInfo returns the DebugInfo field value
-func (o *ELFModel) GetDebugInfo() map[string]interface{} {
-	if o == nil {
-		var ret map[string]interface{}
-		return ret
-	}
-
-	return o.DebugInfo
-}
-
-// GetDebugInfoOk returns a tuple with the DebugInfo field value
-// and a boolean to check if the value has been set.
-func (o *ELFModel) GetDebugInfoOk() (map[string]interface{}, bool) {
-	if o == nil {
-		return map[string]interface{}{}, false
-	}
-	return o.DebugInfo, true
-}
-
-// SetDebugInfo sets field value
-func (o *ELFModel) SetDebugInfo(v map[string]interface{}) {
-	o.DebugInfo = v
-}
-
 // GetVersionInfo returns the VersionInfo field value
 func (o *ELFModel) GetVersionInfo() map[string]interface{} {
 	if o == nil {
@@ -571,25 +571,25 @@ func (o ELFModel) MarshalJSON() ([]byte, error) {
 
 func (o ELFModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["file_type"] = o.FileType
 	toSerialize["architecture"] = o.Architecture
+	toSerialize["build_id"] = o.BuildId
+	toSerialize["debug_info"] = o.DebugInfo
+	toSerialize["dynamic_entries"] = o.DynamicEntries
+	toSerialize["dynamic_symbols"] = o.DynamicSymbols
 	toSerialize["endianness"] = o.Endianness
 	toSerialize["entry_point"] = o.EntryPoint
 	toSerialize["entry_point_bytes"] = o.EntryPointBytes
-	toSerialize["import_hash"] = o.ImportHash
 	toSerialize["export_hash"] = o.ExportHash
-	toSerialize["build_id"] = o.BuildId
-	toSerialize["security"] = o.Security
+	toSerialize["exported_functions"] = o.ExportedFunctions
+	toSerialize["file_type"] = o.FileType
+	toSerialize["import_hash"] = o.ImportHash
+	toSerialize["imports"] = o.Imports
+	toSerialize["notes"] = o.Notes
+	toSerialize["relocations"] = o.Relocations
 	toSerialize["sections"] = o.Sections
+	toSerialize["security"] = o.Security
 	toSerialize["segments"] = o.Segments
 	toSerialize["symbols"] = o.Symbols
-	toSerialize["dynamic_symbols"] = o.DynamicSymbols
-	toSerialize["relocations"] = o.Relocations
-	toSerialize["imports"] = o.Imports
-	toSerialize["exported_functions"] = o.ExportedFunctions
-	toSerialize["dynamic_entries"] = o.DynamicEntries
-	toSerialize["notes"] = o.Notes
-	toSerialize["debug_info"] = o.DebugInfo
 	toSerialize["version_info"] = o.VersionInfo
 
 	for key, value := range o.AdditionalProperties {
@@ -604,25 +604,25 @@ func (o *ELFModel) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"file_type",
 		"architecture",
+		"build_id",
+		"debug_info",
+		"dynamic_entries",
+		"dynamic_symbols",
 		"endianness",
 		"entry_point",
 		"entry_point_bytes",
-		"import_hash",
 		"export_hash",
-		"build_id",
-		"security",
+		"exported_functions",
+		"file_type",
+		"import_hash",
+		"imports",
+		"notes",
+		"relocations",
 		"sections",
+		"security",
 		"segments",
 		"symbols",
-		"dynamic_symbols",
-		"relocations",
-		"imports",
-		"exported_functions",
-		"dynamic_entries",
-		"notes",
-		"debug_info",
 		"version_info",
 	}
 
@@ -653,25 +653,25 @@ func (o *ELFModel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "file_type")
 		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "build_id")
+		delete(additionalProperties, "debug_info")
+		delete(additionalProperties, "dynamic_entries")
+		delete(additionalProperties, "dynamic_symbols")
 		delete(additionalProperties, "endianness")
 		delete(additionalProperties, "entry_point")
 		delete(additionalProperties, "entry_point_bytes")
-		delete(additionalProperties, "import_hash")
 		delete(additionalProperties, "export_hash")
-		delete(additionalProperties, "build_id")
-		delete(additionalProperties, "security")
+		delete(additionalProperties, "exported_functions")
+		delete(additionalProperties, "file_type")
+		delete(additionalProperties, "import_hash")
+		delete(additionalProperties, "imports")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "relocations")
 		delete(additionalProperties, "sections")
+		delete(additionalProperties, "security")
 		delete(additionalProperties, "segments")
 		delete(additionalProperties, "symbols")
-		delete(additionalProperties, "dynamic_symbols")
-		delete(additionalProperties, "relocations")
-		delete(additionalProperties, "imports")
-		delete(additionalProperties, "exported_functions")
-		delete(additionalProperties, "dynamic_entries")
-		delete(additionalProperties, "notes")
-		delete(additionalProperties, "debug_info")
 		delete(additionalProperties, "version_info")
 		o.AdditionalProperties = additionalProperties
 	}

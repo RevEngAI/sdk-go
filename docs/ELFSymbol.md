@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Binding** | **string** |  | 
 **Name** | **string** |  | 
-**Value** | **int32** |  | 
+**SectionIndex** | **int32** |  | 
 **Size** | **int32** |  | 
 **Type** | **string** |  | 
-**Binding** | **string** |  | 
+**Value** | **int32** |  | 
 **Visibility** | **string** |  | 
-**SectionIndex** | **int32** |  | 
 
 ## Methods
 
 ### NewELFSymbol
 
-`func NewELFSymbol(name string, value int32, size int32, type_ string, binding string, visibility string, sectionIndex int32, ) *ELFSymbol`
+`func NewELFSymbol(binding string, name string, sectionIndex int32, size int32, type_ string, value int32, visibility string, ) *ELFSymbol`
 
 NewELFSymbol instantiates a new ELFSymbol object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +30,26 @@ will change when the set of required properties is changed
 NewELFSymbolWithDefaults instantiates a new ELFSymbol object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBinding
+
+`func (o *ELFSymbol) GetBinding() string`
+
+GetBinding returns the Binding field if non-nil, zero value otherwise.
+
+### GetBindingOk
+
+`func (o *ELFSymbol) GetBindingOk() (*string, bool)`
+
+GetBindingOk returns a tuple with the Binding field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBinding
+
+`func (o *ELFSymbol) SetBinding(v string)`
+
+SetBinding sets Binding field to given value.
+
 
 ### GetName
 
@@ -51,24 +71,24 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
-### GetValue
+### GetSectionIndex
 
-`func (o *ELFSymbol) GetValue() int32`
+`func (o *ELFSymbol) GetSectionIndex() int32`
 
-GetValue returns the Value field if non-nil, zero value otherwise.
+GetSectionIndex returns the SectionIndex field if non-nil, zero value otherwise.
 
-### GetValueOk
+### GetSectionIndexOk
 
-`func (o *ELFSymbol) GetValueOk() (*int32, bool)`
+`func (o *ELFSymbol) GetSectionIndexOk() (*int32, bool)`
 
-GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
+GetSectionIndexOk returns a tuple with the SectionIndex field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetValue
+### SetSectionIndex
 
-`func (o *ELFSymbol) SetValue(v int32)`
+`func (o *ELFSymbol) SetSectionIndex(v int32)`
 
-SetValue sets Value field to given value.
+SetSectionIndex sets SectionIndex field to given value.
 
 
 ### GetSize
@@ -111,24 +131,24 @@ and a boolean to check if the value has been set.
 SetType sets Type field to given value.
 
 
-### GetBinding
+### GetValue
 
-`func (o *ELFSymbol) GetBinding() string`
+`func (o *ELFSymbol) GetValue() int32`
 
-GetBinding returns the Binding field if non-nil, zero value otherwise.
+GetValue returns the Value field if non-nil, zero value otherwise.
 
-### GetBindingOk
+### GetValueOk
 
-`func (o *ELFSymbol) GetBindingOk() (*string, bool)`
+`func (o *ELFSymbol) GetValueOk() (*int32, bool)`
 
-GetBindingOk returns a tuple with the Binding field if it's non-nil, zero value otherwise
+GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBinding
+### SetValue
 
-`func (o *ELFSymbol) SetBinding(v string)`
+`func (o *ELFSymbol) SetValue(v int32)`
 
-SetBinding sets Binding field to given value.
+SetValue sets Value field to given value.
 
 
 ### GetVisibility
@@ -149,26 +169,6 @@ and a boolean to check if the value has been set.
 `func (o *ELFSymbol) SetVisibility(v string)`
 
 SetVisibility sets Visibility field to given value.
-
-
-### GetSectionIndex
-
-`func (o *ELFSymbol) GetSectionIndex() int32`
-
-GetSectionIndex returns the SectionIndex field if non-nil, zero value otherwise.
-
-### GetSectionIndexOk
-
-`func (o *ELFSymbol) GetSectionIndexOk() (*int32, bool)`
-
-GetSectionIndexOk returns a tuple with the SectionIndex field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSectionIndex
-
-`func (o *ELFSymbol) SetSectionIndex(v int32)`
-
-SetSectionIndex sets SectionIndex field to given value.
 
 
 

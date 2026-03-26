@@ -19,8 +19,8 @@ var _ MappedNullable = &GetPublicUserResponse{}
 
 // GetPublicUserResponse struct for GetPublicUserResponse
 type GetPublicUserResponse struct {
-	Username string `json:"username"`
 	UserId int32 `json:"user_id"`
+	Username string `json:"username"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,10 +30,10 @@ type _GetPublicUserResponse GetPublicUserResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetPublicUserResponse(username string, userId int32) *GetPublicUserResponse {
+func NewGetPublicUserResponse(userId int32, username string) *GetPublicUserResponse {
 	this := GetPublicUserResponse{}
-	this.Username = username
 	this.UserId = userId
+	this.Username = username
 	return &this
 }
 
@@ -43,30 +43,6 @@ func NewGetPublicUserResponse(username string, userId int32) *GetPublicUserRespo
 func NewGetPublicUserResponseWithDefaults() *GetPublicUserResponse {
 	this := GetPublicUserResponse{}
 	return &this
-}
-
-// GetUsername returns the Username field value
-func (o *GetPublicUserResponse) GetUsername() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Username
-}
-
-// GetUsernameOk returns a tuple with the Username field value
-// and a boolean to check if the value has been set.
-func (o *GetPublicUserResponse) GetUsernameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Username, true
-}
-
-// SetUsername sets field value
-func (o *GetPublicUserResponse) SetUsername(v string) {
-	o.Username = v
 }
 
 // GetUserId returns the UserId field value
@@ -93,6 +69,30 @@ func (o *GetPublicUserResponse) SetUserId(v int32) {
 	o.UserId = v
 }
 
+// GetUsername returns the Username field value
+func (o *GetPublicUserResponse) GetUsername() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Username
+}
+
+// GetUsernameOk returns a tuple with the Username field value
+// and a boolean to check if the value has been set.
+func (o *GetPublicUserResponse) GetUsernameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Username, true
+}
+
+// SetUsername sets field value
+func (o *GetPublicUserResponse) SetUsername(v string) {
+	o.Username = v
+}
+
 func (o GetPublicUserResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,8 +103,8 @@ func (o GetPublicUserResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetPublicUserResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["username"] = o.Username
 	toSerialize["user_id"] = o.UserId
+	toSerialize["username"] = o.Username
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -118,8 +118,8 @@ func (o *GetPublicUserResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"username",
 		"user_id",
+		"username",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -149,8 +149,8 @@ func (o *GetPublicUserResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "username")
 		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "username")
 		o.AdditionalProperties = additionalProperties
 	}
 

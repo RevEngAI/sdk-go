@@ -21,15 +21,15 @@ var _ MappedNullable = &FunctionBlockResponse{}
 type FunctionBlockResponse struct {
 	// The ordered assembly strings for this chunk
 	Asm []string `json:"asm"`
-	// ID of the block
-	Id int32 `json:"id"`
-	// The minimum vaddr of the block
-	MinAddr int32 `json:"min_addr"`
-	// The maximum vaddr of the block
-	MaxAddr int32 `json:"max_addr"`
+	Comment NullableString `json:"comment,omitempty"`
 	// The potential execution flow destinations from this block
 	Destinations []FunctionBlockDestinationResponse `json:"destinations"`
-	Comment NullableString `json:"comment,omitempty"`
+	// ID of the block
+	Id int32 `json:"id"`
+	// The maximum vaddr of the block
+	MaxAddr int32 `json:"max_addr"`
+	// The minimum vaddr of the block
+	MinAddr int32 `json:"min_addr"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,13 +39,13 @@ type _FunctionBlockResponse FunctionBlockResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionBlockResponse(asm []string, id int32, minAddr int32, maxAddr int32, destinations []FunctionBlockDestinationResponse) *FunctionBlockResponse {
+func NewFunctionBlockResponse(asm []string, destinations []FunctionBlockDestinationResponse, id int32, maxAddr int32, minAddr int32) *FunctionBlockResponse {
 	this := FunctionBlockResponse{}
 	this.Asm = asm
-	this.Id = id
-	this.MinAddr = minAddr
-	this.MaxAddr = maxAddr
 	this.Destinations = destinations
+	this.Id = id
+	this.MaxAddr = maxAddr
+	this.MinAddr = minAddr
 	return &this
 }
 
@@ -79,102 +79,6 @@ func (o *FunctionBlockResponse) GetAsmOk() ([]string, bool) {
 // SetAsm sets field value
 func (o *FunctionBlockResponse) SetAsm(v []string) {
 	o.Asm = v
-}
-
-// GetId returns the Id field value
-func (o *FunctionBlockResponse) GetId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *FunctionBlockResponse) GetIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *FunctionBlockResponse) SetId(v int32) {
-	o.Id = v
-}
-
-// GetMinAddr returns the MinAddr field value
-func (o *FunctionBlockResponse) GetMinAddr() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.MinAddr
-}
-
-// GetMinAddrOk returns a tuple with the MinAddr field value
-// and a boolean to check if the value has been set.
-func (o *FunctionBlockResponse) GetMinAddrOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.MinAddr, true
-}
-
-// SetMinAddr sets field value
-func (o *FunctionBlockResponse) SetMinAddr(v int32) {
-	o.MinAddr = v
-}
-
-// GetMaxAddr returns the MaxAddr field value
-func (o *FunctionBlockResponse) GetMaxAddr() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.MaxAddr
-}
-
-// GetMaxAddrOk returns a tuple with the MaxAddr field value
-// and a boolean to check if the value has been set.
-func (o *FunctionBlockResponse) GetMaxAddrOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.MaxAddr, true
-}
-
-// SetMaxAddr sets field value
-func (o *FunctionBlockResponse) SetMaxAddr(v int32) {
-	o.MaxAddr = v
-}
-
-// GetDestinations returns the Destinations field value
-func (o *FunctionBlockResponse) GetDestinations() []FunctionBlockDestinationResponse {
-	if o == nil {
-		var ret []FunctionBlockDestinationResponse
-		return ret
-	}
-
-	return o.Destinations
-}
-
-// GetDestinationsOk returns a tuple with the Destinations field value
-// and a boolean to check if the value has been set.
-func (o *FunctionBlockResponse) GetDestinationsOk() ([]FunctionBlockDestinationResponse, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Destinations, true
-}
-
-// SetDestinations sets field value
-func (o *FunctionBlockResponse) SetDestinations(v []FunctionBlockDestinationResponse) {
-	o.Destinations = v
 }
 
 // GetComment returns the Comment field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -219,6 +123,102 @@ func (o *FunctionBlockResponse) UnsetComment() {
 	o.Comment.Unset()
 }
 
+// GetDestinations returns the Destinations field value
+func (o *FunctionBlockResponse) GetDestinations() []FunctionBlockDestinationResponse {
+	if o == nil {
+		var ret []FunctionBlockDestinationResponse
+		return ret
+	}
+
+	return o.Destinations
+}
+
+// GetDestinationsOk returns a tuple with the Destinations field value
+// and a boolean to check if the value has been set.
+func (o *FunctionBlockResponse) GetDestinationsOk() ([]FunctionBlockDestinationResponse, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Destinations, true
+}
+
+// SetDestinations sets field value
+func (o *FunctionBlockResponse) SetDestinations(v []FunctionBlockDestinationResponse) {
+	o.Destinations = v
+}
+
+// GetId returns the Id field value
+func (o *FunctionBlockResponse) GetId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *FunctionBlockResponse) GetIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *FunctionBlockResponse) SetId(v int32) {
+	o.Id = v
+}
+
+// GetMaxAddr returns the MaxAddr field value
+func (o *FunctionBlockResponse) GetMaxAddr() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.MaxAddr
+}
+
+// GetMaxAddrOk returns a tuple with the MaxAddr field value
+// and a boolean to check if the value has been set.
+func (o *FunctionBlockResponse) GetMaxAddrOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MaxAddr, true
+}
+
+// SetMaxAddr sets field value
+func (o *FunctionBlockResponse) SetMaxAddr(v int32) {
+	o.MaxAddr = v
+}
+
+// GetMinAddr returns the MinAddr field value
+func (o *FunctionBlockResponse) GetMinAddr() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.MinAddr
+}
+
+// GetMinAddrOk returns a tuple with the MinAddr field value
+// and a boolean to check if the value has been set.
+func (o *FunctionBlockResponse) GetMinAddrOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MinAddr, true
+}
+
+// SetMinAddr sets field value
+func (o *FunctionBlockResponse) SetMinAddr(v int32) {
+	o.MinAddr = v
+}
+
 func (o FunctionBlockResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -230,13 +230,13 @@ func (o FunctionBlockResponse) MarshalJSON() ([]byte, error) {
 func (o FunctionBlockResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asm"] = o.Asm
-	toSerialize["id"] = o.Id
-	toSerialize["min_addr"] = o.MinAddr
-	toSerialize["max_addr"] = o.MaxAddr
-	toSerialize["destinations"] = o.Destinations
 	if o.Comment.IsSet() {
 		toSerialize["comment"] = o.Comment.Get()
 	}
+	toSerialize["destinations"] = o.Destinations
+	toSerialize["id"] = o.Id
+	toSerialize["max_addr"] = o.MaxAddr
+	toSerialize["min_addr"] = o.MinAddr
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -251,10 +251,10 @@ func (o *FunctionBlockResponse) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"asm",
-		"id",
-		"min_addr",
-		"max_addr",
 		"destinations",
+		"id",
+		"max_addr",
+		"min_addr",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -285,11 +285,11 @@ func (o *FunctionBlockResponse) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "asm")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "min_addr")
-		delete(additionalProperties, "max_addr")
-		delete(additionalProperties, "destinations")
 		delete(additionalProperties, "comment")
+		delete(additionalProperties, "destinations")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "max_addr")
+		delete(additionalProperties, "min_addr")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ArtifactType** | Pointer to **string** | Type of artifact that the global variable is associated with | [optional] 
 **LastChange** | Pointer to **string** |  | [optional] 
+**Members** | **map[string]int32** | Dictionary of enumeration members and their values | 
 **Name** | **string** | Name of the global variable | 
 **Size** | **int32** | Size of the global variable in bytes | 
-**Members** | **map[string]int32** | Dictionary of enumeration members and their values | 
-**ArtifactType** | Pointer to **string** | Type of artifact that the global variable is associated with | [optional] 
 **Type** | **string** | Data type of the global variable | 
 **Addr** | **int32** | Memory address of the global variable | 
 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewFuncDepsInner
 
-`func NewFuncDepsInner(name string, size int32, members map[string]int32, type_ string, addr int32, ) *FuncDepsInner`
+`func NewFuncDepsInner(members map[string]int32, name string, size int32, type_ string, addr int32, ) *FuncDepsInner`
 
 NewFuncDepsInner instantiates a new FuncDepsInner object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +30,31 @@ will change when the set of required properties is changed
 NewFuncDepsInnerWithDefaults instantiates a new FuncDepsInner object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetArtifactType
+
+`func (o *FuncDepsInner) GetArtifactType() string`
+
+GetArtifactType returns the ArtifactType field if non-nil, zero value otherwise.
+
+### GetArtifactTypeOk
+
+`func (o *FuncDepsInner) GetArtifactTypeOk() (*string, bool)`
+
+GetArtifactTypeOk returns a tuple with the ArtifactType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArtifactType
+
+`func (o *FuncDepsInner) SetArtifactType(v string)`
+
+SetArtifactType sets ArtifactType field to given value.
+
+### HasArtifactType
+
+`func (o *FuncDepsInner) HasArtifactType() bool`
+
+HasArtifactType returns a boolean if a field has been set.
 
 ### GetLastChange
 
@@ -55,6 +80,26 @@ SetLastChange sets LastChange field to given value.
 `func (o *FuncDepsInner) HasLastChange() bool`
 
 HasLastChange returns a boolean if a field has been set.
+
+### GetMembers
+
+`func (o *FuncDepsInner) GetMembers() map[string]int32`
+
+GetMembers returns the Members field if non-nil, zero value otherwise.
+
+### GetMembersOk
+
+`func (o *FuncDepsInner) GetMembersOk() (*map[string]int32, bool)`
+
+GetMembersOk returns a tuple with the Members field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMembers
+
+`func (o *FuncDepsInner) SetMembers(v map[string]int32)`
+
+SetMembers sets Members field to given value.
+
 
 ### GetName
 
@@ -95,51 +140,6 @@ and a boolean to check if the value has been set.
 
 SetSize sets Size field to given value.
 
-
-### GetMembers
-
-`func (o *FuncDepsInner) GetMembers() map[string]int32`
-
-GetMembers returns the Members field if non-nil, zero value otherwise.
-
-### GetMembersOk
-
-`func (o *FuncDepsInner) GetMembersOk() (*map[string]int32, bool)`
-
-GetMembersOk returns a tuple with the Members field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMembers
-
-`func (o *FuncDepsInner) SetMembers(v map[string]int32)`
-
-SetMembers sets Members field to given value.
-
-
-### GetArtifactType
-
-`func (o *FuncDepsInner) GetArtifactType() string`
-
-GetArtifactType returns the ArtifactType field if non-nil, zero value otherwise.
-
-### GetArtifactTypeOk
-
-`func (o *FuncDepsInner) GetArtifactTypeOk() (*string, bool)`
-
-GetArtifactTypeOk returns a tuple with the ArtifactType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetArtifactType
-
-`func (o *FuncDepsInner) SetArtifactType(v string)`
-
-SetArtifactType sets ArtifactType field to given value.
-
-### HasArtifactType
-
-`func (o *FuncDepsInner) HasArtifactType() bool`
-
-HasArtifactType returns a boolean if a field has been set.
 
 ### GetType
 

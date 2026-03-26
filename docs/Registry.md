@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Method** | **string** |  | 
 **Key** | **string** |  | 
-**ValueName** | **NullableString** |  | 
+**Method** | **string** |  | 
 **Value** | **NullableString** |  | 
+**ValueName** | **NullableString** |  | 
 
 ## Methods
 
 ### NewRegistry
 
-`func NewRegistry(method string, key string, valueName NullableString, value NullableString, ) *Registry`
+`func NewRegistry(key string, method string, value NullableString, valueName NullableString, ) *Registry`
 
 NewRegistry instantiates a new Registry object
 This constructor will assign default values to properties that have it defined,
@@ -27,26 +27,6 @@ will change when the set of required properties is changed
 NewRegistryWithDefaults instantiates a new Registry object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMethod
-
-`func (o *Registry) GetMethod() string`
-
-GetMethod returns the Method field if non-nil, zero value otherwise.
-
-### GetMethodOk
-
-`func (o *Registry) GetMethodOk() (*string, bool)`
-
-GetMethodOk returns a tuple with the Method field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMethod
-
-`func (o *Registry) SetMethod(v string)`
-
-SetMethod sets Method field to given value.
-
 
 ### GetKey
 
@@ -68,36 +48,26 @@ and a boolean to check if the value has been set.
 SetKey sets Key field to given value.
 
 
-### GetValueName
+### GetMethod
 
-`func (o *Registry) GetValueName() string`
+`func (o *Registry) GetMethod() string`
 
-GetValueName returns the ValueName field if non-nil, zero value otherwise.
+GetMethod returns the Method field if non-nil, zero value otherwise.
 
-### GetValueNameOk
+### GetMethodOk
 
-`func (o *Registry) GetValueNameOk() (*string, bool)`
+`func (o *Registry) GetMethodOk() (*string, bool)`
 
-GetValueNameOk returns a tuple with the ValueName field if it's non-nil, zero value otherwise
+GetMethodOk returns a tuple with the Method field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetValueName
+### SetMethod
 
-`func (o *Registry) SetValueName(v string)`
+`func (o *Registry) SetMethod(v string)`
 
-SetValueName sets ValueName field to given value.
+SetMethod sets Method field to given value.
 
 
-### SetValueNameNil
-
-`func (o *Registry) SetValueNameNil(b bool)`
-
- SetValueNameNil sets the value for ValueName to be an explicit nil
-
-### UnsetValueName
-`func (o *Registry) UnsetValueName()`
-
-UnsetValueName ensures that no value is present for ValueName, not even an explicit nil
 ### GetValue
 
 `func (o *Registry) GetValue() string`
@@ -128,6 +98,36 @@ SetValue sets Value field to given value.
 `func (o *Registry) UnsetValue()`
 
 UnsetValue ensures that no value is present for Value, not even an explicit nil
+### GetValueName
+
+`func (o *Registry) GetValueName() string`
+
+GetValueName returns the ValueName field if non-nil, zero value otherwise.
+
+### GetValueNameOk
+
+`func (o *Registry) GetValueNameOk() (*string, bool)`
+
+GetValueNameOk returns a tuple with the ValueName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValueName
+
+`func (o *Registry) SetValueName(v string)`
+
+SetValueName sets ValueName field to given value.
+
+
+### SetValueNameNil
+
+`func (o *Registry) SetValueNameNil(b bool)`
+
+ SetValueNameNil sets the value for ValueName to be an explicit nil
+
+### UnsetValueName
+`func (o *Registry) UnsetValueName()`
+
+UnsetValueName ensures that no value is present for ValueName, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

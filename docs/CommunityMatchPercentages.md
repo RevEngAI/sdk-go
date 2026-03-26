@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BinaryName** | **string** |  | 
 **BinaryId** | **int32** |  | 
+**BinaryName** | **string** |  | 
 **MatchedCommunitiesPercent** | **float32** |  | 
 **UnmatchedCommunitiesPercent** | **float32** |  | 
 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewCommunityMatchPercentages
 
-`func NewCommunityMatchPercentages(binaryName string, binaryId int32, matchedCommunitiesPercent float32, unmatchedCommunitiesPercent float32, ) *CommunityMatchPercentages`
+`func NewCommunityMatchPercentages(binaryId int32, binaryName string, matchedCommunitiesPercent float32, unmatchedCommunitiesPercent float32, ) *CommunityMatchPercentages`
 
 NewCommunityMatchPercentages instantiates a new CommunityMatchPercentages object
 This constructor will assign default values to properties that have it defined,
@@ -27,26 +27,6 @@ will change when the set of required properties is changed
 NewCommunityMatchPercentagesWithDefaults instantiates a new CommunityMatchPercentages object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetBinaryName
-
-`func (o *CommunityMatchPercentages) GetBinaryName() string`
-
-GetBinaryName returns the BinaryName field if non-nil, zero value otherwise.
-
-### GetBinaryNameOk
-
-`func (o *CommunityMatchPercentages) GetBinaryNameOk() (*string, bool)`
-
-GetBinaryNameOk returns a tuple with the BinaryName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBinaryName
-
-`func (o *CommunityMatchPercentages) SetBinaryName(v string)`
-
-SetBinaryName sets BinaryName field to given value.
-
 
 ### GetBinaryId
 
@@ -66,6 +46,26 @@ and a boolean to check if the value has been set.
 `func (o *CommunityMatchPercentages) SetBinaryId(v int32)`
 
 SetBinaryId sets BinaryId field to given value.
+
+
+### GetBinaryName
+
+`func (o *CommunityMatchPercentages) GetBinaryName() string`
+
+GetBinaryName returns the BinaryName field if non-nil, zero value otherwise.
+
+### GetBinaryNameOk
+
+`func (o *CommunityMatchPercentages) GetBinaryNameOk() (*string, bool)`
+
+GetBinaryNameOk returns a tuple with the BinaryName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBinaryName
+
+`func (o *CommunityMatchPercentages) SetBinaryName(v string)`
+
+SetBinaryName sets BinaryName field to given value.
 
 
 ### GetMatchedCommunitiesPercent

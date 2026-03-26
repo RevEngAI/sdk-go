@@ -19,12 +19,12 @@ var _ MappedNullable = &FunctionDataTypesList{}
 
 // FunctionDataTypesList struct for FunctionDataTypesList
 type FunctionDataTypesList struct {
+	// List of function data types information
+	Items []FunctionDataTypesListItem `json:"items"`
 	// Total number of functions in analysis
 	TotalCount *int32 `json:"total_count,omitempty"`
 	// Total number of functions with data types
 	TotalDataTypesCount *int32 `json:"total_data_types_count,omitempty"`
-	// List of function data types information
-	Items []FunctionDataTypesListItem `json:"items"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,11 +36,11 @@ type _FunctionDataTypesList FunctionDataTypesList
 // will change when the set of required properties is changed
 func NewFunctionDataTypesList(items []FunctionDataTypesListItem) *FunctionDataTypesList {
 	this := FunctionDataTypesList{}
+	this.Items = items
 	var totalCount int32 = 0
 	this.TotalCount = &totalCount
 	var totalDataTypesCount int32 = 0
 	this.TotalDataTypesCount = &totalDataTypesCount
-	this.Items = items
 	return &this
 }
 
@@ -54,6 +54,30 @@ func NewFunctionDataTypesListWithDefaults() *FunctionDataTypesList {
 	var totalDataTypesCount int32 = 0
 	this.TotalDataTypesCount = &totalDataTypesCount
 	return &this
+}
+
+// GetItems returns the Items field value
+func (o *FunctionDataTypesList) GetItems() []FunctionDataTypesListItem {
+	if o == nil {
+		var ret []FunctionDataTypesListItem
+		return ret
+	}
+
+	return o.Items
+}
+
+// GetItemsOk returns a tuple with the Items field value
+// and a boolean to check if the value has been set.
+func (o *FunctionDataTypesList) GetItemsOk() ([]FunctionDataTypesListItem, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Items, true
+}
+
+// SetItems sets field value
+func (o *FunctionDataTypesList) SetItems(v []FunctionDataTypesListItem) {
+	o.Items = v
 }
 
 // GetTotalCount returns the TotalCount field value if set, zero value otherwise.
@@ -120,30 +144,6 @@ func (o *FunctionDataTypesList) SetTotalDataTypesCount(v int32) {
 	o.TotalDataTypesCount = &v
 }
 
-// GetItems returns the Items field value
-func (o *FunctionDataTypesList) GetItems() []FunctionDataTypesListItem {
-	if o == nil {
-		var ret []FunctionDataTypesListItem
-		return ret
-	}
-
-	return o.Items
-}
-
-// GetItemsOk returns a tuple with the Items field value
-// and a boolean to check if the value has been set.
-func (o *FunctionDataTypesList) GetItemsOk() ([]FunctionDataTypesListItem, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Items, true
-}
-
-// SetItems sets field value
-func (o *FunctionDataTypesList) SetItems(v []FunctionDataTypesListItem) {
-	o.Items = v
-}
-
 func (o FunctionDataTypesList) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -154,13 +154,13 @@ func (o FunctionDataTypesList) MarshalJSON() ([]byte, error) {
 
 func (o FunctionDataTypesList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["items"] = o.Items
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
 	if !IsNil(o.TotalDataTypesCount) {
 		toSerialize["total_data_types_count"] = o.TotalDataTypesCount
 	}
-	toSerialize["items"] = o.Items
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -204,9 +204,9 @@ func (o *FunctionDataTypesList) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "items")
 		delete(additionalProperties, "total_count")
 		delete(additionalProperties, "total_data_types_count")
-		delete(additionalProperties, "items")
 		o.AdditionalProperties = additionalProperties
 	}
 

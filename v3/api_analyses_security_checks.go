@@ -122,8 +122,8 @@ func (a *AnalysesSecurityChecksAPIService) CreateScurityChecksTaskExecute(r ApiC
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v BaseResponse
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v ErrorModel
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -133,8 +133,8 @@ func (a *AnalysesSecurityChecksAPIService) CreateScurityChecksTaskExecute(r ApiC
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v ErrorModel
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v BaseResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

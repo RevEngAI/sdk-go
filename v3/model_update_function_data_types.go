@@ -19,10 +19,10 @@ var _ MappedNullable = &UpdateFunctionDataTypes{}
 
 // UpdateFunctionDataTypes struct for UpdateFunctionDataTypes
 type UpdateFunctionDataTypes struct {
-	// Version of the function data types, used to check this update is not overwriting a newer one
-	DataTypesVersion int32 `json:"data_types_version"`
 	// Function data types information to update
 	DataTypes FunctionInfoInput `json:"data_types"`
+	// Version of the function data types, used to check this update is not overwriting a newer one
+	DataTypesVersion int32 `json:"data_types_version"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,10 +32,10 @@ type _UpdateFunctionDataTypes UpdateFunctionDataTypes
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateFunctionDataTypes(dataTypesVersion int32, dataTypes FunctionInfoInput) *UpdateFunctionDataTypes {
+func NewUpdateFunctionDataTypes(dataTypes FunctionInfoInput, dataTypesVersion int32) *UpdateFunctionDataTypes {
 	this := UpdateFunctionDataTypes{}
-	this.DataTypesVersion = dataTypesVersion
 	this.DataTypes = dataTypes
+	this.DataTypesVersion = dataTypesVersion
 	return &this
 }
 
@@ -45,30 +45,6 @@ func NewUpdateFunctionDataTypes(dataTypesVersion int32, dataTypes FunctionInfoIn
 func NewUpdateFunctionDataTypesWithDefaults() *UpdateFunctionDataTypes {
 	this := UpdateFunctionDataTypes{}
 	return &this
-}
-
-// GetDataTypesVersion returns the DataTypesVersion field value
-func (o *UpdateFunctionDataTypes) GetDataTypesVersion() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.DataTypesVersion
-}
-
-// GetDataTypesVersionOk returns a tuple with the DataTypesVersion field value
-// and a boolean to check if the value has been set.
-func (o *UpdateFunctionDataTypes) GetDataTypesVersionOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.DataTypesVersion, true
-}
-
-// SetDataTypesVersion sets field value
-func (o *UpdateFunctionDataTypes) SetDataTypesVersion(v int32) {
-	o.DataTypesVersion = v
 }
 
 // GetDataTypes returns the DataTypes field value
@@ -95,6 +71,30 @@ func (o *UpdateFunctionDataTypes) SetDataTypes(v FunctionInfoInput) {
 	o.DataTypes = v
 }
 
+// GetDataTypesVersion returns the DataTypesVersion field value
+func (o *UpdateFunctionDataTypes) GetDataTypesVersion() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.DataTypesVersion
+}
+
+// GetDataTypesVersionOk returns a tuple with the DataTypesVersion field value
+// and a boolean to check if the value has been set.
+func (o *UpdateFunctionDataTypes) GetDataTypesVersionOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DataTypesVersion, true
+}
+
+// SetDataTypesVersion sets field value
+func (o *UpdateFunctionDataTypes) SetDataTypesVersion(v int32) {
+	o.DataTypesVersion = v
+}
+
 func (o UpdateFunctionDataTypes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -105,8 +105,8 @@ func (o UpdateFunctionDataTypes) MarshalJSON() ([]byte, error) {
 
 func (o UpdateFunctionDataTypes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["data_types_version"] = o.DataTypesVersion
 	toSerialize["data_types"] = o.DataTypes
+	toSerialize["data_types_version"] = o.DataTypesVersion
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -120,8 +120,8 @@ func (o *UpdateFunctionDataTypes) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"data_types_version",
 		"data_types",
+		"data_types_version",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -151,8 +151,8 @@ func (o *UpdateFunctionDataTypes) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "data_types_version")
 		delete(additionalProperties, "data_types")
+		delete(additionalProperties, "data_types_version")
 		o.AdditionalProperties = additionalProperties
 	}
 

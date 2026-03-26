@@ -19,16 +19,16 @@ var _ MappedNullable = &CalleeFunctionInfo{}
 
 // CalleeFunctionInfo struct for CalleeFunctionInfo
 type CalleeFunctionInfo struct {
-	// Unique identifier of the function
-	FunctionId int64 `json:"function_id"`
-	MatchedFunctionId NullableInt32 `json:"matched_function_id"`
-	DashboardUrl NullableString `json:"dashboard_url"`
-	// Indicates if the function is external
-	IsExternal *bool `json:"is_external,omitempty"`
 	// Name of the called function
 	CalleeName string `json:"callee_name"`
 	// Virtual address of the called function
 	CalleeVaddr string `json:"callee_vaddr"`
+	DashboardUrl NullableString `json:"dashboard_url"`
+	// Unique identifier of the function
+	FunctionId int64 `json:"function_id"`
+	// Indicates if the function is external
+	IsExternal *bool `json:"is_external,omitempty"`
+	MatchedFunctionId NullableInt32 `json:"matched_function_id"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -38,15 +38,15 @@ type _CalleeFunctionInfo CalleeFunctionInfo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCalleeFunctionInfo(functionId int64, matchedFunctionId NullableInt32, dashboardUrl NullableString, calleeName string, calleeVaddr string) *CalleeFunctionInfo {
+func NewCalleeFunctionInfo(calleeName string, calleeVaddr string, dashboardUrl NullableString, functionId int64, matchedFunctionId NullableInt32) *CalleeFunctionInfo {
 	this := CalleeFunctionInfo{}
-	this.FunctionId = functionId
-	this.MatchedFunctionId = matchedFunctionId
-	this.DashboardUrl = dashboardUrl
-	var isExternal bool = false
-	this.IsExternal = &isExternal
 	this.CalleeName = calleeName
 	this.CalleeVaddr = calleeVaddr
+	this.DashboardUrl = dashboardUrl
+	this.FunctionId = functionId
+	var isExternal bool = false
+	this.IsExternal = &isExternal
+	this.MatchedFunctionId = matchedFunctionId
 	return &this
 }
 
@@ -58,114 +58,6 @@ func NewCalleeFunctionInfoWithDefaults() *CalleeFunctionInfo {
 	var isExternal bool = false
 	this.IsExternal = &isExternal
 	return &this
-}
-
-// GetFunctionId returns the FunctionId field value
-func (o *CalleeFunctionInfo) GetFunctionId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.FunctionId
-}
-
-// GetFunctionIdOk returns a tuple with the FunctionId field value
-// and a boolean to check if the value has been set.
-func (o *CalleeFunctionInfo) GetFunctionIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionId, true
-}
-
-// SetFunctionId sets field value
-func (o *CalleeFunctionInfo) SetFunctionId(v int64) {
-	o.FunctionId = v
-}
-
-// GetMatchedFunctionId returns the MatchedFunctionId field value
-// If the value is explicit nil, the zero value for int32 will be returned
-func (o *CalleeFunctionInfo) GetMatchedFunctionId() int32 {
-	if o == nil || o.MatchedFunctionId.Get() == nil {
-		var ret int32
-		return ret
-	}
-
-	return *o.MatchedFunctionId.Get()
-}
-
-// GetMatchedFunctionIdOk returns a tuple with the MatchedFunctionId field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CalleeFunctionInfo) GetMatchedFunctionIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.MatchedFunctionId.Get(), o.MatchedFunctionId.IsSet()
-}
-
-// SetMatchedFunctionId sets field value
-func (o *CalleeFunctionInfo) SetMatchedFunctionId(v int32) {
-	o.MatchedFunctionId.Set(&v)
-}
-
-// GetDashboardUrl returns the DashboardUrl field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *CalleeFunctionInfo) GetDashboardUrl() string {
-	if o == nil || o.DashboardUrl.Get() == nil {
-		var ret string
-		return ret
-	}
-
-	return *o.DashboardUrl.Get()
-}
-
-// GetDashboardUrlOk returns a tuple with the DashboardUrl field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CalleeFunctionInfo) GetDashboardUrlOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.DashboardUrl.Get(), o.DashboardUrl.IsSet()
-}
-
-// SetDashboardUrl sets field value
-func (o *CalleeFunctionInfo) SetDashboardUrl(v string) {
-	o.DashboardUrl.Set(&v)
-}
-
-// GetIsExternal returns the IsExternal field value if set, zero value otherwise.
-func (o *CalleeFunctionInfo) GetIsExternal() bool {
-	if o == nil || IsNil(o.IsExternal) {
-		var ret bool
-		return ret
-	}
-	return *o.IsExternal
-}
-
-// GetIsExternalOk returns a tuple with the IsExternal field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CalleeFunctionInfo) GetIsExternalOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsExternal) {
-		return nil, false
-	}
-	return o.IsExternal, true
-}
-
-// HasIsExternal returns a boolean if a field has been set.
-func (o *CalleeFunctionInfo) HasIsExternal() bool {
-	if o != nil && !IsNil(o.IsExternal) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsExternal gets a reference to the given bool and assigns it to the IsExternal field.
-func (o *CalleeFunctionInfo) SetIsExternal(v bool) {
-	o.IsExternal = &v
 }
 
 // GetCalleeName returns the CalleeName field value
@@ -216,6 +108,114 @@ func (o *CalleeFunctionInfo) SetCalleeVaddr(v string) {
 	o.CalleeVaddr = v
 }
 
+// GetDashboardUrl returns the DashboardUrl field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *CalleeFunctionInfo) GetDashboardUrl() string {
+	if o == nil || o.DashboardUrl.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.DashboardUrl.Get()
+}
+
+// GetDashboardUrlOk returns a tuple with the DashboardUrl field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CalleeFunctionInfo) GetDashboardUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DashboardUrl.Get(), o.DashboardUrl.IsSet()
+}
+
+// SetDashboardUrl sets field value
+func (o *CalleeFunctionInfo) SetDashboardUrl(v string) {
+	o.DashboardUrl.Set(&v)
+}
+
+// GetFunctionId returns the FunctionId field value
+func (o *CalleeFunctionInfo) GetFunctionId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.FunctionId
+}
+
+// GetFunctionIdOk returns a tuple with the FunctionId field value
+// and a boolean to check if the value has been set.
+func (o *CalleeFunctionInfo) GetFunctionIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionId, true
+}
+
+// SetFunctionId sets field value
+func (o *CalleeFunctionInfo) SetFunctionId(v int64) {
+	o.FunctionId = v
+}
+
+// GetIsExternal returns the IsExternal field value if set, zero value otherwise.
+func (o *CalleeFunctionInfo) GetIsExternal() bool {
+	if o == nil || IsNil(o.IsExternal) {
+		var ret bool
+		return ret
+	}
+	return *o.IsExternal
+}
+
+// GetIsExternalOk returns a tuple with the IsExternal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CalleeFunctionInfo) GetIsExternalOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsExternal) {
+		return nil, false
+	}
+	return o.IsExternal, true
+}
+
+// HasIsExternal returns a boolean if a field has been set.
+func (o *CalleeFunctionInfo) HasIsExternal() bool {
+	if o != nil && !IsNil(o.IsExternal) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsExternal gets a reference to the given bool and assigns it to the IsExternal field.
+func (o *CalleeFunctionInfo) SetIsExternal(v bool) {
+	o.IsExternal = &v
+}
+
+// GetMatchedFunctionId returns the MatchedFunctionId field value
+// If the value is explicit nil, the zero value for int32 will be returned
+func (o *CalleeFunctionInfo) GetMatchedFunctionId() int32 {
+	if o == nil || o.MatchedFunctionId.Get() == nil {
+		var ret int32
+		return ret
+	}
+
+	return *o.MatchedFunctionId.Get()
+}
+
+// GetMatchedFunctionIdOk returns a tuple with the MatchedFunctionId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CalleeFunctionInfo) GetMatchedFunctionIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MatchedFunctionId.Get(), o.MatchedFunctionId.IsSet()
+}
+
+// SetMatchedFunctionId sets field value
+func (o *CalleeFunctionInfo) SetMatchedFunctionId(v int32) {
+	o.MatchedFunctionId.Set(&v)
+}
+
 func (o CalleeFunctionInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -226,14 +226,14 @@ func (o CalleeFunctionInfo) MarshalJSON() ([]byte, error) {
 
 func (o CalleeFunctionInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["function_id"] = o.FunctionId
-	toSerialize["matched_function_id"] = o.MatchedFunctionId.Get()
+	toSerialize["callee_name"] = o.CalleeName
+	toSerialize["callee_vaddr"] = o.CalleeVaddr
 	toSerialize["dashboard_url"] = o.DashboardUrl.Get()
+	toSerialize["function_id"] = o.FunctionId
 	if !IsNil(o.IsExternal) {
 		toSerialize["is_external"] = o.IsExternal
 	}
-	toSerialize["callee_name"] = o.CalleeName
-	toSerialize["callee_vaddr"] = o.CalleeVaddr
+	toSerialize["matched_function_id"] = o.MatchedFunctionId.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -247,11 +247,11 @@ func (o *CalleeFunctionInfo) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"function_id",
-		"matched_function_id",
-		"dashboard_url",
 		"callee_name",
 		"callee_vaddr",
+		"dashboard_url",
+		"function_id",
+		"matched_function_id",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -281,12 +281,12 @@ func (o *CalleeFunctionInfo) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "function_id")
-		delete(additionalProperties, "matched_function_id")
-		delete(additionalProperties, "dashboard_url")
-		delete(additionalProperties, "is_external")
 		delete(additionalProperties, "callee_name")
 		delete(additionalProperties, "callee_vaddr")
+		delete(additionalProperties, "dashboard_url")
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "is_external")
+		delete(additionalProperties, "matched_function_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -18,22 +18,22 @@ var _ MappedNullable = &AnalysisFunctionMatchingRequest{}
 
 // AnalysisFunctionMatchingRequest struct for AnalysisFunctionMatchingRequest
 type AnalysisFunctionMatchingRequest struct {
+	Filters NullableFunctionMatchingFilters `json:"filters,omitempty"`
 	// Minimum similarity expected for a match as a percentage, default is 90
 	MinSimilarity *float32 `json:"min_similarity,omitempty"`
-	Filters NullableFunctionMatchingFilters `json:"filters,omitempty"`
-	// Maximum number of matches to return per function, default is 1, max is 10
-	ResultsPerFunction *int32 `json:"results_per_function,omitempty"`
+	// If set to true, forces the system to bypass any cached results and perform a fresh computation
+	NoCache *bool `json:"no_cache,omitempty"`
 	// Page number for paginated results, default is 1 (first page)
 	// Deprecated
 	Page *int32 `json:"page,omitempty"`
 	// Number of functions to return per page, default is 0 (all functions), max is 1000
 	// Deprecated
 	PageSize *int32 `json:"page_size,omitempty"`
+	// Maximum number of matches to return per function, default is 1, max is 10
+	ResultsPerFunction *int32 `json:"results_per_function,omitempty"`
 	// If set to true, only returns the status of the matching operation without the actual results
 	// Deprecated
 	StatusOnly *bool `json:"status_only,omitempty"`
-	// If set to true, forces the system to bypass any cached results and perform a fresh computation
-	NoCache *bool `json:"no_cache,omitempty"`
 	// Whether to use canonical function names during function matching for confidence results, default is False
 	UseCanonicalNames *bool `json:"use_canonical_names,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -47,18 +47,18 @@ type _AnalysisFunctionMatchingRequest AnalysisFunctionMatchingRequest
 // will change when the set of required properties is changed
 func NewAnalysisFunctionMatchingRequest() *AnalysisFunctionMatchingRequest {
 	this := AnalysisFunctionMatchingRequest{}
-	var minSimilarity float32 = 90.0
+	var minSimilarity float32 = 90
 	this.MinSimilarity = &minSimilarity
-	var resultsPerFunction int32 = 1
-	this.ResultsPerFunction = &resultsPerFunction
+	var noCache bool = false
+	this.NoCache = &noCache
 	var page int32 = 1
 	this.Page = &page
 	var pageSize int32 = 0
 	this.PageSize = &pageSize
+	var resultsPerFunction int32 = 1
+	this.ResultsPerFunction = &resultsPerFunction
 	var statusOnly bool = false
 	this.StatusOnly = &statusOnly
-	var noCache bool = false
-	this.NoCache = &noCache
 	var useCanonicalNames bool = false
 	this.UseCanonicalNames = &useCanonicalNames
 	return &this
@@ -69,53 +69,21 @@ func NewAnalysisFunctionMatchingRequest() *AnalysisFunctionMatchingRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewAnalysisFunctionMatchingRequestWithDefaults() *AnalysisFunctionMatchingRequest {
 	this := AnalysisFunctionMatchingRequest{}
-	var minSimilarity float32 = 90.0
+	var minSimilarity float32 = 90
 	this.MinSimilarity = &minSimilarity
-	var resultsPerFunction int32 = 1
-	this.ResultsPerFunction = &resultsPerFunction
+	var noCache bool = false
+	this.NoCache = &noCache
 	var page int32 = 1
 	this.Page = &page
 	var pageSize int32 = 0
 	this.PageSize = &pageSize
+	var resultsPerFunction int32 = 1
+	this.ResultsPerFunction = &resultsPerFunction
 	var statusOnly bool = false
 	this.StatusOnly = &statusOnly
-	var noCache bool = false
-	this.NoCache = &noCache
 	var useCanonicalNames bool = false
 	this.UseCanonicalNames = &useCanonicalNames
 	return &this
-}
-
-// GetMinSimilarity returns the MinSimilarity field value if set, zero value otherwise.
-func (o *AnalysisFunctionMatchingRequest) GetMinSimilarity() float32 {
-	if o == nil || IsNil(o.MinSimilarity) {
-		var ret float32
-		return ret
-	}
-	return *o.MinSimilarity
-}
-
-// GetMinSimilarityOk returns a tuple with the MinSimilarity field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AnalysisFunctionMatchingRequest) GetMinSimilarityOk() (*float32, bool) {
-	if o == nil || IsNil(o.MinSimilarity) {
-		return nil, false
-	}
-	return o.MinSimilarity, true
-}
-
-// HasMinSimilarity returns a boolean if a field has been set.
-func (o *AnalysisFunctionMatchingRequest) HasMinSimilarity() bool {
-	if o != nil && !IsNil(o.MinSimilarity) {
-		return true
-	}
-
-	return false
-}
-
-// SetMinSimilarity gets a reference to the given float32 and assigns it to the MinSimilarity field.
-func (o *AnalysisFunctionMatchingRequest) SetMinSimilarity(v float32) {
-	o.MinSimilarity = &v
 }
 
 // GetFilters returns the Filters field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -160,36 +128,68 @@ func (o *AnalysisFunctionMatchingRequest) UnsetFilters() {
 	o.Filters.Unset()
 }
 
-// GetResultsPerFunction returns the ResultsPerFunction field value if set, zero value otherwise.
-func (o *AnalysisFunctionMatchingRequest) GetResultsPerFunction() int32 {
-	if o == nil || IsNil(o.ResultsPerFunction) {
-		var ret int32
+// GetMinSimilarity returns the MinSimilarity field value if set, zero value otherwise.
+func (o *AnalysisFunctionMatchingRequest) GetMinSimilarity() float32 {
+	if o == nil || IsNil(o.MinSimilarity) {
+		var ret float32
 		return ret
 	}
-	return *o.ResultsPerFunction
+	return *o.MinSimilarity
 }
 
-// GetResultsPerFunctionOk returns a tuple with the ResultsPerFunction field value if set, nil otherwise
+// GetMinSimilarityOk returns a tuple with the MinSimilarity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AnalysisFunctionMatchingRequest) GetResultsPerFunctionOk() (*int32, bool) {
-	if o == nil || IsNil(o.ResultsPerFunction) {
+func (o *AnalysisFunctionMatchingRequest) GetMinSimilarityOk() (*float32, bool) {
+	if o == nil || IsNil(o.MinSimilarity) {
 		return nil, false
 	}
-	return o.ResultsPerFunction, true
+	return o.MinSimilarity, true
 }
 
-// HasResultsPerFunction returns a boolean if a field has been set.
-func (o *AnalysisFunctionMatchingRequest) HasResultsPerFunction() bool {
-	if o != nil && !IsNil(o.ResultsPerFunction) {
+// HasMinSimilarity returns a boolean if a field has been set.
+func (o *AnalysisFunctionMatchingRequest) HasMinSimilarity() bool {
+	if o != nil && !IsNil(o.MinSimilarity) {
 		return true
 	}
 
 	return false
 }
 
-// SetResultsPerFunction gets a reference to the given int32 and assigns it to the ResultsPerFunction field.
-func (o *AnalysisFunctionMatchingRequest) SetResultsPerFunction(v int32) {
-	o.ResultsPerFunction = &v
+// SetMinSimilarity gets a reference to the given float32 and assigns it to the MinSimilarity field.
+func (o *AnalysisFunctionMatchingRequest) SetMinSimilarity(v float32) {
+	o.MinSimilarity = &v
+}
+
+// GetNoCache returns the NoCache field value if set, zero value otherwise.
+func (o *AnalysisFunctionMatchingRequest) GetNoCache() bool {
+	if o == nil || IsNil(o.NoCache) {
+		var ret bool
+		return ret
+	}
+	return *o.NoCache
+}
+
+// GetNoCacheOk returns a tuple with the NoCache field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalysisFunctionMatchingRequest) GetNoCacheOk() (*bool, bool) {
+	if o == nil || IsNil(o.NoCache) {
+		return nil, false
+	}
+	return o.NoCache, true
+}
+
+// HasNoCache returns a boolean if a field has been set.
+func (o *AnalysisFunctionMatchingRequest) HasNoCache() bool {
+	if o != nil && !IsNil(o.NoCache) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoCache gets a reference to the given bool and assigns it to the NoCache field.
+func (o *AnalysisFunctionMatchingRequest) SetNoCache(v bool) {
+	o.NoCache = &v
 }
 
 // GetPage returns the Page field value if set, zero value otherwise.
@@ -262,6 +262,38 @@ func (o *AnalysisFunctionMatchingRequest) SetPageSize(v int32) {
 	o.PageSize = &v
 }
 
+// GetResultsPerFunction returns the ResultsPerFunction field value if set, zero value otherwise.
+func (o *AnalysisFunctionMatchingRequest) GetResultsPerFunction() int32 {
+	if o == nil || IsNil(o.ResultsPerFunction) {
+		var ret int32
+		return ret
+	}
+	return *o.ResultsPerFunction
+}
+
+// GetResultsPerFunctionOk returns a tuple with the ResultsPerFunction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalysisFunctionMatchingRequest) GetResultsPerFunctionOk() (*int32, bool) {
+	if o == nil || IsNil(o.ResultsPerFunction) {
+		return nil, false
+	}
+	return o.ResultsPerFunction, true
+}
+
+// HasResultsPerFunction returns a boolean if a field has been set.
+func (o *AnalysisFunctionMatchingRequest) HasResultsPerFunction() bool {
+	if o != nil && !IsNil(o.ResultsPerFunction) {
+		return true
+	}
+
+	return false
+}
+
+// SetResultsPerFunction gets a reference to the given int32 and assigns it to the ResultsPerFunction field.
+func (o *AnalysisFunctionMatchingRequest) SetResultsPerFunction(v int32) {
+	o.ResultsPerFunction = &v
+}
+
 // GetStatusOnly returns the StatusOnly field value if set, zero value otherwise.
 // Deprecated
 func (o *AnalysisFunctionMatchingRequest) GetStatusOnly() bool {
@@ -295,38 +327,6 @@ func (o *AnalysisFunctionMatchingRequest) HasStatusOnly() bool {
 // Deprecated
 func (o *AnalysisFunctionMatchingRequest) SetStatusOnly(v bool) {
 	o.StatusOnly = &v
-}
-
-// GetNoCache returns the NoCache field value if set, zero value otherwise.
-func (o *AnalysisFunctionMatchingRequest) GetNoCache() bool {
-	if o == nil || IsNil(o.NoCache) {
-		var ret bool
-		return ret
-	}
-	return *o.NoCache
-}
-
-// GetNoCacheOk returns a tuple with the NoCache field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AnalysisFunctionMatchingRequest) GetNoCacheOk() (*bool, bool) {
-	if o == nil || IsNil(o.NoCache) {
-		return nil, false
-	}
-	return o.NoCache, true
-}
-
-// HasNoCache returns a boolean if a field has been set.
-func (o *AnalysisFunctionMatchingRequest) HasNoCache() bool {
-	if o != nil && !IsNil(o.NoCache) {
-		return true
-	}
-
-	return false
-}
-
-// SetNoCache gets a reference to the given bool and assigns it to the NoCache field.
-func (o *AnalysisFunctionMatchingRequest) SetNoCache(v bool) {
-	o.NoCache = &v
 }
 
 // GetUseCanonicalNames returns the UseCanonicalNames field value if set, zero value otherwise.
@@ -371,14 +371,14 @@ func (o AnalysisFunctionMatchingRequest) MarshalJSON() ([]byte, error) {
 
 func (o AnalysisFunctionMatchingRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MinSimilarity) {
-		toSerialize["min_similarity"] = o.MinSimilarity
-	}
 	if o.Filters.IsSet() {
 		toSerialize["filters"] = o.Filters.Get()
 	}
-	if !IsNil(o.ResultsPerFunction) {
-		toSerialize["results_per_function"] = o.ResultsPerFunction
+	if !IsNil(o.MinSimilarity) {
+		toSerialize["min_similarity"] = o.MinSimilarity
+	}
+	if !IsNil(o.NoCache) {
+		toSerialize["no_cache"] = o.NoCache
 	}
 	if !IsNil(o.Page) {
 		toSerialize["page"] = o.Page
@@ -386,11 +386,11 @@ func (o AnalysisFunctionMatchingRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.PageSize) {
 		toSerialize["page_size"] = o.PageSize
 	}
+	if !IsNil(o.ResultsPerFunction) {
+		toSerialize["results_per_function"] = o.ResultsPerFunction
+	}
 	if !IsNil(o.StatusOnly) {
 		toSerialize["status_only"] = o.StatusOnly
-	}
-	if !IsNil(o.NoCache) {
-		toSerialize["no_cache"] = o.NoCache
 	}
 	if !IsNil(o.UseCanonicalNames) {
 		toSerialize["use_canonical_names"] = o.UseCanonicalNames
@@ -417,13 +417,13 @@ func (o *AnalysisFunctionMatchingRequest) UnmarshalJSON(data []byte) (err error)
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "min_similarity")
 		delete(additionalProperties, "filters")
-		delete(additionalProperties, "results_per_function")
+		delete(additionalProperties, "min_similarity")
+		delete(additionalProperties, "no_cache")
 		delete(additionalProperties, "page")
 		delete(additionalProperties, "page_size")
+		delete(additionalProperties, "results_per_function")
 		delete(additionalProperties, "status_only")
-		delete(additionalProperties, "no_cache")
 		delete(additionalProperties, "use_canonical_names")
 		o.AdditionalProperties = additionalProperties
 	}

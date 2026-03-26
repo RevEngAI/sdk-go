@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Items** | [**[]FunctionDataTypesStatus**](FunctionDataTypesStatus.md) | List of function data types information | 
 **TotalCount** | Pointer to **int32** | Total number of functions in analysis | [optional] [default to 0]
 **TotalDataTypesCount** | Pointer to **int32** | Total number of functions with data types | [optional] [default to 0]
-**Items** | [**[]FunctionDataTypesStatus**](FunctionDataTypesStatus.md) | List of function data types information | 
 
 ## Methods
 
@@ -26,6 +26,26 @@ will change when the set of required properties is changed
 NewGenerationStatusListWithDefaults instantiates a new GenerationStatusList object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetItems
+
+`func (o *GenerationStatusList) GetItems() []FunctionDataTypesStatus`
+
+GetItems returns the Items field if non-nil, zero value otherwise.
+
+### GetItemsOk
+
+`func (o *GenerationStatusList) GetItemsOk() (*[]FunctionDataTypesStatus, bool)`
+
+GetItemsOk returns a tuple with the Items field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetItems
+
+`func (o *GenerationStatusList) SetItems(v []FunctionDataTypesStatus)`
+
+SetItems sets Items field to given value.
+
 
 ### GetTotalCount
 
@@ -76,26 +96,6 @@ SetTotalDataTypesCount sets TotalDataTypesCount field to given value.
 `func (o *GenerationStatusList) HasTotalDataTypesCount() bool`
 
 HasTotalDataTypesCount returns a boolean if a field has been set.
-
-### GetItems
-
-`func (o *GenerationStatusList) GetItems() []FunctionDataTypesStatus`
-
-GetItems returns the Items field if non-nil, zero value otherwise.
-
-### GetItemsOk
-
-`func (o *GenerationStatusList) GetItemsOk() (*[]FunctionDataTypesStatus, bool)`
-
-GetItemsOk returns a tuple with the Items field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetItems
-
-`func (o *GenerationStatusList) SetItems(v []FunctionDataTypesStatus)`
-
-SetItems sets Items field to given value.
-
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

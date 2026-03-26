@@ -18,8 +18,8 @@ var _ MappedNullable = &AnalysisUpdateRequest{}
 
 // AnalysisUpdateRequest struct for AnalysisUpdateRequest
 type AnalysisUpdateRequest struct {
-	BinaryName NullableString `json:"binary_name,omitempty"`
 	AnalysisScope NullableString `json:"analysis_scope,omitempty"`
+	BinaryName NullableString `json:"binary_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -40,48 +40,6 @@ func NewAnalysisUpdateRequest() *AnalysisUpdateRequest {
 func NewAnalysisUpdateRequestWithDefaults() *AnalysisUpdateRequest {
 	this := AnalysisUpdateRequest{}
 	return &this
-}
-
-// GetBinaryName returns the BinaryName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AnalysisUpdateRequest) GetBinaryName() string {
-	if o == nil || IsNil(o.BinaryName.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.BinaryName.Get()
-}
-
-// GetBinaryNameOk returns a tuple with the BinaryName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AnalysisUpdateRequest) GetBinaryNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.BinaryName.Get(), o.BinaryName.IsSet()
-}
-
-// HasBinaryName returns a boolean if a field has been set.
-func (o *AnalysisUpdateRequest) HasBinaryName() bool {
-	if o != nil && o.BinaryName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetBinaryName gets a reference to the given NullableString and assigns it to the BinaryName field.
-func (o *AnalysisUpdateRequest) SetBinaryName(v string) {
-	o.BinaryName.Set(&v)
-}
-// SetBinaryNameNil sets the value for BinaryName to be an explicit nil
-func (o *AnalysisUpdateRequest) SetBinaryNameNil() {
-	o.BinaryName.Set(nil)
-}
-
-// UnsetBinaryName ensures that no value is present for BinaryName, not even an explicit nil
-func (o *AnalysisUpdateRequest) UnsetBinaryName() {
-	o.BinaryName.Unset()
 }
 
 // GetAnalysisScope returns the AnalysisScope field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -126,6 +84,48 @@ func (o *AnalysisUpdateRequest) UnsetAnalysisScope() {
 	o.AnalysisScope.Unset()
 }
 
+// GetBinaryName returns the BinaryName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AnalysisUpdateRequest) GetBinaryName() string {
+	if o == nil || IsNil(o.BinaryName.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BinaryName.Get()
+}
+
+// GetBinaryNameOk returns a tuple with the BinaryName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AnalysisUpdateRequest) GetBinaryNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BinaryName.Get(), o.BinaryName.IsSet()
+}
+
+// HasBinaryName returns a boolean if a field has been set.
+func (o *AnalysisUpdateRequest) HasBinaryName() bool {
+	if o != nil && o.BinaryName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBinaryName gets a reference to the given NullableString and assigns it to the BinaryName field.
+func (o *AnalysisUpdateRequest) SetBinaryName(v string) {
+	o.BinaryName.Set(&v)
+}
+// SetBinaryNameNil sets the value for BinaryName to be an explicit nil
+func (o *AnalysisUpdateRequest) SetBinaryNameNil() {
+	o.BinaryName.Set(nil)
+}
+
+// UnsetBinaryName ensures that no value is present for BinaryName, not even an explicit nil
+func (o *AnalysisUpdateRequest) UnsetBinaryName() {
+	o.BinaryName.Unset()
+}
+
 func (o AnalysisUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -136,11 +136,11 @@ func (o AnalysisUpdateRequest) MarshalJSON() ([]byte, error) {
 
 func (o AnalysisUpdateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.BinaryName.IsSet() {
-		toSerialize["binary_name"] = o.BinaryName.Get()
-	}
 	if o.AnalysisScope.IsSet() {
 		toSerialize["analysis_scope"] = o.AnalysisScope.Get()
+	}
+	if o.BinaryName.IsSet() {
+		toSerialize["binary_name"] = o.BinaryName.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -164,8 +164,8 @@ func (o *AnalysisUpdateRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "binary_name")
 		delete(additionalProperties, "analysis_scope")
+		delete(additionalProperties, "binary_name")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -19,13 +19,13 @@ var _ MappedNullable = &Process{}
 
 // Process struct for Process
 type Process struct {
+	Args []string `json:"args"`
+	Children []interface{} `json:"children"`
+	ExecutableName string `json:"executable_name"`
 	Pid int32 `json:"pid"`
 	Procname string `json:"procname"`
-	ExecutableName string `json:"executable_name"`
-	Args []string `json:"args"`
 	TsFrom float32 `json:"ts_from"`
 	TsTo NullableFloat32 `json:"ts_to"`
-	Children []interface{} `json:"children"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,15 +35,15 @@ type _Process Process
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProcess(pid int32, procname string, executableName string, args []string, tsFrom float32, tsTo NullableFloat32, children []interface{}) *Process {
+func NewProcess(args []string, children []interface{}, executableName string, pid int32, procname string, tsFrom float32, tsTo NullableFloat32) *Process {
 	this := Process{}
+	this.Args = args
+	this.Children = children
+	this.ExecutableName = executableName
 	this.Pid = pid
 	this.Procname = procname
-	this.ExecutableName = executableName
-	this.Args = args
 	this.TsFrom = tsFrom
 	this.TsTo = tsTo
-	this.Children = children
 	return &this
 }
 
@@ -53,6 +53,78 @@ func NewProcess(pid int32, procname string, executableName string, args []string
 func NewProcessWithDefaults() *Process {
 	this := Process{}
 	return &this
+}
+
+// GetArgs returns the Args field value
+func (o *Process) GetArgs() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Args
+}
+
+// GetArgsOk returns a tuple with the Args field value
+// and a boolean to check if the value has been set.
+func (o *Process) GetArgsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Args, true
+}
+
+// SetArgs sets field value
+func (o *Process) SetArgs(v []string) {
+	o.Args = v
+}
+
+// GetChildren returns the Children field value
+func (o *Process) GetChildren() []interface{} {
+	if o == nil {
+		var ret []interface{}
+		return ret
+	}
+
+	return o.Children
+}
+
+// GetChildrenOk returns a tuple with the Children field value
+// and a boolean to check if the value has been set.
+func (o *Process) GetChildrenOk() ([]interface{}, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Children, true
+}
+
+// SetChildren sets field value
+func (o *Process) SetChildren(v []interface{}) {
+	o.Children = v
+}
+
+// GetExecutableName returns the ExecutableName field value
+func (o *Process) GetExecutableName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ExecutableName
+}
+
+// GetExecutableNameOk returns a tuple with the ExecutableName field value
+// and a boolean to check if the value has been set.
+func (o *Process) GetExecutableNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ExecutableName, true
+}
+
+// SetExecutableName sets field value
+func (o *Process) SetExecutableName(v string) {
+	o.ExecutableName = v
 }
 
 // GetPid returns the Pid field value
@@ -101,54 +173,6 @@ func (o *Process) GetProcnameOk() (*string, bool) {
 // SetProcname sets field value
 func (o *Process) SetProcname(v string) {
 	o.Procname = v
-}
-
-// GetExecutableName returns the ExecutableName field value
-func (o *Process) GetExecutableName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ExecutableName
-}
-
-// GetExecutableNameOk returns a tuple with the ExecutableName field value
-// and a boolean to check if the value has been set.
-func (o *Process) GetExecutableNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ExecutableName, true
-}
-
-// SetExecutableName sets field value
-func (o *Process) SetExecutableName(v string) {
-	o.ExecutableName = v
-}
-
-// GetArgs returns the Args field value
-func (o *Process) GetArgs() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.Args
-}
-
-// GetArgsOk returns a tuple with the Args field value
-// and a boolean to check if the value has been set.
-func (o *Process) GetArgsOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Args, true
-}
-
-// SetArgs sets field value
-func (o *Process) SetArgs(v []string) {
-	o.Args = v
 }
 
 // GetTsFrom returns the TsFrom field value
@@ -201,30 +225,6 @@ func (o *Process) SetTsTo(v float32) {
 	o.TsTo.Set(&v)
 }
 
-// GetChildren returns the Children field value
-func (o *Process) GetChildren() []interface{} {
-	if o == nil {
-		var ret []interface{}
-		return ret
-	}
-
-	return o.Children
-}
-
-// GetChildrenOk returns a tuple with the Children field value
-// and a boolean to check if the value has been set.
-func (o *Process) GetChildrenOk() ([]interface{}, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Children, true
-}
-
-// SetChildren sets field value
-func (o *Process) SetChildren(v []interface{}) {
-	o.Children = v
-}
-
 func (o Process) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -235,13 +235,13 @@ func (o Process) MarshalJSON() ([]byte, error) {
 
 func (o Process) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["args"] = o.Args
+	toSerialize["children"] = o.Children
+	toSerialize["executable_name"] = o.ExecutableName
 	toSerialize["pid"] = o.Pid
 	toSerialize["procname"] = o.Procname
-	toSerialize["executable_name"] = o.ExecutableName
-	toSerialize["args"] = o.Args
 	toSerialize["ts_from"] = o.TsFrom
 	toSerialize["ts_to"] = o.TsTo.Get()
-	toSerialize["children"] = o.Children
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -255,13 +255,13 @@ func (o *Process) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"args",
+		"children",
+		"executable_name",
 		"pid",
 		"procname",
-		"executable_name",
-		"args",
 		"ts_from",
 		"ts_to",
-		"children",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -291,13 +291,13 @@ func (o *Process) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "args")
+		delete(additionalProperties, "children")
+		delete(additionalProperties, "executable_name")
 		delete(additionalProperties, "pid")
 		delete(additionalProperties, "procname")
-		delete(additionalProperties, "executable_name")
-		delete(additionalProperties, "args")
 		delete(additionalProperties, "ts_from")
 		delete(additionalProperties, "ts_to")
-		delete(additionalProperties, "children")
 		o.AdditionalProperties = additionalProperties
 	}
 

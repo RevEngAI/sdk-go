@@ -20,16 +20,16 @@ var _ MappedNullable = &BinaryExternalsResponse{}
 
 // BinaryExternalsResponse struct for BinaryExternalsResponse
 type BinaryExternalsResponse struct {
+	// MalwareBazaar information
+	Mb map[string]interface{} `json:"mb"`
+	// MalwareBazaar last updated date
+	MbLastUpdated time.Time `json:"mb_last_updated"`
 	// SHA256 hash of the binary
 	Sha256Hash string `json:"sha_256_hash"`
 	// VirusTotal information
 	Vt map[string]interface{} `json:"vt"`
 	// VirusTotal last updated date
 	VtLastUpdated time.Time `json:"vt_last_updated"`
-	// MalwareBazaar information
-	Mb map[string]interface{} `json:"mb"`
-	// MalwareBazaar last updated date
-	MbLastUpdated time.Time `json:"mb_last_updated"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,13 +39,13 @@ type _BinaryExternalsResponse BinaryExternalsResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBinaryExternalsResponse(sha256Hash string, vt map[string]interface{}, vtLastUpdated time.Time, mb map[string]interface{}, mbLastUpdated time.Time) *BinaryExternalsResponse {
+func NewBinaryExternalsResponse(mb map[string]interface{}, mbLastUpdated time.Time, sha256Hash string, vt map[string]interface{}, vtLastUpdated time.Time) *BinaryExternalsResponse {
 	this := BinaryExternalsResponse{}
+	this.Mb = mb
+	this.MbLastUpdated = mbLastUpdated
 	this.Sha256Hash = sha256Hash
 	this.Vt = vt
 	this.VtLastUpdated = vtLastUpdated
-	this.Mb = mb
-	this.MbLastUpdated = mbLastUpdated
 	return &this
 }
 
@@ -55,6 +55,54 @@ func NewBinaryExternalsResponse(sha256Hash string, vt map[string]interface{}, vt
 func NewBinaryExternalsResponseWithDefaults() *BinaryExternalsResponse {
 	this := BinaryExternalsResponse{}
 	return &this
+}
+
+// GetMb returns the Mb field value
+func (o *BinaryExternalsResponse) GetMb() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+
+	return o.Mb
+}
+
+// GetMbOk returns a tuple with the Mb field value
+// and a boolean to check if the value has been set.
+func (o *BinaryExternalsResponse) GetMbOk() (map[string]interface{}, bool) {
+	if o == nil {
+		return map[string]interface{}{}, false
+	}
+	return o.Mb, true
+}
+
+// SetMb sets field value
+func (o *BinaryExternalsResponse) SetMb(v map[string]interface{}) {
+	o.Mb = v
+}
+
+// GetMbLastUpdated returns the MbLastUpdated field value
+func (o *BinaryExternalsResponse) GetMbLastUpdated() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.MbLastUpdated
+}
+
+// GetMbLastUpdatedOk returns a tuple with the MbLastUpdated field value
+// and a boolean to check if the value has been set.
+func (o *BinaryExternalsResponse) GetMbLastUpdatedOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MbLastUpdated, true
+}
+
+// SetMbLastUpdated sets field value
+func (o *BinaryExternalsResponse) SetMbLastUpdated(v time.Time) {
+	o.MbLastUpdated = v
 }
 
 // GetSha256Hash returns the Sha256Hash field value
@@ -129,54 +177,6 @@ func (o *BinaryExternalsResponse) SetVtLastUpdated(v time.Time) {
 	o.VtLastUpdated = v
 }
 
-// GetMb returns the Mb field value
-func (o *BinaryExternalsResponse) GetMb() map[string]interface{} {
-	if o == nil {
-		var ret map[string]interface{}
-		return ret
-	}
-
-	return o.Mb
-}
-
-// GetMbOk returns a tuple with the Mb field value
-// and a boolean to check if the value has been set.
-func (o *BinaryExternalsResponse) GetMbOk() (map[string]interface{}, bool) {
-	if o == nil {
-		return map[string]interface{}{}, false
-	}
-	return o.Mb, true
-}
-
-// SetMb sets field value
-func (o *BinaryExternalsResponse) SetMb(v map[string]interface{}) {
-	o.Mb = v
-}
-
-// GetMbLastUpdated returns the MbLastUpdated field value
-func (o *BinaryExternalsResponse) GetMbLastUpdated() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.MbLastUpdated
-}
-
-// GetMbLastUpdatedOk returns a tuple with the MbLastUpdated field value
-// and a boolean to check if the value has been set.
-func (o *BinaryExternalsResponse) GetMbLastUpdatedOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.MbLastUpdated, true
-}
-
-// SetMbLastUpdated sets field value
-func (o *BinaryExternalsResponse) SetMbLastUpdated(v time.Time) {
-	o.MbLastUpdated = v
-}
-
 func (o BinaryExternalsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -187,11 +187,11 @@ func (o BinaryExternalsResponse) MarshalJSON() ([]byte, error) {
 
 func (o BinaryExternalsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["mb"] = o.Mb
+	toSerialize["mb_last_updated"] = o.MbLastUpdated
 	toSerialize["sha_256_hash"] = o.Sha256Hash
 	toSerialize["vt"] = o.Vt
 	toSerialize["vt_last_updated"] = o.VtLastUpdated
-	toSerialize["mb"] = o.Mb
-	toSerialize["mb_last_updated"] = o.MbLastUpdated
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -205,11 +205,11 @@ func (o *BinaryExternalsResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"mb",
+		"mb_last_updated",
 		"sha_256_hash",
 		"vt",
 		"vt_last_updated",
-		"mb",
-		"mb_last_updated",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -239,11 +239,11 @@ func (o *BinaryExternalsResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "mb")
+		delete(additionalProperties, "mb_last_updated")
 		delete(additionalProperties, "sha_256_hash")
 		delete(additionalProperties, "vt")
 		delete(additionalProperties, "vt_last_updated")
-		delete(additionalProperties, "mb")
-		delete(additionalProperties, "mb_last_updated")
 		o.AdditionalProperties = additionalProperties
 	}
 

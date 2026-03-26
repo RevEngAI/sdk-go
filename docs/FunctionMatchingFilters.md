@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BinaryIds** | Pointer to **[]int32** | ID&#39;s of binaries to limit the search to, if empty, search all scoped binaries | [optional] [default to {}]
 **CollectionIds** | Pointer to **[]int32** | ID&#39;s of collections to limit the search to, if empty, search all scoped collections | [optional] [default to {}]
+**DebugTypes** | Pointer to **[]string** | Limit the search to specific debug types, if empty, search all scoped debug &amp; non-debug functions | [optional] [default to {}]
 **FunctionIds** | Pointer to **[]int64** | ID&#39;s of functions to limit the search to, if empty, search all scoped functions | [optional] [default to {}]
 **UserIds** | Pointer to **[]int32** | ID&#39;s of users to limit the search to, if empty, search all scoped users | [optional] [default to {}]
-**DebugTypes** | Pointer to **[]string** | Limit the search to specific debug types, if empty, search all scoped debug &amp; non-debug functions | [optional] [default to {}]
 
 ## Methods
 
@@ -79,6 +79,31 @@ SetCollectionIds sets CollectionIds field to given value.
 
 HasCollectionIds returns a boolean if a field has been set.
 
+### GetDebugTypes
+
+`func (o *FunctionMatchingFilters) GetDebugTypes() []string`
+
+GetDebugTypes returns the DebugTypes field if non-nil, zero value otherwise.
+
+### GetDebugTypesOk
+
+`func (o *FunctionMatchingFilters) GetDebugTypesOk() (*[]string, bool)`
+
+GetDebugTypesOk returns a tuple with the DebugTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDebugTypes
+
+`func (o *FunctionMatchingFilters) SetDebugTypes(v []string)`
+
+SetDebugTypes sets DebugTypes field to given value.
+
+### HasDebugTypes
+
+`func (o *FunctionMatchingFilters) HasDebugTypes() bool`
+
+HasDebugTypes returns a boolean if a field has been set.
+
 ### GetFunctionIds
 
 `func (o *FunctionMatchingFilters) GetFunctionIds() []int64`
@@ -128,31 +153,6 @@ SetUserIds sets UserIds field to given value.
 `func (o *FunctionMatchingFilters) HasUserIds() bool`
 
 HasUserIds returns a boolean if a field has been set.
-
-### GetDebugTypes
-
-`func (o *FunctionMatchingFilters) GetDebugTypes() []string`
-
-GetDebugTypes returns the DebugTypes field if non-nil, zero value otherwise.
-
-### GetDebugTypesOk
-
-`func (o *FunctionMatchingFilters) GetDebugTypesOk() (*[]string, bool)`
-
-GetDebugTypesOk returns a tuple with the DebugTypes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDebugTypes
-
-`func (o *FunctionMatchingFilters) SetDebugTypes(v []string)`
-
-SetDebugTypes sets DebugTypes field to given value.
-
-### HasDebugTypes
-
-`func (o *FunctionMatchingFilters) HasDebugTypes() bool`
-
-HasDebugTypes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

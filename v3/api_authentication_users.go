@@ -630,7 +630,6 @@ func (a *AuthenticationUsersAPIService) LoginUserExecute(r ApiLoginUserRequest) 
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

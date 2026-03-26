@@ -19,8 +19,8 @@ var _ MappedNullable = &XrefResponse{}
 
 // XrefResponse struct for XrefResponse
 type XrefResponse struct {
-	XrefToList []XrefToResponse `json:"xref_to_list"`
 	XrefFromList []XrefFromResponse `json:"xref_from_list"`
+	XrefToList []XrefToResponse `json:"xref_to_list"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,10 +30,10 @@ type _XrefResponse XrefResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXrefResponse(xrefToList []XrefToResponse, xrefFromList []XrefFromResponse) *XrefResponse {
+func NewXrefResponse(xrefFromList []XrefFromResponse, xrefToList []XrefToResponse) *XrefResponse {
 	this := XrefResponse{}
-	this.XrefToList = xrefToList
 	this.XrefFromList = xrefFromList
+	this.XrefToList = xrefToList
 	return &this
 }
 
@@ -43,30 +43,6 @@ func NewXrefResponse(xrefToList []XrefToResponse, xrefFromList []XrefFromRespons
 func NewXrefResponseWithDefaults() *XrefResponse {
 	this := XrefResponse{}
 	return &this
-}
-
-// GetXrefToList returns the XrefToList field value
-func (o *XrefResponse) GetXrefToList() []XrefToResponse {
-	if o == nil {
-		var ret []XrefToResponse
-		return ret
-	}
-
-	return o.XrefToList
-}
-
-// GetXrefToListOk returns a tuple with the XrefToList field value
-// and a boolean to check if the value has been set.
-func (o *XrefResponse) GetXrefToListOk() ([]XrefToResponse, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.XrefToList, true
-}
-
-// SetXrefToList sets field value
-func (o *XrefResponse) SetXrefToList(v []XrefToResponse) {
-	o.XrefToList = v
 }
 
 // GetXrefFromList returns the XrefFromList field value
@@ -93,6 +69,30 @@ func (o *XrefResponse) SetXrefFromList(v []XrefFromResponse) {
 	o.XrefFromList = v
 }
 
+// GetXrefToList returns the XrefToList field value
+func (o *XrefResponse) GetXrefToList() []XrefToResponse {
+	if o == nil {
+		var ret []XrefToResponse
+		return ret
+	}
+
+	return o.XrefToList
+}
+
+// GetXrefToListOk returns a tuple with the XrefToList field value
+// and a boolean to check if the value has been set.
+func (o *XrefResponse) GetXrefToListOk() ([]XrefToResponse, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.XrefToList, true
+}
+
+// SetXrefToList sets field value
+func (o *XrefResponse) SetXrefToList(v []XrefToResponse) {
+	o.XrefToList = v
+}
+
 func (o XrefResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,8 +103,8 @@ func (o XrefResponse) MarshalJSON() ([]byte, error) {
 
 func (o XrefResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["xref_to_list"] = o.XrefToList
 	toSerialize["xref_from_list"] = o.XrefFromList
+	toSerialize["xref_to_list"] = o.XrefToList
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -118,8 +118,8 @@ func (o *XrefResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"xref_to_list",
 		"xref_from_list",
+		"xref_to_list",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -149,8 +149,8 @@ func (o *XrefResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "xref_to_list")
 		delete(additionalProperties, "xref_from_list")
+		delete(additionalProperties, "xref_to_list")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LastChange** | Pointer to **NullableString** |  | [optional] 
 **Addr** | **int32** | Memory address of the global variable | 
-**Name** | **string** | Name of the global variable | 
-**Type** | **string** | Data type of the global variable | 
-**Size** | **int32** | Size of the global variable in bytes | 
 **ArtifactType** | Pointer to **string** | Type of artifact that the global variable is associated with | [optional] 
+**LastChange** | Pointer to **NullableString** |  | [optional] 
+**Name** | **string** | Name of the global variable | 
+**Size** | **int32** | Size of the global variable in bytes | 
+**Type** | **string** | Data type of the global variable | 
 
 ## Methods
 
 ### NewGlobalVariable
 
-`func NewGlobalVariable(addr int32, name string, type_ string, size int32, ) *GlobalVariable`
+`func NewGlobalVariable(addr int32, name string, size int32, type_ string, ) *GlobalVariable`
 
 NewGlobalVariable instantiates a new GlobalVariable object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +29,51 @@ will change when the set of required properties is changed
 NewGlobalVariableWithDefaults instantiates a new GlobalVariable object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAddr
+
+`func (o *GlobalVariable) GetAddr() int32`
+
+GetAddr returns the Addr field if non-nil, zero value otherwise.
+
+### GetAddrOk
+
+`func (o *GlobalVariable) GetAddrOk() (*int32, bool)`
+
+GetAddrOk returns a tuple with the Addr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAddr
+
+`func (o *GlobalVariable) SetAddr(v int32)`
+
+SetAddr sets Addr field to given value.
+
+
+### GetArtifactType
+
+`func (o *GlobalVariable) GetArtifactType() string`
+
+GetArtifactType returns the ArtifactType field if non-nil, zero value otherwise.
+
+### GetArtifactTypeOk
+
+`func (o *GlobalVariable) GetArtifactTypeOk() (*string, bool)`
+
+GetArtifactTypeOk returns a tuple with the ArtifactType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArtifactType
+
+`func (o *GlobalVariable) SetArtifactType(v string)`
+
+SetArtifactType sets ArtifactType field to given value.
+
+### HasArtifactType
+
+`func (o *GlobalVariable) HasArtifactType() bool`
+
+HasArtifactType returns a boolean if a field has been set.
 
 ### GetLastChange
 
@@ -65,26 +110,6 @@ HasLastChange returns a boolean if a field has been set.
 `func (o *GlobalVariable) UnsetLastChange()`
 
 UnsetLastChange ensures that no value is present for LastChange, not even an explicit nil
-### GetAddr
-
-`func (o *GlobalVariable) GetAddr() int32`
-
-GetAddr returns the Addr field if non-nil, zero value otherwise.
-
-### GetAddrOk
-
-`func (o *GlobalVariable) GetAddrOk() (*int32, bool)`
-
-GetAddrOk returns a tuple with the Addr field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAddr
-
-`func (o *GlobalVariable) SetAddr(v int32)`
-
-SetAddr sets Addr field to given value.
-
-
 ### GetName
 
 `func (o *GlobalVariable) GetName() string`
@@ -103,26 +128,6 @@ and a boolean to check if the value has been set.
 `func (o *GlobalVariable) SetName(v string)`
 
 SetName sets Name field to given value.
-
-
-### GetType
-
-`func (o *GlobalVariable) GetType() string`
-
-GetType returns the Type field if non-nil, zero value otherwise.
-
-### GetTypeOk
-
-`func (o *GlobalVariable) GetTypeOk() (*string, bool)`
-
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetType
-
-`func (o *GlobalVariable) SetType(v string)`
-
-SetType sets Type field to given value.
 
 
 ### GetSize
@@ -145,30 +150,25 @@ and a boolean to check if the value has been set.
 SetSize sets Size field to given value.
 
 
-### GetArtifactType
+### GetType
 
-`func (o *GlobalVariable) GetArtifactType() string`
+`func (o *GlobalVariable) GetType() string`
 
-GetArtifactType returns the ArtifactType field if non-nil, zero value otherwise.
+GetType returns the Type field if non-nil, zero value otherwise.
 
-### GetArtifactTypeOk
+### GetTypeOk
 
-`func (o *GlobalVariable) GetArtifactTypeOk() (*string, bool)`
+`func (o *GlobalVariable) GetTypeOk() (*string, bool)`
 
-GetArtifactTypeOk returns a tuple with the ArtifactType field if it's non-nil, zero value otherwise
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetArtifactType
+### SetType
 
-`func (o *GlobalVariable) SetArtifactType(v string)`
+`func (o *GlobalVariable) SetType(v string)`
 
-SetArtifactType sets ArtifactType field to given value.
+SetType sets Type field to given value.
 
-### HasArtifactType
-
-`func (o *GlobalVariable) HasArtifactType() bool`
-
-HasArtifactType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

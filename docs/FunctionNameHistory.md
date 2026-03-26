@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HistoryId** | **int32** | The ID of the history record | 
 **ChangeMadeBy** | **string** | The user who made the change | 
-**FunctionName** | **string** | The name of the function | 
-**MangledName** | **string** | The mangled name of the function | 
-**IsDebug** | **bool** | Whether the function is debugged | 
-**SourceType** | [**FunctionSourceType**](FunctionSourceType.md) | The source type of the function | 
 **CreatedAt** | **string** | The timestamp when the function name was created | 
+**FunctionName** | **string** | The name of the function | 
+**HistoryId** | **int32** | The ID of the history record | 
+**IsDebug** | **bool** | Whether the function is debugged | 
+**MangledName** | **string** | The mangled name of the function | 
+**SourceType** | [**FunctionSourceType**](FunctionSourceType.md) | The source type of the function | 
 
 ## Methods
 
 ### NewFunctionNameHistory
 
-`func NewFunctionNameHistory(historyId int32, changeMadeBy string, functionName string, mangledName string, isDebug bool, sourceType FunctionSourceType, createdAt string, ) *FunctionNameHistory`
+`func NewFunctionNameHistory(changeMadeBy string, createdAt string, functionName string, historyId int32, isDebug bool, mangledName string, sourceType FunctionSourceType, ) *FunctionNameHistory`
 
 NewFunctionNameHistory instantiates a new FunctionNameHistory object
 This constructor will assign default values to properties that have it defined,
@@ -30,26 +30,6 @@ will change when the set of required properties is changed
 NewFunctionNameHistoryWithDefaults instantiates a new FunctionNameHistory object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetHistoryId
-
-`func (o *FunctionNameHistory) GetHistoryId() int32`
-
-GetHistoryId returns the HistoryId field if non-nil, zero value otherwise.
-
-### GetHistoryIdOk
-
-`func (o *FunctionNameHistory) GetHistoryIdOk() (*int32, bool)`
-
-GetHistoryIdOk returns a tuple with the HistoryId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHistoryId
-
-`func (o *FunctionNameHistory) SetHistoryId(v int32)`
-
-SetHistoryId sets HistoryId field to given value.
-
 
 ### GetChangeMadeBy
 
@@ -69,6 +49,26 @@ and a boolean to check if the value has been set.
 `func (o *FunctionNameHistory) SetChangeMadeBy(v string)`
 
 SetChangeMadeBy sets ChangeMadeBy field to given value.
+
+
+### GetCreatedAt
+
+`func (o *FunctionNameHistory) GetCreatedAt() string`
+
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+
+### GetCreatedAtOk
+
+`func (o *FunctionNameHistory) GetCreatedAtOk() (*string, bool)`
+
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedAt
+
+`func (o *FunctionNameHistory) SetCreatedAt(v string)`
+
+SetCreatedAt sets CreatedAt field to given value.
 
 
 ### GetFunctionName
@@ -91,24 +91,24 @@ and a boolean to check if the value has been set.
 SetFunctionName sets FunctionName field to given value.
 
 
-### GetMangledName
+### GetHistoryId
 
-`func (o *FunctionNameHistory) GetMangledName() string`
+`func (o *FunctionNameHistory) GetHistoryId() int32`
 
-GetMangledName returns the MangledName field if non-nil, zero value otherwise.
+GetHistoryId returns the HistoryId field if non-nil, zero value otherwise.
 
-### GetMangledNameOk
+### GetHistoryIdOk
 
-`func (o *FunctionNameHistory) GetMangledNameOk() (*string, bool)`
+`func (o *FunctionNameHistory) GetHistoryIdOk() (*int32, bool)`
 
-GetMangledNameOk returns a tuple with the MangledName field if it's non-nil, zero value otherwise
+GetHistoryIdOk returns a tuple with the HistoryId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMangledName
+### SetHistoryId
 
-`func (o *FunctionNameHistory) SetMangledName(v string)`
+`func (o *FunctionNameHistory) SetHistoryId(v int32)`
 
-SetMangledName sets MangledName field to given value.
+SetHistoryId sets HistoryId field to given value.
 
 
 ### GetIsDebug
@@ -131,6 +131,26 @@ and a boolean to check if the value has been set.
 SetIsDebug sets IsDebug field to given value.
 
 
+### GetMangledName
+
+`func (o *FunctionNameHistory) GetMangledName() string`
+
+GetMangledName returns the MangledName field if non-nil, zero value otherwise.
+
+### GetMangledNameOk
+
+`func (o *FunctionNameHistory) GetMangledNameOk() (*string, bool)`
+
+GetMangledNameOk returns a tuple with the MangledName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMangledName
+
+`func (o *FunctionNameHistory) SetMangledName(v string)`
+
+SetMangledName sets MangledName field to given value.
+
+
 ### GetSourceType
 
 `func (o *FunctionNameHistory) GetSourceType() FunctionSourceType`
@@ -149,26 +169,6 @@ and a boolean to check if the value has been set.
 `func (o *FunctionNameHistory) SetSourceType(v FunctionSourceType)`
 
 SetSourceType sets SourceType field to given value.
-
-
-### GetCreatedAt
-
-`func (o *FunctionNameHistory) GetCreatedAt() string`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *FunctionNameHistory) GetCreatedAtOk() (*string, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *FunctionNameHistory) SetCreatedAt(v string)`
-
-SetCreatedAt sets CreatedAt field to given value.
 
 
 

@@ -21,10 +21,10 @@ var _ MappedNullable = &FunctionRenameMap{}
 type FunctionRenameMap struct {
 	// The ID of the function to rename
 	FunctionId int64 `json:"function_id"`
-	// The new name for the function
-	NewName string `json:"new_name"`
 	// The new mangled name for the function
 	NewMangledName string `json:"new_mangled_name"`
+	// The new name for the function
+	NewName string `json:"new_name"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,11 +34,11 @@ type _FunctionRenameMap FunctionRenameMap
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionRenameMap(functionId int64, newName string, newMangledName string) *FunctionRenameMap {
+func NewFunctionRenameMap(functionId int64, newMangledName string, newName string) *FunctionRenameMap {
 	this := FunctionRenameMap{}
 	this.FunctionId = functionId
-	this.NewName = newName
 	this.NewMangledName = newMangledName
+	this.NewName = newName
 	return &this
 }
 
@@ -74,30 +74,6 @@ func (o *FunctionRenameMap) SetFunctionId(v int64) {
 	o.FunctionId = v
 }
 
-// GetNewName returns the NewName field value
-func (o *FunctionRenameMap) GetNewName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.NewName
-}
-
-// GetNewNameOk returns a tuple with the NewName field value
-// and a boolean to check if the value has been set.
-func (o *FunctionRenameMap) GetNewNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.NewName, true
-}
-
-// SetNewName sets field value
-func (o *FunctionRenameMap) SetNewName(v string) {
-	o.NewName = v
-}
-
 // GetNewMangledName returns the NewMangledName field value
 func (o *FunctionRenameMap) GetNewMangledName() string {
 	if o == nil {
@@ -122,6 +98,30 @@ func (o *FunctionRenameMap) SetNewMangledName(v string) {
 	o.NewMangledName = v
 }
 
+// GetNewName returns the NewName field value
+func (o *FunctionRenameMap) GetNewName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.NewName
+}
+
+// GetNewNameOk returns a tuple with the NewName field value
+// and a boolean to check if the value has been set.
+func (o *FunctionRenameMap) GetNewNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.NewName, true
+}
+
+// SetNewName sets field value
+func (o *FunctionRenameMap) SetNewName(v string) {
+	o.NewName = v
+}
+
 func (o FunctionRenameMap) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -133,8 +133,8 @@ func (o FunctionRenameMap) MarshalJSON() ([]byte, error) {
 func (o FunctionRenameMap) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["function_id"] = o.FunctionId
-	toSerialize["new_name"] = o.NewName
 	toSerialize["new_mangled_name"] = o.NewMangledName
+	toSerialize["new_name"] = o.NewName
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -149,8 +149,8 @@ func (o *FunctionRenameMap) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"function_id",
-		"new_name",
 		"new_mangled_name",
+		"new_name",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -181,8 +181,8 @@ func (o *FunctionRenameMap) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "function_id")
-		delete(additionalProperties, "new_name")
 		delete(additionalProperties, "new_mangled_name")
+		delete(additionalProperties, "new_name")
 		o.AdditionalProperties = additionalProperties
 	}
 

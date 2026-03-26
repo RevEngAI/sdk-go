@@ -19,9 +19,9 @@ var _ MappedNullable = &BinaryAdditionalDetailsDataResponse{}
 
 // BinaryAdditionalDetailsDataResponse struct for BinaryAdditionalDetailsDataResponse
 type BinaryAdditionalDetailsDataResponse struct {
+	Elf NullableELFModel `json:"elf,omitempty"`
 	File FileMetadata `json:"file"`
 	Pe NullablePEModel `json:"pe,omitempty"`
-	Elf NullableELFModel `json:"elf,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,6 +43,48 @@ func NewBinaryAdditionalDetailsDataResponse(file FileMetadata) *BinaryAdditional
 func NewBinaryAdditionalDetailsDataResponseWithDefaults() *BinaryAdditionalDetailsDataResponse {
 	this := BinaryAdditionalDetailsDataResponse{}
 	return &this
+}
+
+// GetElf returns the Elf field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BinaryAdditionalDetailsDataResponse) GetElf() ELFModel {
+	if o == nil || IsNil(o.Elf.Get()) {
+		var ret ELFModel
+		return ret
+	}
+	return *o.Elf.Get()
+}
+
+// GetElfOk returns a tuple with the Elf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BinaryAdditionalDetailsDataResponse) GetElfOk() (*ELFModel, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Elf.Get(), o.Elf.IsSet()
+}
+
+// HasElf returns a boolean if a field has been set.
+func (o *BinaryAdditionalDetailsDataResponse) HasElf() bool {
+	if o != nil && o.Elf.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetElf gets a reference to the given NullableELFModel and assigns it to the Elf field.
+func (o *BinaryAdditionalDetailsDataResponse) SetElf(v ELFModel) {
+	o.Elf.Set(&v)
+}
+// SetElfNil sets the value for Elf to be an explicit nil
+func (o *BinaryAdditionalDetailsDataResponse) SetElfNil() {
+	o.Elf.Set(nil)
+}
+
+// UnsetElf ensures that no value is present for Elf, not even an explicit nil
+func (o *BinaryAdditionalDetailsDataResponse) UnsetElf() {
+	o.Elf.Unset()
 }
 
 // GetFile returns the File field value
@@ -111,48 +153,6 @@ func (o *BinaryAdditionalDetailsDataResponse) UnsetPe() {
 	o.Pe.Unset()
 }
 
-// GetElf returns the Elf field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BinaryAdditionalDetailsDataResponse) GetElf() ELFModel {
-	if o == nil || IsNil(o.Elf.Get()) {
-		var ret ELFModel
-		return ret
-	}
-	return *o.Elf.Get()
-}
-
-// GetElfOk returns a tuple with the Elf field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BinaryAdditionalDetailsDataResponse) GetElfOk() (*ELFModel, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Elf.Get(), o.Elf.IsSet()
-}
-
-// HasElf returns a boolean if a field has been set.
-func (o *BinaryAdditionalDetailsDataResponse) HasElf() bool {
-	if o != nil && o.Elf.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetElf gets a reference to the given NullableELFModel and assigns it to the Elf field.
-func (o *BinaryAdditionalDetailsDataResponse) SetElf(v ELFModel) {
-	o.Elf.Set(&v)
-}
-// SetElfNil sets the value for Elf to be an explicit nil
-func (o *BinaryAdditionalDetailsDataResponse) SetElfNil() {
-	o.Elf.Set(nil)
-}
-
-// UnsetElf ensures that no value is present for Elf, not even an explicit nil
-func (o *BinaryAdditionalDetailsDataResponse) UnsetElf() {
-	o.Elf.Unset()
-}
-
 func (o BinaryAdditionalDetailsDataResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -163,12 +163,12 @@ func (o BinaryAdditionalDetailsDataResponse) MarshalJSON() ([]byte, error) {
 
 func (o BinaryAdditionalDetailsDataResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Elf.IsSet() {
+		toSerialize["elf"] = o.Elf.Get()
+	}
 	toSerialize["file"] = o.File
 	if o.Pe.IsSet() {
 		toSerialize["pe"] = o.Pe.Get()
-	}
-	if o.Elf.IsSet() {
-		toSerialize["elf"] = o.Elf.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -213,9 +213,9 @@ func (o *BinaryAdditionalDetailsDataResponse) UnmarshalJSON(data []byte) (err er
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "elf")
 		delete(additionalProperties, "file")
 		delete(additionalProperties, "pe")
-		delete(additionalProperties, "elf")
 		o.AdditionalProperties = additionalProperties
 	}
 

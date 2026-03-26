@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Sha256** | **string** |  | 
-**Type** | **string** |  | 
 **Size** | **int32** |  | 
+**Type** | **string** |  | 
 
 ## Methods
 
 ### NewProcessDumpMetadata
 
-`func NewProcessDumpMetadata(sha256 string, type_ string, size int32, ) *ProcessDumpMetadata`
+`func NewProcessDumpMetadata(sha256 string, size int32, type_ string, ) *ProcessDumpMetadata`
 
 NewProcessDumpMetadata instantiates a new ProcessDumpMetadata object
 This constructor will assign default values to properties that have it defined,
@@ -47,26 +47,6 @@ and a boolean to check if the value has been set.
 SetSha256 sets Sha256 field to given value.
 
 
-### GetType
-
-`func (o *ProcessDumpMetadata) GetType() string`
-
-GetType returns the Type field if non-nil, zero value otherwise.
-
-### GetTypeOk
-
-`func (o *ProcessDumpMetadata) GetTypeOk() (*string, bool)`
-
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetType
-
-`func (o *ProcessDumpMetadata) SetType(v string)`
-
-SetType sets Type field to given value.
-
-
 ### GetSize
 
 `func (o *ProcessDumpMetadata) GetSize() int32`
@@ -85,6 +65,26 @@ and a boolean to check if the value has been set.
 `func (o *ProcessDumpMetadata) SetSize(v int32)`
 
 SetSize sets Size field to given value.
+
+
+### GetType
+
+`func (o *ProcessDumpMetadata) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *ProcessDumpMetadata) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *ProcessDumpMetadata) SetType(v string)`
+
+SetType sets Type field to given value.
 
 
 

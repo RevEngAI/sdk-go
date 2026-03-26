@@ -4,22 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** |  | 
-**Type** | **string** |  | 
-**VirtualAddress** | **int32** |  | 
-**VirtualSize** | **int32** |  | 
-**RawSize** | **int32** |  | 
+**Alignment** | **int32** |  | 
+**Entropy** | **float32** |  | 
 **FileOffset** | **int32** |  | 
 **Flags** | **string** |  | 
 **FlagsRaw** | **int32** |  | 
-**Entropy** | **float32** |  | 
-**Alignment** | **int32** |  | 
+**Name** | **string** |  | 
+**RawSize** | **int32** |  | 
+**Type** | **string** |  | 
+**VirtualAddress** | **int32** |  | 
+**VirtualSize** | **int32** |  | 
 
 ## Methods
 
 ### NewELFSection
 
-`func NewELFSection(name string, type_ string, virtualAddress int32, virtualSize int32, rawSize int32, fileOffset int32, flags string, flagsRaw int32, entropy float32, alignment int32, ) *ELFSection`
+`func NewELFSection(alignment int32, entropy float32, fileOffset int32, flags string, flagsRaw int32, name string, rawSize int32, type_ string, virtualAddress int32, virtualSize int32, ) *ELFSection`
 
 NewELFSection instantiates a new ELFSection object
 This constructor will assign default values to properties that have it defined,
@@ -34,104 +34,44 @@ NewELFSectionWithDefaults instantiates a new ELFSection object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetName
+### GetAlignment
 
-`func (o *ELFSection) GetName() string`
+`func (o *ELFSection) GetAlignment() int32`
 
-GetName returns the Name field if non-nil, zero value otherwise.
+GetAlignment returns the Alignment field if non-nil, zero value otherwise.
 
-### GetNameOk
+### GetAlignmentOk
 
-`func (o *ELFSection) GetNameOk() (*string, bool)`
+`func (o *ELFSection) GetAlignmentOk() (*int32, bool)`
 
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+GetAlignmentOk returns a tuple with the Alignment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetName
+### SetAlignment
 
-`func (o *ELFSection) SetName(v string)`
+`func (o *ELFSection) SetAlignment(v int32)`
 
-SetName sets Name field to given value.
+SetAlignment sets Alignment field to given value.
 
 
-### GetType
+### GetEntropy
 
-`func (o *ELFSection) GetType() string`
+`func (o *ELFSection) GetEntropy() float32`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetEntropy returns the Entropy field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetEntropyOk
 
-`func (o *ELFSection) GetTypeOk() (*string, bool)`
+`func (o *ELFSection) GetEntropyOk() (*float32, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetEntropyOk returns a tuple with the Entropy field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetEntropy
 
-`func (o *ELFSection) SetType(v string)`
+`func (o *ELFSection) SetEntropy(v float32)`
 
-SetType sets Type field to given value.
-
-
-### GetVirtualAddress
-
-`func (o *ELFSection) GetVirtualAddress() int32`
-
-GetVirtualAddress returns the VirtualAddress field if non-nil, zero value otherwise.
-
-### GetVirtualAddressOk
-
-`func (o *ELFSection) GetVirtualAddressOk() (*int32, bool)`
-
-GetVirtualAddressOk returns a tuple with the VirtualAddress field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVirtualAddress
-
-`func (o *ELFSection) SetVirtualAddress(v int32)`
-
-SetVirtualAddress sets VirtualAddress field to given value.
-
-
-### GetVirtualSize
-
-`func (o *ELFSection) GetVirtualSize() int32`
-
-GetVirtualSize returns the VirtualSize field if non-nil, zero value otherwise.
-
-### GetVirtualSizeOk
-
-`func (o *ELFSection) GetVirtualSizeOk() (*int32, bool)`
-
-GetVirtualSizeOk returns a tuple with the VirtualSize field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVirtualSize
-
-`func (o *ELFSection) SetVirtualSize(v int32)`
-
-SetVirtualSize sets VirtualSize field to given value.
-
-
-### GetRawSize
-
-`func (o *ELFSection) GetRawSize() int32`
-
-GetRawSize returns the RawSize field if non-nil, zero value otherwise.
-
-### GetRawSizeOk
-
-`func (o *ELFSection) GetRawSizeOk() (*int32, bool)`
-
-GetRawSizeOk returns a tuple with the RawSize field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRawSize
-
-`func (o *ELFSection) SetRawSize(v int32)`
-
-SetRawSize sets RawSize field to given value.
+SetEntropy sets Entropy field to given value.
 
 
 ### GetFileOffset
@@ -194,44 +134,104 @@ and a boolean to check if the value has been set.
 SetFlagsRaw sets FlagsRaw field to given value.
 
 
-### GetEntropy
+### GetName
 
-`func (o *ELFSection) GetEntropy() float32`
+`func (o *ELFSection) GetName() string`
 
-GetEntropy returns the Entropy field if non-nil, zero value otherwise.
+GetName returns the Name field if non-nil, zero value otherwise.
 
-### GetEntropyOk
+### GetNameOk
 
-`func (o *ELFSection) GetEntropyOk() (*float32, bool)`
+`func (o *ELFSection) GetNameOk() (*string, bool)`
 
-GetEntropyOk returns a tuple with the Entropy field if it's non-nil, zero value otherwise
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEntropy
+### SetName
 
-`func (o *ELFSection) SetEntropy(v float32)`
+`func (o *ELFSection) SetName(v string)`
 
-SetEntropy sets Entropy field to given value.
+SetName sets Name field to given value.
 
 
-### GetAlignment
+### GetRawSize
 
-`func (o *ELFSection) GetAlignment() int32`
+`func (o *ELFSection) GetRawSize() int32`
 
-GetAlignment returns the Alignment field if non-nil, zero value otherwise.
+GetRawSize returns the RawSize field if non-nil, zero value otherwise.
 
-### GetAlignmentOk
+### GetRawSizeOk
 
-`func (o *ELFSection) GetAlignmentOk() (*int32, bool)`
+`func (o *ELFSection) GetRawSizeOk() (*int32, bool)`
 
-GetAlignmentOk returns a tuple with the Alignment field if it's non-nil, zero value otherwise
+GetRawSizeOk returns a tuple with the RawSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAlignment
+### SetRawSize
 
-`func (o *ELFSection) SetAlignment(v int32)`
+`func (o *ELFSection) SetRawSize(v int32)`
 
-SetAlignment sets Alignment field to given value.
+SetRawSize sets RawSize field to given value.
+
+
+### GetType
+
+`func (o *ELFSection) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *ELFSection) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *ELFSection) SetType(v string)`
+
+SetType sets Type field to given value.
+
+
+### GetVirtualAddress
+
+`func (o *ELFSection) GetVirtualAddress() int32`
+
+GetVirtualAddress returns the VirtualAddress field if non-nil, zero value otherwise.
+
+### GetVirtualAddressOk
+
+`func (o *ELFSection) GetVirtualAddressOk() (*int32, bool)`
+
+GetVirtualAddressOk returns a tuple with the VirtualAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVirtualAddress
+
+`func (o *ELFSection) SetVirtualAddress(v int32)`
+
+SetVirtualAddress sets VirtualAddress field to given value.
+
+
+### GetVirtualSize
+
+`func (o *ELFSection) GetVirtualSize() int32`
+
+GetVirtualSize returns the VirtualSize field if non-nil, zero value otherwise.
+
+### GetVirtualSizeOk
+
+`func (o *ELFSection) GetVirtualSizeOk() (*int32, bool)`
+
+GetVirtualSizeOk returns a tuple with the VirtualSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVirtualSize
+
+`func (o *ELFSection) SetVirtualSize(v int32)`
+
+SetVirtualSize sets VirtualSize field to given value.
 
 
 

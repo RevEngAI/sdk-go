@@ -20,9 +20,9 @@ var _ MappedNullable = &ExternalResponse{}
 
 // ExternalResponse struct for ExternalResponse
 type ExternalResponse struct {
-	Sha256Hash string `json:"sha_256_hash"`
 	Data map[string]interface{} `json:"data"`
 	LastUpdated time.Time `json:"last_updated"`
+	Sha256Hash string `json:"sha_256_hash"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,11 +32,11 @@ type _ExternalResponse ExternalResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewExternalResponse(sha256Hash string, data map[string]interface{}, lastUpdated time.Time) *ExternalResponse {
+func NewExternalResponse(data map[string]interface{}, lastUpdated time.Time, sha256Hash string) *ExternalResponse {
 	this := ExternalResponse{}
-	this.Sha256Hash = sha256Hash
 	this.Data = data
 	this.LastUpdated = lastUpdated
+	this.Sha256Hash = sha256Hash
 	return &this
 }
 
@@ -46,30 +46,6 @@ func NewExternalResponse(sha256Hash string, data map[string]interface{}, lastUpd
 func NewExternalResponseWithDefaults() *ExternalResponse {
 	this := ExternalResponse{}
 	return &this
-}
-
-// GetSha256Hash returns the Sha256Hash field value
-func (o *ExternalResponse) GetSha256Hash() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Sha256Hash
-}
-
-// GetSha256HashOk returns a tuple with the Sha256Hash field value
-// and a boolean to check if the value has been set.
-func (o *ExternalResponse) GetSha256HashOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Sha256Hash, true
-}
-
-// SetSha256Hash sets field value
-func (o *ExternalResponse) SetSha256Hash(v string) {
-	o.Sha256Hash = v
 }
 
 // GetData returns the Data field value
@@ -120,6 +96,30 @@ func (o *ExternalResponse) SetLastUpdated(v time.Time) {
 	o.LastUpdated = v
 }
 
+// GetSha256Hash returns the Sha256Hash field value
+func (o *ExternalResponse) GetSha256Hash() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Sha256Hash
+}
+
+// GetSha256HashOk returns a tuple with the Sha256Hash field value
+// and a boolean to check if the value has been set.
+func (o *ExternalResponse) GetSha256HashOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Sha256Hash, true
+}
+
+// SetSha256Hash sets field value
+func (o *ExternalResponse) SetSha256Hash(v string) {
+	o.Sha256Hash = v
+}
+
 func (o ExternalResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,9 +130,9 @@ func (o ExternalResponse) MarshalJSON() ([]byte, error) {
 
 func (o ExternalResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["sha_256_hash"] = o.Sha256Hash
 	toSerialize["data"] = o.Data
 	toSerialize["last_updated"] = o.LastUpdated
+	toSerialize["sha_256_hash"] = o.Sha256Hash
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -146,9 +146,9 @@ func (o *ExternalResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"sha_256_hash",
 		"data",
 		"last_updated",
+		"sha_256_hash",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -178,9 +178,9 @@ func (o *ExternalResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "sha_256_hash")
 		delete(additionalProperties, "data")
 		delete(additionalProperties, "last_updated")
+		delete(additionalProperties, "sha_256_hash")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MinSimilarity** | Pointer to **float32** | Minimum similarity expected for a match as a percentage, default is 90 | [optional] [default to 90.0]
 **Apply** | Pointer to **bool** | Whether to apply the matched function names to the target binary, default is False | [optional] [default to false]
-**ConfidenceThreshold** | Pointer to **float32** | Confidence threshold for applying function names as a percentage, default is 90 | [optional] [default to 90.0]
+**ConfidenceThreshold** | Pointer to **float32** | Confidence threshold for applying function names as a percentage, default is 90 | [optional] [default to 90]
 **MinGroupSize** | Pointer to **int32** | Minimum number of matching functions required to consider for a match, default is 10 | [optional] [default to 10]
-**StatusOnly** | Pointer to **bool** | If set to true, only returns the status of the auto-unstrip operation without the actual results | [optional] [default to false]
+**MinSimilarity** | Pointer to **float32** | Minimum similarity expected for a match as a percentage, default is 90 | [optional] [default to 90]
 **NoCache** | Pointer to **bool** | If set to true, forces the system to bypass any cached results and perform a fresh computation | [optional] [default to false]
+**StatusOnly** | Pointer to **bool** | If set to true, only returns the status of the auto-unstrip operation without the actual results | [optional] [default to false]
 **UseCanonicalNames** | Pointer to **bool** | Whether to use canonical function names during matching for auto-unstrip, default is False | [optional] [default to false]
 
 ## Methods
@@ -30,31 +30,6 @@ will change when the set of required properties is changed
 NewAutoUnstripRequestWithDefaults instantiates a new AutoUnstripRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMinSimilarity
-
-`func (o *AutoUnstripRequest) GetMinSimilarity() float32`
-
-GetMinSimilarity returns the MinSimilarity field if non-nil, zero value otherwise.
-
-### GetMinSimilarityOk
-
-`func (o *AutoUnstripRequest) GetMinSimilarityOk() (*float32, bool)`
-
-GetMinSimilarityOk returns a tuple with the MinSimilarity field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMinSimilarity
-
-`func (o *AutoUnstripRequest) SetMinSimilarity(v float32)`
-
-SetMinSimilarity sets MinSimilarity field to given value.
-
-### HasMinSimilarity
-
-`func (o *AutoUnstripRequest) HasMinSimilarity() bool`
-
-HasMinSimilarity returns a boolean if a field has been set.
 
 ### GetApply
 
@@ -131,30 +106,30 @@ SetMinGroupSize sets MinGroupSize field to given value.
 
 HasMinGroupSize returns a boolean if a field has been set.
 
-### GetStatusOnly
+### GetMinSimilarity
 
-`func (o *AutoUnstripRequest) GetStatusOnly() bool`
+`func (o *AutoUnstripRequest) GetMinSimilarity() float32`
 
-GetStatusOnly returns the StatusOnly field if non-nil, zero value otherwise.
+GetMinSimilarity returns the MinSimilarity field if non-nil, zero value otherwise.
 
-### GetStatusOnlyOk
+### GetMinSimilarityOk
 
-`func (o *AutoUnstripRequest) GetStatusOnlyOk() (*bool, bool)`
+`func (o *AutoUnstripRequest) GetMinSimilarityOk() (*float32, bool)`
 
-GetStatusOnlyOk returns a tuple with the StatusOnly field if it's non-nil, zero value otherwise
+GetMinSimilarityOk returns a tuple with the MinSimilarity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStatusOnly
+### SetMinSimilarity
 
-`func (o *AutoUnstripRequest) SetStatusOnly(v bool)`
+`func (o *AutoUnstripRequest) SetMinSimilarity(v float32)`
 
-SetStatusOnly sets StatusOnly field to given value.
+SetMinSimilarity sets MinSimilarity field to given value.
 
-### HasStatusOnly
+### HasMinSimilarity
 
-`func (o *AutoUnstripRequest) HasStatusOnly() bool`
+`func (o *AutoUnstripRequest) HasMinSimilarity() bool`
 
-HasStatusOnly returns a boolean if a field has been set.
+HasMinSimilarity returns a boolean if a field has been set.
 
 ### GetNoCache
 
@@ -180,6 +155,31 @@ SetNoCache sets NoCache field to given value.
 `func (o *AutoUnstripRequest) HasNoCache() bool`
 
 HasNoCache returns a boolean if a field has been set.
+
+### GetStatusOnly
+
+`func (o *AutoUnstripRequest) GetStatusOnly() bool`
+
+GetStatusOnly returns the StatusOnly field if non-nil, zero value otherwise.
+
+### GetStatusOnlyOk
+
+`func (o *AutoUnstripRequest) GetStatusOnlyOk() (*bool, bool)`
+
+GetStatusOnlyOk returns a tuple with the StatusOnly field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatusOnly
+
+`func (o *AutoUnstripRequest) SetStatusOnly(v bool)`
+
+SetStatusOnly sets StatusOnly field to given value.
+
+### HasStatusOnly
+
+`func (o *AutoUnstripRequest) HasStatusOnly() bool`
+
+HasStatusOnly returns a boolean if a field has been set.
 
 ### GetUseCanonicalNames
 

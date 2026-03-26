@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AnalysisId** | **int32** |  | 
-**Message** | **NullableString** |  | 
 **Error** | Pointer to **NullableString** |  | [optional] 
+**Message** | **NullableString** |  | 
 
 ## Methods
 
@@ -47,36 +47,6 @@ and a boolean to check if the value has been set.
 SetAnalysisId sets AnalysisId field to given value.
 
 
-### GetMessage
-
-`func (o *AnalysisBulkAddTagsResponseItem) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *AnalysisBulkAddTagsResponseItem) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *AnalysisBulkAddTagsResponseItem) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### SetMessageNil
-
-`func (o *AnalysisBulkAddTagsResponseItem) SetMessageNil(b bool)`
-
- SetMessageNil sets the value for Message to be an explicit nil
-
-### UnsetMessage
-`func (o *AnalysisBulkAddTagsResponseItem) UnsetMessage()`
-
-UnsetMessage ensures that no value is present for Message, not even an explicit nil
 ### GetError
 
 `func (o *AnalysisBulkAddTagsResponseItem) GetError() string`
@@ -112,6 +82,36 @@ HasError returns a boolean if a field has been set.
 `func (o *AnalysisBulkAddTagsResponseItem) UnsetError()`
 
 UnsetError ensures that no value is present for Error, not even an explicit nil
+### GetMessage
+
+`func (o *AnalysisBulkAddTagsResponseItem) GetMessage() string`
+
+GetMessage returns the Message field if non-nil, zero value otherwise.
+
+### GetMessageOk
+
+`func (o *AnalysisBulkAddTagsResponseItem) GetMessageOk() (*string, bool)`
+
+GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMessage
+
+`func (o *AnalysisBulkAddTagsResponseItem) SetMessage(v string)`
+
+SetMessage sets Message field to given value.
+
+
+### SetMessageNil
+
+`func (o *AnalysisBulkAddTagsResponseItem) SetMessageNil(b bool)`
+
+ SetMessageNil sets the value for Message to be an explicit nil
+
+### UnsetMessage
+`func (o *AnalysisBulkAddTagsResponseItem) UnsetMessage()`
+
+UnsetMessage ensures that no value is present for Message, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

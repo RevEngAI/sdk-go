@@ -19,8 +19,8 @@ var _ MappedNullable = &TTPSElement{}
 
 // TTPSElement struct for TTPSElement
 type TTPSElement struct {
-	Name string `json:"name"`
 	Attack []TTPSAttack `json:"attack"`
+	Name string `json:"name"`
 	Occurrences []TTPSOccurance `json:"occurrences"`
 	Score int32 `json:"score"`
 	AdditionalProperties map[string]interface{}
@@ -32,10 +32,10 @@ type _TTPSElement TTPSElement
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTTPSElement(name string, attack []TTPSAttack, occurrences []TTPSOccurance, score int32) *TTPSElement {
+func NewTTPSElement(attack []TTPSAttack, name string, occurrences []TTPSOccurance, score int32) *TTPSElement {
 	this := TTPSElement{}
-	this.Name = name
 	this.Attack = attack
+	this.Name = name
 	this.Occurrences = occurrences
 	this.Score = score
 	return &this
@@ -47,30 +47,6 @@ func NewTTPSElement(name string, attack []TTPSAttack, occurrences []TTPSOccuranc
 func NewTTPSElementWithDefaults() *TTPSElement {
 	this := TTPSElement{}
 	return &this
-}
-
-// GetName returns the Name field value
-func (o *TTPSElement) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *TTPSElement) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *TTPSElement) SetName(v string) {
-	o.Name = v
 }
 
 // GetAttack returns the Attack field value
@@ -95,6 +71,30 @@ func (o *TTPSElement) GetAttackOk() ([]TTPSAttack, bool) {
 // SetAttack sets field value
 func (o *TTPSElement) SetAttack(v []TTPSAttack) {
 	o.Attack = v
+}
+
+// GetName returns the Name field value
+func (o *TTPSElement) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *TTPSElement) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *TTPSElement) SetName(v string) {
+	o.Name = v
 }
 
 // GetOccurrences returns the Occurrences field value
@@ -155,8 +155,8 @@ func (o TTPSElement) MarshalJSON() ([]byte, error) {
 
 func (o TTPSElement) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
 	toSerialize["attack"] = o.Attack
+	toSerialize["name"] = o.Name
 	toSerialize["occurrences"] = o.Occurrences
 	toSerialize["score"] = o.Score
 
@@ -172,8 +172,8 @@ func (o *TTPSElement) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"name",
 		"attack",
+		"name",
 		"occurrences",
 		"score",
 	}
@@ -205,8 +205,8 @@ func (o *TTPSElement) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "name")
 		delete(additionalProperties, "attack")
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "occurrences")
 		delete(additionalProperties, "score")
 		o.AdditionalProperties = additionalProperties

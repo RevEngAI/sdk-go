@@ -19,8 +19,8 @@ var _ MappedNullable = &SinglePDBEntryModel{}
 
 // SinglePDBEntryModel struct for SinglePDBEntryModel
 type SinglePDBEntryModel struct {
-	Guid string `json:"guid"`
 	Age int32 `json:"age"`
+	Guid string `json:"guid"`
 	Path string `json:"path"`
 	AdditionalProperties map[string]interface{}
 }
@@ -31,10 +31,10 @@ type _SinglePDBEntryModel SinglePDBEntryModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSinglePDBEntryModel(guid string, age int32, path string) *SinglePDBEntryModel {
+func NewSinglePDBEntryModel(age int32, guid string, path string) *SinglePDBEntryModel {
 	this := SinglePDBEntryModel{}
-	this.Guid = guid
 	this.Age = age
+	this.Guid = guid
 	this.Path = path
 	return &this
 }
@@ -45,30 +45,6 @@ func NewSinglePDBEntryModel(guid string, age int32, path string) *SinglePDBEntry
 func NewSinglePDBEntryModelWithDefaults() *SinglePDBEntryModel {
 	this := SinglePDBEntryModel{}
 	return &this
-}
-
-// GetGuid returns the Guid field value
-func (o *SinglePDBEntryModel) GetGuid() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Guid
-}
-
-// GetGuidOk returns a tuple with the Guid field value
-// and a boolean to check if the value has been set.
-func (o *SinglePDBEntryModel) GetGuidOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Guid, true
-}
-
-// SetGuid sets field value
-func (o *SinglePDBEntryModel) SetGuid(v string) {
-	o.Guid = v
 }
 
 // GetAge returns the Age field value
@@ -93,6 +69,30 @@ func (o *SinglePDBEntryModel) GetAgeOk() (*int32, bool) {
 // SetAge sets field value
 func (o *SinglePDBEntryModel) SetAge(v int32) {
 	o.Age = v
+}
+
+// GetGuid returns the Guid field value
+func (o *SinglePDBEntryModel) GetGuid() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Guid
+}
+
+// GetGuidOk returns a tuple with the Guid field value
+// and a boolean to check if the value has been set.
+func (o *SinglePDBEntryModel) GetGuidOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Guid, true
+}
+
+// SetGuid sets field value
+func (o *SinglePDBEntryModel) SetGuid(v string) {
+	o.Guid = v
 }
 
 // GetPath returns the Path field value
@@ -129,8 +129,8 @@ func (o SinglePDBEntryModel) MarshalJSON() ([]byte, error) {
 
 func (o SinglePDBEntryModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["guid"] = o.Guid
 	toSerialize["age"] = o.Age
+	toSerialize["guid"] = o.Guid
 	toSerialize["path"] = o.Path
 
 	for key, value := range o.AdditionalProperties {
@@ -145,8 +145,8 @@ func (o *SinglePDBEntryModel) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"guid",
 		"age",
+		"guid",
 		"path",
 	}
 
@@ -177,8 +177,8 @@ func (o *SinglePDBEntryModel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "guid")
 		delete(additionalProperties, "age")
+		delete(additionalProperties, "guid")
 		delete(additionalProperties, "path")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MangledName** | **string** |  | 
-**StartAddress** | **int64** |  | 
 **EndAddress** | **int64** |  | 
 **IncludeInAnalysis** | Pointer to **NullableBool** |  | [optional] 
+**MangledName** | **string** |  | 
+**StartAddress** | **int64** |  | 
 
 ## Methods
 
 ### NewFunctionBoundary
 
-`func NewFunctionBoundary(mangledName string, startAddress int64, endAddress int64, ) *FunctionBoundary`
+`func NewFunctionBoundary(endAddress int64, mangledName string, startAddress int64, ) *FunctionBoundary`
 
 NewFunctionBoundary instantiates a new FunctionBoundary object
 This constructor will assign default values to properties that have it defined,
@@ -27,46 +27,6 @@ will change when the set of required properties is changed
 NewFunctionBoundaryWithDefaults instantiates a new FunctionBoundary object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMangledName
-
-`func (o *FunctionBoundary) GetMangledName() string`
-
-GetMangledName returns the MangledName field if non-nil, zero value otherwise.
-
-### GetMangledNameOk
-
-`func (o *FunctionBoundary) GetMangledNameOk() (*string, bool)`
-
-GetMangledNameOk returns a tuple with the MangledName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMangledName
-
-`func (o *FunctionBoundary) SetMangledName(v string)`
-
-SetMangledName sets MangledName field to given value.
-
-
-### GetStartAddress
-
-`func (o *FunctionBoundary) GetStartAddress() int64`
-
-GetStartAddress returns the StartAddress field if non-nil, zero value otherwise.
-
-### GetStartAddressOk
-
-`func (o *FunctionBoundary) GetStartAddressOk() (*int64, bool)`
-
-GetStartAddressOk returns a tuple with the StartAddress field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStartAddress
-
-`func (o *FunctionBoundary) SetStartAddress(v int64)`
-
-SetStartAddress sets StartAddress field to given value.
-
 
 ### GetEndAddress
 
@@ -123,6 +83,46 @@ HasIncludeInAnalysis returns a boolean if a field has been set.
 `func (o *FunctionBoundary) UnsetIncludeInAnalysis()`
 
 UnsetIncludeInAnalysis ensures that no value is present for IncludeInAnalysis, not even an explicit nil
+### GetMangledName
+
+`func (o *FunctionBoundary) GetMangledName() string`
+
+GetMangledName returns the MangledName field if non-nil, zero value otherwise.
+
+### GetMangledNameOk
+
+`func (o *FunctionBoundary) GetMangledNameOk() (*string, bool)`
+
+GetMangledNameOk returns a tuple with the MangledName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMangledName
+
+`func (o *FunctionBoundary) SetMangledName(v string)`
+
+SetMangledName sets MangledName field to given value.
+
+
+### GetStartAddress
+
+`func (o *FunctionBoundary) GetStartAddress() int64`
+
+GetStartAddress returns the StartAddress field if non-nil, zero value otherwise.
+
+### GetStartAddressOk
+
+`func (o *FunctionBoundary) GetStartAddressOk() (*int64, bool)`
+
+GetStartAddressOk returns a tuple with the StartAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartAddress
+
+`func (o *FunctionBoundary) SetStartAddress(v int64)`
+
+SetStartAddress sets StartAddress field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -280,7 +280,7 @@ import (
 )
 
 func main() {
-	loginRequest := *revengai.NewLoginRequest("Username_example", "Password_example") // LoginRequest | 
+	loginRequest := *revengai.NewLoginRequest("Password_example", "Username_example") // LoginRequest | 
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)

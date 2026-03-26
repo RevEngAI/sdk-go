@@ -4,23 +4,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Aslr** | **bool** |  | 
-**Dep** | **bool** |  | 
-**Cfg** | **bool** |  | 
-**DriverModel** | **bool** |  | 
 **AppContainer** | **bool** |  | 
-**TerminalServerAware** | **bool** |  | 
-**ImageIsolation** | **bool** |  | 
-**CodeIntegrity** | **bool** |  | 
-**HighEntropy** | **bool** |  | 
-**Seh** | **bool** |  | 
+**Aslr** | **bool** |  | 
 **BoundImage** | **bool** |  | 
+**Cfg** | **bool** |  | 
+**CodeIntegrity** | **bool** |  | 
+**Dep** | **bool** |  | 
+**DriverModel** | **bool** |  | 
+**HighEntropy** | **bool** |  | 
+**ImageIsolation** | **bool** |  | 
+**Seh** | **bool** |  | 
+**TerminalServerAware** | **bool** |  | 
 
 ## Methods
 
 ### NewSecurityModel
 
-`func NewSecurityModel(aslr bool, dep bool, cfg bool, driverModel bool, appContainer bool, terminalServerAware bool, imageIsolation bool, codeIntegrity bool, highEntropy bool, seh bool, boundImage bool, ) *SecurityModel`
+`func NewSecurityModel(appContainer bool, aslr bool, boundImage bool, cfg bool, codeIntegrity bool, dep bool, driverModel bool, highEntropy bool, imageIsolation bool, seh bool, terminalServerAware bool, ) *SecurityModel`
 
 NewSecurityModel instantiates a new SecurityModel object
 This constructor will assign default values to properties that have it defined,
@@ -34,6 +34,26 @@ will change when the set of required properties is changed
 NewSecurityModelWithDefaults instantiates a new SecurityModel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAppContainer
+
+`func (o *SecurityModel) GetAppContainer() bool`
+
+GetAppContainer returns the AppContainer field if non-nil, zero value otherwise.
+
+### GetAppContainerOk
+
+`func (o *SecurityModel) GetAppContainerOk() (*bool, bool)`
+
+GetAppContainerOk returns a tuple with the AppContainer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAppContainer
+
+`func (o *SecurityModel) SetAppContainer(v bool)`
+
+SetAppContainer sets AppContainer field to given value.
+
 
 ### GetAslr
 
@@ -55,24 +75,24 @@ and a boolean to check if the value has been set.
 SetAslr sets Aslr field to given value.
 
 
-### GetDep
+### GetBoundImage
 
-`func (o *SecurityModel) GetDep() bool`
+`func (o *SecurityModel) GetBoundImage() bool`
 
-GetDep returns the Dep field if non-nil, zero value otherwise.
+GetBoundImage returns the BoundImage field if non-nil, zero value otherwise.
 
-### GetDepOk
+### GetBoundImageOk
 
-`func (o *SecurityModel) GetDepOk() (*bool, bool)`
+`func (o *SecurityModel) GetBoundImageOk() (*bool, bool)`
 
-GetDepOk returns a tuple with the Dep field if it's non-nil, zero value otherwise
+GetBoundImageOk returns a tuple with the BoundImage field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDep
+### SetBoundImage
 
-`func (o *SecurityModel) SetDep(v bool)`
+`func (o *SecurityModel) SetBoundImage(v bool)`
 
-SetDep sets Dep field to given value.
+SetBoundImage sets BoundImage field to given value.
 
 
 ### GetCfg
@@ -95,86 +115,6 @@ and a boolean to check if the value has been set.
 SetCfg sets Cfg field to given value.
 
 
-### GetDriverModel
-
-`func (o *SecurityModel) GetDriverModel() bool`
-
-GetDriverModel returns the DriverModel field if non-nil, zero value otherwise.
-
-### GetDriverModelOk
-
-`func (o *SecurityModel) GetDriverModelOk() (*bool, bool)`
-
-GetDriverModelOk returns a tuple with the DriverModel field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDriverModel
-
-`func (o *SecurityModel) SetDriverModel(v bool)`
-
-SetDriverModel sets DriverModel field to given value.
-
-
-### GetAppContainer
-
-`func (o *SecurityModel) GetAppContainer() bool`
-
-GetAppContainer returns the AppContainer field if non-nil, zero value otherwise.
-
-### GetAppContainerOk
-
-`func (o *SecurityModel) GetAppContainerOk() (*bool, bool)`
-
-GetAppContainerOk returns a tuple with the AppContainer field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAppContainer
-
-`func (o *SecurityModel) SetAppContainer(v bool)`
-
-SetAppContainer sets AppContainer field to given value.
-
-
-### GetTerminalServerAware
-
-`func (o *SecurityModel) GetTerminalServerAware() bool`
-
-GetTerminalServerAware returns the TerminalServerAware field if non-nil, zero value otherwise.
-
-### GetTerminalServerAwareOk
-
-`func (o *SecurityModel) GetTerminalServerAwareOk() (*bool, bool)`
-
-GetTerminalServerAwareOk returns a tuple with the TerminalServerAware field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTerminalServerAware
-
-`func (o *SecurityModel) SetTerminalServerAware(v bool)`
-
-SetTerminalServerAware sets TerminalServerAware field to given value.
-
-
-### GetImageIsolation
-
-`func (o *SecurityModel) GetImageIsolation() bool`
-
-GetImageIsolation returns the ImageIsolation field if non-nil, zero value otherwise.
-
-### GetImageIsolationOk
-
-`func (o *SecurityModel) GetImageIsolationOk() (*bool, bool)`
-
-GetImageIsolationOk returns a tuple with the ImageIsolation field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetImageIsolation
-
-`func (o *SecurityModel) SetImageIsolation(v bool)`
-
-SetImageIsolation sets ImageIsolation field to given value.
-
-
 ### GetCodeIntegrity
 
 `func (o *SecurityModel) GetCodeIntegrity() bool`
@@ -193,6 +133,46 @@ and a boolean to check if the value has been set.
 `func (o *SecurityModel) SetCodeIntegrity(v bool)`
 
 SetCodeIntegrity sets CodeIntegrity field to given value.
+
+
+### GetDep
+
+`func (o *SecurityModel) GetDep() bool`
+
+GetDep returns the Dep field if non-nil, zero value otherwise.
+
+### GetDepOk
+
+`func (o *SecurityModel) GetDepOk() (*bool, bool)`
+
+GetDepOk returns a tuple with the Dep field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDep
+
+`func (o *SecurityModel) SetDep(v bool)`
+
+SetDep sets Dep field to given value.
+
+
+### GetDriverModel
+
+`func (o *SecurityModel) GetDriverModel() bool`
+
+GetDriverModel returns the DriverModel field if non-nil, zero value otherwise.
+
+### GetDriverModelOk
+
+`func (o *SecurityModel) GetDriverModelOk() (*bool, bool)`
+
+GetDriverModelOk returns a tuple with the DriverModel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDriverModel
+
+`func (o *SecurityModel) SetDriverModel(v bool)`
+
+SetDriverModel sets DriverModel field to given value.
 
 
 ### GetHighEntropy
@@ -215,6 +195,26 @@ and a boolean to check if the value has been set.
 SetHighEntropy sets HighEntropy field to given value.
 
 
+### GetImageIsolation
+
+`func (o *SecurityModel) GetImageIsolation() bool`
+
+GetImageIsolation returns the ImageIsolation field if non-nil, zero value otherwise.
+
+### GetImageIsolationOk
+
+`func (o *SecurityModel) GetImageIsolationOk() (*bool, bool)`
+
+GetImageIsolationOk returns a tuple with the ImageIsolation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageIsolation
+
+`func (o *SecurityModel) SetImageIsolation(v bool)`
+
+SetImageIsolation sets ImageIsolation field to given value.
+
+
 ### GetSeh
 
 `func (o *SecurityModel) GetSeh() bool`
@@ -235,24 +235,24 @@ and a boolean to check if the value has been set.
 SetSeh sets Seh field to given value.
 
 
-### GetBoundImage
+### GetTerminalServerAware
 
-`func (o *SecurityModel) GetBoundImage() bool`
+`func (o *SecurityModel) GetTerminalServerAware() bool`
 
-GetBoundImage returns the BoundImage field if non-nil, zero value otherwise.
+GetTerminalServerAware returns the TerminalServerAware field if non-nil, zero value otherwise.
 
-### GetBoundImageOk
+### GetTerminalServerAwareOk
 
-`func (o *SecurityModel) GetBoundImageOk() (*bool, bool)`
+`func (o *SecurityModel) GetTerminalServerAwareOk() (*bool, bool)`
 
-GetBoundImageOk returns a tuple with the BoundImage field if it's non-nil, zero value otherwise
+GetTerminalServerAwareOk returns a tuple with the TerminalServerAware field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBoundImage
+### SetTerminalServerAware
 
-`func (o *SecurityModel) SetBoundImage(v bool)`
+`func (o *SecurityModel) SetTerminalServerAware(v bool)`
 
-SetBoundImage sets BoundImage field to given value.
+SetTerminalServerAware sets TerminalServerAware field to given value.
 
 
 

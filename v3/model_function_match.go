@@ -19,10 +19,10 @@ var _ MappedNullable = &FunctionMatch{}
 
 // FunctionMatch struct for FunctionMatch
 type FunctionMatch struct {
+	Confidences []NameConfidence `json:"confidences,omitempty"`
 	// Unique identifier of the function
 	FunctionId int64 `json:"function_id"`
 	MatchedFunctions []MatchedFunction `json:"matched_functions"`
-	Confidences []NameConfidence `json:"confidences,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,6 +45,39 @@ func NewFunctionMatch(functionId int64, matchedFunctions []MatchedFunction) *Fun
 func NewFunctionMatchWithDefaults() *FunctionMatch {
 	this := FunctionMatch{}
 	return &this
+}
+
+// GetConfidences returns the Confidences field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FunctionMatch) GetConfidences() []NameConfidence {
+	if o == nil {
+		var ret []NameConfidence
+		return ret
+	}
+	return o.Confidences
+}
+
+// GetConfidencesOk returns a tuple with the Confidences field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FunctionMatch) GetConfidencesOk() ([]NameConfidence, bool) {
+	if o == nil || IsNil(o.Confidences) {
+		return nil, false
+	}
+	return o.Confidences, true
+}
+
+// HasConfidences returns a boolean if a field has been set.
+func (o *FunctionMatch) HasConfidences() bool {
+	if o != nil && !IsNil(o.Confidences) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfidences gets a reference to the given []NameConfidence and assigns it to the Confidences field.
+func (o *FunctionMatch) SetConfidences(v []NameConfidence) {
+	o.Confidences = v
 }
 
 // GetFunctionId returns the FunctionId field value
@@ -95,39 +128,6 @@ func (o *FunctionMatch) SetMatchedFunctions(v []MatchedFunction) {
 	o.MatchedFunctions = v
 }
 
-// GetConfidences returns the Confidences field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionMatch) GetConfidences() []NameConfidence {
-	if o == nil {
-		var ret []NameConfidence
-		return ret
-	}
-	return o.Confidences
-}
-
-// GetConfidencesOk returns a tuple with the Confidences field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionMatch) GetConfidencesOk() ([]NameConfidence, bool) {
-	if o == nil || IsNil(o.Confidences) {
-		return nil, false
-	}
-	return o.Confidences, true
-}
-
-// HasConfidences returns a boolean if a field has been set.
-func (o *FunctionMatch) HasConfidences() bool {
-	if o != nil && !IsNil(o.Confidences) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfidences gets a reference to the given []NameConfidence and assigns it to the Confidences field.
-func (o *FunctionMatch) SetConfidences(v []NameConfidence) {
-	o.Confidences = v
-}
-
 func (o FunctionMatch) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -138,11 +138,11 @@ func (o FunctionMatch) MarshalJSON() ([]byte, error) {
 
 func (o FunctionMatch) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["function_id"] = o.FunctionId
-	toSerialize["matched_functions"] = o.MatchedFunctions
 	if o.Confidences != nil {
 		toSerialize["confidences"] = o.Confidences
 	}
+	toSerialize["function_id"] = o.FunctionId
+	toSerialize["matched_functions"] = o.MatchedFunctions
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -187,9 +187,9 @@ func (o *FunctionMatch) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "confidences")
 		delete(additionalProperties, "function_id")
 		delete(additionalProperties, "matched_functions")
-		delete(additionalProperties, "confidences")
 		o.AdditionalProperties = additionalProperties
 	}
 

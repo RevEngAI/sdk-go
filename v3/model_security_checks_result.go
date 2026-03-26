@@ -19,14 +19,14 @@ var _ MappedNullable = &SecurityChecksResult{}
 
 // SecurityChecksResult struct for SecurityChecksResult
 type SecurityChecksResult struct {
+	Confidence ConfidenceType `json:"confidence"`
+	Description string `json:"description"`
 	FunctionId int64 `json:"function_id"`
 	FunctionName string `json:"function_name"`
 	Name string `json:"name"`
-	VulnClass VulnerabilityType `json:"vuln_class"`
-	Description string `json:"description"`
 	Remediation string `json:"remediation"`
-	Confidence ConfidenceType `json:"confidence"`
 	Severity SeverityType `json:"severity"`
+	VulnClass VulnerabilityType `json:"vuln_class"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,16 +36,16 @@ type _SecurityChecksResult SecurityChecksResult
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSecurityChecksResult(functionId int64, functionName string, name string, vulnClass VulnerabilityType, description string, remediation string, confidence ConfidenceType, severity SeverityType) *SecurityChecksResult {
+func NewSecurityChecksResult(confidence ConfidenceType, description string, functionId int64, functionName string, name string, remediation string, severity SeverityType, vulnClass VulnerabilityType) *SecurityChecksResult {
 	this := SecurityChecksResult{}
+	this.Confidence = confidence
+	this.Description = description
 	this.FunctionId = functionId
 	this.FunctionName = functionName
 	this.Name = name
-	this.VulnClass = vulnClass
-	this.Description = description
 	this.Remediation = remediation
-	this.Confidence = confidence
 	this.Severity = severity
+	this.VulnClass = vulnClass
 	return &this
 }
 
@@ -55,6 +55,54 @@ func NewSecurityChecksResult(functionId int64, functionName string, name string,
 func NewSecurityChecksResultWithDefaults() *SecurityChecksResult {
 	this := SecurityChecksResult{}
 	return &this
+}
+
+// GetConfidence returns the Confidence field value
+func (o *SecurityChecksResult) GetConfidence() ConfidenceType {
+	if o == nil {
+		var ret ConfidenceType
+		return ret
+	}
+
+	return o.Confidence
+}
+
+// GetConfidenceOk returns a tuple with the Confidence field value
+// and a boolean to check if the value has been set.
+func (o *SecurityChecksResult) GetConfidenceOk() (*ConfidenceType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Confidence, true
+}
+
+// SetConfidence sets field value
+func (o *SecurityChecksResult) SetConfidence(v ConfidenceType) {
+	o.Confidence = v
+}
+
+// GetDescription returns the Description field value
+func (o *SecurityChecksResult) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *SecurityChecksResult) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *SecurityChecksResult) SetDescription(v string) {
+	o.Description = v
 }
 
 // GetFunctionId returns the FunctionId field value
@@ -129,54 +177,6 @@ func (o *SecurityChecksResult) SetName(v string) {
 	o.Name = v
 }
 
-// GetVulnClass returns the VulnClass field value
-func (o *SecurityChecksResult) GetVulnClass() VulnerabilityType {
-	if o == nil {
-		var ret VulnerabilityType
-		return ret
-	}
-
-	return o.VulnClass
-}
-
-// GetVulnClassOk returns a tuple with the VulnClass field value
-// and a boolean to check if the value has been set.
-func (o *SecurityChecksResult) GetVulnClassOk() (*VulnerabilityType, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.VulnClass, true
-}
-
-// SetVulnClass sets field value
-func (o *SecurityChecksResult) SetVulnClass(v VulnerabilityType) {
-	o.VulnClass = v
-}
-
-// GetDescription returns the Description field value
-func (o *SecurityChecksResult) GetDescription() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value
-// and a boolean to check if the value has been set.
-func (o *SecurityChecksResult) GetDescriptionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Description, true
-}
-
-// SetDescription sets field value
-func (o *SecurityChecksResult) SetDescription(v string) {
-	o.Description = v
-}
-
 // GetRemediation returns the Remediation field value
 func (o *SecurityChecksResult) GetRemediation() string {
 	if o == nil {
@@ -199,30 +199,6 @@ func (o *SecurityChecksResult) GetRemediationOk() (*string, bool) {
 // SetRemediation sets field value
 func (o *SecurityChecksResult) SetRemediation(v string) {
 	o.Remediation = v
-}
-
-// GetConfidence returns the Confidence field value
-func (o *SecurityChecksResult) GetConfidence() ConfidenceType {
-	if o == nil {
-		var ret ConfidenceType
-		return ret
-	}
-
-	return o.Confidence
-}
-
-// GetConfidenceOk returns a tuple with the Confidence field value
-// and a boolean to check if the value has been set.
-func (o *SecurityChecksResult) GetConfidenceOk() (*ConfidenceType, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Confidence, true
-}
-
-// SetConfidence sets field value
-func (o *SecurityChecksResult) SetConfidence(v ConfidenceType) {
-	o.Confidence = v
 }
 
 // GetSeverity returns the Severity field value
@@ -249,6 +225,30 @@ func (o *SecurityChecksResult) SetSeverity(v SeverityType) {
 	o.Severity = v
 }
 
+// GetVulnClass returns the VulnClass field value
+func (o *SecurityChecksResult) GetVulnClass() VulnerabilityType {
+	if o == nil {
+		var ret VulnerabilityType
+		return ret
+	}
+
+	return o.VulnClass
+}
+
+// GetVulnClassOk returns a tuple with the VulnClass field value
+// and a boolean to check if the value has been set.
+func (o *SecurityChecksResult) GetVulnClassOk() (*VulnerabilityType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.VulnClass, true
+}
+
+// SetVulnClass sets field value
+func (o *SecurityChecksResult) SetVulnClass(v VulnerabilityType) {
+	o.VulnClass = v
+}
+
 func (o SecurityChecksResult) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -259,14 +259,14 @@ func (o SecurityChecksResult) MarshalJSON() ([]byte, error) {
 
 func (o SecurityChecksResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["confidence"] = o.Confidence
+	toSerialize["description"] = o.Description
 	toSerialize["function_id"] = o.FunctionId
 	toSerialize["function_name"] = o.FunctionName
 	toSerialize["name"] = o.Name
-	toSerialize["vuln_class"] = o.VulnClass
-	toSerialize["description"] = o.Description
 	toSerialize["remediation"] = o.Remediation
-	toSerialize["confidence"] = o.Confidence
 	toSerialize["severity"] = o.Severity
+	toSerialize["vuln_class"] = o.VulnClass
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -280,14 +280,14 @@ func (o *SecurityChecksResult) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"confidence",
+		"description",
 		"function_id",
 		"function_name",
 		"name",
-		"vuln_class",
-		"description",
 		"remediation",
-		"confidence",
 		"severity",
+		"vuln_class",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -317,14 +317,14 @@ func (o *SecurityChecksResult) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "confidence")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "function_id")
 		delete(additionalProperties, "function_name")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "vuln_class")
-		delete(additionalProperties, "description")
 		delete(additionalProperties, "remediation")
-		delete(additionalProperties, "confidence")
 		delete(additionalProperties, "severity")
+		delete(additionalProperties, "vuln_class")
 		o.AdditionalProperties = additionalProperties
 	}
 

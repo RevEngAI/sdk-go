@@ -26,14 +26,14 @@ type CollectionBinaryResponse struct {
 	BinaryId int32 `json:"binary_id"`
 	// Binary name
 	BinaryName string `json:"binary_name"`
-	// Binary owner
-	OwnerId int32 `json:"owner_id"`
-	// Binary SHA-256 hash
-	Sha256Hash string `json:"sha_256_hash"`
 	// Binary creation date
 	CreatedAt time.Time `json:"created_at"`
 	// Is the analysis owned by a RevEng.AI account
 	IsSystemAnalysis bool `json:"is_system_analysis"`
+	// Binary owner
+	OwnerId int32 `json:"owner_id"`
+	// Binary SHA-256 hash
+	Sha256Hash string `json:"sha_256_hash"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,15 +43,15 @@ type _CollectionBinaryResponse CollectionBinaryResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCollectionBinaryResponse(analysisId int32, binaryId int32, binaryName string, ownerId int32, sha256Hash string, createdAt time.Time, isSystemAnalysis bool) *CollectionBinaryResponse {
+func NewCollectionBinaryResponse(analysisId int32, binaryId int32, binaryName string, createdAt time.Time, isSystemAnalysis bool, ownerId int32, sha256Hash string) *CollectionBinaryResponse {
 	this := CollectionBinaryResponse{}
 	this.AnalysisId = analysisId
 	this.BinaryId = binaryId
 	this.BinaryName = binaryName
-	this.OwnerId = ownerId
-	this.Sha256Hash = sha256Hash
 	this.CreatedAt = createdAt
 	this.IsSystemAnalysis = isSystemAnalysis
+	this.OwnerId = ownerId
+	this.Sha256Hash = sha256Hash
 	return &this
 }
 
@@ -135,54 +135,6 @@ func (o *CollectionBinaryResponse) SetBinaryName(v string) {
 	o.BinaryName = v
 }
 
-// GetOwnerId returns the OwnerId field value
-func (o *CollectionBinaryResponse) GetOwnerId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.OwnerId
-}
-
-// GetOwnerIdOk returns a tuple with the OwnerId field value
-// and a boolean to check if the value has been set.
-func (o *CollectionBinaryResponse) GetOwnerIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.OwnerId, true
-}
-
-// SetOwnerId sets field value
-func (o *CollectionBinaryResponse) SetOwnerId(v int32) {
-	o.OwnerId = v
-}
-
-// GetSha256Hash returns the Sha256Hash field value
-func (o *CollectionBinaryResponse) GetSha256Hash() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Sha256Hash
-}
-
-// GetSha256HashOk returns a tuple with the Sha256Hash field value
-// and a boolean to check if the value has been set.
-func (o *CollectionBinaryResponse) GetSha256HashOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Sha256Hash, true
-}
-
-// SetSha256Hash sets field value
-func (o *CollectionBinaryResponse) SetSha256Hash(v string) {
-	o.Sha256Hash = v
-}
-
 // GetCreatedAt returns the CreatedAt field value
 func (o *CollectionBinaryResponse) GetCreatedAt() time.Time {
 	if o == nil {
@@ -231,6 +183,54 @@ func (o *CollectionBinaryResponse) SetIsSystemAnalysis(v bool) {
 	o.IsSystemAnalysis = v
 }
 
+// GetOwnerId returns the OwnerId field value
+func (o *CollectionBinaryResponse) GetOwnerId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.OwnerId
+}
+
+// GetOwnerIdOk returns a tuple with the OwnerId field value
+// and a boolean to check if the value has been set.
+func (o *CollectionBinaryResponse) GetOwnerIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OwnerId, true
+}
+
+// SetOwnerId sets field value
+func (o *CollectionBinaryResponse) SetOwnerId(v int32) {
+	o.OwnerId = v
+}
+
+// GetSha256Hash returns the Sha256Hash field value
+func (o *CollectionBinaryResponse) GetSha256Hash() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Sha256Hash
+}
+
+// GetSha256HashOk returns a tuple with the Sha256Hash field value
+// and a boolean to check if the value has been set.
+func (o *CollectionBinaryResponse) GetSha256HashOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Sha256Hash, true
+}
+
+// SetSha256Hash sets field value
+func (o *CollectionBinaryResponse) SetSha256Hash(v string) {
+	o.Sha256Hash = v
+}
+
 func (o CollectionBinaryResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -244,10 +244,10 @@ func (o CollectionBinaryResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["analysis_id"] = o.AnalysisId
 	toSerialize["binary_id"] = o.BinaryId
 	toSerialize["binary_name"] = o.BinaryName
-	toSerialize["owner_id"] = o.OwnerId
-	toSerialize["sha_256_hash"] = o.Sha256Hash
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["is_system_analysis"] = o.IsSystemAnalysis
+	toSerialize["owner_id"] = o.OwnerId
+	toSerialize["sha_256_hash"] = o.Sha256Hash
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -264,10 +264,10 @@ func (o *CollectionBinaryResponse) UnmarshalJSON(data []byte) (err error) {
 		"analysis_id",
 		"binary_id",
 		"binary_name",
-		"owner_id",
-		"sha_256_hash",
 		"created_at",
 		"is_system_analysis",
+		"owner_id",
+		"sha_256_hash",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -300,10 +300,10 @@ func (o *CollectionBinaryResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "analysis_id")
 		delete(additionalProperties, "binary_id")
 		delete(additionalProperties, "binary_name")
-		delete(additionalProperties, "owner_id")
-		delete(additionalProperties, "sha_256_hash")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "is_system_analysis")
+		delete(additionalProperties, "owner_id")
+		delete(additionalProperties, "sha_256_hash")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -258,7 +258,7 @@ import (
 )
 
 func main() {
-	functionMatchingRequest := *revengai.NewFunctionMatchingRequest(int32(123), []int64{int64(123)}) // FunctionMatchingRequest | 
+	functionMatchingRequest := *revengai.NewFunctionMatchingRequest([]int64{int64(123)}, int32(123)) // FunctionMatchingRequest | 
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)

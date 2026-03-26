@@ -20,8 +20,8 @@ var _ MappedNullable = &SecurityChecksResponse{}
 // SecurityChecksResponse struct for SecurityChecksResponse
 type SecurityChecksResponse struct {
 	BinaryId int32 `json:"binary_id"`
-	TotalResults int32 `json:"total_results"`
 	Results []SecurityChecksResult `json:"results"`
+	TotalResults int32 `json:"total_results"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,11 +31,11 @@ type _SecurityChecksResponse SecurityChecksResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSecurityChecksResponse(binaryId int32, totalResults int32, results []SecurityChecksResult) *SecurityChecksResponse {
+func NewSecurityChecksResponse(binaryId int32, results []SecurityChecksResult, totalResults int32) *SecurityChecksResponse {
 	this := SecurityChecksResponse{}
 	this.BinaryId = binaryId
-	this.TotalResults = totalResults
 	this.Results = results
+	this.TotalResults = totalResults
 	return &this
 }
 
@@ -71,30 +71,6 @@ func (o *SecurityChecksResponse) SetBinaryId(v int32) {
 	o.BinaryId = v
 }
 
-// GetTotalResults returns the TotalResults field value
-func (o *SecurityChecksResponse) GetTotalResults() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.TotalResults
-}
-
-// GetTotalResultsOk returns a tuple with the TotalResults field value
-// and a boolean to check if the value has been set.
-func (o *SecurityChecksResponse) GetTotalResultsOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TotalResults, true
-}
-
-// SetTotalResults sets field value
-func (o *SecurityChecksResponse) SetTotalResults(v int32) {
-	o.TotalResults = v
-}
-
 // GetResults returns the Results field value
 func (o *SecurityChecksResponse) GetResults() []SecurityChecksResult {
 	if o == nil {
@@ -119,6 +95,30 @@ func (o *SecurityChecksResponse) SetResults(v []SecurityChecksResult) {
 	o.Results = v
 }
 
+// GetTotalResults returns the TotalResults field value
+func (o *SecurityChecksResponse) GetTotalResults() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.TotalResults
+}
+
+// GetTotalResultsOk returns a tuple with the TotalResults field value
+// and a boolean to check if the value has been set.
+func (o *SecurityChecksResponse) GetTotalResultsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TotalResults, true
+}
+
+// SetTotalResults sets field value
+func (o *SecurityChecksResponse) SetTotalResults(v int32) {
+	o.TotalResults = v
+}
+
 func (o SecurityChecksResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,8 +130,8 @@ func (o SecurityChecksResponse) MarshalJSON() ([]byte, error) {
 func (o SecurityChecksResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["binary_id"] = o.BinaryId
-	toSerialize["total_results"] = o.TotalResults
 	toSerialize["results"] = o.Results
+	toSerialize["total_results"] = o.TotalResults
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -146,8 +146,8 @@ func (o *SecurityChecksResponse) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"binary_id",
-		"total_results",
 		"results",
+		"total_results",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -178,8 +178,8 @@ func (o *SecurityChecksResponse) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "binary_id")
-		delete(additionalProperties, "total_results")
 		delete(additionalProperties, "results")
+		delete(additionalProperties, "total_results")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to **bool** | Response status on whether the request succeeded | [optional] [default to true]
 **Data** | Pointer to [**NullableAnalysisCreateResponse**](AnalysisCreateResponse.md) |  | [optional] 
-**Message** | Pointer to **NullableString** |  | [optional] 
 **Errors** | Pointer to [**[]ErrorModel**](ErrorModel.md) |  | [optional] 
+**Message** | Pointer to **NullableString** |  | [optional] 
 **Meta** | Pointer to [**MetaModel**](MetaModel.md) | Metadata | [optional] 
+**Status** | Pointer to **bool** | Response status on whether the request succeeded | [optional] [default to true]
 
 ## Methods
 
@@ -28,31 +28,6 @@ will change when the set of required properties is changed
 NewBaseResponseAnalysisCreateResponseWithDefaults instantiates a new BaseResponseAnalysisCreateResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetStatus
-
-`func (o *BaseResponseAnalysisCreateResponse) GetStatus() bool`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *BaseResponseAnalysisCreateResponse) GetStatusOk() (*bool, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *BaseResponseAnalysisCreateResponse) SetStatus(v bool)`
-
-SetStatus sets Status field to given value.
-
-### HasStatus
-
-`func (o *BaseResponseAnalysisCreateResponse) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 ### GetData
 
@@ -89,41 +64,6 @@ HasData returns a boolean if a field has been set.
 `func (o *BaseResponseAnalysisCreateResponse) UnsetData()`
 
 UnsetData ensures that no value is present for Data, not even an explicit nil
-### GetMessage
-
-`func (o *BaseResponseAnalysisCreateResponse) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *BaseResponseAnalysisCreateResponse) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *BaseResponseAnalysisCreateResponse) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-### HasMessage
-
-`func (o *BaseResponseAnalysisCreateResponse) HasMessage() bool`
-
-HasMessage returns a boolean if a field has been set.
-
-### SetMessageNil
-
-`func (o *BaseResponseAnalysisCreateResponse) SetMessageNil(b bool)`
-
- SetMessageNil sets the value for Message to be an explicit nil
-
-### UnsetMessage
-`func (o *BaseResponseAnalysisCreateResponse) UnsetMessage()`
-
-UnsetMessage ensures that no value is present for Message, not even an explicit nil
 ### GetErrors
 
 `func (o *BaseResponseAnalysisCreateResponse) GetErrors() []ErrorModel`
@@ -159,6 +99,41 @@ HasErrors returns a boolean if a field has been set.
 `func (o *BaseResponseAnalysisCreateResponse) UnsetErrors()`
 
 UnsetErrors ensures that no value is present for Errors, not even an explicit nil
+### GetMessage
+
+`func (o *BaseResponseAnalysisCreateResponse) GetMessage() string`
+
+GetMessage returns the Message field if non-nil, zero value otherwise.
+
+### GetMessageOk
+
+`func (o *BaseResponseAnalysisCreateResponse) GetMessageOk() (*string, bool)`
+
+GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMessage
+
+`func (o *BaseResponseAnalysisCreateResponse) SetMessage(v string)`
+
+SetMessage sets Message field to given value.
+
+### HasMessage
+
+`func (o *BaseResponseAnalysisCreateResponse) HasMessage() bool`
+
+HasMessage returns a boolean if a field has been set.
+
+### SetMessageNil
+
+`func (o *BaseResponseAnalysisCreateResponse) SetMessageNil(b bool)`
+
+ SetMessageNil sets the value for Message to be an explicit nil
+
+### UnsetMessage
+`func (o *BaseResponseAnalysisCreateResponse) UnsetMessage()`
+
+UnsetMessage ensures that no value is present for Message, not even an explicit nil
 ### GetMeta
 
 `func (o *BaseResponseAnalysisCreateResponse) GetMeta() MetaModel`
@@ -183,6 +158,31 @@ SetMeta sets Meta field to given value.
 `func (o *BaseResponseAnalysisCreateResponse) HasMeta() bool`
 
 HasMeta returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *BaseResponseAnalysisCreateResponse) GetStatus() bool`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *BaseResponseAnalysisCreateResponse) GetStatusOk() (*bool, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *BaseResponseAnalysisCreateResponse) SetStatus(v bool)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *BaseResponseAnalysisCreateResponse) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

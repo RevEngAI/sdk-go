@@ -22,12 +22,12 @@ type FunctionMatchingFilters struct {
 	BinaryIds []int32 `json:"binary_ids,omitempty"`
 	// ID's of collections to limit the search to, if empty, search all scoped collections
 	CollectionIds []int32 `json:"collection_ids,omitempty"`
+	// Limit the search to specific debug types, if empty, search all scoped debug & non-debug functions
+	DebugTypes []string `json:"debug_types,omitempty"`
 	// ID's of functions to limit the search to, if empty, search all scoped functions
 	FunctionIds []int64 `json:"function_ids,omitempty"`
 	// ID's of users to limit the search to, if empty, search all scoped users
 	UserIds []int32 `json:"user_ids,omitempty"`
-	// Limit the search to specific debug types, if empty, search all scoped debug & non-debug functions
-	DebugTypes []string `json:"debug_types,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,6 +114,38 @@ func (o *FunctionMatchingFilters) SetCollectionIds(v []int32) {
 	o.CollectionIds = v
 }
 
+// GetDebugTypes returns the DebugTypes field value if set, zero value otherwise.
+func (o *FunctionMatchingFilters) GetDebugTypes() []string {
+	if o == nil || IsNil(o.DebugTypes) {
+		var ret []string
+		return ret
+	}
+	return o.DebugTypes
+}
+
+// GetDebugTypesOk returns a tuple with the DebugTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionMatchingFilters) GetDebugTypesOk() ([]string, bool) {
+	if o == nil || IsNil(o.DebugTypes) {
+		return nil, false
+	}
+	return o.DebugTypes, true
+}
+
+// HasDebugTypes returns a boolean if a field has been set.
+func (o *FunctionMatchingFilters) HasDebugTypes() bool {
+	if o != nil && !IsNil(o.DebugTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetDebugTypes gets a reference to the given []string and assigns it to the DebugTypes field.
+func (o *FunctionMatchingFilters) SetDebugTypes(v []string) {
+	o.DebugTypes = v
+}
+
 // GetFunctionIds returns the FunctionIds field value if set, zero value otherwise.
 func (o *FunctionMatchingFilters) GetFunctionIds() []int64 {
 	if o == nil || IsNil(o.FunctionIds) {
@@ -178,38 +210,6 @@ func (o *FunctionMatchingFilters) SetUserIds(v []int32) {
 	o.UserIds = v
 }
 
-// GetDebugTypes returns the DebugTypes field value if set, zero value otherwise.
-func (o *FunctionMatchingFilters) GetDebugTypes() []string {
-	if o == nil || IsNil(o.DebugTypes) {
-		var ret []string
-		return ret
-	}
-	return o.DebugTypes
-}
-
-// GetDebugTypesOk returns a tuple with the DebugTypes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FunctionMatchingFilters) GetDebugTypesOk() ([]string, bool) {
-	if o == nil || IsNil(o.DebugTypes) {
-		return nil, false
-	}
-	return o.DebugTypes, true
-}
-
-// HasDebugTypes returns a boolean if a field has been set.
-func (o *FunctionMatchingFilters) HasDebugTypes() bool {
-	if o != nil && !IsNil(o.DebugTypes) {
-		return true
-	}
-
-	return false
-}
-
-// SetDebugTypes gets a reference to the given []string and assigns it to the DebugTypes field.
-func (o *FunctionMatchingFilters) SetDebugTypes(v []string) {
-	o.DebugTypes = v
-}
-
 func (o FunctionMatchingFilters) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -226,14 +226,14 @@ func (o FunctionMatchingFilters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CollectionIds) {
 		toSerialize["collection_ids"] = o.CollectionIds
 	}
+	if !IsNil(o.DebugTypes) {
+		toSerialize["debug_types"] = o.DebugTypes
+	}
 	if !IsNil(o.FunctionIds) {
 		toSerialize["function_ids"] = o.FunctionIds
 	}
 	if !IsNil(o.UserIds) {
 		toSerialize["user_ids"] = o.UserIds
-	}
-	if !IsNil(o.DebugTypes) {
-		toSerialize["debug_types"] = o.DebugTypes
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -259,9 +259,9 @@ func (o *FunctionMatchingFilters) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "binary_ids")
 		delete(additionalProperties, "collection_ids")
+		delete(additionalProperties, "debug_types")
 		delete(additionalProperties, "function_ids")
 		delete(additionalProperties, "user_ids")
-		delete(additionalProperties, "debug_types")
 		o.AdditionalProperties = additionalProperties
 	}
 

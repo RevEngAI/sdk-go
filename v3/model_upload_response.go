@@ -19,9 +19,9 @@ var _ MappedNullable = &UploadResponse{}
 
 // UploadResponse struct for UploadResponse
 type UploadResponse struct {
-	Sha256Hash string `json:"sha_256_hash"`
 	FileType UploadFileType `json:"file_type"`
 	Filename string `json:"filename"`
+	Sha256Hash string `json:"sha_256_hash"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,11 +31,11 @@ type _UploadResponse UploadResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUploadResponse(sha256Hash string, fileType UploadFileType, filename string) *UploadResponse {
+func NewUploadResponse(fileType UploadFileType, filename string, sha256Hash string) *UploadResponse {
 	this := UploadResponse{}
-	this.Sha256Hash = sha256Hash
 	this.FileType = fileType
 	this.Filename = filename
+	this.Sha256Hash = sha256Hash
 	return &this
 }
 
@@ -45,30 +45,6 @@ func NewUploadResponse(sha256Hash string, fileType UploadFileType, filename stri
 func NewUploadResponseWithDefaults() *UploadResponse {
 	this := UploadResponse{}
 	return &this
-}
-
-// GetSha256Hash returns the Sha256Hash field value
-func (o *UploadResponse) GetSha256Hash() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Sha256Hash
-}
-
-// GetSha256HashOk returns a tuple with the Sha256Hash field value
-// and a boolean to check if the value has been set.
-func (o *UploadResponse) GetSha256HashOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Sha256Hash, true
-}
-
-// SetSha256Hash sets field value
-func (o *UploadResponse) SetSha256Hash(v string) {
-	o.Sha256Hash = v
 }
 
 // GetFileType returns the FileType field value
@@ -119,6 +95,30 @@ func (o *UploadResponse) SetFilename(v string) {
 	o.Filename = v
 }
 
+// GetSha256Hash returns the Sha256Hash field value
+func (o *UploadResponse) GetSha256Hash() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Sha256Hash
+}
+
+// GetSha256HashOk returns a tuple with the Sha256Hash field value
+// and a boolean to check if the value has been set.
+func (o *UploadResponse) GetSha256HashOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Sha256Hash, true
+}
+
+// SetSha256Hash sets field value
+func (o *UploadResponse) SetSha256Hash(v string) {
+	o.Sha256Hash = v
+}
+
 func (o UploadResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -129,9 +129,9 @@ func (o UploadResponse) MarshalJSON() ([]byte, error) {
 
 func (o UploadResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["sha_256_hash"] = o.Sha256Hash
 	toSerialize["file_type"] = o.FileType
 	toSerialize["filename"] = o.Filename
+	toSerialize["sha_256_hash"] = o.Sha256Hash
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -145,9 +145,9 @@ func (o *UploadResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"sha_256_hash",
 		"file_type",
 		"filename",
+		"sha_256_hash",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -177,9 +177,9 @@ func (o *UploadResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "sha_256_hash")
 		delete(additionalProperties, "file_type")
 		delete(additionalProperties, "filename")
+		delete(additionalProperties, "sha_256_hash")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -20,14 +20,14 @@ var _ MappedNullable = &GetMeResponse{}
 
 // GetMeResponse struct for GetMeResponse
 type GetMeResponse struct {
-	Username string `json:"username"`
-	UserId int32 `json:"user_id"`
+	Creation time.Time `json:"creation"`
+	Email string `json:"email"`
 	FirstName string `json:"first_name"`
 	LastName string `json:"last_name"`
-	Email string `json:"email"`
-	Creation time.Time `json:"creation"`
-	TutorialSeen bool `json:"tutorial_seen"`
 	Role string `json:"role"`
+	TutorialSeen bool `json:"tutorial_seen"`
+	UserId int32 `json:"user_id"`
+	Username string `json:"username"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,16 +37,16 @@ type _GetMeResponse GetMeResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetMeResponse(username string, userId int32, firstName string, lastName string, email string, creation time.Time, tutorialSeen bool, role string) *GetMeResponse {
+func NewGetMeResponse(creation time.Time, email string, firstName string, lastName string, role string, tutorialSeen bool, userId int32, username string) *GetMeResponse {
 	this := GetMeResponse{}
-	this.Username = username
-	this.UserId = userId
+	this.Creation = creation
+	this.Email = email
 	this.FirstName = firstName
 	this.LastName = lastName
-	this.Email = email
-	this.Creation = creation
-	this.TutorialSeen = tutorialSeen
 	this.Role = role
+	this.TutorialSeen = tutorialSeen
+	this.UserId = userId
+	this.Username = username
 	return &this
 }
 
@@ -58,52 +58,52 @@ func NewGetMeResponseWithDefaults() *GetMeResponse {
 	return &this
 }
 
-// GetUsername returns the Username field value
-func (o *GetMeResponse) GetUsername() string {
+// GetCreation returns the Creation field value
+func (o *GetMeResponse) GetCreation() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.Creation
+}
+
+// GetCreationOk returns a tuple with the Creation field value
+// and a boolean to check if the value has been set.
+func (o *GetMeResponse) GetCreationOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Creation, true
+}
+
+// SetCreation sets field value
+func (o *GetMeResponse) SetCreation(v time.Time) {
+	o.Creation = v
+}
+
+// GetEmail returns the Email field value
+func (o *GetMeResponse) GetEmail() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Username
+	return o.Email
 }
 
-// GetUsernameOk returns a tuple with the Username field value
+// GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
-func (o *GetMeResponse) GetUsernameOk() (*string, bool) {
+func (o *GetMeResponse) GetEmailOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Username, true
+	return &o.Email, true
 }
 
-// SetUsername sets field value
-func (o *GetMeResponse) SetUsername(v string) {
-	o.Username = v
-}
-
-// GetUserId returns the UserId field value
-func (o *GetMeResponse) GetUserId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.UserId
-}
-
-// GetUserIdOk returns a tuple with the UserId field value
-// and a boolean to check if the value has been set.
-func (o *GetMeResponse) GetUserIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.UserId, true
-}
-
-// SetUserId sets field value
-func (o *GetMeResponse) SetUserId(v int32) {
-	o.UserId = v
+// SetEmail sets field value
+func (o *GetMeResponse) SetEmail(v string) {
+	o.Email = v
 }
 
 // GetFirstName returns the FirstName field value
@@ -154,52 +154,28 @@ func (o *GetMeResponse) SetLastName(v string) {
 	o.LastName = v
 }
 
-// GetEmail returns the Email field value
-func (o *GetMeResponse) GetEmail() string {
+// GetRole returns the Role field value
+func (o *GetMeResponse) GetRole() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Email
+	return o.Role
 }
 
-// GetEmailOk returns a tuple with the Email field value
+// GetRoleOk returns a tuple with the Role field value
 // and a boolean to check if the value has been set.
-func (o *GetMeResponse) GetEmailOk() (*string, bool) {
+func (o *GetMeResponse) GetRoleOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Email, true
+	return &o.Role, true
 }
 
-// SetEmail sets field value
-func (o *GetMeResponse) SetEmail(v string) {
-	o.Email = v
-}
-
-// GetCreation returns the Creation field value
-func (o *GetMeResponse) GetCreation() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.Creation
-}
-
-// GetCreationOk returns a tuple with the Creation field value
-// and a boolean to check if the value has been set.
-func (o *GetMeResponse) GetCreationOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Creation, true
-}
-
-// SetCreation sets field value
-func (o *GetMeResponse) SetCreation(v time.Time) {
-	o.Creation = v
+// SetRole sets field value
+func (o *GetMeResponse) SetRole(v string) {
+	o.Role = v
 }
 
 // GetTutorialSeen returns the TutorialSeen field value
@@ -226,28 +202,52 @@ func (o *GetMeResponse) SetTutorialSeen(v bool) {
 	o.TutorialSeen = v
 }
 
-// GetRole returns the Role field value
-func (o *GetMeResponse) GetRole() string {
+// GetUserId returns the UserId field value
+func (o *GetMeResponse) GetUserId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.UserId
+}
+
+// GetUserIdOk returns a tuple with the UserId field value
+// and a boolean to check if the value has been set.
+func (o *GetMeResponse) GetUserIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UserId, true
+}
+
+// SetUserId sets field value
+func (o *GetMeResponse) SetUserId(v int32) {
+	o.UserId = v
+}
+
+// GetUsername returns the Username field value
+func (o *GetMeResponse) GetUsername() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Role
+	return o.Username
 }
 
-// GetRoleOk returns a tuple with the Role field value
+// GetUsernameOk returns a tuple with the Username field value
 // and a boolean to check if the value has been set.
-func (o *GetMeResponse) GetRoleOk() (*string, bool) {
+func (o *GetMeResponse) GetUsernameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Role, true
+	return &o.Username, true
 }
 
-// SetRole sets field value
-func (o *GetMeResponse) SetRole(v string) {
-	o.Role = v
+// SetUsername sets field value
+func (o *GetMeResponse) SetUsername(v string) {
+	o.Username = v
 }
 
 func (o GetMeResponse) MarshalJSON() ([]byte, error) {
@@ -260,14 +260,14 @@ func (o GetMeResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetMeResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["username"] = o.Username
-	toSerialize["user_id"] = o.UserId
+	toSerialize["creation"] = o.Creation
+	toSerialize["email"] = o.Email
 	toSerialize["first_name"] = o.FirstName
 	toSerialize["last_name"] = o.LastName
-	toSerialize["email"] = o.Email
-	toSerialize["creation"] = o.Creation
-	toSerialize["tutorial_seen"] = o.TutorialSeen
 	toSerialize["role"] = o.Role
+	toSerialize["tutorial_seen"] = o.TutorialSeen
+	toSerialize["user_id"] = o.UserId
+	toSerialize["username"] = o.Username
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -281,14 +281,14 @@ func (o *GetMeResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"username",
-		"user_id",
+		"creation",
+		"email",
 		"first_name",
 		"last_name",
-		"email",
-		"creation",
-		"tutorial_seen",
 		"role",
+		"tutorial_seen",
+		"user_id",
+		"username",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -318,14 +318,14 @@ func (o *GetMeResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "username")
-		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "creation")
+		delete(additionalProperties, "email")
 		delete(additionalProperties, "first_name")
 		delete(additionalProperties, "last_name")
-		delete(additionalProperties, "email")
-		delete(additionalProperties, "creation")
-		delete(additionalProperties, "tutorial_seen")
 		delete(additionalProperties, "role")
+		delete(additionalProperties, "tutorial_seen")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "username")
 		o.AdditionalProperties = additionalProperties
 	}
 

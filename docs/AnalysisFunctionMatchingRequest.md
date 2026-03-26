@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MinSimilarity** | Pointer to **float32** | Minimum similarity expected for a match as a percentage, default is 90 | [optional] [default to 90.0]
 **Filters** | Pointer to [**NullableFunctionMatchingFilters**](FunctionMatchingFilters.md) |  | [optional] 
-**ResultsPerFunction** | Pointer to **int32** | Maximum number of matches to return per function, default is 1, max is 10 | [optional] [default to 1]
+**MinSimilarity** | Pointer to **float32** | Minimum similarity expected for a match as a percentage, default is 90 | [optional] [default to 90]
+**NoCache** | Pointer to **bool** | If set to true, forces the system to bypass any cached results and perform a fresh computation | [optional] [default to false]
 **Page** | Pointer to **int32** | Page number for paginated results, default is 1 (first page) | [optional] [default to 1]
 **PageSize** | Pointer to **int32** | Number of functions to return per page, default is 0 (all functions), max is 1000 | [optional] [default to 0]
+**ResultsPerFunction** | Pointer to **int32** | Maximum number of matches to return per function, default is 1, max is 10 | [optional] [default to 1]
 **StatusOnly** | Pointer to **bool** | If set to true, only returns the status of the matching operation without the actual results | [optional] [default to false]
-**NoCache** | Pointer to **bool** | If set to true, forces the system to bypass any cached results and perform a fresh computation | [optional] [default to false]
 **UseCanonicalNames** | Pointer to **bool** | Whether to use canonical function names during function matching for confidence results, default is False | [optional] [default to false]
 
 ## Methods
@@ -31,31 +31,6 @@ will change when the set of required properties is changed
 NewAnalysisFunctionMatchingRequestWithDefaults instantiates a new AnalysisFunctionMatchingRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMinSimilarity
-
-`func (o *AnalysisFunctionMatchingRequest) GetMinSimilarity() float32`
-
-GetMinSimilarity returns the MinSimilarity field if non-nil, zero value otherwise.
-
-### GetMinSimilarityOk
-
-`func (o *AnalysisFunctionMatchingRequest) GetMinSimilarityOk() (*float32, bool)`
-
-GetMinSimilarityOk returns a tuple with the MinSimilarity field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMinSimilarity
-
-`func (o *AnalysisFunctionMatchingRequest) SetMinSimilarity(v float32)`
-
-SetMinSimilarity sets MinSimilarity field to given value.
-
-### HasMinSimilarity
-
-`func (o *AnalysisFunctionMatchingRequest) HasMinSimilarity() bool`
-
-HasMinSimilarity returns a boolean if a field has been set.
 
 ### GetFilters
 
@@ -92,30 +67,55 @@ HasFilters returns a boolean if a field has been set.
 `func (o *AnalysisFunctionMatchingRequest) UnsetFilters()`
 
 UnsetFilters ensures that no value is present for Filters, not even an explicit nil
-### GetResultsPerFunction
+### GetMinSimilarity
 
-`func (o *AnalysisFunctionMatchingRequest) GetResultsPerFunction() int32`
+`func (o *AnalysisFunctionMatchingRequest) GetMinSimilarity() float32`
 
-GetResultsPerFunction returns the ResultsPerFunction field if non-nil, zero value otherwise.
+GetMinSimilarity returns the MinSimilarity field if non-nil, zero value otherwise.
 
-### GetResultsPerFunctionOk
+### GetMinSimilarityOk
 
-`func (o *AnalysisFunctionMatchingRequest) GetResultsPerFunctionOk() (*int32, bool)`
+`func (o *AnalysisFunctionMatchingRequest) GetMinSimilarityOk() (*float32, bool)`
 
-GetResultsPerFunctionOk returns a tuple with the ResultsPerFunction field if it's non-nil, zero value otherwise
+GetMinSimilarityOk returns a tuple with the MinSimilarity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetResultsPerFunction
+### SetMinSimilarity
 
-`func (o *AnalysisFunctionMatchingRequest) SetResultsPerFunction(v int32)`
+`func (o *AnalysisFunctionMatchingRequest) SetMinSimilarity(v float32)`
 
-SetResultsPerFunction sets ResultsPerFunction field to given value.
+SetMinSimilarity sets MinSimilarity field to given value.
 
-### HasResultsPerFunction
+### HasMinSimilarity
 
-`func (o *AnalysisFunctionMatchingRequest) HasResultsPerFunction() bool`
+`func (o *AnalysisFunctionMatchingRequest) HasMinSimilarity() bool`
 
-HasResultsPerFunction returns a boolean if a field has been set.
+HasMinSimilarity returns a boolean if a field has been set.
+
+### GetNoCache
+
+`func (o *AnalysisFunctionMatchingRequest) GetNoCache() bool`
+
+GetNoCache returns the NoCache field if non-nil, zero value otherwise.
+
+### GetNoCacheOk
+
+`func (o *AnalysisFunctionMatchingRequest) GetNoCacheOk() (*bool, bool)`
+
+GetNoCacheOk returns a tuple with the NoCache field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNoCache
+
+`func (o *AnalysisFunctionMatchingRequest) SetNoCache(v bool)`
+
+SetNoCache sets NoCache field to given value.
+
+### HasNoCache
+
+`func (o *AnalysisFunctionMatchingRequest) HasNoCache() bool`
+
+HasNoCache returns a boolean if a field has been set.
 
 ### GetPage
 
@@ -167,6 +167,31 @@ SetPageSize sets PageSize field to given value.
 
 HasPageSize returns a boolean if a field has been set.
 
+### GetResultsPerFunction
+
+`func (o *AnalysisFunctionMatchingRequest) GetResultsPerFunction() int32`
+
+GetResultsPerFunction returns the ResultsPerFunction field if non-nil, zero value otherwise.
+
+### GetResultsPerFunctionOk
+
+`func (o *AnalysisFunctionMatchingRequest) GetResultsPerFunctionOk() (*int32, bool)`
+
+GetResultsPerFunctionOk returns a tuple with the ResultsPerFunction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResultsPerFunction
+
+`func (o *AnalysisFunctionMatchingRequest) SetResultsPerFunction(v int32)`
+
+SetResultsPerFunction sets ResultsPerFunction field to given value.
+
+### HasResultsPerFunction
+
+`func (o *AnalysisFunctionMatchingRequest) HasResultsPerFunction() bool`
+
+HasResultsPerFunction returns a boolean if a field has been set.
+
 ### GetStatusOnly
 
 `func (o *AnalysisFunctionMatchingRequest) GetStatusOnly() bool`
@@ -191,31 +216,6 @@ SetStatusOnly sets StatusOnly field to given value.
 `func (o *AnalysisFunctionMatchingRequest) HasStatusOnly() bool`
 
 HasStatusOnly returns a boolean if a field has been set.
-
-### GetNoCache
-
-`func (o *AnalysisFunctionMatchingRequest) GetNoCache() bool`
-
-GetNoCache returns the NoCache field if non-nil, zero value otherwise.
-
-### GetNoCacheOk
-
-`func (o *AnalysisFunctionMatchingRequest) GetNoCacheOk() (*bool, bool)`
-
-GetNoCacheOk returns a tuple with the NoCache field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNoCache
-
-`func (o *AnalysisFunctionMatchingRequest) SetNoCache(v bool)`
-
-SetNoCache sets NoCache field to given value.
-
-### HasNoCache
-
-`func (o *AnalysisFunctionMatchingRequest) HasNoCache() bool`
-
-HasNoCache returns a boolean if a field has been set.
 
 ### GetUseCanonicalNames
 

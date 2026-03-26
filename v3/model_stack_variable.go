@@ -19,17 +19,17 @@ var _ MappedNullable = &StackVariable{}
 
 // StackVariable struct for StackVariable
 type StackVariable struct {
-	LastChange NullableString `json:"last_change,omitempty"`
-	// Offset of the stack variable
-	Offset int32 `json:"offset"`
-	// Name of the stack variable
-	Name string `json:"name"`
-	// Data type of the stack variable
-	Type string `json:"type"`
-	// Size of the stack variable in bytes
-	Size int32 `json:"size"`
 	// Memory address of the stack variable
 	Addr int32 `json:"addr"`
+	LastChange NullableString `json:"last_change,omitempty"`
+	// Name of the stack variable
+	Name string `json:"name"`
+	// Offset of the stack variable
+	Offset int32 `json:"offset"`
+	// Size of the stack variable in bytes
+	Size int32 `json:"size"`
+	// Data type of the stack variable
+	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,13 +39,13 @@ type _StackVariable StackVariable
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStackVariable(offset int32, name string, type_ string, size int32, addr int32) *StackVariable {
+func NewStackVariable(addr int32, name string, offset int32, size int32, type_ string) *StackVariable {
 	this := StackVariable{}
-	this.Offset = offset
-	this.Name = name
-	this.Type = type_
-	this.Size = size
 	this.Addr = addr
+	this.Name = name
+	this.Offset = offset
+	this.Size = size
+	this.Type = type_
 	return &this
 }
 
@@ -55,6 +55,30 @@ func NewStackVariable(offset int32, name string, type_ string, size int32, addr 
 func NewStackVariableWithDefaults() *StackVariable {
 	this := StackVariable{}
 	return &this
+}
+
+// GetAddr returns the Addr field value
+func (o *StackVariable) GetAddr() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Addr
+}
+
+// GetAddrOk returns a tuple with the Addr field value
+// and a boolean to check if the value has been set.
+func (o *StackVariable) GetAddrOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Addr, true
+}
+
+// SetAddr sets field value
+func (o *StackVariable) SetAddr(v int32) {
+	o.Addr = v
 }
 
 // GetLastChange returns the LastChange field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -99,30 +123,6 @@ func (o *StackVariable) UnsetLastChange() {
 	o.LastChange.Unset()
 }
 
-// GetOffset returns the Offset field value
-func (o *StackVariable) GetOffset() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Offset
-}
-
-// GetOffsetOk returns a tuple with the Offset field value
-// and a boolean to check if the value has been set.
-func (o *StackVariable) GetOffsetOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Offset, true
-}
-
-// SetOffset sets field value
-func (o *StackVariable) SetOffset(v int32) {
-	o.Offset = v
-}
-
 // GetName returns the Name field value
 func (o *StackVariable) GetName() string {
 	if o == nil {
@@ -147,28 +147,28 @@ func (o *StackVariable) SetName(v string) {
 	o.Name = v
 }
 
-// GetType returns the Type field value
-func (o *StackVariable) GetType() string {
+// GetOffset returns the Offset field value
+func (o *StackVariable) GetOffset() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
-	return o.Type
+	return o.Offset
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetOffsetOk returns a tuple with the Offset field value
 // and a boolean to check if the value has been set.
-func (o *StackVariable) GetTypeOk() (*string, bool) {
+func (o *StackVariable) GetOffsetOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Type, true
+	return &o.Offset, true
 }
 
-// SetType sets field value
-func (o *StackVariable) SetType(v string) {
-	o.Type = v
+// SetOffset sets field value
+func (o *StackVariable) SetOffset(v int32) {
+	o.Offset = v
 }
 
 // GetSize returns the Size field value
@@ -195,28 +195,28 @@ func (o *StackVariable) SetSize(v int32) {
 	o.Size = v
 }
 
-// GetAddr returns the Addr field value
-func (o *StackVariable) GetAddr() int32 {
+// GetType returns the Type field value
+func (o *StackVariable) GetType() string {
 	if o == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 
-	return o.Addr
+	return o.Type
 }
 
-// GetAddrOk returns a tuple with the Addr field value
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *StackVariable) GetAddrOk() (*int32, bool) {
+func (o *StackVariable) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Addr, true
+	return &o.Type, true
 }
 
-// SetAddr sets field value
-func (o *StackVariable) SetAddr(v int32) {
-	o.Addr = v
+// SetType sets field value
+func (o *StackVariable) SetType(v string) {
+	o.Type = v
 }
 
 func (o StackVariable) MarshalJSON() ([]byte, error) {
@@ -229,14 +229,14 @@ func (o StackVariable) MarshalJSON() ([]byte, error) {
 
 func (o StackVariable) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["addr"] = o.Addr
 	if o.LastChange.IsSet() {
 		toSerialize["last_change"] = o.LastChange.Get()
 	}
-	toSerialize["offset"] = o.Offset
 	toSerialize["name"] = o.Name
-	toSerialize["type"] = o.Type
+	toSerialize["offset"] = o.Offset
 	toSerialize["size"] = o.Size
-	toSerialize["addr"] = o.Addr
+	toSerialize["type"] = o.Type
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -250,11 +250,11 @@ func (o *StackVariable) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"offset",
-		"name",
-		"type",
-		"size",
 		"addr",
+		"name",
+		"offset",
+		"size",
+		"type",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -284,12 +284,12 @@ func (o *StackVariable) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "last_change")
-		delete(additionalProperties, "offset")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "size")
 		delete(additionalProperties, "addr")
+		delete(additionalProperties, "last_change")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "offset")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Username** | **string** |  | 
-**UserId** | **int32** |  | 
+**Creation** | **time.Time** |  | 
+**Email** | **string** |  | 
 **FirstName** | **string** |  | 
 **LastName** | **string** |  | 
-**Email** | **string** |  | 
-**Creation** | **time.Time** |  | 
-**TutorialSeen** | **bool** |  | 
 **Role** | **string** |  | 
+**TutorialSeen** | **bool** |  | 
+**UserId** | **int32** |  | 
+**Username** | **string** |  | 
 
 ## Methods
 
 ### NewGetMeResponse
 
-`func NewGetMeResponse(username string, userId int32, firstName string, lastName string, email string, creation time.Time, tutorialSeen bool, role string, ) *GetMeResponse`
+`func NewGetMeResponse(creation time.Time, email string, firstName string, lastName string, role string, tutorialSeen bool, userId int32, username string, ) *GetMeResponse`
 
 NewGetMeResponse instantiates a new GetMeResponse object
 This constructor will assign default values to properties that have it defined,
@@ -32,44 +32,44 @@ NewGetMeResponseWithDefaults instantiates a new GetMeResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetUsername
+### GetCreation
 
-`func (o *GetMeResponse) GetUsername() string`
+`func (o *GetMeResponse) GetCreation() time.Time`
 
-GetUsername returns the Username field if non-nil, zero value otherwise.
+GetCreation returns the Creation field if non-nil, zero value otherwise.
 
-### GetUsernameOk
+### GetCreationOk
 
-`func (o *GetMeResponse) GetUsernameOk() (*string, bool)`
+`func (o *GetMeResponse) GetCreationOk() (*time.Time, bool)`
 
-GetUsernameOk returns a tuple with the Username field if it's non-nil, zero value otherwise
+GetCreationOk returns a tuple with the Creation field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUsername
+### SetCreation
 
-`func (o *GetMeResponse) SetUsername(v string)`
+`func (o *GetMeResponse) SetCreation(v time.Time)`
 
-SetUsername sets Username field to given value.
+SetCreation sets Creation field to given value.
 
 
-### GetUserId
+### GetEmail
 
-`func (o *GetMeResponse) GetUserId() int32`
+`func (o *GetMeResponse) GetEmail() string`
 
-GetUserId returns the UserId field if non-nil, zero value otherwise.
+GetEmail returns the Email field if non-nil, zero value otherwise.
 
-### GetUserIdOk
+### GetEmailOk
 
-`func (o *GetMeResponse) GetUserIdOk() (*int32, bool)`
+`func (o *GetMeResponse) GetEmailOk() (*string, bool)`
 
-GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
+GetEmailOk returns a tuple with the Email field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUserId
+### SetEmail
 
-`func (o *GetMeResponse) SetUserId(v int32)`
+`func (o *GetMeResponse) SetEmail(v string)`
 
-SetUserId sets UserId field to given value.
+SetEmail sets Email field to given value.
 
 
 ### GetFirstName
@@ -112,44 +112,24 @@ and a boolean to check if the value has been set.
 SetLastName sets LastName field to given value.
 
 
-### GetEmail
+### GetRole
 
-`func (o *GetMeResponse) GetEmail() string`
+`func (o *GetMeResponse) GetRole() string`
 
-GetEmail returns the Email field if non-nil, zero value otherwise.
+GetRole returns the Role field if non-nil, zero value otherwise.
 
-### GetEmailOk
+### GetRoleOk
 
-`func (o *GetMeResponse) GetEmailOk() (*string, bool)`
+`func (o *GetMeResponse) GetRoleOk() (*string, bool)`
 
-GetEmailOk returns a tuple with the Email field if it's non-nil, zero value otherwise
+GetRoleOk returns a tuple with the Role field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEmail
+### SetRole
 
-`func (o *GetMeResponse) SetEmail(v string)`
+`func (o *GetMeResponse) SetRole(v string)`
 
-SetEmail sets Email field to given value.
-
-
-### GetCreation
-
-`func (o *GetMeResponse) GetCreation() time.Time`
-
-GetCreation returns the Creation field if non-nil, zero value otherwise.
-
-### GetCreationOk
-
-`func (o *GetMeResponse) GetCreationOk() (*time.Time, bool)`
-
-GetCreationOk returns a tuple with the Creation field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreation
-
-`func (o *GetMeResponse) SetCreation(v time.Time)`
-
-SetCreation sets Creation field to given value.
+SetRole sets Role field to given value.
 
 
 ### GetTutorialSeen
@@ -172,24 +152,44 @@ and a boolean to check if the value has been set.
 SetTutorialSeen sets TutorialSeen field to given value.
 
 
-### GetRole
+### GetUserId
 
-`func (o *GetMeResponse) GetRole() string`
+`func (o *GetMeResponse) GetUserId() int32`
 
-GetRole returns the Role field if non-nil, zero value otherwise.
+GetUserId returns the UserId field if non-nil, zero value otherwise.
 
-### GetRoleOk
+### GetUserIdOk
 
-`func (o *GetMeResponse) GetRoleOk() (*string, bool)`
+`func (o *GetMeResponse) GetUserIdOk() (*int32, bool)`
 
-GetRoleOk returns a tuple with the Role field if it's non-nil, zero value otherwise
+GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRole
+### SetUserId
 
-`func (o *GetMeResponse) SetRole(v string)`
+`func (o *GetMeResponse) SetUserId(v int32)`
 
-SetRole sets Role field to given value.
+SetUserId sets UserId field to given value.
+
+
+### GetUsername
+
+`func (o *GetMeResponse) GetUsername() string`
+
+GetUsername returns the Username field if non-nil, zero value otherwise.
+
+### GetUsernameOk
+
+`func (o *GetMeResponse) GetUsernameOk() (*string, bool)`
+
+GetUsernameOk returns a tuple with the Username field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsername
+
+`func (o *GetMeResponse) SetUsername(v string)`
+
+SetUsername sets Username field to given value.
 
 
 

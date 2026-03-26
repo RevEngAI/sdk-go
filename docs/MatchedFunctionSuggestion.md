@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FunctionId** | **int64** | Unique identifier of the matched function | 
 **FunctionVaddr** | **int64** | Virtual address of the matched function | 
-**SuggestedName** | Pointer to **NullableString** |  | [optional] 
 **SuggestedDemangledName** | **string** | De-mangled name of the function group that contains the matched functions | 
+**SuggestedName** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -68,6 +68,26 @@ and a boolean to check if the value has been set.
 SetFunctionVaddr sets FunctionVaddr field to given value.
 
 
+### GetSuggestedDemangledName
+
+`func (o *MatchedFunctionSuggestion) GetSuggestedDemangledName() string`
+
+GetSuggestedDemangledName returns the SuggestedDemangledName field if non-nil, zero value otherwise.
+
+### GetSuggestedDemangledNameOk
+
+`func (o *MatchedFunctionSuggestion) GetSuggestedDemangledNameOk() (*string, bool)`
+
+GetSuggestedDemangledNameOk returns a tuple with the SuggestedDemangledName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuggestedDemangledName
+
+`func (o *MatchedFunctionSuggestion) SetSuggestedDemangledName(v string)`
+
+SetSuggestedDemangledName sets SuggestedDemangledName field to given value.
+
+
 ### GetSuggestedName
 
 `func (o *MatchedFunctionSuggestion) GetSuggestedName() string`
@@ -103,26 +123,6 @@ HasSuggestedName returns a boolean if a field has been set.
 `func (o *MatchedFunctionSuggestion) UnsetSuggestedName()`
 
 UnsetSuggestedName ensures that no value is present for SuggestedName, not even an explicit nil
-### GetSuggestedDemangledName
-
-`func (o *MatchedFunctionSuggestion) GetSuggestedDemangledName() string`
-
-GetSuggestedDemangledName returns the SuggestedDemangledName field if non-nil, zero value otherwise.
-
-### GetSuggestedDemangledNameOk
-
-`func (o *MatchedFunctionSuggestion) GetSuggestedDemangledNameOk() (*string, bool)`
-
-GetSuggestedDemangledNameOk returns a tuple with the SuggestedDemangledName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSuggestedDemangledName
-
-`func (o *MatchedFunctionSuggestion) SetSuggestedDemangledName(v string)`
-
-SetSuggestedDemangledName sets SuggestedDemangledName field to given value.
-
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

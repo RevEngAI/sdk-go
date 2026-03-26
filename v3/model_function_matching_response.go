@@ -18,16 +18,16 @@ var _ MappedNullable = &FunctionMatchingResponse{}
 
 // FunctionMatchingResponse struct for FunctionMatchingResponse
 type FunctionMatchingResponse struct {
+	CurrentPage NullableInt32 `json:"current_page,omitempty"`
+	ErrorMessage NullableString `json:"error_message,omitempty"`
+	Matches []FunctionMatch `json:"matches,omitempty"`
+	NumDebugMatches NullableInt32 `json:"num_debug_matches,omitempty"`
+	NumMatches NullableInt32 `json:"num_matches,omitempty"`
 	// Progress of the matching operation, represented as a percentage
 	Progress *int32 `json:"progress,omitempty"`
 	Status NullableString `json:"status,omitempty"`
-	TotalTime NullableInt32 `json:"total_time,omitempty"`
-	ErrorMessage NullableString `json:"error_message,omitempty"`
-	CurrentPage NullableInt32 `json:"current_page,omitempty"`
 	TotalPages NullableInt32 `json:"total_pages,omitempty"`
-	Matches []FunctionMatch `json:"matches,omitempty"`
-	NumMatches NullableInt32 `json:"num_matches,omitempty"`
-	NumDebugMatches NullableInt32 `json:"num_debug_matches,omitempty"`
+	TotalTime NullableInt32 `json:"total_time,omitempty"`
 	UpdatedAt NullableString `json:"updated_at,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -53,6 +53,207 @@ func NewFunctionMatchingResponseWithDefaults() *FunctionMatchingResponse {
 	var progress int32 = 0
 	this.Progress = &progress
 	return &this
+}
+
+// GetCurrentPage returns the CurrentPage field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FunctionMatchingResponse) GetCurrentPage() int32 {
+	if o == nil || IsNil(o.CurrentPage.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.CurrentPage.Get()
+}
+
+// GetCurrentPageOk returns a tuple with the CurrentPage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FunctionMatchingResponse) GetCurrentPageOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CurrentPage.Get(), o.CurrentPage.IsSet()
+}
+
+// HasCurrentPage returns a boolean if a field has been set.
+func (o *FunctionMatchingResponse) HasCurrentPage() bool {
+	if o != nil && o.CurrentPage.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrentPage gets a reference to the given NullableInt32 and assigns it to the CurrentPage field.
+func (o *FunctionMatchingResponse) SetCurrentPage(v int32) {
+	o.CurrentPage.Set(&v)
+}
+// SetCurrentPageNil sets the value for CurrentPage to be an explicit nil
+func (o *FunctionMatchingResponse) SetCurrentPageNil() {
+	o.CurrentPage.Set(nil)
+}
+
+// UnsetCurrentPage ensures that no value is present for CurrentPage, not even an explicit nil
+func (o *FunctionMatchingResponse) UnsetCurrentPage() {
+	o.CurrentPage.Unset()
+}
+
+// GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FunctionMatchingResponse) GetErrorMessage() string {
+	if o == nil || IsNil(o.ErrorMessage.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ErrorMessage.Get()
+}
+
+// GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FunctionMatchingResponse) GetErrorMessageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
+}
+
+// HasErrorMessage returns a boolean if a field has been set.
+func (o *FunctionMatchingResponse) HasErrorMessage() bool {
+	if o != nil && o.ErrorMessage.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorMessage gets a reference to the given NullableString and assigns it to the ErrorMessage field.
+func (o *FunctionMatchingResponse) SetErrorMessage(v string) {
+	o.ErrorMessage.Set(&v)
+}
+// SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
+func (o *FunctionMatchingResponse) SetErrorMessageNil() {
+	o.ErrorMessage.Set(nil)
+}
+
+// UnsetErrorMessage ensures that no value is present for ErrorMessage, not even an explicit nil
+func (o *FunctionMatchingResponse) UnsetErrorMessage() {
+	o.ErrorMessage.Unset()
+}
+
+// GetMatches returns the Matches field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FunctionMatchingResponse) GetMatches() []FunctionMatch {
+	if o == nil {
+		var ret []FunctionMatch
+		return ret
+	}
+	return o.Matches
+}
+
+// GetMatchesOk returns a tuple with the Matches field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FunctionMatchingResponse) GetMatchesOk() ([]FunctionMatch, bool) {
+	if o == nil || IsNil(o.Matches) {
+		return nil, false
+	}
+	return o.Matches, true
+}
+
+// HasMatches returns a boolean if a field has been set.
+func (o *FunctionMatchingResponse) HasMatches() bool {
+	if o != nil && !IsNil(o.Matches) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatches gets a reference to the given []FunctionMatch and assigns it to the Matches field.
+func (o *FunctionMatchingResponse) SetMatches(v []FunctionMatch) {
+	o.Matches = v
+}
+
+// GetNumDebugMatches returns the NumDebugMatches field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FunctionMatchingResponse) GetNumDebugMatches() int32 {
+	if o == nil || IsNil(o.NumDebugMatches.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.NumDebugMatches.Get()
+}
+
+// GetNumDebugMatchesOk returns a tuple with the NumDebugMatches field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FunctionMatchingResponse) GetNumDebugMatchesOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.NumDebugMatches.Get(), o.NumDebugMatches.IsSet()
+}
+
+// HasNumDebugMatches returns a boolean if a field has been set.
+func (o *FunctionMatchingResponse) HasNumDebugMatches() bool {
+	if o != nil && o.NumDebugMatches.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNumDebugMatches gets a reference to the given NullableInt32 and assigns it to the NumDebugMatches field.
+func (o *FunctionMatchingResponse) SetNumDebugMatches(v int32) {
+	o.NumDebugMatches.Set(&v)
+}
+// SetNumDebugMatchesNil sets the value for NumDebugMatches to be an explicit nil
+func (o *FunctionMatchingResponse) SetNumDebugMatchesNil() {
+	o.NumDebugMatches.Set(nil)
+}
+
+// UnsetNumDebugMatches ensures that no value is present for NumDebugMatches, not even an explicit nil
+func (o *FunctionMatchingResponse) UnsetNumDebugMatches() {
+	o.NumDebugMatches.Unset()
+}
+
+// GetNumMatches returns the NumMatches field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FunctionMatchingResponse) GetNumMatches() int32 {
+	if o == nil || IsNil(o.NumMatches.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.NumMatches.Get()
+}
+
+// GetNumMatchesOk returns a tuple with the NumMatches field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FunctionMatchingResponse) GetNumMatchesOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.NumMatches.Get(), o.NumMatches.IsSet()
+}
+
+// HasNumMatches returns a boolean if a field has been set.
+func (o *FunctionMatchingResponse) HasNumMatches() bool {
+	if o != nil && o.NumMatches.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNumMatches gets a reference to the given NullableInt32 and assigns it to the NumMatches field.
+func (o *FunctionMatchingResponse) SetNumMatches(v int32) {
+	o.NumMatches.Set(&v)
+}
+// SetNumMatchesNil sets the value for NumMatches to be an explicit nil
+func (o *FunctionMatchingResponse) SetNumMatchesNil() {
+	o.NumMatches.Set(nil)
+}
+
+// UnsetNumMatches ensures that no value is present for NumMatches, not even an explicit nil
+func (o *FunctionMatchingResponse) UnsetNumMatches() {
+	o.NumMatches.Unset()
 }
 
 // GetProgress returns the Progress field value if set, zero value otherwise.
@@ -129,132 +330,6 @@ func (o *FunctionMatchingResponse) UnsetStatus() {
 	o.Status.Unset()
 }
 
-// GetTotalTime returns the TotalTime field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionMatchingResponse) GetTotalTime() int32 {
-	if o == nil || IsNil(o.TotalTime.Get()) {
-		var ret int32
-		return ret
-	}
-	return *o.TotalTime.Get()
-}
-
-// GetTotalTimeOk returns a tuple with the TotalTime field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionMatchingResponse) GetTotalTimeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.TotalTime.Get(), o.TotalTime.IsSet()
-}
-
-// HasTotalTime returns a boolean if a field has been set.
-func (o *FunctionMatchingResponse) HasTotalTime() bool {
-	if o != nil && o.TotalTime.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetTotalTime gets a reference to the given NullableInt32 and assigns it to the TotalTime field.
-func (o *FunctionMatchingResponse) SetTotalTime(v int32) {
-	o.TotalTime.Set(&v)
-}
-// SetTotalTimeNil sets the value for TotalTime to be an explicit nil
-func (o *FunctionMatchingResponse) SetTotalTimeNil() {
-	o.TotalTime.Set(nil)
-}
-
-// UnsetTotalTime ensures that no value is present for TotalTime, not even an explicit nil
-func (o *FunctionMatchingResponse) UnsetTotalTime() {
-	o.TotalTime.Unset()
-}
-
-// GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionMatchingResponse) GetErrorMessage() string {
-	if o == nil || IsNil(o.ErrorMessage.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.ErrorMessage.Get()
-}
-
-// GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionMatchingResponse) GetErrorMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
-}
-
-// HasErrorMessage returns a boolean if a field has been set.
-func (o *FunctionMatchingResponse) HasErrorMessage() bool {
-	if o != nil && o.ErrorMessage.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetErrorMessage gets a reference to the given NullableString and assigns it to the ErrorMessage field.
-func (o *FunctionMatchingResponse) SetErrorMessage(v string) {
-	o.ErrorMessage.Set(&v)
-}
-// SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
-func (o *FunctionMatchingResponse) SetErrorMessageNil() {
-	o.ErrorMessage.Set(nil)
-}
-
-// UnsetErrorMessage ensures that no value is present for ErrorMessage, not even an explicit nil
-func (o *FunctionMatchingResponse) UnsetErrorMessage() {
-	o.ErrorMessage.Unset()
-}
-
-// GetCurrentPage returns the CurrentPage field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionMatchingResponse) GetCurrentPage() int32 {
-	if o == nil || IsNil(o.CurrentPage.Get()) {
-		var ret int32
-		return ret
-	}
-	return *o.CurrentPage.Get()
-}
-
-// GetCurrentPageOk returns a tuple with the CurrentPage field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionMatchingResponse) GetCurrentPageOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.CurrentPage.Get(), o.CurrentPage.IsSet()
-}
-
-// HasCurrentPage returns a boolean if a field has been set.
-func (o *FunctionMatchingResponse) HasCurrentPage() bool {
-	if o != nil && o.CurrentPage.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCurrentPage gets a reference to the given NullableInt32 and assigns it to the CurrentPage field.
-func (o *FunctionMatchingResponse) SetCurrentPage(v int32) {
-	o.CurrentPage.Set(&v)
-}
-// SetCurrentPageNil sets the value for CurrentPage to be an explicit nil
-func (o *FunctionMatchingResponse) SetCurrentPageNil() {
-	o.CurrentPage.Set(nil)
-}
-
-// UnsetCurrentPage ensures that no value is present for CurrentPage, not even an explicit nil
-func (o *FunctionMatchingResponse) UnsetCurrentPage() {
-	o.CurrentPage.Unset()
-}
-
 // GetTotalPages returns the TotalPages field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FunctionMatchingResponse) GetTotalPages() int32 {
 	if o == nil || IsNil(o.TotalPages.Get()) {
@@ -297,121 +372,46 @@ func (o *FunctionMatchingResponse) UnsetTotalPages() {
 	o.TotalPages.Unset()
 }
 
-// GetMatches returns the Matches field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionMatchingResponse) GetMatches() []FunctionMatch {
-	if o == nil {
-		var ret []FunctionMatch
-		return ret
-	}
-	return o.Matches
-}
-
-// GetMatchesOk returns a tuple with the Matches field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionMatchingResponse) GetMatchesOk() ([]FunctionMatch, bool) {
-	if o == nil || IsNil(o.Matches) {
-		return nil, false
-	}
-	return o.Matches, true
-}
-
-// HasMatches returns a boolean if a field has been set.
-func (o *FunctionMatchingResponse) HasMatches() bool {
-	if o != nil && !IsNil(o.Matches) {
-		return true
-	}
-
-	return false
-}
-
-// SetMatches gets a reference to the given []FunctionMatch and assigns it to the Matches field.
-func (o *FunctionMatchingResponse) SetMatches(v []FunctionMatch) {
-	o.Matches = v
-}
-
-// GetNumMatches returns the NumMatches field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionMatchingResponse) GetNumMatches() int32 {
-	if o == nil || IsNil(o.NumMatches.Get()) {
+// GetTotalTime returns the TotalTime field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FunctionMatchingResponse) GetTotalTime() int32 {
+	if o == nil || IsNil(o.TotalTime.Get()) {
 		var ret int32
 		return ret
 	}
-	return *o.NumMatches.Get()
+	return *o.TotalTime.Get()
 }
 
-// GetNumMatchesOk returns a tuple with the NumMatches field value if set, nil otherwise
+// GetTotalTimeOk returns a tuple with the TotalTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionMatchingResponse) GetNumMatchesOk() (*int32, bool) {
+func (o *FunctionMatchingResponse) GetTotalTimeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.NumMatches.Get(), o.NumMatches.IsSet()
+	return o.TotalTime.Get(), o.TotalTime.IsSet()
 }
 
-// HasNumMatches returns a boolean if a field has been set.
-func (o *FunctionMatchingResponse) HasNumMatches() bool {
-	if o != nil && o.NumMatches.IsSet() {
+// HasTotalTime returns a boolean if a field has been set.
+func (o *FunctionMatchingResponse) HasTotalTime() bool {
+	if o != nil && o.TotalTime.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNumMatches gets a reference to the given NullableInt32 and assigns it to the NumMatches field.
-func (o *FunctionMatchingResponse) SetNumMatches(v int32) {
-	o.NumMatches.Set(&v)
+// SetTotalTime gets a reference to the given NullableInt32 and assigns it to the TotalTime field.
+func (o *FunctionMatchingResponse) SetTotalTime(v int32) {
+	o.TotalTime.Set(&v)
 }
-// SetNumMatchesNil sets the value for NumMatches to be an explicit nil
-func (o *FunctionMatchingResponse) SetNumMatchesNil() {
-	o.NumMatches.Set(nil)
-}
-
-// UnsetNumMatches ensures that no value is present for NumMatches, not even an explicit nil
-func (o *FunctionMatchingResponse) UnsetNumMatches() {
-	o.NumMatches.Unset()
+// SetTotalTimeNil sets the value for TotalTime to be an explicit nil
+func (o *FunctionMatchingResponse) SetTotalTimeNil() {
+	o.TotalTime.Set(nil)
 }
 
-// GetNumDebugMatches returns the NumDebugMatches field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionMatchingResponse) GetNumDebugMatches() int32 {
-	if o == nil || IsNil(o.NumDebugMatches.Get()) {
-		var ret int32
-		return ret
-	}
-	return *o.NumDebugMatches.Get()
-}
-
-// GetNumDebugMatchesOk returns a tuple with the NumDebugMatches field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionMatchingResponse) GetNumDebugMatchesOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.NumDebugMatches.Get(), o.NumDebugMatches.IsSet()
-}
-
-// HasNumDebugMatches returns a boolean if a field has been set.
-func (o *FunctionMatchingResponse) HasNumDebugMatches() bool {
-	if o != nil && o.NumDebugMatches.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetNumDebugMatches gets a reference to the given NullableInt32 and assigns it to the NumDebugMatches field.
-func (o *FunctionMatchingResponse) SetNumDebugMatches(v int32) {
-	o.NumDebugMatches.Set(&v)
-}
-// SetNumDebugMatchesNil sets the value for NumDebugMatches to be an explicit nil
-func (o *FunctionMatchingResponse) SetNumDebugMatchesNil() {
-	o.NumDebugMatches.Set(nil)
-}
-
-// UnsetNumDebugMatches ensures that no value is present for NumDebugMatches, not even an explicit nil
-func (o *FunctionMatchingResponse) UnsetNumDebugMatches() {
-	o.NumDebugMatches.Unset()
+// UnsetTotalTime ensures that no value is present for TotalTime, not even an explicit nil
+func (o *FunctionMatchingResponse) UnsetTotalTime() {
+	o.TotalTime.Unset()
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -466,32 +466,32 @@ func (o FunctionMatchingResponse) MarshalJSON() ([]byte, error) {
 
 func (o FunctionMatchingResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if o.CurrentPage.IsSet() {
+		toSerialize["current_page"] = o.CurrentPage.Get()
+	}
+	if o.ErrorMessage.IsSet() {
+		toSerialize["error_message"] = o.ErrorMessage.Get()
+	}
+	if o.Matches != nil {
+		toSerialize["matches"] = o.Matches
+	}
+	if o.NumDebugMatches.IsSet() {
+		toSerialize["num_debug_matches"] = o.NumDebugMatches.Get()
+	}
+	if o.NumMatches.IsSet() {
+		toSerialize["num_matches"] = o.NumMatches.Get()
+	}
 	if !IsNil(o.Progress) {
 		toSerialize["progress"] = o.Progress
 	}
 	if o.Status.IsSet() {
 		toSerialize["status"] = o.Status.Get()
 	}
-	if o.TotalTime.IsSet() {
-		toSerialize["total_time"] = o.TotalTime.Get()
-	}
-	if o.ErrorMessage.IsSet() {
-		toSerialize["error_message"] = o.ErrorMessage.Get()
-	}
-	if o.CurrentPage.IsSet() {
-		toSerialize["current_page"] = o.CurrentPage.Get()
-	}
 	if o.TotalPages.IsSet() {
 		toSerialize["total_pages"] = o.TotalPages.Get()
 	}
-	if o.Matches != nil {
-		toSerialize["matches"] = o.Matches
-	}
-	if o.NumMatches.IsSet() {
-		toSerialize["num_matches"] = o.NumMatches.Get()
-	}
-	if o.NumDebugMatches.IsSet() {
-		toSerialize["num_debug_matches"] = o.NumDebugMatches.Get()
+	if o.TotalTime.IsSet() {
+		toSerialize["total_time"] = o.TotalTime.Get()
 	}
 	if o.UpdatedAt.IsSet() {
 		toSerialize["updated_at"] = o.UpdatedAt.Get()
@@ -518,15 +518,15 @@ func (o *FunctionMatchingResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "current_page")
+		delete(additionalProperties, "error_message")
+		delete(additionalProperties, "matches")
+		delete(additionalProperties, "num_debug_matches")
+		delete(additionalProperties, "num_matches")
 		delete(additionalProperties, "progress")
 		delete(additionalProperties, "status")
-		delete(additionalProperties, "total_time")
-		delete(additionalProperties, "error_message")
-		delete(additionalProperties, "current_page")
 		delete(additionalProperties, "total_pages")
-		delete(additionalProperties, "matches")
-		delete(additionalProperties, "num_matches")
-		delete(additionalProperties, "num_debug_matches")
+		delete(additionalProperties, "total_time")
 		delete(additionalProperties, "updated_at")
 		o.AdditionalProperties = additionalProperties
 	}

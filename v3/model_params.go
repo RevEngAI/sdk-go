@@ -19,17 +19,17 @@ var _ MappedNullable = &Params{}
 
 // Params struct for Params
 type Params struct {
-	DebugHash NullableString `json:"debug_hash"`
-	// The size of the binary data
-	BinarySize int32 `json:"binary_size"`
 	// The architecture of the binary data
 	Architecture string `json:"architecture"`
-	// The type of binary data
-	BinaryType string `json:"binary_type"`
-	// The format of the binary data
-	BinaryFormat string `json:"binary_format"`
 	// Whether the binary data is dynamic
 	BinaryDynamic bool `json:"binary_dynamic"`
+	// The format of the binary data
+	BinaryFormat string `json:"binary_format"`
+	// The size of the binary data
+	BinarySize int32 `json:"binary_size"`
+	// The type of binary data
+	BinaryType string `json:"binary_type"`
+	DebugHash NullableString `json:"debug_hash"`
 	// The name of the model
 	ModelName string `json:"model_name"`
 	AdditionalProperties map[string]interface{}
@@ -41,14 +41,14 @@ type _Params Params
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewParams(debugHash NullableString, binarySize int32, architecture string, binaryType string, binaryFormat string, binaryDynamic bool, modelName string) *Params {
+func NewParams(architecture string, binaryDynamic bool, binaryFormat string, binarySize int32, binaryType string, debugHash NullableString, modelName string) *Params {
 	this := Params{}
-	this.DebugHash = debugHash
-	this.BinarySize = binarySize
 	this.Architecture = architecture
-	this.BinaryType = binaryType
-	this.BinaryFormat = binaryFormat
 	this.BinaryDynamic = binaryDynamic
+	this.BinaryFormat = binaryFormat
+	this.BinarySize = binarySize
+	this.BinaryType = binaryType
+	this.DebugHash = debugHash
 	this.ModelName = modelName
 	return &this
 }
@@ -59,56 +59,6 @@ func NewParams(debugHash NullableString, binarySize int32, architecture string, 
 func NewParamsWithDefaults() *Params {
 	this := Params{}
 	return &this
-}
-
-// GetDebugHash returns the DebugHash field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *Params) GetDebugHash() string {
-	if o == nil || o.DebugHash.Get() == nil {
-		var ret string
-		return ret
-	}
-
-	return *o.DebugHash.Get()
-}
-
-// GetDebugHashOk returns a tuple with the DebugHash field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Params) GetDebugHashOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.DebugHash.Get(), o.DebugHash.IsSet()
-}
-
-// SetDebugHash sets field value
-func (o *Params) SetDebugHash(v string) {
-	o.DebugHash.Set(&v)
-}
-
-// GetBinarySize returns the BinarySize field value
-func (o *Params) GetBinarySize() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.BinarySize
-}
-
-// GetBinarySizeOk returns a tuple with the BinarySize field value
-// and a boolean to check if the value has been set.
-func (o *Params) GetBinarySizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.BinarySize, true
-}
-
-// SetBinarySize sets field value
-func (o *Params) SetBinarySize(v int32) {
-	o.BinarySize = v
 }
 
 // GetArchitecture returns the Architecture field value
@@ -135,28 +85,28 @@ func (o *Params) SetArchitecture(v string) {
 	o.Architecture = v
 }
 
-// GetBinaryType returns the BinaryType field value
-func (o *Params) GetBinaryType() string {
+// GetBinaryDynamic returns the BinaryDynamic field value
+func (o *Params) GetBinaryDynamic() bool {
 	if o == nil {
-		var ret string
+		var ret bool
 		return ret
 	}
 
-	return o.BinaryType
+	return o.BinaryDynamic
 }
 
-// GetBinaryTypeOk returns a tuple with the BinaryType field value
+// GetBinaryDynamicOk returns a tuple with the BinaryDynamic field value
 // and a boolean to check if the value has been set.
-func (o *Params) GetBinaryTypeOk() (*string, bool) {
+func (o *Params) GetBinaryDynamicOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.BinaryType, true
+	return &o.BinaryDynamic, true
 }
 
-// SetBinaryType sets field value
-func (o *Params) SetBinaryType(v string) {
-	o.BinaryType = v
+// SetBinaryDynamic sets field value
+func (o *Params) SetBinaryDynamic(v bool) {
+	o.BinaryDynamic = v
 }
 
 // GetBinaryFormat returns the BinaryFormat field value
@@ -183,28 +133,78 @@ func (o *Params) SetBinaryFormat(v string) {
 	o.BinaryFormat = v
 }
 
-// GetBinaryDynamic returns the BinaryDynamic field value
-func (o *Params) GetBinaryDynamic() bool {
+// GetBinarySize returns the BinarySize field value
+func (o *Params) GetBinarySize() int32 {
 	if o == nil {
-		var ret bool
+		var ret int32
 		return ret
 	}
 
-	return o.BinaryDynamic
+	return o.BinarySize
 }
 
-// GetBinaryDynamicOk returns a tuple with the BinaryDynamic field value
+// GetBinarySizeOk returns a tuple with the BinarySize field value
 // and a boolean to check if the value has been set.
-func (o *Params) GetBinaryDynamicOk() (*bool, bool) {
+func (o *Params) GetBinarySizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.BinaryDynamic, true
+	return &o.BinarySize, true
 }
 
-// SetBinaryDynamic sets field value
-func (o *Params) SetBinaryDynamic(v bool) {
-	o.BinaryDynamic = v
+// SetBinarySize sets field value
+func (o *Params) SetBinarySize(v int32) {
+	o.BinarySize = v
+}
+
+// GetBinaryType returns the BinaryType field value
+func (o *Params) GetBinaryType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.BinaryType
+}
+
+// GetBinaryTypeOk returns a tuple with the BinaryType field value
+// and a boolean to check if the value has been set.
+func (o *Params) GetBinaryTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.BinaryType, true
+}
+
+// SetBinaryType sets field value
+func (o *Params) SetBinaryType(v string) {
+	o.BinaryType = v
+}
+
+// GetDebugHash returns the DebugHash field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *Params) GetDebugHash() string {
+	if o == nil || o.DebugHash.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.DebugHash.Get()
+}
+
+// GetDebugHashOk returns a tuple with the DebugHash field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Params) GetDebugHashOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DebugHash.Get(), o.DebugHash.IsSet()
+}
+
+// SetDebugHash sets field value
+func (o *Params) SetDebugHash(v string) {
+	o.DebugHash.Set(&v)
 }
 
 // GetModelName returns the ModelName field value
@@ -241,12 +241,12 @@ func (o Params) MarshalJSON() ([]byte, error) {
 
 func (o Params) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["debug_hash"] = o.DebugHash.Get()
-	toSerialize["binary_size"] = o.BinarySize
 	toSerialize["architecture"] = o.Architecture
-	toSerialize["binary_type"] = o.BinaryType
-	toSerialize["binary_format"] = o.BinaryFormat
 	toSerialize["binary_dynamic"] = o.BinaryDynamic
+	toSerialize["binary_format"] = o.BinaryFormat
+	toSerialize["binary_size"] = o.BinarySize
+	toSerialize["binary_type"] = o.BinaryType
+	toSerialize["debug_hash"] = o.DebugHash.Get()
 	toSerialize["model_name"] = o.ModelName
 
 	for key, value := range o.AdditionalProperties {
@@ -261,12 +261,12 @@ func (o *Params) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"debug_hash",
-		"binary_size",
 		"architecture",
-		"binary_type",
-		"binary_format",
 		"binary_dynamic",
+		"binary_format",
+		"binary_size",
+		"binary_type",
+		"debug_hash",
 		"model_name",
 	}
 
@@ -297,12 +297,12 @@ func (o *Params) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "debug_hash")
-		delete(additionalProperties, "binary_size")
 		delete(additionalProperties, "architecture")
-		delete(additionalProperties, "binary_type")
-		delete(additionalProperties, "binary_format")
 		delete(additionalProperties, "binary_dynamic")
+		delete(additionalProperties, "binary_format")
+		delete(additionalProperties, "binary_size")
+		delete(additionalProperties, "binary_type")
+		delete(additionalProperties, "debug_hash")
 		delete(additionalProperties, "model_name")
 		o.AdditionalProperties = additionalProperties
 	}

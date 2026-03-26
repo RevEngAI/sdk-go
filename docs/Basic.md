@@ -4,29 +4,29 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AnalysisScope** | **string** | The scope of the analysis | 
+**BaseAddress** | **NullableInt32** |  | 
 **BinaryId** | **int32** | The ID of the binary | 
 **BinaryName** | **string** | The name of the binary uploaded | 
 **BinarySize** | **int32** | The size of the binary uploaded (bytes) | 
+**BinaryUuid** | Pointer to **NullableString** |  | [optional] 
 **Creation** | **time.Time** | When the binary was uploaded | 
-**Sha256Hash** | **string** | The hash of the binary uploaded | 
-**ModelName** | **string** | The model name used for analysis | 
-**ModelId** | **int32** | The model ID used for analysis | 
-**OwnerUsername** | **string** | The name of the owner of the binary | 
-**IsSystem** | **bool** | Whether the analysis is a system analysis | 
-**AnalysisScope** | **string** | The scope of the analysis | 
-**IsOwner** | **bool** | Whether the current user is the owner | 
 **Debug** | **bool** | Whether the current analysis was analysed with debug symbols | 
 **FunctionCount** | **int32** | The number of functions in the binary | 
 **IsAdvanced** | **bool** | Whether the analysis was advanced | 
-**BaseAddress** | **NullableInt32** |  | 
-**BinaryUuid** | Pointer to **NullableString** |  | [optional] 
+**IsOwner** | **bool** | Whether the current user is the owner | 
+**IsSystem** | **bool** | Whether the analysis is a system analysis | 
+**ModelId** | **int32** | The model ID used for analysis | 
+**ModelName** | **string** | The model name used for analysis | 
+**OwnerUsername** | **string** | The name of the owner of the binary | 
 **SequencerVersion** | Pointer to **NullableString** |  | [optional] 
+**Sha256Hash** | **string** | The hash of the binary uploaded | 
 
 ## Methods
 
 ### NewBasic
 
-`func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time.Time, sha256Hash string, modelName string, modelId int32, ownerUsername string, isSystem bool, analysisScope string, isOwner bool, debug bool, functionCount int32, isAdvanced bool, baseAddress NullableInt32, ) *Basic`
+`func NewBasic(analysisScope string, baseAddress NullableInt32, binaryId int32, binaryName string, binarySize int32, creation time.Time, debug bool, functionCount int32, isAdvanced bool, isOwner bool, isSystem bool, modelId int32, modelName string, ownerUsername string, sha256Hash string, ) *Basic`
 
 NewBasic instantiates a new Basic object
 This constructor will assign default values to properties that have it defined,
@@ -41,6 +41,56 @@ NewBasicWithDefaults instantiates a new Basic object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetAnalysisScope
+
+`func (o *Basic) GetAnalysisScope() string`
+
+GetAnalysisScope returns the AnalysisScope field if non-nil, zero value otherwise.
+
+### GetAnalysisScopeOk
+
+`func (o *Basic) GetAnalysisScopeOk() (*string, bool)`
+
+GetAnalysisScopeOk returns a tuple with the AnalysisScope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAnalysisScope
+
+`func (o *Basic) SetAnalysisScope(v string)`
+
+SetAnalysisScope sets AnalysisScope field to given value.
+
+
+### GetBaseAddress
+
+`func (o *Basic) GetBaseAddress() int32`
+
+GetBaseAddress returns the BaseAddress field if non-nil, zero value otherwise.
+
+### GetBaseAddressOk
+
+`func (o *Basic) GetBaseAddressOk() (*int32, bool)`
+
+GetBaseAddressOk returns a tuple with the BaseAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBaseAddress
+
+`func (o *Basic) SetBaseAddress(v int32)`
+
+SetBaseAddress sets BaseAddress field to given value.
+
+
+### SetBaseAddressNil
+
+`func (o *Basic) SetBaseAddressNil(b bool)`
+
+ SetBaseAddressNil sets the value for BaseAddress to be an explicit nil
+
+### UnsetBaseAddress
+`func (o *Basic) UnsetBaseAddress()`
+
+UnsetBaseAddress ensures that no value is present for BaseAddress, not even an explicit nil
 ### GetBinaryId
 
 `func (o *Basic) GetBinaryId() int32`
@@ -101,6 +151,41 @@ and a boolean to check if the value has been set.
 SetBinarySize sets BinarySize field to given value.
 
 
+### GetBinaryUuid
+
+`func (o *Basic) GetBinaryUuid() string`
+
+GetBinaryUuid returns the BinaryUuid field if non-nil, zero value otherwise.
+
+### GetBinaryUuidOk
+
+`func (o *Basic) GetBinaryUuidOk() (*string, bool)`
+
+GetBinaryUuidOk returns a tuple with the BinaryUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBinaryUuid
+
+`func (o *Basic) SetBinaryUuid(v string)`
+
+SetBinaryUuid sets BinaryUuid field to given value.
+
+### HasBinaryUuid
+
+`func (o *Basic) HasBinaryUuid() bool`
+
+HasBinaryUuid returns a boolean if a field has been set.
+
+### SetBinaryUuidNil
+
+`func (o *Basic) SetBinaryUuidNil(b bool)`
+
+ SetBinaryUuidNil sets the value for BinaryUuid to be an explicit nil
+
+### UnsetBinaryUuid
+`func (o *Basic) UnsetBinaryUuid()`
+
+UnsetBinaryUuid ensures that no value is present for BinaryUuid, not even an explicit nil
 ### GetCreation
 
 `func (o *Basic) GetCreation() time.Time`
@@ -119,146 +204,6 @@ and a boolean to check if the value has been set.
 `func (o *Basic) SetCreation(v time.Time)`
 
 SetCreation sets Creation field to given value.
-
-
-### GetSha256Hash
-
-`func (o *Basic) GetSha256Hash() string`
-
-GetSha256Hash returns the Sha256Hash field if non-nil, zero value otherwise.
-
-### GetSha256HashOk
-
-`func (o *Basic) GetSha256HashOk() (*string, bool)`
-
-GetSha256HashOk returns a tuple with the Sha256Hash field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSha256Hash
-
-`func (o *Basic) SetSha256Hash(v string)`
-
-SetSha256Hash sets Sha256Hash field to given value.
-
-
-### GetModelName
-
-`func (o *Basic) GetModelName() string`
-
-GetModelName returns the ModelName field if non-nil, zero value otherwise.
-
-### GetModelNameOk
-
-`func (o *Basic) GetModelNameOk() (*string, bool)`
-
-GetModelNameOk returns a tuple with the ModelName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelName
-
-`func (o *Basic) SetModelName(v string)`
-
-SetModelName sets ModelName field to given value.
-
-
-### GetModelId
-
-`func (o *Basic) GetModelId() int32`
-
-GetModelId returns the ModelId field if non-nil, zero value otherwise.
-
-### GetModelIdOk
-
-`func (o *Basic) GetModelIdOk() (*int32, bool)`
-
-GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelId
-
-`func (o *Basic) SetModelId(v int32)`
-
-SetModelId sets ModelId field to given value.
-
-
-### GetOwnerUsername
-
-`func (o *Basic) GetOwnerUsername() string`
-
-GetOwnerUsername returns the OwnerUsername field if non-nil, zero value otherwise.
-
-### GetOwnerUsernameOk
-
-`func (o *Basic) GetOwnerUsernameOk() (*string, bool)`
-
-GetOwnerUsernameOk returns a tuple with the OwnerUsername field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOwnerUsername
-
-`func (o *Basic) SetOwnerUsername(v string)`
-
-SetOwnerUsername sets OwnerUsername field to given value.
-
-
-### GetIsSystem
-
-`func (o *Basic) GetIsSystem() bool`
-
-GetIsSystem returns the IsSystem field if non-nil, zero value otherwise.
-
-### GetIsSystemOk
-
-`func (o *Basic) GetIsSystemOk() (*bool, bool)`
-
-GetIsSystemOk returns a tuple with the IsSystem field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsSystem
-
-`func (o *Basic) SetIsSystem(v bool)`
-
-SetIsSystem sets IsSystem field to given value.
-
-
-### GetAnalysisScope
-
-`func (o *Basic) GetAnalysisScope() string`
-
-GetAnalysisScope returns the AnalysisScope field if non-nil, zero value otherwise.
-
-### GetAnalysisScopeOk
-
-`func (o *Basic) GetAnalysisScopeOk() (*string, bool)`
-
-GetAnalysisScopeOk returns a tuple with the AnalysisScope field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAnalysisScope
-
-`func (o *Basic) SetAnalysisScope(v string)`
-
-SetAnalysisScope sets AnalysisScope field to given value.
-
-
-### GetIsOwner
-
-`func (o *Basic) GetIsOwner() bool`
-
-GetIsOwner returns the IsOwner field if non-nil, zero value otherwise.
-
-### GetIsOwnerOk
-
-`func (o *Basic) GetIsOwnerOk() (*bool, bool)`
-
-GetIsOwnerOk returns a tuple with the IsOwner field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsOwner
-
-`func (o *Basic) SetIsOwner(v bool)`
-
-SetIsOwner sets IsOwner field to given value.
 
 
 ### GetDebug
@@ -321,71 +266,106 @@ and a boolean to check if the value has been set.
 SetIsAdvanced sets IsAdvanced field to given value.
 
 
-### GetBaseAddress
+### GetIsOwner
 
-`func (o *Basic) GetBaseAddress() int32`
+`func (o *Basic) GetIsOwner() bool`
 
-GetBaseAddress returns the BaseAddress field if non-nil, zero value otherwise.
+GetIsOwner returns the IsOwner field if non-nil, zero value otherwise.
 
-### GetBaseAddressOk
+### GetIsOwnerOk
 
-`func (o *Basic) GetBaseAddressOk() (*int32, bool)`
+`func (o *Basic) GetIsOwnerOk() (*bool, bool)`
 
-GetBaseAddressOk returns a tuple with the BaseAddress field if it's non-nil, zero value otherwise
+GetIsOwnerOk returns a tuple with the IsOwner field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBaseAddress
+### SetIsOwner
 
-`func (o *Basic) SetBaseAddress(v int32)`
+`func (o *Basic) SetIsOwner(v bool)`
 
-SetBaseAddress sets BaseAddress field to given value.
+SetIsOwner sets IsOwner field to given value.
 
 
-### SetBaseAddressNil
+### GetIsSystem
 
-`func (o *Basic) SetBaseAddressNil(b bool)`
+`func (o *Basic) GetIsSystem() bool`
 
- SetBaseAddressNil sets the value for BaseAddress to be an explicit nil
+GetIsSystem returns the IsSystem field if non-nil, zero value otherwise.
 
-### UnsetBaseAddress
-`func (o *Basic) UnsetBaseAddress()`
+### GetIsSystemOk
 
-UnsetBaseAddress ensures that no value is present for BaseAddress, not even an explicit nil
-### GetBinaryUuid
+`func (o *Basic) GetIsSystemOk() (*bool, bool)`
 
-`func (o *Basic) GetBinaryUuid() string`
-
-GetBinaryUuid returns the BinaryUuid field if non-nil, zero value otherwise.
-
-### GetBinaryUuidOk
-
-`func (o *Basic) GetBinaryUuidOk() (*string, bool)`
-
-GetBinaryUuidOk returns a tuple with the BinaryUuid field if it's non-nil, zero value otherwise
+GetIsSystemOk returns a tuple with the IsSystem field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBinaryUuid
+### SetIsSystem
 
-`func (o *Basic) SetBinaryUuid(v string)`
+`func (o *Basic) SetIsSystem(v bool)`
 
-SetBinaryUuid sets BinaryUuid field to given value.
+SetIsSystem sets IsSystem field to given value.
 
-### HasBinaryUuid
 
-`func (o *Basic) HasBinaryUuid() bool`
+### GetModelId
 
-HasBinaryUuid returns a boolean if a field has been set.
+`func (o *Basic) GetModelId() int32`
 
-### SetBinaryUuidNil
+GetModelId returns the ModelId field if non-nil, zero value otherwise.
 
-`func (o *Basic) SetBinaryUuidNil(b bool)`
+### GetModelIdOk
 
- SetBinaryUuidNil sets the value for BinaryUuid to be an explicit nil
+`func (o *Basic) GetModelIdOk() (*int32, bool)`
 
-### UnsetBinaryUuid
-`func (o *Basic) UnsetBinaryUuid()`
+GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
 
-UnsetBinaryUuid ensures that no value is present for BinaryUuid, not even an explicit nil
+### SetModelId
+
+`func (o *Basic) SetModelId(v int32)`
+
+SetModelId sets ModelId field to given value.
+
+
+### GetModelName
+
+`func (o *Basic) GetModelName() string`
+
+GetModelName returns the ModelName field if non-nil, zero value otherwise.
+
+### GetModelNameOk
+
+`func (o *Basic) GetModelNameOk() (*string, bool)`
+
+GetModelNameOk returns a tuple with the ModelName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelName
+
+`func (o *Basic) SetModelName(v string)`
+
+SetModelName sets ModelName field to given value.
+
+
+### GetOwnerUsername
+
+`func (o *Basic) GetOwnerUsername() string`
+
+GetOwnerUsername returns the OwnerUsername field if non-nil, zero value otherwise.
+
+### GetOwnerUsernameOk
+
+`func (o *Basic) GetOwnerUsernameOk() (*string, bool)`
+
+GetOwnerUsernameOk returns a tuple with the OwnerUsername field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOwnerUsername
+
+`func (o *Basic) SetOwnerUsername(v string)`
+
+SetOwnerUsername sets OwnerUsername field to given value.
+
+
 ### GetSequencerVersion
 
 `func (o *Basic) GetSequencerVersion() string`
@@ -421,6 +401,26 @@ HasSequencerVersion returns a boolean if a field has been set.
 `func (o *Basic) UnsetSequencerVersion()`
 
 UnsetSequencerVersion ensures that no value is present for SequencerVersion, not even an explicit nil
+### GetSha256Hash
+
+`func (o *Basic) GetSha256Hash() string`
+
+GetSha256Hash returns the Sha256Hash field if non-nil, zero value otherwise.
+
+### GetSha256HashOk
+
+`func (o *Basic) GetSha256HashOk() (*string, bool)`
+
+GetSha256HashOk returns a tuple with the Sha256Hash field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSha256Hash
+
+`func (o *Basic) SetSha256Hash(v string)`
+
+SetSha256Hash sets Sha256Hash field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

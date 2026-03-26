@@ -19,13 +19,13 @@ var _ MappedNullable = &Enumeration{}
 
 // Enumeration struct for Enumeration
 type Enumeration struct {
-	LastChange NullableString `json:"last_change,omitempty"`
-	// Name of the enumeration
-	Name string `json:"name"`
-	// Dictionary of enumeration members and their values
-	Members map[string]int32 `json:"members"`
 	// Type of artifact that the enumeration is associated with
 	ArtifactType *string `json:"artifact_type,omitempty"`
+	LastChange NullableString `json:"last_change,omitempty"`
+	// Dictionary of enumeration members and their values
+	Members map[string]int32 `json:"members"`
+	// Name of the enumeration
+	Name string `json:"name"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,10 +35,10 @@ type _Enumeration Enumeration
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnumeration(name string, members map[string]int32) *Enumeration {
+func NewEnumeration(members map[string]int32, name string) *Enumeration {
 	this := Enumeration{}
-	this.Name = name
 	this.Members = members
+	this.Name = name
 	return &this
 }
 
@@ -48,6 +48,38 @@ func NewEnumeration(name string, members map[string]int32) *Enumeration {
 func NewEnumerationWithDefaults() *Enumeration {
 	this := Enumeration{}
 	return &this
+}
+
+// GetArtifactType returns the ArtifactType field value if set, zero value otherwise.
+func (o *Enumeration) GetArtifactType() string {
+	if o == nil || IsNil(o.ArtifactType) {
+		var ret string
+		return ret
+	}
+	return *o.ArtifactType
+}
+
+// GetArtifactTypeOk returns a tuple with the ArtifactType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Enumeration) GetArtifactTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.ArtifactType) {
+		return nil, false
+	}
+	return o.ArtifactType, true
+}
+
+// HasArtifactType returns a boolean if a field has been set.
+func (o *Enumeration) HasArtifactType() bool {
+	if o != nil && !IsNil(o.ArtifactType) {
+		return true
+	}
+
+	return false
+}
+
+// SetArtifactType gets a reference to the given string and assigns it to the ArtifactType field.
+func (o *Enumeration) SetArtifactType(v string) {
+	o.ArtifactType = &v
 }
 
 // GetLastChange returns the LastChange field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -92,30 +124,6 @@ func (o *Enumeration) UnsetLastChange() {
 	o.LastChange.Unset()
 }
 
-// GetName returns the Name field value
-func (o *Enumeration) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *Enumeration) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *Enumeration) SetName(v string) {
-	o.Name = v
-}
-
 // GetMembers returns the Members field value
 func (o *Enumeration) GetMembers() map[string]int32 {
 	if o == nil {
@@ -140,36 +148,28 @@ func (o *Enumeration) SetMembers(v map[string]int32) {
 	o.Members = v
 }
 
-// GetArtifactType returns the ArtifactType field value if set, zero value otherwise.
-func (o *Enumeration) GetArtifactType() string {
-	if o == nil || IsNil(o.ArtifactType) {
+// GetName returns the Name field value
+func (o *Enumeration) GetName() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ArtifactType
+
+	return o.Name
 }
 
-// GetArtifactTypeOk returns a tuple with the ArtifactType field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *Enumeration) GetArtifactTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.ArtifactType) {
+func (o *Enumeration) GetNameOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ArtifactType, true
+	return &o.Name, true
 }
 
-// HasArtifactType returns a boolean if a field has been set.
-func (o *Enumeration) HasArtifactType() bool {
-	if o != nil && !IsNil(o.ArtifactType) {
-		return true
-	}
-
-	return false
-}
-
-// SetArtifactType gets a reference to the given string and assigns it to the ArtifactType field.
-func (o *Enumeration) SetArtifactType(v string) {
-	o.ArtifactType = &v
+// SetName sets field value
+func (o *Enumeration) SetName(v string) {
+	o.Name = v
 }
 
 func (o Enumeration) MarshalJSON() ([]byte, error) {
@@ -182,14 +182,14 @@ func (o Enumeration) MarshalJSON() ([]byte, error) {
 
 func (o Enumeration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.LastChange.IsSet() {
-		toSerialize["last_change"] = o.LastChange.Get()
-	}
-	toSerialize["name"] = o.Name
-	toSerialize["members"] = o.Members
 	if !IsNil(o.ArtifactType) {
 		toSerialize["artifact_type"] = o.ArtifactType
 	}
+	if o.LastChange.IsSet() {
+		toSerialize["last_change"] = o.LastChange.Get()
+	}
+	toSerialize["members"] = o.Members
+	toSerialize["name"] = o.Name
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -203,8 +203,8 @@ func (o *Enumeration) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"name",
 		"members",
+		"name",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -234,10 +234,10 @@ func (o *Enumeration) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "last_change")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "members")
 		delete(additionalProperties, "artifact_type")
+		delete(additionalProperties, "last_change")
+		delete(additionalProperties, "members")
+		delete(additionalProperties, "name")
 		o.AdditionalProperties = additionalProperties
 	}
 

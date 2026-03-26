@@ -19,10 +19,10 @@ var _ MappedNullable = &FileMetadata{}
 
 // FileMetadata struct for FileMetadata
 type FileMetadata struct {
-	Size int32 `json:"size"`
-	FriendlySize string `json:"friendly_size"`
 	Entropy float32 `json:"entropy"`
+	FriendlySize string `json:"friendly_size"`
 	Hashes FileHashes `json:"hashes"`
+	Size int32 `json:"size"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,12 +32,12 @@ type _FileMetadata FileMetadata
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileMetadata(size int32, friendlySize string, entropy float32, hashes FileHashes) *FileMetadata {
+func NewFileMetadata(entropy float32, friendlySize string, hashes FileHashes, size int32) *FileMetadata {
 	this := FileMetadata{}
-	this.Size = size
-	this.FriendlySize = friendlySize
 	this.Entropy = entropy
+	this.FriendlySize = friendlySize
 	this.Hashes = hashes
+	this.Size = size
 	return &this
 }
 
@@ -47,54 +47,6 @@ func NewFileMetadata(size int32, friendlySize string, entropy float32, hashes Fi
 func NewFileMetadataWithDefaults() *FileMetadata {
 	this := FileMetadata{}
 	return &this
-}
-
-// GetSize returns the Size field value
-func (o *FileMetadata) GetSize() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Size
-}
-
-// GetSizeOk returns a tuple with the Size field value
-// and a boolean to check if the value has been set.
-func (o *FileMetadata) GetSizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Size, true
-}
-
-// SetSize sets field value
-func (o *FileMetadata) SetSize(v int32) {
-	o.Size = v
-}
-
-// GetFriendlySize returns the FriendlySize field value
-func (o *FileMetadata) GetFriendlySize() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.FriendlySize
-}
-
-// GetFriendlySizeOk returns a tuple with the FriendlySize field value
-// and a boolean to check if the value has been set.
-func (o *FileMetadata) GetFriendlySizeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FriendlySize, true
-}
-
-// SetFriendlySize sets field value
-func (o *FileMetadata) SetFriendlySize(v string) {
-	o.FriendlySize = v
 }
 
 // GetEntropy returns the Entropy field value
@@ -121,6 +73,30 @@ func (o *FileMetadata) SetEntropy(v float32) {
 	o.Entropy = v
 }
 
+// GetFriendlySize returns the FriendlySize field value
+func (o *FileMetadata) GetFriendlySize() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FriendlySize
+}
+
+// GetFriendlySizeOk returns a tuple with the FriendlySize field value
+// and a boolean to check if the value has been set.
+func (o *FileMetadata) GetFriendlySizeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FriendlySize, true
+}
+
+// SetFriendlySize sets field value
+func (o *FileMetadata) SetFriendlySize(v string) {
+	o.FriendlySize = v
+}
+
 // GetHashes returns the Hashes field value
 func (o *FileMetadata) GetHashes() FileHashes {
 	if o == nil {
@@ -145,6 +121,30 @@ func (o *FileMetadata) SetHashes(v FileHashes) {
 	o.Hashes = v
 }
 
+// GetSize returns the Size field value
+func (o *FileMetadata) GetSize() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Size
+}
+
+// GetSizeOk returns a tuple with the Size field value
+// and a boolean to check if the value has been set.
+func (o *FileMetadata) GetSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Size, true
+}
+
+// SetSize sets field value
+func (o *FileMetadata) SetSize(v int32) {
+	o.Size = v
+}
+
 func (o FileMetadata) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -155,10 +155,10 @@ func (o FileMetadata) MarshalJSON() ([]byte, error) {
 
 func (o FileMetadata) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["size"] = o.Size
-	toSerialize["friendly_size"] = o.FriendlySize
 	toSerialize["entropy"] = o.Entropy
+	toSerialize["friendly_size"] = o.FriendlySize
 	toSerialize["hashes"] = o.Hashes
+	toSerialize["size"] = o.Size
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -172,10 +172,10 @@ func (o *FileMetadata) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"size",
-		"friendly_size",
 		"entropy",
+		"friendly_size",
 		"hashes",
+		"size",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -205,10 +205,10 @@ func (o *FileMetadata) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "size")
-		delete(additionalProperties, "friendly_size")
 		delete(additionalProperties, "entropy")
+		delete(additionalProperties, "friendly_size")
 		delete(additionalProperties, "hashes")
+		delete(additionalProperties, "size")
 		o.AdditionalProperties = additionalProperties
 	}
 

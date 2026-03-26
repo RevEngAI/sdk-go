@@ -19,14 +19,14 @@ var _ MappedNullable = &XrefFromResponse{}
 
 // XrefFromResponse struct for XrefFromResponse
 type XrefFromResponse struct {
-	Value NullableString `json:"value"`
-	IsScalar NullableBool `json:"is_scalar,omitempty"`
 	IsCall NullableBool `json:"is_call,omitempty"`
 	IsData NullableBool `json:"is_data,omitempty"`
+	IsScalar NullableBool `json:"is_scalar,omitempty"`
 	IsString NullableBool `json:"is_string,omitempty"`
+	OrigStrEncoding NullableString `json:"orig_str_encoding,omitempty"`
 	RawData NullableString `json:"raw_data,omitempty"`
 	Segment NullableSegmentInfo `json:"segment,omitempty"`
-	OrigStrEncoding NullableString `json:"orig_str_encoding,omitempty"`
+	Value NullableString `json:"value"`
 	XrefTo NullableString `json:"xref_to"`
 	AdditionalProperties map[string]interface{}
 }
@@ -50,74 +50,6 @@ func NewXrefFromResponse(value NullableString, xrefTo NullableString) *XrefFromR
 func NewXrefFromResponseWithDefaults() *XrefFromResponse {
 	this := XrefFromResponse{}
 	return &this
-}
-
-// GetValue returns the Value field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *XrefFromResponse) GetValue() string {
-	if o == nil || o.Value.Get() == nil {
-		var ret string
-		return ret
-	}
-
-	return *o.Value.Get()
-}
-
-// GetValueOk returns a tuple with the Value field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *XrefFromResponse) GetValueOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Value.Get(), o.Value.IsSet()
-}
-
-// SetValue sets field value
-func (o *XrefFromResponse) SetValue(v string) {
-	o.Value.Set(&v)
-}
-
-// GetIsScalar returns the IsScalar field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *XrefFromResponse) GetIsScalar() bool {
-	if o == nil || IsNil(o.IsScalar.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.IsScalar.Get()
-}
-
-// GetIsScalarOk returns a tuple with the IsScalar field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *XrefFromResponse) GetIsScalarOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.IsScalar.Get(), o.IsScalar.IsSet()
-}
-
-// HasIsScalar returns a boolean if a field has been set.
-func (o *XrefFromResponse) HasIsScalar() bool {
-	if o != nil && o.IsScalar.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetIsScalar gets a reference to the given NullableBool and assigns it to the IsScalar field.
-func (o *XrefFromResponse) SetIsScalar(v bool) {
-	o.IsScalar.Set(&v)
-}
-// SetIsScalarNil sets the value for IsScalar to be an explicit nil
-func (o *XrefFromResponse) SetIsScalarNil() {
-	o.IsScalar.Set(nil)
-}
-
-// UnsetIsScalar ensures that no value is present for IsScalar, not even an explicit nil
-func (o *XrefFromResponse) UnsetIsScalar() {
-	o.IsScalar.Unset()
 }
 
 // GetIsCall returns the IsCall field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -204,6 +136,48 @@ func (o *XrefFromResponse) UnsetIsData() {
 	o.IsData.Unset()
 }
 
+// GetIsScalar returns the IsScalar field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *XrefFromResponse) GetIsScalar() bool {
+	if o == nil || IsNil(o.IsScalar.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.IsScalar.Get()
+}
+
+// GetIsScalarOk returns a tuple with the IsScalar field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *XrefFromResponse) GetIsScalarOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IsScalar.Get(), o.IsScalar.IsSet()
+}
+
+// HasIsScalar returns a boolean if a field has been set.
+func (o *XrefFromResponse) HasIsScalar() bool {
+	if o != nil && o.IsScalar.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIsScalar gets a reference to the given NullableBool and assigns it to the IsScalar field.
+func (o *XrefFromResponse) SetIsScalar(v bool) {
+	o.IsScalar.Set(&v)
+}
+// SetIsScalarNil sets the value for IsScalar to be an explicit nil
+func (o *XrefFromResponse) SetIsScalarNil() {
+	o.IsScalar.Set(nil)
+}
+
+// UnsetIsScalar ensures that no value is present for IsScalar, not even an explicit nil
+func (o *XrefFromResponse) UnsetIsScalar() {
+	o.IsScalar.Unset()
+}
+
 // GetIsString returns the IsString field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *XrefFromResponse) GetIsString() bool {
 	if o == nil || IsNil(o.IsString.Get()) {
@@ -244,6 +218,48 @@ func (o *XrefFromResponse) SetIsStringNil() {
 // UnsetIsString ensures that no value is present for IsString, not even an explicit nil
 func (o *XrefFromResponse) UnsetIsString() {
 	o.IsString.Unset()
+}
+
+// GetOrigStrEncoding returns the OrigStrEncoding field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *XrefFromResponse) GetOrigStrEncoding() string {
+	if o == nil || IsNil(o.OrigStrEncoding.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.OrigStrEncoding.Get()
+}
+
+// GetOrigStrEncodingOk returns a tuple with the OrigStrEncoding field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *XrefFromResponse) GetOrigStrEncodingOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.OrigStrEncoding.Get(), o.OrigStrEncoding.IsSet()
+}
+
+// HasOrigStrEncoding returns a boolean if a field has been set.
+func (o *XrefFromResponse) HasOrigStrEncoding() bool {
+	if o != nil && o.OrigStrEncoding.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOrigStrEncoding gets a reference to the given NullableString and assigns it to the OrigStrEncoding field.
+func (o *XrefFromResponse) SetOrigStrEncoding(v string) {
+	o.OrigStrEncoding.Set(&v)
+}
+// SetOrigStrEncodingNil sets the value for OrigStrEncoding to be an explicit nil
+func (o *XrefFromResponse) SetOrigStrEncodingNil() {
+	o.OrigStrEncoding.Set(nil)
+}
+
+// UnsetOrigStrEncoding ensures that no value is present for OrigStrEncoding, not even an explicit nil
+func (o *XrefFromResponse) UnsetOrigStrEncoding() {
+	o.OrigStrEncoding.Unset()
 }
 
 // GetRawData returns the RawData field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -330,46 +346,30 @@ func (o *XrefFromResponse) UnsetSegment() {
 	o.Segment.Unset()
 }
 
-// GetOrigStrEncoding returns the OrigStrEncoding field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *XrefFromResponse) GetOrigStrEncoding() string {
-	if o == nil || IsNil(o.OrigStrEncoding.Get()) {
+// GetValue returns the Value field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *XrefFromResponse) GetValue() string {
+	if o == nil || o.Value.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrigStrEncoding.Get()
+
+	return *o.Value.Get()
 }
 
-// GetOrigStrEncodingOk returns a tuple with the OrigStrEncoding field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *XrefFromResponse) GetOrigStrEncodingOk() (*string, bool) {
+func (o *XrefFromResponse) GetValueOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.OrigStrEncoding.Get(), o.OrigStrEncoding.IsSet()
+	return o.Value.Get(), o.Value.IsSet()
 }
 
-// HasOrigStrEncoding returns a boolean if a field has been set.
-func (o *XrefFromResponse) HasOrigStrEncoding() bool {
-	if o != nil && o.OrigStrEncoding.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetOrigStrEncoding gets a reference to the given NullableString and assigns it to the OrigStrEncoding field.
-func (o *XrefFromResponse) SetOrigStrEncoding(v string) {
-	o.OrigStrEncoding.Set(&v)
-}
-// SetOrigStrEncodingNil sets the value for OrigStrEncoding to be an explicit nil
-func (o *XrefFromResponse) SetOrigStrEncodingNil() {
-	o.OrigStrEncoding.Set(nil)
-}
-
-// UnsetOrigStrEncoding ensures that no value is present for OrigStrEncoding, not even an explicit nil
-func (o *XrefFromResponse) UnsetOrigStrEncoding() {
-	o.OrigStrEncoding.Unset()
+// SetValue sets field value
+func (o *XrefFromResponse) SetValue(v string) {
+	o.Value.Set(&v)
 }
 
 // GetXrefTo returns the XrefTo field value
@@ -408,18 +408,20 @@ func (o XrefFromResponse) MarshalJSON() ([]byte, error) {
 
 func (o XrefFromResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["value"] = o.Value.Get()
-	if o.IsScalar.IsSet() {
-		toSerialize["is_scalar"] = o.IsScalar.Get()
-	}
 	if o.IsCall.IsSet() {
 		toSerialize["is_call"] = o.IsCall.Get()
 	}
 	if o.IsData.IsSet() {
 		toSerialize["is_data"] = o.IsData.Get()
 	}
+	if o.IsScalar.IsSet() {
+		toSerialize["is_scalar"] = o.IsScalar.Get()
+	}
 	if o.IsString.IsSet() {
 		toSerialize["is_string"] = o.IsString.Get()
+	}
+	if o.OrigStrEncoding.IsSet() {
+		toSerialize["orig_str_encoding"] = o.OrigStrEncoding.Get()
 	}
 	if o.RawData.IsSet() {
 		toSerialize["raw_data"] = o.RawData.Get()
@@ -427,9 +429,7 @@ func (o XrefFromResponse) ToMap() (map[string]interface{}, error) {
 	if o.Segment.IsSet() {
 		toSerialize["segment"] = o.Segment.Get()
 	}
-	if o.OrigStrEncoding.IsSet() {
-		toSerialize["orig_str_encoding"] = o.OrigStrEncoding.Get()
-	}
+	toSerialize["value"] = o.Value.Get()
 	toSerialize["xref_to"] = o.XrefTo.Get()
 
 	for key, value := range o.AdditionalProperties {
@@ -475,14 +475,14 @@ func (o *XrefFromResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "value")
-		delete(additionalProperties, "is_scalar")
 		delete(additionalProperties, "is_call")
 		delete(additionalProperties, "is_data")
+		delete(additionalProperties, "is_scalar")
 		delete(additionalProperties, "is_string")
+		delete(additionalProperties, "orig_str_encoding")
 		delete(additionalProperties, "raw_data")
 		delete(additionalProperties, "segment")
-		delete(additionalProperties, "orig_str_encoding")
+		delete(additionalProperties, "value")
 		delete(additionalProperties, "xref_to")
 		o.AdditionalProperties = additionalProperties
 	}

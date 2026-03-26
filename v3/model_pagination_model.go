@@ -19,9 +19,9 @@ var _ MappedNullable = &PaginationModel{}
 
 // PaginationModel struct for PaginationModel
 type PaginationModel struct {
-	PageSize int32 `json:"page_size"`
-	PageNumber int32 `json:"page_number"`
 	HasNextPage bool `json:"has_next_page"`
+	PageNumber int32 `json:"page_number"`
+	PageSize int32 `json:"page_size"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,11 +31,11 @@ type _PaginationModel PaginationModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaginationModel(pageSize int32, pageNumber int32, hasNextPage bool) *PaginationModel {
+func NewPaginationModel(hasNextPage bool, pageNumber int32, pageSize int32) *PaginationModel {
 	this := PaginationModel{}
-	this.PageSize = pageSize
-	this.PageNumber = pageNumber
 	this.HasNextPage = hasNextPage
+	this.PageNumber = pageNumber
+	this.PageSize = pageSize
 	return &this
 }
 
@@ -45,54 +45,6 @@ func NewPaginationModel(pageSize int32, pageNumber int32, hasNextPage bool) *Pag
 func NewPaginationModelWithDefaults() *PaginationModel {
 	this := PaginationModel{}
 	return &this
-}
-
-// GetPageSize returns the PageSize field value
-func (o *PaginationModel) GetPageSize() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.PageSize
-}
-
-// GetPageSizeOk returns a tuple with the PageSize field value
-// and a boolean to check if the value has been set.
-func (o *PaginationModel) GetPageSizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PageSize, true
-}
-
-// SetPageSize sets field value
-func (o *PaginationModel) SetPageSize(v int32) {
-	o.PageSize = v
-}
-
-// GetPageNumber returns the PageNumber field value
-func (o *PaginationModel) GetPageNumber() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.PageNumber
-}
-
-// GetPageNumberOk returns a tuple with the PageNumber field value
-// and a boolean to check if the value has been set.
-func (o *PaginationModel) GetPageNumberOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PageNumber, true
-}
-
-// SetPageNumber sets field value
-func (o *PaginationModel) SetPageNumber(v int32) {
-	o.PageNumber = v
 }
 
 // GetHasNextPage returns the HasNextPage field value
@@ -119,6 +71,54 @@ func (o *PaginationModel) SetHasNextPage(v bool) {
 	o.HasNextPage = v
 }
 
+// GetPageNumber returns the PageNumber field value
+func (o *PaginationModel) GetPageNumber() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.PageNumber
+}
+
+// GetPageNumberOk returns a tuple with the PageNumber field value
+// and a boolean to check if the value has been set.
+func (o *PaginationModel) GetPageNumberOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PageNumber, true
+}
+
+// SetPageNumber sets field value
+func (o *PaginationModel) SetPageNumber(v int32) {
+	o.PageNumber = v
+}
+
+// GetPageSize returns the PageSize field value
+func (o *PaginationModel) GetPageSize() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.PageSize
+}
+
+// GetPageSizeOk returns a tuple with the PageSize field value
+// and a boolean to check if the value has been set.
+func (o *PaginationModel) GetPageSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PageSize, true
+}
+
+// SetPageSize sets field value
+func (o *PaginationModel) SetPageSize(v int32) {
+	o.PageSize = v
+}
+
 func (o PaginationModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -129,9 +129,9 @@ func (o PaginationModel) MarshalJSON() ([]byte, error) {
 
 func (o PaginationModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["page_size"] = o.PageSize
-	toSerialize["page_number"] = o.PageNumber
 	toSerialize["has_next_page"] = o.HasNextPage
+	toSerialize["page_number"] = o.PageNumber
+	toSerialize["page_size"] = o.PageSize
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -145,9 +145,9 @@ func (o *PaginationModel) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"page_size",
-		"page_number",
 		"has_next_page",
+		"page_number",
+		"page_size",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -177,9 +177,9 @@ func (o *PaginationModel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "page_size")
-		delete(additionalProperties, "page_number")
 		delete(additionalProperties, "has_next_page")
+		delete(additionalProperties, "page_number")
+		delete(additionalProperties, "page_size")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -22,13 +22,13 @@ var _ MappedNullable = &CommentResponse{}
 type CommentResponse struct {
 	// Comment text content
 	Content string `json:"content"`
-	Id int32 `json:"id"`
-	UserId int32 `json:"user_id"`
-	ResourceType string `json:"resource_type"`
-	ResourceId string `json:"resource_id"`
 	Context NullableContext `json:"context,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
+	Id int32 `json:"id"`
+	ResourceId string `json:"resource_id"`
+	ResourceType string `json:"resource_type"`
 	UpdatedAt time.Time `json:"updated_at"`
+	UserId int32 `json:"user_id"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -38,15 +38,15 @@ type _CommentResponse CommentResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCommentResponse(content string, id int32, userId int32, resourceType string, resourceId string, createdAt time.Time, updatedAt time.Time) *CommentResponse {
+func NewCommentResponse(content string, createdAt time.Time, id int32, resourceId string, resourceType string, updatedAt time.Time, userId int32) *CommentResponse {
 	this := CommentResponse{}
 	this.Content = content
-	this.Id = id
-	this.UserId = userId
-	this.ResourceType = resourceType
-	this.ResourceId = resourceId
 	this.CreatedAt = createdAt
+	this.Id = id
+	this.ResourceId = resourceId
+	this.ResourceType = resourceType
 	this.UpdatedAt = updatedAt
+	this.UserId = userId
 	return &this
 }
 
@@ -80,102 +80,6 @@ func (o *CommentResponse) GetContentOk() (*string, bool) {
 // SetContent sets field value
 func (o *CommentResponse) SetContent(v string) {
 	o.Content = v
-}
-
-// GetId returns the Id field value
-func (o *CommentResponse) GetId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *CommentResponse) GetIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *CommentResponse) SetId(v int32) {
-	o.Id = v
-}
-
-// GetUserId returns the UserId field value
-func (o *CommentResponse) GetUserId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.UserId
-}
-
-// GetUserIdOk returns a tuple with the UserId field value
-// and a boolean to check if the value has been set.
-func (o *CommentResponse) GetUserIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.UserId, true
-}
-
-// SetUserId sets field value
-func (o *CommentResponse) SetUserId(v int32) {
-	o.UserId = v
-}
-
-// GetResourceType returns the ResourceType field value
-func (o *CommentResponse) GetResourceType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResourceType
-}
-
-// GetResourceTypeOk returns a tuple with the ResourceType field value
-// and a boolean to check if the value has been set.
-func (o *CommentResponse) GetResourceTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResourceType, true
-}
-
-// SetResourceType sets field value
-func (o *CommentResponse) SetResourceType(v string) {
-	o.ResourceType = v
-}
-
-// GetResourceId returns the ResourceId field value
-func (o *CommentResponse) GetResourceId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResourceId
-}
-
-// GetResourceIdOk returns a tuple with the ResourceId field value
-// and a boolean to check if the value has been set.
-func (o *CommentResponse) GetResourceIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResourceId, true
-}
-
-// SetResourceId sets field value
-func (o *CommentResponse) SetResourceId(v string) {
-	o.ResourceId = v
 }
 
 // GetContext returns the Context field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -244,6 +148,78 @@ func (o *CommentResponse) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
+// GetId returns the Id field value
+func (o *CommentResponse) GetId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *CommentResponse) GetIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *CommentResponse) SetId(v int32) {
+	o.Id = v
+}
+
+// GetResourceId returns the ResourceId field value
+func (o *CommentResponse) GetResourceId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResourceId
+}
+
+// GetResourceIdOk returns a tuple with the ResourceId field value
+// and a boolean to check if the value has been set.
+func (o *CommentResponse) GetResourceIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResourceId, true
+}
+
+// SetResourceId sets field value
+func (o *CommentResponse) SetResourceId(v string) {
+	o.ResourceId = v
+}
+
+// GetResourceType returns the ResourceType field value
+func (o *CommentResponse) GetResourceType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResourceType
+}
+
+// GetResourceTypeOk returns a tuple with the ResourceType field value
+// and a boolean to check if the value has been set.
+func (o *CommentResponse) GetResourceTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResourceType, true
+}
+
+// SetResourceType sets field value
+func (o *CommentResponse) SetResourceType(v string) {
+	o.ResourceType = v
+}
+
 // GetUpdatedAt returns the UpdatedAt field value
 func (o *CommentResponse) GetUpdatedAt() time.Time {
 	if o == nil {
@@ -268,6 +244,30 @@ func (o *CommentResponse) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = v
 }
 
+// GetUserId returns the UserId field value
+func (o *CommentResponse) GetUserId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.UserId
+}
+
+// GetUserIdOk returns a tuple with the UserId field value
+// and a boolean to check if the value has been set.
+func (o *CommentResponse) GetUserIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UserId, true
+}
+
+// SetUserId sets field value
+func (o *CommentResponse) SetUserId(v int32) {
+	o.UserId = v
+}
+
 func (o CommentResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -279,15 +279,15 @@ func (o CommentResponse) MarshalJSON() ([]byte, error) {
 func (o CommentResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["content"] = o.Content
-	toSerialize["id"] = o.Id
-	toSerialize["user_id"] = o.UserId
-	toSerialize["resource_type"] = o.ResourceType
-	toSerialize["resource_id"] = o.ResourceId
 	if o.Context.IsSet() {
 		toSerialize["context"] = o.Context.Get()
 	}
 	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["id"] = o.Id
+	toSerialize["resource_id"] = o.ResourceId
+	toSerialize["resource_type"] = o.ResourceType
 	toSerialize["updated_at"] = o.UpdatedAt
+	toSerialize["user_id"] = o.UserId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -302,12 +302,12 @@ func (o *CommentResponse) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"content",
-		"id",
-		"user_id",
-		"resource_type",
-		"resource_id",
 		"created_at",
+		"id",
+		"resource_id",
+		"resource_type",
 		"updated_at",
+		"user_id",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -338,13 +338,13 @@ func (o *CommentResponse) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "content")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "user_id")
-		delete(additionalProperties, "resource_type")
-		delete(additionalProperties, "resource_id")
 		delete(additionalProperties, "context")
 		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "resource_type")
 		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "user_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int64** | Function id | 
-**Name** | **string** | Name of the function | 
-**NameSourceType** | **string** | The source (process) the function name came from | 
-**NameSource** | [**NameSourceType**](NameSourceType.md) | The source of the current function name. | 
-**MangledName** | **string** | Mangled name of the function | 
-**Vaddr** | **int64** | Function virtual address | 
-**Size** | **int32** | Function size in bytes | 
 **Debug** | **bool** | Whether the function has debug information | 
+**Id** | **int64** | Function id | 
+**MangledName** | **string** | Mangled name of the function | 
+**Name** | **string** | Name of the function | 
+**NameSource** | [**NameSourceType**](NameSourceType.md) | The source of the current function name. | 
+**NameSourceType** | **string** | The source (process) the function name came from | 
+**Size** | **int32** | Function size in bytes | 
+**Vaddr** | **int64** | Function virtual address | 
 
 ## Methods
 
 ### NewFunctionListItem
 
-`func NewFunctionListItem(id int64, name string, nameSourceType string, nameSource NameSourceType, mangledName string, vaddr int64, size int32, debug bool, ) *FunctionListItem`
+`func NewFunctionListItem(debug bool, id int64, mangledName string, name string, nameSource NameSourceType, nameSourceType string, size int32, vaddr int64, ) *FunctionListItem`
 
 NewFunctionListItem instantiates a new FunctionListItem object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +31,26 @@ will change when the set of required properties is changed
 NewFunctionListItemWithDefaults instantiates a new FunctionListItem object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetDebug
+
+`func (o *FunctionListItem) GetDebug() bool`
+
+GetDebug returns the Debug field if non-nil, zero value otherwise.
+
+### GetDebugOk
+
+`func (o *FunctionListItem) GetDebugOk() (*bool, bool)`
+
+GetDebugOk returns a tuple with the Debug field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDebug
+
+`func (o *FunctionListItem) SetDebug(v bool)`
+
+SetDebug sets Debug field to given value.
+
 
 ### GetId
 
@@ -50,66 +70,6 @@ and a boolean to check if the value has been set.
 `func (o *FunctionListItem) SetId(v int64)`
 
 SetId sets Id field to given value.
-
-
-### GetName
-
-`func (o *FunctionListItem) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *FunctionListItem) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *FunctionListItem) SetName(v string)`
-
-SetName sets Name field to given value.
-
-
-### GetNameSourceType
-
-`func (o *FunctionListItem) GetNameSourceType() string`
-
-GetNameSourceType returns the NameSourceType field if non-nil, zero value otherwise.
-
-### GetNameSourceTypeOk
-
-`func (o *FunctionListItem) GetNameSourceTypeOk() (*string, bool)`
-
-GetNameSourceTypeOk returns a tuple with the NameSourceType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNameSourceType
-
-`func (o *FunctionListItem) SetNameSourceType(v string)`
-
-SetNameSourceType sets NameSourceType field to given value.
-
-
-### GetNameSource
-
-`func (o *FunctionListItem) GetNameSource() NameSourceType`
-
-GetNameSource returns the NameSource field if non-nil, zero value otherwise.
-
-### GetNameSourceOk
-
-`func (o *FunctionListItem) GetNameSourceOk() (*NameSourceType, bool)`
-
-GetNameSourceOk returns a tuple with the NameSource field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNameSource
-
-`func (o *FunctionListItem) SetNameSource(v NameSourceType)`
-
-SetNameSource sets NameSource field to given value.
 
 
 ### GetMangledName
@@ -132,24 +92,64 @@ and a boolean to check if the value has been set.
 SetMangledName sets MangledName field to given value.
 
 
-### GetVaddr
+### GetName
 
-`func (o *FunctionListItem) GetVaddr() int64`
+`func (o *FunctionListItem) GetName() string`
 
-GetVaddr returns the Vaddr field if non-nil, zero value otherwise.
+GetName returns the Name field if non-nil, zero value otherwise.
 
-### GetVaddrOk
+### GetNameOk
 
-`func (o *FunctionListItem) GetVaddrOk() (*int64, bool)`
+`func (o *FunctionListItem) GetNameOk() (*string, bool)`
 
-GetVaddrOk returns a tuple with the Vaddr field if it's non-nil, zero value otherwise
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVaddr
+### SetName
 
-`func (o *FunctionListItem) SetVaddr(v int64)`
+`func (o *FunctionListItem) SetName(v string)`
 
-SetVaddr sets Vaddr field to given value.
+SetName sets Name field to given value.
+
+
+### GetNameSource
+
+`func (o *FunctionListItem) GetNameSource() NameSourceType`
+
+GetNameSource returns the NameSource field if non-nil, zero value otherwise.
+
+### GetNameSourceOk
+
+`func (o *FunctionListItem) GetNameSourceOk() (*NameSourceType, bool)`
+
+GetNameSourceOk returns a tuple with the NameSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNameSource
+
+`func (o *FunctionListItem) SetNameSource(v NameSourceType)`
+
+SetNameSource sets NameSource field to given value.
+
+
+### GetNameSourceType
+
+`func (o *FunctionListItem) GetNameSourceType() string`
+
+GetNameSourceType returns the NameSourceType field if non-nil, zero value otherwise.
+
+### GetNameSourceTypeOk
+
+`func (o *FunctionListItem) GetNameSourceTypeOk() (*string, bool)`
+
+GetNameSourceTypeOk returns a tuple with the NameSourceType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNameSourceType
+
+`func (o *FunctionListItem) SetNameSourceType(v string)`
+
+SetNameSourceType sets NameSourceType field to given value.
 
 
 ### GetSize
@@ -172,24 +172,24 @@ and a boolean to check if the value has been set.
 SetSize sets Size field to given value.
 
 
-### GetDebug
+### GetVaddr
 
-`func (o *FunctionListItem) GetDebug() bool`
+`func (o *FunctionListItem) GetVaddr() int64`
 
-GetDebug returns the Debug field if non-nil, zero value otherwise.
+GetVaddr returns the Vaddr field if non-nil, zero value otherwise.
 
-### GetDebugOk
+### GetVaddrOk
 
-`func (o *FunctionListItem) GetDebugOk() (*bool, bool)`
+`func (o *FunctionListItem) GetVaddrOk() (*int64, bool)`
 
-GetDebugOk returns a tuple with the Debug field if it's non-nil, zero value otherwise
+GetVaddrOk returns a tuple with the Vaddr field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDebug
+### SetVaddr
 
-`func (o *FunctionListItem) SetDebug(v bool)`
+`func (o *FunctionListItem) SetVaddr(v int64)`
 
-SetDebug sets Debug field to given value.
+SetVaddr sets Vaddr field to given value.
 
 
 

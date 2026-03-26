@@ -276,7 +276,7 @@ func (a *AnalysesCoreAPIService) CreateAnalysisExecute(r ApiCreateAnalysisReques
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 422 {
+		if localVarHTTPResponse.StatusCode == 400 {
 			var v BaseResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -298,7 +298,7 @@ func (a *AnalysesCoreAPIService) CreateAnalysisExecute(r ApiCreateAnalysisReques
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v BaseResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -425,7 +425,7 @@ func (a *AnalysesCoreAPIService) DeleteAnalysisExecute(r ApiDeleteAnalysisReques
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 422 {
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v BaseResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -447,7 +447,7 @@ func (a *AnalysesCoreAPIService) DeleteAnalysisExecute(r ApiDeleteAnalysisReques
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 403 {
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v BaseResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1663,6 +1663,144 @@ func (a *AnalysesCoreAPIService) LookupBinaryIdExecute(r ApiLookupBinaryIdReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiPutAnalysisStringsRequest struct {
+	ctx context.Context
+	ApiService *AnalysesCoreAPIService
+	analysisId int32
+	putAnalysisStringsRequest *PutAnalysisStringsRequest
+}
+
+func (r ApiPutAnalysisStringsRequest) PutAnalysisStringsRequest(putAnalysisStringsRequest PutAnalysisStringsRequest) ApiPutAnalysisStringsRequest {
+	r.putAnalysisStringsRequest = &putAnalysisStringsRequest
+	return r
+}
+
+func (r ApiPutAnalysisStringsRequest) Execute() (*BaseResponse, *http.Response, error) {
+	return r.ApiService.PutAnalysisStringsExecute(r)
+}
+
+/*
+PutAnalysisStrings Add strings to the analysis
+
+Add strings to the analysis. Rejects if any string already exists at the given vaddr.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param analysisId
+ @return ApiPutAnalysisStringsRequest
+*/
+func (a *AnalysesCoreAPIService) PutAnalysisStrings(ctx context.Context, analysisId int32) ApiPutAnalysisStringsRequest {
+	return ApiPutAnalysisStringsRequest{
+		ApiService: a,
+		ctx: ctx,
+		analysisId: analysisId,
+	}
+}
+
+// Execute executes the request
+//  @return BaseResponse
+func (a *AnalysesCoreAPIService) PutAnalysisStringsExecute(r ApiPutAnalysisStringsRequest) (*BaseResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BaseResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.PutAnalysisStrings")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/analyses/{analysis_id}/strings"
+	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.putAnalysisStringsRequest == nil {
+		return localVarReturnValue, nil, reportError("putAnalysisStringsRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.putAnalysisStringsRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v BaseResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiRequeueAnalysisRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
@@ -1785,7 +1923,7 @@ func (a *AnalysesCoreAPIService) RequeueAnalysisExecute(r ApiRequeueAnalysisRequ
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 422 {
+		if localVarHTTPResponse.StatusCode == 400 {
 			var v BaseResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1807,7 +1945,7 @@ func (a *AnalysesCoreAPIService) RequeueAnalysisExecute(r ApiRequeueAnalysisRequ
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v BaseResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -2111,19 +2249,19 @@ func (a *AnalysesCoreAPIService) UpdateAnalysisTagsExecute(r ApiUpdateAnalysisTa
 type ApiUploadFileRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
-	uploadFileType *UploadFileType
 	file *os.File
+	uploadFileType *UploadFileType
 	packedPassword *string
 	forceOverwrite *bool
 }
 
-func (r ApiUploadFileRequest) UploadFileType(uploadFileType UploadFileType) ApiUploadFileRequest {
-	r.uploadFileType = &uploadFileType
+func (r ApiUploadFileRequest) File(file *os.File) ApiUploadFileRequest {
+	r.file = file
 	return r
 }
 
-func (r ApiUploadFileRequest) File(file *os.File) ApiUploadFileRequest {
-	r.file = file
+func (r ApiUploadFileRequest) UploadFileType(uploadFileType UploadFileType) ApiUploadFileRequest {
+	r.uploadFileType = &uploadFileType
 	return r
 }
 
@@ -2174,11 +2312,11 @@ func (a *AnalysesCoreAPIService) UploadFileExecute(r ApiUploadFileRequest) (*Bas
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.uploadFileType == nil {
-		return localVarReturnValue, nil, reportError("uploadFileType is required and must be specified")
-	}
 	if r.file == nil {
 		return localVarReturnValue, nil, reportError("file is required and must be specified")
+	}
+	if r.uploadFileType == nil {
+		return localVarReturnValue, nil, reportError("uploadFileType is required and must be specified")
 	}
 
 	if r.packedPassword != nil {
@@ -2201,7 +2339,6 @@ func (a *AnalysesCoreAPIService) UploadFileExecute(r ApiUploadFileRequest) (*Bas
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarFormParams, "upload_file_type", r.uploadFileType, "", "")
 	var fileLocalVarFormFileName string
 	var fileLocalVarFileName     string
 	var fileLocalVarFileBytes    []byte
@@ -2220,6 +2357,7 @@ func (a *AnalysesCoreAPIService) UploadFileExecute(r ApiUploadFileRequest) (*Bas
 	if r.forceOverwrite != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "force_overwrite", r.forceOverwrite, "", "")
 	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "upload_file_type", r.uploadFileType, "", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

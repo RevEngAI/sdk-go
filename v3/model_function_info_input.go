@@ -19,9 +19,9 @@ var _ MappedNullable = &FunctionInfoInput{}
 
 // FunctionInfoInput struct for FunctionInfoInput
 type FunctionInfoInput struct {
-	FuncTypes NullableFunctionTypeInput `json:"func_types,omitempty"`
 	// List of function dependencies
 	FuncDeps []FuncDepsInner `json:"func_deps"`
+	FuncTypes NullableFunctionTypeInput `json:"func_types,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,6 +43,30 @@ func NewFunctionInfoInput(funcDeps []FuncDepsInner) *FunctionInfoInput {
 func NewFunctionInfoInputWithDefaults() *FunctionInfoInput {
 	this := FunctionInfoInput{}
 	return &this
+}
+
+// GetFuncDeps returns the FuncDeps field value
+func (o *FunctionInfoInput) GetFuncDeps() []FuncDepsInner {
+	if o == nil {
+		var ret []FuncDepsInner
+		return ret
+	}
+
+	return o.FuncDeps
+}
+
+// GetFuncDepsOk returns a tuple with the FuncDeps field value
+// and a boolean to check if the value has been set.
+func (o *FunctionInfoInput) GetFuncDepsOk() ([]FuncDepsInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FuncDeps, true
+}
+
+// SetFuncDeps sets field value
+func (o *FunctionInfoInput) SetFuncDeps(v []FuncDepsInner) {
+	o.FuncDeps = v
 }
 
 // GetFuncTypes returns the FuncTypes field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -87,30 +111,6 @@ func (o *FunctionInfoInput) UnsetFuncTypes() {
 	o.FuncTypes.Unset()
 }
 
-// GetFuncDeps returns the FuncDeps field value
-func (o *FunctionInfoInput) GetFuncDeps() []FuncDepsInner {
-	if o == nil {
-		var ret []FuncDepsInner
-		return ret
-	}
-
-	return o.FuncDeps
-}
-
-// GetFuncDepsOk returns a tuple with the FuncDeps field value
-// and a boolean to check if the value has been set.
-func (o *FunctionInfoInput) GetFuncDepsOk() ([]FuncDepsInner, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.FuncDeps, true
-}
-
-// SetFuncDeps sets field value
-func (o *FunctionInfoInput) SetFuncDeps(v []FuncDepsInner) {
-	o.FuncDeps = v
-}
-
 func (o FunctionInfoInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -121,10 +121,10 @@ func (o FunctionInfoInput) MarshalJSON() ([]byte, error) {
 
 func (o FunctionInfoInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["func_deps"] = o.FuncDeps
 	if o.FuncTypes.IsSet() {
 		toSerialize["func_types"] = o.FuncTypes.Get()
 	}
-	toSerialize["func_deps"] = o.FuncDeps
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -168,8 +168,8 @@ func (o *FunctionInfoInput) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "func_types")
 		delete(additionalProperties, "func_deps")
+		delete(additionalProperties, "func_types")
 		o.AdditionalProperties = additionalProperties
 	}
 

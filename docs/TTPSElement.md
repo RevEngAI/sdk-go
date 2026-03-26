@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** |  | 
 **Attack** | [**[]TTPSAttack**](TTPSAttack.md) |  | 
+**Name** | **string** |  | 
 **Occurrences** | [**[]TTPSOccurance**](TTPSOccurance.md) |  | 
 **Score** | **int32** |  | 
 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewTTPSElement
 
-`func NewTTPSElement(name string, attack []TTPSAttack, occurrences []TTPSOccurance, score int32, ) *TTPSElement`
+`func NewTTPSElement(attack []TTPSAttack, name string, occurrences []TTPSOccurance, score int32, ) *TTPSElement`
 
 NewTTPSElement instantiates a new TTPSElement object
 This constructor will assign default values to properties that have it defined,
@@ -27,26 +27,6 @@ will change when the set of required properties is changed
 NewTTPSElementWithDefaults instantiates a new TTPSElement object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetName
-
-`func (o *TTPSElement) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *TTPSElement) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *TTPSElement) SetName(v string)`
-
-SetName sets Name field to given value.
-
 
 ### GetAttack
 
@@ -66,6 +46,26 @@ and a boolean to check if the value has been set.
 `func (o *TTPSElement) SetAttack(v []TTPSAttack)`
 
 SetAttack sets Attack field to given value.
+
+
+### GetName
+
+`func (o *TTPSElement) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *TTPSElement) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *TTPSElement) SetName(v string)`
+
+SetName sets Name field to given value.
 
 
 ### GetOccurrences

@@ -19,16 +19,16 @@ var _ MappedNullable = &ELFSection{}
 
 // ELFSection struct for ELFSection
 type ELFSection struct {
-	Name string `json:"name"`
-	Type string `json:"type"`
-	VirtualAddress int32 `json:"virtual_address"`
-	VirtualSize int32 `json:"virtual_size"`
-	RawSize int32 `json:"raw_size"`
+	Alignment int32 `json:"alignment"`
+	Entropy float32 `json:"entropy"`
 	FileOffset int32 `json:"file_offset"`
 	Flags string `json:"flags"`
 	FlagsRaw int32 `json:"flags_raw"`
-	Entropy float32 `json:"entropy"`
-	Alignment int32 `json:"alignment"`
+	Name string `json:"name"`
+	RawSize int32 `json:"raw_size"`
+	Type string `json:"type"`
+	VirtualAddress int32 `json:"virtual_address"`
+	VirtualSize int32 `json:"virtual_size"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -38,18 +38,18 @@ type _ELFSection ELFSection
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewELFSection(name string, type_ string, virtualAddress int32, virtualSize int32, rawSize int32, fileOffset int32, flags string, flagsRaw int32, entropy float32, alignment int32) *ELFSection {
+func NewELFSection(alignment int32, entropy float32, fileOffset int32, flags string, flagsRaw int32, name string, rawSize int32, type_ string, virtualAddress int32, virtualSize int32) *ELFSection {
 	this := ELFSection{}
-	this.Name = name
-	this.Type = type_
-	this.VirtualAddress = virtualAddress
-	this.VirtualSize = virtualSize
-	this.RawSize = rawSize
+	this.Alignment = alignment
+	this.Entropy = entropy
 	this.FileOffset = fileOffset
 	this.Flags = flags
 	this.FlagsRaw = flagsRaw
-	this.Entropy = entropy
-	this.Alignment = alignment
+	this.Name = name
+	this.RawSize = rawSize
+	this.Type = type_
+	this.VirtualAddress = virtualAddress
+	this.VirtualSize = virtualSize
 	return &this
 }
 
@@ -61,124 +61,52 @@ func NewELFSectionWithDefaults() *ELFSection {
 	return &this
 }
 
-// GetName returns the Name field value
-func (o *ELFSection) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *ELFSection) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *ELFSection) SetName(v string) {
-	o.Name = v
-}
-
-// GetType returns the Type field value
-func (o *ELFSection) GetType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *ELFSection) GetTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *ELFSection) SetType(v string) {
-	o.Type = v
-}
-
-// GetVirtualAddress returns the VirtualAddress field value
-func (o *ELFSection) GetVirtualAddress() int32 {
+// GetAlignment returns the Alignment field value
+func (o *ELFSection) GetAlignment() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.VirtualAddress
+	return o.Alignment
 }
 
-// GetVirtualAddressOk returns a tuple with the VirtualAddress field value
+// GetAlignmentOk returns a tuple with the Alignment field value
 // and a boolean to check if the value has been set.
-func (o *ELFSection) GetVirtualAddressOk() (*int32, bool) {
+func (o *ELFSection) GetAlignmentOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.VirtualAddress, true
+	return &o.Alignment, true
 }
 
-// SetVirtualAddress sets field value
-func (o *ELFSection) SetVirtualAddress(v int32) {
-	o.VirtualAddress = v
+// SetAlignment sets field value
+func (o *ELFSection) SetAlignment(v int32) {
+	o.Alignment = v
 }
 
-// GetVirtualSize returns the VirtualSize field value
-func (o *ELFSection) GetVirtualSize() int32 {
+// GetEntropy returns the Entropy field value
+func (o *ELFSection) GetEntropy() float32 {
 	if o == nil {
-		var ret int32
+		var ret float32
 		return ret
 	}
 
-	return o.VirtualSize
+	return o.Entropy
 }
 
-// GetVirtualSizeOk returns a tuple with the VirtualSize field value
+// GetEntropyOk returns a tuple with the Entropy field value
 // and a boolean to check if the value has been set.
-func (o *ELFSection) GetVirtualSizeOk() (*int32, bool) {
+func (o *ELFSection) GetEntropyOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.VirtualSize, true
+	return &o.Entropy, true
 }
 
-// SetVirtualSize sets field value
-func (o *ELFSection) SetVirtualSize(v int32) {
-	o.VirtualSize = v
-}
-
-// GetRawSize returns the RawSize field value
-func (o *ELFSection) GetRawSize() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.RawSize
-}
-
-// GetRawSizeOk returns a tuple with the RawSize field value
-// and a boolean to check if the value has been set.
-func (o *ELFSection) GetRawSizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RawSize, true
-}
-
-// SetRawSize sets field value
-func (o *ELFSection) SetRawSize(v int32) {
-	o.RawSize = v
+// SetEntropy sets field value
+func (o *ELFSection) SetEntropy(v float32) {
+	o.Entropy = v
 }
 
 // GetFileOffset returns the FileOffset field value
@@ -253,52 +181,124 @@ func (o *ELFSection) SetFlagsRaw(v int32) {
 	o.FlagsRaw = v
 }
 
-// GetEntropy returns the Entropy field value
-func (o *ELFSection) GetEntropy() float32 {
+// GetName returns the Name field value
+func (o *ELFSection) GetName() string {
 	if o == nil {
-		var ret float32
+		var ret string
 		return ret
 	}
 
-	return o.Entropy
+	return o.Name
 }
 
-// GetEntropyOk returns a tuple with the Entropy field value
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *ELFSection) GetEntropyOk() (*float32, bool) {
+func (o *ELFSection) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Entropy, true
+	return &o.Name, true
 }
 
-// SetEntropy sets field value
-func (o *ELFSection) SetEntropy(v float32) {
-	o.Entropy = v
+// SetName sets field value
+func (o *ELFSection) SetName(v string) {
+	o.Name = v
 }
 
-// GetAlignment returns the Alignment field value
-func (o *ELFSection) GetAlignment() int32 {
+// GetRawSize returns the RawSize field value
+func (o *ELFSection) GetRawSize() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.Alignment
+	return o.RawSize
 }
 
-// GetAlignmentOk returns a tuple with the Alignment field value
+// GetRawSizeOk returns a tuple with the RawSize field value
 // and a boolean to check if the value has been set.
-func (o *ELFSection) GetAlignmentOk() (*int32, bool) {
+func (o *ELFSection) GetRawSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Alignment, true
+	return &o.RawSize, true
 }
 
-// SetAlignment sets field value
-func (o *ELFSection) SetAlignment(v int32) {
-	o.Alignment = v
+// SetRawSize sets field value
+func (o *ELFSection) SetRawSize(v int32) {
+	o.RawSize = v
+}
+
+// GetType returns the Type field value
+func (o *ELFSection) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *ELFSection) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *ELFSection) SetType(v string) {
+	o.Type = v
+}
+
+// GetVirtualAddress returns the VirtualAddress field value
+func (o *ELFSection) GetVirtualAddress() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.VirtualAddress
+}
+
+// GetVirtualAddressOk returns a tuple with the VirtualAddress field value
+// and a boolean to check if the value has been set.
+func (o *ELFSection) GetVirtualAddressOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.VirtualAddress, true
+}
+
+// SetVirtualAddress sets field value
+func (o *ELFSection) SetVirtualAddress(v int32) {
+	o.VirtualAddress = v
+}
+
+// GetVirtualSize returns the VirtualSize field value
+func (o *ELFSection) GetVirtualSize() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.VirtualSize
+}
+
+// GetVirtualSizeOk returns a tuple with the VirtualSize field value
+// and a boolean to check if the value has been set.
+func (o *ELFSection) GetVirtualSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.VirtualSize, true
+}
+
+// SetVirtualSize sets field value
+func (o *ELFSection) SetVirtualSize(v int32) {
+	o.VirtualSize = v
 }
 
 func (o ELFSection) MarshalJSON() ([]byte, error) {
@@ -311,16 +311,16 @@ func (o ELFSection) MarshalJSON() ([]byte, error) {
 
 func (o ELFSection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	toSerialize["type"] = o.Type
-	toSerialize["virtual_address"] = o.VirtualAddress
-	toSerialize["virtual_size"] = o.VirtualSize
-	toSerialize["raw_size"] = o.RawSize
+	toSerialize["alignment"] = o.Alignment
+	toSerialize["entropy"] = o.Entropy
 	toSerialize["file_offset"] = o.FileOffset
 	toSerialize["flags"] = o.Flags
 	toSerialize["flags_raw"] = o.FlagsRaw
-	toSerialize["entropy"] = o.Entropy
-	toSerialize["alignment"] = o.Alignment
+	toSerialize["name"] = o.Name
+	toSerialize["raw_size"] = o.RawSize
+	toSerialize["type"] = o.Type
+	toSerialize["virtual_address"] = o.VirtualAddress
+	toSerialize["virtual_size"] = o.VirtualSize
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -334,16 +334,16 @@ func (o *ELFSection) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"name",
-		"type",
-		"virtual_address",
-		"virtual_size",
-		"raw_size",
+		"alignment",
+		"entropy",
 		"file_offset",
 		"flags",
 		"flags_raw",
-		"entropy",
-		"alignment",
+		"name",
+		"raw_size",
+		"type",
+		"virtual_address",
+		"virtual_size",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -373,16 +373,16 @@ func (o *ELFSection) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "virtual_address")
-		delete(additionalProperties, "virtual_size")
-		delete(additionalProperties, "raw_size")
+		delete(additionalProperties, "alignment")
+		delete(additionalProperties, "entropy")
 		delete(additionalProperties, "file_offset")
 		delete(additionalProperties, "flags")
 		delete(additionalProperties, "flags_raw")
-		delete(additionalProperties, "entropy")
-		delete(additionalProperties, "alignment")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "raw_size")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "virtual_address")
+		delete(additionalProperties, "virtual_size")
 		o.AdditionalProperties = additionalProperties
 	}
 

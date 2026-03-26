@@ -19,12 +19,12 @@ var _ MappedNullable = &DieMatch{}
 
 // DieMatch struct for DieMatch
 type DieMatch struct {
+	// Human-readable description from DIE's 'string' field; suitable for UI/logs, not for parsing.
+	Display string `json:"display"`
 	// Canonical name of the matched signature/technology (e.g., 'UPX', 'GCC', 'MSVC').
 	Name string `json:"name"`
 	// Category assigned by DIE for the match (e.g., 'compiler', 'packer', 'file').
 	Type string `json:"type"`
-	// Human-readable description from DIE's 'string' field; suitable for UI/logs, not for parsing.
-	Display string `json:"display"`
 	// Extracted version string when available; may be empty/None if unknown.
 	Version string `json:"version"`
 	AdditionalProperties map[string]interface{}
@@ -36,11 +36,11 @@ type _DieMatch DieMatch
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDieMatch(name string, type_ string, display string, version string) *DieMatch {
+func NewDieMatch(display string, name string, type_ string, version string) *DieMatch {
 	this := DieMatch{}
+	this.Display = display
 	this.Name = name
 	this.Type = type_
-	this.Display = display
 	this.Version = version
 	return &this
 }
@@ -51,6 +51,30 @@ func NewDieMatch(name string, type_ string, display string, version string) *Die
 func NewDieMatchWithDefaults() *DieMatch {
 	this := DieMatch{}
 	return &this
+}
+
+// GetDisplay returns the Display field value
+func (o *DieMatch) GetDisplay() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Display
+}
+
+// GetDisplayOk returns a tuple with the Display field value
+// and a boolean to check if the value has been set.
+func (o *DieMatch) GetDisplayOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Display, true
+}
+
+// SetDisplay sets field value
+func (o *DieMatch) SetDisplay(v string) {
+	o.Display = v
 }
 
 // GetName returns the Name field value
@@ -101,30 +125,6 @@ func (o *DieMatch) SetType(v string) {
 	o.Type = v
 }
 
-// GetDisplay returns the Display field value
-func (o *DieMatch) GetDisplay() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Display
-}
-
-// GetDisplayOk returns a tuple with the Display field value
-// and a boolean to check if the value has been set.
-func (o *DieMatch) GetDisplayOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Display, true
-}
-
-// SetDisplay sets field value
-func (o *DieMatch) SetDisplay(v string) {
-	o.Display = v
-}
-
 // GetVersion returns the Version field value
 func (o *DieMatch) GetVersion() string {
 	if o == nil {
@@ -159,9 +159,9 @@ func (o DieMatch) MarshalJSON() ([]byte, error) {
 
 func (o DieMatch) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["display"] = o.Display
 	toSerialize["name"] = o.Name
 	toSerialize["type"] = o.Type
-	toSerialize["display"] = o.Display
 	toSerialize["version"] = o.Version
 
 	for key, value := range o.AdditionalProperties {
@@ -176,9 +176,9 @@ func (o *DieMatch) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"display",
 		"name",
 		"type",
-		"display",
 		"version",
 	}
 
@@ -209,9 +209,9 @@ func (o *DieMatch) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "display")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "type")
-		delete(additionalProperties, "display")
 		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties
 	}

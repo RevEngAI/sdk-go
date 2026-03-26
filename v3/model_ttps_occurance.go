@@ -19,8 +19,8 @@ var _ MappedNullable = &TTPSOccurance{}
 
 // TTPSOccurance struct for TTPSOccurance
 type TTPSOccurance struct {
-	Ppid int32 `json:"ppid"`
 	Pid int32 `json:"pid"`
+	Ppid int32 `json:"ppid"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,10 +30,10 @@ type _TTPSOccurance TTPSOccurance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTTPSOccurance(ppid int32, pid int32) *TTPSOccurance {
+func NewTTPSOccurance(pid int32, ppid int32) *TTPSOccurance {
 	this := TTPSOccurance{}
-	this.Ppid = ppid
 	this.Pid = pid
+	this.Ppid = ppid
 	return &this
 }
 
@@ -43,30 +43,6 @@ func NewTTPSOccurance(ppid int32, pid int32) *TTPSOccurance {
 func NewTTPSOccuranceWithDefaults() *TTPSOccurance {
 	this := TTPSOccurance{}
 	return &this
-}
-
-// GetPpid returns the Ppid field value
-func (o *TTPSOccurance) GetPpid() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Ppid
-}
-
-// GetPpidOk returns a tuple with the Ppid field value
-// and a boolean to check if the value has been set.
-func (o *TTPSOccurance) GetPpidOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Ppid, true
-}
-
-// SetPpid sets field value
-func (o *TTPSOccurance) SetPpid(v int32) {
-	o.Ppid = v
 }
 
 // GetPid returns the Pid field value
@@ -93,6 +69,30 @@ func (o *TTPSOccurance) SetPid(v int32) {
 	o.Pid = v
 }
 
+// GetPpid returns the Ppid field value
+func (o *TTPSOccurance) GetPpid() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Ppid
+}
+
+// GetPpidOk returns a tuple with the Ppid field value
+// and a boolean to check if the value has been set.
+func (o *TTPSOccurance) GetPpidOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Ppid, true
+}
+
+// SetPpid sets field value
+func (o *TTPSOccurance) SetPpid(v int32) {
+	o.Ppid = v
+}
+
 func (o TTPSOccurance) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,8 +103,8 @@ func (o TTPSOccurance) MarshalJSON() ([]byte, error) {
 
 func (o TTPSOccurance) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["ppid"] = o.Ppid
 	toSerialize["pid"] = o.Pid
+	toSerialize["ppid"] = o.Ppid
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -118,8 +118,8 @@ func (o *TTPSOccurance) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"ppid",
 		"pid",
+		"ppid",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -149,8 +149,8 @@ func (o *TTPSOccurance) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "ppid")
 		delete(additionalProperties, "pid")
+		delete(additionalProperties, "ppid")
 		o.AdditionalProperties = additionalProperties
 	}
 

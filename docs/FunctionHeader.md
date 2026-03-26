@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Addr** | **int32** | Memory address of the function | 
+**Args** | [**map[string]Argument**](Argument.md) | Dictionary of function arguments | 
 **LastChange** | Pointer to **NullableString** |  | [optional] 
 **Name** | **string** | Name of the function | 
-**Addr** | **int32** | Memory address of the function | 
 **Type** | **string** | Return type of the function | 
-**Args** | [**map[string]Argument**](Argument.md) | Dictionary of function arguments | 
 
 ## Methods
 
 ### NewFunctionHeader
 
-`func NewFunctionHeader(name string, addr int32, type_ string, args map[string]Argument, ) *FunctionHeader`
+`func NewFunctionHeader(addr int32, args map[string]Argument, name string, type_ string, ) *FunctionHeader`
 
 NewFunctionHeader instantiates a new FunctionHeader object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +28,46 @@ will change when the set of required properties is changed
 NewFunctionHeaderWithDefaults instantiates a new FunctionHeader object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAddr
+
+`func (o *FunctionHeader) GetAddr() int32`
+
+GetAddr returns the Addr field if non-nil, zero value otherwise.
+
+### GetAddrOk
+
+`func (o *FunctionHeader) GetAddrOk() (*int32, bool)`
+
+GetAddrOk returns a tuple with the Addr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAddr
+
+`func (o *FunctionHeader) SetAddr(v int32)`
+
+SetAddr sets Addr field to given value.
+
+
+### GetArgs
+
+`func (o *FunctionHeader) GetArgs() map[string]Argument`
+
+GetArgs returns the Args field if non-nil, zero value otherwise.
+
+### GetArgsOk
+
+`func (o *FunctionHeader) GetArgsOk() (*map[string]Argument, bool)`
+
+GetArgsOk returns a tuple with the Args field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArgs
+
+`func (o *FunctionHeader) SetArgs(v map[string]Argument)`
+
+SetArgs sets Args field to given value.
+
 
 ### GetLastChange
 
@@ -84,26 +124,6 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
-### GetAddr
-
-`func (o *FunctionHeader) GetAddr() int32`
-
-GetAddr returns the Addr field if non-nil, zero value otherwise.
-
-### GetAddrOk
-
-`func (o *FunctionHeader) GetAddrOk() (*int32, bool)`
-
-GetAddrOk returns a tuple with the Addr field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAddr
-
-`func (o *FunctionHeader) SetAddr(v int32)`
-
-SetAddr sets Addr field to given value.
-
-
 ### GetType
 
 `func (o *FunctionHeader) GetType() string`
@@ -122,26 +142,6 @@ and a boolean to check if the value has been set.
 `func (o *FunctionHeader) SetType(v string)`
 
 SetType sets Type field to given value.
-
-
-### GetArgs
-
-`func (o *FunctionHeader) GetArgs() map[string]Argument`
-
-GetArgs returns the Args field if non-nil, zero value otherwise.
-
-### GetArgsOk
-
-`func (o *FunctionHeader) GetArgsOk() (*map[string]Argument, bool)`
-
-GetArgsOk returns a tuple with the Args field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetArgs
-
-`func (o *FunctionHeader) SetArgs(v map[string]Argument)`
-
-SetArgs sets Args field to given value.
 
 
 

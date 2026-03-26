@@ -19,20 +19,20 @@ var _ MappedNullable = &AppApiRestV2FunctionsTypesFunction{}
 
 // AppApiRestV2FunctionsTypesFunction struct for AppApiRestV2FunctionsTypesFunction
 type AppApiRestV2FunctionsTypesFunction struct {
-	// Function id
-	FunctionId int64 `json:"function_id"`
-	// Demangled name of the function
-	FunctionName string `json:"function_name"`
-	// Mangled name of the function
-	FunctionMangledName string `json:"function_mangled_name"`
-	// Function virtual address
-	FunctionVaddr int64 `json:"function_vaddr"`
-	// Function size
-	FunctionSize int32 `json:"function_size"`
 	// Whether the function is debug
 	Debug bool `json:"debug"`
-	Embedding3d []float32 `json:"embedding_3d,omitempty"`
 	Embedding1d []float32 `json:"embedding_1d,omitempty"`
+	Embedding3d []float32 `json:"embedding_3d,omitempty"`
+	// Function id
+	FunctionId int64 `json:"function_id"`
+	// Mangled name of the function
+	FunctionMangledName string `json:"function_mangled_name"`
+	// Demangled name of the function
+	FunctionName string `json:"function_name"`
+	// Function size
+	FunctionSize int32 `json:"function_size"`
+	// Function virtual address
+	FunctionVaddr int64 `json:"function_vaddr"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -42,14 +42,14 @@ type _AppApiRestV2FunctionsTypesFunction AppApiRestV2FunctionsTypesFunction
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAppApiRestV2FunctionsTypesFunction(functionId int64, functionName string, functionMangledName string, functionVaddr int64, functionSize int32, debug bool) *AppApiRestV2FunctionsTypesFunction {
+func NewAppApiRestV2FunctionsTypesFunction(debug bool, functionId int64, functionMangledName string, functionName string, functionSize int32, functionVaddr int64) *AppApiRestV2FunctionsTypesFunction {
 	this := AppApiRestV2FunctionsTypesFunction{}
-	this.FunctionId = functionId
-	this.FunctionName = functionName
-	this.FunctionMangledName = functionMangledName
-	this.FunctionVaddr = functionVaddr
-	this.FunctionSize = functionSize
 	this.Debug = debug
+	this.FunctionId = functionId
+	this.FunctionMangledName = functionMangledName
+	this.FunctionName = functionName
+	this.FunctionSize = functionSize
+	this.FunctionVaddr = functionVaddr
 	return &this
 }
 
@@ -59,126 +59,6 @@ func NewAppApiRestV2FunctionsTypesFunction(functionId int64, functionName string
 func NewAppApiRestV2FunctionsTypesFunctionWithDefaults() *AppApiRestV2FunctionsTypesFunction {
 	this := AppApiRestV2FunctionsTypesFunction{}
 	return &this
-}
-
-// GetFunctionId returns the FunctionId field value
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.FunctionId
-}
-
-// GetFunctionIdOk returns a tuple with the FunctionId field value
-// and a boolean to check if the value has been set.
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionId, true
-}
-
-// SetFunctionId sets field value
-func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionId(v int64) {
-	o.FunctionId = v
-}
-
-// GetFunctionName returns the FunctionName field value
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.FunctionName
-}
-
-// GetFunctionNameOk returns a tuple with the FunctionName field value
-// and a boolean to check if the value has been set.
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionName, true
-}
-
-// SetFunctionName sets field value
-func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionName(v string) {
-	o.FunctionName = v
-}
-
-// GetFunctionMangledName returns the FunctionMangledName field value
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionMangledName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.FunctionMangledName
-}
-
-// GetFunctionMangledNameOk returns a tuple with the FunctionMangledName field value
-// and a boolean to check if the value has been set.
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionMangledNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionMangledName, true
-}
-
-// SetFunctionMangledName sets field value
-func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionMangledName(v string) {
-	o.FunctionMangledName = v
-}
-
-// GetFunctionVaddr returns the FunctionVaddr field value
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionVaddr() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.FunctionVaddr
-}
-
-// GetFunctionVaddrOk returns a tuple with the FunctionVaddr field value
-// and a boolean to check if the value has been set.
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionVaddrOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionVaddr, true
-}
-
-// SetFunctionVaddr sets field value
-func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionVaddr(v int64) {
-	o.FunctionVaddr = v
-}
-
-// GetFunctionSize returns the FunctionSize field value
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionSize() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.FunctionSize
-}
-
-// GetFunctionSizeOk returns a tuple with the FunctionSize field value
-// and a boolean to check if the value has been set.
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionSizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionSize, true
-}
-
-// SetFunctionSize sets field value
-func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionSize(v int32) {
-	o.FunctionSize = v
 }
 
 // GetDebug returns the Debug field value
@@ -203,39 +83,6 @@ func (o *AppApiRestV2FunctionsTypesFunction) GetDebugOk() (*bool, bool) {
 // SetDebug sets field value
 func (o *AppApiRestV2FunctionsTypesFunction) SetDebug(v bool) {
 	o.Debug = v
-}
-
-// GetEmbedding3d returns the Embedding3d field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AppApiRestV2FunctionsTypesFunction) GetEmbedding3d() []float32 {
-	if o == nil {
-		var ret []float32
-		return ret
-	}
-	return o.Embedding3d
-}
-
-// GetEmbedding3dOk returns a tuple with the Embedding3d field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AppApiRestV2FunctionsTypesFunction) GetEmbedding3dOk() ([]float32, bool) {
-	if o == nil || IsNil(o.Embedding3d) {
-		return nil, false
-	}
-	return o.Embedding3d, true
-}
-
-// HasEmbedding3d returns a boolean if a field has been set.
-func (o *AppApiRestV2FunctionsTypesFunction) HasEmbedding3d() bool {
-	if o != nil && !IsNil(o.Embedding3d) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmbedding3d gets a reference to the given []float32 and assigns it to the Embedding3d field.
-func (o *AppApiRestV2FunctionsTypesFunction) SetEmbedding3d(v []float32) {
-	o.Embedding3d = v
 }
 
 // GetEmbedding1d returns the Embedding1d field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -271,6 +118,159 @@ func (o *AppApiRestV2FunctionsTypesFunction) SetEmbedding1d(v []float32) {
 	o.Embedding1d = v
 }
 
+// GetEmbedding3d returns the Embedding3d field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AppApiRestV2FunctionsTypesFunction) GetEmbedding3d() []float32 {
+	if o == nil {
+		var ret []float32
+		return ret
+	}
+	return o.Embedding3d
+}
+
+// GetEmbedding3dOk returns a tuple with the Embedding3d field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AppApiRestV2FunctionsTypesFunction) GetEmbedding3dOk() ([]float32, bool) {
+	if o == nil || IsNil(o.Embedding3d) {
+		return nil, false
+	}
+	return o.Embedding3d, true
+}
+
+// HasEmbedding3d returns a boolean if a field has been set.
+func (o *AppApiRestV2FunctionsTypesFunction) HasEmbedding3d() bool {
+	if o != nil && !IsNil(o.Embedding3d) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmbedding3d gets a reference to the given []float32 and assigns it to the Embedding3d field.
+func (o *AppApiRestV2FunctionsTypesFunction) SetEmbedding3d(v []float32) {
+	o.Embedding3d = v
+}
+
+// GetFunctionId returns the FunctionId field value
+func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.FunctionId
+}
+
+// GetFunctionIdOk returns a tuple with the FunctionId field value
+// and a boolean to check if the value has been set.
+func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionId, true
+}
+
+// SetFunctionId sets field value
+func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionId(v int64) {
+	o.FunctionId = v
+}
+
+// GetFunctionMangledName returns the FunctionMangledName field value
+func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionMangledName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FunctionMangledName
+}
+
+// GetFunctionMangledNameOk returns a tuple with the FunctionMangledName field value
+// and a boolean to check if the value has been set.
+func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionMangledNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionMangledName, true
+}
+
+// SetFunctionMangledName sets field value
+func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionMangledName(v string) {
+	o.FunctionMangledName = v
+}
+
+// GetFunctionName returns the FunctionName field value
+func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FunctionName
+}
+
+// GetFunctionNameOk returns a tuple with the FunctionName field value
+// and a boolean to check if the value has been set.
+func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionName, true
+}
+
+// SetFunctionName sets field value
+func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionName(v string) {
+	o.FunctionName = v
+}
+
+// GetFunctionSize returns the FunctionSize field value
+func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionSize() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.FunctionSize
+}
+
+// GetFunctionSizeOk returns a tuple with the FunctionSize field value
+// and a boolean to check if the value has been set.
+func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionSize, true
+}
+
+// SetFunctionSize sets field value
+func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionSize(v int32) {
+	o.FunctionSize = v
+}
+
+// GetFunctionVaddr returns the FunctionVaddr field value
+func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionVaddr() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.FunctionVaddr
+}
+
+// GetFunctionVaddrOk returns a tuple with the FunctionVaddr field value
+// and a boolean to check if the value has been set.
+func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionVaddrOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionVaddr, true
+}
+
+// SetFunctionVaddr sets field value
+func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionVaddr(v int64) {
+	o.FunctionVaddr = v
+}
+
 func (o AppApiRestV2FunctionsTypesFunction) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -281,18 +281,18 @@ func (o AppApiRestV2FunctionsTypesFunction) MarshalJSON() ([]byte, error) {
 
 func (o AppApiRestV2FunctionsTypesFunction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["function_id"] = o.FunctionId
-	toSerialize["function_name"] = o.FunctionName
-	toSerialize["function_mangled_name"] = o.FunctionMangledName
-	toSerialize["function_vaddr"] = o.FunctionVaddr
-	toSerialize["function_size"] = o.FunctionSize
 	toSerialize["debug"] = o.Debug
-	if o.Embedding3d != nil {
-		toSerialize["embedding_3d"] = o.Embedding3d
-	}
 	if o.Embedding1d != nil {
 		toSerialize["embedding_1d"] = o.Embedding1d
 	}
+	if o.Embedding3d != nil {
+		toSerialize["embedding_3d"] = o.Embedding3d
+	}
+	toSerialize["function_id"] = o.FunctionId
+	toSerialize["function_mangled_name"] = o.FunctionMangledName
+	toSerialize["function_name"] = o.FunctionName
+	toSerialize["function_size"] = o.FunctionSize
+	toSerialize["function_vaddr"] = o.FunctionVaddr
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -306,12 +306,12 @@ func (o *AppApiRestV2FunctionsTypesFunction) UnmarshalJSON(data []byte) (err err
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"function_id",
-		"function_name",
-		"function_mangled_name",
-		"function_vaddr",
-		"function_size",
 		"debug",
+		"function_id",
+		"function_mangled_name",
+		"function_name",
+		"function_size",
+		"function_vaddr",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -341,14 +341,14 @@ func (o *AppApiRestV2FunctionsTypesFunction) UnmarshalJSON(data []byte) (err err
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "function_id")
-		delete(additionalProperties, "function_name")
-		delete(additionalProperties, "function_mangled_name")
-		delete(additionalProperties, "function_vaddr")
-		delete(additionalProperties, "function_size")
 		delete(additionalProperties, "debug")
-		delete(additionalProperties, "embedding_3d")
 		delete(additionalProperties, "embedding_1d")
+		delete(additionalProperties, "embedding_3d")
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_mangled_name")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "function_size")
+		delete(additionalProperties, "function_vaddr")
 		o.AdditionalProperties = additionalProperties
 	}
 

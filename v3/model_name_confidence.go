@@ -19,10 +19,10 @@ var _ MappedNullable = &NameConfidence{}
 
 // NameConfidence struct for NameConfidence
 type NameConfidence struct {
-	// The suggested function name
-	Name string `json:"name"`
 	// Confidence score as a percentage
 	Confidence float32 `json:"confidence"`
+	// The suggested function name
+	Name string `json:"name"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,10 +32,10 @@ type _NameConfidence NameConfidence
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNameConfidence(name string, confidence float32) *NameConfidence {
+func NewNameConfidence(confidence float32, name string) *NameConfidence {
 	this := NameConfidence{}
-	this.Name = name
 	this.Confidence = confidence
+	this.Name = name
 	return &this
 }
 
@@ -45,30 +45,6 @@ func NewNameConfidence(name string, confidence float32) *NameConfidence {
 func NewNameConfidenceWithDefaults() *NameConfidence {
 	this := NameConfidence{}
 	return &this
-}
-
-// GetName returns the Name field value
-func (o *NameConfidence) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *NameConfidence) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *NameConfidence) SetName(v string) {
-	o.Name = v
 }
 
 // GetConfidence returns the Confidence field value
@@ -95,6 +71,30 @@ func (o *NameConfidence) SetConfidence(v float32) {
 	o.Confidence = v
 }
 
+// GetName returns the Name field value
+func (o *NameConfidence) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *NameConfidence) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *NameConfidence) SetName(v string) {
+	o.Name = v
+}
+
 func (o NameConfidence) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -105,8 +105,8 @@ func (o NameConfidence) MarshalJSON() ([]byte, error) {
 
 func (o NameConfidence) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
 	toSerialize["confidence"] = o.Confidence
+	toSerialize["name"] = o.Name
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -120,8 +120,8 @@ func (o *NameConfidence) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"name",
 		"confidence",
+		"name",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -151,8 +151,8 @@ func (o *NameConfidence) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "name")
 		delete(additionalProperties, "confidence")
+		delete(additionalProperties, "name")
 		o.AdditionalProperties = additionalProperties
 	}
 

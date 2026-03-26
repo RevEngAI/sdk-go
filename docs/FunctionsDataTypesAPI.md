@@ -385,7 +385,7 @@ import (
 func main() {
 	analysisId := int32(56) // int32 | 
 	functionId := int32(56) // int32 | 
-	updateFunctionDataTypes := *revengai.NewUpdateFunctionDataTypes(int32(123), *revengai.NewFunctionInfoInput([]revengai.FuncDepsInner{*revengai.NewFuncDepsInner("Name_example", int32(123), map[string]int32{"key": int32(123)}, "Type_example", int32(123))})) // UpdateFunctionDataTypes | 
+	updateFunctionDataTypes := *revengai.NewUpdateFunctionDataTypes(*revengai.NewFunctionInfoInput([]revengai.FuncDepsInner{*revengai.NewFuncDepsInner(map[string]int32{"key": int32(123)}, "Name_example", int32(123), "Type_example", int32(123))}), int32(123)) // UpdateFunctionDataTypes | 
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)

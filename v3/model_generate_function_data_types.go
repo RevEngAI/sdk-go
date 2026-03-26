@@ -19,14 +19,14 @@ var _ MappedNullable = &GenerateFunctionDataTypes{}
 
 // GenerateFunctionDataTypes struct for GenerateFunctionDataTypes
 type GenerateFunctionDataTypes struct {
+	// List of function data types information that are either already generated, or now queued for generation
+	DataTypesList GenerationStatusList `json:"data_types_list"`
 	// [DEPRECATED] This value has been replaced with the `data_types_list` field
 	// Deprecated
 	Queued bool `json:"queued"`
 	// [DEPRECATED] This value has been replaced with the `data_types_list` field
 	// Deprecated
 	Reference string `json:"reference"`
-	// List of function data types information that are either already generated, or now queued for generation
-	DataTypesList GenerationStatusList `json:"data_types_list"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,11 +36,11 @@ type _GenerateFunctionDataTypes GenerateFunctionDataTypes
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGenerateFunctionDataTypes(queued bool, reference string, dataTypesList GenerationStatusList) *GenerateFunctionDataTypes {
+func NewGenerateFunctionDataTypes(dataTypesList GenerationStatusList, queued bool, reference string) *GenerateFunctionDataTypes {
 	this := GenerateFunctionDataTypes{}
+	this.DataTypesList = dataTypesList
 	this.Queued = queued
 	this.Reference = reference
-	this.DataTypesList = dataTypesList
 	return &this
 }
 
@@ -50,6 +50,30 @@ func NewGenerateFunctionDataTypes(queued bool, reference string, dataTypesList G
 func NewGenerateFunctionDataTypesWithDefaults() *GenerateFunctionDataTypes {
 	this := GenerateFunctionDataTypes{}
 	return &this
+}
+
+// GetDataTypesList returns the DataTypesList field value
+func (o *GenerateFunctionDataTypes) GetDataTypesList() GenerationStatusList {
+	if o == nil {
+		var ret GenerationStatusList
+		return ret
+	}
+
+	return o.DataTypesList
+}
+
+// GetDataTypesListOk returns a tuple with the DataTypesList field value
+// and a boolean to check if the value has been set.
+func (o *GenerateFunctionDataTypes) GetDataTypesListOk() (*GenerationStatusList, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DataTypesList, true
+}
+
+// SetDataTypesList sets field value
+func (o *GenerateFunctionDataTypes) SetDataTypesList(v GenerationStatusList) {
+	o.DataTypesList = v
 }
 
 // GetQueued returns the Queued field value
@@ -106,30 +130,6 @@ func (o *GenerateFunctionDataTypes) SetReference(v string) {
 	o.Reference = v
 }
 
-// GetDataTypesList returns the DataTypesList field value
-func (o *GenerateFunctionDataTypes) GetDataTypesList() GenerationStatusList {
-	if o == nil {
-		var ret GenerationStatusList
-		return ret
-	}
-
-	return o.DataTypesList
-}
-
-// GetDataTypesListOk returns a tuple with the DataTypesList field value
-// and a boolean to check if the value has been set.
-func (o *GenerateFunctionDataTypes) GetDataTypesListOk() (*GenerationStatusList, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.DataTypesList, true
-}
-
-// SetDataTypesList sets field value
-func (o *GenerateFunctionDataTypes) SetDataTypesList(v GenerationStatusList) {
-	o.DataTypesList = v
-}
-
 func (o GenerateFunctionDataTypes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -140,9 +140,9 @@ func (o GenerateFunctionDataTypes) MarshalJSON() ([]byte, error) {
 
 func (o GenerateFunctionDataTypes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["data_types_list"] = o.DataTypesList
 	toSerialize["queued"] = o.Queued
 	toSerialize["reference"] = o.Reference
-	toSerialize["data_types_list"] = o.DataTypesList
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -156,9 +156,9 @@ func (o *GenerateFunctionDataTypes) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"data_types_list",
 		"queued",
 		"reference",
-		"data_types_list",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -188,9 +188,9 @@ func (o *GenerateFunctionDataTypes) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data_types_list")
 		delete(additionalProperties, "queued")
 		delete(additionalProperties, "reference")
-		delete(additionalProperties, "data_types_list")
 		o.AdditionalProperties = additionalProperties
 	}
 

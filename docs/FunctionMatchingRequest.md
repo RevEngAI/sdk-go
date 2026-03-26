@@ -4,22 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ModelId** | **int32** | ID of the model used for function matching, used to determine the embedding model | 
-**FunctionIds** | **[]int64** | ID&#39;s of functions to find matches for, must be at least one function ID | 
-**MinSimilarity** | Pointer to **float32** | Minimum similarity expected for a match as a percentage, default is 90 | [optional] [default to 90.0]
 **Filters** | Pointer to [**NullableFunctionMatchingFilters**](FunctionMatchingFilters.md) |  | [optional] 
-**ResultsPerFunction** | Pointer to **int32** | Maximum number of matches to return per function, default is 1, max is 50 | [optional] [default to 1]
+**FunctionIds** | **[]int64** | ID&#39;s of functions to find matches for, must be at least one function ID | 
+**MinSimilarity** | Pointer to **float32** | Minimum similarity expected for a match as a percentage, default is 90 | [optional] [default to 90]
+**ModelId** | **int32** | ID of the model used for function matching, used to determine the embedding model | 
+**NoCache** | Pointer to **bool** | If set to true, forces the system to bypass any cached results and perform a fresh computation | [optional] [default to false]
 **Page** | Pointer to **int32** | Page number for paginated results, default is 1 (first page) | [optional] [default to 1]
 **PageSize** | Pointer to **int32** | Number of functions to return per page, default is 0 (all functions), max is 1000 | [optional] [default to 0]
+**ResultsPerFunction** | Pointer to **int32** | Maximum number of matches to return per function, default is 1, max is 50 | [optional] [default to 1]
 **StatusOnly** | Pointer to **bool** | If set to true, only returns the status of the matching operation without the actual results | [optional] [default to false]
-**NoCache** | Pointer to **bool** | If set to true, forces the system to bypass any cached results and perform a fresh computation | [optional] [default to false]
 **UseCanonicalNames** | Pointer to **bool** | Whether to use canonical function names during function matching for confidence results, default is False | [optional] [default to false]
 
 ## Methods
 
 ### NewFunctionMatchingRequest
 
-`func NewFunctionMatchingRequest(modelId int32, functionIds []int64, ) *FunctionMatchingRequest`
+`func NewFunctionMatchingRequest(functionIds []int64, modelId int32, ) *FunctionMatchingRequest`
 
 NewFunctionMatchingRequest instantiates a new FunctionMatchingRequest object
 This constructor will assign default values to properties that have it defined,
@@ -34,26 +34,41 @@ NewFunctionMatchingRequestWithDefaults instantiates a new FunctionMatchingReques
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetModelId
+### GetFilters
 
-`func (o *FunctionMatchingRequest) GetModelId() int32`
+`func (o *FunctionMatchingRequest) GetFilters() FunctionMatchingFilters`
 
-GetModelId returns the ModelId field if non-nil, zero value otherwise.
+GetFilters returns the Filters field if non-nil, zero value otherwise.
 
-### GetModelIdOk
+### GetFiltersOk
 
-`func (o *FunctionMatchingRequest) GetModelIdOk() (*int32, bool)`
+`func (o *FunctionMatchingRequest) GetFiltersOk() (*FunctionMatchingFilters, bool)`
 
-GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
+GetFiltersOk returns a tuple with the Filters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetModelId
+### SetFilters
 
-`func (o *FunctionMatchingRequest) SetModelId(v int32)`
+`func (o *FunctionMatchingRequest) SetFilters(v FunctionMatchingFilters)`
 
-SetModelId sets ModelId field to given value.
+SetFilters sets Filters field to given value.
 
+### HasFilters
 
+`func (o *FunctionMatchingRequest) HasFilters() bool`
+
+HasFilters returns a boolean if a field has been set.
+
+### SetFiltersNil
+
+`func (o *FunctionMatchingRequest) SetFiltersNil(b bool)`
+
+ SetFiltersNil sets the value for Filters to be an explicit nil
+
+### UnsetFilters
+`func (o *FunctionMatchingRequest) UnsetFilters()`
+
+UnsetFilters ensures that no value is present for Filters, not even an explicit nil
 ### GetFunctionIds
 
 `func (o *FunctionMatchingRequest) GetFunctionIds() []int64`
@@ -99,65 +114,50 @@ SetMinSimilarity sets MinSimilarity field to given value.
 
 HasMinSimilarity returns a boolean if a field has been set.
 
-### GetFilters
+### GetModelId
 
-`func (o *FunctionMatchingRequest) GetFilters() FunctionMatchingFilters`
+`func (o *FunctionMatchingRequest) GetModelId() int32`
 
-GetFilters returns the Filters field if non-nil, zero value otherwise.
+GetModelId returns the ModelId field if non-nil, zero value otherwise.
 
-### GetFiltersOk
+### GetModelIdOk
 
-`func (o *FunctionMatchingRequest) GetFiltersOk() (*FunctionMatchingFilters, bool)`
+`func (o *FunctionMatchingRequest) GetModelIdOk() (*int32, bool)`
 
-GetFiltersOk returns a tuple with the Filters field if it's non-nil, zero value otherwise
+GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFilters
+### SetModelId
 
-`func (o *FunctionMatchingRequest) SetFilters(v FunctionMatchingFilters)`
+`func (o *FunctionMatchingRequest) SetModelId(v int32)`
 
-SetFilters sets Filters field to given value.
+SetModelId sets ModelId field to given value.
 
-### HasFilters
 
-`func (o *FunctionMatchingRequest) HasFilters() bool`
+### GetNoCache
 
-HasFilters returns a boolean if a field has been set.
+`func (o *FunctionMatchingRequest) GetNoCache() bool`
 
-### SetFiltersNil
+GetNoCache returns the NoCache field if non-nil, zero value otherwise.
 
-`func (o *FunctionMatchingRequest) SetFiltersNil(b bool)`
+### GetNoCacheOk
 
- SetFiltersNil sets the value for Filters to be an explicit nil
+`func (o *FunctionMatchingRequest) GetNoCacheOk() (*bool, bool)`
 
-### UnsetFilters
-`func (o *FunctionMatchingRequest) UnsetFilters()`
-
-UnsetFilters ensures that no value is present for Filters, not even an explicit nil
-### GetResultsPerFunction
-
-`func (o *FunctionMatchingRequest) GetResultsPerFunction() int32`
-
-GetResultsPerFunction returns the ResultsPerFunction field if non-nil, zero value otherwise.
-
-### GetResultsPerFunctionOk
-
-`func (o *FunctionMatchingRequest) GetResultsPerFunctionOk() (*int32, bool)`
-
-GetResultsPerFunctionOk returns a tuple with the ResultsPerFunction field if it's non-nil, zero value otherwise
+GetNoCacheOk returns a tuple with the NoCache field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetResultsPerFunction
+### SetNoCache
 
-`func (o *FunctionMatchingRequest) SetResultsPerFunction(v int32)`
+`func (o *FunctionMatchingRequest) SetNoCache(v bool)`
 
-SetResultsPerFunction sets ResultsPerFunction field to given value.
+SetNoCache sets NoCache field to given value.
 
-### HasResultsPerFunction
+### HasNoCache
 
-`func (o *FunctionMatchingRequest) HasResultsPerFunction() bool`
+`func (o *FunctionMatchingRequest) HasNoCache() bool`
 
-HasResultsPerFunction returns a boolean if a field has been set.
+HasNoCache returns a boolean if a field has been set.
 
 ### GetPage
 
@@ -209,6 +209,31 @@ SetPageSize sets PageSize field to given value.
 
 HasPageSize returns a boolean if a field has been set.
 
+### GetResultsPerFunction
+
+`func (o *FunctionMatchingRequest) GetResultsPerFunction() int32`
+
+GetResultsPerFunction returns the ResultsPerFunction field if non-nil, zero value otherwise.
+
+### GetResultsPerFunctionOk
+
+`func (o *FunctionMatchingRequest) GetResultsPerFunctionOk() (*int32, bool)`
+
+GetResultsPerFunctionOk returns a tuple with the ResultsPerFunction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResultsPerFunction
+
+`func (o *FunctionMatchingRequest) SetResultsPerFunction(v int32)`
+
+SetResultsPerFunction sets ResultsPerFunction field to given value.
+
+### HasResultsPerFunction
+
+`func (o *FunctionMatchingRequest) HasResultsPerFunction() bool`
+
+HasResultsPerFunction returns a boolean if a field has been set.
+
 ### GetStatusOnly
 
 `func (o *FunctionMatchingRequest) GetStatusOnly() bool`
@@ -233,31 +258,6 @@ SetStatusOnly sets StatusOnly field to given value.
 `func (o *FunctionMatchingRequest) HasStatusOnly() bool`
 
 HasStatusOnly returns a boolean if a field has been set.
-
-### GetNoCache
-
-`func (o *FunctionMatchingRequest) GetNoCache() bool`
-
-GetNoCache returns the NoCache field if non-nil, zero value otherwise.
-
-### GetNoCacheOk
-
-`func (o *FunctionMatchingRequest) GetNoCacheOk() (*bool, bool)`
-
-GetNoCacheOk returns a tuple with the NoCache field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNoCache
-
-`func (o *FunctionMatchingRequest) SetNoCache(v bool)`
-
-SetNoCache sets NoCache field to given value.
-
-### HasNoCache
-
-`func (o *FunctionMatchingRequest) HasNoCache() bool`
-
-HasNoCache returns a boolean if a field has been set.
 
 ### GetUseCanonicalNames
 

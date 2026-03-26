@@ -19,20 +19,20 @@ var _ MappedNullable = &FunctionsDetailResponse{}
 
 // FunctionsDetailResponse struct for FunctionsDetailResponse
 type FunctionsDetailResponse struct {
+	AnalysisId int32 `json:"analysis_id"`
+	BinaryId int32 `json:"binary_id"`
+	BinaryName string `json:"binary_name"`
+	Debug bool `json:"debug"`
+	DebugHash NullableString `json:"debug_hash"`
+	Embedding1d []float32 `json:"embedding_1d,omitempty"`
+	Embedding3d []float32 `json:"embedding_3d,omitempty"`
 	// Function id
 	FunctionId int64 `json:"function_id"`
 	FunctionName string `json:"function_name"`
 	FunctionNameMangled string `json:"function_name_mangled"`
-	FunctionVaddr int64 `json:"function_vaddr"`
 	FunctionSize int32 `json:"function_size"`
-	AnalysisId int32 `json:"analysis_id"`
-	BinaryId int32 `json:"binary_id"`
-	BinaryName string `json:"binary_name"`
+	FunctionVaddr int64 `json:"function_vaddr"`
 	Sha256Hash string `json:"sha_256_hash"`
-	DebugHash NullableString `json:"debug_hash"`
-	Debug bool `json:"debug"`
-	Embedding3d []float32 `json:"embedding_3d,omitempty"`
-	Embedding1d []float32 `json:"embedding_1d,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -42,19 +42,19 @@ type _FunctionsDetailResponse FunctionsDetailResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionsDetailResponse(functionId int64, functionName string, functionNameMangled string, functionVaddr int64, functionSize int32, analysisId int32, binaryId int32, binaryName string, sha256Hash string, debugHash NullableString, debug bool) *FunctionsDetailResponse {
+func NewFunctionsDetailResponse(analysisId int32, binaryId int32, binaryName string, debug bool, debugHash NullableString, functionId int64, functionName string, functionNameMangled string, functionSize int32, functionVaddr int64, sha256Hash string) *FunctionsDetailResponse {
 	this := FunctionsDetailResponse{}
-	this.FunctionId = functionId
-	this.FunctionName = functionName
-	this.FunctionNameMangled = functionNameMangled
-	this.FunctionVaddr = functionVaddr
-	this.FunctionSize = functionSize
 	this.AnalysisId = analysisId
 	this.BinaryId = binaryId
 	this.BinaryName = binaryName
-	this.Sha256Hash = sha256Hash
-	this.DebugHash = debugHash
 	this.Debug = debug
+	this.DebugHash = debugHash
+	this.FunctionId = functionId
+	this.FunctionName = functionName
+	this.FunctionNameMangled = functionNameMangled
+	this.FunctionSize = functionSize
+	this.FunctionVaddr = functionVaddr
+	this.Sha256Hash = sha256Hash
 	return &this
 }
 
@@ -64,126 +64,6 @@ func NewFunctionsDetailResponse(functionId int64, functionName string, functionN
 func NewFunctionsDetailResponseWithDefaults() *FunctionsDetailResponse {
 	this := FunctionsDetailResponse{}
 	return &this
-}
-
-// GetFunctionId returns the FunctionId field value
-func (o *FunctionsDetailResponse) GetFunctionId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.FunctionId
-}
-
-// GetFunctionIdOk returns a tuple with the FunctionId field value
-// and a boolean to check if the value has been set.
-func (o *FunctionsDetailResponse) GetFunctionIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionId, true
-}
-
-// SetFunctionId sets field value
-func (o *FunctionsDetailResponse) SetFunctionId(v int64) {
-	o.FunctionId = v
-}
-
-// GetFunctionName returns the FunctionName field value
-func (o *FunctionsDetailResponse) GetFunctionName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.FunctionName
-}
-
-// GetFunctionNameOk returns a tuple with the FunctionName field value
-// and a boolean to check if the value has been set.
-func (o *FunctionsDetailResponse) GetFunctionNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionName, true
-}
-
-// SetFunctionName sets field value
-func (o *FunctionsDetailResponse) SetFunctionName(v string) {
-	o.FunctionName = v
-}
-
-// GetFunctionNameMangled returns the FunctionNameMangled field value
-func (o *FunctionsDetailResponse) GetFunctionNameMangled() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.FunctionNameMangled
-}
-
-// GetFunctionNameMangledOk returns a tuple with the FunctionNameMangled field value
-// and a boolean to check if the value has been set.
-func (o *FunctionsDetailResponse) GetFunctionNameMangledOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionNameMangled, true
-}
-
-// SetFunctionNameMangled sets field value
-func (o *FunctionsDetailResponse) SetFunctionNameMangled(v string) {
-	o.FunctionNameMangled = v
-}
-
-// GetFunctionVaddr returns the FunctionVaddr field value
-func (o *FunctionsDetailResponse) GetFunctionVaddr() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.FunctionVaddr
-}
-
-// GetFunctionVaddrOk returns a tuple with the FunctionVaddr field value
-// and a boolean to check if the value has been set.
-func (o *FunctionsDetailResponse) GetFunctionVaddrOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionVaddr, true
-}
-
-// SetFunctionVaddr sets field value
-func (o *FunctionsDetailResponse) SetFunctionVaddr(v int64) {
-	o.FunctionVaddr = v
-}
-
-// GetFunctionSize returns the FunctionSize field value
-func (o *FunctionsDetailResponse) GetFunctionSize() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.FunctionSize
-}
-
-// GetFunctionSizeOk returns a tuple with the FunctionSize field value
-// and a boolean to check if the value has been set.
-func (o *FunctionsDetailResponse) GetFunctionSizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionSize, true
-}
-
-// SetFunctionSize sets field value
-func (o *FunctionsDetailResponse) SetFunctionSize(v int32) {
-	o.FunctionSize = v
 }
 
 // GetAnalysisId returns the AnalysisId field value
@@ -258,28 +138,28 @@ func (o *FunctionsDetailResponse) SetBinaryName(v string) {
 	o.BinaryName = v
 }
 
-// GetSha256Hash returns the Sha256Hash field value
-func (o *FunctionsDetailResponse) GetSha256Hash() string {
+// GetDebug returns the Debug field value
+func (o *FunctionsDetailResponse) GetDebug() bool {
 	if o == nil {
-		var ret string
+		var ret bool
 		return ret
 	}
 
-	return o.Sha256Hash
+	return o.Debug
 }
 
-// GetSha256HashOk returns a tuple with the Sha256Hash field value
+// GetDebugOk returns a tuple with the Debug field value
 // and a boolean to check if the value has been set.
-func (o *FunctionsDetailResponse) GetSha256HashOk() (*string, bool) {
+func (o *FunctionsDetailResponse) GetDebugOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Sha256Hash, true
+	return &o.Debug, true
 }
 
-// SetSha256Hash sets field value
-func (o *FunctionsDetailResponse) SetSha256Hash(v string) {
-	o.Sha256Hash = v
+// SetDebug sets field value
+func (o *FunctionsDetailResponse) SetDebug(v bool) {
+	o.Debug = v
 }
 
 // GetDebugHash returns the DebugHash field value
@@ -306,63 +186,6 @@ func (o *FunctionsDetailResponse) GetDebugHashOk() (*string, bool) {
 // SetDebugHash sets field value
 func (o *FunctionsDetailResponse) SetDebugHash(v string) {
 	o.DebugHash.Set(&v)
-}
-
-// GetDebug returns the Debug field value
-func (o *FunctionsDetailResponse) GetDebug() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Debug
-}
-
-// GetDebugOk returns a tuple with the Debug field value
-// and a boolean to check if the value has been set.
-func (o *FunctionsDetailResponse) GetDebugOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Debug, true
-}
-
-// SetDebug sets field value
-func (o *FunctionsDetailResponse) SetDebug(v bool) {
-	o.Debug = v
-}
-
-// GetEmbedding3d returns the Embedding3d field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionsDetailResponse) GetEmbedding3d() []float32 {
-	if o == nil {
-		var ret []float32
-		return ret
-	}
-	return o.Embedding3d
-}
-
-// GetEmbedding3dOk returns a tuple with the Embedding3d field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionsDetailResponse) GetEmbedding3dOk() ([]float32, bool) {
-	if o == nil || IsNil(o.Embedding3d) {
-		return nil, false
-	}
-	return o.Embedding3d, true
-}
-
-// HasEmbedding3d returns a boolean if a field has been set.
-func (o *FunctionsDetailResponse) HasEmbedding3d() bool {
-	if o != nil && !IsNil(o.Embedding3d) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmbedding3d gets a reference to the given []float32 and assigns it to the Embedding3d field.
-func (o *FunctionsDetailResponse) SetEmbedding3d(v []float32) {
-	o.Embedding3d = v
 }
 
 // GetEmbedding1d returns the Embedding1d field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -398,6 +221,183 @@ func (o *FunctionsDetailResponse) SetEmbedding1d(v []float32) {
 	o.Embedding1d = v
 }
 
+// GetEmbedding3d returns the Embedding3d field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FunctionsDetailResponse) GetEmbedding3d() []float32 {
+	if o == nil {
+		var ret []float32
+		return ret
+	}
+	return o.Embedding3d
+}
+
+// GetEmbedding3dOk returns a tuple with the Embedding3d field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FunctionsDetailResponse) GetEmbedding3dOk() ([]float32, bool) {
+	if o == nil || IsNil(o.Embedding3d) {
+		return nil, false
+	}
+	return o.Embedding3d, true
+}
+
+// HasEmbedding3d returns a boolean if a field has been set.
+func (o *FunctionsDetailResponse) HasEmbedding3d() bool {
+	if o != nil && !IsNil(o.Embedding3d) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmbedding3d gets a reference to the given []float32 and assigns it to the Embedding3d field.
+func (o *FunctionsDetailResponse) SetEmbedding3d(v []float32) {
+	o.Embedding3d = v
+}
+
+// GetFunctionId returns the FunctionId field value
+func (o *FunctionsDetailResponse) GetFunctionId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.FunctionId
+}
+
+// GetFunctionIdOk returns a tuple with the FunctionId field value
+// and a boolean to check if the value has been set.
+func (o *FunctionsDetailResponse) GetFunctionIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionId, true
+}
+
+// SetFunctionId sets field value
+func (o *FunctionsDetailResponse) SetFunctionId(v int64) {
+	o.FunctionId = v
+}
+
+// GetFunctionName returns the FunctionName field value
+func (o *FunctionsDetailResponse) GetFunctionName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FunctionName
+}
+
+// GetFunctionNameOk returns a tuple with the FunctionName field value
+// and a boolean to check if the value has been set.
+func (o *FunctionsDetailResponse) GetFunctionNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionName, true
+}
+
+// SetFunctionName sets field value
+func (o *FunctionsDetailResponse) SetFunctionName(v string) {
+	o.FunctionName = v
+}
+
+// GetFunctionNameMangled returns the FunctionNameMangled field value
+func (o *FunctionsDetailResponse) GetFunctionNameMangled() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FunctionNameMangled
+}
+
+// GetFunctionNameMangledOk returns a tuple with the FunctionNameMangled field value
+// and a boolean to check if the value has been set.
+func (o *FunctionsDetailResponse) GetFunctionNameMangledOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionNameMangled, true
+}
+
+// SetFunctionNameMangled sets field value
+func (o *FunctionsDetailResponse) SetFunctionNameMangled(v string) {
+	o.FunctionNameMangled = v
+}
+
+// GetFunctionSize returns the FunctionSize field value
+func (o *FunctionsDetailResponse) GetFunctionSize() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.FunctionSize
+}
+
+// GetFunctionSizeOk returns a tuple with the FunctionSize field value
+// and a boolean to check if the value has been set.
+func (o *FunctionsDetailResponse) GetFunctionSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionSize, true
+}
+
+// SetFunctionSize sets field value
+func (o *FunctionsDetailResponse) SetFunctionSize(v int32) {
+	o.FunctionSize = v
+}
+
+// GetFunctionVaddr returns the FunctionVaddr field value
+func (o *FunctionsDetailResponse) GetFunctionVaddr() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.FunctionVaddr
+}
+
+// GetFunctionVaddrOk returns a tuple with the FunctionVaddr field value
+// and a boolean to check if the value has been set.
+func (o *FunctionsDetailResponse) GetFunctionVaddrOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionVaddr, true
+}
+
+// SetFunctionVaddr sets field value
+func (o *FunctionsDetailResponse) SetFunctionVaddr(v int64) {
+	o.FunctionVaddr = v
+}
+
+// GetSha256Hash returns the Sha256Hash field value
+func (o *FunctionsDetailResponse) GetSha256Hash() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Sha256Hash
+}
+
+// GetSha256HashOk returns a tuple with the Sha256Hash field value
+// and a boolean to check if the value has been set.
+func (o *FunctionsDetailResponse) GetSha256HashOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Sha256Hash, true
+}
+
+// SetSha256Hash sets field value
+func (o *FunctionsDetailResponse) SetSha256Hash(v string) {
+	o.Sha256Hash = v
+}
+
 func (o FunctionsDetailResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -408,23 +408,23 @@ func (o FunctionsDetailResponse) MarshalJSON() ([]byte, error) {
 
 func (o FunctionsDetailResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["function_id"] = o.FunctionId
-	toSerialize["function_name"] = o.FunctionName
-	toSerialize["function_name_mangled"] = o.FunctionNameMangled
-	toSerialize["function_vaddr"] = o.FunctionVaddr
-	toSerialize["function_size"] = o.FunctionSize
 	toSerialize["analysis_id"] = o.AnalysisId
 	toSerialize["binary_id"] = o.BinaryId
 	toSerialize["binary_name"] = o.BinaryName
-	toSerialize["sha_256_hash"] = o.Sha256Hash
-	toSerialize["debug_hash"] = o.DebugHash.Get()
 	toSerialize["debug"] = o.Debug
-	if o.Embedding3d != nil {
-		toSerialize["embedding_3d"] = o.Embedding3d
-	}
+	toSerialize["debug_hash"] = o.DebugHash.Get()
 	if o.Embedding1d != nil {
 		toSerialize["embedding_1d"] = o.Embedding1d
 	}
+	if o.Embedding3d != nil {
+		toSerialize["embedding_3d"] = o.Embedding3d
+	}
+	toSerialize["function_id"] = o.FunctionId
+	toSerialize["function_name"] = o.FunctionName
+	toSerialize["function_name_mangled"] = o.FunctionNameMangled
+	toSerialize["function_size"] = o.FunctionSize
+	toSerialize["function_vaddr"] = o.FunctionVaddr
+	toSerialize["sha_256_hash"] = o.Sha256Hash
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -438,17 +438,17 @@ func (o *FunctionsDetailResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"function_id",
-		"function_name",
-		"function_name_mangled",
-		"function_vaddr",
-		"function_size",
 		"analysis_id",
 		"binary_id",
 		"binary_name",
-		"sha_256_hash",
-		"debug_hash",
 		"debug",
+		"debug_hash",
+		"function_id",
+		"function_name",
+		"function_name_mangled",
+		"function_size",
+		"function_vaddr",
+		"sha_256_hash",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -478,19 +478,19 @@ func (o *FunctionsDetailResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "function_id")
-		delete(additionalProperties, "function_name")
-		delete(additionalProperties, "function_name_mangled")
-		delete(additionalProperties, "function_vaddr")
-		delete(additionalProperties, "function_size")
 		delete(additionalProperties, "analysis_id")
 		delete(additionalProperties, "binary_id")
 		delete(additionalProperties, "binary_name")
-		delete(additionalProperties, "sha_256_hash")
-		delete(additionalProperties, "debug_hash")
 		delete(additionalProperties, "debug")
-		delete(additionalProperties, "embedding_3d")
+		delete(additionalProperties, "debug_hash")
 		delete(additionalProperties, "embedding_1d")
+		delete(additionalProperties, "embedding_3d")
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "function_name_mangled")
+		delete(additionalProperties, "function_size")
+		delete(additionalProperties, "function_vaddr")
+		delete(additionalProperties, "sha_256_hash")
 		o.AdditionalProperties = additionalProperties
 	}
 

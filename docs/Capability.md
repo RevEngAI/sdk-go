@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Capabilities** | **[]string** | The list of capabilities associated with the function | 
 **FunctionName** | **string** | The name of the function with a capability | 
 **FunctionVaddr** | **int64** | The virtual address of the function where the capability comes from | 
-**Capabilities** | **[]string** | The list of capabilities associated with the function | 
 
 ## Methods
 
 ### NewCapability
 
-`func NewCapability(functionName string, functionVaddr int64, capabilities []string, ) *Capability`
+`func NewCapability(capabilities []string, functionName string, functionVaddr int64, ) *Capability`
 
 NewCapability instantiates a new Capability object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +26,26 @@ will change when the set of required properties is changed
 NewCapabilityWithDefaults instantiates a new Capability object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCapabilities
+
+`func (o *Capability) GetCapabilities() []string`
+
+GetCapabilities returns the Capabilities field if non-nil, zero value otherwise.
+
+### GetCapabilitiesOk
+
+`func (o *Capability) GetCapabilitiesOk() (*[]string, bool)`
+
+GetCapabilitiesOk returns a tuple with the Capabilities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapabilities
+
+`func (o *Capability) SetCapabilities(v []string)`
+
+SetCapabilities sets Capabilities field to given value.
+
 
 ### GetFunctionName
 
@@ -65,26 +85,6 @@ and a boolean to check if the value has been set.
 `func (o *Capability) SetFunctionVaddr(v int64)`
 
 SetFunctionVaddr sets FunctionVaddr field to given value.
-
-
-### GetCapabilities
-
-`func (o *Capability) GetCapabilities() []string`
-
-GetCapabilities returns the Capabilities field if non-nil, zero value otherwise.
-
-### GetCapabilitiesOk
-
-`func (o *Capability) GetCapabilitiesOk() (*[]string, bool)`
-
-GetCapabilitiesOk returns a tuple with the Capabilities field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCapabilities
-
-`func (o *Capability) SetCapabilities(v []string)`
-
-SetCapabilities sets Capabilities field to given value.
 
 
 

@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Completed** | **bool** | Whether the service has completed data types generation | 
-**Status** | **string** | The current status of the data types service | 
 **DataTypes** | Pointer to [**NullableFunctionInfoOutput**](FunctionInfoOutput.md) |  | [optional] 
 **DataTypesVersion** | Pointer to **NullableInt32** |  | [optional] 
+**Status** | **string** | The current status of the data types service | 
 
 ## Methods
 
@@ -46,26 +46,6 @@ and a boolean to check if the value has been set.
 `func (o *FunctionDataTypes) SetCompleted(v bool)`
 
 SetCompleted sets Completed field to given value.
-
-
-### GetStatus
-
-`func (o *FunctionDataTypes) GetStatus() string`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *FunctionDataTypes) GetStatusOk() (*string, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *FunctionDataTypes) SetStatus(v string)`
-
-SetStatus sets Status field to given value.
 
 
 ### GetDataTypes
@@ -138,6 +118,26 @@ HasDataTypesVersion returns a boolean if a field has been set.
 `func (o *FunctionDataTypes) UnsetDataTypesVersion()`
 
 UnsetDataTypesVersion ensures that no value is present for DataTypesVersion, not even an explicit nil
+### GetStatus
+
+`func (o *FunctionDataTypes) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *FunctionDataTypes) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *FunctionDataTypes) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

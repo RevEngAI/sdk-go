@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**XrefToList** | [**[]XrefToResponse**](XrefToResponse.md) |  | 
 **XrefFromList** | [**[]XrefFromResponse**](XrefFromResponse.md) |  | 
+**XrefToList** | [**[]XrefToResponse**](XrefToResponse.md) |  | 
 
 ## Methods
 
 ### NewXrefResponse
 
-`func NewXrefResponse(xrefToList []XrefToResponse, xrefFromList []XrefFromResponse, ) *XrefResponse`
+`func NewXrefResponse(xrefFromList []XrefFromResponse, xrefToList []XrefToResponse, ) *XrefResponse`
 
 NewXrefResponse instantiates a new XrefResponse object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewXrefResponseWithDefaults instantiates a new XrefResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetXrefToList
-
-`func (o *XrefResponse) GetXrefToList() []XrefToResponse`
-
-GetXrefToList returns the XrefToList field if non-nil, zero value otherwise.
-
-### GetXrefToListOk
-
-`func (o *XrefResponse) GetXrefToListOk() (*[]XrefToResponse, bool)`
-
-GetXrefToListOk returns a tuple with the XrefToList field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetXrefToList
-
-`func (o *XrefResponse) SetXrefToList(v []XrefToResponse)`
-
-SetXrefToList sets XrefToList field to given value.
-
 
 ### GetXrefFromList
 
@@ -64,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *XrefResponse) SetXrefFromList(v []XrefFromResponse)`
 
 SetXrefFromList sets XrefFromList field to given value.
+
+
+### GetXrefToList
+
+`func (o *XrefResponse) GetXrefToList() []XrefToResponse`
+
+GetXrefToList returns the XrefToList field if non-nil, zero value otherwise.
+
+### GetXrefToListOk
+
+`func (o *XrefResponse) GetXrefToListOk() (*[]XrefToResponse, bool)`
+
+GetXrefToListOk returns a tuple with the XrefToList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetXrefToList
+
+`func (o *XrefResponse) SetXrefToList(v []XrefToResponse)`
+
+SetXrefToList sets XrefToList field to given value.
 
 
 

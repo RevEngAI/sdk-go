@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**NumberOfExports** | **int32** |  | 
 **Exports** | **[]map[string]int32** |  | 
+**NumberOfExports** | **int32** |  | 
 
 ## Methods
 
 ### NewExportModel
 
-`func NewExportModel(numberOfExports int32, exports []map[string]int32, ) *ExportModel`
+`func NewExportModel(exports []map[string]int32, numberOfExports int32, ) *ExportModel`
 
 NewExportModel instantiates a new ExportModel object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewExportModelWithDefaults instantiates a new ExportModel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetNumberOfExports
-
-`func (o *ExportModel) GetNumberOfExports() int32`
-
-GetNumberOfExports returns the NumberOfExports field if non-nil, zero value otherwise.
-
-### GetNumberOfExportsOk
-
-`func (o *ExportModel) GetNumberOfExportsOk() (*int32, bool)`
-
-GetNumberOfExportsOk returns a tuple with the NumberOfExports field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNumberOfExports
-
-`func (o *ExportModel) SetNumberOfExports(v int32)`
-
-SetNumberOfExports sets NumberOfExports field to given value.
-
 
 ### GetExports
 
@@ -64,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *ExportModel) SetExports(v []map[string]int32)`
 
 SetExports sets Exports field to given value.
+
+
+### GetNumberOfExports
+
+`func (o *ExportModel) GetNumberOfExports() int32`
+
+GetNumberOfExports returns the NumberOfExports field if non-nil, zero value otherwise.
+
+### GetNumberOfExportsOk
+
+`func (o *ExportModel) GetNumberOfExportsOk() (*int32, bool)`
+
+GetNumberOfExportsOk returns a tuple with the NumberOfExports field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumberOfExports
+
+`func (o *ExportModel) SetNumberOfExports(v int32)`
+
+SetNumberOfExports sets NumberOfExports field to given value.
 
 
 

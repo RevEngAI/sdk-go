@@ -21,12 +21,12 @@ var _ MappedNullable = &FunctionDataTypesListItem{}
 type FunctionDataTypesListItem struct {
 	// Whether the service has completed data types generation
 	Completed bool `json:"completed"`
-	// The current status of the data types service
-	Status string `json:"status"`
 	DataTypes NullableFunctionInfoOutput `json:"data_types,omitempty"`
 	DataTypesVersion NullableInt32 `json:"data_types_version,omitempty"`
 	// Function id
 	FunctionId int64 `json:"function_id"`
+	// The current status of the data types service
+	Status string `json:"status"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,11 +36,11 @@ type _FunctionDataTypesListItem FunctionDataTypesListItem
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionDataTypesListItem(completed bool, status string, functionId int64) *FunctionDataTypesListItem {
+func NewFunctionDataTypesListItem(completed bool, functionId int64, status string) *FunctionDataTypesListItem {
 	this := FunctionDataTypesListItem{}
 	this.Completed = completed
-	this.Status = status
 	this.FunctionId = functionId
+	this.Status = status
 	return &this
 }
 
@@ -74,30 +74,6 @@ func (o *FunctionDataTypesListItem) GetCompletedOk() (*bool, bool) {
 // SetCompleted sets field value
 func (o *FunctionDataTypesListItem) SetCompleted(v bool) {
 	o.Completed = v
-}
-
-// GetStatus returns the Status field value
-func (o *FunctionDataTypesListItem) GetStatus() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Status
-}
-
-// GetStatusOk returns a tuple with the Status field value
-// and a boolean to check if the value has been set.
-func (o *FunctionDataTypesListItem) GetStatusOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Status, true
-}
-
-// SetStatus sets field value
-func (o *FunctionDataTypesListItem) SetStatus(v string) {
-	o.Status = v
 }
 
 // GetDataTypes returns the DataTypes field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -208,6 +184,30 @@ func (o *FunctionDataTypesListItem) SetFunctionId(v int64) {
 	o.FunctionId = v
 }
 
+// GetStatus returns the Status field value
+func (o *FunctionDataTypesListItem) GetStatus() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value
+// and a boolean to check if the value has been set.
+func (o *FunctionDataTypesListItem) GetStatusOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Status, true
+}
+
+// SetStatus sets field value
+func (o *FunctionDataTypesListItem) SetStatus(v string) {
+	o.Status = v
+}
+
 func (o FunctionDataTypesListItem) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -219,7 +219,6 @@ func (o FunctionDataTypesListItem) MarshalJSON() ([]byte, error) {
 func (o FunctionDataTypesListItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["completed"] = o.Completed
-	toSerialize["status"] = o.Status
 	if o.DataTypes.IsSet() {
 		toSerialize["data_types"] = o.DataTypes.Get()
 	}
@@ -227,6 +226,7 @@ func (o FunctionDataTypesListItem) ToMap() (map[string]interface{}, error) {
 		toSerialize["data_types_version"] = o.DataTypesVersion.Get()
 	}
 	toSerialize["function_id"] = o.FunctionId
+	toSerialize["status"] = o.Status
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -241,8 +241,8 @@ func (o *FunctionDataTypesListItem) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"completed",
-		"status",
 		"function_id",
+		"status",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -273,10 +273,10 @@ func (o *FunctionDataTypesListItem) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "completed")
-		delete(additionalProperties, "status")
 		delete(additionalProperties, "data_types")
 		delete(additionalProperties, "data_types_version")
 		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "status")
 		o.AdditionalProperties = additionalProperties
 	}
 

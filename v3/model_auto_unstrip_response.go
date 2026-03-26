@@ -18,14 +18,14 @@ var _ MappedNullable = &AutoUnstripResponse{}
 
 // AutoUnstripResponse struct for AutoUnstripResponse
 type AutoUnstripResponse struct {
+	Applied NullableBool `json:"applied,omitempty"`
+	ErrorMessage NullableString `json:"error_message,omitempty"`
+	Matches []MatchedFunctionSuggestion `json:"matches,omitempty"`
 	// Progress of the auto-unstrip operation, represented as a percentage
 	// Deprecated
 	Progress *int32 `json:"progress,omitempty"`
 	Status NullableString `json:"status,omitempty"`
 	TotalTime NullableInt32 `json:"total_time,omitempty"`
-	Matches []MatchedFunctionSuggestion `json:"matches,omitempty"`
-	Applied NullableBool `json:"applied,omitempty"`
-	ErrorMessage NullableString `json:"error_message,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -50,6 +50,123 @@ func NewAutoUnstripResponseWithDefaults() *AutoUnstripResponse {
 	var progress int32 = 0
 	this.Progress = &progress
 	return &this
+}
+
+// GetApplied returns the Applied field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AutoUnstripResponse) GetApplied() bool {
+	if o == nil || IsNil(o.Applied.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.Applied.Get()
+}
+
+// GetAppliedOk returns a tuple with the Applied field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AutoUnstripResponse) GetAppliedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Applied.Get(), o.Applied.IsSet()
+}
+
+// HasApplied returns a boolean if a field has been set.
+func (o *AutoUnstripResponse) HasApplied() bool {
+	if o != nil && o.Applied.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetApplied gets a reference to the given NullableBool and assigns it to the Applied field.
+func (o *AutoUnstripResponse) SetApplied(v bool) {
+	o.Applied.Set(&v)
+}
+// SetAppliedNil sets the value for Applied to be an explicit nil
+func (o *AutoUnstripResponse) SetAppliedNil() {
+	o.Applied.Set(nil)
+}
+
+// UnsetApplied ensures that no value is present for Applied, not even an explicit nil
+func (o *AutoUnstripResponse) UnsetApplied() {
+	o.Applied.Unset()
+}
+
+// GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AutoUnstripResponse) GetErrorMessage() string {
+	if o == nil || IsNil(o.ErrorMessage.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ErrorMessage.Get()
+}
+
+// GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AutoUnstripResponse) GetErrorMessageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
+}
+
+// HasErrorMessage returns a boolean if a field has been set.
+func (o *AutoUnstripResponse) HasErrorMessage() bool {
+	if o != nil && o.ErrorMessage.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorMessage gets a reference to the given NullableString and assigns it to the ErrorMessage field.
+func (o *AutoUnstripResponse) SetErrorMessage(v string) {
+	o.ErrorMessage.Set(&v)
+}
+// SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
+func (o *AutoUnstripResponse) SetErrorMessageNil() {
+	o.ErrorMessage.Set(nil)
+}
+
+// UnsetErrorMessage ensures that no value is present for ErrorMessage, not even an explicit nil
+func (o *AutoUnstripResponse) UnsetErrorMessage() {
+	o.ErrorMessage.Unset()
+}
+
+// GetMatches returns the Matches field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AutoUnstripResponse) GetMatches() []MatchedFunctionSuggestion {
+	if o == nil {
+		var ret []MatchedFunctionSuggestion
+		return ret
+	}
+	return o.Matches
+}
+
+// GetMatchesOk returns a tuple with the Matches field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AutoUnstripResponse) GetMatchesOk() ([]MatchedFunctionSuggestion, bool) {
+	if o == nil || IsNil(o.Matches) {
+		return nil, false
+	}
+	return o.Matches, true
+}
+
+// HasMatches returns a boolean if a field has been set.
+func (o *AutoUnstripResponse) HasMatches() bool {
+	if o != nil && !IsNil(o.Matches) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatches gets a reference to the given []MatchedFunctionSuggestion and assigns it to the Matches field.
+func (o *AutoUnstripResponse) SetMatches(v []MatchedFunctionSuggestion) {
+	o.Matches = v
 }
 
 // GetProgress returns the Progress field value if set, zero value otherwise.
@@ -171,123 +288,6 @@ func (o *AutoUnstripResponse) UnsetTotalTime() {
 	o.TotalTime.Unset()
 }
 
-// GetMatches returns the Matches field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AutoUnstripResponse) GetMatches() []MatchedFunctionSuggestion {
-	if o == nil {
-		var ret []MatchedFunctionSuggestion
-		return ret
-	}
-	return o.Matches
-}
-
-// GetMatchesOk returns a tuple with the Matches field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoUnstripResponse) GetMatchesOk() ([]MatchedFunctionSuggestion, bool) {
-	if o == nil || IsNil(o.Matches) {
-		return nil, false
-	}
-	return o.Matches, true
-}
-
-// HasMatches returns a boolean if a field has been set.
-func (o *AutoUnstripResponse) HasMatches() bool {
-	if o != nil && !IsNil(o.Matches) {
-		return true
-	}
-
-	return false
-}
-
-// SetMatches gets a reference to the given []MatchedFunctionSuggestion and assigns it to the Matches field.
-func (o *AutoUnstripResponse) SetMatches(v []MatchedFunctionSuggestion) {
-	o.Matches = v
-}
-
-// GetApplied returns the Applied field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AutoUnstripResponse) GetApplied() bool {
-	if o == nil || IsNil(o.Applied.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.Applied.Get()
-}
-
-// GetAppliedOk returns a tuple with the Applied field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoUnstripResponse) GetAppliedOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Applied.Get(), o.Applied.IsSet()
-}
-
-// HasApplied returns a boolean if a field has been set.
-func (o *AutoUnstripResponse) HasApplied() bool {
-	if o != nil && o.Applied.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetApplied gets a reference to the given NullableBool and assigns it to the Applied field.
-func (o *AutoUnstripResponse) SetApplied(v bool) {
-	o.Applied.Set(&v)
-}
-// SetAppliedNil sets the value for Applied to be an explicit nil
-func (o *AutoUnstripResponse) SetAppliedNil() {
-	o.Applied.Set(nil)
-}
-
-// UnsetApplied ensures that no value is present for Applied, not even an explicit nil
-func (o *AutoUnstripResponse) UnsetApplied() {
-	o.Applied.Unset()
-}
-
-// GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AutoUnstripResponse) GetErrorMessage() string {
-	if o == nil || IsNil(o.ErrorMessage.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.ErrorMessage.Get()
-}
-
-// GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoUnstripResponse) GetErrorMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
-}
-
-// HasErrorMessage returns a boolean if a field has been set.
-func (o *AutoUnstripResponse) HasErrorMessage() bool {
-	if o != nil && o.ErrorMessage.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetErrorMessage gets a reference to the given NullableString and assigns it to the ErrorMessage field.
-func (o *AutoUnstripResponse) SetErrorMessage(v string) {
-	o.ErrorMessage.Set(&v)
-}
-// SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
-func (o *AutoUnstripResponse) SetErrorMessageNil() {
-	o.ErrorMessage.Set(nil)
-}
-
-// UnsetErrorMessage ensures that no value is present for ErrorMessage, not even an explicit nil
-func (o *AutoUnstripResponse) UnsetErrorMessage() {
-	o.ErrorMessage.Unset()
-}
-
 func (o AutoUnstripResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -298,6 +298,15 @@ func (o AutoUnstripResponse) MarshalJSON() ([]byte, error) {
 
 func (o AutoUnstripResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Applied.IsSet() {
+		toSerialize["applied"] = o.Applied.Get()
+	}
+	if o.ErrorMessage.IsSet() {
+		toSerialize["error_message"] = o.ErrorMessage.Get()
+	}
+	if o.Matches != nil {
+		toSerialize["matches"] = o.Matches
+	}
 	if !IsNil(o.Progress) {
 		toSerialize["progress"] = o.Progress
 	}
@@ -306,15 +315,6 @@ func (o AutoUnstripResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if o.TotalTime.IsSet() {
 		toSerialize["total_time"] = o.TotalTime.Get()
-	}
-	if o.Matches != nil {
-		toSerialize["matches"] = o.Matches
-	}
-	if o.Applied.IsSet() {
-		toSerialize["applied"] = o.Applied.Get()
-	}
-	if o.ErrorMessage.IsSet() {
-		toSerialize["error_message"] = o.ErrorMessage.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -338,12 +338,12 @@ func (o *AutoUnstripResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applied")
+		delete(additionalProperties, "error_message")
+		delete(additionalProperties, "matches")
 		delete(additionalProperties, "progress")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "total_time")
-		delete(additionalProperties, "matches")
-		delete(additionalProperties, "applied")
-		delete(additionalProperties, "error_message")
 		o.AdditionalProperties = additionalProperties
 	}
 

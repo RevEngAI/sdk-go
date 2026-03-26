@@ -19,13 +19,13 @@ var _ MappedNullable = &ELFRelocation{}
 
 // ELFRelocation struct for ELFRelocation
 type ELFRelocation struct {
-	Address int32 `json:"address"`
-	Type string `json:"type"`
-	Size int32 `json:"size"`
 	Addend int32 `json:"addend"`
-	SymbolName string `json:"symbol_name"`
+	Address int32 `json:"address"`
 	IsDynamic bool `json:"is_dynamic"`
 	IsPltgot bool `json:"is_pltgot"`
+	Size int32 `json:"size"`
+	SymbolName string `json:"symbol_name"`
+	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,15 +35,15 @@ type _ELFRelocation ELFRelocation
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewELFRelocation(address int32, type_ string, size int32, addend int32, symbolName string, isDynamic bool, isPltgot bool) *ELFRelocation {
+func NewELFRelocation(addend int32, address int32, isDynamic bool, isPltgot bool, size int32, symbolName string, type_ string) *ELFRelocation {
 	this := ELFRelocation{}
-	this.Address = address
-	this.Type = type_
-	this.Size = size
 	this.Addend = addend
-	this.SymbolName = symbolName
+	this.Address = address
 	this.IsDynamic = isDynamic
 	this.IsPltgot = isPltgot
+	this.Size = size
+	this.SymbolName = symbolName
+	this.Type = type_
 	return &this
 }
 
@@ -53,78 +53,6 @@ func NewELFRelocation(address int32, type_ string, size int32, addend int32, sym
 func NewELFRelocationWithDefaults() *ELFRelocation {
 	this := ELFRelocation{}
 	return &this
-}
-
-// GetAddress returns the Address field value
-func (o *ELFRelocation) GetAddress() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Address
-}
-
-// GetAddressOk returns a tuple with the Address field value
-// and a boolean to check if the value has been set.
-func (o *ELFRelocation) GetAddressOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Address, true
-}
-
-// SetAddress sets field value
-func (o *ELFRelocation) SetAddress(v int32) {
-	o.Address = v
-}
-
-// GetType returns the Type field value
-func (o *ELFRelocation) GetType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *ELFRelocation) GetTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *ELFRelocation) SetType(v string) {
-	o.Type = v
-}
-
-// GetSize returns the Size field value
-func (o *ELFRelocation) GetSize() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Size
-}
-
-// GetSizeOk returns a tuple with the Size field value
-// and a boolean to check if the value has been set.
-func (o *ELFRelocation) GetSizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Size, true
-}
-
-// SetSize sets field value
-func (o *ELFRelocation) SetSize(v int32) {
-	o.Size = v
 }
 
 // GetAddend returns the Addend field value
@@ -151,28 +79,28 @@ func (o *ELFRelocation) SetAddend(v int32) {
 	o.Addend = v
 }
 
-// GetSymbolName returns the SymbolName field value
-func (o *ELFRelocation) GetSymbolName() string {
+// GetAddress returns the Address field value
+func (o *ELFRelocation) GetAddress() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
-	return o.SymbolName
+	return o.Address
 }
 
-// GetSymbolNameOk returns a tuple with the SymbolName field value
+// GetAddressOk returns a tuple with the Address field value
 // and a boolean to check if the value has been set.
-func (o *ELFRelocation) GetSymbolNameOk() (*string, bool) {
+func (o *ELFRelocation) GetAddressOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.SymbolName, true
+	return &o.Address, true
 }
 
-// SetSymbolName sets field value
-func (o *ELFRelocation) SetSymbolName(v string) {
-	o.SymbolName = v
+// SetAddress sets field value
+func (o *ELFRelocation) SetAddress(v int32) {
+	o.Address = v
 }
 
 // GetIsDynamic returns the IsDynamic field value
@@ -223,6 +151,78 @@ func (o *ELFRelocation) SetIsPltgot(v bool) {
 	o.IsPltgot = v
 }
 
+// GetSize returns the Size field value
+func (o *ELFRelocation) GetSize() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Size
+}
+
+// GetSizeOk returns a tuple with the Size field value
+// and a boolean to check if the value has been set.
+func (o *ELFRelocation) GetSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Size, true
+}
+
+// SetSize sets field value
+func (o *ELFRelocation) SetSize(v int32) {
+	o.Size = v
+}
+
+// GetSymbolName returns the SymbolName field value
+func (o *ELFRelocation) GetSymbolName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.SymbolName
+}
+
+// GetSymbolNameOk returns a tuple with the SymbolName field value
+// and a boolean to check if the value has been set.
+func (o *ELFRelocation) GetSymbolNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SymbolName, true
+}
+
+// SetSymbolName sets field value
+func (o *ELFRelocation) SetSymbolName(v string) {
+	o.SymbolName = v
+}
+
+// GetType returns the Type field value
+func (o *ELFRelocation) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *ELFRelocation) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *ELFRelocation) SetType(v string) {
+	o.Type = v
+}
+
 func (o ELFRelocation) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -233,13 +233,13 @@ func (o ELFRelocation) MarshalJSON() ([]byte, error) {
 
 func (o ELFRelocation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["address"] = o.Address
-	toSerialize["type"] = o.Type
-	toSerialize["size"] = o.Size
 	toSerialize["addend"] = o.Addend
-	toSerialize["symbol_name"] = o.SymbolName
+	toSerialize["address"] = o.Address
 	toSerialize["is_dynamic"] = o.IsDynamic
 	toSerialize["is_pltgot"] = o.IsPltgot
+	toSerialize["size"] = o.Size
+	toSerialize["symbol_name"] = o.SymbolName
+	toSerialize["type"] = o.Type
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -253,13 +253,13 @@ func (o *ELFRelocation) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"address",
-		"type",
-		"size",
 		"addend",
-		"symbol_name",
+		"address",
 		"is_dynamic",
 		"is_pltgot",
+		"size",
+		"symbol_name",
+		"type",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -289,13 +289,13 @@ func (o *ELFRelocation) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "address")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "size")
 		delete(additionalProperties, "addend")
-		delete(additionalProperties, "symbol_name")
+		delete(additionalProperties, "address")
 		delete(additionalProperties, "is_dynamic")
 		delete(additionalProperties, "is_pltgot")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "symbol_name")
+		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
 	}
 

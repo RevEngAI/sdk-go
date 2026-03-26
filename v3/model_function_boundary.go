@@ -19,10 +19,10 @@ var _ MappedNullable = &FunctionBoundary{}
 
 // FunctionBoundary struct for FunctionBoundary
 type FunctionBoundary struct {
-	MangledName string `json:"mangled_name"`
-	StartAddress int64 `json:"start_address"`
 	EndAddress int64 `json:"end_address"`
 	IncludeInAnalysis NullableBool `json:"include_in_analysis,omitempty"`
+	MangledName string `json:"mangled_name"`
+	StartAddress int64 `json:"start_address"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,11 +32,11 @@ type _FunctionBoundary FunctionBoundary
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionBoundary(mangledName string, startAddress int64, endAddress int64) *FunctionBoundary {
+func NewFunctionBoundary(endAddress int64, mangledName string, startAddress int64) *FunctionBoundary {
 	this := FunctionBoundary{}
+	this.EndAddress = endAddress
 	this.MangledName = mangledName
 	this.StartAddress = startAddress
-	this.EndAddress = endAddress
 	return &this
 }
 
@@ -46,54 +46,6 @@ func NewFunctionBoundary(mangledName string, startAddress int64, endAddress int6
 func NewFunctionBoundaryWithDefaults() *FunctionBoundary {
 	this := FunctionBoundary{}
 	return &this
-}
-
-// GetMangledName returns the MangledName field value
-func (o *FunctionBoundary) GetMangledName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.MangledName
-}
-
-// GetMangledNameOk returns a tuple with the MangledName field value
-// and a boolean to check if the value has been set.
-func (o *FunctionBoundary) GetMangledNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.MangledName, true
-}
-
-// SetMangledName sets field value
-func (o *FunctionBoundary) SetMangledName(v string) {
-	o.MangledName = v
-}
-
-// GetStartAddress returns the StartAddress field value
-func (o *FunctionBoundary) GetStartAddress() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.StartAddress
-}
-
-// GetStartAddressOk returns a tuple with the StartAddress field value
-// and a boolean to check if the value has been set.
-func (o *FunctionBoundary) GetStartAddressOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.StartAddress, true
-}
-
-// SetStartAddress sets field value
-func (o *FunctionBoundary) SetStartAddress(v int64) {
-	o.StartAddress = v
 }
 
 // GetEndAddress returns the EndAddress field value
@@ -162,6 +114,54 @@ func (o *FunctionBoundary) UnsetIncludeInAnalysis() {
 	o.IncludeInAnalysis.Unset()
 }
 
+// GetMangledName returns the MangledName field value
+func (o *FunctionBoundary) GetMangledName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.MangledName
+}
+
+// GetMangledNameOk returns a tuple with the MangledName field value
+// and a boolean to check if the value has been set.
+func (o *FunctionBoundary) GetMangledNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MangledName, true
+}
+
+// SetMangledName sets field value
+func (o *FunctionBoundary) SetMangledName(v string) {
+	o.MangledName = v
+}
+
+// GetStartAddress returns the StartAddress field value
+func (o *FunctionBoundary) GetStartAddress() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.StartAddress
+}
+
+// GetStartAddressOk returns a tuple with the StartAddress field value
+// and a boolean to check if the value has been set.
+func (o *FunctionBoundary) GetStartAddressOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.StartAddress, true
+}
+
+// SetStartAddress sets field value
+func (o *FunctionBoundary) SetStartAddress(v int64) {
+	o.StartAddress = v
+}
+
 func (o FunctionBoundary) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -172,12 +172,12 @@ func (o FunctionBoundary) MarshalJSON() ([]byte, error) {
 
 func (o FunctionBoundary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["mangled_name"] = o.MangledName
-	toSerialize["start_address"] = o.StartAddress
 	toSerialize["end_address"] = o.EndAddress
 	if o.IncludeInAnalysis.IsSet() {
 		toSerialize["include_in_analysis"] = o.IncludeInAnalysis.Get()
 	}
+	toSerialize["mangled_name"] = o.MangledName
+	toSerialize["start_address"] = o.StartAddress
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -191,9 +191,9 @@ func (o *FunctionBoundary) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"end_address",
 		"mangled_name",
 		"start_address",
-		"end_address",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -223,10 +223,10 @@ func (o *FunctionBoundary) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "mangled_name")
-		delete(additionalProperties, "start_address")
 		delete(additionalProperties, "end_address")
 		delete(additionalProperties, "include_in_analysis")
+		delete(additionalProperties, "mangled_name")
+		delete(additionalProperties, "start_address")
 		o.AdditionalProperties = additionalProperties
 	}
 

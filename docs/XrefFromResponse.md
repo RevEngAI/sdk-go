@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Value** | **NullableString** |  | 
-**IsScalar** | Pointer to **NullableBool** |  | [optional] 
 **IsCall** | Pointer to **NullableBool** |  | [optional] 
 **IsData** | Pointer to **NullableBool** |  | [optional] 
+**IsScalar** | Pointer to **NullableBool** |  | [optional] 
 **IsString** | Pointer to **NullableBool** |  | [optional] 
+**OrigStrEncoding** | Pointer to **NullableString** |  | [optional] 
 **RawData** | Pointer to **NullableString** |  | [optional] 
 **Segment** | Pointer to [**NullableSegmentInfo**](SegmentInfo.md) |  | [optional] 
-**OrigStrEncoding** | Pointer to **NullableString** |  | [optional] 
+**Value** | **NullableString** |  | 
 **XrefTo** | **NullableString** |  | 
 
 ## Methods
@@ -33,71 +33,6 @@ NewXrefFromResponseWithDefaults instantiates a new XrefFromResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetValue
-
-`func (o *XrefFromResponse) GetValue() string`
-
-GetValue returns the Value field if non-nil, zero value otherwise.
-
-### GetValueOk
-
-`func (o *XrefFromResponse) GetValueOk() (*string, bool)`
-
-GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetValue
-
-`func (o *XrefFromResponse) SetValue(v string)`
-
-SetValue sets Value field to given value.
-
-
-### SetValueNil
-
-`func (o *XrefFromResponse) SetValueNil(b bool)`
-
- SetValueNil sets the value for Value to be an explicit nil
-
-### UnsetValue
-`func (o *XrefFromResponse) UnsetValue()`
-
-UnsetValue ensures that no value is present for Value, not even an explicit nil
-### GetIsScalar
-
-`func (o *XrefFromResponse) GetIsScalar() bool`
-
-GetIsScalar returns the IsScalar field if non-nil, zero value otherwise.
-
-### GetIsScalarOk
-
-`func (o *XrefFromResponse) GetIsScalarOk() (*bool, bool)`
-
-GetIsScalarOk returns a tuple with the IsScalar field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsScalar
-
-`func (o *XrefFromResponse) SetIsScalar(v bool)`
-
-SetIsScalar sets IsScalar field to given value.
-
-### HasIsScalar
-
-`func (o *XrefFromResponse) HasIsScalar() bool`
-
-HasIsScalar returns a boolean if a field has been set.
-
-### SetIsScalarNil
-
-`func (o *XrefFromResponse) SetIsScalarNil(b bool)`
-
- SetIsScalarNil sets the value for IsScalar to be an explicit nil
-
-### UnsetIsScalar
-`func (o *XrefFromResponse) UnsetIsScalar()`
-
-UnsetIsScalar ensures that no value is present for IsScalar, not even an explicit nil
 ### GetIsCall
 
 `func (o *XrefFromResponse) GetIsCall() bool`
@@ -168,6 +103,41 @@ HasIsData returns a boolean if a field has been set.
 `func (o *XrefFromResponse) UnsetIsData()`
 
 UnsetIsData ensures that no value is present for IsData, not even an explicit nil
+### GetIsScalar
+
+`func (o *XrefFromResponse) GetIsScalar() bool`
+
+GetIsScalar returns the IsScalar field if non-nil, zero value otherwise.
+
+### GetIsScalarOk
+
+`func (o *XrefFromResponse) GetIsScalarOk() (*bool, bool)`
+
+GetIsScalarOk returns a tuple with the IsScalar field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsScalar
+
+`func (o *XrefFromResponse) SetIsScalar(v bool)`
+
+SetIsScalar sets IsScalar field to given value.
+
+### HasIsScalar
+
+`func (o *XrefFromResponse) HasIsScalar() bool`
+
+HasIsScalar returns a boolean if a field has been set.
+
+### SetIsScalarNil
+
+`func (o *XrefFromResponse) SetIsScalarNil(b bool)`
+
+ SetIsScalarNil sets the value for IsScalar to be an explicit nil
+
+### UnsetIsScalar
+`func (o *XrefFromResponse) UnsetIsScalar()`
+
+UnsetIsScalar ensures that no value is present for IsScalar, not even an explicit nil
 ### GetIsString
 
 `func (o *XrefFromResponse) GetIsString() bool`
@@ -203,6 +173,41 @@ HasIsString returns a boolean if a field has been set.
 `func (o *XrefFromResponse) UnsetIsString()`
 
 UnsetIsString ensures that no value is present for IsString, not even an explicit nil
+### GetOrigStrEncoding
+
+`func (o *XrefFromResponse) GetOrigStrEncoding() string`
+
+GetOrigStrEncoding returns the OrigStrEncoding field if non-nil, zero value otherwise.
+
+### GetOrigStrEncodingOk
+
+`func (o *XrefFromResponse) GetOrigStrEncodingOk() (*string, bool)`
+
+GetOrigStrEncodingOk returns a tuple with the OrigStrEncoding field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrigStrEncoding
+
+`func (o *XrefFromResponse) SetOrigStrEncoding(v string)`
+
+SetOrigStrEncoding sets OrigStrEncoding field to given value.
+
+### HasOrigStrEncoding
+
+`func (o *XrefFromResponse) HasOrigStrEncoding() bool`
+
+HasOrigStrEncoding returns a boolean if a field has been set.
+
+### SetOrigStrEncodingNil
+
+`func (o *XrefFromResponse) SetOrigStrEncodingNil(b bool)`
+
+ SetOrigStrEncodingNil sets the value for OrigStrEncoding to be an explicit nil
+
+### UnsetOrigStrEncoding
+`func (o *XrefFromResponse) UnsetOrigStrEncoding()`
+
+UnsetOrigStrEncoding ensures that no value is present for OrigStrEncoding, not even an explicit nil
 ### GetRawData
 
 `func (o *XrefFromResponse) GetRawData() string`
@@ -273,41 +278,36 @@ HasSegment returns a boolean if a field has been set.
 `func (o *XrefFromResponse) UnsetSegment()`
 
 UnsetSegment ensures that no value is present for Segment, not even an explicit nil
-### GetOrigStrEncoding
+### GetValue
 
-`func (o *XrefFromResponse) GetOrigStrEncoding() string`
+`func (o *XrefFromResponse) GetValue() string`
 
-GetOrigStrEncoding returns the OrigStrEncoding field if non-nil, zero value otherwise.
+GetValue returns the Value field if non-nil, zero value otherwise.
 
-### GetOrigStrEncodingOk
+### GetValueOk
 
-`func (o *XrefFromResponse) GetOrigStrEncodingOk() (*string, bool)`
+`func (o *XrefFromResponse) GetValueOk() (*string, bool)`
 
-GetOrigStrEncodingOk returns a tuple with the OrigStrEncoding field if it's non-nil, zero value otherwise
+GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrigStrEncoding
+### SetValue
 
-`func (o *XrefFromResponse) SetOrigStrEncoding(v string)`
+`func (o *XrefFromResponse) SetValue(v string)`
 
-SetOrigStrEncoding sets OrigStrEncoding field to given value.
+SetValue sets Value field to given value.
 
-### HasOrigStrEncoding
 
-`func (o *XrefFromResponse) HasOrigStrEncoding() bool`
+### SetValueNil
 
-HasOrigStrEncoding returns a boolean if a field has been set.
+`func (o *XrefFromResponse) SetValueNil(b bool)`
 
-### SetOrigStrEncodingNil
+ SetValueNil sets the value for Value to be an explicit nil
 
-`func (o *XrefFromResponse) SetOrigStrEncodingNil(b bool)`
+### UnsetValue
+`func (o *XrefFromResponse) UnsetValue()`
 
- SetOrigStrEncodingNil sets the value for OrigStrEncoding to be an explicit nil
-
-### UnsetOrigStrEncoding
-`func (o *XrefFromResponse) UnsetOrigStrEncoding()`
-
-UnsetOrigStrEncoding ensures that no value is present for OrigStrEncoding, not even an explicit nil
+UnsetValue ensures that no value is present for Value, not even an explicit nil
 ### GetXrefTo
 
 `func (o *XrefFromResponse) GetXrefTo() string`

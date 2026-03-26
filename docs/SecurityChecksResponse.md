@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BinaryId** | **int32** |  | 
-**TotalResults** | **int32** |  | 
 **Results** | [**[]SecurityChecksResult**](SecurityChecksResult.md) |  | 
+**TotalResults** | **int32** |  | 
 
 ## Methods
 
 ### NewSecurityChecksResponse
 
-`func NewSecurityChecksResponse(binaryId int32, totalResults int32, results []SecurityChecksResult, ) *SecurityChecksResponse`
+`func NewSecurityChecksResponse(binaryId int32, results []SecurityChecksResult, totalResults int32, ) *SecurityChecksResponse`
 
 NewSecurityChecksResponse instantiates a new SecurityChecksResponse object
 This constructor will assign default values to properties that have it defined,
@@ -47,26 +47,6 @@ and a boolean to check if the value has been set.
 SetBinaryId sets BinaryId field to given value.
 
 
-### GetTotalResults
-
-`func (o *SecurityChecksResponse) GetTotalResults() int32`
-
-GetTotalResults returns the TotalResults field if non-nil, zero value otherwise.
-
-### GetTotalResultsOk
-
-`func (o *SecurityChecksResponse) GetTotalResultsOk() (*int32, bool)`
-
-GetTotalResultsOk returns a tuple with the TotalResults field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTotalResults
-
-`func (o *SecurityChecksResponse) SetTotalResults(v int32)`
-
-SetTotalResults sets TotalResults field to given value.
-
-
 ### GetResults
 
 `func (o *SecurityChecksResponse) GetResults() []SecurityChecksResult`
@@ -85,6 +65,26 @@ and a boolean to check if the value has been set.
 `func (o *SecurityChecksResponse) SetResults(v []SecurityChecksResult)`
 
 SetResults sets Results field to given value.
+
+
+### GetTotalResults
+
+`func (o *SecurityChecksResponse) GetTotalResults() int32`
+
+GetTotalResults returns the TotalResults field if non-nil, zero value otherwise.
+
+### GetTotalResultsOk
+
+`func (o *SecurityChecksResponse) GetTotalResultsOk() (*int32, bool)`
+
+GetTotalResultsOk returns a tuple with the TotalResults field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalResults
+
+`func (o *SecurityChecksResponse) SetTotalResults(v int32)`
+
+SetTotalResults sets TotalResults field to given value.
 
 
 

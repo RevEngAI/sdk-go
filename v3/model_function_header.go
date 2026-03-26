@@ -19,15 +19,15 @@ var _ MappedNullable = &FunctionHeader{}
 
 // FunctionHeader struct for FunctionHeader
 type FunctionHeader struct {
+	// Memory address of the function
+	Addr int32 `json:"addr"`
+	// Dictionary of function arguments
+	Args map[string]Argument `json:"args"`
 	LastChange NullableString `json:"last_change,omitempty"`
 	// Name of the function
 	Name string `json:"name"`
-	// Memory address of the function
-	Addr int32 `json:"addr"`
 	// Return type of the function
 	Type string `json:"type"`
-	// Dictionary of function arguments
-	Args map[string]Argument `json:"args"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,12 +37,12 @@ type _FunctionHeader FunctionHeader
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionHeader(name string, addr int32, type_ string, args map[string]Argument) *FunctionHeader {
+func NewFunctionHeader(addr int32, args map[string]Argument, name string, type_ string) *FunctionHeader {
 	this := FunctionHeader{}
-	this.Name = name
 	this.Addr = addr
-	this.Type = type_
 	this.Args = args
+	this.Name = name
+	this.Type = type_
 	return &this
 }
 
@@ -52,6 +52,54 @@ func NewFunctionHeader(name string, addr int32, type_ string, args map[string]Ar
 func NewFunctionHeaderWithDefaults() *FunctionHeader {
 	this := FunctionHeader{}
 	return &this
+}
+
+// GetAddr returns the Addr field value
+func (o *FunctionHeader) GetAddr() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Addr
+}
+
+// GetAddrOk returns a tuple with the Addr field value
+// and a boolean to check if the value has been set.
+func (o *FunctionHeader) GetAddrOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Addr, true
+}
+
+// SetAddr sets field value
+func (o *FunctionHeader) SetAddr(v int32) {
+	o.Addr = v
+}
+
+// GetArgs returns the Args field value
+func (o *FunctionHeader) GetArgs() map[string]Argument {
+	if o == nil {
+		var ret map[string]Argument
+		return ret
+	}
+
+	return o.Args
+}
+
+// GetArgsOk returns a tuple with the Args field value
+// and a boolean to check if the value has been set.
+func (o *FunctionHeader) GetArgsOk() (map[string]Argument, bool) {
+	if o == nil {
+		return map[string]Argument{}, false
+	}
+	return o.Args, true
+}
+
+// SetArgs sets field value
+func (o *FunctionHeader) SetArgs(v map[string]Argument) {
+	o.Args = v
 }
 
 // GetLastChange returns the LastChange field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -120,30 +168,6 @@ func (o *FunctionHeader) SetName(v string) {
 	o.Name = v
 }
 
-// GetAddr returns the Addr field value
-func (o *FunctionHeader) GetAddr() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Addr
-}
-
-// GetAddrOk returns a tuple with the Addr field value
-// and a boolean to check if the value has been set.
-func (o *FunctionHeader) GetAddrOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Addr, true
-}
-
-// SetAddr sets field value
-func (o *FunctionHeader) SetAddr(v int32) {
-	o.Addr = v
-}
-
 // GetType returns the Type field value
 func (o *FunctionHeader) GetType() string {
 	if o == nil {
@@ -168,30 +192,6 @@ func (o *FunctionHeader) SetType(v string) {
 	o.Type = v
 }
 
-// GetArgs returns the Args field value
-func (o *FunctionHeader) GetArgs() map[string]Argument {
-	if o == nil {
-		var ret map[string]Argument
-		return ret
-	}
-
-	return o.Args
-}
-
-// GetArgsOk returns a tuple with the Args field value
-// and a boolean to check if the value has been set.
-func (o *FunctionHeader) GetArgsOk() (map[string]Argument, bool) {
-	if o == nil {
-		return map[string]Argument{}, false
-	}
-	return o.Args, true
-}
-
-// SetArgs sets field value
-func (o *FunctionHeader) SetArgs(v map[string]Argument) {
-	o.Args = v
-}
-
 func (o FunctionHeader) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -202,13 +202,13 @@ func (o FunctionHeader) MarshalJSON() ([]byte, error) {
 
 func (o FunctionHeader) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["addr"] = o.Addr
+	toSerialize["args"] = o.Args
 	if o.LastChange.IsSet() {
 		toSerialize["last_change"] = o.LastChange.Get()
 	}
 	toSerialize["name"] = o.Name
-	toSerialize["addr"] = o.Addr
 	toSerialize["type"] = o.Type
-	toSerialize["args"] = o.Args
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -222,10 +222,10 @@ func (o *FunctionHeader) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"name",
 		"addr",
-		"type",
 		"args",
+		"name",
+		"type",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -255,11 +255,11 @@ func (o *FunctionHeader) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "addr")
+		delete(additionalProperties, "args")
 		delete(additionalProperties, "last_change")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "addr")
 		delete(additionalProperties, "type")
-		delete(additionalProperties, "args")
 		o.AdditionalProperties = additionalProperties
 	}
 

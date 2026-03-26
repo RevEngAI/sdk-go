@@ -19,8 +19,8 @@ var _ MappedNullable = &DecompilationCommentContext{}
 
 // DecompilationCommentContext struct for DecompilationCommentContext
 type DecompilationCommentContext struct {
-	StartLine NullableInt32 `json:"start_line"`
 	EndLine NullableInt32 `json:"end_line"`
+	StartLine NullableInt32 `json:"start_line"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,10 +30,10 @@ type _DecompilationCommentContext DecompilationCommentContext
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDecompilationCommentContext(startLine NullableInt32, endLine NullableInt32) *DecompilationCommentContext {
+func NewDecompilationCommentContext(endLine NullableInt32, startLine NullableInt32) *DecompilationCommentContext {
 	this := DecompilationCommentContext{}
-	this.StartLine = startLine
 	this.EndLine = endLine
+	this.StartLine = startLine
 	return &this
 }
 
@@ -43,32 +43,6 @@ func NewDecompilationCommentContext(startLine NullableInt32, endLine NullableInt
 func NewDecompilationCommentContextWithDefaults() *DecompilationCommentContext {
 	this := DecompilationCommentContext{}
 	return &this
-}
-
-// GetStartLine returns the StartLine field value
-// If the value is explicit nil, the zero value for int32 will be returned
-func (o *DecompilationCommentContext) GetStartLine() int32 {
-	if o == nil || o.StartLine.Get() == nil {
-		var ret int32
-		return ret
-	}
-
-	return *o.StartLine.Get()
-}
-
-// GetStartLineOk returns a tuple with the StartLine field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DecompilationCommentContext) GetStartLineOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.StartLine.Get(), o.StartLine.IsSet()
-}
-
-// SetStartLine sets field value
-func (o *DecompilationCommentContext) SetStartLine(v int32) {
-	o.StartLine.Set(&v)
 }
 
 // GetEndLine returns the EndLine field value
@@ -97,6 +71,32 @@ func (o *DecompilationCommentContext) SetEndLine(v int32) {
 	o.EndLine.Set(&v)
 }
 
+// GetStartLine returns the StartLine field value
+// If the value is explicit nil, the zero value for int32 will be returned
+func (o *DecompilationCommentContext) GetStartLine() int32 {
+	if o == nil || o.StartLine.Get() == nil {
+		var ret int32
+		return ret
+	}
+
+	return *o.StartLine.Get()
+}
+
+// GetStartLineOk returns a tuple with the StartLine field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DecompilationCommentContext) GetStartLineOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StartLine.Get(), o.StartLine.IsSet()
+}
+
+// SetStartLine sets field value
+func (o *DecompilationCommentContext) SetStartLine(v int32) {
+	o.StartLine.Set(&v)
+}
+
 func (o DecompilationCommentContext) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -107,8 +107,8 @@ func (o DecompilationCommentContext) MarshalJSON() ([]byte, error) {
 
 func (o DecompilationCommentContext) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["start_line"] = o.StartLine.Get()
 	toSerialize["end_line"] = o.EndLine.Get()
+	toSerialize["start_line"] = o.StartLine.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -122,8 +122,8 @@ func (o *DecompilationCommentContext) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"start_line",
 		"end_line",
+		"start_line",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -153,8 +153,8 @@ func (o *DecompilationCommentContext) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "start_line")
 		delete(additionalProperties, "end_line")
+		delete(additionalProperties, "start_line")
 		o.AdditionalProperties = additionalProperties
 	}
 

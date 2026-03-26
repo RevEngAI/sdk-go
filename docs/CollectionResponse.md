@@ -4,23 +4,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Binaries** | Pointer to [**[]CollectionResponseBinariesInner**](CollectionResponseBinariesInner.md) |  | [optional] 
 **CollectionId** | **int32** | Collection ID | 
 **CollectionName** | **string** | Collection name | 
-**Description** | **string** | Collection description | 
-**ModelId** | **int32** | Collection model ID | 
-**UserId** | **int32** | Collection user ID | 
-**TeamId** | Pointer to **NullableInt32** |  | [optional] 
 **CollectionScope** | [**CollectionScope**](CollectionScope.md) | Collection public status | 
 **CreatedAt** | **time.Time** | Collection creation date | 
-**UpdatedAt** | **time.Time** | Collection last update date | 
+**Description** | **string** | Collection description | 
+**ModelId** | **int32** | Collection model ID | 
 **Tags** | Pointer to **[]string** |  | [optional] 
-**Binaries** | Pointer to [**[]CollectionResponseBinariesInner**](CollectionResponseBinariesInner.md) |  | [optional] 
+**TeamId** | Pointer to **NullableInt32** |  | [optional] 
+**UpdatedAt** | **time.Time** | Collection last update date | 
+**UserId** | **int32** | Collection user ID | 
 
 ## Methods
 
 ### NewCollectionResponse
 
-`func NewCollectionResponse(collectionId int32, collectionName string, description string, modelId int32, userId int32, collectionScope CollectionScope, createdAt time.Time, updatedAt time.Time, ) *CollectionResponse`
+`func NewCollectionResponse(collectionId int32, collectionName string, collectionScope CollectionScope, createdAt time.Time, description string, modelId int32, updatedAt time.Time, userId int32, ) *CollectionResponse`
 
 NewCollectionResponse instantiates a new CollectionResponse object
 This constructor will assign default values to properties that have it defined,
@@ -35,6 +35,41 @@ NewCollectionResponseWithDefaults instantiates a new CollectionResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetBinaries
+
+`func (o *CollectionResponse) GetBinaries() []CollectionResponseBinariesInner`
+
+GetBinaries returns the Binaries field if non-nil, zero value otherwise.
+
+### GetBinariesOk
+
+`func (o *CollectionResponse) GetBinariesOk() (*[]CollectionResponseBinariesInner, bool)`
+
+GetBinariesOk returns a tuple with the Binaries field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBinaries
+
+`func (o *CollectionResponse) SetBinaries(v []CollectionResponseBinariesInner)`
+
+SetBinaries sets Binaries field to given value.
+
+### HasBinaries
+
+`func (o *CollectionResponse) HasBinaries() bool`
+
+HasBinaries returns a boolean if a field has been set.
+
+### SetBinariesNil
+
+`func (o *CollectionResponse) SetBinariesNil(b bool)`
+
+ SetBinariesNil sets the value for Binaries to be an explicit nil
+
+### UnsetBinaries
+`func (o *CollectionResponse) UnsetBinaries()`
+
+UnsetBinaries ensures that no value is present for Binaries, not even an explicit nil
 ### GetCollectionId
 
 `func (o *CollectionResponse) GetCollectionId() int32`
@@ -73,6 +108,46 @@ and a boolean to check if the value has been set.
 `func (o *CollectionResponse) SetCollectionName(v string)`
 
 SetCollectionName sets CollectionName field to given value.
+
+
+### GetCollectionScope
+
+`func (o *CollectionResponse) GetCollectionScope() CollectionScope`
+
+GetCollectionScope returns the CollectionScope field if non-nil, zero value otherwise.
+
+### GetCollectionScopeOk
+
+`func (o *CollectionResponse) GetCollectionScopeOk() (*CollectionScope, bool)`
+
+GetCollectionScopeOk returns a tuple with the CollectionScope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCollectionScope
+
+`func (o *CollectionResponse) SetCollectionScope(v CollectionScope)`
+
+SetCollectionScope sets CollectionScope field to given value.
+
+
+### GetCreatedAt
+
+`func (o *CollectionResponse) GetCreatedAt() time.Time`
+
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+
+### GetCreatedAtOk
+
+`func (o *CollectionResponse) GetCreatedAtOk() (*time.Time, bool)`
+
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedAt
+
+`func (o *CollectionResponse) SetCreatedAt(v time.Time)`
+
+SetCreatedAt sets CreatedAt field to given value.
 
 
 ### GetDescription
@@ -115,121 +190,6 @@ and a boolean to check if the value has been set.
 SetModelId sets ModelId field to given value.
 
 
-### GetUserId
-
-`func (o *CollectionResponse) GetUserId() int32`
-
-GetUserId returns the UserId field if non-nil, zero value otherwise.
-
-### GetUserIdOk
-
-`func (o *CollectionResponse) GetUserIdOk() (*int32, bool)`
-
-GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUserId
-
-`func (o *CollectionResponse) SetUserId(v int32)`
-
-SetUserId sets UserId field to given value.
-
-
-### GetTeamId
-
-`func (o *CollectionResponse) GetTeamId() int32`
-
-GetTeamId returns the TeamId field if non-nil, zero value otherwise.
-
-### GetTeamIdOk
-
-`func (o *CollectionResponse) GetTeamIdOk() (*int32, bool)`
-
-GetTeamIdOk returns a tuple with the TeamId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTeamId
-
-`func (o *CollectionResponse) SetTeamId(v int32)`
-
-SetTeamId sets TeamId field to given value.
-
-### HasTeamId
-
-`func (o *CollectionResponse) HasTeamId() bool`
-
-HasTeamId returns a boolean if a field has been set.
-
-### SetTeamIdNil
-
-`func (o *CollectionResponse) SetTeamIdNil(b bool)`
-
- SetTeamIdNil sets the value for TeamId to be an explicit nil
-
-### UnsetTeamId
-`func (o *CollectionResponse) UnsetTeamId()`
-
-UnsetTeamId ensures that no value is present for TeamId, not even an explicit nil
-### GetCollectionScope
-
-`func (o *CollectionResponse) GetCollectionScope() CollectionScope`
-
-GetCollectionScope returns the CollectionScope field if non-nil, zero value otherwise.
-
-### GetCollectionScopeOk
-
-`func (o *CollectionResponse) GetCollectionScopeOk() (*CollectionScope, bool)`
-
-GetCollectionScopeOk returns a tuple with the CollectionScope field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCollectionScope
-
-`func (o *CollectionResponse) SetCollectionScope(v CollectionScope)`
-
-SetCollectionScope sets CollectionScope field to given value.
-
-
-### GetCreatedAt
-
-`func (o *CollectionResponse) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *CollectionResponse) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *CollectionResponse) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-
-### GetUpdatedAt
-
-`func (o *CollectionResponse) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *CollectionResponse) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *CollectionResponse) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-
 ### GetTags
 
 `func (o *CollectionResponse) GetTags() []string`
@@ -265,41 +225,81 @@ HasTags returns a boolean if a field has been set.
 `func (o *CollectionResponse) UnsetTags()`
 
 UnsetTags ensures that no value is present for Tags, not even an explicit nil
-### GetBinaries
+### GetTeamId
 
-`func (o *CollectionResponse) GetBinaries() []CollectionResponseBinariesInner`
+`func (o *CollectionResponse) GetTeamId() int32`
 
-GetBinaries returns the Binaries field if non-nil, zero value otherwise.
+GetTeamId returns the TeamId field if non-nil, zero value otherwise.
 
-### GetBinariesOk
+### GetTeamIdOk
 
-`func (o *CollectionResponse) GetBinariesOk() (*[]CollectionResponseBinariesInner, bool)`
+`func (o *CollectionResponse) GetTeamIdOk() (*int32, bool)`
 
-GetBinariesOk returns a tuple with the Binaries field if it's non-nil, zero value otherwise
+GetTeamIdOk returns a tuple with the TeamId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBinaries
+### SetTeamId
 
-`func (o *CollectionResponse) SetBinaries(v []CollectionResponseBinariesInner)`
+`func (o *CollectionResponse) SetTeamId(v int32)`
 
-SetBinaries sets Binaries field to given value.
+SetTeamId sets TeamId field to given value.
 
-### HasBinaries
+### HasTeamId
 
-`func (o *CollectionResponse) HasBinaries() bool`
+`func (o *CollectionResponse) HasTeamId() bool`
 
-HasBinaries returns a boolean if a field has been set.
+HasTeamId returns a boolean if a field has been set.
 
-### SetBinariesNil
+### SetTeamIdNil
 
-`func (o *CollectionResponse) SetBinariesNil(b bool)`
+`func (o *CollectionResponse) SetTeamIdNil(b bool)`
 
- SetBinariesNil sets the value for Binaries to be an explicit nil
+ SetTeamIdNil sets the value for TeamId to be an explicit nil
 
-### UnsetBinaries
-`func (o *CollectionResponse) UnsetBinaries()`
+### UnsetTeamId
+`func (o *CollectionResponse) UnsetTeamId()`
 
-UnsetBinaries ensures that no value is present for Binaries, not even an explicit nil
+UnsetTeamId ensures that no value is present for TeamId, not even an explicit nil
+### GetUpdatedAt
+
+`func (o *CollectionResponse) GetUpdatedAt() time.Time`
+
+GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
+
+### GetUpdatedAtOk
+
+`func (o *CollectionResponse) GetUpdatedAtOk() (*time.Time, bool)`
+
+GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdatedAt
+
+`func (o *CollectionResponse) SetUpdatedAt(v time.Time)`
+
+SetUpdatedAt sets UpdatedAt field to given value.
+
+
+### GetUserId
+
+`func (o *CollectionResponse) GetUserId() int32`
+
+GetUserId returns the UserId field if non-nil, zero value otherwise.
+
+### GetUserIdOk
+
+`func (o *CollectionResponse) GetUserIdOk() (*int32, bool)`
+
+GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserId
+
+`func (o *CollectionResponse) SetUserId(v int32)`
+
+SetUserId sets UserId field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -4,32 +4,32 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FileType** | **string** |  | 
 **Architecture** | **string** |  | 
+**BuildId** | **string** |  | 
+**DebugInfo** | **map[string]interface{}** |  | 
+**DynamicEntries** | [**[]ElfDynamicEntry**](ElfDynamicEntry.md) |  | 
+**DynamicSymbols** | [**[]ELFSymbol**](ELFSymbol.md) |  | 
 **Endianness** | **string** |  | 
 **EntryPoint** | **int32** |  | 
 **EntryPointBytes** | **string** |  | 
-**ImportHash** | **string** |  | 
 **ExportHash** | **string** |  | 
-**BuildId** | **string** |  | 
-**Security** | [**ELFSecurity**](ELFSecurity.md) |  | 
+**ExportedFunctions** | **[]string** |  | 
+**FileType** | **string** |  | 
+**ImportHash** | **string** |  | 
+**Imports** | [**ELFImportModel**](ELFImportModel.md) |  | 
+**Notes** | **[]map[string]interface{}** |  | 
+**Relocations** | [**[]ELFRelocation**](ELFRelocation.md) |  | 
 **Sections** | [**[]ELFSection**](ELFSection.md) |  | 
+**Security** | [**ELFSecurity**](ELFSecurity.md) |  | 
 **Segments** | [**[]ELFSegment**](ELFSegment.md) |  | 
 **Symbols** | [**[]ELFSymbol**](ELFSymbol.md) |  | 
-**DynamicSymbols** | [**[]ELFSymbol**](ELFSymbol.md) |  | 
-**Relocations** | [**[]ELFRelocation**](ELFRelocation.md) |  | 
-**Imports** | [**ELFImportModel**](ELFImportModel.md) |  | 
-**ExportedFunctions** | **[]string** |  | 
-**DynamicEntries** | [**[]ElfDynamicEntry**](ElfDynamicEntry.md) |  | 
-**Notes** | **[]map[string]interface{}** |  | 
-**DebugInfo** | **map[string]interface{}** |  | 
 **VersionInfo** | **map[string]interface{}** |  | 
 
 ## Methods
 
 ### NewELFModel
 
-`func NewELFModel(fileType string, architecture string, endianness string, entryPoint int32, entryPointBytes string, importHash string, exportHash string, buildId string, security ELFSecurity, sections []ELFSection, segments []ELFSegment, symbols []ELFSymbol, dynamicSymbols []ELFSymbol, relocations []ELFRelocation, imports ELFImportModel, exportedFunctions []string, dynamicEntries []ElfDynamicEntry, notes []map[string]interface{}, debugInfo map[string]interface{}, versionInfo map[string]interface{}, ) *ELFModel`
+`func NewELFModel(architecture string, buildId string, debugInfo map[string]interface{}, dynamicEntries []ElfDynamicEntry, dynamicSymbols []ELFSymbol, endianness string, entryPoint int32, entryPointBytes string, exportHash string, exportedFunctions []string, fileType string, importHash string, imports ELFImportModel, notes []map[string]interface{}, relocations []ELFRelocation, sections []ELFSection, security ELFSecurity, segments []ELFSegment, symbols []ELFSymbol, versionInfo map[string]interface{}, ) *ELFModel`
 
 NewELFModel instantiates a new ELFModel object
 This constructor will assign default values to properties that have it defined,
@@ -43,26 +43,6 @@ will change when the set of required properties is changed
 NewELFModelWithDefaults instantiates a new ELFModel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetFileType
-
-`func (o *ELFModel) GetFileType() string`
-
-GetFileType returns the FileType field if non-nil, zero value otherwise.
-
-### GetFileTypeOk
-
-`func (o *ELFModel) GetFileTypeOk() (*string, bool)`
-
-GetFileTypeOk returns a tuple with the FileType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFileType
-
-`func (o *ELFModel) SetFileType(v string)`
-
-SetFileType sets FileType field to given value.
-
 
 ### GetArchitecture
 
@@ -82,6 +62,86 @@ and a boolean to check if the value has been set.
 `func (o *ELFModel) SetArchitecture(v string)`
 
 SetArchitecture sets Architecture field to given value.
+
+
+### GetBuildId
+
+`func (o *ELFModel) GetBuildId() string`
+
+GetBuildId returns the BuildId field if non-nil, zero value otherwise.
+
+### GetBuildIdOk
+
+`func (o *ELFModel) GetBuildIdOk() (*string, bool)`
+
+GetBuildIdOk returns a tuple with the BuildId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuildId
+
+`func (o *ELFModel) SetBuildId(v string)`
+
+SetBuildId sets BuildId field to given value.
+
+
+### GetDebugInfo
+
+`func (o *ELFModel) GetDebugInfo() map[string]interface{}`
+
+GetDebugInfo returns the DebugInfo field if non-nil, zero value otherwise.
+
+### GetDebugInfoOk
+
+`func (o *ELFModel) GetDebugInfoOk() (*map[string]interface{}, bool)`
+
+GetDebugInfoOk returns a tuple with the DebugInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDebugInfo
+
+`func (o *ELFModel) SetDebugInfo(v map[string]interface{})`
+
+SetDebugInfo sets DebugInfo field to given value.
+
+
+### GetDynamicEntries
+
+`func (o *ELFModel) GetDynamicEntries() []ElfDynamicEntry`
+
+GetDynamicEntries returns the DynamicEntries field if non-nil, zero value otherwise.
+
+### GetDynamicEntriesOk
+
+`func (o *ELFModel) GetDynamicEntriesOk() (*[]ElfDynamicEntry, bool)`
+
+GetDynamicEntriesOk returns a tuple with the DynamicEntries field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDynamicEntries
+
+`func (o *ELFModel) SetDynamicEntries(v []ElfDynamicEntry)`
+
+SetDynamicEntries sets DynamicEntries field to given value.
+
+
+### GetDynamicSymbols
+
+`func (o *ELFModel) GetDynamicSymbols() []ELFSymbol`
+
+GetDynamicSymbols returns the DynamicSymbols field if non-nil, zero value otherwise.
+
+### GetDynamicSymbolsOk
+
+`func (o *ELFModel) GetDynamicSymbolsOk() (*[]ELFSymbol, bool)`
+
+GetDynamicSymbolsOk returns a tuple with the DynamicSymbols field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDynamicSymbols
+
+`func (o *ELFModel) SetDynamicSymbols(v []ELFSymbol)`
+
+SetDynamicSymbols sets DynamicSymbols field to given value.
 
 
 ### GetEndianness
@@ -144,26 +204,6 @@ and a boolean to check if the value has been set.
 SetEntryPointBytes sets EntryPointBytes field to given value.
 
 
-### GetImportHash
-
-`func (o *ELFModel) GetImportHash() string`
-
-GetImportHash returns the ImportHash field if non-nil, zero value otherwise.
-
-### GetImportHashOk
-
-`func (o *ELFModel) GetImportHashOk() (*string, bool)`
-
-GetImportHashOk returns a tuple with the ImportHash field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetImportHash
-
-`func (o *ELFModel) SetImportHash(v string)`
-
-SetImportHash sets ImportHash field to given value.
-
-
 ### GetExportHash
 
 `func (o *ELFModel) GetExportHash() string`
@@ -184,44 +224,124 @@ and a boolean to check if the value has been set.
 SetExportHash sets ExportHash field to given value.
 
 
-### GetBuildId
+### GetExportedFunctions
 
-`func (o *ELFModel) GetBuildId() string`
+`func (o *ELFModel) GetExportedFunctions() []string`
 
-GetBuildId returns the BuildId field if non-nil, zero value otherwise.
+GetExportedFunctions returns the ExportedFunctions field if non-nil, zero value otherwise.
 
-### GetBuildIdOk
+### GetExportedFunctionsOk
 
-`func (o *ELFModel) GetBuildIdOk() (*string, bool)`
+`func (o *ELFModel) GetExportedFunctionsOk() (*[]string, bool)`
 
-GetBuildIdOk returns a tuple with the BuildId field if it's non-nil, zero value otherwise
+GetExportedFunctionsOk returns a tuple with the ExportedFunctions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBuildId
+### SetExportedFunctions
 
-`func (o *ELFModel) SetBuildId(v string)`
+`func (o *ELFModel) SetExportedFunctions(v []string)`
 
-SetBuildId sets BuildId field to given value.
+SetExportedFunctions sets ExportedFunctions field to given value.
 
 
-### GetSecurity
+### GetFileType
 
-`func (o *ELFModel) GetSecurity() ELFSecurity`
+`func (o *ELFModel) GetFileType() string`
 
-GetSecurity returns the Security field if non-nil, zero value otherwise.
+GetFileType returns the FileType field if non-nil, zero value otherwise.
 
-### GetSecurityOk
+### GetFileTypeOk
 
-`func (o *ELFModel) GetSecurityOk() (*ELFSecurity, bool)`
+`func (o *ELFModel) GetFileTypeOk() (*string, bool)`
 
-GetSecurityOk returns a tuple with the Security field if it's non-nil, zero value otherwise
+GetFileTypeOk returns a tuple with the FileType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSecurity
+### SetFileType
 
-`func (o *ELFModel) SetSecurity(v ELFSecurity)`
+`func (o *ELFModel) SetFileType(v string)`
 
-SetSecurity sets Security field to given value.
+SetFileType sets FileType field to given value.
+
+
+### GetImportHash
+
+`func (o *ELFModel) GetImportHash() string`
+
+GetImportHash returns the ImportHash field if non-nil, zero value otherwise.
+
+### GetImportHashOk
+
+`func (o *ELFModel) GetImportHashOk() (*string, bool)`
+
+GetImportHashOk returns a tuple with the ImportHash field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImportHash
+
+`func (o *ELFModel) SetImportHash(v string)`
+
+SetImportHash sets ImportHash field to given value.
+
+
+### GetImports
+
+`func (o *ELFModel) GetImports() ELFImportModel`
+
+GetImports returns the Imports field if non-nil, zero value otherwise.
+
+### GetImportsOk
+
+`func (o *ELFModel) GetImportsOk() (*ELFImportModel, bool)`
+
+GetImportsOk returns a tuple with the Imports field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImports
+
+`func (o *ELFModel) SetImports(v ELFImportModel)`
+
+SetImports sets Imports field to given value.
+
+
+### GetNotes
+
+`func (o *ELFModel) GetNotes() []map[string]interface{}`
+
+GetNotes returns the Notes field if non-nil, zero value otherwise.
+
+### GetNotesOk
+
+`func (o *ELFModel) GetNotesOk() (*[]map[string]interface{}, bool)`
+
+GetNotesOk returns a tuple with the Notes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNotes
+
+`func (o *ELFModel) SetNotes(v []map[string]interface{})`
+
+SetNotes sets Notes field to given value.
+
+
+### GetRelocations
+
+`func (o *ELFModel) GetRelocations() []ELFRelocation`
+
+GetRelocations returns the Relocations field if non-nil, zero value otherwise.
+
+### GetRelocationsOk
+
+`func (o *ELFModel) GetRelocationsOk() (*[]ELFRelocation, bool)`
+
+GetRelocationsOk returns a tuple with the Relocations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRelocations
+
+`func (o *ELFModel) SetRelocations(v []ELFRelocation)`
+
+SetRelocations sets Relocations field to given value.
 
 
 ### GetSections
@@ -242,6 +362,26 @@ and a boolean to check if the value has been set.
 `func (o *ELFModel) SetSections(v []ELFSection)`
 
 SetSections sets Sections field to given value.
+
+
+### GetSecurity
+
+`func (o *ELFModel) GetSecurity() ELFSecurity`
+
+GetSecurity returns the Security field if non-nil, zero value otherwise.
+
+### GetSecurityOk
+
+`func (o *ELFModel) GetSecurityOk() (*ELFSecurity, bool)`
+
+GetSecurityOk returns a tuple with the Security field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecurity
+
+`func (o *ELFModel) SetSecurity(v ELFSecurity)`
+
+SetSecurity sets Security field to given value.
 
 
 ### GetSegments
@@ -282,146 +422,6 @@ and a boolean to check if the value has been set.
 `func (o *ELFModel) SetSymbols(v []ELFSymbol)`
 
 SetSymbols sets Symbols field to given value.
-
-
-### GetDynamicSymbols
-
-`func (o *ELFModel) GetDynamicSymbols() []ELFSymbol`
-
-GetDynamicSymbols returns the DynamicSymbols field if non-nil, zero value otherwise.
-
-### GetDynamicSymbolsOk
-
-`func (o *ELFModel) GetDynamicSymbolsOk() (*[]ELFSymbol, bool)`
-
-GetDynamicSymbolsOk returns a tuple with the DynamicSymbols field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDynamicSymbols
-
-`func (o *ELFModel) SetDynamicSymbols(v []ELFSymbol)`
-
-SetDynamicSymbols sets DynamicSymbols field to given value.
-
-
-### GetRelocations
-
-`func (o *ELFModel) GetRelocations() []ELFRelocation`
-
-GetRelocations returns the Relocations field if non-nil, zero value otherwise.
-
-### GetRelocationsOk
-
-`func (o *ELFModel) GetRelocationsOk() (*[]ELFRelocation, bool)`
-
-GetRelocationsOk returns a tuple with the Relocations field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRelocations
-
-`func (o *ELFModel) SetRelocations(v []ELFRelocation)`
-
-SetRelocations sets Relocations field to given value.
-
-
-### GetImports
-
-`func (o *ELFModel) GetImports() ELFImportModel`
-
-GetImports returns the Imports field if non-nil, zero value otherwise.
-
-### GetImportsOk
-
-`func (o *ELFModel) GetImportsOk() (*ELFImportModel, bool)`
-
-GetImportsOk returns a tuple with the Imports field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetImports
-
-`func (o *ELFModel) SetImports(v ELFImportModel)`
-
-SetImports sets Imports field to given value.
-
-
-### GetExportedFunctions
-
-`func (o *ELFModel) GetExportedFunctions() []string`
-
-GetExportedFunctions returns the ExportedFunctions field if non-nil, zero value otherwise.
-
-### GetExportedFunctionsOk
-
-`func (o *ELFModel) GetExportedFunctionsOk() (*[]string, bool)`
-
-GetExportedFunctionsOk returns a tuple with the ExportedFunctions field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExportedFunctions
-
-`func (o *ELFModel) SetExportedFunctions(v []string)`
-
-SetExportedFunctions sets ExportedFunctions field to given value.
-
-
-### GetDynamicEntries
-
-`func (o *ELFModel) GetDynamicEntries() []ElfDynamicEntry`
-
-GetDynamicEntries returns the DynamicEntries field if non-nil, zero value otherwise.
-
-### GetDynamicEntriesOk
-
-`func (o *ELFModel) GetDynamicEntriesOk() (*[]ElfDynamicEntry, bool)`
-
-GetDynamicEntriesOk returns a tuple with the DynamicEntries field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDynamicEntries
-
-`func (o *ELFModel) SetDynamicEntries(v []ElfDynamicEntry)`
-
-SetDynamicEntries sets DynamicEntries field to given value.
-
-
-### GetNotes
-
-`func (o *ELFModel) GetNotes() []map[string]interface{}`
-
-GetNotes returns the Notes field if non-nil, zero value otherwise.
-
-### GetNotesOk
-
-`func (o *ELFModel) GetNotesOk() (*[]map[string]interface{}, bool)`
-
-GetNotesOk returns a tuple with the Notes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNotes
-
-`func (o *ELFModel) SetNotes(v []map[string]interface{})`
-
-SetNotes sets Notes field to given value.
-
-
-### GetDebugInfo
-
-`func (o *ELFModel) GetDebugInfo() map[string]interface{}`
-
-GetDebugInfo returns the DebugInfo field if non-nil, zero value otherwise.
-
-### GetDebugInfoOk
-
-`func (o *ELFModel) GetDebugInfoOk() (*map[string]interface{}, bool)`
-
-GetDebugInfoOk returns a tuple with the DebugInfo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDebugInfo
-
-`func (o *ELFModel) SetDebugInfo(v map[string]interface{})`
-
-SetDebugInfo sets DebugInfo field to given value.
 
 
 ### GetVersionInfo

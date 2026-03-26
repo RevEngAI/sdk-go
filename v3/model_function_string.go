@@ -19,10 +19,12 @@ var _ MappedNullable = &FunctionString{}
 
 // FunctionString struct for FunctionString
 type FunctionString struct {
-	// The value of the string literal
-	Value string `json:"value"`
+	// The source of the string
+	Source *StringSource `json:"source,omitempty"`
 	// The vaddr of the string value
 	Vaddr int32 `json:"vaddr"`
+	// The value of the string literal
+	Value string `json:"value"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,10 +34,12 @@ type _FunctionString FunctionString
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionString(value string, vaddr int32) *FunctionString {
+func NewFunctionString(vaddr int32, value string) *FunctionString {
 	this := FunctionString{}
-	this.Value = value
+	var source StringSource = STRINGSOURCE_SYSTEM
+	this.Source = &source
 	this.Vaddr = vaddr
+	this.Value = value
 	return &this
 }
 
@@ -44,31 +48,41 @@ func NewFunctionString(value string, vaddr int32) *FunctionString {
 // but it doesn't guarantee that properties required by API are set
 func NewFunctionStringWithDefaults() *FunctionString {
 	this := FunctionString{}
+	var source StringSource = STRINGSOURCE_SYSTEM
+	this.Source = &source
 	return &this
 }
 
-// GetValue returns the Value field value
-func (o *FunctionString) GetValue() string {
-	if o == nil {
-		var ret string
+// GetSource returns the Source field value if set, zero value otherwise.
+func (o *FunctionString) GetSource() StringSource {
+	if o == nil || IsNil(o.Source) {
+		var ret StringSource
 		return ret
 	}
-
-	return o.Value
+	return *o.Source
 }
 
-// GetValueOk returns a tuple with the Value field value
+// GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FunctionString) GetValueOk() (*string, bool) {
-	if o == nil {
+func (o *FunctionString) GetSourceOk() (*StringSource, bool) {
+	if o == nil || IsNil(o.Source) {
 		return nil, false
 	}
-	return &o.Value, true
+	return o.Source, true
 }
 
-// SetValue sets field value
-func (o *FunctionString) SetValue(v string) {
-	o.Value = v
+// HasSource returns a boolean if a field has been set.
+func (o *FunctionString) HasSource() bool {
+	if o != nil && !IsNil(o.Source) {
+		return true
+	}
+
+	return false
+}
+
+// SetSource gets a reference to the given StringSource and assigns it to the Source field.
+func (o *FunctionString) SetSource(v StringSource) {
+	o.Source = &v
 }
 
 // GetVaddr returns the Vaddr field value
@@ -95,6 +109,30 @@ func (o *FunctionString) SetVaddr(v int32) {
 	o.Vaddr = v
 }
 
+// GetValue returns the Value field value
+func (o *FunctionString) GetValue() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Value
+}
+
+// GetValueOk returns a tuple with the Value field value
+// and a boolean to check if the value has been set.
+func (o *FunctionString) GetValueOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Value, true
+}
+
+// SetValue sets field value
+func (o *FunctionString) SetValue(v string) {
+	o.Value = v
+}
+
 func (o FunctionString) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -105,8 +143,11 @@ func (o FunctionString) MarshalJSON() ([]byte, error) {
 
 func (o FunctionString) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["value"] = o.Value
+	if !IsNil(o.Source) {
+		toSerialize["source"] = o.Source
+	}
 	toSerialize["vaddr"] = o.Vaddr
+	toSerialize["value"] = o.Value
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -120,8 +161,8 @@ func (o *FunctionString) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"value",
 		"vaddr",
+		"value",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -151,8 +192,9 @@ func (o *FunctionString) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "value")
+		delete(additionalProperties, "source")
 		delete(additionalProperties, "vaddr")
+		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
 	}
 

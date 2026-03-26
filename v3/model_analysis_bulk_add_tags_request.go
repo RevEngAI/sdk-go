@@ -19,8 +19,8 @@ var _ MappedNullable = &AnalysisBulkAddTagsRequest{}
 
 // AnalysisBulkAddTagsRequest struct for AnalysisBulkAddTagsRequest
 type AnalysisBulkAddTagsRequest struct {
-	Tags []string `json:"tags"`
 	AnalysisIds []int32 `json:"analysis_ids"`
+	Tags []string `json:"tags"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,10 +30,10 @@ type _AnalysisBulkAddTagsRequest AnalysisBulkAddTagsRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisBulkAddTagsRequest(tags []string, analysisIds []int32) *AnalysisBulkAddTagsRequest {
+func NewAnalysisBulkAddTagsRequest(analysisIds []int32, tags []string) *AnalysisBulkAddTagsRequest {
 	this := AnalysisBulkAddTagsRequest{}
-	this.Tags = tags
 	this.AnalysisIds = analysisIds
+	this.Tags = tags
 	return &this
 }
 
@@ -43,30 +43,6 @@ func NewAnalysisBulkAddTagsRequest(tags []string, analysisIds []int32) *Analysis
 func NewAnalysisBulkAddTagsRequestWithDefaults() *AnalysisBulkAddTagsRequest {
 	this := AnalysisBulkAddTagsRequest{}
 	return &this
-}
-
-// GetTags returns the Tags field value
-func (o *AnalysisBulkAddTagsRequest) GetTags() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value
-// and a boolean to check if the value has been set.
-func (o *AnalysisBulkAddTagsRequest) GetTagsOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// SetTags sets field value
-func (o *AnalysisBulkAddTagsRequest) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetAnalysisIds returns the AnalysisIds field value
@@ -93,6 +69,30 @@ func (o *AnalysisBulkAddTagsRequest) SetAnalysisIds(v []int32) {
 	o.AnalysisIds = v
 }
 
+// GetTags returns the Tags field value
+func (o *AnalysisBulkAddTagsRequest) GetTags() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisBulkAddTagsRequest) GetTagsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// SetTags sets field value
+func (o *AnalysisBulkAddTagsRequest) SetTags(v []string) {
+	o.Tags = v
+}
+
 func (o AnalysisBulkAddTagsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,8 +103,8 @@ func (o AnalysisBulkAddTagsRequest) MarshalJSON() ([]byte, error) {
 
 func (o AnalysisBulkAddTagsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["tags"] = o.Tags
 	toSerialize["analysis_ids"] = o.AnalysisIds
+	toSerialize["tags"] = o.Tags
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -118,8 +118,8 @@ func (o *AnalysisBulkAddTagsRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"tags",
 		"analysis_ids",
+		"tags",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -149,8 +149,8 @@ func (o *AnalysisBulkAddTagsRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "tags")
 		delete(additionalProperties, "analysis_ids")
+		delete(additionalProperties, "tags")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -19,10 +19,10 @@ var _ MappedNullable = &ProcessDump{}
 
 // ProcessDump struct for ProcessDump
 type ProcessDump struct {
-	BaseAddress int32 `json:"base_address"`
 	ActualFilename string `json:"actual_filename"`
-	FilenameFriendly string `json:"filename_friendly"`
+	BaseAddress int32 `json:"base_address"`
 	ExtendedMetadata ProcessDumpMetadata `json:"extended_metadata"`
+	FilenameFriendly string `json:"filename_friendly"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,12 +32,12 @@ type _ProcessDump ProcessDump
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProcessDump(baseAddress int32, actualFilename string, filenameFriendly string, extendedMetadata ProcessDumpMetadata) *ProcessDump {
+func NewProcessDump(actualFilename string, baseAddress int32, extendedMetadata ProcessDumpMetadata, filenameFriendly string) *ProcessDump {
 	this := ProcessDump{}
-	this.BaseAddress = baseAddress
 	this.ActualFilename = actualFilename
-	this.FilenameFriendly = filenameFriendly
+	this.BaseAddress = baseAddress
 	this.ExtendedMetadata = extendedMetadata
+	this.FilenameFriendly = filenameFriendly
 	return &this
 }
 
@@ -47,30 +47,6 @@ func NewProcessDump(baseAddress int32, actualFilename string, filenameFriendly s
 func NewProcessDumpWithDefaults() *ProcessDump {
 	this := ProcessDump{}
 	return &this
-}
-
-// GetBaseAddress returns the BaseAddress field value
-func (o *ProcessDump) GetBaseAddress() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.BaseAddress
-}
-
-// GetBaseAddressOk returns a tuple with the BaseAddress field value
-// and a boolean to check if the value has been set.
-func (o *ProcessDump) GetBaseAddressOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.BaseAddress, true
-}
-
-// SetBaseAddress sets field value
-func (o *ProcessDump) SetBaseAddress(v int32) {
-	o.BaseAddress = v
 }
 
 // GetActualFilename returns the ActualFilename field value
@@ -97,28 +73,28 @@ func (o *ProcessDump) SetActualFilename(v string) {
 	o.ActualFilename = v
 }
 
-// GetFilenameFriendly returns the FilenameFriendly field value
-func (o *ProcessDump) GetFilenameFriendly() string {
+// GetBaseAddress returns the BaseAddress field value
+func (o *ProcessDump) GetBaseAddress() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
-	return o.FilenameFriendly
+	return o.BaseAddress
 }
 
-// GetFilenameFriendlyOk returns a tuple with the FilenameFriendly field value
+// GetBaseAddressOk returns a tuple with the BaseAddress field value
 // and a boolean to check if the value has been set.
-func (o *ProcessDump) GetFilenameFriendlyOk() (*string, bool) {
+func (o *ProcessDump) GetBaseAddressOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.FilenameFriendly, true
+	return &o.BaseAddress, true
 }
 
-// SetFilenameFriendly sets field value
-func (o *ProcessDump) SetFilenameFriendly(v string) {
-	o.FilenameFriendly = v
+// SetBaseAddress sets field value
+func (o *ProcessDump) SetBaseAddress(v int32) {
+	o.BaseAddress = v
 }
 
 // GetExtendedMetadata returns the ExtendedMetadata field value
@@ -145,6 +121,30 @@ func (o *ProcessDump) SetExtendedMetadata(v ProcessDumpMetadata) {
 	o.ExtendedMetadata = v
 }
 
+// GetFilenameFriendly returns the FilenameFriendly field value
+func (o *ProcessDump) GetFilenameFriendly() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FilenameFriendly
+}
+
+// GetFilenameFriendlyOk returns a tuple with the FilenameFriendly field value
+// and a boolean to check if the value has been set.
+func (o *ProcessDump) GetFilenameFriendlyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FilenameFriendly, true
+}
+
+// SetFilenameFriendly sets field value
+func (o *ProcessDump) SetFilenameFriendly(v string) {
+	o.FilenameFriendly = v
+}
+
 func (o ProcessDump) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -155,10 +155,10 @@ func (o ProcessDump) MarshalJSON() ([]byte, error) {
 
 func (o ProcessDump) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["base_address"] = o.BaseAddress
 	toSerialize["actual_filename"] = o.ActualFilename
-	toSerialize["filename_friendly"] = o.FilenameFriendly
+	toSerialize["base_address"] = o.BaseAddress
 	toSerialize["extended_metadata"] = o.ExtendedMetadata
+	toSerialize["filename_friendly"] = o.FilenameFriendly
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -172,10 +172,10 @@ func (o *ProcessDump) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"base_address",
 		"actual_filename",
-		"filename_friendly",
+		"base_address",
 		"extended_metadata",
+		"filename_friendly",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -205,10 +205,10 @@ func (o *ProcessDump) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "base_address")
 		delete(additionalProperties, "actual_filename")
-		delete(additionalProperties, "filename_friendly")
+		delete(additionalProperties, "base_address")
 		delete(additionalProperties, "extended_metadata")
+		delete(additionalProperties, "filename_friendly")
 		o.AdditionalProperties = additionalProperties
 	}
 

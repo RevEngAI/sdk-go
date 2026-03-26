@@ -19,13 +19,13 @@ var _ MappedNullable = &ELFSymbol{}
 
 // ELFSymbol struct for ELFSymbol
 type ELFSymbol struct {
+	Binding string `json:"binding"`
 	Name string `json:"name"`
-	Value int32 `json:"value"`
+	SectionIndex int32 `json:"section_index"`
 	Size int32 `json:"size"`
 	Type string `json:"type"`
-	Binding string `json:"binding"`
+	Value int32 `json:"value"`
 	Visibility string `json:"visibility"`
-	SectionIndex int32 `json:"section_index"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,15 +35,15 @@ type _ELFSymbol ELFSymbol
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewELFSymbol(name string, value int32, size int32, type_ string, binding string, visibility string, sectionIndex int32) *ELFSymbol {
+func NewELFSymbol(binding string, name string, sectionIndex int32, size int32, type_ string, value int32, visibility string) *ELFSymbol {
 	this := ELFSymbol{}
+	this.Binding = binding
 	this.Name = name
-	this.Value = value
+	this.SectionIndex = sectionIndex
 	this.Size = size
 	this.Type = type_
-	this.Binding = binding
+	this.Value = value
 	this.Visibility = visibility
-	this.SectionIndex = sectionIndex
 	return &this
 }
 
@@ -53,6 +53,30 @@ func NewELFSymbol(name string, value int32, size int32, type_ string, binding st
 func NewELFSymbolWithDefaults() *ELFSymbol {
 	this := ELFSymbol{}
 	return &this
+}
+
+// GetBinding returns the Binding field value
+func (o *ELFSymbol) GetBinding() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Binding
+}
+
+// GetBindingOk returns a tuple with the Binding field value
+// and a boolean to check if the value has been set.
+func (o *ELFSymbol) GetBindingOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Binding, true
+}
+
+// SetBinding sets field value
+func (o *ELFSymbol) SetBinding(v string) {
+	o.Binding = v
 }
 
 // GetName returns the Name field value
@@ -79,28 +103,28 @@ func (o *ELFSymbol) SetName(v string) {
 	o.Name = v
 }
 
-// GetValue returns the Value field value
-func (o *ELFSymbol) GetValue() int32 {
+// GetSectionIndex returns the SectionIndex field value
+func (o *ELFSymbol) GetSectionIndex() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.Value
+	return o.SectionIndex
 }
 
-// GetValueOk returns a tuple with the Value field value
+// GetSectionIndexOk returns a tuple with the SectionIndex field value
 // and a boolean to check if the value has been set.
-func (o *ELFSymbol) GetValueOk() (*int32, bool) {
+func (o *ELFSymbol) GetSectionIndexOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Value, true
+	return &o.SectionIndex, true
 }
 
-// SetValue sets field value
-func (o *ELFSymbol) SetValue(v int32) {
-	o.Value = v
+// SetSectionIndex sets field value
+func (o *ELFSymbol) SetSectionIndex(v int32) {
+	o.SectionIndex = v
 }
 
 // GetSize returns the Size field value
@@ -151,28 +175,28 @@ func (o *ELFSymbol) SetType(v string) {
 	o.Type = v
 }
 
-// GetBinding returns the Binding field value
-func (o *ELFSymbol) GetBinding() string {
+// GetValue returns the Value field value
+func (o *ELFSymbol) GetValue() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
-	return o.Binding
+	return o.Value
 }
 
-// GetBindingOk returns a tuple with the Binding field value
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-func (o *ELFSymbol) GetBindingOk() (*string, bool) {
+func (o *ELFSymbol) GetValueOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Binding, true
+	return &o.Value, true
 }
 
-// SetBinding sets field value
-func (o *ELFSymbol) SetBinding(v string) {
-	o.Binding = v
+// SetValue sets field value
+func (o *ELFSymbol) SetValue(v int32) {
+	o.Value = v
 }
 
 // GetVisibility returns the Visibility field value
@@ -199,30 +223,6 @@ func (o *ELFSymbol) SetVisibility(v string) {
 	o.Visibility = v
 }
 
-// GetSectionIndex returns the SectionIndex field value
-func (o *ELFSymbol) GetSectionIndex() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.SectionIndex
-}
-
-// GetSectionIndexOk returns a tuple with the SectionIndex field value
-// and a boolean to check if the value has been set.
-func (o *ELFSymbol) GetSectionIndexOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.SectionIndex, true
-}
-
-// SetSectionIndex sets field value
-func (o *ELFSymbol) SetSectionIndex(v int32) {
-	o.SectionIndex = v
-}
-
 func (o ELFSymbol) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -233,13 +233,13 @@ func (o ELFSymbol) MarshalJSON() ([]byte, error) {
 
 func (o ELFSymbol) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["binding"] = o.Binding
 	toSerialize["name"] = o.Name
-	toSerialize["value"] = o.Value
+	toSerialize["section_index"] = o.SectionIndex
 	toSerialize["size"] = o.Size
 	toSerialize["type"] = o.Type
-	toSerialize["binding"] = o.Binding
+	toSerialize["value"] = o.Value
 	toSerialize["visibility"] = o.Visibility
-	toSerialize["section_index"] = o.SectionIndex
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -253,13 +253,13 @@ func (o *ELFSymbol) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"binding",
 		"name",
-		"value",
+		"section_index",
 		"size",
 		"type",
-		"binding",
+		"value",
 		"visibility",
-		"section_index",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -289,13 +289,13 @@ func (o *ELFSymbol) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binding")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "value")
+		delete(additionalProperties, "section_index")
 		delete(additionalProperties, "size")
 		delete(additionalProperties, "type")
-		delete(additionalProperties, "binding")
+		delete(additionalProperties, "value")
 		delete(additionalProperties, "visibility")
-		delete(additionalProperties, "section_index")
 		o.AdditionalProperties = additionalProperties
 	}
 

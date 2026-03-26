@@ -19,17 +19,17 @@ var _ MappedNullable = &SecurityModel{}
 
 // SecurityModel struct for SecurityModel
 type SecurityModel struct {
-	Aslr bool `json:"aslr"`
-	Dep bool `json:"dep"`
-	Cfg bool `json:"cfg"`
-	DriverModel bool `json:"driver_model"`
 	AppContainer bool `json:"app_container"`
-	TerminalServerAware bool `json:"terminal_server_aware"`
-	ImageIsolation bool `json:"image_isolation"`
-	CodeIntegrity bool `json:"code_integrity"`
-	HighEntropy bool `json:"high_entropy"`
-	Seh bool `json:"seh"`
+	Aslr bool `json:"aslr"`
 	BoundImage bool `json:"bound_image"`
+	Cfg bool `json:"cfg"`
+	CodeIntegrity bool `json:"code_integrity"`
+	Dep bool `json:"dep"`
+	DriverModel bool `json:"driver_model"`
+	HighEntropy bool `json:"high_entropy"`
+	ImageIsolation bool `json:"image_isolation"`
+	Seh bool `json:"seh"`
+	TerminalServerAware bool `json:"terminal_server_aware"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,19 +39,19 @@ type _SecurityModel SecurityModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSecurityModel(aslr bool, dep bool, cfg bool, driverModel bool, appContainer bool, terminalServerAware bool, imageIsolation bool, codeIntegrity bool, highEntropy bool, seh bool, boundImage bool) *SecurityModel {
+func NewSecurityModel(appContainer bool, aslr bool, boundImage bool, cfg bool, codeIntegrity bool, dep bool, driverModel bool, highEntropy bool, imageIsolation bool, seh bool, terminalServerAware bool) *SecurityModel {
 	this := SecurityModel{}
-	this.Aslr = aslr
-	this.Dep = dep
-	this.Cfg = cfg
-	this.DriverModel = driverModel
 	this.AppContainer = appContainer
-	this.TerminalServerAware = terminalServerAware
-	this.ImageIsolation = imageIsolation
-	this.CodeIntegrity = codeIntegrity
-	this.HighEntropy = highEntropy
-	this.Seh = seh
+	this.Aslr = aslr
 	this.BoundImage = boundImage
+	this.Cfg = cfg
+	this.CodeIntegrity = codeIntegrity
+	this.Dep = dep
+	this.DriverModel = driverModel
+	this.HighEntropy = highEntropy
+	this.ImageIsolation = imageIsolation
+	this.Seh = seh
+	this.TerminalServerAware = terminalServerAware
 	return &this
 }
 
@@ -61,102 +61,6 @@ func NewSecurityModel(aslr bool, dep bool, cfg bool, driverModel bool, appContai
 func NewSecurityModelWithDefaults() *SecurityModel {
 	this := SecurityModel{}
 	return &this
-}
-
-// GetAslr returns the Aslr field value
-func (o *SecurityModel) GetAslr() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Aslr
-}
-
-// GetAslrOk returns a tuple with the Aslr field value
-// and a boolean to check if the value has been set.
-func (o *SecurityModel) GetAslrOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Aslr, true
-}
-
-// SetAslr sets field value
-func (o *SecurityModel) SetAslr(v bool) {
-	o.Aslr = v
-}
-
-// GetDep returns the Dep field value
-func (o *SecurityModel) GetDep() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Dep
-}
-
-// GetDepOk returns a tuple with the Dep field value
-// and a boolean to check if the value has been set.
-func (o *SecurityModel) GetDepOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Dep, true
-}
-
-// SetDep sets field value
-func (o *SecurityModel) SetDep(v bool) {
-	o.Dep = v
-}
-
-// GetCfg returns the Cfg field value
-func (o *SecurityModel) GetCfg() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Cfg
-}
-
-// GetCfgOk returns a tuple with the Cfg field value
-// and a boolean to check if the value has been set.
-func (o *SecurityModel) GetCfgOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Cfg, true
-}
-
-// SetCfg sets field value
-func (o *SecurityModel) SetCfg(v bool) {
-	o.Cfg = v
-}
-
-// GetDriverModel returns the DriverModel field value
-func (o *SecurityModel) GetDriverModel() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.DriverModel
-}
-
-// GetDriverModelOk returns a tuple with the DriverModel field value
-// and a boolean to check if the value has been set.
-func (o *SecurityModel) GetDriverModelOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.DriverModel, true
-}
-
-// SetDriverModel sets field value
-func (o *SecurityModel) SetDriverModel(v bool) {
-	o.DriverModel = v
 }
 
 // GetAppContainer returns the AppContainer field value
@@ -183,124 +87,28 @@ func (o *SecurityModel) SetAppContainer(v bool) {
 	o.AppContainer = v
 }
 
-// GetTerminalServerAware returns the TerminalServerAware field value
-func (o *SecurityModel) GetTerminalServerAware() bool {
+// GetAslr returns the Aslr field value
+func (o *SecurityModel) GetAslr() bool {
 	if o == nil {
 		var ret bool
 		return ret
 	}
 
-	return o.TerminalServerAware
+	return o.Aslr
 }
 
-// GetTerminalServerAwareOk returns a tuple with the TerminalServerAware field value
+// GetAslrOk returns a tuple with the Aslr field value
 // and a boolean to check if the value has been set.
-func (o *SecurityModel) GetTerminalServerAwareOk() (*bool, bool) {
+func (o *SecurityModel) GetAslrOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.TerminalServerAware, true
+	return &o.Aslr, true
 }
 
-// SetTerminalServerAware sets field value
-func (o *SecurityModel) SetTerminalServerAware(v bool) {
-	o.TerminalServerAware = v
-}
-
-// GetImageIsolation returns the ImageIsolation field value
-func (o *SecurityModel) GetImageIsolation() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.ImageIsolation
-}
-
-// GetImageIsolationOk returns a tuple with the ImageIsolation field value
-// and a boolean to check if the value has been set.
-func (o *SecurityModel) GetImageIsolationOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ImageIsolation, true
-}
-
-// SetImageIsolation sets field value
-func (o *SecurityModel) SetImageIsolation(v bool) {
-	o.ImageIsolation = v
-}
-
-// GetCodeIntegrity returns the CodeIntegrity field value
-func (o *SecurityModel) GetCodeIntegrity() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.CodeIntegrity
-}
-
-// GetCodeIntegrityOk returns a tuple with the CodeIntegrity field value
-// and a boolean to check if the value has been set.
-func (o *SecurityModel) GetCodeIntegrityOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CodeIntegrity, true
-}
-
-// SetCodeIntegrity sets field value
-func (o *SecurityModel) SetCodeIntegrity(v bool) {
-	o.CodeIntegrity = v
-}
-
-// GetHighEntropy returns the HighEntropy field value
-func (o *SecurityModel) GetHighEntropy() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.HighEntropy
-}
-
-// GetHighEntropyOk returns a tuple with the HighEntropy field value
-// and a boolean to check if the value has been set.
-func (o *SecurityModel) GetHighEntropyOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.HighEntropy, true
-}
-
-// SetHighEntropy sets field value
-func (o *SecurityModel) SetHighEntropy(v bool) {
-	o.HighEntropy = v
-}
-
-// GetSeh returns the Seh field value
-func (o *SecurityModel) GetSeh() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Seh
-}
-
-// GetSehOk returns a tuple with the Seh field value
-// and a boolean to check if the value has been set.
-func (o *SecurityModel) GetSehOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Seh, true
-}
-
-// SetSeh sets field value
-func (o *SecurityModel) SetSeh(v bool) {
-	o.Seh = v
+// SetAslr sets field value
+func (o *SecurityModel) SetAslr(v bool) {
+	o.Aslr = v
 }
 
 // GetBoundImage returns the BoundImage field value
@@ -327,6 +135,198 @@ func (o *SecurityModel) SetBoundImage(v bool) {
 	o.BoundImage = v
 }
 
+// GetCfg returns the Cfg field value
+func (o *SecurityModel) GetCfg() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Cfg
+}
+
+// GetCfgOk returns a tuple with the Cfg field value
+// and a boolean to check if the value has been set.
+func (o *SecurityModel) GetCfgOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Cfg, true
+}
+
+// SetCfg sets field value
+func (o *SecurityModel) SetCfg(v bool) {
+	o.Cfg = v
+}
+
+// GetCodeIntegrity returns the CodeIntegrity field value
+func (o *SecurityModel) GetCodeIntegrity() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.CodeIntegrity
+}
+
+// GetCodeIntegrityOk returns a tuple with the CodeIntegrity field value
+// and a boolean to check if the value has been set.
+func (o *SecurityModel) GetCodeIntegrityOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CodeIntegrity, true
+}
+
+// SetCodeIntegrity sets field value
+func (o *SecurityModel) SetCodeIntegrity(v bool) {
+	o.CodeIntegrity = v
+}
+
+// GetDep returns the Dep field value
+func (o *SecurityModel) GetDep() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Dep
+}
+
+// GetDepOk returns a tuple with the Dep field value
+// and a boolean to check if the value has been set.
+func (o *SecurityModel) GetDepOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Dep, true
+}
+
+// SetDep sets field value
+func (o *SecurityModel) SetDep(v bool) {
+	o.Dep = v
+}
+
+// GetDriverModel returns the DriverModel field value
+func (o *SecurityModel) GetDriverModel() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.DriverModel
+}
+
+// GetDriverModelOk returns a tuple with the DriverModel field value
+// and a boolean to check if the value has been set.
+func (o *SecurityModel) GetDriverModelOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DriverModel, true
+}
+
+// SetDriverModel sets field value
+func (o *SecurityModel) SetDriverModel(v bool) {
+	o.DriverModel = v
+}
+
+// GetHighEntropy returns the HighEntropy field value
+func (o *SecurityModel) GetHighEntropy() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.HighEntropy
+}
+
+// GetHighEntropyOk returns a tuple with the HighEntropy field value
+// and a boolean to check if the value has been set.
+func (o *SecurityModel) GetHighEntropyOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.HighEntropy, true
+}
+
+// SetHighEntropy sets field value
+func (o *SecurityModel) SetHighEntropy(v bool) {
+	o.HighEntropy = v
+}
+
+// GetImageIsolation returns the ImageIsolation field value
+func (o *SecurityModel) GetImageIsolation() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ImageIsolation
+}
+
+// GetImageIsolationOk returns a tuple with the ImageIsolation field value
+// and a boolean to check if the value has been set.
+func (o *SecurityModel) GetImageIsolationOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ImageIsolation, true
+}
+
+// SetImageIsolation sets field value
+func (o *SecurityModel) SetImageIsolation(v bool) {
+	o.ImageIsolation = v
+}
+
+// GetSeh returns the Seh field value
+func (o *SecurityModel) GetSeh() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Seh
+}
+
+// GetSehOk returns a tuple with the Seh field value
+// and a boolean to check if the value has been set.
+func (o *SecurityModel) GetSehOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Seh, true
+}
+
+// SetSeh sets field value
+func (o *SecurityModel) SetSeh(v bool) {
+	o.Seh = v
+}
+
+// GetTerminalServerAware returns the TerminalServerAware field value
+func (o *SecurityModel) GetTerminalServerAware() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.TerminalServerAware
+}
+
+// GetTerminalServerAwareOk returns a tuple with the TerminalServerAware field value
+// and a boolean to check if the value has been set.
+func (o *SecurityModel) GetTerminalServerAwareOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TerminalServerAware, true
+}
+
+// SetTerminalServerAware sets field value
+func (o *SecurityModel) SetTerminalServerAware(v bool) {
+	o.TerminalServerAware = v
+}
+
 func (o SecurityModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -337,17 +337,17 @@ func (o SecurityModel) MarshalJSON() ([]byte, error) {
 
 func (o SecurityModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["aslr"] = o.Aslr
-	toSerialize["dep"] = o.Dep
-	toSerialize["cfg"] = o.Cfg
-	toSerialize["driver_model"] = o.DriverModel
 	toSerialize["app_container"] = o.AppContainer
-	toSerialize["terminal_server_aware"] = o.TerminalServerAware
-	toSerialize["image_isolation"] = o.ImageIsolation
-	toSerialize["code_integrity"] = o.CodeIntegrity
-	toSerialize["high_entropy"] = o.HighEntropy
-	toSerialize["seh"] = o.Seh
+	toSerialize["aslr"] = o.Aslr
 	toSerialize["bound_image"] = o.BoundImage
+	toSerialize["cfg"] = o.Cfg
+	toSerialize["code_integrity"] = o.CodeIntegrity
+	toSerialize["dep"] = o.Dep
+	toSerialize["driver_model"] = o.DriverModel
+	toSerialize["high_entropy"] = o.HighEntropy
+	toSerialize["image_isolation"] = o.ImageIsolation
+	toSerialize["seh"] = o.Seh
+	toSerialize["terminal_server_aware"] = o.TerminalServerAware
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -361,17 +361,17 @@ func (o *SecurityModel) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"aslr",
-		"dep",
-		"cfg",
-		"driver_model",
 		"app_container",
-		"terminal_server_aware",
-		"image_isolation",
-		"code_integrity",
-		"high_entropy",
-		"seh",
+		"aslr",
 		"bound_image",
+		"cfg",
+		"code_integrity",
+		"dep",
+		"driver_model",
+		"high_entropy",
+		"image_isolation",
+		"seh",
+		"terminal_server_aware",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -401,17 +401,17 @@ func (o *SecurityModel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "aslr")
-		delete(additionalProperties, "dep")
-		delete(additionalProperties, "cfg")
-		delete(additionalProperties, "driver_model")
 		delete(additionalProperties, "app_container")
-		delete(additionalProperties, "terminal_server_aware")
-		delete(additionalProperties, "image_isolation")
-		delete(additionalProperties, "code_integrity")
-		delete(additionalProperties, "high_entropy")
-		delete(additionalProperties, "seh")
+		delete(additionalProperties, "aslr")
 		delete(additionalProperties, "bound_image")
+		delete(additionalProperties, "cfg")
+		delete(additionalProperties, "code_integrity")
+		delete(additionalProperties, "dep")
+		delete(additionalProperties, "driver_model")
+		delete(additionalProperties, "high_entropy")
+		delete(additionalProperties, "image_isolation")
+		delete(additionalProperties, "seh")
+		delete(additionalProperties, "terminal_server_aware")
 		o.AdditionalProperties = additionalProperties
 	}
 

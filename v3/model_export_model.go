@@ -19,8 +19,8 @@ var _ MappedNullable = &ExportModel{}
 
 // ExportModel struct for ExportModel
 type ExportModel struct {
-	NumberOfExports int32 `json:"number_of_exports"`
 	Exports []map[string]int32 `json:"exports"`
+	NumberOfExports int32 `json:"number_of_exports"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,10 +30,10 @@ type _ExportModel ExportModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewExportModel(numberOfExports int32, exports []map[string]int32) *ExportModel {
+func NewExportModel(exports []map[string]int32, numberOfExports int32) *ExportModel {
 	this := ExportModel{}
-	this.NumberOfExports = numberOfExports
 	this.Exports = exports
+	this.NumberOfExports = numberOfExports
 	return &this
 }
 
@@ -43,30 +43,6 @@ func NewExportModel(numberOfExports int32, exports []map[string]int32) *ExportMo
 func NewExportModelWithDefaults() *ExportModel {
 	this := ExportModel{}
 	return &this
-}
-
-// GetNumberOfExports returns the NumberOfExports field value
-func (o *ExportModel) GetNumberOfExports() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.NumberOfExports
-}
-
-// GetNumberOfExportsOk returns a tuple with the NumberOfExports field value
-// and a boolean to check if the value has been set.
-func (o *ExportModel) GetNumberOfExportsOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.NumberOfExports, true
-}
-
-// SetNumberOfExports sets field value
-func (o *ExportModel) SetNumberOfExports(v int32) {
-	o.NumberOfExports = v
 }
 
 // GetExports returns the Exports field value
@@ -93,6 +69,30 @@ func (o *ExportModel) SetExports(v []map[string]int32) {
 	o.Exports = v
 }
 
+// GetNumberOfExports returns the NumberOfExports field value
+func (o *ExportModel) GetNumberOfExports() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.NumberOfExports
+}
+
+// GetNumberOfExportsOk returns a tuple with the NumberOfExports field value
+// and a boolean to check if the value has been set.
+func (o *ExportModel) GetNumberOfExportsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.NumberOfExports, true
+}
+
+// SetNumberOfExports sets field value
+func (o *ExportModel) SetNumberOfExports(v int32) {
+	o.NumberOfExports = v
+}
+
 func (o ExportModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,8 +103,8 @@ func (o ExportModel) MarshalJSON() ([]byte, error) {
 
 func (o ExportModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["number_of_exports"] = o.NumberOfExports
 	toSerialize["exports"] = o.Exports
+	toSerialize["number_of_exports"] = o.NumberOfExports
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -118,8 +118,8 @@ func (o *ExportModel) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"number_of_exports",
 		"exports",
+		"number_of_exports",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -149,8 +149,8 @@ func (o *ExportModel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "number_of_exports")
 		delete(additionalProperties, "exports")
+		delete(additionalProperties, "number_of_exports")
 		o.AdditionalProperties = additionalProperties
 	}
 

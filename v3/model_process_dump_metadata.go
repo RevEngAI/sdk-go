@@ -20,8 +20,8 @@ var _ MappedNullable = &ProcessDumpMetadata{}
 // ProcessDumpMetadata struct for ProcessDumpMetadata
 type ProcessDumpMetadata struct {
 	Sha256 string `json:"sha256"`
-	Type string `json:"type"`
 	Size int32 `json:"size"`
+	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,11 +31,11 @@ type _ProcessDumpMetadata ProcessDumpMetadata
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProcessDumpMetadata(sha256 string, type_ string, size int32) *ProcessDumpMetadata {
+func NewProcessDumpMetadata(sha256 string, size int32, type_ string) *ProcessDumpMetadata {
 	this := ProcessDumpMetadata{}
 	this.Sha256 = sha256
-	this.Type = type_
 	this.Size = size
+	this.Type = type_
 	return &this
 }
 
@@ -71,30 +71,6 @@ func (o *ProcessDumpMetadata) SetSha256(v string) {
 	o.Sha256 = v
 }
 
-// GetType returns the Type field value
-func (o *ProcessDumpMetadata) GetType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *ProcessDumpMetadata) GetTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *ProcessDumpMetadata) SetType(v string) {
-	o.Type = v
-}
-
 // GetSize returns the Size field value
 func (o *ProcessDumpMetadata) GetSize() int32 {
 	if o == nil {
@@ -119,6 +95,30 @@ func (o *ProcessDumpMetadata) SetSize(v int32) {
 	o.Size = v
 }
 
+// GetType returns the Type field value
+func (o *ProcessDumpMetadata) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *ProcessDumpMetadata) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *ProcessDumpMetadata) SetType(v string) {
+	o.Type = v
+}
+
 func (o ProcessDumpMetadata) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,8 +130,8 @@ func (o ProcessDumpMetadata) MarshalJSON() ([]byte, error) {
 func (o ProcessDumpMetadata) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["sha256"] = o.Sha256
-	toSerialize["type"] = o.Type
 	toSerialize["size"] = o.Size
+	toSerialize["type"] = o.Type
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -146,8 +146,8 @@ func (o *ProcessDumpMetadata) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"sha256",
-		"type",
 		"size",
+		"type",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -178,8 +178,8 @@ func (o *ProcessDumpMetadata) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "sha256")
-		delete(additionalProperties, "type")
 		delete(additionalProperties, "size")
+		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
 	}
 

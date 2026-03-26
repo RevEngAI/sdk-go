@@ -5,16 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **LastChange** | Pointer to **NullableString** |  | [optional] 
-**Offset** | **int32** | Offset of the argument in the function signature | 
 **Name** | **string** | Name of the argument | 
-**Type** | **string** | Data type of the argument | 
+**Offset** | **int32** | Offset of the argument in the function signature | 
 **Size** | **int32** | Size of the argument in bytes | 
+**Type** | **string** | Data type of the argument | 
 
 ## Methods
 
 ### NewArgument
 
-`func NewArgument(offset int32, name string, type_ string, size int32, ) *Argument`
+`func NewArgument(name string, offset int32, size int32, type_ string, ) *Argument`
 
 NewArgument instantiates a new Argument object
 This constructor will assign default values to properties that have it defined,
@@ -64,26 +64,6 @@ HasLastChange returns a boolean if a field has been set.
 `func (o *Argument) UnsetLastChange()`
 
 UnsetLastChange ensures that no value is present for LastChange, not even an explicit nil
-### GetOffset
-
-`func (o *Argument) GetOffset() int32`
-
-GetOffset returns the Offset field if non-nil, zero value otherwise.
-
-### GetOffsetOk
-
-`func (o *Argument) GetOffsetOk() (*int32, bool)`
-
-GetOffsetOk returns a tuple with the Offset field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOffset
-
-`func (o *Argument) SetOffset(v int32)`
-
-SetOffset sets Offset field to given value.
-
-
 ### GetName
 
 `func (o *Argument) GetName() string`
@@ -104,24 +84,24 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
-### GetType
+### GetOffset
 
-`func (o *Argument) GetType() string`
+`func (o *Argument) GetOffset() int32`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetOffset returns the Offset field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetOffsetOk
 
-`func (o *Argument) GetTypeOk() (*string, bool)`
+`func (o *Argument) GetOffsetOk() (*int32, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetOffsetOk returns a tuple with the Offset field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetOffset
 
-`func (o *Argument) SetType(v string)`
+`func (o *Argument) SetOffset(v int32)`
 
-SetType sets Type field to given value.
+SetOffset sets Offset field to given value.
 
 
 ### GetSize
@@ -142,6 +122,26 @@ and a boolean to check if the value has been set.
 `func (o *Argument) SetSize(v int32)`
 
 SetSize sets Size field to given value.
+
+
+### GetType
+
+`func (o *Argument) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *Argument) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *Argument) SetType(v string)`
+
+SetType sets Type field to given value.
 
 
 

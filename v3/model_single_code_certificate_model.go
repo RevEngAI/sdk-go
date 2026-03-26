@@ -19,12 +19,12 @@ var _ MappedNullable = &SingleCodeCertificateModel{}
 
 // SingleCodeCertificateModel struct for SingleCodeCertificateModel
 type SingleCodeCertificateModel struct {
-	Version int32 `json:"version"`
-	IssuedOn string `json:"issued_on"`
 	ExpiresOn string `json:"expires_on"`
+	IssuedOn string `json:"issued_on"`
 	IssuerName string `json:"issuer_name"`
 	SerialNumber string `json:"serial_number"`
 	SubjectName string `json:"subject_name"`
+	Version int32 `json:"version"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,14 +34,14 @@ type _SingleCodeCertificateModel SingleCodeCertificateModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSingleCodeCertificateModel(version int32, issuedOn string, expiresOn string, issuerName string, serialNumber string, subjectName string) *SingleCodeCertificateModel {
+func NewSingleCodeCertificateModel(expiresOn string, issuedOn string, issuerName string, serialNumber string, subjectName string, version int32) *SingleCodeCertificateModel {
 	this := SingleCodeCertificateModel{}
-	this.Version = version
-	this.IssuedOn = issuedOn
 	this.ExpiresOn = expiresOn
+	this.IssuedOn = issuedOn
 	this.IssuerName = issuerName
 	this.SerialNumber = serialNumber
 	this.SubjectName = subjectName
+	this.Version = version
 	return &this
 }
 
@@ -51,54 +51,6 @@ func NewSingleCodeCertificateModel(version int32, issuedOn string, expiresOn str
 func NewSingleCodeCertificateModelWithDefaults() *SingleCodeCertificateModel {
 	this := SingleCodeCertificateModel{}
 	return &this
-}
-
-// GetVersion returns the Version field value
-func (o *SingleCodeCertificateModel) GetVersion() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Version
-}
-
-// GetVersionOk returns a tuple with the Version field value
-// and a boolean to check if the value has been set.
-func (o *SingleCodeCertificateModel) GetVersionOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Version, true
-}
-
-// SetVersion sets field value
-func (o *SingleCodeCertificateModel) SetVersion(v int32) {
-	o.Version = v
-}
-
-// GetIssuedOn returns the IssuedOn field value
-func (o *SingleCodeCertificateModel) GetIssuedOn() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.IssuedOn
-}
-
-// GetIssuedOnOk returns a tuple with the IssuedOn field value
-// and a boolean to check if the value has been set.
-func (o *SingleCodeCertificateModel) GetIssuedOnOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.IssuedOn, true
-}
-
-// SetIssuedOn sets field value
-func (o *SingleCodeCertificateModel) SetIssuedOn(v string) {
-	o.IssuedOn = v
 }
 
 // GetExpiresOn returns the ExpiresOn field value
@@ -123,6 +75,30 @@ func (o *SingleCodeCertificateModel) GetExpiresOnOk() (*string, bool) {
 // SetExpiresOn sets field value
 func (o *SingleCodeCertificateModel) SetExpiresOn(v string) {
 	o.ExpiresOn = v
+}
+
+// GetIssuedOn returns the IssuedOn field value
+func (o *SingleCodeCertificateModel) GetIssuedOn() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.IssuedOn
+}
+
+// GetIssuedOnOk returns a tuple with the IssuedOn field value
+// and a boolean to check if the value has been set.
+func (o *SingleCodeCertificateModel) GetIssuedOnOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IssuedOn, true
+}
+
+// SetIssuedOn sets field value
+func (o *SingleCodeCertificateModel) SetIssuedOn(v string) {
+	o.IssuedOn = v
 }
 
 // GetIssuerName returns the IssuerName field value
@@ -197,6 +173,30 @@ func (o *SingleCodeCertificateModel) SetSubjectName(v string) {
 	o.SubjectName = v
 }
 
+// GetVersion returns the Version field value
+func (o *SingleCodeCertificateModel) GetVersion() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Version
+}
+
+// GetVersionOk returns a tuple with the Version field value
+// and a boolean to check if the value has been set.
+func (o *SingleCodeCertificateModel) GetVersionOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Version, true
+}
+
+// SetVersion sets field value
+func (o *SingleCodeCertificateModel) SetVersion(v int32) {
+	o.Version = v
+}
+
 func (o SingleCodeCertificateModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -207,12 +207,12 @@ func (o SingleCodeCertificateModel) MarshalJSON() ([]byte, error) {
 
 func (o SingleCodeCertificateModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["version"] = o.Version
-	toSerialize["issued_on"] = o.IssuedOn
 	toSerialize["expires_on"] = o.ExpiresOn
+	toSerialize["issued_on"] = o.IssuedOn
 	toSerialize["issuer_name"] = o.IssuerName
 	toSerialize["serial_number"] = o.SerialNumber
 	toSerialize["subject_name"] = o.SubjectName
+	toSerialize["version"] = o.Version
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -226,12 +226,12 @@ func (o *SingleCodeCertificateModel) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"version",
-		"issued_on",
 		"expires_on",
+		"issued_on",
 		"issuer_name",
 		"serial_number",
 		"subject_name",
+		"version",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -261,12 +261,12 @@ func (o *SingleCodeCertificateModel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "version")
-		delete(additionalProperties, "issued_on")
 		delete(additionalProperties, "expires_on")
+		delete(additionalProperties, "issued_on")
 		delete(additionalProperties, "issuer_name")
 		delete(additionalProperties, "serial_number")
 		delete(additionalProperties, "subject_name")
+		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties
 	}
 

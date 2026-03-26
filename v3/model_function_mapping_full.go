@@ -19,21 +19,21 @@ var _ MappedNullable = &FunctionMappingFull{}
 
 // FunctionMappingFull struct for FunctionMappingFull
 type FunctionMappingFull struct {
-	InverseStringMap map[string]InverseStringMapItem `json:"inverse_string_map"`
-	InverseFunctionMap map[string]InverseFunctionMapItem `json:"inverse_function_map"`
-	UnmatchedFunctions map[string]InverseValue `json:"unmatched_functions"`
-	UnmatchedCustomTypes map[string]InverseValue `json:"unmatched_custom_types"`
-	UnmatchedStrings map[string]InverseValue `json:"unmatched_strings"`
-	UnmatchedVars map[string]InverseValue `json:"unmatched_vars"`
-	UnmatchedGoToLabels map[string]InverseValue `json:"unmatched_go_to_labels"`
-	UnmatchedCustomFunctionPointers map[string]InverseValue `json:"unmatched_custom_function_pointers"`
-	UnmatchedVariadicLists map[string]InverseValue `json:"unmatched_variadic_lists"`
-	UnmatchedEnums map[string]InverseValue `json:"unmatched_enums"`
-	UnmatchedGlobalVars map[string]InverseValue `json:"unmatched_global_vars"`
 	Fields map[string]map[string]InverseValue `json:"fields"`
+	InverseFunctionMap map[string]InverseFunctionMapItem `json:"inverse_function_map"`
+	InverseStringMap map[string]InverseStringMapItem `json:"inverse_string_map"`
+	UnmatchedCustomFunctionPointers map[string]InverseValue `json:"unmatched_custom_function_pointers"`
+	UnmatchedCustomTypes map[string]InverseValue `json:"unmatched_custom_types"`
+	UnmatchedEnums map[string]InverseValue `json:"unmatched_enums"`
 	// No longer provided.
 	// Deprecated
 	UnmatchedExternalVars map[string]InverseValue `json:"unmatched_external_vars,omitempty"`
+	UnmatchedFunctions map[string]InverseValue `json:"unmatched_functions"`
+	UnmatchedGlobalVars map[string]InverseValue `json:"unmatched_global_vars"`
+	UnmatchedGoToLabels map[string]InverseValue `json:"unmatched_go_to_labels"`
+	UnmatchedStrings map[string]InverseValue `json:"unmatched_strings"`
+	UnmatchedVariadicLists map[string]InverseValue `json:"unmatched_variadic_lists"`
+	UnmatchedVars map[string]InverseValue `json:"unmatched_vars"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,20 +43,20 @@ type _FunctionMappingFull FunctionMappingFull
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionMappingFull(inverseStringMap map[string]InverseStringMapItem, inverseFunctionMap map[string]InverseFunctionMapItem, unmatchedFunctions map[string]InverseValue, unmatchedCustomTypes map[string]InverseValue, unmatchedStrings map[string]InverseValue, unmatchedVars map[string]InverseValue, unmatchedGoToLabels map[string]InverseValue, unmatchedCustomFunctionPointers map[string]InverseValue, unmatchedVariadicLists map[string]InverseValue, unmatchedEnums map[string]InverseValue, unmatchedGlobalVars map[string]InverseValue, fields map[string]map[string]InverseValue) *FunctionMappingFull {
+func NewFunctionMappingFull(fields map[string]map[string]InverseValue, inverseFunctionMap map[string]InverseFunctionMapItem, inverseStringMap map[string]InverseStringMapItem, unmatchedCustomFunctionPointers map[string]InverseValue, unmatchedCustomTypes map[string]InverseValue, unmatchedEnums map[string]InverseValue, unmatchedFunctions map[string]InverseValue, unmatchedGlobalVars map[string]InverseValue, unmatchedGoToLabels map[string]InverseValue, unmatchedStrings map[string]InverseValue, unmatchedVariadicLists map[string]InverseValue, unmatchedVars map[string]InverseValue) *FunctionMappingFull {
 	this := FunctionMappingFull{}
-	this.InverseStringMap = inverseStringMap
-	this.InverseFunctionMap = inverseFunctionMap
-	this.UnmatchedFunctions = unmatchedFunctions
-	this.UnmatchedCustomTypes = unmatchedCustomTypes
-	this.UnmatchedStrings = unmatchedStrings
-	this.UnmatchedVars = unmatchedVars
-	this.UnmatchedGoToLabels = unmatchedGoToLabels
-	this.UnmatchedCustomFunctionPointers = unmatchedCustomFunctionPointers
-	this.UnmatchedVariadicLists = unmatchedVariadicLists
-	this.UnmatchedEnums = unmatchedEnums
-	this.UnmatchedGlobalVars = unmatchedGlobalVars
 	this.Fields = fields
+	this.InverseFunctionMap = inverseFunctionMap
+	this.InverseStringMap = inverseStringMap
+	this.UnmatchedCustomFunctionPointers = unmatchedCustomFunctionPointers
+	this.UnmatchedCustomTypes = unmatchedCustomTypes
+	this.UnmatchedEnums = unmatchedEnums
+	this.UnmatchedFunctions = unmatchedFunctions
+	this.UnmatchedGlobalVars = unmatchedGlobalVars
+	this.UnmatchedGoToLabels = unmatchedGoToLabels
+	this.UnmatchedStrings = unmatchedStrings
+	this.UnmatchedVariadicLists = unmatchedVariadicLists
+	this.UnmatchedVars = unmatchedVars
 	return &this
 }
 
@@ -68,28 +68,28 @@ func NewFunctionMappingFullWithDefaults() *FunctionMappingFull {
 	return &this
 }
 
-// GetInverseStringMap returns the InverseStringMap field value
-func (o *FunctionMappingFull) GetInverseStringMap() map[string]InverseStringMapItem {
+// GetFields returns the Fields field value
+func (o *FunctionMappingFull) GetFields() map[string]map[string]InverseValue {
 	if o == nil {
-		var ret map[string]InverseStringMapItem
+		var ret map[string]map[string]InverseValue
 		return ret
 	}
 
-	return o.InverseStringMap
+	return o.Fields
 }
 
-// GetInverseStringMapOk returns a tuple with the InverseStringMap field value
+// GetFieldsOk returns a tuple with the Fields field value
 // and a boolean to check if the value has been set.
-func (o *FunctionMappingFull) GetInverseStringMapOk() (map[string]InverseStringMapItem, bool) {
+func (o *FunctionMappingFull) GetFieldsOk() (map[string]map[string]InverseValue, bool) {
 	if o == nil {
-		return map[string]InverseStringMapItem{}, false
+		return map[string]map[string]InverseValue{}, false
 	}
-	return o.InverseStringMap, true
+	return o.Fields, true
 }
 
-// SetInverseStringMap sets field value
-func (o *FunctionMappingFull) SetInverseStringMap(v map[string]InverseStringMapItem) {
-	o.InverseStringMap = v
+// SetFields sets field value
+func (o *FunctionMappingFull) SetFields(v map[string]map[string]InverseValue) {
+	o.Fields = v
 }
 
 // GetInverseFunctionMap returns the InverseFunctionMap field value
@@ -116,124 +116,28 @@ func (o *FunctionMappingFull) SetInverseFunctionMap(v map[string]InverseFunction
 	o.InverseFunctionMap = v
 }
 
-// GetUnmatchedFunctions returns the UnmatchedFunctions field value
-func (o *FunctionMappingFull) GetUnmatchedFunctions() map[string]InverseValue {
+// GetInverseStringMap returns the InverseStringMap field value
+func (o *FunctionMappingFull) GetInverseStringMap() map[string]InverseStringMapItem {
 	if o == nil {
-		var ret map[string]InverseValue
+		var ret map[string]InverseStringMapItem
 		return ret
 	}
 
-	return o.UnmatchedFunctions
+	return o.InverseStringMap
 }
 
-// GetUnmatchedFunctionsOk returns a tuple with the UnmatchedFunctions field value
+// GetInverseStringMapOk returns a tuple with the InverseStringMap field value
 // and a boolean to check if the value has been set.
-func (o *FunctionMappingFull) GetUnmatchedFunctionsOk() (map[string]InverseValue, bool) {
+func (o *FunctionMappingFull) GetInverseStringMapOk() (map[string]InverseStringMapItem, bool) {
 	if o == nil {
-		return map[string]InverseValue{}, false
+		return map[string]InverseStringMapItem{}, false
 	}
-	return o.UnmatchedFunctions, true
+	return o.InverseStringMap, true
 }
 
-// SetUnmatchedFunctions sets field value
-func (o *FunctionMappingFull) SetUnmatchedFunctions(v map[string]InverseValue) {
-	o.UnmatchedFunctions = v
-}
-
-// GetUnmatchedCustomTypes returns the UnmatchedCustomTypes field value
-func (o *FunctionMappingFull) GetUnmatchedCustomTypes() map[string]InverseValue {
-	if o == nil {
-		var ret map[string]InverseValue
-		return ret
-	}
-
-	return o.UnmatchedCustomTypes
-}
-
-// GetUnmatchedCustomTypesOk returns a tuple with the UnmatchedCustomTypes field value
-// and a boolean to check if the value has been set.
-func (o *FunctionMappingFull) GetUnmatchedCustomTypesOk() (map[string]InverseValue, bool) {
-	if o == nil {
-		return map[string]InverseValue{}, false
-	}
-	return o.UnmatchedCustomTypes, true
-}
-
-// SetUnmatchedCustomTypes sets field value
-func (o *FunctionMappingFull) SetUnmatchedCustomTypes(v map[string]InverseValue) {
-	o.UnmatchedCustomTypes = v
-}
-
-// GetUnmatchedStrings returns the UnmatchedStrings field value
-func (o *FunctionMappingFull) GetUnmatchedStrings() map[string]InverseValue {
-	if o == nil {
-		var ret map[string]InverseValue
-		return ret
-	}
-
-	return o.UnmatchedStrings
-}
-
-// GetUnmatchedStringsOk returns a tuple with the UnmatchedStrings field value
-// and a boolean to check if the value has been set.
-func (o *FunctionMappingFull) GetUnmatchedStringsOk() (map[string]InverseValue, bool) {
-	if o == nil {
-		return map[string]InverseValue{}, false
-	}
-	return o.UnmatchedStrings, true
-}
-
-// SetUnmatchedStrings sets field value
-func (o *FunctionMappingFull) SetUnmatchedStrings(v map[string]InverseValue) {
-	o.UnmatchedStrings = v
-}
-
-// GetUnmatchedVars returns the UnmatchedVars field value
-func (o *FunctionMappingFull) GetUnmatchedVars() map[string]InverseValue {
-	if o == nil {
-		var ret map[string]InverseValue
-		return ret
-	}
-
-	return o.UnmatchedVars
-}
-
-// GetUnmatchedVarsOk returns a tuple with the UnmatchedVars field value
-// and a boolean to check if the value has been set.
-func (o *FunctionMappingFull) GetUnmatchedVarsOk() (map[string]InverseValue, bool) {
-	if o == nil {
-		return map[string]InverseValue{}, false
-	}
-	return o.UnmatchedVars, true
-}
-
-// SetUnmatchedVars sets field value
-func (o *FunctionMappingFull) SetUnmatchedVars(v map[string]InverseValue) {
-	o.UnmatchedVars = v
-}
-
-// GetUnmatchedGoToLabels returns the UnmatchedGoToLabels field value
-func (o *FunctionMappingFull) GetUnmatchedGoToLabels() map[string]InverseValue {
-	if o == nil {
-		var ret map[string]InverseValue
-		return ret
-	}
-
-	return o.UnmatchedGoToLabels
-}
-
-// GetUnmatchedGoToLabelsOk returns a tuple with the UnmatchedGoToLabels field value
-// and a boolean to check if the value has been set.
-func (o *FunctionMappingFull) GetUnmatchedGoToLabelsOk() (map[string]InverseValue, bool) {
-	if o == nil {
-		return map[string]InverseValue{}, false
-	}
-	return o.UnmatchedGoToLabels, true
-}
-
-// SetUnmatchedGoToLabels sets field value
-func (o *FunctionMappingFull) SetUnmatchedGoToLabels(v map[string]InverseValue) {
-	o.UnmatchedGoToLabels = v
+// SetInverseStringMap sets field value
+func (o *FunctionMappingFull) SetInverseStringMap(v map[string]InverseStringMapItem) {
+	o.InverseStringMap = v
 }
 
 // GetUnmatchedCustomFunctionPointers returns the UnmatchedCustomFunctionPointers field value
@@ -260,28 +164,28 @@ func (o *FunctionMappingFull) SetUnmatchedCustomFunctionPointers(v map[string]In
 	o.UnmatchedCustomFunctionPointers = v
 }
 
-// GetUnmatchedVariadicLists returns the UnmatchedVariadicLists field value
-func (o *FunctionMappingFull) GetUnmatchedVariadicLists() map[string]InverseValue {
+// GetUnmatchedCustomTypes returns the UnmatchedCustomTypes field value
+func (o *FunctionMappingFull) GetUnmatchedCustomTypes() map[string]InverseValue {
 	if o == nil {
 		var ret map[string]InverseValue
 		return ret
 	}
 
-	return o.UnmatchedVariadicLists
+	return o.UnmatchedCustomTypes
 }
 
-// GetUnmatchedVariadicListsOk returns a tuple with the UnmatchedVariadicLists field value
+// GetUnmatchedCustomTypesOk returns a tuple with the UnmatchedCustomTypes field value
 // and a boolean to check if the value has been set.
-func (o *FunctionMappingFull) GetUnmatchedVariadicListsOk() (map[string]InverseValue, bool) {
+func (o *FunctionMappingFull) GetUnmatchedCustomTypesOk() (map[string]InverseValue, bool) {
 	if o == nil {
 		return map[string]InverseValue{}, false
 	}
-	return o.UnmatchedVariadicLists, true
+	return o.UnmatchedCustomTypes, true
 }
 
-// SetUnmatchedVariadicLists sets field value
-func (o *FunctionMappingFull) SetUnmatchedVariadicLists(v map[string]InverseValue) {
-	o.UnmatchedVariadicLists = v
+// SetUnmatchedCustomTypes sets field value
+func (o *FunctionMappingFull) SetUnmatchedCustomTypes(v map[string]InverseValue) {
+	o.UnmatchedCustomTypes = v
 }
 
 // GetUnmatchedEnums returns the UnmatchedEnums field value
@@ -306,54 +210,6 @@ func (o *FunctionMappingFull) GetUnmatchedEnumsOk() (map[string]InverseValue, bo
 // SetUnmatchedEnums sets field value
 func (o *FunctionMappingFull) SetUnmatchedEnums(v map[string]InverseValue) {
 	o.UnmatchedEnums = v
-}
-
-// GetUnmatchedGlobalVars returns the UnmatchedGlobalVars field value
-func (o *FunctionMappingFull) GetUnmatchedGlobalVars() map[string]InverseValue {
-	if o == nil {
-		var ret map[string]InverseValue
-		return ret
-	}
-
-	return o.UnmatchedGlobalVars
-}
-
-// GetUnmatchedGlobalVarsOk returns a tuple with the UnmatchedGlobalVars field value
-// and a boolean to check if the value has been set.
-func (o *FunctionMappingFull) GetUnmatchedGlobalVarsOk() (map[string]InverseValue, bool) {
-	if o == nil {
-		return map[string]InverseValue{}, false
-	}
-	return o.UnmatchedGlobalVars, true
-}
-
-// SetUnmatchedGlobalVars sets field value
-func (o *FunctionMappingFull) SetUnmatchedGlobalVars(v map[string]InverseValue) {
-	o.UnmatchedGlobalVars = v
-}
-
-// GetFields returns the Fields field value
-func (o *FunctionMappingFull) GetFields() map[string]map[string]InverseValue {
-	if o == nil {
-		var ret map[string]map[string]InverseValue
-		return ret
-	}
-
-	return o.Fields
-}
-
-// GetFieldsOk returns a tuple with the Fields field value
-// and a boolean to check if the value has been set.
-func (o *FunctionMappingFull) GetFieldsOk() (map[string]map[string]InverseValue, bool) {
-	if o == nil {
-		return map[string]map[string]InverseValue{}, false
-	}
-	return o.Fields, true
-}
-
-// SetFields sets field value
-func (o *FunctionMappingFull) SetFields(v map[string]map[string]InverseValue) {
-	o.Fields = v
 }
 
 // GetUnmatchedExternalVars returns the UnmatchedExternalVars field value if set, zero value otherwise.
@@ -391,6 +247,150 @@ func (o *FunctionMappingFull) SetUnmatchedExternalVars(v map[string]InverseValue
 	o.UnmatchedExternalVars = v
 }
 
+// GetUnmatchedFunctions returns the UnmatchedFunctions field value
+func (o *FunctionMappingFull) GetUnmatchedFunctions() map[string]InverseValue {
+	if o == nil {
+		var ret map[string]InverseValue
+		return ret
+	}
+
+	return o.UnmatchedFunctions
+}
+
+// GetUnmatchedFunctionsOk returns a tuple with the UnmatchedFunctions field value
+// and a boolean to check if the value has been set.
+func (o *FunctionMappingFull) GetUnmatchedFunctionsOk() (map[string]InverseValue, bool) {
+	if o == nil {
+		return map[string]InverseValue{}, false
+	}
+	return o.UnmatchedFunctions, true
+}
+
+// SetUnmatchedFunctions sets field value
+func (o *FunctionMappingFull) SetUnmatchedFunctions(v map[string]InverseValue) {
+	o.UnmatchedFunctions = v
+}
+
+// GetUnmatchedGlobalVars returns the UnmatchedGlobalVars field value
+func (o *FunctionMappingFull) GetUnmatchedGlobalVars() map[string]InverseValue {
+	if o == nil {
+		var ret map[string]InverseValue
+		return ret
+	}
+
+	return o.UnmatchedGlobalVars
+}
+
+// GetUnmatchedGlobalVarsOk returns a tuple with the UnmatchedGlobalVars field value
+// and a boolean to check if the value has been set.
+func (o *FunctionMappingFull) GetUnmatchedGlobalVarsOk() (map[string]InverseValue, bool) {
+	if o == nil {
+		return map[string]InverseValue{}, false
+	}
+	return o.UnmatchedGlobalVars, true
+}
+
+// SetUnmatchedGlobalVars sets field value
+func (o *FunctionMappingFull) SetUnmatchedGlobalVars(v map[string]InverseValue) {
+	o.UnmatchedGlobalVars = v
+}
+
+// GetUnmatchedGoToLabels returns the UnmatchedGoToLabels field value
+func (o *FunctionMappingFull) GetUnmatchedGoToLabels() map[string]InverseValue {
+	if o == nil {
+		var ret map[string]InverseValue
+		return ret
+	}
+
+	return o.UnmatchedGoToLabels
+}
+
+// GetUnmatchedGoToLabelsOk returns a tuple with the UnmatchedGoToLabels field value
+// and a boolean to check if the value has been set.
+func (o *FunctionMappingFull) GetUnmatchedGoToLabelsOk() (map[string]InverseValue, bool) {
+	if o == nil {
+		return map[string]InverseValue{}, false
+	}
+	return o.UnmatchedGoToLabels, true
+}
+
+// SetUnmatchedGoToLabels sets field value
+func (o *FunctionMappingFull) SetUnmatchedGoToLabels(v map[string]InverseValue) {
+	o.UnmatchedGoToLabels = v
+}
+
+// GetUnmatchedStrings returns the UnmatchedStrings field value
+func (o *FunctionMappingFull) GetUnmatchedStrings() map[string]InverseValue {
+	if o == nil {
+		var ret map[string]InverseValue
+		return ret
+	}
+
+	return o.UnmatchedStrings
+}
+
+// GetUnmatchedStringsOk returns a tuple with the UnmatchedStrings field value
+// and a boolean to check if the value has been set.
+func (o *FunctionMappingFull) GetUnmatchedStringsOk() (map[string]InverseValue, bool) {
+	if o == nil {
+		return map[string]InverseValue{}, false
+	}
+	return o.UnmatchedStrings, true
+}
+
+// SetUnmatchedStrings sets field value
+func (o *FunctionMappingFull) SetUnmatchedStrings(v map[string]InverseValue) {
+	o.UnmatchedStrings = v
+}
+
+// GetUnmatchedVariadicLists returns the UnmatchedVariadicLists field value
+func (o *FunctionMappingFull) GetUnmatchedVariadicLists() map[string]InverseValue {
+	if o == nil {
+		var ret map[string]InverseValue
+		return ret
+	}
+
+	return o.UnmatchedVariadicLists
+}
+
+// GetUnmatchedVariadicListsOk returns a tuple with the UnmatchedVariadicLists field value
+// and a boolean to check if the value has been set.
+func (o *FunctionMappingFull) GetUnmatchedVariadicListsOk() (map[string]InverseValue, bool) {
+	if o == nil {
+		return map[string]InverseValue{}, false
+	}
+	return o.UnmatchedVariadicLists, true
+}
+
+// SetUnmatchedVariadicLists sets field value
+func (o *FunctionMappingFull) SetUnmatchedVariadicLists(v map[string]InverseValue) {
+	o.UnmatchedVariadicLists = v
+}
+
+// GetUnmatchedVars returns the UnmatchedVars field value
+func (o *FunctionMappingFull) GetUnmatchedVars() map[string]InverseValue {
+	if o == nil {
+		var ret map[string]InverseValue
+		return ret
+	}
+
+	return o.UnmatchedVars
+}
+
+// GetUnmatchedVarsOk returns a tuple with the UnmatchedVars field value
+// and a boolean to check if the value has been set.
+func (o *FunctionMappingFull) GetUnmatchedVarsOk() (map[string]InverseValue, bool) {
+	if o == nil {
+		return map[string]InverseValue{}, false
+	}
+	return o.UnmatchedVars, true
+}
+
+// SetUnmatchedVars sets field value
+func (o *FunctionMappingFull) SetUnmatchedVars(v map[string]InverseValue) {
+	o.UnmatchedVars = v
+}
+
 func (o FunctionMappingFull) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -401,21 +401,21 @@ func (o FunctionMappingFull) MarshalJSON() ([]byte, error) {
 
 func (o FunctionMappingFull) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["inverse_string_map"] = o.InverseStringMap
-	toSerialize["inverse_function_map"] = o.InverseFunctionMap
-	toSerialize["unmatched_functions"] = o.UnmatchedFunctions
-	toSerialize["unmatched_custom_types"] = o.UnmatchedCustomTypes
-	toSerialize["unmatched_strings"] = o.UnmatchedStrings
-	toSerialize["unmatched_vars"] = o.UnmatchedVars
-	toSerialize["unmatched_go_to_labels"] = o.UnmatchedGoToLabels
-	toSerialize["unmatched_custom_function_pointers"] = o.UnmatchedCustomFunctionPointers
-	toSerialize["unmatched_variadic_lists"] = o.UnmatchedVariadicLists
-	toSerialize["unmatched_enums"] = o.UnmatchedEnums
-	toSerialize["unmatched_global_vars"] = o.UnmatchedGlobalVars
 	toSerialize["fields"] = o.Fields
+	toSerialize["inverse_function_map"] = o.InverseFunctionMap
+	toSerialize["inverse_string_map"] = o.InverseStringMap
+	toSerialize["unmatched_custom_function_pointers"] = o.UnmatchedCustomFunctionPointers
+	toSerialize["unmatched_custom_types"] = o.UnmatchedCustomTypes
+	toSerialize["unmatched_enums"] = o.UnmatchedEnums
 	if !IsNil(o.UnmatchedExternalVars) {
 		toSerialize["unmatched_external_vars"] = o.UnmatchedExternalVars
 	}
+	toSerialize["unmatched_functions"] = o.UnmatchedFunctions
+	toSerialize["unmatched_global_vars"] = o.UnmatchedGlobalVars
+	toSerialize["unmatched_go_to_labels"] = o.UnmatchedGoToLabels
+	toSerialize["unmatched_strings"] = o.UnmatchedStrings
+	toSerialize["unmatched_variadic_lists"] = o.UnmatchedVariadicLists
+	toSerialize["unmatched_vars"] = o.UnmatchedVars
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -429,18 +429,18 @@ func (o *FunctionMappingFull) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"inverse_string_map",
-		"inverse_function_map",
-		"unmatched_functions",
-		"unmatched_custom_types",
-		"unmatched_strings",
-		"unmatched_vars",
-		"unmatched_go_to_labels",
-		"unmatched_custom_function_pointers",
-		"unmatched_variadic_lists",
-		"unmatched_enums",
-		"unmatched_global_vars",
 		"fields",
+		"inverse_function_map",
+		"inverse_string_map",
+		"unmatched_custom_function_pointers",
+		"unmatched_custom_types",
+		"unmatched_enums",
+		"unmatched_functions",
+		"unmatched_global_vars",
+		"unmatched_go_to_labels",
+		"unmatched_strings",
+		"unmatched_variadic_lists",
+		"unmatched_vars",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -470,19 +470,19 @@ func (o *FunctionMappingFull) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "inverse_string_map")
-		delete(additionalProperties, "inverse_function_map")
-		delete(additionalProperties, "unmatched_functions")
-		delete(additionalProperties, "unmatched_custom_types")
-		delete(additionalProperties, "unmatched_strings")
-		delete(additionalProperties, "unmatched_vars")
-		delete(additionalProperties, "unmatched_go_to_labels")
-		delete(additionalProperties, "unmatched_custom_function_pointers")
-		delete(additionalProperties, "unmatched_variadic_lists")
-		delete(additionalProperties, "unmatched_enums")
-		delete(additionalProperties, "unmatched_global_vars")
 		delete(additionalProperties, "fields")
+		delete(additionalProperties, "inverse_function_map")
+		delete(additionalProperties, "inverse_string_map")
+		delete(additionalProperties, "unmatched_custom_function_pointers")
+		delete(additionalProperties, "unmatched_custom_types")
+		delete(additionalProperties, "unmatched_enums")
 		delete(additionalProperties, "unmatched_external_vars")
+		delete(additionalProperties, "unmatched_functions")
+		delete(additionalProperties, "unmatched_global_vars")
+		delete(additionalProperties, "unmatched_go_to_labels")
+		delete(additionalProperties, "unmatched_strings")
+		delete(additionalProperties, "unmatched_variadic_lists")
+		delete(additionalProperties, "unmatched_vars")
 		o.AdditionalProperties = additionalProperties
 	}
 

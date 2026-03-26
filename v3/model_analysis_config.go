@@ -18,20 +18,20 @@ var _ MappedNullable = &AnalysisConfig{}
 
 // AnalysisConfig struct for AnalysisConfig
 type AnalysisConfig struct {
-	// Settings to scrape third party sources
-	ScrapeThirdPartyConfig *ScrapeThirdPartyConfig `json:"scrape_third_party_config,omitempty"`
+	// Enables an advanced security analysis.
+	AdvancedAnalysis *bool `json:"advanced_analysis,omitempty"`
+	// A configuration option for generating capabilities of a binary
+	GenerateCapabilities *bool `json:"generate_capabilities,omitempty"`
 	// A configuration option for fetching CVEs data.
 	GenerateCves *bool `json:"generate_cves,omitempty"`
 	// A configuration option for generating software bill of materials data.
 	GenerateSbom *bool `json:"generate_sbom,omitempty"`
-	// A configuration option for generating capabilities of a binary
-	GenerateCapabilities *bool `json:"generate_capabilities,omitempty"`
 	// When enabled, skips using cached data within the processing.
 	NoCache *bool `json:"no_cache,omitempty"`
-	// Enables an advanced security analysis.
-	AdvancedAnalysis *bool `json:"advanced_analysis,omitempty"`
 	// Including a sandbox config enables the dynamic execution sandbox
 	SandboxConfig *SandboxOptions `json:"sandbox_config,omitempty"`
+	// Settings to scrape third party sources
+	ScrapeThirdPartyConfig *ScrapeThirdPartyConfig `json:"scrape_third_party_config,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,16 +43,16 @@ type _AnalysisConfig AnalysisConfig
 // will change when the set of required properties is changed
 func NewAnalysisConfig() *AnalysisConfig {
 	this := AnalysisConfig{}
+	var advancedAnalysis bool = false
+	this.AdvancedAnalysis = &advancedAnalysis
+	var generateCapabilities bool = false
+	this.GenerateCapabilities = &generateCapabilities
 	var generateCves bool = false
 	this.GenerateCves = &generateCves
 	var generateSbom bool = false
 	this.GenerateSbom = &generateSbom
-	var generateCapabilities bool = false
-	this.GenerateCapabilities = &generateCapabilities
 	var noCache bool = false
 	this.NoCache = &noCache
-	var advancedAnalysis bool = false
-	this.AdvancedAnalysis = &advancedAnalysis
 	return &this
 }
 
@@ -61,49 +61,81 @@ func NewAnalysisConfig() *AnalysisConfig {
 // but it doesn't guarantee that properties required by API are set
 func NewAnalysisConfigWithDefaults() *AnalysisConfig {
 	this := AnalysisConfig{}
+	var advancedAnalysis bool = false
+	this.AdvancedAnalysis = &advancedAnalysis
+	var generateCapabilities bool = false
+	this.GenerateCapabilities = &generateCapabilities
 	var generateCves bool = false
 	this.GenerateCves = &generateCves
 	var generateSbom bool = false
 	this.GenerateSbom = &generateSbom
-	var generateCapabilities bool = false
-	this.GenerateCapabilities = &generateCapabilities
 	var noCache bool = false
 	this.NoCache = &noCache
-	var advancedAnalysis bool = false
-	this.AdvancedAnalysis = &advancedAnalysis
 	return &this
 }
 
-// GetScrapeThirdPartyConfig returns the ScrapeThirdPartyConfig field value if set, zero value otherwise.
-func (o *AnalysisConfig) GetScrapeThirdPartyConfig() ScrapeThirdPartyConfig {
-	if o == nil || IsNil(o.ScrapeThirdPartyConfig) {
-		var ret ScrapeThirdPartyConfig
+// GetAdvancedAnalysis returns the AdvancedAnalysis field value if set, zero value otherwise.
+func (o *AnalysisConfig) GetAdvancedAnalysis() bool {
+	if o == nil || IsNil(o.AdvancedAnalysis) {
+		var ret bool
 		return ret
 	}
-	return *o.ScrapeThirdPartyConfig
+	return *o.AdvancedAnalysis
 }
 
-// GetScrapeThirdPartyConfigOk returns a tuple with the ScrapeThirdPartyConfig field value if set, nil otherwise
+// GetAdvancedAnalysisOk returns a tuple with the AdvancedAnalysis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AnalysisConfig) GetScrapeThirdPartyConfigOk() (*ScrapeThirdPartyConfig, bool) {
-	if o == nil || IsNil(o.ScrapeThirdPartyConfig) {
+func (o *AnalysisConfig) GetAdvancedAnalysisOk() (*bool, bool) {
+	if o == nil || IsNil(o.AdvancedAnalysis) {
 		return nil, false
 	}
-	return o.ScrapeThirdPartyConfig, true
+	return o.AdvancedAnalysis, true
 }
 
-// HasScrapeThirdPartyConfig returns a boolean if a field has been set.
-func (o *AnalysisConfig) HasScrapeThirdPartyConfig() bool {
-	if o != nil && !IsNil(o.ScrapeThirdPartyConfig) {
+// HasAdvancedAnalysis returns a boolean if a field has been set.
+func (o *AnalysisConfig) HasAdvancedAnalysis() bool {
+	if o != nil && !IsNil(o.AdvancedAnalysis) {
 		return true
 	}
 
 	return false
 }
 
-// SetScrapeThirdPartyConfig gets a reference to the given ScrapeThirdPartyConfig and assigns it to the ScrapeThirdPartyConfig field.
-func (o *AnalysisConfig) SetScrapeThirdPartyConfig(v ScrapeThirdPartyConfig) {
-	o.ScrapeThirdPartyConfig = &v
+// SetAdvancedAnalysis gets a reference to the given bool and assigns it to the AdvancedAnalysis field.
+func (o *AnalysisConfig) SetAdvancedAnalysis(v bool) {
+	o.AdvancedAnalysis = &v
+}
+
+// GetGenerateCapabilities returns the GenerateCapabilities field value if set, zero value otherwise.
+func (o *AnalysisConfig) GetGenerateCapabilities() bool {
+	if o == nil || IsNil(o.GenerateCapabilities) {
+		var ret bool
+		return ret
+	}
+	return *o.GenerateCapabilities
+}
+
+// GetGenerateCapabilitiesOk returns a tuple with the GenerateCapabilities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalysisConfig) GetGenerateCapabilitiesOk() (*bool, bool) {
+	if o == nil || IsNil(o.GenerateCapabilities) {
+		return nil, false
+	}
+	return o.GenerateCapabilities, true
+}
+
+// HasGenerateCapabilities returns a boolean if a field has been set.
+func (o *AnalysisConfig) HasGenerateCapabilities() bool {
+	if o != nil && !IsNil(o.GenerateCapabilities) {
+		return true
+	}
+
+	return false
+}
+
+// SetGenerateCapabilities gets a reference to the given bool and assigns it to the GenerateCapabilities field.
+func (o *AnalysisConfig) SetGenerateCapabilities(v bool) {
+	o.GenerateCapabilities = &v
 }
 
 // GetGenerateCves returns the GenerateCves field value if set, zero value otherwise.
@@ -170,38 +202,6 @@ func (o *AnalysisConfig) SetGenerateSbom(v bool) {
 	o.GenerateSbom = &v
 }
 
-// GetGenerateCapabilities returns the GenerateCapabilities field value if set, zero value otherwise.
-func (o *AnalysisConfig) GetGenerateCapabilities() bool {
-	if o == nil || IsNil(o.GenerateCapabilities) {
-		var ret bool
-		return ret
-	}
-	return *o.GenerateCapabilities
-}
-
-// GetGenerateCapabilitiesOk returns a tuple with the GenerateCapabilities field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AnalysisConfig) GetGenerateCapabilitiesOk() (*bool, bool) {
-	if o == nil || IsNil(o.GenerateCapabilities) {
-		return nil, false
-	}
-	return o.GenerateCapabilities, true
-}
-
-// HasGenerateCapabilities returns a boolean if a field has been set.
-func (o *AnalysisConfig) HasGenerateCapabilities() bool {
-	if o != nil && !IsNil(o.GenerateCapabilities) {
-		return true
-	}
-
-	return false
-}
-
-// SetGenerateCapabilities gets a reference to the given bool and assigns it to the GenerateCapabilities field.
-func (o *AnalysisConfig) SetGenerateCapabilities(v bool) {
-	o.GenerateCapabilities = &v
-}
-
 // GetNoCache returns the NoCache field value if set, zero value otherwise.
 func (o *AnalysisConfig) GetNoCache() bool {
 	if o == nil || IsNil(o.NoCache) {
@@ -232,38 +232,6 @@ func (o *AnalysisConfig) HasNoCache() bool {
 // SetNoCache gets a reference to the given bool and assigns it to the NoCache field.
 func (o *AnalysisConfig) SetNoCache(v bool) {
 	o.NoCache = &v
-}
-
-// GetAdvancedAnalysis returns the AdvancedAnalysis field value if set, zero value otherwise.
-func (o *AnalysisConfig) GetAdvancedAnalysis() bool {
-	if o == nil || IsNil(o.AdvancedAnalysis) {
-		var ret bool
-		return ret
-	}
-	return *o.AdvancedAnalysis
-}
-
-// GetAdvancedAnalysisOk returns a tuple with the AdvancedAnalysis field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AnalysisConfig) GetAdvancedAnalysisOk() (*bool, bool) {
-	if o == nil || IsNil(o.AdvancedAnalysis) {
-		return nil, false
-	}
-	return o.AdvancedAnalysis, true
-}
-
-// HasAdvancedAnalysis returns a boolean if a field has been set.
-func (o *AnalysisConfig) HasAdvancedAnalysis() bool {
-	if o != nil && !IsNil(o.AdvancedAnalysis) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdvancedAnalysis gets a reference to the given bool and assigns it to the AdvancedAnalysis field.
-func (o *AnalysisConfig) SetAdvancedAnalysis(v bool) {
-	o.AdvancedAnalysis = &v
 }
 
 // GetSandboxConfig returns the SandboxConfig field value if set, zero value otherwise.
@@ -298,6 +266,38 @@ func (o *AnalysisConfig) SetSandboxConfig(v SandboxOptions) {
 	o.SandboxConfig = &v
 }
 
+// GetScrapeThirdPartyConfig returns the ScrapeThirdPartyConfig field value if set, zero value otherwise.
+func (o *AnalysisConfig) GetScrapeThirdPartyConfig() ScrapeThirdPartyConfig {
+	if o == nil || IsNil(o.ScrapeThirdPartyConfig) {
+		var ret ScrapeThirdPartyConfig
+		return ret
+	}
+	return *o.ScrapeThirdPartyConfig
+}
+
+// GetScrapeThirdPartyConfigOk returns a tuple with the ScrapeThirdPartyConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalysisConfig) GetScrapeThirdPartyConfigOk() (*ScrapeThirdPartyConfig, bool) {
+	if o == nil || IsNil(o.ScrapeThirdPartyConfig) {
+		return nil, false
+	}
+	return o.ScrapeThirdPartyConfig, true
+}
+
+// HasScrapeThirdPartyConfig returns a boolean if a field has been set.
+func (o *AnalysisConfig) HasScrapeThirdPartyConfig() bool {
+	if o != nil && !IsNil(o.ScrapeThirdPartyConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetScrapeThirdPartyConfig gets a reference to the given ScrapeThirdPartyConfig and assigns it to the ScrapeThirdPartyConfig field.
+func (o *AnalysisConfig) SetScrapeThirdPartyConfig(v ScrapeThirdPartyConfig) {
+	o.ScrapeThirdPartyConfig = &v
+}
+
 func (o AnalysisConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -308,8 +308,11 @@ func (o AnalysisConfig) MarshalJSON() ([]byte, error) {
 
 func (o AnalysisConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ScrapeThirdPartyConfig) {
-		toSerialize["scrape_third_party_config"] = o.ScrapeThirdPartyConfig
+	if !IsNil(o.AdvancedAnalysis) {
+		toSerialize["advanced_analysis"] = o.AdvancedAnalysis
+	}
+	if !IsNil(o.GenerateCapabilities) {
+		toSerialize["generate_capabilities"] = o.GenerateCapabilities
 	}
 	if !IsNil(o.GenerateCves) {
 		toSerialize["generate_cves"] = o.GenerateCves
@@ -317,17 +320,14 @@ func (o AnalysisConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GenerateSbom) {
 		toSerialize["generate_sbom"] = o.GenerateSbom
 	}
-	if !IsNil(o.GenerateCapabilities) {
-		toSerialize["generate_capabilities"] = o.GenerateCapabilities
-	}
 	if !IsNil(o.NoCache) {
 		toSerialize["no_cache"] = o.NoCache
 	}
-	if !IsNil(o.AdvancedAnalysis) {
-		toSerialize["advanced_analysis"] = o.AdvancedAnalysis
-	}
 	if !IsNil(o.SandboxConfig) {
 		toSerialize["sandbox_config"] = o.SandboxConfig
+	}
+	if !IsNil(o.ScrapeThirdPartyConfig) {
+		toSerialize["scrape_third_party_config"] = o.ScrapeThirdPartyConfig
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -351,13 +351,13 @@ func (o *AnalysisConfig) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "scrape_third_party_config")
+		delete(additionalProperties, "advanced_analysis")
+		delete(additionalProperties, "generate_capabilities")
 		delete(additionalProperties, "generate_cves")
 		delete(additionalProperties, "generate_sbom")
-		delete(additionalProperties, "generate_capabilities")
 		delete(additionalProperties, "no_cache")
-		delete(additionalProperties, "advanced_analysis")
 		delete(additionalProperties, "sandbox_config")
+		delete(additionalProperties, "scrape_third_party_config")
 		o.AdditionalProperties = additionalProperties
 	}
 

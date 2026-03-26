@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Success** | **bool** |  | 
 **Data** | [**map[string][]Registry**](array.md) |  | 
+**Success** | **bool** |  | 
 
 ## Methods
 
 ### NewProcessRegistry
 
-`func NewProcessRegistry(success bool, data map[string][]Registry, ) *ProcessRegistry`
+`func NewProcessRegistry(data map[string][]Registry, success bool, ) *ProcessRegistry`
 
 NewProcessRegistry instantiates a new ProcessRegistry object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewProcessRegistryWithDefaults instantiates a new ProcessRegistry object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetSuccess
-
-`func (o *ProcessRegistry) GetSuccess() bool`
-
-GetSuccess returns the Success field if non-nil, zero value otherwise.
-
-### GetSuccessOk
-
-`func (o *ProcessRegistry) GetSuccessOk() (*bool, bool)`
-
-GetSuccessOk returns a tuple with the Success field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSuccess
-
-`func (o *ProcessRegistry) SetSuccess(v bool)`
-
-SetSuccess sets Success field to given value.
-
 
 ### GetData
 
@@ -64,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *ProcessRegistry) SetData(v map[string][]Registry)`
 
 SetData sets Data field to given value.
+
+
+### GetSuccess
+
+`func (o *ProcessRegistry) GetSuccess() bool`
+
+GetSuccess returns the Success field if non-nil, zero value otherwise.
+
+### GetSuccessOk
+
+`func (o *ProcessRegistry) GetSuccessOk() (*bool, bool)`
+
+GetSuccessOk returns a tuple with the Success field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuccess
+
+`func (o *ProcessRegistry) SetSuccess(v bool)`
+
+SetSuccess sets Success field to given value.
 
 
 

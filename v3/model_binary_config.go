@@ -18,9 +18,9 @@ var _ MappedNullable = &BinaryConfig{}
 
 // BinaryConfig struct for BinaryConfig
 type BinaryConfig struct {
+	FileFormat NullableFileFormat `json:"file_format,omitempty"`
 	Isa NullableISA `json:"isa,omitempty"`
 	Platform NullablePlatform `json:"platform,omitempty"`
-	FileFormat NullableFileFormat `json:"file_format,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,6 +41,48 @@ func NewBinaryConfig() *BinaryConfig {
 func NewBinaryConfigWithDefaults() *BinaryConfig {
 	this := BinaryConfig{}
 	return &this
+}
+
+// GetFileFormat returns the FileFormat field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BinaryConfig) GetFileFormat() FileFormat {
+	if o == nil || IsNil(o.FileFormat.Get()) {
+		var ret FileFormat
+		return ret
+	}
+	return *o.FileFormat.Get()
+}
+
+// GetFileFormatOk returns a tuple with the FileFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BinaryConfig) GetFileFormatOk() (*FileFormat, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FileFormat.Get(), o.FileFormat.IsSet()
+}
+
+// HasFileFormat returns a boolean if a field has been set.
+func (o *BinaryConfig) HasFileFormat() bool {
+	if o != nil && o.FileFormat.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFileFormat gets a reference to the given NullableFileFormat and assigns it to the FileFormat field.
+func (o *BinaryConfig) SetFileFormat(v FileFormat) {
+	o.FileFormat.Set(&v)
+}
+// SetFileFormatNil sets the value for FileFormat to be an explicit nil
+func (o *BinaryConfig) SetFileFormatNil() {
+	o.FileFormat.Set(nil)
+}
+
+// UnsetFileFormat ensures that no value is present for FileFormat, not even an explicit nil
+func (o *BinaryConfig) UnsetFileFormat() {
+	o.FileFormat.Unset()
 }
 
 // GetIsa returns the Isa field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -127,48 +169,6 @@ func (o *BinaryConfig) UnsetPlatform() {
 	o.Platform.Unset()
 }
 
-// GetFileFormat returns the FileFormat field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BinaryConfig) GetFileFormat() FileFormat {
-	if o == nil || IsNil(o.FileFormat.Get()) {
-		var ret FileFormat
-		return ret
-	}
-	return *o.FileFormat.Get()
-}
-
-// GetFileFormatOk returns a tuple with the FileFormat field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BinaryConfig) GetFileFormatOk() (*FileFormat, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.FileFormat.Get(), o.FileFormat.IsSet()
-}
-
-// HasFileFormat returns a boolean if a field has been set.
-func (o *BinaryConfig) HasFileFormat() bool {
-	if o != nil && o.FileFormat.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFileFormat gets a reference to the given NullableFileFormat and assigns it to the FileFormat field.
-func (o *BinaryConfig) SetFileFormat(v FileFormat) {
-	o.FileFormat.Set(&v)
-}
-// SetFileFormatNil sets the value for FileFormat to be an explicit nil
-func (o *BinaryConfig) SetFileFormatNil() {
-	o.FileFormat.Set(nil)
-}
-
-// UnsetFileFormat ensures that no value is present for FileFormat, not even an explicit nil
-func (o *BinaryConfig) UnsetFileFormat() {
-	o.FileFormat.Unset()
-}
-
 func (o BinaryConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -179,14 +179,14 @@ func (o BinaryConfig) MarshalJSON() ([]byte, error) {
 
 func (o BinaryConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if o.FileFormat.IsSet() {
+		toSerialize["file_format"] = o.FileFormat.Get()
+	}
 	if o.Isa.IsSet() {
 		toSerialize["isa"] = o.Isa.Get()
 	}
 	if o.Platform.IsSet() {
 		toSerialize["platform"] = o.Platform.Get()
-	}
-	if o.FileFormat.IsSet() {
-		toSerialize["file_format"] = o.FileFormat.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -210,9 +210,9 @@ func (o *BinaryConfig) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "file_format")
 		delete(additionalProperties, "isa")
 		delete(additionalProperties, "platform")
-		delete(additionalProperties, "file_format")
 		o.AdditionalProperties = additionalProperties
 	}
 

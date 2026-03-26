@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**NumberOfImports** | **int32** |  | 
 **Imports** | **[]string** |  | 
+**NumberOfImports** | **int32** |  | 
 
 ## Methods
 
 ### NewELFImportModel
 
-`func NewELFImportModel(numberOfImports int32, imports []string, ) *ELFImportModel`
+`func NewELFImportModel(imports []string, numberOfImports int32, ) *ELFImportModel`
 
 NewELFImportModel instantiates a new ELFImportModel object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewELFImportModelWithDefaults instantiates a new ELFImportModel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetNumberOfImports
-
-`func (o *ELFImportModel) GetNumberOfImports() int32`
-
-GetNumberOfImports returns the NumberOfImports field if non-nil, zero value otherwise.
-
-### GetNumberOfImportsOk
-
-`func (o *ELFImportModel) GetNumberOfImportsOk() (*int32, bool)`
-
-GetNumberOfImportsOk returns a tuple with the NumberOfImports field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNumberOfImports
-
-`func (o *ELFImportModel) SetNumberOfImports(v int32)`
-
-SetNumberOfImports sets NumberOfImports field to given value.
-
 
 ### GetImports
 
@@ -64,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *ELFImportModel) SetImports(v []string)`
 
 SetImports sets Imports field to given value.
+
+
+### GetNumberOfImports
+
+`func (o *ELFImportModel) GetNumberOfImports() int32`
+
+GetNumberOfImports returns the NumberOfImports field if non-nil, zero value otherwise.
+
+### GetNumberOfImportsOk
+
+`func (o *ELFImportModel) GetNumberOfImportsOk() (*int32, bool)`
+
+GetNumberOfImportsOk returns a tuple with the NumberOfImports field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumberOfImports
+
+`func (o *ELFImportModel) SetNumberOfImports(v int32)`
+
+SetNumberOfImports sets NumberOfImports field to given value.
 
 
 

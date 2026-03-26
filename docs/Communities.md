@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TotalFunctions** | **int32** | The total number of matched community functions | 
-**TotalMatchedFunctions** | **int32** | The total number of functions in the binary | 
 **DirectCommunityMatchPercentages** | [**[]CommunityMatchPercentages**](CommunityMatchPercentages.md) | The list of directly matched communities | 
 **TopComponents** | **[]map[string]interface{}** | The top components of the binary | 
+**TotalFunctions** | **int32** | The total number of matched community functions | 
+**TotalMatchedFunctions** | **int32** | The total number of functions in the binary | 
 
 ## Methods
 
 ### NewCommunities
 
-`func NewCommunities(totalFunctions int32, totalMatchedFunctions int32, directCommunityMatchPercentages []CommunityMatchPercentages, topComponents []map[string]interface{}, ) *Communities`
+`func NewCommunities(directCommunityMatchPercentages []CommunityMatchPercentages, topComponents []map[string]interface{}, totalFunctions int32, totalMatchedFunctions int32, ) *Communities`
 
 NewCommunities instantiates a new Communities object
 This constructor will assign default values to properties that have it defined,
@@ -27,46 +27,6 @@ will change when the set of required properties is changed
 NewCommunitiesWithDefaults instantiates a new Communities object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetTotalFunctions
-
-`func (o *Communities) GetTotalFunctions() int32`
-
-GetTotalFunctions returns the TotalFunctions field if non-nil, zero value otherwise.
-
-### GetTotalFunctionsOk
-
-`func (o *Communities) GetTotalFunctionsOk() (*int32, bool)`
-
-GetTotalFunctionsOk returns a tuple with the TotalFunctions field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTotalFunctions
-
-`func (o *Communities) SetTotalFunctions(v int32)`
-
-SetTotalFunctions sets TotalFunctions field to given value.
-
-
-### GetTotalMatchedFunctions
-
-`func (o *Communities) GetTotalMatchedFunctions() int32`
-
-GetTotalMatchedFunctions returns the TotalMatchedFunctions field if non-nil, zero value otherwise.
-
-### GetTotalMatchedFunctionsOk
-
-`func (o *Communities) GetTotalMatchedFunctionsOk() (*int32, bool)`
-
-GetTotalMatchedFunctionsOk returns a tuple with the TotalMatchedFunctions field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTotalMatchedFunctions
-
-`func (o *Communities) SetTotalMatchedFunctions(v int32)`
-
-SetTotalMatchedFunctions sets TotalMatchedFunctions field to given value.
-
 
 ### GetDirectCommunityMatchPercentages
 
@@ -106,6 +66,46 @@ and a boolean to check if the value has been set.
 `func (o *Communities) SetTopComponents(v []map[string]interface{})`
 
 SetTopComponents sets TopComponents field to given value.
+
+
+### GetTotalFunctions
+
+`func (o *Communities) GetTotalFunctions() int32`
+
+GetTotalFunctions returns the TotalFunctions field if non-nil, zero value otherwise.
+
+### GetTotalFunctionsOk
+
+`func (o *Communities) GetTotalFunctionsOk() (*int32, bool)`
+
+GetTotalFunctionsOk returns a tuple with the TotalFunctions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalFunctions
+
+`func (o *Communities) SetTotalFunctions(v int32)`
+
+SetTotalFunctions sets TotalFunctions field to given value.
+
+
+### GetTotalMatchedFunctions
+
+`func (o *Communities) GetTotalMatchedFunctions() int32`
+
+GetTotalMatchedFunctions returns the TotalMatchedFunctions field if non-nil, zero value otherwise.
+
+### GetTotalMatchedFunctionsOk
+
+`func (o *Communities) GetTotalMatchedFunctionsOk() (*int32, bool)`
+
+GetTotalMatchedFunctionsOk returns a tuple with the TotalMatchedFunctions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalMatchedFunctions
+
+`func (o *Communities) SetTotalMatchedFunctions(v int32)`
+
+SetTotalMatchedFunctions sets TotalMatchedFunctions field to given value.
 
 
 

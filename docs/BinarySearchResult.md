@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AnalysisId** | **int32** | The analysis ID | 
 **BinaryId** | **int32** | The binary ID | 
 **BinaryName** | **string** | The name of the binary | 
-**AnalysisId** | **int32** | The analysis ID | 
-**Sha256Hash** | **string** | The SHA-256 hash of the binary | 
-**Tags** | **[]string** |  | 
 **CreatedAt** | **time.Time** | The creation date of the binary | 
 **ModelId** | **int32** | The model ID of the binary | 
 **ModelName** | **string** | The name of the model | 
 **OwnedBy** | **string** | The owner of the binary | 
+**Sha256Hash** | **string** | The SHA-256 hash of the binary | 
+**Tags** | **[]string** |  | 
 
 ## Methods
 
 ### NewBinarySearchResult
 
-`func NewBinarySearchResult(binaryId int32, binaryName string, analysisId int32, sha256Hash string, tags []string, createdAt time.Time, modelId int32, modelName string, ownedBy string, ) *BinarySearchResult`
+`func NewBinarySearchResult(analysisId int32, binaryId int32, binaryName string, createdAt time.Time, modelId int32, modelName string, ownedBy string, sha256Hash string, tags []string, ) *BinarySearchResult`
 
 NewBinarySearchResult instantiates a new BinarySearchResult object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +32,26 @@ will change when the set of required properties is changed
 NewBinarySearchResultWithDefaults instantiates a new BinarySearchResult object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAnalysisId
+
+`func (o *BinarySearchResult) GetAnalysisId() int32`
+
+GetAnalysisId returns the AnalysisId field if non-nil, zero value otherwise.
+
+### GetAnalysisIdOk
+
+`func (o *BinarySearchResult) GetAnalysisIdOk() (*int32, bool)`
+
+GetAnalysisIdOk returns a tuple with the AnalysisId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAnalysisId
+
+`func (o *BinarySearchResult) SetAnalysisId(v int32)`
+
+SetAnalysisId sets AnalysisId field to given value.
+
 
 ### GetBinaryId
 
@@ -73,76 +93,6 @@ and a boolean to check if the value has been set.
 SetBinaryName sets BinaryName field to given value.
 
 
-### GetAnalysisId
-
-`func (o *BinarySearchResult) GetAnalysisId() int32`
-
-GetAnalysisId returns the AnalysisId field if non-nil, zero value otherwise.
-
-### GetAnalysisIdOk
-
-`func (o *BinarySearchResult) GetAnalysisIdOk() (*int32, bool)`
-
-GetAnalysisIdOk returns a tuple with the AnalysisId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAnalysisId
-
-`func (o *BinarySearchResult) SetAnalysisId(v int32)`
-
-SetAnalysisId sets AnalysisId field to given value.
-
-
-### GetSha256Hash
-
-`func (o *BinarySearchResult) GetSha256Hash() string`
-
-GetSha256Hash returns the Sha256Hash field if non-nil, zero value otherwise.
-
-### GetSha256HashOk
-
-`func (o *BinarySearchResult) GetSha256HashOk() (*string, bool)`
-
-GetSha256HashOk returns a tuple with the Sha256Hash field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSha256Hash
-
-`func (o *BinarySearchResult) SetSha256Hash(v string)`
-
-SetSha256Hash sets Sha256Hash field to given value.
-
-
-### GetTags
-
-`func (o *BinarySearchResult) GetTags() []string`
-
-GetTags returns the Tags field if non-nil, zero value otherwise.
-
-### GetTagsOk
-
-`func (o *BinarySearchResult) GetTagsOk() (*[]string, bool)`
-
-GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTags
-
-`func (o *BinarySearchResult) SetTags(v []string)`
-
-SetTags sets Tags field to given value.
-
-
-### SetTagsNil
-
-`func (o *BinarySearchResult) SetTagsNil(b bool)`
-
- SetTagsNil sets the value for Tags to be an explicit nil
-
-### UnsetTags
-`func (o *BinarySearchResult) UnsetTags()`
-
-UnsetTags ensures that no value is present for Tags, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *BinarySearchResult) GetCreatedAt() time.Time`
@@ -223,6 +173,56 @@ and a boolean to check if the value has been set.
 SetOwnedBy sets OwnedBy field to given value.
 
 
+### GetSha256Hash
+
+`func (o *BinarySearchResult) GetSha256Hash() string`
+
+GetSha256Hash returns the Sha256Hash field if non-nil, zero value otherwise.
+
+### GetSha256HashOk
+
+`func (o *BinarySearchResult) GetSha256HashOk() (*string, bool)`
+
+GetSha256HashOk returns a tuple with the Sha256Hash field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSha256Hash
+
+`func (o *BinarySearchResult) SetSha256Hash(v string)`
+
+SetSha256Hash sets Sha256Hash field to given value.
+
+
+### GetTags
+
+`func (o *BinarySearchResult) GetTags() []string`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *BinarySearchResult) GetTagsOk() (*[]string, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *BinarySearchResult) SetTags(v []string)`
+
+SetTags sets Tags field to given value.
+
+
+### SetTagsNil
+
+`func (o *BinarySearchResult) SetTagsNil(b bool)`
+
+ SetTagsNil sets the value for Tags to be an explicit nil
+
+### UnsetTags
+`func (o *BinarySearchResult) UnsetTags()`
+
+UnsetTags ensures that no value is present for Tags, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

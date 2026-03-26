@@ -19,14 +19,14 @@ var _ MappedNullable = &ConfigResponse{}
 
 // ConfigResponse struct for ConfigResponse
 type ConfigResponse struct {
+	// List of models that support AI decompilation
+	AiDecompilerSupportedModels []string `json:"ai_decompiler_supported_models"`
+	// List of programming languages that are not supported for AI decompilation
+	AiDecompilerUnsupportedLanguages []string `json:"ai_decompiler_unsupported_languages"`
 	// The domain of the RevEng.AI platform you are connected to
 	DashboardUrl *string `json:"dashboard_url,omitempty"`
 	// Maximum file size (in bytes) that can be uploaded for analysis
 	MaxFileSizeBytes int32 `json:"max_file_size_bytes"`
-	// List of programming languages that are not supported for AI decompilation
-	AiDecompilerUnsupportedLanguages []string `json:"ai_decompiler_unsupported_languages"`
-	// List of models that support AI decompilation
-	AiDecompilerSupportedModels []string `json:"ai_decompiler_supported_models"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,13 +36,13 @@ type _ConfigResponse ConfigResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigResponse(maxFileSizeBytes int32, aiDecompilerUnsupportedLanguages []string, aiDecompilerSupportedModels []string) *ConfigResponse {
+func NewConfigResponse(aiDecompilerSupportedModels []string, aiDecompilerUnsupportedLanguages []string, maxFileSizeBytes int32) *ConfigResponse {
 	this := ConfigResponse{}
+	this.AiDecompilerSupportedModels = aiDecompilerSupportedModels
+	this.AiDecompilerUnsupportedLanguages = aiDecompilerUnsupportedLanguages
 	var dashboardUrl string = ""
 	this.DashboardUrl = &dashboardUrl
 	this.MaxFileSizeBytes = maxFileSizeBytes
-	this.AiDecompilerUnsupportedLanguages = aiDecompilerUnsupportedLanguages
-	this.AiDecompilerSupportedModels = aiDecompilerSupportedModels
 	return &this
 }
 
@@ -54,6 +54,54 @@ func NewConfigResponseWithDefaults() *ConfigResponse {
 	var dashboardUrl string = ""
 	this.DashboardUrl = &dashboardUrl
 	return &this
+}
+
+// GetAiDecompilerSupportedModels returns the AiDecompilerSupportedModels field value
+func (o *ConfigResponse) GetAiDecompilerSupportedModels() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.AiDecompilerSupportedModels
+}
+
+// GetAiDecompilerSupportedModelsOk returns a tuple with the AiDecompilerSupportedModels field value
+// and a boolean to check if the value has been set.
+func (o *ConfigResponse) GetAiDecompilerSupportedModelsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AiDecompilerSupportedModels, true
+}
+
+// SetAiDecompilerSupportedModels sets field value
+func (o *ConfigResponse) SetAiDecompilerSupportedModels(v []string) {
+	o.AiDecompilerSupportedModels = v
+}
+
+// GetAiDecompilerUnsupportedLanguages returns the AiDecompilerUnsupportedLanguages field value
+func (o *ConfigResponse) GetAiDecompilerUnsupportedLanguages() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.AiDecompilerUnsupportedLanguages
+}
+
+// GetAiDecompilerUnsupportedLanguagesOk returns a tuple with the AiDecompilerUnsupportedLanguages field value
+// and a boolean to check if the value has been set.
+func (o *ConfigResponse) GetAiDecompilerUnsupportedLanguagesOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AiDecompilerUnsupportedLanguages, true
+}
+
+// SetAiDecompilerUnsupportedLanguages sets field value
+func (o *ConfigResponse) SetAiDecompilerUnsupportedLanguages(v []string) {
+	o.AiDecompilerUnsupportedLanguages = v
 }
 
 // GetDashboardUrl returns the DashboardUrl field value if set, zero value otherwise.
@@ -112,54 +160,6 @@ func (o *ConfigResponse) SetMaxFileSizeBytes(v int32) {
 	o.MaxFileSizeBytes = v
 }
 
-// GetAiDecompilerUnsupportedLanguages returns the AiDecompilerUnsupportedLanguages field value
-func (o *ConfigResponse) GetAiDecompilerUnsupportedLanguages() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.AiDecompilerUnsupportedLanguages
-}
-
-// GetAiDecompilerUnsupportedLanguagesOk returns a tuple with the AiDecompilerUnsupportedLanguages field value
-// and a boolean to check if the value has been set.
-func (o *ConfigResponse) GetAiDecompilerUnsupportedLanguagesOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.AiDecompilerUnsupportedLanguages, true
-}
-
-// SetAiDecompilerUnsupportedLanguages sets field value
-func (o *ConfigResponse) SetAiDecompilerUnsupportedLanguages(v []string) {
-	o.AiDecompilerUnsupportedLanguages = v
-}
-
-// GetAiDecompilerSupportedModels returns the AiDecompilerSupportedModels field value
-func (o *ConfigResponse) GetAiDecompilerSupportedModels() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.AiDecompilerSupportedModels
-}
-
-// GetAiDecompilerSupportedModelsOk returns a tuple with the AiDecompilerSupportedModels field value
-// and a boolean to check if the value has been set.
-func (o *ConfigResponse) GetAiDecompilerSupportedModelsOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.AiDecompilerSupportedModels, true
-}
-
-// SetAiDecompilerSupportedModels sets field value
-func (o *ConfigResponse) SetAiDecompilerSupportedModels(v []string) {
-	o.AiDecompilerSupportedModels = v
-}
-
 func (o ConfigResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -170,12 +170,12 @@ func (o ConfigResponse) MarshalJSON() ([]byte, error) {
 
 func (o ConfigResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["ai_decompiler_supported_models"] = o.AiDecompilerSupportedModels
+	toSerialize["ai_decompiler_unsupported_languages"] = o.AiDecompilerUnsupportedLanguages
 	if !IsNil(o.DashboardUrl) {
 		toSerialize["dashboard_url"] = o.DashboardUrl
 	}
 	toSerialize["max_file_size_bytes"] = o.MaxFileSizeBytes
-	toSerialize["ai_decompiler_unsupported_languages"] = o.AiDecompilerUnsupportedLanguages
-	toSerialize["ai_decompiler_supported_models"] = o.AiDecompilerSupportedModels
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -189,9 +189,9 @@ func (o *ConfigResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"max_file_size_bytes",
-		"ai_decompiler_unsupported_languages",
 		"ai_decompiler_supported_models",
+		"ai_decompiler_unsupported_languages",
+		"max_file_size_bytes",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -221,10 +221,10 @@ func (o *ConfigResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ai_decompiler_supported_models")
+		delete(additionalProperties, "ai_decompiler_unsupported_languages")
 		delete(additionalProperties, "dashboard_url")
 		delete(additionalProperties, "max_file_size_bytes")
-		delete(additionalProperties, "ai_decompiler_unsupported_languages")
-		delete(additionalProperties, "ai_decompiler_supported_models")
 		o.AdditionalProperties = additionalProperties
 	}
 

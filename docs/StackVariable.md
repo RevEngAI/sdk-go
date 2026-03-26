@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LastChange** | Pointer to **NullableString** |  | [optional] 
-**Offset** | **int32** | Offset of the stack variable | 
-**Name** | **string** | Name of the stack variable | 
-**Type** | **string** | Data type of the stack variable | 
-**Size** | **int32** | Size of the stack variable in bytes | 
 **Addr** | **int32** | Memory address of the stack variable | 
+**LastChange** | Pointer to **NullableString** |  | [optional] 
+**Name** | **string** | Name of the stack variable | 
+**Offset** | **int32** | Offset of the stack variable | 
+**Size** | **int32** | Size of the stack variable in bytes | 
+**Type** | **string** | Data type of the stack variable | 
 
 ## Methods
 
 ### NewStackVariable
 
-`func NewStackVariable(offset int32, name string, type_ string, size int32, addr int32, ) *StackVariable`
+`func NewStackVariable(addr int32, name string, offset int32, size int32, type_ string, ) *StackVariable`
 
 NewStackVariable instantiates a new StackVariable object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +29,26 @@ will change when the set of required properties is changed
 NewStackVariableWithDefaults instantiates a new StackVariable object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAddr
+
+`func (o *StackVariable) GetAddr() int32`
+
+GetAddr returns the Addr field if non-nil, zero value otherwise.
+
+### GetAddrOk
+
+`func (o *StackVariable) GetAddrOk() (*int32, bool)`
+
+GetAddrOk returns a tuple with the Addr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAddr
+
+`func (o *StackVariable) SetAddr(v int32)`
+
+SetAddr sets Addr field to given value.
+
 
 ### GetLastChange
 
@@ -65,26 +85,6 @@ HasLastChange returns a boolean if a field has been set.
 `func (o *StackVariable) UnsetLastChange()`
 
 UnsetLastChange ensures that no value is present for LastChange, not even an explicit nil
-### GetOffset
-
-`func (o *StackVariable) GetOffset() int32`
-
-GetOffset returns the Offset field if non-nil, zero value otherwise.
-
-### GetOffsetOk
-
-`func (o *StackVariable) GetOffsetOk() (*int32, bool)`
-
-GetOffsetOk returns a tuple with the Offset field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOffset
-
-`func (o *StackVariable) SetOffset(v int32)`
-
-SetOffset sets Offset field to given value.
-
-
 ### GetName
 
 `func (o *StackVariable) GetName() string`
@@ -105,24 +105,24 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
-### GetType
+### GetOffset
 
-`func (o *StackVariable) GetType() string`
+`func (o *StackVariable) GetOffset() int32`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetOffset returns the Offset field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetOffsetOk
 
-`func (o *StackVariable) GetTypeOk() (*string, bool)`
+`func (o *StackVariable) GetOffsetOk() (*int32, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetOffsetOk returns a tuple with the Offset field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetOffset
 
-`func (o *StackVariable) SetType(v string)`
+`func (o *StackVariable) SetOffset(v int32)`
 
-SetType sets Type field to given value.
+SetOffset sets Offset field to given value.
 
 
 ### GetSize
@@ -145,24 +145,24 @@ and a boolean to check if the value has been set.
 SetSize sets Size field to given value.
 
 
-### GetAddr
+### GetType
 
-`func (o *StackVariable) GetAddr() int32`
+`func (o *StackVariable) GetType() string`
 
-GetAddr returns the Addr field if non-nil, zero value otherwise.
+GetType returns the Type field if non-nil, zero value otherwise.
 
-### GetAddrOk
+### GetTypeOk
 
-`func (o *StackVariable) GetAddrOk() (*int32, bool)`
+`func (o *StackVariable) GetTypeOk() (*string, bool)`
 
-GetAddrOk returns a tuple with the Addr field if it's non-nil, zero value otherwise
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAddr
+### SetType
 
-`func (o *StackVariable) SetAddr(v int32)`
+`func (o *StackVariable) SetType(v string)`
 
-SetAddr sets Addr field to given value.
+SetType sets Type field to given value.
 
 
 

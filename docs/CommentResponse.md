@@ -5,19 +5,19 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Content** | **string** | Comment text content | 
-**Id** | **int32** |  | 
-**UserId** | **int32** |  | 
-**ResourceType** | **string** |  | 
-**ResourceId** | **string** |  | 
 **Context** | Pointer to [**NullableContext**](Context.md) |  | [optional] 
 **CreatedAt** | **time.Time** |  | 
+**Id** | **int32** |  | 
+**ResourceId** | **string** |  | 
+**ResourceType** | **string** |  | 
 **UpdatedAt** | **time.Time** |  | 
+**UserId** | **int32** |  | 
 
 ## Methods
 
 ### NewCommentResponse
 
-`func NewCommentResponse(content string, id int32, userId int32, resourceType string, resourceId string, createdAt time.Time, updatedAt time.Time, ) *CommentResponse`
+`func NewCommentResponse(content string, createdAt time.Time, id int32, resourceId string, resourceType string, updatedAt time.Time, userId int32, ) *CommentResponse`
 
 NewCommentResponse instantiates a new CommentResponse object
 This constructor will assign default values to properties that have it defined,
@@ -50,86 +50,6 @@ and a boolean to check if the value has been set.
 `func (o *CommentResponse) SetContent(v string)`
 
 SetContent sets Content field to given value.
-
-
-### GetId
-
-`func (o *CommentResponse) GetId() int32`
-
-GetId returns the Id field if non-nil, zero value otherwise.
-
-### GetIdOk
-
-`func (o *CommentResponse) GetIdOk() (*int32, bool)`
-
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetId
-
-`func (o *CommentResponse) SetId(v int32)`
-
-SetId sets Id field to given value.
-
-
-### GetUserId
-
-`func (o *CommentResponse) GetUserId() int32`
-
-GetUserId returns the UserId field if non-nil, zero value otherwise.
-
-### GetUserIdOk
-
-`func (o *CommentResponse) GetUserIdOk() (*int32, bool)`
-
-GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUserId
-
-`func (o *CommentResponse) SetUserId(v int32)`
-
-SetUserId sets UserId field to given value.
-
-
-### GetResourceType
-
-`func (o *CommentResponse) GetResourceType() string`
-
-GetResourceType returns the ResourceType field if non-nil, zero value otherwise.
-
-### GetResourceTypeOk
-
-`func (o *CommentResponse) GetResourceTypeOk() (*string, bool)`
-
-GetResourceTypeOk returns a tuple with the ResourceType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResourceType
-
-`func (o *CommentResponse) SetResourceType(v string)`
-
-SetResourceType sets ResourceType field to given value.
-
-
-### GetResourceId
-
-`func (o *CommentResponse) GetResourceId() string`
-
-GetResourceId returns the ResourceId field if non-nil, zero value otherwise.
-
-### GetResourceIdOk
-
-`func (o *CommentResponse) GetResourceIdOk() (*string, bool)`
-
-GetResourceIdOk returns a tuple with the ResourceId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResourceId
-
-`func (o *CommentResponse) SetResourceId(v string)`
-
-SetResourceId sets ResourceId field to given value.
 
 
 ### GetContext
@@ -187,6 +107,66 @@ and a boolean to check if the value has been set.
 SetCreatedAt sets CreatedAt field to given value.
 
 
+### GetId
+
+`func (o *CommentResponse) GetId() int32`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *CommentResponse) GetIdOk() (*int32, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *CommentResponse) SetId(v int32)`
+
+SetId sets Id field to given value.
+
+
+### GetResourceId
+
+`func (o *CommentResponse) GetResourceId() string`
+
+GetResourceId returns the ResourceId field if non-nil, zero value otherwise.
+
+### GetResourceIdOk
+
+`func (o *CommentResponse) GetResourceIdOk() (*string, bool)`
+
+GetResourceIdOk returns a tuple with the ResourceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourceId
+
+`func (o *CommentResponse) SetResourceId(v string)`
+
+SetResourceId sets ResourceId field to given value.
+
+
+### GetResourceType
+
+`func (o *CommentResponse) GetResourceType() string`
+
+GetResourceType returns the ResourceType field if non-nil, zero value otherwise.
+
+### GetResourceTypeOk
+
+`func (o *CommentResponse) GetResourceTypeOk() (*string, bool)`
+
+GetResourceTypeOk returns a tuple with the ResourceType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourceType
+
+`func (o *CommentResponse) SetResourceType(v string)`
+
+SetResourceType sets ResourceType field to given value.
+
+
 ### GetUpdatedAt
 
 `func (o *CommentResponse) GetUpdatedAt() time.Time`
@@ -205,6 +185,26 @@ and a boolean to check if the value has been set.
 `func (o *CommentResponse) SetUpdatedAt(v time.Time)`
 
 SetUpdatedAt sets UpdatedAt field to given value.
+
+
+### GetUserId
+
+`func (o *CommentResponse) GetUserId() int32`
+
+GetUserId returns the UserId field if non-nil, zero value otherwise.
+
+### GetUserIdOk
+
+`func (o *CommentResponse) GetUserIdOk() (*int32, bool)`
+
+GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserId
+
+`func (o *CommentResponse) SetUserId(v int32)`
+
+SetUserId sets UserId field to given value.
 
 
 

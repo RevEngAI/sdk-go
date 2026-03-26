@@ -23,9 +23,9 @@ type MatchedFunctionSuggestion struct {
 	FunctionId int64 `json:"function_id"`
 	// Virtual address of the matched function
 	FunctionVaddr int64 `json:"function_vaddr"`
-	SuggestedName NullableString `json:"suggested_name,omitempty"`
 	// De-mangled name of the function group that contains the matched functions
 	SuggestedDemangledName string `json:"suggested_demangled_name"`
+	SuggestedName NullableString `json:"suggested_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -99,6 +99,30 @@ func (o *MatchedFunctionSuggestion) SetFunctionVaddr(v int64) {
 	o.FunctionVaddr = v
 }
 
+// GetSuggestedDemangledName returns the SuggestedDemangledName field value
+func (o *MatchedFunctionSuggestion) GetSuggestedDemangledName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.SuggestedDemangledName
+}
+
+// GetSuggestedDemangledNameOk returns a tuple with the SuggestedDemangledName field value
+// and a boolean to check if the value has been set.
+func (o *MatchedFunctionSuggestion) GetSuggestedDemangledNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SuggestedDemangledName, true
+}
+
+// SetSuggestedDemangledName sets field value
+func (o *MatchedFunctionSuggestion) SetSuggestedDemangledName(v string) {
+	o.SuggestedDemangledName = v
+}
+
 // GetSuggestedName returns the SuggestedName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MatchedFunctionSuggestion) GetSuggestedName() string {
 	if o == nil || IsNil(o.SuggestedName.Get()) {
@@ -141,30 +165,6 @@ func (o *MatchedFunctionSuggestion) UnsetSuggestedName() {
 	o.SuggestedName.Unset()
 }
 
-// GetSuggestedDemangledName returns the SuggestedDemangledName field value
-func (o *MatchedFunctionSuggestion) GetSuggestedDemangledName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.SuggestedDemangledName
-}
-
-// GetSuggestedDemangledNameOk returns a tuple with the SuggestedDemangledName field value
-// and a boolean to check if the value has been set.
-func (o *MatchedFunctionSuggestion) GetSuggestedDemangledNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.SuggestedDemangledName, true
-}
-
-// SetSuggestedDemangledName sets field value
-func (o *MatchedFunctionSuggestion) SetSuggestedDemangledName(v string) {
-	o.SuggestedDemangledName = v
-}
-
 func (o MatchedFunctionSuggestion) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -177,10 +177,10 @@ func (o MatchedFunctionSuggestion) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["function_id"] = o.FunctionId
 	toSerialize["function_vaddr"] = o.FunctionVaddr
+	toSerialize["suggested_demangled_name"] = o.SuggestedDemangledName
 	if o.SuggestedName.IsSet() {
 		toSerialize["suggested_name"] = o.SuggestedName.Get()
 	}
-	toSerialize["suggested_demangled_name"] = o.SuggestedDemangledName
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -228,8 +228,8 @@ func (o *MatchedFunctionSuggestion) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "function_id")
 		delete(additionalProperties, "function_vaddr")
-		delete(additionalProperties, "suggested_name")
 		delete(additionalProperties, "suggested_demangled_name")
+		delete(additionalProperties, "suggested_name")
 		o.AdditionalProperties = additionalProperties
 	}
 

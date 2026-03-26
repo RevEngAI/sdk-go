@@ -32,7 +32,7 @@ import (
 )
 
 func main() {
-	functionsListRename := *revengai.NewFunctionsListRename([]revengai.FunctionRenameMap{*revengai.NewFunctionRenameMap(int64(123), "NewName_example", "NewMangledName_example")}) // FunctionsListRename | 
+	functionsListRename := *revengai.NewFunctionsListRename([]revengai.FunctionRenameMap{*revengai.NewFunctionRenameMap(int64(123), "NewMangledName_example", "NewName_example")}) // FunctionsListRename | 
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
@@ -169,7 +169,7 @@ import (
 
 func main() {
 	functionId := int32(56) // int32 | 
-	functionRename := *revengai.NewFunctionRename("NewName_example", "NewMangledName_example") // FunctionRename | 
+	functionRename := *revengai.NewFunctionRename("NewMangledName_example", "NewName_example") // FunctionRename | 
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)

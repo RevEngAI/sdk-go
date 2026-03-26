@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | **int32** |  | 
-**Type** | **string** |  | 
-**Size** | **int32** |  | 
 **Addend** | **int32** |  | 
-**SymbolName** | **string** |  | 
+**Address** | **int32** |  | 
 **IsDynamic** | **bool** |  | 
 **IsPltgot** | **bool** |  | 
+**Size** | **int32** |  | 
+**SymbolName** | **string** |  | 
+**Type** | **string** |  | 
 
 ## Methods
 
 ### NewELFRelocation
 
-`func NewELFRelocation(address int32, type_ string, size int32, addend int32, symbolName string, isDynamic bool, isPltgot bool, ) *ELFRelocation`
+`func NewELFRelocation(addend int32, address int32, isDynamic bool, isPltgot bool, size int32, symbolName string, type_ string, ) *ELFRelocation`
 
 NewELFRelocation instantiates a new ELFRelocation object
 This constructor will assign default values to properties that have it defined,
@@ -30,66 +30,6 @@ will change when the set of required properties is changed
 NewELFRelocationWithDefaults instantiates a new ELFRelocation object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAddress
-
-`func (o *ELFRelocation) GetAddress() int32`
-
-GetAddress returns the Address field if non-nil, zero value otherwise.
-
-### GetAddressOk
-
-`func (o *ELFRelocation) GetAddressOk() (*int32, bool)`
-
-GetAddressOk returns a tuple with the Address field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAddress
-
-`func (o *ELFRelocation) SetAddress(v int32)`
-
-SetAddress sets Address field to given value.
-
-
-### GetType
-
-`func (o *ELFRelocation) GetType() string`
-
-GetType returns the Type field if non-nil, zero value otherwise.
-
-### GetTypeOk
-
-`func (o *ELFRelocation) GetTypeOk() (*string, bool)`
-
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetType
-
-`func (o *ELFRelocation) SetType(v string)`
-
-SetType sets Type field to given value.
-
-
-### GetSize
-
-`func (o *ELFRelocation) GetSize() int32`
-
-GetSize returns the Size field if non-nil, zero value otherwise.
-
-### GetSizeOk
-
-`func (o *ELFRelocation) GetSizeOk() (*int32, bool)`
-
-GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSize
-
-`func (o *ELFRelocation) SetSize(v int32)`
-
-SetSize sets Size field to given value.
-
 
 ### GetAddend
 
@@ -111,24 +51,24 @@ and a boolean to check if the value has been set.
 SetAddend sets Addend field to given value.
 
 
-### GetSymbolName
+### GetAddress
 
-`func (o *ELFRelocation) GetSymbolName() string`
+`func (o *ELFRelocation) GetAddress() int32`
 
-GetSymbolName returns the SymbolName field if non-nil, zero value otherwise.
+GetAddress returns the Address field if non-nil, zero value otherwise.
 
-### GetSymbolNameOk
+### GetAddressOk
 
-`func (o *ELFRelocation) GetSymbolNameOk() (*string, bool)`
+`func (o *ELFRelocation) GetAddressOk() (*int32, bool)`
 
-GetSymbolNameOk returns a tuple with the SymbolName field if it's non-nil, zero value otherwise
+GetAddressOk returns a tuple with the Address field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSymbolName
+### SetAddress
 
-`func (o *ELFRelocation) SetSymbolName(v string)`
+`func (o *ELFRelocation) SetAddress(v int32)`
 
-SetSymbolName sets SymbolName field to given value.
+SetAddress sets Address field to given value.
 
 
 ### GetIsDynamic
@@ -169,6 +109,66 @@ and a boolean to check if the value has been set.
 `func (o *ELFRelocation) SetIsPltgot(v bool)`
 
 SetIsPltgot sets IsPltgot field to given value.
+
+
+### GetSize
+
+`func (o *ELFRelocation) GetSize() int32`
+
+GetSize returns the Size field if non-nil, zero value otherwise.
+
+### GetSizeOk
+
+`func (o *ELFRelocation) GetSizeOk() (*int32, bool)`
+
+GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSize
+
+`func (o *ELFRelocation) SetSize(v int32)`
+
+SetSize sets Size field to given value.
+
+
+### GetSymbolName
+
+`func (o *ELFRelocation) GetSymbolName() string`
+
+GetSymbolName returns the SymbolName field if non-nil, zero value otherwise.
+
+### GetSymbolNameOk
+
+`func (o *ELFRelocation) GetSymbolNameOk() (*string, bool)`
+
+GetSymbolNameOk returns a tuple with the SymbolName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSymbolName
+
+`func (o *ELFRelocation) SetSymbolName(v string)`
+
+SetSymbolName sets SymbolName field to given value.
+
+
+### GetType
+
+`func (o *ELFRelocation) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *ELFRelocation) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *ELFRelocation) SetType(v string)`
+
+SetType sets Type field to given value.
 
 
 

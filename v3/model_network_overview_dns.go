@@ -19,9 +19,9 @@ var _ MappedNullable = &NetworkOverviewDns{}
 
 // NetworkOverviewDns struct for NetworkOverviewDns
 type NetworkOverviewDns struct {
+	Answers []NetworkOverviewDnsAnswer `json:"answers"`
 	Host string `json:"host"`
 	Type string `json:"type"`
-	Answers []NetworkOverviewDnsAnswer `json:"answers"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,11 +31,11 @@ type _NetworkOverviewDns NetworkOverviewDns
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkOverviewDns(host string, type_ string, answers []NetworkOverviewDnsAnswer) *NetworkOverviewDns {
+func NewNetworkOverviewDns(answers []NetworkOverviewDnsAnswer, host string, type_ string) *NetworkOverviewDns {
 	this := NetworkOverviewDns{}
+	this.Answers = answers
 	this.Host = host
 	this.Type = type_
-	this.Answers = answers
 	return &this
 }
 
@@ -45,6 +45,30 @@ func NewNetworkOverviewDns(host string, type_ string, answers []NetworkOverviewD
 func NewNetworkOverviewDnsWithDefaults() *NetworkOverviewDns {
 	this := NetworkOverviewDns{}
 	return &this
+}
+
+// GetAnswers returns the Answers field value
+func (o *NetworkOverviewDns) GetAnswers() []NetworkOverviewDnsAnswer {
+	if o == nil {
+		var ret []NetworkOverviewDnsAnswer
+		return ret
+	}
+
+	return o.Answers
+}
+
+// GetAnswersOk returns a tuple with the Answers field value
+// and a boolean to check if the value has been set.
+func (o *NetworkOverviewDns) GetAnswersOk() ([]NetworkOverviewDnsAnswer, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Answers, true
+}
+
+// SetAnswers sets field value
+func (o *NetworkOverviewDns) SetAnswers(v []NetworkOverviewDnsAnswer) {
+	o.Answers = v
 }
 
 // GetHost returns the Host field value
@@ -95,30 +119,6 @@ func (o *NetworkOverviewDns) SetType(v string) {
 	o.Type = v
 }
 
-// GetAnswers returns the Answers field value
-func (o *NetworkOverviewDns) GetAnswers() []NetworkOverviewDnsAnswer {
-	if o == nil {
-		var ret []NetworkOverviewDnsAnswer
-		return ret
-	}
-
-	return o.Answers
-}
-
-// GetAnswersOk returns a tuple with the Answers field value
-// and a boolean to check if the value has been set.
-func (o *NetworkOverviewDns) GetAnswersOk() ([]NetworkOverviewDnsAnswer, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Answers, true
-}
-
-// SetAnswers sets field value
-func (o *NetworkOverviewDns) SetAnswers(v []NetworkOverviewDnsAnswer) {
-	o.Answers = v
-}
-
 func (o NetworkOverviewDns) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -129,9 +129,9 @@ func (o NetworkOverviewDns) MarshalJSON() ([]byte, error) {
 
 func (o NetworkOverviewDns) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["answers"] = o.Answers
 	toSerialize["host"] = o.Host
 	toSerialize["type"] = o.Type
-	toSerialize["answers"] = o.Answers
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -145,9 +145,9 @@ func (o *NetworkOverviewDns) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"answers",
 		"host",
 		"type",
-		"answers",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -177,9 +177,9 @@ func (o *NetworkOverviewDns) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "answers")
 		delete(additionalProperties, "host")
 		delete(additionalProperties, "type")
-		delete(additionalProperties, "answers")
 		o.AdditionalProperties = additionalProperties
 	}
 

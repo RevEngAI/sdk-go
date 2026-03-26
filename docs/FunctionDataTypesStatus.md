@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FunctionId** | **int64** | Function id | 
 **Completed** | **bool** | Whether the service has completed data types generation | 
+**FunctionId** | **int64** | Function id | 
 **Status** | **string** | The current status of the data types service | 
 
 ## Methods
 
 ### NewFunctionDataTypesStatus
 
-`func NewFunctionDataTypesStatus(functionId int64, completed bool, status string, ) *FunctionDataTypesStatus`
+`func NewFunctionDataTypesStatus(completed bool, functionId int64, status string, ) *FunctionDataTypesStatus`
 
 NewFunctionDataTypesStatus instantiates a new FunctionDataTypesStatus object
 This constructor will assign default values to properties that have it defined,
@@ -26,26 +26,6 @@ will change when the set of required properties is changed
 NewFunctionDataTypesStatusWithDefaults instantiates a new FunctionDataTypesStatus object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetFunctionId
-
-`func (o *FunctionDataTypesStatus) GetFunctionId() int64`
-
-GetFunctionId returns the FunctionId field if non-nil, zero value otherwise.
-
-### GetFunctionIdOk
-
-`func (o *FunctionDataTypesStatus) GetFunctionIdOk() (*int64, bool)`
-
-GetFunctionIdOk returns a tuple with the FunctionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFunctionId
-
-`func (o *FunctionDataTypesStatus) SetFunctionId(v int64)`
-
-SetFunctionId sets FunctionId field to given value.
-
 
 ### GetCompleted
 
@@ -65,6 +45,26 @@ and a boolean to check if the value has been set.
 `func (o *FunctionDataTypesStatus) SetCompleted(v bool)`
 
 SetCompleted sets Completed field to given value.
+
+
+### GetFunctionId
+
+`func (o *FunctionDataTypesStatus) GetFunctionId() int64`
+
+GetFunctionId returns the FunctionId field if non-nil, zero value otherwise.
+
+### GetFunctionIdOk
+
+`func (o *FunctionDataTypesStatus) GetFunctionIdOk() (*int64, bool)`
+
+GetFunctionIdOk returns a tuple with the FunctionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFunctionId
+
+`func (o *FunctionDataTypesStatus) SetFunctionId(v int64)`
+
+SetFunctionId sets FunctionId field to given value.
 
 
 ### GetStatus

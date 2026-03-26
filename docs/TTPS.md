@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Success** | **bool** |  | 
 **Data** | [**TTPSData**](TTPSData.md) |  | 
+**Success** | **bool** |  | 
 
 ## Methods
 
 ### NewTTPS
 
-`func NewTTPS(success bool, data TTPSData, ) *TTPS`
+`func NewTTPS(data TTPSData, success bool, ) *TTPS`
 
 NewTTPS instantiates a new TTPS object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewTTPSWithDefaults instantiates a new TTPS object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetSuccess
-
-`func (o *TTPS) GetSuccess() bool`
-
-GetSuccess returns the Success field if non-nil, zero value otherwise.
-
-### GetSuccessOk
-
-`func (o *TTPS) GetSuccessOk() (*bool, bool)`
-
-GetSuccessOk returns a tuple with the Success field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSuccess
-
-`func (o *TTPS) SetSuccess(v bool)`
-
-SetSuccess sets Success field to given value.
-
 
 ### GetData
 
@@ -64,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *TTPS) SetData(v TTPSData)`
 
 SetData sets Data field to given value.
+
+
+### GetSuccess
+
+`func (o *TTPS) GetSuccess() bool`
+
+GetSuccess returns the Success field if non-nil, zero value otherwise.
+
+### GetSuccessOk
+
+`func (o *TTPS) GetSuccessOk() (*bool, bool)`
+
+GetSuccessOk returns a tuple with the Success field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuccess
+
+`func (o *TTPS) SetSuccess(v bool)`
+
+SetSuccess sets Success field to given value.
 
 
 

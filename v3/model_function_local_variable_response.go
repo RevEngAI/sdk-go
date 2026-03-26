@@ -21,9 +21,9 @@ var _ MappedNullable = &FunctionLocalVariableResponse{}
 type FunctionLocalVariableResponse struct {
 	Address string `json:"address"`
 	DType string `json:"d_type"`
-	Size int32 `json:"size"`
 	Loc string `json:"loc"`
 	Name string `json:"name"`
+	Size int32 `json:"size"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,13 +33,13 @@ type _FunctionLocalVariableResponse FunctionLocalVariableResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionLocalVariableResponse(address string, dType string, size int32, loc string, name string) *FunctionLocalVariableResponse {
+func NewFunctionLocalVariableResponse(address string, dType string, loc string, name string, size int32) *FunctionLocalVariableResponse {
 	this := FunctionLocalVariableResponse{}
 	this.Address = address
 	this.DType = dType
-	this.Size = size
 	this.Loc = loc
 	this.Name = name
+	this.Size = size
 	return &this
 }
 
@@ -99,30 +99,6 @@ func (o *FunctionLocalVariableResponse) SetDType(v string) {
 	o.DType = v
 }
 
-// GetSize returns the Size field value
-func (o *FunctionLocalVariableResponse) GetSize() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Size
-}
-
-// GetSizeOk returns a tuple with the Size field value
-// and a boolean to check if the value has been set.
-func (o *FunctionLocalVariableResponse) GetSizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Size, true
-}
-
-// SetSize sets field value
-func (o *FunctionLocalVariableResponse) SetSize(v int32) {
-	o.Size = v
-}
-
 // GetLoc returns the Loc field value
 func (o *FunctionLocalVariableResponse) GetLoc() string {
 	if o == nil {
@@ -171,6 +147,30 @@ func (o *FunctionLocalVariableResponse) SetName(v string) {
 	o.Name = v
 }
 
+// GetSize returns the Size field value
+func (o *FunctionLocalVariableResponse) GetSize() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Size
+}
+
+// GetSizeOk returns a tuple with the Size field value
+// and a boolean to check if the value has been set.
+func (o *FunctionLocalVariableResponse) GetSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Size, true
+}
+
+// SetSize sets field value
+func (o *FunctionLocalVariableResponse) SetSize(v int32) {
+	o.Size = v
+}
+
 func (o FunctionLocalVariableResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -183,9 +183,9 @@ func (o FunctionLocalVariableResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["address"] = o.Address
 	toSerialize["d_type"] = o.DType
-	toSerialize["size"] = o.Size
 	toSerialize["loc"] = o.Loc
 	toSerialize["name"] = o.Name
+	toSerialize["size"] = o.Size
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -201,9 +201,9 @@ func (o *FunctionLocalVariableResponse) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"address",
 		"d_type",
-		"size",
 		"loc",
 		"name",
+		"size",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -235,9 +235,9 @@ func (o *FunctionLocalVariableResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "address")
 		delete(additionalProperties, "d_type")
-		delete(additionalProperties, "size")
 		delete(additionalProperties, "loc")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "size")
 		o.AdditionalProperties = additionalProperties
 	}
 

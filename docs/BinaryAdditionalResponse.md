@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BinaryId** | **int32** |  | 
-**Details** | [**NullableBinaryAdditionalDetailsDataResponse**](BinaryAdditionalDetailsDataResponse.md) |  | 
 **Creation** | Pointer to **NullableTime** |  | [optional] 
+**Details** | [**NullableBinaryAdditionalDetailsDataResponse**](BinaryAdditionalDetailsDataResponse.md) |  | 
 
 ## Methods
 
@@ -47,36 +47,6 @@ and a boolean to check if the value has been set.
 SetBinaryId sets BinaryId field to given value.
 
 
-### GetDetails
-
-`func (o *BinaryAdditionalResponse) GetDetails() BinaryAdditionalDetailsDataResponse`
-
-GetDetails returns the Details field if non-nil, zero value otherwise.
-
-### GetDetailsOk
-
-`func (o *BinaryAdditionalResponse) GetDetailsOk() (*BinaryAdditionalDetailsDataResponse, bool)`
-
-GetDetailsOk returns a tuple with the Details field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDetails
-
-`func (o *BinaryAdditionalResponse) SetDetails(v BinaryAdditionalDetailsDataResponse)`
-
-SetDetails sets Details field to given value.
-
-
-### SetDetailsNil
-
-`func (o *BinaryAdditionalResponse) SetDetailsNil(b bool)`
-
- SetDetailsNil sets the value for Details to be an explicit nil
-
-### UnsetDetails
-`func (o *BinaryAdditionalResponse) UnsetDetails()`
-
-UnsetDetails ensures that no value is present for Details, not even an explicit nil
 ### GetCreation
 
 `func (o *BinaryAdditionalResponse) GetCreation() time.Time`
@@ -112,6 +82,36 @@ HasCreation returns a boolean if a field has been set.
 `func (o *BinaryAdditionalResponse) UnsetCreation()`
 
 UnsetCreation ensures that no value is present for Creation, not even an explicit nil
+### GetDetails
+
+`func (o *BinaryAdditionalResponse) GetDetails() BinaryAdditionalDetailsDataResponse`
+
+GetDetails returns the Details field if non-nil, zero value otherwise.
+
+### GetDetailsOk
+
+`func (o *BinaryAdditionalResponse) GetDetailsOk() (*BinaryAdditionalDetailsDataResponse, bool)`
+
+GetDetailsOk returns a tuple with the Details field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetails
+
+`func (o *BinaryAdditionalResponse) SetDetails(v BinaryAdditionalDetailsDataResponse)`
+
+SetDetails sets Details field to given value.
+
+
+### SetDetailsNil
+
+`func (o *BinaryAdditionalResponse) SetDetailsNil(b bool)`
+
+ SetDetailsNil sets the value for Details to be an explicit nil
+
+### UnsetDetails
+`func (o *BinaryAdditionalResponse) UnsetDetails()`
+
+UnsetDetails ensures that no value is present for Details, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

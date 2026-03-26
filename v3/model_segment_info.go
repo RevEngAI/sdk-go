@@ -18,12 +18,12 @@ var _ MappedNullable = &SegmentInfo{}
 
 // SegmentInfo Represents the information about a segment.  Attributes:     name: The name of the segment.     r: Determines if the segment has read permission.     w: Determines if the segment has write permission.     x: Determines if the segment has execute permission.     start: The start address of the segment.     end: The end address of the segment.
 type SegmentInfo struct {
+	End *int32 `json:"end,omitempty"`
 	Name *string `json:"name,omitempty"`
 	R NullableBool `json:"r,omitempty"`
+	Start *int32 `json:"start,omitempty"`
 	W NullableBool `json:"w,omitempty"`
 	X NullableBool `json:"x,omitempty"`
-	Start *int32 `json:"start,omitempty"`
-	End *int32 `json:"end,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,12 +35,12 @@ type _SegmentInfo SegmentInfo
 // will change when the set of required properties is changed
 func NewSegmentInfo() *SegmentInfo {
 	this := SegmentInfo{}
+	var end int32 = 0
+	this.End = &end
 	var name string = ""
 	this.Name = &name
 	var start int32 = 0
 	this.Start = &start
-	var end int32 = 0
-	this.End = &end
 	return &this
 }
 
@@ -49,13 +49,45 @@ func NewSegmentInfo() *SegmentInfo {
 // but it doesn't guarantee that properties required by API are set
 func NewSegmentInfoWithDefaults() *SegmentInfo {
 	this := SegmentInfo{}
+	var end int32 = 0
+	this.End = &end
 	var name string = ""
 	this.Name = &name
 	var start int32 = 0
 	this.Start = &start
-	var end int32 = 0
-	this.End = &end
 	return &this
+}
+
+// GetEnd returns the End field value if set, zero value otherwise.
+func (o *SegmentInfo) GetEnd() int32 {
+	if o == nil || IsNil(o.End) {
+		var ret int32
+		return ret
+	}
+	return *o.End
+}
+
+// GetEndOk returns a tuple with the End field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SegmentInfo) GetEndOk() (*int32, bool) {
+	if o == nil || IsNil(o.End) {
+		return nil, false
+	}
+	return o.End, true
+}
+
+// HasEnd returns a boolean if a field has been set.
+func (o *SegmentInfo) HasEnd() bool {
+	if o != nil && !IsNil(o.End) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnd gets a reference to the given int32 and assigns it to the End field.
+func (o *SegmentInfo) SetEnd(v int32) {
+	o.End = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -130,6 +162,38 @@ func (o *SegmentInfo) SetRNil() {
 // UnsetR ensures that no value is present for R, not even an explicit nil
 func (o *SegmentInfo) UnsetR() {
 	o.R.Unset()
+}
+
+// GetStart returns the Start field value if set, zero value otherwise.
+func (o *SegmentInfo) GetStart() int32 {
+	if o == nil || IsNil(o.Start) {
+		var ret int32
+		return ret
+	}
+	return *o.Start
+}
+
+// GetStartOk returns a tuple with the Start field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SegmentInfo) GetStartOk() (*int32, bool) {
+	if o == nil || IsNil(o.Start) {
+		return nil, false
+	}
+	return o.Start, true
+}
+
+// HasStart returns a boolean if a field has been set.
+func (o *SegmentInfo) HasStart() bool {
+	if o != nil && !IsNil(o.Start) {
+		return true
+	}
+
+	return false
+}
+
+// SetStart gets a reference to the given int32 and assigns it to the Start field.
+func (o *SegmentInfo) SetStart(v int32) {
+	o.Start = &v
 }
 
 // GetW returns the W field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -216,70 +280,6 @@ func (o *SegmentInfo) UnsetX() {
 	o.X.Unset()
 }
 
-// GetStart returns the Start field value if set, zero value otherwise.
-func (o *SegmentInfo) GetStart() int32 {
-	if o == nil || IsNil(o.Start) {
-		var ret int32
-		return ret
-	}
-	return *o.Start
-}
-
-// GetStartOk returns a tuple with the Start field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SegmentInfo) GetStartOk() (*int32, bool) {
-	if o == nil || IsNil(o.Start) {
-		return nil, false
-	}
-	return o.Start, true
-}
-
-// HasStart returns a boolean if a field has been set.
-func (o *SegmentInfo) HasStart() bool {
-	if o != nil && !IsNil(o.Start) {
-		return true
-	}
-
-	return false
-}
-
-// SetStart gets a reference to the given int32 and assigns it to the Start field.
-func (o *SegmentInfo) SetStart(v int32) {
-	o.Start = &v
-}
-
-// GetEnd returns the End field value if set, zero value otherwise.
-func (o *SegmentInfo) GetEnd() int32 {
-	if o == nil || IsNil(o.End) {
-		var ret int32
-		return ret
-	}
-	return *o.End
-}
-
-// GetEndOk returns a tuple with the End field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SegmentInfo) GetEndOk() (*int32, bool) {
-	if o == nil || IsNil(o.End) {
-		return nil, false
-	}
-	return o.End, true
-}
-
-// HasEnd returns a boolean if a field has been set.
-func (o *SegmentInfo) HasEnd() bool {
-	if o != nil && !IsNil(o.End) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnd gets a reference to the given int32 and assigns it to the End field.
-func (o *SegmentInfo) SetEnd(v int32) {
-	o.End = &v
-}
-
 func (o SegmentInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -290,23 +290,23 @@ func (o SegmentInfo) MarshalJSON() ([]byte, error) {
 
 func (o SegmentInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.End) {
+		toSerialize["end"] = o.End
+	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	if o.R.IsSet() {
 		toSerialize["r"] = o.R.Get()
 	}
+	if !IsNil(o.Start) {
+		toSerialize["start"] = o.Start
+	}
 	if o.W.IsSet() {
 		toSerialize["w"] = o.W.Get()
 	}
 	if o.X.IsSet() {
 		toSerialize["x"] = o.X.Get()
-	}
-	if !IsNil(o.Start) {
-		toSerialize["start"] = o.Start
-	}
-	if !IsNil(o.End) {
-		toSerialize["end"] = o.End
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -330,12 +330,12 @@ func (o *SegmentInfo) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "end")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "r")
+		delete(additionalProperties, "start")
 		delete(additionalProperties, "w")
 		delete(additionalProperties, "x")
-		delete(additionalProperties, "start")
-		delete(additionalProperties, "end")
 		o.AdditionalProperties = additionalProperties
 	}
 

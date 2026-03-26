@@ -19,14 +19,14 @@ var _ MappedNullable = &Structure{}
 
 // Structure struct for Structure
 type Structure struct {
+	// Type of artifact that the structure is associated with
+	ArtifactType *string `json:"artifact_type,omitempty"`
 	LastChange NullableString `json:"last_change,omitempty"`
+	// Dictionary of structure members
+	Members map[string]StructureMember `json:"members"`
 	// Name of the structure
 	Name string `json:"name"`
 	Size NullableInt32 `json:"size,omitempty"`
-	// Dictionary of structure members
-	Members map[string]StructureMember `json:"members"`
-	// Type of artifact that the structure is associated with
-	ArtifactType *string `json:"artifact_type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,10 +36,10 @@ type _Structure Structure
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStructure(name string, members map[string]StructureMember) *Structure {
+func NewStructure(members map[string]StructureMember, name string) *Structure {
 	this := Structure{}
-	this.Name = name
 	this.Members = members
+	this.Name = name
 	return &this
 }
 
@@ -49,6 +49,38 @@ func NewStructure(name string, members map[string]StructureMember) *Structure {
 func NewStructureWithDefaults() *Structure {
 	this := Structure{}
 	return &this
+}
+
+// GetArtifactType returns the ArtifactType field value if set, zero value otherwise.
+func (o *Structure) GetArtifactType() string {
+	if o == nil || IsNil(o.ArtifactType) {
+		var ret string
+		return ret
+	}
+	return *o.ArtifactType
+}
+
+// GetArtifactTypeOk returns a tuple with the ArtifactType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Structure) GetArtifactTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.ArtifactType) {
+		return nil, false
+	}
+	return o.ArtifactType, true
+}
+
+// HasArtifactType returns a boolean if a field has been set.
+func (o *Structure) HasArtifactType() bool {
+	if o != nil && !IsNil(o.ArtifactType) {
+		return true
+	}
+
+	return false
+}
+
+// SetArtifactType gets a reference to the given string and assigns it to the ArtifactType field.
+func (o *Structure) SetArtifactType(v string) {
+	o.ArtifactType = &v
 }
 
 // GetLastChange returns the LastChange field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -91,6 +123,30 @@ func (o *Structure) SetLastChangeNil() {
 // UnsetLastChange ensures that no value is present for LastChange, not even an explicit nil
 func (o *Structure) UnsetLastChange() {
 	o.LastChange.Unset()
+}
+
+// GetMembers returns the Members field value
+func (o *Structure) GetMembers() map[string]StructureMember {
+	if o == nil {
+		var ret map[string]StructureMember
+		return ret
+	}
+
+	return o.Members
+}
+
+// GetMembersOk returns a tuple with the Members field value
+// and a boolean to check if the value has been set.
+func (o *Structure) GetMembersOk() (map[string]StructureMember, bool) {
+	if o == nil {
+		return map[string]StructureMember{}, false
+	}
+	return o.Members, true
+}
+
+// SetMembers sets field value
+func (o *Structure) SetMembers(v map[string]StructureMember) {
+	o.Members = v
 }
 
 // GetName returns the Name field value
@@ -159,62 +215,6 @@ func (o *Structure) UnsetSize() {
 	o.Size.Unset()
 }
 
-// GetMembers returns the Members field value
-func (o *Structure) GetMembers() map[string]StructureMember {
-	if o == nil {
-		var ret map[string]StructureMember
-		return ret
-	}
-
-	return o.Members
-}
-
-// GetMembersOk returns a tuple with the Members field value
-// and a boolean to check if the value has been set.
-func (o *Structure) GetMembersOk() (map[string]StructureMember, bool) {
-	if o == nil {
-		return map[string]StructureMember{}, false
-	}
-	return o.Members, true
-}
-
-// SetMembers sets field value
-func (o *Structure) SetMembers(v map[string]StructureMember) {
-	o.Members = v
-}
-
-// GetArtifactType returns the ArtifactType field value if set, zero value otherwise.
-func (o *Structure) GetArtifactType() string {
-	if o == nil || IsNil(o.ArtifactType) {
-		var ret string
-		return ret
-	}
-	return *o.ArtifactType
-}
-
-// GetArtifactTypeOk returns a tuple with the ArtifactType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Structure) GetArtifactTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.ArtifactType) {
-		return nil, false
-	}
-	return o.ArtifactType, true
-}
-
-// HasArtifactType returns a boolean if a field has been set.
-func (o *Structure) HasArtifactType() bool {
-	if o != nil && !IsNil(o.ArtifactType) {
-		return true
-	}
-
-	return false
-}
-
-// SetArtifactType gets a reference to the given string and assigns it to the ArtifactType field.
-func (o *Structure) SetArtifactType(v string) {
-	o.ArtifactType = &v
-}
-
 func (o Structure) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -225,16 +225,16 @@ func (o Structure) MarshalJSON() ([]byte, error) {
 
 func (o Structure) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ArtifactType) {
+		toSerialize["artifact_type"] = o.ArtifactType
+	}
 	if o.LastChange.IsSet() {
 		toSerialize["last_change"] = o.LastChange.Get()
 	}
+	toSerialize["members"] = o.Members
 	toSerialize["name"] = o.Name
 	if o.Size.IsSet() {
 		toSerialize["size"] = o.Size.Get()
-	}
-	toSerialize["members"] = o.Members
-	if !IsNil(o.ArtifactType) {
-		toSerialize["artifact_type"] = o.ArtifactType
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -249,8 +249,8 @@ func (o *Structure) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"name",
 		"members",
+		"name",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -280,11 +280,11 @@ func (o *Structure) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "artifact_type")
 		delete(additionalProperties, "last_change")
+		delete(additionalProperties, "members")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "size")
-		delete(additionalProperties, "members")
-		delete(additionalProperties, "artifact_type")
 		o.AdditionalProperties = additionalProperties
 	}
 

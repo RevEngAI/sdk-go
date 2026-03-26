@@ -19,9 +19,9 @@ var _ MappedNullable = &NetworkOverviewMetadata{}
 
 // NetworkOverviewMetadata struct for NetworkOverviewMetadata
 type NetworkOverviewMetadata struct {
-	Host string `json:"host"`
-	CountryCode string `json:"country_code"`
 	ASN string `json:"ASN"`
+	CountryCode string `json:"country_code"`
+	Host string `json:"host"`
 	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
@@ -32,11 +32,11 @@ type _NetworkOverviewMetadata NetworkOverviewMetadata
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkOverviewMetadata(host string, countryCode string, aSN string, type_ string) *NetworkOverviewMetadata {
+func NewNetworkOverviewMetadata(aSN string, countryCode string, host string, type_ string) *NetworkOverviewMetadata {
 	this := NetworkOverviewMetadata{}
-	this.Host = host
-	this.CountryCode = countryCode
 	this.ASN = aSN
+	this.CountryCode = countryCode
+	this.Host = host
 	this.Type = type_
 	return &this
 }
@@ -49,28 +49,28 @@ func NewNetworkOverviewMetadataWithDefaults() *NetworkOverviewMetadata {
 	return &this
 }
 
-// GetHost returns the Host field value
-func (o *NetworkOverviewMetadata) GetHost() string {
+// GetASN returns the ASN field value
+func (o *NetworkOverviewMetadata) GetASN() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Host
+	return o.ASN
 }
 
-// GetHostOk returns a tuple with the Host field value
+// GetASNOk returns a tuple with the ASN field value
 // and a boolean to check if the value has been set.
-func (o *NetworkOverviewMetadata) GetHostOk() (*string, bool) {
+func (o *NetworkOverviewMetadata) GetASNOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Host, true
+	return &o.ASN, true
 }
 
-// SetHost sets field value
-func (o *NetworkOverviewMetadata) SetHost(v string) {
-	o.Host = v
+// SetASN sets field value
+func (o *NetworkOverviewMetadata) SetASN(v string) {
+	o.ASN = v
 }
 
 // GetCountryCode returns the CountryCode field value
@@ -97,28 +97,28 @@ func (o *NetworkOverviewMetadata) SetCountryCode(v string) {
 	o.CountryCode = v
 }
 
-// GetASN returns the ASN field value
-func (o *NetworkOverviewMetadata) GetASN() string {
+// GetHost returns the Host field value
+func (o *NetworkOverviewMetadata) GetHost() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ASN
+	return o.Host
 }
 
-// GetASNOk returns a tuple with the ASN field value
+// GetHostOk returns a tuple with the Host field value
 // and a boolean to check if the value has been set.
-func (o *NetworkOverviewMetadata) GetASNOk() (*string, bool) {
+func (o *NetworkOverviewMetadata) GetHostOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ASN, true
+	return &o.Host, true
 }
 
-// SetASN sets field value
-func (o *NetworkOverviewMetadata) SetASN(v string) {
-	o.ASN = v
+// SetHost sets field value
+func (o *NetworkOverviewMetadata) SetHost(v string) {
+	o.Host = v
 }
 
 // GetType returns the Type field value
@@ -155,9 +155,9 @@ func (o NetworkOverviewMetadata) MarshalJSON() ([]byte, error) {
 
 func (o NetworkOverviewMetadata) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["host"] = o.Host
-	toSerialize["country_code"] = o.CountryCode
 	toSerialize["ASN"] = o.ASN
+	toSerialize["country_code"] = o.CountryCode
+	toSerialize["host"] = o.Host
 	toSerialize["type"] = o.Type
 
 	for key, value := range o.AdditionalProperties {
@@ -172,9 +172,9 @@ func (o *NetworkOverviewMetadata) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"host",
-		"country_code",
 		"ASN",
+		"country_code",
+		"host",
 		"type",
 	}
 
@@ -205,9 +205,9 @@ func (o *NetworkOverviewMetadata) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "host")
-		delete(additionalProperties, "country_code")
 		delete(additionalProperties, "ASN")
+		delete(additionalProperties, "country_code")
+		delete(additionalProperties, "host")
 		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
 	}

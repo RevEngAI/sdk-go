@@ -19,10 +19,10 @@ var _ MappedNullable = &Registry{}
 
 // Registry struct for Registry
 type Registry struct {
-	Method string `json:"method"`
 	Key string `json:"key"`
-	ValueName NullableString `json:"value_name"`
+	Method string `json:"method"`
 	Value NullableString `json:"value"`
+	ValueName NullableString `json:"value_name"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,12 +32,12 @@ type _Registry Registry
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegistry(method string, key string, valueName NullableString, value NullableString) *Registry {
+func NewRegistry(key string, method string, value NullableString, valueName NullableString) *Registry {
 	this := Registry{}
-	this.Method = method
 	this.Key = key
-	this.ValueName = valueName
+	this.Method = method
 	this.Value = value
+	this.ValueName = valueName
 	return &this
 }
 
@@ -47,30 +47,6 @@ func NewRegistry(method string, key string, valueName NullableString, value Null
 func NewRegistryWithDefaults() *Registry {
 	this := Registry{}
 	return &this
-}
-
-// GetMethod returns the Method field value
-func (o *Registry) GetMethod() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Method
-}
-
-// GetMethodOk returns a tuple with the Method field value
-// and a boolean to check if the value has been set.
-func (o *Registry) GetMethodOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Method, true
-}
-
-// SetMethod sets field value
-func (o *Registry) SetMethod(v string) {
-	o.Method = v
 }
 
 // GetKey returns the Key field value
@@ -97,30 +73,28 @@ func (o *Registry) SetKey(v string) {
 	o.Key = v
 }
 
-// GetValueName returns the ValueName field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *Registry) GetValueName() string {
-	if o == nil || o.ValueName.Get() == nil {
+// GetMethod returns the Method field value
+func (o *Registry) GetMethod() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.ValueName.Get()
+	return o.Method
 }
 
-// GetValueNameOk returns a tuple with the ValueName field value
+// GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Registry) GetValueNameOk() (*string, bool) {
+func (o *Registry) GetMethodOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ValueName.Get(), o.ValueName.IsSet()
+	return &o.Method, true
 }
 
-// SetValueName sets field value
-func (o *Registry) SetValueName(v string) {
-	o.ValueName.Set(&v)
+// SetMethod sets field value
+func (o *Registry) SetMethod(v string) {
+	o.Method = v
 }
 
 // GetValue returns the Value field value
@@ -149,6 +123,32 @@ func (o *Registry) SetValue(v string) {
 	o.Value.Set(&v)
 }
 
+// GetValueName returns the ValueName field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *Registry) GetValueName() string {
+	if o == nil || o.ValueName.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.ValueName.Get()
+}
+
+// GetValueNameOk returns a tuple with the ValueName field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Registry) GetValueNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ValueName.Get(), o.ValueName.IsSet()
+}
+
+// SetValueName sets field value
+func (o *Registry) SetValueName(v string) {
+	o.ValueName.Set(&v)
+}
+
 func (o Registry) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -159,10 +159,10 @@ func (o Registry) MarshalJSON() ([]byte, error) {
 
 func (o Registry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["method"] = o.Method
 	toSerialize["key"] = o.Key
-	toSerialize["value_name"] = o.ValueName.Get()
+	toSerialize["method"] = o.Method
 	toSerialize["value"] = o.Value.Get()
+	toSerialize["value_name"] = o.ValueName.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -176,10 +176,10 @@ func (o *Registry) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"method",
 		"key",
-		"value_name",
+		"method",
 		"value",
+		"value_name",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -209,10 +209,10 @@ func (o *Registry) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "method")
 		delete(additionalProperties, "key")
-		delete(additionalProperties, "value_name")
+		delete(additionalProperties, "method")
 		delete(additionalProperties, "value")
+		delete(additionalProperties, "value_name")
 		o.AdditionalProperties = additionalProperties
 	}
 

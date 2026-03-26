@@ -19,13 +19,13 @@ var _ MappedNullable = &SingleSectionModel{}
 
 // SingleSectionModel struct for SingleSectionModel
 type SingleSectionModel struct {
+	Characteristics string `json:"characteristics"`
+	Entropy float32 `json:"entropy"`
 	Name string `json:"name"`
+	RawSize int32 `json:"raw_size"`
+	Sha3256 string `json:"sha3_256"`
 	VirtualAddress int32 `json:"virtual_address"`
 	VirtualSize int32 `json:"virtual_size"`
-	Characteristics string `json:"characteristics"`
-	RawSize int32 `json:"raw_size"`
-	Entropy float32 `json:"entropy"`
-	Sha3256 string `json:"sha3_256"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,15 +35,15 @@ type _SingleSectionModel SingleSectionModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSingleSectionModel(name string, virtualAddress int32, virtualSize int32, characteristics string, rawSize int32, entropy float32, sha3256 string) *SingleSectionModel {
+func NewSingleSectionModel(characteristics string, entropy float32, name string, rawSize int32, sha3256 string, virtualAddress int32, virtualSize int32) *SingleSectionModel {
 	this := SingleSectionModel{}
+	this.Characteristics = characteristics
+	this.Entropy = entropy
 	this.Name = name
+	this.RawSize = rawSize
+	this.Sha3256 = sha3256
 	this.VirtualAddress = virtualAddress
 	this.VirtualSize = virtualSize
-	this.Characteristics = characteristics
-	this.RawSize = rawSize
-	this.Entropy = entropy
-	this.Sha3256 = sha3256
 	return &this
 }
 
@@ -53,6 +53,54 @@ func NewSingleSectionModel(name string, virtualAddress int32, virtualSize int32,
 func NewSingleSectionModelWithDefaults() *SingleSectionModel {
 	this := SingleSectionModel{}
 	return &this
+}
+
+// GetCharacteristics returns the Characteristics field value
+func (o *SingleSectionModel) GetCharacteristics() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Characteristics
+}
+
+// GetCharacteristicsOk returns a tuple with the Characteristics field value
+// and a boolean to check if the value has been set.
+func (o *SingleSectionModel) GetCharacteristicsOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Characteristics, true
+}
+
+// SetCharacteristics sets field value
+func (o *SingleSectionModel) SetCharacteristics(v string) {
+	o.Characteristics = v
+}
+
+// GetEntropy returns the Entropy field value
+func (o *SingleSectionModel) GetEntropy() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.Entropy
+}
+
+// GetEntropyOk returns a tuple with the Entropy field value
+// and a boolean to check if the value has been set.
+func (o *SingleSectionModel) GetEntropyOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Entropy, true
+}
+
+// SetEntropy sets field value
+func (o *SingleSectionModel) SetEntropy(v float32) {
+	o.Entropy = v
 }
 
 // GetName returns the Name field value
@@ -77,6 +125,54 @@ func (o *SingleSectionModel) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *SingleSectionModel) SetName(v string) {
 	o.Name = v
+}
+
+// GetRawSize returns the RawSize field value
+func (o *SingleSectionModel) GetRawSize() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.RawSize
+}
+
+// GetRawSizeOk returns a tuple with the RawSize field value
+// and a boolean to check if the value has been set.
+func (o *SingleSectionModel) GetRawSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RawSize, true
+}
+
+// SetRawSize sets field value
+func (o *SingleSectionModel) SetRawSize(v int32) {
+	o.RawSize = v
+}
+
+// GetSha3256 returns the Sha3256 field value
+func (o *SingleSectionModel) GetSha3256() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Sha3256
+}
+
+// GetSha3256Ok returns a tuple with the Sha3256 field value
+// and a boolean to check if the value has been set.
+func (o *SingleSectionModel) GetSha3256Ok() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Sha3256, true
+}
+
+// SetSha3256 sets field value
+func (o *SingleSectionModel) SetSha3256(v string) {
+	o.Sha3256 = v
 }
 
 // GetVirtualAddress returns the VirtualAddress field value
@@ -127,102 +223,6 @@ func (o *SingleSectionModel) SetVirtualSize(v int32) {
 	o.VirtualSize = v
 }
 
-// GetCharacteristics returns the Characteristics field value
-func (o *SingleSectionModel) GetCharacteristics() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Characteristics
-}
-
-// GetCharacteristicsOk returns a tuple with the Characteristics field value
-// and a boolean to check if the value has been set.
-func (o *SingleSectionModel) GetCharacteristicsOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Characteristics, true
-}
-
-// SetCharacteristics sets field value
-func (o *SingleSectionModel) SetCharacteristics(v string) {
-	o.Characteristics = v
-}
-
-// GetRawSize returns the RawSize field value
-func (o *SingleSectionModel) GetRawSize() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.RawSize
-}
-
-// GetRawSizeOk returns a tuple with the RawSize field value
-// and a boolean to check if the value has been set.
-func (o *SingleSectionModel) GetRawSizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RawSize, true
-}
-
-// SetRawSize sets field value
-func (o *SingleSectionModel) SetRawSize(v int32) {
-	o.RawSize = v
-}
-
-// GetEntropy returns the Entropy field value
-func (o *SingleSectionModel) GetEntropy() float32 {
-	if o == nil {
-		var ret float32
-		return ret
-	}
-
-	return o.Entropy
-}
-
-// GetEntropyOk returns a tuple with the Entropy field value
-// and a boolean to check if the value has been set.
-func (o *SingleSectionModel) GetEntropyOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Entropy, true
-}
-
-// SetEntropy sets field value
-func (o *SingleSectionModel) SetEntropy(v float32) {
-	o.Entropy = v
-}
-
-// GetSha3256 returns the Sha3256 field value
-func (o *SingleSectionModel) GetSha3256() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Sha3256
-}
-
-// GetSha3256Ok returns a tuple with the Sha3256 field value
-// and a boolean to check if the value has been set.
-func (o *SingleSectionModel) GetSha3256Ok() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Sha3256, true
-}
-
-// SetSha3256 sets field value
-func (o *SingleSectionModel) SetSha3256(v string) {
-	o.Sha3256 = v
-}
-
 func (o SingleSectionModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -233,13 +233,13 @@ func (o SingleSectionModel) MarshalJSON() ([]byte, error) {
 
 func (o SingleSectionModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["characteristics"] = o.Characteristics
+	toSerialize["entropy"] = o.Entropy
 	toSerialize["name"] = o.Name
+	toSerialize["raw_size"] = o.RawSize
+	toSerialize["sha3_256"] = o.Sha3256
 	toSerialize["virtual_address"] = o.VirtualAddress
 	toSerialize["virtual_size"] = o.VirtualSize
-	toSerialize["characteristics"] = o.Characteristics
-	toSerialize["raw_size"] = o.RawSize
-	toSerialize["entropy"] = o.Entropy
-	toSerialize["sha3_256"] = o.Sha3256
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -253,13 +253,13 @@ func (o *SingleSectionModel) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"characteristics",
+		"entropy",
 		"name",
+		"raw_size",
+		"sha3_256",
 		"virtual_address",
 		"virtual_size",
-		"characteristics",
-		"raw_size",
-		"entropy",
-		"sha3_256",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -289,13 +289,13 @@ func (o *SingleSectionModel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "characteristics")
+		delete(additionalProperties, "entropy")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "raw_size")
+		delete(additionalProperties, "sha3_256")
 		delete(additionalProperties, "virtual_address")
 		delete(additionalProperties, "virtual_size")
-		delete(additionalProperties, "characteristics")
-		delete(additionalProperties, "raw_size")
-		delete(additionalProperties, "entropy")
-		delete(additionalProperties, "sha3_256")
 		o.AdditionalProperties = additionalProperties
 	}
 

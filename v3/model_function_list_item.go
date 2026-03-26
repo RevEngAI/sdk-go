@@ -19,22 +19,22 @@ var _ MappedNullable = &FunctionListItem{}
 
 // FunctionListItem struct for FunctionListItem
 type FunctionListItem struct {
-	// Function id
-	Id int64 `json:"id"`
-	// Name of the function
-	Name string `json:"name"`
-	// The source (process) the function name came from
-	NameSourceType string `json:"name_source_type"`
-	// The source of the current function name.
-	NameSource NameSourceType `json:"name_source"`
-	// Mangled name of the function
-	MangledName string `json:"mangled_name"`
-	// Function virtual address
-	Vaddr int64 `json:"vaddr"`
-	// Function size in bytes
-	Size int32 `json:"size"`
 	// Whether the function has debug information
 	Debug bool `json:"debug"`
+	// Function id
+	Id int64 `json:"id"`
+	// Mangled name of the function
+	MangledName string `json:"mangled_name"`
+	// Name of the function
+	Name string `json:"name"`
+	// The source of the current function name.
+	NameSource NameSourceType `json:"name_source"`
+	// The source (process) the function name came from
+	NameSourceType string `json:"name_source_type"`
+	// Function size in bytes
+	Size int32 `json:"size"`
+	// Function virtual address
+	Vaddr int64 `json:"vaddr"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,16 +44,16 @@ type _FunctionListItem FunctionListItem
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionListItem(id int64, name string, nameSourceType string, nameSource NameSourceType, mangledName string, vaddr int64, size int32, debug bool) *FunctionListItem {
+func NewFunctionListItem(debug bool, id int64, mangledName string, name string, nameSource NameSourceType, nameSourceType string, size int32, vaddr int64) *FunctionListItem {
 	this := FunctionListItem{}
-	this.Id = id
-	this.Name = name
-	this.NameSourceType = nameSourceType
-	this.NameSource = nameSource
-	this.MangledName = mangledName
-	this.Vaddr = vaddr
-	this.Size = size
 	this.Debug = debug
+	this.Id = id
+	this.MangledName = mangledName
+	this.Name = name
+	this.NameSource = nameSource
+	this.NameSourceType = nameSourceType
+	this.Size = size
+	this.Vaddr = vaddr
 	return &this
 }
 
@@ -63,174 +63,6 @@ func NewFunctionListItem(id int64, name string, nameSourceType string, nameSourc
 func NewFunctionListItemWithDefaults() *FunctionListItem {
 	this := FunctionListItem{}
 	return &this
-}
-
-// GetId returns the Id field value
-func (o *FunctionListItem) GetId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *FunctionListItem) GetIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *FunctionListItem) SetId(v int64) {
-	o.Id = v
-}
-
-// GetName returns the Name field value
-func (o *FunctionListItem) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *FunctionListItem) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *FunctionListItem) SetName(v string) {
-	o.Name = v
-}
-
-// GetNameSourceType returns the NameSourceType field value
-func (o *FunctionListItem) GetNameSourceType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.NameSourceType
-}
-
-// GetNameSourceTypeOk returns a tuple with the NameSourceType field value
-// and a boolean to check if the value has been set.
-func (o *FunctionListItem) GetNameSourceTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.NameSourceType, true
-}
-
-// SetNameSourceType sets field value
-func (o *FunctionListItem) SetNameSourceType(v string) {
-	o.NameSourceType = v
-}
-
-// GetNameSource returns the NameSource field value
-func (o *FunctionListItem) GetNameSource() NameSourceType {
-	if o == nil {
-		var ret NameSourceType
-		return ret
-	}
-
-	return o.NameSource
-}
-
-// GetNameSourceOk returns a tuple with the NameSource field value
-// and a boolean to check if the value has been set.
-func (o *FunctionListItem) GetNameSourceOk() (*NameSourceType, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.NameSource, true
-}
-
-// SetNameSource sets field value
-func (o *FunctionListItem) SetNameSource(v NameSourceType) {
-	o.NameSource = v
-}
-
-// GetMangledName returns the MangledName field value
-func (o *FunctionListItem) GetMangledName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.MangledName
-}
-
-// GetMangledNameOk returns a tuple with the MangledName field value
-// and a boolean to check if the value has been set.
-func (o *FunctionListItem) GetMangledNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.MangledName, true
-}
-
-// SetMangledName sets field value
-func (o *FunctionListItem) SetMangledName(v string) {
-	o.MangledName = v
-}
-
-// GetVaddr returns the Vaddr field value
-func (o *FunctionListItem) GetVaddr() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.Vaddr
-}
-
-// GetVaddrOk returns a tuple with the Vaddr field value
-// and a boolean to check if the value has been set.
-func (o *FunctionListItem) GetVaddrOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Vaddr, true
-}
-
-// SetVaddr sets field value
-func (o *FunctionListItem) SetVaddr(v int64) {
-	o.Vaddr = v
-}
-
-// GetSize returns the Size field value
-func (o *FunctionListItem) GetSize() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Size
-}
-
-// GetSizeOk returns a tuple with the Size field value
-// and a boolean to check if the value has been set.
-func (o *FunctionListItem) GetSizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Size, true
-}
-
-// SetSize sets field value
-func (o *FunctionListItem) SetSize(v int32) {
-	o.Size = v
 }
 
 // GetDebug returns the Debug field value
@@ -257,6 +89,174 @@ func (o *FunctionListItem) SetDebug(v bool) {
 	o.Debug = v
 }
 
+// GetId returns the Id field value
+func (o *FunctionListItem) GetId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *FunctionListItem) GetIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *FunctionListItem) SetId(v int64) {
+	o.Id = v
+}
+
+// GetMangledName returns the MangledName field value
+func (o *FunctionListItem) GetMangledName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.MangledName
+}
+
+// GetMangledNameOk returns a tuple with the MangledName field value
+// and a boolean to check if the value has been set.
+func (o *FunctionListItem) GetMangledNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MangledName, true
+}
+
+// SetMangledName sets field value
+func (o *FunctionListItem) SetMangledName(v string) {
+	o.MangledName = v
+}
+
+// GetName returns the Name field value
+func (o *FunctionListItem) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *FunctionListItem) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *FunctionListItem) SetName(v string) {
+	o.Name = v
+}
+
+// GetNameSource returns the NameSource field value
+func (o *FunctionListItem) GetNameSource() NameSourceType {
+	if o == nil {
+		var ret NameSourceType
+		return ret
+	}
+
+	return o.NameSource
+}
+
+// GetNameSourceOk returns a tuple with the NameSource field value
+// and a boolean to check if the value has been set.
+func (o *FunctionListItem) GetNameSourceOk() (*NameSourceType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.NameSource, true
+}
+
+// SetNameSource sets field value
+func (o *FunctionListItem) SetNameSource(v NameSourceType) {
+	o.NameSource = v
+}
+
+// GetNameSourceType returns the NameSourceType field value
+func (o *FunctionListItem) GetNameSourceType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.NameSourceType
+}
+
+// GetNameSourceTypeOk returns a tuple with the NameSourceType field value
+// and a boolean to check if the value has been set.
+func (o *FunctionListItem) GetNameSourceTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.NameSourceType, true
+}
+
+// SetNameSourceType sets field value
+func (o *FunctionListItem) SetNameSourceType(v string) {
+	o.NameSourceType = v
+}
+
+// GetSize returns the Size field value
+func (o *FunctionListItem) GetSize() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Size
+}
+
+// GetSizeOk returns a tuple with the Size field value
+// and a boolean to check if the value has been set.
+func (o *FunctionListItem) GetSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Size, true
+}
+
+// SetSize sets field value
+func (o *FunctionListItem) SetSize(v int32) {
+	o.Size = v
+}
+
+// GetVaddr returns the Vaddr field value
+func (o *FunctionListItem) GetVaddr() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.Vaddr
+}
+
+// GetVaddrOk returns a tuple with the Vaddr field value
+// and a boolean to check if the value has been set.
+func (o *FunctionListItem) GetVaddrOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Vaddr, true
+}
+
+// SetVaddr sets field value
+func (o *FunctionListItem) SetVaddr(v int64) {
+	o.Vaddr = v
+}
+
 func (o FunctionListItem) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -267,14 +267,14 @@ func (o FunctionListItem) MarshalJSON() ([]byte, error) {
 
 func (o FunctionListItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["name"] = o.Name
-	toSerialize["name_source_type"] = o.NameSourceType
-	toSerialize["name_source"] = o.NameSource
-	toSerialize["mangled_name"] = o.MangledName
-	toSerialize["vaddr"] = o.Vaddr
-	toSerialize["size"] = o.Size
 	toSerialize["debug"] = o.Debug
+	toSerialize["id"] = o.Id
+	toSerialize["mangled_name"] = o.MangledName
+	toSerialize["name"] = o.Name
+	toSerialize["name_source"] = o.NameSource
+	toSerialize["name_source_type"] = o.NameSourceType
+	toSerialize["size"] = o.Size
+	toSerialize["vaddr"] = o.Vaddr
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -288,14 +288,14 @@ func (o *FunctionListItem) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"id",
-		"name",
-		"name_source_type",
-		"name_source",
-		"mangled_name",
-		"vaddr",
-		"size",
 		"debug",
+		"id",
+		"mangled_name",
+		"name",
+		"name_source",
+		"name_source_type",
+		"size",
+		"vaddr",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -325,14 +325,14 @@ func (o *FunctionListItem) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "name_source_type")
-		delete(additionalProperties, "name_source")
-		delete(additionalProperties, "mangled_name")
-		delete(additionalProperties, "vaddr")
-		delete(additionalProperties, "size")
 		delete(additionalProperties, "debug")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "mangled_name")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "name_source")
+		delete(additionalProperties, "name_source_type")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "vaddr")
 		o.AdditionalProperties = additionalProperties
 	}
 

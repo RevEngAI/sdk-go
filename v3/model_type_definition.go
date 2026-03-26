@@ -19,13 +19,13 @@ var _ MappedNullable = &TypeDefinition{}
 
 // TypeDefinition struct for TypeDefinition
 type TypeDefinition struct {
+	// Type of artifact the type definition is associated with
+	ArtifactType *string `json:"artifact_type,omitempty"`
 	LastChange NullableString `json:"last_change,omitempty"`
 	// Name of the type definition
 	Name string `json:"name"`
 	// Underlying type of the type definition
 	Type string `json:"type"`
-	// Type of artifact the type definition is associated with
-	ArtifactType *string `json:"artifact_type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -48,6 +48,38 @@ func NewTypeDefinition(name string, type_ string) *TypeDefinition {
 func NewTypeDefinitionWithDefaults() *TypeDefinition {
 	this := TypeDefinition{}
 	return &this
+}
+
+// GetArtifactType returns the ArtifactType field value if set, zero value otherwise.
+func (o *TypeDefinition) GetArtifactType() string {
+	if o == nil || IsNil(o.ArtifactType) {
+		var ret string
+		return ret
+	}
+	return *o.ArtifactType
+}
+
+// GetArtifactTypeOk returns a tuple with the ArtifactType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TypeDefinition) GetArtifactTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.ArtifactType) {
+		return nil, false
+	}
+	return o.ArtifactType, true
+}
+
+// HasArtifactType returns a boolean if a field has been set.
+func (o *TypeDefinition) HasArtifactType() bool {
+	if o != nil && !IsNil(o.ArtifactType) {
+		return true
+	}
+
+	return false
+}
+
+// SetArtifactType gets a reference to the given string and assigns it to the ArtifactType field.
+func (o *TypeDefinition) SetArtifactType(v string) {
+	o.ArtifactType = &v
 }
 
 // GetLastChange returns the LastChange field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -140,38 +172,6 @@ func (o *TypeDefinition) SetType(v string) {
 	o.Type = v
 }
 
-// GetArtifactType returns the ArtifactType field value if set, zero value otherwise.
-func (o *TypeDefinition) GetArtifactType() string {
-	if o == nil || IsNil(o.ArtifactType) {
-		var ret string
-		return ret
-	}
-	return *o.ArtifactType
-}
-
-// GetArtifactTypeOk returns a tuple with the ArtifactType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TypeDefinition) GetArtifactTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.ArtifactType) {
-		return nil, false
-	}
-	return o.ArtifactType, true
-}
-
-// HasArtifactType returns a boolean if a field has been set.
-func (o *TypeDefinition) HasArtifactType() bool {
-	if o != nil && !IsNil(o.ArtifactType) {
-		return true
-	}
-
-	return false
-}
-
-// SetArtifactType gets a reference to the given string and assigns it to the ArtifactType field.
-func (o *TypeDefinition) SetArtifactType(v string) {
-	o.ArtifactType = &v
-}
-
 func (o TypeDefinition) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -182,14 +182,14 @@ func (o TypeDefinition) MarshalJSON() ([]byte, error) {
 
 func (o TypeDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ArtifactType) {
+		toSerialize["artifact_type"] = o.ArtifactType
+	}
 	if o.LastChange.IsSet() {
 		toSerialize["last_change"] = o.LastChange.Get()
 	}
 	toSerialize["name"] = o.Name
 	toSerialize["type"] = o.Type
-	if !IsNil(o.ArtifactType) {
-		toSerialize["artifact_type"] = o.ArtifactType
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -234,10 +234,10 @@ func (o *TypeDefinition) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "artifact_type")
 		delete(additionalProperties, "last_change")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "type")
-		delete(additionalProperties, "artifact_type")
 		o.AdditionalProperties = additionalProperties
 	}
 

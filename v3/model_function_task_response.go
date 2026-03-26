@@ -18,8 +18,8 @@ var _ MappedNullable = &FunctionTaskResponse{}
 
 // FunctionTaskResponse struct for FunctionTaskResponse
 type FunctionTaskResponse struct {
-	Status *FunctionTaskStatus `json:"status,omitempty"`
 	ErrorMessage NullableString `json:"error_message,omitempty"`
+	Status *FunctionTaskStatus `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,38 +44,6 @@ func NewFunctionTaskResponseWithDefaults() *FunctionTaskResponse {
 	var status FunctionTaskStatus = FUNCTIONTASKSTATUS_UNINITIALISED
 	this.Status = &status
 	return &this
-}
-
-// GetStatus returns the Status field value if set, zero value otherwise.
-func (o *FunctionTaskResponse) GetStatus() FunctionTaskStatus {
-	if o == nil || IsNil(o.Status) {
-		var ret FunctionTaskStatus
-		return ret
-	}
-	return *o.Status
-}
-
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FunctionTaskResponse) GetStatusOk() (*FunctionTaskStatus, bool) {
-	if o == nil || IsNil(o.Status) {
-		return nil, false
-	}
-	return o.Status, true
-}
-
-// HasStatus returns a boolean if a field has been set.
-func (o *FunctionTaskResponse) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given FunctionTaskStatus and assigns it to the Status field.
-func (o *FunctionTaskResponse) SetStatus(v FunctionTaskStatus) {
-	o.Status = &v
 }
 
 // GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -120,6 +88,38 @@ func (o *FunctionTaskResponse) UnsetErrorMessage() {
 	o.ErrorMessage.Unset()
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *FunctionTaskResponse) GetStatus() FunctionTaskStatus {
+	if o == nil || IsNil(o.Status) {
+		var ret FunctionTaskStatus
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionTaskResponse) GetStatusOk() (*FunctionTaskStatus, bool) {
+	if o == nil || IsNil(o.Status) {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *FunctionTaskResponse) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given FunctionTaskStatus and assigns it to the Status field.
+func (o *FunctionTaskResponse) SetStatus(v FunctionTaskStatus) {
+	o.Status = &v
+}
+
 func (o FunctionTaskResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,11 +130,11 @@ func (o FunctionTaskResponse) MarshalJSON() ([]byte, error) {
 
 func (o FunctionTaskResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
 	if o.ErrorMessage.IsSet() {
 		toSerialize["error_message"] = o.ErrorMessage.Get()
+	}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -158,8 +158,8 @@ func (o *FunctionTaskResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "status")
 		delete(additionalProperties, "error_message")
+		delete(additionalProperties, "status")
 		o.AdditionalProperties = additionalProperties
 	}
 

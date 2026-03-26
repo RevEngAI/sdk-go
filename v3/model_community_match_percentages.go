@@ -19,8 +19,8 @@ var _ MappedNullable = &CommunityMatchPercentages{}
 
 // CommunityMatchPercentages struct for CommunityMatchPercentages
 type CommunityMatchPercentages struct {
-	BinaryName string `json:"binary_name"`
 	BinaryId int32 `json:"binary_id"`
+	BinaryName string `json:"binary_name"`
 	MatchedCommunitiesPercent float32 `json:"matched_communities_percent"`
 	UnmatchedCommunitiesPercent float32 `json:"unmatched_communities_percent"`
 	AdditionalProperties map[string]interface{}
@@ -32,10 +32,10 @@ type _CommunityMatchPercentages CommunityMatchPercentages
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCommunityMatchPercentages(binaryName string, binaryId int32, matchedCommunitiesPercent float32, unmatchedCommunitiesPercent float32) *CommunityMatchPercentages {
+func NewCommunityMatchPercentages(binaryId int32, binaryName string, matchedCommunitiesPercent float32, unmatchedCommunitiesPercent float32) *CommunityMatchPercentages {
 	this := CommunityMatchPercentages{}
-	this.BinaryName = binaryName
 	this.BinaryId = binaryId
+	this.BinaryName = binaryName
 	this.MatchedCommunitiesPercent = matchedCommunitiesPercent
 	this.UnmatchedCommunitiesPercent = unmatchedCommunitiesPercent
 	return &this
@@ -47,30 +47,6 @@ func NewCommunityMatchPercentages(binaryName string, binaryId int32, matchedComm
 func NewCommunityMatchPercentagesWithDefaults() *CommunityMatchPercentages {
 	this := CommunityMatchPercentages{}
 	return &this
-}
-
-// GetBinaryName returns the BinaryName field value
-func (o *CommunityMatchPercentages) GetBinaryName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.BinaryName
-}
-
-// GetBinaryNameOk returns a tuple with the BinaryName field value
-// and a boolean to check if the value has been set.
-func (o *CommunityMatchPercentages) GetBinaryNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.BinaryName, true
-}
-
-// SetBinaryName sets field value
-func (o *CommunityMatchPercentages) SetBinaryName(v string) {
-	o.BinaryName = v
 }
 
 // GetBinaryId returns the BinaryId field value
@@ -95,6 +71,30 @@ func (o *CommunityMatchPercentages) GetBinaryIdOk() (*int32, bool) {
 // SetBinaryId sets field value
 func (o *CommunityMatchPercentages) SetBinaryId(v int32) {
 	o.BinaryId = v
+}
+
+// GetBinaryName returns the BinaryName field value
+func (o *CommunityMatchPercentages) GetBinaryName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.BinaryName
+}
+
+// GetBinaryNameOk returns a tuple with the BinaryName field value
+// and a boolean to check if the value has been set.
+func (o *CommunityMatchPercentages) GetBinaryNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.BinaryName, true
+}
+
+// SetBinaryName sets field value
+func (o *CommunityMatchPercentages) SetBinaryName(v string) {
+	o.BinaryName = v
 }
 
 // GetMatchedCommunitiesPercent returns the MatchedCommunitiesPercent field value
@@ -155,8 +155,8 @@ func (o CommunityMatchPercentages) MarshalJSON() ([]byte, error) {
 
 func (o CommunityMatchPercentages) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["binary_name"] = o.BinaryName
 	toSerialize["binary_id"] = o.BinaryId
+	toSerialize["binary_name"] = o.BinaryName
 	toSerialize["matched_communities_percent"] = o.MatchedCommunitiesPercent
 	toSerialize["unmatched_communities_percent"] = o.UnmatchedCommunitiesPercent
 
@@ -172,8 +172,8 @@ func (o *CommunityMatchPercentages) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"binary_name",
 		"binary_id",
+		"binary_name",
 		"matched_communities_percent",
 		"unmatched_communities_percent",
 	}
@@ -205,8 +205,8 @@ func (o *CommunityMatchPercentages) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "binary_name")
 		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "binary_name")
 		delete(additionalProperties, "matched_communities_percent")
 		delete(additionalProperties, "unmatched_communities_percent")
 		o.AdditionalProperties = additionalProperties

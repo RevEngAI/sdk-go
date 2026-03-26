@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Confidences** | Pointer to [**[]NameConfidence**](NameConfidence.md) |  | [optional] 
 **FunctionId** | **int64** | Unique identifier of the function | 
 **MatchedFunctions** | [**[]MatchedFunction**](MatchedFunction.md) |  | 
-**Confidences** | Pointer to [**[]NameConfidence**](NameConfidence.md) |  | [optional] 
 
 ## Methods
 
@@ -27,6 +27,41 @@ NewFunctionMatchWithDefaults instantiates a new FunctionMatch object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetConfidences
+
+`func (o *FunctionMatch) GetConfidences() []NameConfidence`
+
+GetConfidences returns the Confidences field if non-nil, zero value otherwise.
+
+### GetConfidencesOk
+
+`func (o *FunctionMatch) GetConfidencesOk() (*[]NameConfidence, bool)`
+
+GetConfidencesOk returns a tuple with the Confidences field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfidences
+
+`func (o *FunctionMatch) SetConfidences(v []NameConfidence)`
+
+SetConfidences sets Confidences field to given value.
+
+### HasConfidences
+
+`func (o *FunctionMatch) HasConfidences() bool`
+
+HasConfidences returns a boolean if a field has been set.
+
+### SetConfidencesNil
+
+`func (o *FunctionMatch) SetConfidencesNil(b bool)`
+
+ SetConfidencesNil sets the value for Confidences to be an explicit nil
+
+### UnsetConfidences
+`func (o *FunctionMatch) UnsetConfidences()`
+
+UnsetConfidences ensures that no value is present for Confidences, not even an explicit nil
 ### GetFunctionId
 
 `func (o *FunctionMatch) GetFunctionId() int64`
@@ -67,41 +102,6 @@ and a boolean to check if the value has been set.
 SetMatchedFunctions sets MatchedFunctions field to given value.
 
 
-### GetConfidences
-
-`func (o *FunctionMatch) GetConfidences() []NameConfidence`
-
-GetConfidences returns the Confidences field if non-nil, zero value otherwise.
-
-### GetConfidencesOk
-
-`func (o *FunctionMatch) GetConfidencesOk() (*[]NameConfidence, bool)`
-
-GetConfidencesOk returns a tuple with the Confidences field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConfidences
-
-`func (o *FunctionMatch) SetConfidences(v []NameConfidence)`
-
-SetConfidences sets Confidences field to given value.
-
-### HasConfidences
-
-`func (o *FunctionMatch) HasConfidences() bool`
-
-HasConfidences returns a boolean if a field has been set.
-
-### SetConfidencesNil
-
-`func (o *FunctionMatch) SetConfidencesNil(b bool)`
-
- SetConfidencesNil sets the value for Confidences to be an explicit nil
-
-### UnsetConfidences
-`func (o *FunctionMatch) UnsetConfidences()`
-
-UnsetConfidences ensures that no value is present for Confidences, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

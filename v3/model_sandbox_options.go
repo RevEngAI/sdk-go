@@ -18,9 +18,9 @@ var _ MappedNullable = &SandboxOptions{}
 
 // SandboxOptions struct for SandboxOptions
 type SandboxOptions struct {
-	Enabled *bool `json:"enabled,omitempty"`
 	// The command line parameters to pass to the dynamic execution sandbox. Requires `sandbox` to be True.
 	CommandLineArgs *string `json:"command_line_args,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,10 +32,10 @@ type _SandboxOptions SandboxOptions
 // will change when the set of required properties is changed
 func NewSandboxOptions() *SandboxOptions {
 	this := SandboxOptions{}
-	var enabled bool = false
-	this.Enabled = &enabled
 	var commandLineArgs string = ""
 	this.CommandLineArgs = &commandLineArgs
+	var enabled bool = false
+	this.Enabled = &enabled
 	return &this
 }
 
@@ -44,43 +44,11 @@ func NewSandboxOptions() *SandboxOptions {
 // but it doesn't guarantee that properties required by API are set
 func NewSandboxOptionsWithDefaults() *SandboxOptions {
 	this := SandboxOptions{}
-	var enabled bool = false
-	this.Enabled = &enabled
 	var commandLineArgs string = ""
 	this.CommandLineArgs = &commandLineArgs
+	var enabled bool = false
+	this.Enabled = &enabled
 	return &this
-}
-
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
-func (o *SandboxOptions) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
-		var ret bool
-		return ret
-	}
-	return *o.Enabled
-}
-
-// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SandboxOptions) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
-		return nil, false
-	}
-	return o.Enabled, true
-}
-
-// HasEnabled returns a boolean if a field has been set.
-func (o *SandboxOptions) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
-func (o *SandboxOptions) SetEnabled(v bool) {
-	o.Enabled = &v
 }
 
 // GetCommandLineArgs returns the CommandLineArgs field value if set, zero value otherwise.
@@ -115,6 +83,38 @@ func (o *SandboxOptions) SetCommandLineArgs(v string) {
 	o.CommandLineArgs = &v
 }
 
+// GetEnabled returns the Enabled field value if set, zero value otherwise.
+func (o *SandboxOptions) GetEnabled() bool {
+	if o == nil || IsNil(o.Enabled) {
+		var ret bool
+		return ret
+	}
+	return *o.Enabled
+}
+
+// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SandboxOptions) GetEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Enabled) {
+		return nil, false
+	}
+	return o.Enabled, true
+}
+
+// HasEnabled returns a boolean if a field has been set.
+func (o *SandboxOptions) HasEnabled() bool {
+	if o != nil && !IsNil(o.Enabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+func (o *SandboxOptions) SetEnabled(v bool) {
+	o.Enabled = &v
+}
+
 func (o SandboxOptions) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -125,11 +125,11 @@ func (o SandboxOptions) MarshalJSON() ([]byte, error) {
 
 func (o SandboxOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Enabled) {
-		toSerialize["enabled"] = o.Enabled
-	}
 	if !IsNil(o.CommandLineArgs) {
 		toSerialize["command_line_args"] = o.CommandLineArgs
+	}
+	if !IsNil(o.Enabled) {
+		toSerialize["enabled"] = o.Enabled
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -153,8 +153,8 @@ func (o *SandboxOptions) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "enabled")
 		delete(additionalProperties, "command_line_args")
+		delete(additionalProperties, "enabled")
 		o.AdditionalProperties = additionalProperties
 	}
 

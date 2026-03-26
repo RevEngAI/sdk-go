@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Mb** | **map[string]interface{}** | MalwareBazaar information | 
+**MbLastUpdated** | **time.Time** | MalwareBazaar last updated date | 
 **Sha256Hash** | **string** | SHA256 hash of the binary | 
 **Vt** | **map[string]interface{}** | VirusTotal information | 
 **VtLastUpdated** | **time.Time** | VirusTotal last updated date | 
-**Mb** | **map[string]interface{}** | MalwareBazaar information | 
-**MbLastUpdated** | **time.Time** | MalwareBazaar last updated date | 
 
 ## Methods
 
 ### NewBinaryExternalsResponse
 
-`func NewBinaryExternalsResponse(sha256Hash string, vt map[string]interface{}, vtLastUpdated time.Time, mb map[string]interface{}, mbLastUpdated time.Time, ) *BinaryExternalsResponse`
+`func NewBinaryExternalsResponse(mb map[string]interface{}, mbLastUpdated time.Time, sha256Hash string, vt map[string]interface{}, vtLastUpdated time.Time, ) *BinaryExternalsResponse`
 
 NewBinaryExternalsResponse instantiates a new BinaryExternalsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +28,46 @@ will change when the set of required properties is changed
 NewBinaryExternalsResponseWithDefaults instantiates a new BinaryExternalsResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetMb
+
+`func (o *BinaryExternalsResponse) GetMb() map[string]interface{}`
+
+GetMb returns the Mb field if non-nil, zero value otherwise.
+
+### GetMbOk
+
+`func (o *BinaryExternalsResponse) GetMbOk() (*map[string]interface{}, bool)`
+
+GetMbOk returns a tuple with the Mb field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMb
+
+`func (o *BinaryExternalsResponse) SetMb(v map[string]interface{})`
+
+SetMb sets Mb field to given value.
+
+
+### GetMbLastUpdated
+
+`func (o *BinaryExternalsResponse) GetMbLastUpdated() time.Time`
+
+GetMbLastUpdated returns the MbLastUpdated field if non-nil, zero value otherwise.
+
+### GetMbLastUpdatedOk
+
+`func (o *BinaryExternalsResponse) GetMbLastUpdatedOk() (*time.Time, bool)`
+
+GetMbLastUpdatedOk returns a tuple with the MbLastUpdated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMbLastUpdated
+
+`func (o *BinaryExternalsResponse) SetMbLastUpdated(v time.Time)`
+
+SetMbLastUpdated sets MbLastUpdated field to given value.
+
 
 ### GetSha256Hash
 
@@ -87,46 +127,6 @@ and a boolean to check if the value has been set.
 `func (o *BinaryExternalsResponse) SetVtLastUpdated(v time.Time)`
 
 SetVtLastUpdated sets VtLastUpdated field to given value.
-
-
-### GetMb
-
-`func (o *BinaryExternalsResponse) GetMb() map[string]interface{}`
-
-GetMb returns the Mb field if non-nil, zero value otherwise.
-
-### GetMbOk
-
-`func (o *BinaryExternalsResponse) GetMbOk() (*map[string]interface{}, bool)`
-
-GetMbOk returns a tuple with the Mb field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMb
-
-`func (o *BinaryExternalsResponse) SetMb(v map[string]interface{})`
-
-SetMb sets Mb field to given value.
-
-
-### GetMbLastUpdated
-
-`func (o *BinaryExternalsResponse) GetMbLastUpdated() time.Time`
-
-GetMbLastUpdated returns the MbLastUpdated field if non-nil, zero value otherwise.
-
-### GetMbLastUpdatedOk
-
-`func (o *BinaryExternalsResponse) GetMbLastUpdatedOk() (*time.Time, bool)`
-
-GetMbLastUpdatedOk returns a tuple with the MbLastUpdated field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMbLastUpdated
-
-`func (o *BinaryExternalsResponse) SetMbLastUpdated(v time.Time)`
-
-SetMbLastUpdated sets MbLastUpdated field to given value.
 
 
 

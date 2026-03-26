@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AnalysisConfig** | Pointer to [**AnalysisConfig**](AnalysisConfig.md) | The analysis config enables the configuration of optional analysis stages | [optional] 
+**AnalysisScope** | Pointer to [**AnalysisScope**](AnalysisScope.md) | The scope of the analysis determines who can access it | [optional] [default to ANALYSISSCOPE_PRIVATE]
+**AutoRunAgents** | Pointer to [**AutoRunAgents**](AutoRunAgents.md) |  | [optional] 
+**BinaryConfig** | Pointer to [**BinaryConfig**](BinaryConfig.md) | The binary config can override automatically determined values such as ISA, Platform, File Format, etc | [optional] 
+**DebugHash** | Pointer to **NullableString** |  | [optional] 
 **Filename** | **string** | The name of the file | 
 **Sha256Hash** | **string** | The name of the file | 
-**Tags** | Pointer to [**[]Tag**](Tag.md) | List of community tags to assign to an analysis | [optional] [default to {}]
-**AnalysisScope** | Pointer to [**AnalysisScope**](AnalysisScope.md) | The scope of the analysis determines who can access it | [optional] [default to ANALYSISSCOPE_PRIVATE]
 **Symbols** | Pointer to [**NullableSymbols**](Symbols.md) |  | [optional] 
-**DebugHash** | Pointer to **NullableString** |  | [optional] 
-**AnalysisConfig** | Pointer to [**AnalysisConfig**](AnalysisConfig.md) | The analysis config enables the configuration of optional analysis stages | [optional] 
-**BinaryConfig** | Pointer to [**BinaryConfig**](BinaryConfig.md) | The binary config can override automatically determined values such as ISA, Platform, File Format, etc | [optional] 
-**AutoRunAgents** | Pointer to [**AutoRunAgents**](AutoRunAgents.md) |  | [optional] 
+**Tags** | Pointer to [**[]Tag**](Tag.md) | List of community tags to assign to an analysis | [optional] [default to {}]
 
 ## Methods
 
@@ -33,6 +33,141 @@ NewAnalysisCreateRequestWithDefaults instantiates a new AnalysisCreateRequest ob
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetAnalysisConfig
+
+`func (o *AnalysisCreateRequest) GetAnalysisConfig() AnalysisConfig`
+
+GetAnalysisConfig returns the AnalysisConfig field if non-nil, zero value otherwise.
+
+### GetAnalysisConfigOk
+
+`func (o *AnalysisCreateRequest) GetAnalysisConfigOk() (*AnalysisConfig, bool)`
+
+GetAnalysisConfigOk returns a tuple with the AnalysisConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAnalysisConfig
+
+`func (o *AnalysisCreateRequest) SetAnalysisConfig(v AnalysisConfig)`
+
+SetAnalysisConfig sets AnalysisConfig field to given value.
+
+### HasAnalysisConfig
+
+`func (o *AnalysisCreateRequest) HasAnalysisConfig() bool`
+
+HasAnalysisConfig returns a boolean if a field has been set.
+
+### GetAnalysisScope
+
+`func (o *AnalysisCreateRequest) GetAnalysisScope() AnalysisScope`
+
+GetAnalysisScope returns the AnalysisScope field if non-nil, zero value otherwise.
+
+### GetAnalysisScopeOk
+
+`func (o *AnalysisCreateRequest) GetAnalysisScopeOk() (*AnalysisScope, bool)`
+
+GetAnalysisScopeOk returns a tuple with the AnalysisScope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAnalysisScope
+
+`func (o *AnalysisCreateRequest) SetAnalysisScope(v AnalysisScope)`
+
+SetAnalysisScope sets AnalysisScope field to given value.
+
+### HasAnalysisScope
+
+`func (o *AnalysisCreateRequest) HasAnalysisScope() bool`
+
+HasAnalysisScope returns a boolean if a field has been set.
+
+### GetAutoRunAgents
+
+`func (o *AnalysisCreateRequest) GetAutoRunAgents() AutoRunAgents`
+
+GetAutoRunAgents returns the AutoRunAgents field if non-nil, zero value otherwise.
+
+### GetAutoRunAgentsOk
+
+`func (o *AnalysisCreateRequest) GetAutoRunAgentsOk() (*AutoRunAgents, bool)`
+
+GetAutoRunAgentsOk returns a tuple with the AutoRunAgents field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoRunAgents
+
+`func (o *AnalysisCreateRequest) SetAutoRunAgents(v AutoRunAgents)`
+
+SetAutoRunAgents sets AutoRunAgents field to given value.
+
+### HasAutoRunAgents
+
+`func (o *AnalysisCreateRequest) HasAutoRunAgents() bool`
+
+HasAutoRunAgents returns a boolean if a field has been set.
+
+### GetBinaryConfig
+
+`func (o *AnalysisCreateRequest) GetBinaryConfig() BinaryConfig`
+
+GetBinaryConfig returns the BinaryConfig field if non-nil, zero value otherwise.
+
+### GetBinaryConfigOk
+
+`func (o *AnalysisCreateRequest) GetBinaryConfigOk() (*BinaryConfig, bool)`
+
+GetBinaryConfigOk returns a tuple with the BinaryConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBinaryConfig
+
+`func (o *AnalysisCreateRequest) SetBinaryConfig(v BinaryConfig)`
+
+SetBinaryConfig sets BinaryConfig field to given value.
+
+### HasBinaryConfig
+
+`func (o *AnalysisCreateRequest) HasBinaryConfig() bool`
+
+HasBinaryConfig returns a boolean if a field has been set.
+
+### GetDebugHash
+
+`func (o *AnalysisCreateRequest) GetDebugHash() string`
+
+GetDebugHash returns the DebugHash field if non-nil, zero value otherwise.
+
+### GetDebugHashOk
+
+`func (o *AnalysisCreateRequest) GetDebugHashOk() (*string, bool)`
+
+GetDebugHashOk returns a tuple with the DebugHash field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDebugHash
+
+`func (o *AnalysisCreateRequest) SetDebugHash(v string)`
+
+SetDebugHash sets DebugHash field to given value.
+
+### HasDebugHash
+
+`func (o *AnalysisCreateRequest) HasDebugHash() bool`
+
+HasDebugHash returns a boolean if a field has been set.
+
+### SetDebugHashNil
+
+`func (o *AnalysisCreateRequest) SetDebugHashNil(b bool)`
+
+ SetDebugHashNil sets the value for DebugHash to be an explicit nil
+
+### UnsetDebugHash
+`func (o *AnalysisCreateRequest) UnsetDebugHash()`
+
+UnsetDebugHash ensures that no value is present for DebugHash, not even an explicit nil
 ### GetFilename
 
 `func (o *AnalysisCreateRequest) GetFilename() string`
@@ -73,56 +208,6 @@ and a boolean to check if the value has been set.
 SetSha256Hash sets Sha256Hash field to given value.
 
 
-### GetTags
-
-`func (o *AnalysisCreateRequest) GetTags() []Tag`
-
-GetTags returns the Tags field if non-nil, zero value otherwise.
-
-### GetTagsOk
-
-`func (o *AnalysisCreateRequest) GetTagsOk() (*[]Tag, bool)`
-
-GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTags
-
-`func (o *AnalysisCreateRequest) SetTags(v []Tag)`
-
-SetTags sets Tags field to given value.
-
-### HasTags
-
-`func (o *AnalysisCreateRequest) HasTags() bool`
-
-HasTags returns a boolean if a field has been set.
-
-### GetAnalysisScope
-
-`func (o *AnalysisCreateRequest) GetAnalysisScope() AnalysisScope`
-
-GetAnalysisScope returns the AnalysisScope field if non-nil, zero value otherwise.
-
-### GetAnalysisScopeOk
-
-`func (o *AnalysisCreateRequest) GetAnalysisScopeOk() (*AnalysisScope, bool)`
-
-GetAnalysisScopeOk returns a tuple with the AnalysisScope field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAnalysisScope
-
-`func (o *AnalysisCreateRequest) SetAnalysisScope(v AnalysisScope)`
-
-SetAnalysisScope sets AnalysisScope field to given value.
-
-### HasAnalysisScope
-
-`func (o *AnalysisCreateRequest) HasAnalysisScope() bool`
-
-HasAnalysisScope returns a boolean if a field has been set.
-
 ### GetSymbols
 
 `func (o *AnalysisCreateRequest) GetSymbols() Symbols`
@@ -158,115 +243,30 @@ HasSymbols returns a boolean if a field has been set.
 `func (o *AnalysisCreateRequest) UnsetSymbols()`
 
 UnsetSymbols ensures that no value is present for Symbols, not even an explicit nil
-### GetDebugHash
+### GetTags
 
-`func (o *AnalysisCreateRequest) GetDebugHash() string`
+`func (o *AnalysisCreateRequest) GetTags() []Tag`
 
-GetDebugHash returns the DebugHash field if non-nil, zero value otherwise.
+GetTags returns the Tags field if non-nil, zero value otherwise.
 
-### GetDebugHashOk
+### GetTagsOk
 
-`func (o *AnalysisCreateRequest) GetDebugHashOk() (*string, bool)`
+`func (o *AnalysisCreateRequest) GetTagsOk() (*[]Tag, bool)`
 
-GetDebugHashOk returns a tuple with the DebugHash field if it's non-nil, zero value otherwise
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDebugHash
+### SetTags
 
-`func (o *AnalysisCreateRequest) SetDebugHash(v string)`
+`func (o *AnalysisCreateRequest) SetTags(v []Tag)`
 
-SetDebugHash sets DebugHash field to given value.
+SetTags sets Tags field to given value.
 
-### HasDebugHash
+### HasTags
 
-`func (o *AnalysisCreateRequest) HasDebugHash() bool`
+`func (o *AnalysisCreateRequest) HasTags() bool`
 
-HasDebugHash returns a boolean if a field has been set.
-
-### SetDebugHashNil
-
-`func (o *AnalysisCreateRequest) SetDebugHashNil(b bool)`
-
- SetDebugHashNil sets the value for DebugHash to be an explicit nil
-
-### UnsetDebugHash
-`func (o *AnalysisCreateRequest) UnsetDebugHash()`
-
-UnsetDebugHash ensures that no value is present for DebugHash, not even an explicit nil
-### GetAnalysisConfig
-
-`func (o *AnalysisCreateRequest) GetAnalysisConfig() AnalysisConfig`
-
-GetAnalysisConfig returns the AnalysisConfig field if non-nil, zero value otherwise.
-
-### GetAnalysisConfigOk
-
-`func (o *AnalysisCreateRequest) GetAnalysisConfigOk() (*AnalysisConfig, bool)`
-
-GetAnalysisConfigOk returns a tuple with the AnalysisConfig field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAnalysisConfig
-
-`func (o *AnalysisCreateRequest) SetAnalysisConfig(v AnalysisConfig)`
-
-SetAnalysisConfig sets AnalysisConfig field to given value.
-
-### HasAnalysisConfig
-
-`func (o *AnalysisCreateRequest) HasAnalysisConfig() bool`
-
-HasAnalysisConfig returns a boolean if a field has been set.
-
-### GetBinaryConfig
-
-`func (o *AnalysisCreateRequest) GetBinaryConfig() BinaryConfig`
-
-GetBinaryConfig returns the BinaryConfig field if non-nil, zero value otherwise.
-
-### GetBinaryConfigOk
-
-`func (o *AnalysisCreateRequest) GetBinaryConfigOk() (*BinaryConfig, bool)`
-
-GetBinaryConfigOk returns a tuple with the BinaryConfig field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBinaryConfig
-
-`func (o *AnalysisCreateRequest) SetBinaryConfig(v BinaryConfig)`
-
-SetBinaryConfig sets BinaryConfig field to given value.
-
-### HasBinaryConfig
-
-`func (o *AnalysisCreateRequest) HasBinaryConfig() bool`
-
-HasBinaryConfig returns a boolean if a field has been set.
-
-### GetAutoRunAgents
-
-`func (o *AnalysisCreateRequest) GetAutoRunAgents() AutoRunAgents`
-
-GetAutoRunAgents returns the AutoRunAgents field if non-nil, zero value otherwise.
-
-### GetAutoRunAgentsOk
-
-`func (o *AnalysisCreateRequest) GetAutoRunAgentsOk() (*AutoRunAgents, bool)`
-
-GetAutoRunAgentsOk returns a tuple with the AutoRunAgents field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAutoRunAgents
-
-`func (o *AnalysisCreateRequest) SetAutoRunAgents(v AutoRunAgents)`
-
-SetAutoRunAgents sets AutoRunAgents field to given value.
-
-### HasAutoRunAgents
-
-`func (o *AnalysisCreateRequest) HasAutoRunAgents() bool`
-
-HasAutoRunAgents returns a boolean if a field has been set.
+HasTags returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

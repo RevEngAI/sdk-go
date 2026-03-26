@@ -19,9 +19,9 @@ var _ MappedNullable = &InverseFunctionMapItem{}
 
 // InverseFunctionMapItem struct for InverseFunctionMapItem
 type InverseFunctionMapItem struct {
-	Name string `json:"name"`
 	Addr NullableAddr `json:"addr"`
 	IsExternal *bool `json:"is_external,omitempty"`
+	Name string `json:"name"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,12 +31,12 @@ type _InverseFunctionMapItem InverseFunctionMapItem
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInverseFunctionMapItem(name string, addr NullableAddr) *InverseFunctionMapItem {
+func NewInverseFunctionMapItem(addr NullableAddr, name string) *InverseFunctionMapItem {
 	this := InverseFunctionMapItem{}
-	this.Name = name
 	this.Addr = addr
 	var isExternal bool = false
 	this.IsExternal = &isExternal
+	this.Name = name
 	return &this
 }
 
@@ -48,30 +48,6 @@ func NewInverseFunctionMapItemWithDefaults() *InverseFunctionMapItem {
 	var isExternal bool = false
 	this.IsExternal = &isExternal
 	return &this
-}
-
-// GetName returns the Name field value
-func (o *InverseFunctionMapItem) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *InverseFunctionMapItem) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *InverseFunctionMapItem) SetName(v string) {
-	o.Name = v
 }
 
 // GetAddr returns the Addr field value
@@ -132,6 +108,30 @@ func (o *InverseFunctionMapItem) SetIsExternal(v bool) {
 	o.IsExternal = &v
 }
 
+// GetName returns the Name field value
+func (o *InverseFunctionMapItem) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *InverseFunctionMapItem) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *InverseFunctionMapItem) SetName(v string) {
+	o.Name = v
+}
+
 func (o InverseFunctionMapItem) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -142,11 +142,11 @@ func (o InverseFunctionMapItem) MarshalJSON() ([]byte, error) {
 
 func (o InverseFunctionMapItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
 	toSerialize["addr"] = o.Addr.Get()
 	if !IsNil(o.IsExternal) {
 		toSerialize["is_external"] = o.IsExternal
 	}
+	toSerialize["name"] = o.Name
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -160,8 +160,8 @@ func (o *InverseFunctionMapItem) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"name",
 		"addr",
+		"name",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -191,9 +191,9 @@ func (o *InverseFunctionMapItem) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "name")
 		delete(additionalProperties, "addr")
 		delete(additionalProperties, "is_external")
+		delete(additionalProperties, "name")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DType** | **string** |  | 
-**Loc** | **string** |  | 
 **Addr** | **string** |  | 
+**DType** | **string** |  | 
 **Length** | **int32** |  | 
+**Loc** | **string** |  | 
 **Name** | **string** |  | 
 
 ## Methods
 
 ### NewFunctionParamResponse
 
-`func NewFunctionParamResponse(dType string, loc string, addr string, length int32, name string, ) *FunctionParamResponse`
+`func NewFunctionParamResponse(addr string, dType string, length int32, loc string, name string, ) *FunctionParamResponse`
 
 NewFunctionParamResponse instantiates a new FunctionParamResponse object
 This constructor will assign default values to properties that have it defined,
@@ -28,46 +28,6 @@ will change when the set of required properties is changed
 NewFunctionParamResponseWithDefaults instantiates a new FunctionParamResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetDType
-
-`func (o *FunctionParamResponse) GetDType() string`
-
-GetDType returns the DType field if non-nil, zero value otherwise.
-
-### GetDTypeOk
-
-`func (o *FunctionParamResponse) GetDTypeOk() (*string, bool)`
-
-GetDTypeOk returns a tuple with the DType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDType
-
-`func (o *FunctionParamResponse) SetDType(v string)`
-
-SetDType sets DType field to given value.
-
-
-### GetLoc
-
-`func (o *FunctionParamResponse) GetLoc() string`
-
-GetLoc returns the Loc field if non-nil, zero value otherwise.
-
-### GetLocOk
-
-`func (o *FunctionParamResponse) GetLocOk() (*string, bool)`
-
-GetLocOk returns a tuple with the Loc field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLoc
-
-`func (o *FunctionParamResponse) SetLoc(v string)`
-
-SetLoc sets Loc field to given value.
-
 
 ### GetAddr
 
@@ -89,6 +49,26 @@ and a boolean to check if the value has been set.
 SetAddr sets Addr field to given value.
 
 
+### GetDType
+
+`func (o *FunctionParamResponse) GetDType() string`
+
+GetDType returns the DType field if non-nil, zero value otherwise.
+
+### GetDTypeOk
+
+`func (o *FunctionParamResponse) GetDTypeOk() (*string, bool)`
+
+GetDTypeOk returns a tuple with the DType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDType
+
+`func (o *FunctionParamResponse) SetDType(v string)`
+
+SetDType sets DType field to given value.
+
+
 ### GetLength
 
 `func (o *FunctionParamResponse) GetLength() int32`
@@ -107,6 +87,26 @@ and a boolean to check if the value has been set.
 `func (o *FunctionParamResponse) SetLength(v int32)`
 
 SetLength sets Length field to given value.
+
+
+### GetLoc
+
+`func (o *FunctionParamResponse) GetLoc() string`
+
+GetLoc returns the Loc field if non-nil, zero value otherwise.
+
+### GetLocOk
+
+`func (o *FunctionParamResponse) GetLocOk() (*string, bool)`
+
+GetLocOk returns a tuple with the Loc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLoc
+
+`func (o *FunctionParamResponse) SetLoc(v string)`
+
+SetLoc sets Loc field to given value.
 
 
 ### GetName

@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | [**AiDecompilationTaskStatus**](AiDecompilationTaskStatus.md) | The status of the AI decompilation task | 
+**AiSummary** | Pointer to **NullableString** |  | [optional] 
 **Decompilation** | **NullableString** |  | 
-**RawDecompilation** | **NullableString** |  | 
 **FunctionMapping** | [**map[string]InverseFunctionMapItem**](InverseFunctionMapItem.md) |  | 
 **FunctionMappingFull** | [**NullableFunctionMappingFull**](FunctionMappingFull.md) |  | 
-**Summary** | Pointer to **NullableString** |  | [optional] 
-**AiSummary** | Pointer to **NullableString** |  | [optional] 
-**RawAiSummary** | Pointer to **NullableString** |  | [optional] 
 **PredictedFunctionName** | Pointer to **NullableString** |  | [optional] 
+**RawAiSummary** | Pointer to **NullableString** |  | [optional] 
+**RawDecompilation** | **NullableString** |  | 
+**Status** | [**AiDecompilationTaskStatus**](AiDecompilationTaskStatus.md) | The status of the AI decompilation task | 
+**Summary** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
 ### NewGetAiDecompilationTask
 
-`func NewGetAiDecompilationTask(status AiDecompilationTaskStatus, decompilation NullableString, rawDecompilation NullableString, functionMapping map[string]InverseFunctionMapItem, functionMappingFull NullableFunctionMappingFull, ) *GetAiDecompilationTask`
+`func NewGetAiDecompilationTask(decompilation NullableString, functionMapping map[string]InverseFunctionMapItem, functionMappingFull NullableFunctionMappingFull, rawDecompilation NullableString, status AiDecompilationTaskStatus, ) *GetAiDecompilationTask`
 
 NewGetAiDecompilationTask instantiates a new GetAiDecompilationTask object
 This constructor will assign default values to properties that have it defined,
@@ -33,26 +33,41 @@ NewGetAiDecompilationTaskWithDefaults instantiates a new GetAiDecompilationTask 
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetStatus
+### GetAiSummary
 
-`func (o *GetAiDecompilationTask) GetStatus() AiDecompilationTaskStatus`
+`func (o *GetAiDecompilationTask) GetAiSummary() string`
 
-GetStatus returns the Status field if non-nil, zero value otherwise.
+GetAiSummary returns the AiSummary field if non-nil, zero value otherwise.
 
-### GetStatusOk
+### GetAiSummaryOk
 
-`func (o *GetAiDecompilationTask) GetStatusOk() (*AiDecompilationTaskStatus, bool)`
+`func (o *GetAiDecompilationTask) GetAiSummaryOk() (*string, bool)`
 
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+GetAiSummaryOk returns a tuple with the AiSummary field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStatus
+### SetAiSummary
 
-`func (o *GetAiDecompilationTask) SetStatus(v AiDecompilationTaskStatus)`
+`func (o *GetAiDecompilationTask) SetAiSummary(v string)`
 
-SetStatus sets Status field to given value.
+SetAiSummary sets AiSummary field to given value.
 
+### HasAiSummary
 
+`func (o *GetAiDecompilationTask) HasAiSummary() bool`
+
+HasAiSummary returns a boolean if a field has been set.
+
+### SetAiSummaryNil
+
+`func (o *GetAiDecompilationTask) SetAiSummaryNil(b bool)`
+
+ SetAiSummaryNil sets the value for AiSummary to be an explicit nil
+
+### UnsetAiSummary
+`func (o *GetAiDecompilationTask) UnsetAiSummary()`
+
+UnsetAiSummary ensures that no value is present for AiSummary, not even an explicit nil
 ### GetDecompilation
 
 `func (o *GetAiDecompilationTask) GetDecompilation() string`
@@ -83,36 +98,6 @@ SetDecompilation sets Decompilation field to given value.
 `func (o *GetAiDecompilationTask) UnsetDecompilation()`
 
 UnsetDecompilation ensures that no value is present for Decompilation, not even an explicit nil
-### GetRawDecompilation
-
-`func (o *GetAiDecompilationTask) GetRawDecompilation() string`
-
-GetRawDecompilation returns the RawDecompilation field if non-nil, zero value otherwise.
-
-### GetRawDecompilationOk
-
-`func (o *GetAiDecompilationTask) GetRawDecompilationOk() (*string, bool)`
-
-GetRawDecompilationOk returns a tuple with the RawDecompilation field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRawDecompilation
-
-`func (o *GetAiDecompilationTask) SetRawDecompilation(v string)`
-
-SetRawDecompilation sets RawDecompilation field to given value.
-
-
-### SetRawDecompilationNil
-
-`func (o *GetAiDecompilationTask) SetRawDecompilationNil(b bool)`
-
- SetRawDecompilationNil sets the value for RawDecompilation to be an explicit nil
-
-### UnsetRawDecompilation
-`func (o *GetAiDecompilationTask) UnsetRawDecompilation()`
-
-UnsetRawDecompilation ensures that no value is present for RawDecompilation, not even an explicit nil
 ### GetFunctionMapping
 
 `func (o *GetAiDecompilationTask) GetFunctionMapping() map[string]InverseFunctionMapItem`
@@ -173,111 +158,6 @@ SetFunctionMappingFull sets FunctionMappingFull field to given value.
 `func (o *GetAiDecompilationTask) UnsetFunctionMappingFull()`
 
 UnsetFunctionMappingFull ensures that no value is present for FunctionMappingFull, not even an explicit nil
-### GetSummary
-
-`func (o *GetAiDecompilationTask) GetSummary() string`
-
-GetSummary returns the Summary field if non-nil, zero value otherwise.
-
-### GetSummaryOk
-
-`func (o *GetAiDecompilationTask) GetSummaryOk() (*string, bool)`
-
-GetSummaryOk returns a tuple with the Summary field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSummary
-
-`func (o *GetAiDecompilationTask) SetSummary(v string)`
-
-SetSummary sets Summary field to given value.
-
-### HasSummary
-
-`func (o *GetAiDecompilationTask) HasSummary() bool`
-
-HasSummary returns a boolean if a field has been set.
-
-### SetSummaryNil
-
-`func (o *GetAiDecompilationTask) SetSummaryNil(b bool)`
-
- SetSummaryNil sets the value for Summary to be an explicit nil
-
-### UnsetSummary
-`func (o *GetAiDecompilationTask) UnsetSummary()`
-
-UnsetSummary ensures that no value is present for Summary, not even an explicit nil
-### GetAiSummary
-
-`func (o *GetAiDecompilationTask) GetAiSummary() string`
-
-GetAiSummary returns the AiSummary field if non-nil, zero value otherwise.
-
-### GetAiSummaryOk
-
-`func (o *GetAiDecompilationTask) GetAiSummaryOk() (*string, bool)`
-
-GetAiSummaryOk returns a tuple with the AiSummary field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAiSummary
-
-`func (o *GetAiDecompilationTask) SetAiSummary(v string)`
-
-SetAiSummary sets AiSummary field to given value.
-
-### HasAiSummary
-
-`func (o *GetAiDecompilationTask) HasAiSummary() bool`
-
-HasAiSummary returns a boolean if a field has been set.
-
-### SetAiSummaryNil
-
-`func (o *GetAiDecompilationTask) SetAiSummaryNil(b bool)`
-
- SetAiSummaryNil sets the value for AiSummary to be an explicit nil
-
-### UnsetAiSummary
-`func (o *GetAiDecompilationTask) UnsetAiSummary()`
-
-UnsetAiSummary ensures that no value is present for AiSummary, not even an explicit nil
-### GetRawAiSummary
-
-`func (o *GetAiDecompilationTask) GetRawAiSummary() string`
-
-GetRawAiSummary returns the RawAiSummary field if non-nil, zero value otherwise.
-
-### GetRawAiSummaryOk
-
-`func (o *GetAiDecompilationTask) GetRawAiSummaryOk() (*string, bool)`
-
-GetRawAiSummaryOk returns a tuple with the RawAiSummary field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRawAiSummary
-
-`func (o *GetAiDecompilationTask) SetRawAiSummary(v string)`
-
-SetRawAiSummary sets RawAiSummary field to given value.
-
-### HasRawAiSummary
-
-`func (o *GetAiDecompilationTask) HasRawAiSummary() bool`
-
-HasRawAiSummary returns a boolean if a field has been set.
-
-### SetRawAiSummaryNil
-
-`func (o *GetAiDecompilationTask) SetRawAiSummaryNil(b bool)`
-
- SetRawAiSummaryNil sets the value for RawAiSummary to be an explicit nil
-
-### UnsetRawAiSummary
-`func (o *GetAiDecompilationTask) UnsetRawAiSummary()`
-
-UnsetRawAiSummary ensures that no value is present for RawAiSummary, not even an explicit nil
 ### GetPredictedFunctionName
 
 `func (o *GetAiDecompilationTask) GetPredictedFunctionName() string`
@@ -313,6 +193,126 @@ HasPredictedFunctionName returns a boolean if a field has been set.
 `func (o *GetAiDecompilationTask) UnsetPredictedFunctionName()`
 
 UnsetPredictedFunctionName ensures that no value is present for PredictedFunctionName, not even an explicit nil
+### GetRawAiSummary
+
+`func (o *GetAiDecompilationTask) GetRawAiSummary() string`
+
+GetRawAiSummary returns the RawAiSummary field if non-nil, zero value otherwise.
+
+### GetRawAiSummaryOk
+
+`func (o *GetAiDecompilationTask) GetRawAiSummaryOk() (*string, bool)`
+
+GetRawAiSummaryOk returns a tuple with the RawAiSummary field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRawAiSummary
+
+`func (o *GetAiDecompilationTask) SetRawAiSummary(v string)`
+
+SetRawAiSummary sets RawAiSummary field to given value.
+
+### HasRawAiSummary
+
+`func (o *GetAiDecompilationTask) HasRawAiSummary() bool`
+
+HasRawAiSummary returns a boolean if a field has been set.
+
+### SetRawAiSummaryNil
+
+`func (o *GetAiDecompilationTask) SetRawAiSummaryNil(b bool)`
+
+ SetRawAiSummaryNil sets the value for RawAiSummary to be an explicit nil
+
+### UnsetRawAiSummary
+`func (o *GetAiDecompilationTask) UnsetRawAiSummary()`
+
+UnsetRawAiSummary ensures that no value is present for RawAiSummary, not even an explicit nil
+### GetRawDecompilation
+
+`func (o *GetAiDecompilationTask) GetRawDecompilation() string`
+
+GetRawDecompilation returns the RawDecompilation field if non-nil, zero value otherwise.
+
+### GetRawDecompilationOk
+
+`func (o *GetAiDecompilationTask) GetRawDecompilationOk() (*string, bool)`
+
+GetRawDecompilationOk returns a tuple with the RawDecompilation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRawDecompilation
+
+`func (o *GetAiDecompilationTask) SetRawDecompilation(v string)`
+
+SetRawDecompilation sets RawDecompilation field to given value.
+
+
+### SetRawDecompilationNil
+
+`func (o *GetAiDecompilationTask) SetRawDecompilationNil(b bool)`
+
+ SetRawDecompilationNil sets the value for RawDecompilation to be an explicit nil
+
+### UnsetRawDecompilation
+`func (o *GetAiDecompilationTask) UnsetRawDecompilation()`
+
+UnsetRawDecompilation ensures that no value is present for RawDecompilation, not even an explicit nil
+### GetStatus
+
+`func (o *GetAiDecompilationTask) GetStatus() AiDecompilationTaskStatus`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *GetAiDecompilationTask) GetStatusOk() (*AiDecompilationTaskStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *GetAiDecompilationTask) SetStatus(v AiDecompilationTaskStatus)`
+
+SetStatus sets Status field to given value.
+
+
+### GetSummary
+
+`func (o *GetAiDecompilationTask) GetSummary() string`
+
+GetSummary returns the Summary field if non-nil, zero value otherwise.
+
+### GetSummaryOk
+
+`func (o *GetAiDecompilationTask) GetSummaryOk() (*string, bool)`
+
+GetSummaryOk returns a tuple with the Summary field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSummary
+
+`func (o *GetAiDecompilationTask) SetSummary(v string)`
+
+SetSummary sets Summary field to given value.
+
+### HasSummary
+
+`func (o *GetAiDecompilationTask) HasSummary() bool`
+
+HasSummary returns a boolean if a field has been set.
+
+### SetSummaryNil
+
+`func (o *GetAiDecompilationTask) SetSummaryNil(b bool)`
+
+ SetSummaryNil sets the value for Summary to be an explicit nil
+
+### UnsetSummary
+`func (o *GetAiDecompilationTask) UnsetSummary()`
+
+UnsetSummary ensures that no value is present for Summary, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

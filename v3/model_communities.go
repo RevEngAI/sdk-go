@@ -19,14 +19,14 @@ var _ MappedNullable = &Communities{}
 
 // Communities struct for Communities
 type Communities struct {
-	// The total number of matched community functions
-	TotalFunctions int32 `json:"total_functions"`
-	// The total number of functions in the binary
-	TotalMatchedFunctions int32 `json:"total_matched_functions"`
 	// The list of directly matched communities
 	DirectCommunityMatchPercentages []CommunityMatchPercentages `json:"direct_community_match_percentages"`
 	// The top components of the binary
 	TopComponents []map[string]interface{} `json:"top_components"`
+	// The total number of matched community functions
+	TotalFunctions int32 `json:"total_functions"`
+	// The total number of functions in the binary
+	TotalMatchedFunctions int32 `json:"total_matched_functions"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,12 +36,12 @@ type _Communities Communities
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCommunities(totalFunctions int32, totalMatchedFunctions int32, directCommunityMatchPercentages []CommunityMatchPercentages, topComponents []map[string]interface{}) *Communities {
+func NewCommunities(directCommunityMatchPercentages []CommunityMatchPercentages, topComponents []map[string]interface{}, totalFunctions int32, totalMatchedFunctions int32) *Communities {
 	this := Communities{}
-	this.TotalFunctions = totalFunctions
-	this.TotalMatchedFunctions = totalMatchedFunctions
 	this.DirectCommunityMatchPercentages = directCommunityMatchPercentages
 	this.TopComponents = topComponents
+	this.TotalFunctions = totalFunctions
+	this.TotalMatchedFunctions = totalMatchedFunctions
 	return &this
 }
 
@@ -51,54 +51,6 @@ func NewCommunities(totalFunctions int32, totalMatchedFunctions int32, directCom
 func NewCommunitiesWithDefaults() *Communities {
 	this := Communities{}
 	return &this
-}
-
-// GetTotalFunctions returns the TotalFunctions field value
-func (o *Communities) GetTotalFunctions() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.TotalFunctions
-}
-
-// GetTotalFunctionsOk returns a tuple with the TotalFunctions field value
-// and a boolean to check if the value has been set.
-func (o *Communities) GetTotalFunctionsOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TotalFunctions, true
-}
-
-// SetTotalFunctions sets field value
-func (o *Communities) SetTotalFunctions(v int32) {
-	o.TotalFunctions = v
-}
-
-// GetTotalMatchedFunctions returns the TotalMatchedFunctions field value
-func (o *Communities) GetTotalMatchedFunctions() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.TotalMatchedFunctions
-}
-
-// GetTotalMatchedFunctionsOk returns a tuple with the TotalMatchedFunctions field value
-// and a boolean to check if the value has been set.
-func (o *Communities) GetTotalMatchedFunctionsOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TotalMatchedFunctions, true
-}
-
-// SetTotalMatchedFunctions sets field value
-func (o *Communities) SetTotalMatchedFunctions(v int32) {
-	o.TotalMatchedFunctions = v
 }
 
 // GetDirectCommunityMatchPercentages returns the DirectCommunityMatchPercentages field value
@@ -149,6 +101,54 @@ func (o *Communities) SetTopComponents(v []map[string]interface{}) {
 	o.TopComponents = v
 }
 
+// GetTotalFunctions returns the TotalFunctions field value
+func (o *Communities) GetTotalFunctions() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.TotalFunctions
+}
+
+// GetTotalFunctionsOk returns a tuple with the TotalFunctions field value
+// and a boolean to check if the value has been set.
+func (o *Communities) GetTotalFunctionsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TotalFunctions, true
+}
+
+// SetTotalFunctions sets field value
+func (o *Communities) SetTotalFunctions(v int32) {
+	o.TotalFunctions = v
+}
+
+// GetTotalMatchedFunctions returns the TotalMatchedFunctions field value
+func (o *Communities) GetTotalMatchedFunctions() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.TotalMatchedFunctions
+}
+
+// GetTotalMatchedFunctionsOk returns a tuple with the TotalMatchedFunctions field value
+// and a boolean to check if the value has been set.
+func (o *Communities) GetTotalMatchedFunctionsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TotalMatchedFunctions, true
+}
+
+// SetTotalMatchedFunctions sets field value
+func (o *Communities) SetTotalMatchedFunctions(v int32) {
+	o.TotalMatchedFunctions = v
+}
+
 func (o Communities) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -159,10 +159,10 @@ func (o Communities) MarshalJSON() ([]byte, error) {
 
 func (o Communities) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["total_functions"] = o.TotalFunctions
-	toSerialize["total_matched_functions"] = o.TotalMatchedFunctions
 	toSerialize["direct_community_match_percentages"] = o.DirectCommunityMatchPercentages
 	toSerialize["top_components"] = o.TopComponents
+	toSerialize["total_functions"] = o.TotalFunctions
+	toSerialize["total_matched_functions"] = o.TotalMatchedFunctions
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -176,10 +176,10 @@ func (o *Communities) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"total_functions",
-		"total_matched_functions",
 		"direct_community_match_percentages",
 		"top_components",
+		"total_functions",
+		"total_matched_functions",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -209,10 +209,10 @@ func (o *Communities) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "total_functions")
-		delete(additionalProperties, "total_matched_functions")
 		delete(additionalProperties, "direct_community_match_percentages")
 		delete(additionalProperties, "top_components")
+		delete(additionalProperties, "total_functions")
+		delete(additionalProperties, "total_matched_functions")
 		o.AdditionalProperties = additionalProperties
 	}
 

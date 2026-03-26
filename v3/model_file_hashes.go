@@ -22,11 +22,11 @@ type FileHashes struct {
 	Md5 NullableString `json:"md5"`
 	Sha1 NullableString `json:"sha1"`
 	Sha256 NullableString `json:"sha256"`
-	Sha512 NullableString `json:"sha512"`
 	Sha3224 NullableString `json:"sha3_224"`
 	Sha3256 NullableString `json:"sha3_256"`
 	Sha3384 NullableString `json:"sha3_384"`
 	Sha3512 NullableString `json:"sha3_512"`
+	Sha512 NullableString `json:"sha512"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,16 +36,16 @@ type _FileHashes FileHashes
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileHashes(md5 NullableString, sha1 NullableString, sha256 NullableString, sha512 NullableString, sha3224 NullableString, sha3256 NullableString, sha3384 NullableString, sha3512 NullableString) *FileHashes {
+func NewFileHashes(md5 NullableString, sha1 NullableString, sha256 NullableString, sha3224 NullableString, sha3256 NullableString, sha3384 NullableString, sha3512 NullableString, sha512 NullableString) *FileHashes {
 	this := FileHashes{}
 	this.Md5 = md5
 	this.Sha1 = sha1
 	this.Sha256 = sha256
-	this.Sha512 = sha512
 	this.Sha3224 = sha3224
 	this.Sha3256 = sha3256
 	this.Sha3384 = sha3384
 	this.Sha3512 = sha3512
+	this.Sha512 = sha512
 	return &this
 }
 
@@ -133,32 +133,6 @@ func (o *FileHashes) GetSha256Ok() (*string, bool) {
 // SetSha256 sets field value
 func (o *FileHashes) SetSha256(v string) {
 	o.Sha256.Set(&v)
-}
-
-// GetSha512 returns the Sha512 field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *FileHashes) GetSha512() string {
-	if o == nil || o.Sha512.Get() == nil {
-		var ret string
-		return ret
-	}
-
-	return *o.Sha512.Get()
-}
-
-// GetSha512Ok returns a tuple with the Sha512 field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FileHashes) GetSha512Ok() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Sha512.Get(), o.Sha512.IsSet()
-}
-
-// SetSha512 sets field value
-func (o *FileHashes) SetSha512(v string) {
-	o.Sha512.Set(&v)
 }
 
 // GetSha3224 returns the Sha3224 field value
@@ -265,6 +239,32 @@ func (o *FileHashes) SetSha3512(v string) {
 	o.Sha3512.Set(&v)
 }
 
+// GetSha512 returns the Sha512 field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *FileHashes) GetSha512() string {
+	if o == nil || o.Sha512.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.Sha512.Get()
+}
+
+// GetSha512Ok returns a tuple with the Sha512 field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FileHashes) GetSha512Ok() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Sha512.Get(), o.Sha512.IsSet()
+}
+
+// SetSha512 sets field value
+func (o *FileHashes) SetSha512(v string) {
+	o.Sha512.Set(&v)
+}
+
 func (o FileHashes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -278,11 +278,11 @@ func (o FileHashes) ToMap() (map[string]interface{}, error) {
 	toSerialize["md5"] = o.Md5.Get()
 	toSerialize["sha1"] = o.Sha1.Get()
 	toSerialize["sha256"] = o.Sha256.Get()
-	toSerialize["sha512"] = o.Sha512.Get()
 	toSerialize["sha3_224"] = o.Sha3224.Get()
 	toSerialize["sha3_256"] = o.Sha3256.Get()
 	toSerialize["sha3_384"] = o.Sha3384.Get()
 	toSerialize["sha3_512"] = o.Sha3512.Get()
+	toSerialize["sha512"] = o.Sha512.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -299,11 +299,11 @@ func (o *FileHashes) UnmarshalJSON(data []byte) (err error) {
 		"md5",
 		"sha1",
 		"sha256",
-		"sha512",
 		"sha3_224",
 		"sha3_256",
 		"sha3_384",
 		"sha3_512",
+		"sha512",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -336,11 +336,11 @@ func (o *FileHashes) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "md5")
 		delete(additionalProperties, "sha1")
 		delete(additionalProperties, "sha256")
-		delete(additionalProperties, "sha512")
 		delete(additionalProperties, "sha3_224")
 		delete(additionalProperties, "sha3_256")
 		delete(additionalProperties, "sha3_384")
 		delete(additionalProperties, "sha3_512")
+		delete(additionalProperties, "sha512")
 		o.AdditionalProperties = additionalProperties
 	}
 

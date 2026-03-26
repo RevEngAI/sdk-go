@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CurrentPage** | Pointer to **NullableInt32** |  | [optional] 
+**ErrorMessage** | Pointer to **NullableString** |  | [optional] 
+**Matches** | Pointer to [**[]FunctionMatch**](FunctionMatch.md) |  | [optional] 
+**NumDebugMatches** | Pointer to **NullableInt32** |  | [optional] 
+**NumMatches** | Pointer to **NullableInt32** |  | [optional] 
 **Progress** | Pointer to **int32** | Progress of the matching operation, represented as a percentage | [optional] [default to 0]
 **Status** | Pointer to **NullableString** |  | [optional] 
-**TotalTime** | Pointer to **NullableInt32** |  | [optional] 
-**ErrorMessage** | Pointer to **NullableString** |  | [optional] 
-**CurrentPage** | Pointer to **NullableInt32** |  | [optional] 
 **TotalPages** | Pointer to **NullableInt32** |  | [optional] 
-**Matches** | Pointer to [**[]FunctionMatch**](FunctionMatch.md) |  | [optional] 
-**NumMatches** | Pointer to **NullableInt32** |  | [optional] 
-**NumDebugMatches** | Pointer to **NullableInt32** |  | [optional] 
+**TotalTime** | Pointer to **NullableInt32** |  | [optional] 
 **UpdatedAt** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
@@ -34,6 +34,181 @@ NewFunctionMatchingResponseWithDefaults instantiates a new FunctionMatchingRespo
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetCurrentPage
+
+`func (o *FunctionMatchingResponse) GetCurrentPage() int32`
+
+GetCurrentPage returns the CurrentPage field if non-nil, zero value otherwise.
+
+### GetCurrentPageOk
+
+`func (o *FunctionMatchingResponse) GetCurrentPageOk() (*int32, bool)`
+
+GetCurrentPageOk returns a tuple with the CurrentPage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrentPage
+
+`func (o *FunctionMatchingResponse) SetCurrentPage(v int32)`
+
+SetCurrentPage sets CurrentPage field to given value.
+
+### HasCurrentPage
+
+`func (o *FunctionMatchingResponse) HasCurrentPage() bool`
+
+HasCurrentPage returns a boolean if a field has been set.
+
+### SetCurrentPageNil
+
+`func (o *FunctionMatchingResponse) SetCurrentPageNil(b bool)`
+
+ SetCurrentPageNil sets the value for CurrentPage to be an explicit nil
+
+### UnsetCurrentPage
+`func (o *FunctionMatchingResponse) UnsetCurrentPage()`
+
+UnsetCurrentPage ensures that no value is present for CurrentPage, not even an explicit nil
+### GetErrorMessage
+
+`func (o *FunctionMatchingResponse) GetErrorMessage() string`
+
+GetErrorMessage returns the ErrorMessage field if non-nil, zero value otherwise.
+
+### GetErrorMessageOk
+
+`func (o *FunctionMatchingResponse) GetErrorMessageOk() (*string, bool)`
+
+GetErrorMessageOk returns a tuple with the ErrorMessage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorMessage
+
+`func (o *FunctionMatchingResponse) SetErrorMessage(v string)`
+
+SetErrorMessage sets ErrorMessage field to given value.
+
+### HasErrorMessage
+
+`func (o *FunctionMatchingResponse) HasErrorMessage() bool`
+
+HasErrorMessage returns a boolean if a field has been set.
+
+### SetErrorMessageNil
+
+`func (o *FunctionMatchingResponse) SetErrorMessageNil(b bool)`
+
+ SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
+
+### UnsetErrorMessage
+`func (o *FunctionMatchingResponse) UnsetErrorMessage()`
+
+UnsetErrorMessage ensures that no value is present for ErrorMessage, not even an explicit nil
+### GetMatches
+
+`func (o *FunctionMatchingResponse) GetMatches() []FunctionMatch`
+
+GetMatches returns the Matches field if non-nil, zero value otherwise.
+
+### GetMatchesOk
+
+`func (o *FunctionMatchingResponse) GetMatchesOk() (*[]FunctionMatch, bool)`
+
+GetMatchesOk returns a tuple with the Matches field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatches
+
+`func (o *FunctionMatchingResponse) SetMatches(v []FunctionMatch)`
+
+SetMatches sets Matches field to given value.
+
+### HasMatches
+
+`func (o *FunctionMatchingResponse) HasMatches() bool`
+
+HasMatches returns a boolean if a field has been set.
+
+### SetMatchesNil
+
+`func (o *FunctionMatchingResponse) SetMatchesNil(b bool)`
+
+ SetMatchesNil sets the value for Matches to be an explicit nil
+
+### UnsetMatches
+`func (o *FunctionMatchingResponse) UnsetMatches()`
+
+UnsetMatches ensures that no value is present for Matches, not even an explicit nil
+### GetNumDebugMatches
+
+`func (o *FunctionMatchingResponse) GetNumDebugMatches() int32`
+
+GetNumDebugMatches returns the NumDebugMatches field if non-nil, zero value otherwise.
+
+### GetNumDebugMatchesOk
+
+`func (o *FunctionMatchingResponse) GetNumDebugMatchesOk() (*int32, bool)`
+
+GetNumDebugMatchesOk returns a tuple with the NumDebugMatches field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumDebugMatches
+
+`func (o *FunctionMatchingResponse) SetNumDebugMatches(v int32)`
+
+SetNumDebugMatches sets NumDebugMatches field to given value.
+
+### HasNumDebugMatches
+
+`func (o *FunctionMatchingResponse) HasNumDebugMatches() bool`
+
+HasNumDebugMatches returns a boolean if a field has been set.
+
+### SetNumDebugMatchesNil
+
+`func (o *FunctionMatchingResponse) SetNumDebugMatchesNil(b bool)`
+
+ SetNumDebugMatchesNil sets the value for NumDebugMatches to be an explicit nil
+
+### UnsetNumDebugMatches
+`func (o *FunctionMatchingResponse) UnsetNumDebugMatches()`
+
+UnsetNumDebugMatches ensures that no value is present for NumDebugMatches, not even an explicit nil
+### GetNumMatches
+
+`func (o *FunctionMatchingResponse) GetNumMatches() int32`
+
+GetNumMatches returns the NumMatches field if non-nil, zero value otherwise.
+
+### GetNumMatchesOk
+
+`func (o *FunctionMatchingResponse) GetNumMatchesOk() (*int32, bool)`
+
+GetNumMatchesOk returns a tuple with the NumMatches field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumMatches
+
+`func (o *FunctionMatchingResponse) SetNumMatches(v int32)`
+
+SetNumMatches sets NumMatches field to given value.
+
+### HasNumMatches
+
+`func (o *FunctionMatchingResponse) HasNumMatches() bool`
+
+HasNumMatches returns a boolean if a field has been set.
+
+### SetNumMatchesNil
+
+`func (o *FunctionMatchingResponse) SetNumMatchesNil(b bool)`
+
+ SetNumMatchesNil sets the value for NumMatches to be an explicit nil
+
+### UnsetNumMatches
+`func (o *FunctionMatchingResponse) UnsetNumMatches()`
+
+UnsetNumMatches ensures that no value is present for NumMatches, not even an explicit nil
 ### GetProgress
 
 `func (o *FunctionMatchingResponse) GetProgress() int32`
@@ -94,111 +269,6 @@ HasStatus returns a boolean if a field has been set.
 `func (o *FunctionMatchingResponse) UnsetStatus()`
 
 UnsetStatus ensures that no value is present for Status, not even an explicit nil
-### GetTotalTime
-
-`func (o *FunctionMatchingResponse) GetTotalTime() int32`
-
-GetTotalTime returns the TotalTime field if non-nil, zero value otherwise.
-
-### GetTotalTimeOk
-
-`func (o *FunctionMatchingResponse) GetTotalTimeOk() (*int32, bool)`
-
-GetTotalTimeOk returns a tuple with the TotalTime field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTotalTime
-
-`func (o *FunctionMatchingResponse) SetTotalTime(v int32)`
-
-SetTotalTime sets TotalTime field to given value.
-
-### HasTotalTime
-
-`func (o *FunctionMatchingResponse) HasTotalTime() bool`
-
-HasTotalTime returns a boolean if a field has been set.
-
-### SetTotalTimeNil
-
-`func (o *FunctionMatchingResponse) SetTotalTimeNil(b bool)`
-
- SetTotalTimeNil sets the value for TotalTime to be an explicit nil
-
-### UnsetTotalTime
-`func (o *FunctionMatchingResponse) UnsetTotalTime()`
-
-UnsetTotalTime ensures that no value is present for TotalTime, not even an explicit nil
-### GetErrorMessage
-
-`func (o *FunctionMatchingResponse) GetErrorMessage() string`
-
-GetErrorMessage returns the ErrorMessage field if non-nil, zero value otherwise.
-
-### GetErrorMessageOk
-
-`func (o *FunctionMatchingResponse) GetErrorMessageOk() (*string, bool)`
-
-GetErrorMessageOk returns a tuple with the ErrorMessage field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetErrorMessage
-
-`func (o *FunctionMatchingResponse) SetErrorMessage(v string)`
-
-SetErrorMessage sets ErrorMessage field to given value.
-
-### HasErrorMessage
-
-`func (o *FunctionMatchingResponse) HasErrorMessage() bool`
-
-HasErrorMessage returns a boolean if a field has been set.
-
-### SetErrorMessageNil
-
-`func (o *FunctionMatchingResponse) SetErrorMessageNil(b bool)`
-
- SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
-
-### UnsetErrorMessage
-`func (o *FunctionMatchingResponse) UnsetErrorMessage()`
-
-UnsetErrorMessage ensures that no value is present for ErrorMessage, not even an explicit nil
-### GetCurrentPage
-
-`func (o *FunctionMatchingResponse) GetCurrentPage() int32`
-
-GetCurrentPage returns the CurrentPage field if non-nil, zero value otherwise.
-
-### GetCurrentPageOk
-
-`func (o *FunctionMatchingResponse) GetCurrentPageOk() (*int32, bool)`
-
-GetCurrentPageOk returns a tuple with the CurrentPage field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrentPage
-
-`func (o *FunctionMatchingResponse) SetCurrentPage(v int32)`
-
-SetCurrentPage sets CurrentPage field to given value.
-
-### HasCurrentPage
-
-`func (o *FunctionMatchingResponse) HasCurrentPage() bool`
-
-HasCurrentPage returns a boolean if a field has been set.
-
-### SetCurrentPageNil
-
-`func (o *FunctionMatchingResponse) SetCurrentPageNil(b bool)`
-
- SetCurrentPageNil sets the value for CurrentPage to be an explicit nil
-
-### UnsetCurrentPage
-`func (o *FunctionMatchingResponse) UnsetCurrentPage()`
-
-UnsetCurrentPage ensures that no value is present for CurrentPage, not even an explicit nil
 ### GetTotalPages
 
 `func (o *FunctionMatchingResponse) GetTotalPages() int32`
@@ -234,111 +304,41 @@ HasTotalPages returns a boolean if a field has been set.
 `func (o *FunctionMatchingResponse) UnsetTotalPages()`
 
 UnsetTotalPages ensures that no value is present for TotalPages, not even an explicit nil
-### GetMatches
+### GetTotalTime
 
-`func (o *FunctionMatchingResponse) GetMatches() []FunctionMatch`
+`func (o *FunctionMatchingResponse) GetTotalTime() int32`
 
-GetMatches returns the Matches field if non-nil, zero value otherwise.
+GetTotalTime returns the TotalTime field if non-nil, zero value otherwise.
 
-### GetMatchesOk
+### GetTotalTimeOk
 
-`func (o *FunctionMatchingResponse) GetMatchesOk() (*[]FunctionMatch, bool)`
+`func (o *FunctionMatchingResponse) GetTotalTimeOk() (*int32, bool)`
 
-GetMatchesOk returns a tuple with the Matches field if it's non-nil, zero value otherwise
+GetTotalTimeOk returns a tuple with the TotalTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMatches
+### SetTotalTime
 
-`func (o *FunctionMatchingResponse) SetMatches(v []FunctionMatch)`
+`func (o *FunctionMatchingResponse) SetTotalTime(v int32)`
 
-SetMatches sets Matches field to given value.
+SetTotalTime sets TotalTime field to given value.
 
-### HasMatches
+### HasTotalTime
 
-`func (o *FunctionMatchingResponse) HasMatches() bool`
+`func (o *FunctionMatchingResponse) HasTotalTime() bool`
 
-HasMatches returns a boolean if a field has been set.
+HasTotalTime returns a boolean if a field has been set.
 
-### SetMatchesNil
+### SetTotalTimeNil
 
-`func (o *FunctionMatchingResponse) SetMatchesNil(b bool)`
+`func (o *FunctionMatchingResponse) SetTotalTimeNil(b bool)`
 
- SetMatchesNil sets the value for Matches to be an explicit nil
+ SetTotalTimeNil sets the value for TotalTime to be an explicit nil
 
-### UnsetMatches
-`func (o *FunctionMatchingResponse) UnsetMatches()`
+### UnsetTotalTime
+`func (o *FunctionMatchingResponse) UnsetTotalTime()`
 
-UnsetMatches ensures that no value is present for Matches, not even an explicit nil
-### GetNumMatches
-
-`func (o *FunctionMatchingResponse) GetNumMatches() int32`
-
-GetNumMatches returns the NumMatches field if non-nil, zero value otherwise.
-
-### GetNumMatchesOk
-
-`func (o *FunctionMatchingResponse) GetNumMatchesOk() (*int32, bool)`
-
-GetNumMatchesOk returns a tuple with the NumMatches field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNumMatches
-
-`func (o *FunctionMatchingResponse) SetNumMatches(v int32)`
-
-SetNumMatches sets NumMatches field to given value.
-
-### HasNumMatches
-
-`func (o *FunctionMatchingResponse) HasNumMatches() bool`
-
-HasNumMatches returns a boolean if a field has been set.
-
-### SetNumMatchesNil
-
-`func (o *FunctionMatchingResponse) SetNumMatchesNil(b bool)`
-
- SetNumMatchesNil sets the value for NumMatches to be an explicit nil
-
-### UnsetNumMatches
-`func (o *FunctionMatchingResponse) UnsetNumMatches()`
-
-UnsetNumMatches ensures that no value is present for NumMatches, not even an explicit nil
-### GetNumDebugMatches
-
-`func (o *FunctionMatchingResponse) GetNumDebugMatches() int32`
-
-GetNumDebugMatches returns the NumDebugMatches field if non-nil, zero value otherwise.
-
-### GetNumDebugMatchesOk
-
-`func (o *FunctionMatchingResponse) GetNumDebugMatchesOk() (*int32, bool)`
-
-GetNumDebugMatchesOk returns a tuple with the NumDebugMatches field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNumDebugMatches
-
-`func (o *FunctionMatchingResponse) SetNumDebugMatches(v int32)`
-
-SetNumDebugMatches sets NumDebugMatches field to given value.
-
-### HasNumDebugMatches
-
-`func (o *FunctionMatchingResponse) HasNumDebugMatches() bool`
-
-HasNumDebugMatches returns a boolean if a field has been set.
-
-### SetNumDebugMatchesNil
-
-`func (o *FunctionMatchingResponse) SetNumDebugMatchesNil(b bool)`
-
- SetNumDebugMatchesNil sets the value for NumDebugMatches to be an explicit nil
-
-### UnsetNumDebugMatches
-`func (o *FunctionMatchingResponse) UnsetNumDebugMatches()`
-
-UnsetNumDebugMatches ensures that no value is present for NumDebugMatches, not even an explicit nil
+UnsetTotalTime ensures that no value is present for TotalTime, not even an explicit nil
 ### GetUpdatedAt
 
 `func (o *FunctionMatchingResponse) GetUpdatedAt() string`

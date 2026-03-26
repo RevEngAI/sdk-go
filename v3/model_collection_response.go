@@ -20,25 +20,25 @@ var _ MappedNullable = &CollectionResponse{}
 
 // CollectionResponse struct for CollectionResponse
 type CollectionResponse struct {
+	Binaries []CollectionResponseBinariesInner `json:"binaries,omitempty"`
 	// Collection ID
 	CollectionId int32 `json:"collection_id"`
 	// Collection name
 	CollectionName string `json:"collection_name"`
-	// Collection description
-	Description string `json:"description"`
-	// Collection model ID
-	ModelId int32 `json:"model_id"`
-	// Collection user ID
-	UserId int32 `json:"user_id"`
-	TeamId NullableInt32 `json:"team_id,omitempty"`
 	// Collection public status
 	CollectionScope CollectionScope `json:"collection_scope"`
 	// Collection creation date
 	CreatedAt time.Time `json:"created_at"`
+	// Collection description
+	Description string `json:"description"`
+	// Collection model ID
+	ModelId int32 `json:"model_id"`
+	Tags []string `json:"tags,omitempty"`
+	TeamId NullableInt32 `json:"team_id,omitempty"`
 	// Collection last update date
 	UpdatedAt time.Time `json:"updated_at"`
-	Tags []string `json:"tags,omitempty"`
-	Binaries []CollectionResponseBinariesInner `json:"binaries,omitempty"`
+	// Collection user ID
+	UserId int32 `json:"user_id"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -48,16 +48,16 @@ type _CollectionResponse CollectionResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCollectionResponse(collectionId int32, collectionName string, description string, modelId int32, userId int32, collectionScope CollectionScope, createdAt time.Time, updatedAt time.Time) *CollectionResponse {
+func NewCollectionResponse(collectionId int32, collectionName string, collectionScope CollectionScope, createdAt time.Time, description string, modelId int32, updatedAt time.Time, userId int32) *CollectionResponse {
 	this := CollectionResponse{}
 	this.CollectionId = collectionId
 	this.CollectionName = collectionName
-	this.Description = description
-	this.ModelId = modelId
-	this.UserId = userId
 	this.CollectionScope = collectionScope
 	this.CreatedAt = createdAt
+	this.Description = description
+	this.ModelId = modelId
 	this.UpdatedAt = updatedAt
+	this.UserId = userId
 	return &this
 }
 
@@ -67,6 +67,39 @@ func NewCollectionResponse(collectionId int32, collectionName string, descriptio
 func NewCollectionResponseWithDefaults() *CollectionResponse {
 	this := CollectionResponse{}
 	return &this
+}
+
+// GetBinaries returns the Binaries field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CollectionResponse) GetBinaries() []CollectionResponseBinariesInner {
+	if o == nil {
+		var ret []CollectionResponseBinariesInner
+		return ret
+	}
+	return o.Binaries
+}
+
+// GetBinariesOk returns a tuple with the Binaries field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CollectionResponse) GetBinariesOk() ([]CollectionResponseBinariesInner, bool) {
+	if o == nil || IsNil(o.Binaries) {
+		return nil, false
+	}
+	return o.Binaries, true
+}
+
+// HasBinaries returns a boolean if a field has been set.
+func (o *CollectionResponse) HasBinaries() bool {
+	if o != nil && !IsNil(o.Binaries) {
+		return true
+	}
+
+	return false
+}
+
+// SetBinaries gets a reference to the given []CollectionResponseBinariesInner and assigns it to the Binaries field.
+func (o *CollectionResponse) SetBinaries(v []CollectionResponseBinariesInner) {
+	o.Binaries = v
 }
 
 // GetCollectionId returns the CollectionId field value
@@ -117,120 +150,6 @@ func (o *CollectionResponse) SetCollectionName(v string) {
 	o.CollectionName = v
 }
 
-// GetDescription returns the Description field value
-func (o *CollectionResponse) GetDescription() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value
-// and a boolean to check if the value has been set.
-func (o *CollectionResponse) GetDescriptionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Description, true
-}
-
-// SetDescription sets field value
-func (o *CollectionResponse) SetDescription(v string) {
-	o.Description = v
-}
-
-// GetModelId returns the ModelId field value
-func (o *CollectionResponse) GetModelId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.ModelId
-}
-
-// GetModelIdOk returns a tuple with the ModelId field value
-// and a boolean to check if the value has been set.
-func (o *CollectionResponse) GetModelIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelId, true
-}
-
-// SetModelId sets field value
-func (o *CollectionResponse) SetModelId(v int32) {
-	o.ModelId = v
-}
-
-// GetUserId returns the UserId field value
-func (o *CollectionResponse) GetUserId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.UserId
-}
-
-// GetUserIdOk returns a tuple with the UserId field value
-// and a boolean to check if the value has been set.
-func (o *CollectionResponse) GetUserIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.UserId, true
-}
-
-// SetUserId sets field value
-func (o *CollectionResponse) SetUserId(v int32) {
-	o.UserId = v
-}
-
-// GetTeamId returns the TeamId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CollectionResponse) GetTeamId() int32 {
-	if o == nil || IsNil(o.TeamId.Get()) {
-		var ret int32
-		return ret
-	}
-	return *o.TeamId.Get()
-}
-
-// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CollectionResponse) GetTeamIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.TeamId.Get(), o.TeamId.IsSet()
-}
-
-// HasTeamId returns a boolean if a field has been set.
-func (o *CollectionResponse) HasTeamId() bool {
-	if o != nil && o.TeamId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetTeamId gets a reference to the given NullableInt32 and assigns it to the TeamId field.
-func (o *CollectionResponse) SetTeamId(v int32) {
-	o.TeamId.Set(&v)
-}
-// SetTeamIdNil sets the value for TeamId to be an explicit nil
-func (o *CollectionResponse) SetTeamIdNil() {
-	o.TeamId.Set(nil)
-}
-
-// UnsetTeamId ensures that no value is present for TeamId, not even an explicit nil
-func (o *CollectionResponse) UnsetTeamId() {
-	o.TeamId.Unset()
-}
-
 // GetCollectionScope returns the CollectionScope field value
 func (o *CollectionResponse) GetCollectionScope() CollectionScope {
 	if o == nil {
@@ -279,28 +198,52 @@ func (o *CollectionResponse) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value
-func (o *CollectionResponse) GetUpdatedAt() time.Time {
+// GetDescription returns the Description field value
+func (o *CollectionResponse) GetDescription() string {
 	if o == nil {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 
-	return o.UpdatedAt
+	return o.Description
 }
 
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
-func (o *CollectionResponse) GetUpdatedAtOk() (*time.Time, bool) {
+func (o *CollectionResponse) GetDescriptionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.UpdatedAt, true
+	return &o.Description, true
 }
 
-// SetUpdatedAt sets field value
-func (o *CollectionResponse) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = v
+// SetDescription sets field value
+func (o *CollectionResponse) SetDescription(v string) {
+	o.Description = v
+}
+
+// GetModelId returns the ModelId field value
+func (o *CollectionResponse) GetModelId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.ModelId
+}
+
+// GetModelIdOk returns a tuple with the ModelId field value
+// and a boolean to check if the value has been set.
+func (o *CollectionResponse) GetModelIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ModelId, true
+}
+
+// SetModelId sets field value
+func (o *CollectionResponse) SetModelId(v int32) {
+	o.ModelId = v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -336,37 +279,94 @@ func (o *CollectionResponse) SetTags(v []string) {
 	o.Tags = v
 }
 
-// GetBinaries returns the Binaries field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CollectionResponse) GetBinaries() []CollectionResponseBinariesInner {
-	if o == nil {
-		var ret []CollectionResponseBinariesInner
+// GetTeamId returns the TeamId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CollectionResponse) GetTeamId() int32 {
+	if o == nil || IsNil(o.TeamId.Get()) {
+		var ret int32
 		return ret
 	}
-	return o.Binaries
+	return *o.TeamId.Get()
 }
 
-// GetBinariesOk returns a tuple with the Binaries field value if set, nil otherwise
+// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CollectionResponse) GetBinariesOk() ([]CollectionResponseBinariesInner, bool) {
-	if o == nil || IsNil(o.Binaries) {
+func (o *CollectionResponse) GetTeamIdOk() (*int32, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Binaries, true
+	return o.TeamId.Get(), o.TeamId.IsSet()
 }
 
-// HasBinaries returns a boolean if a field has been set.
-func (o *CollectionResponse) HasBinaries() bool {
-	if o != nil && !IsNil(o.Binaries) {
+// HasTeamId returns a boolean if a field has been set.
+func (o *CollectionResponse) HasTeamId() bool {
+	if o != nil && o.TeamId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBinaries gets a reference to the given []CollectionResponseBinariesInner and assigns it to the Binaries field.
-func (o *CollectionResponse) SetBinaries(v []CollectionResponseBinariesInner) {
-	o.Binaries = v
+// SetTeamId gets a reference to the given NullableInt32 and assigns it to the TeamId field.
+func (o *CollectionResponse) SetTeamId(v int32) {
+	o.TeamId.Set(&v)
+}
+// SetTeamIdNil sets the value for TeamId to be an explicit nil
+func (o *CollectionResponse) SetTeamIdNil() {
+	o.TeamId.Set(nil)
+}
+
+// UnsetTeamId ensures that no value is present for TeamId, not even an explicit nil
+func (o *CollectionResponse) UnsetTeamId() {
+	o.TeamId.Unset()
+}
+
+// GetUpdatedAt returns the UpdatedAt field value
+func (o *CollectionResponse) GetUpdatedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
+// and a boolean to check if the value has been set.
+func (o *CollectionResponse) GetUpdatedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UpdatedAt, true
+}
+
+// SetUpdatedAt sets field value
+func (o *CollectionResponse) SetUpdatedAt(v time.Time) {
+	o.UpdatedAt = v
+}
+
+// GetUserId returns the UserId field value
+func (o *CollectionResponse) GetUserId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.UserId
+}
+
+// GetUserIdOk returns a tuple with the UserId field value
+// and a boolean to check if the value has been set.
+func (o *CollectionResponse) GetUserIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UserId, true
+}
+
+// SetUserId sets field value
+func (o *CollectionResponse) SetUserId(v int32) {
+	o.UserId = v
 }
 
 func (o CollectionResponse) MarshalJSON() ([]byte, error) {
@@ -379,23 +379,23 @@ func (o CollectionResponse) MarshalJSON() ([]byte, error) {
 
 func (o CollectionResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["collection_id"] = o.CollectionId
-	toSerialize["collection_name"] = o.CollectionName
-	toSerialize["description"] = o.Description
-	toSerialize["model_id"] = o.ModelId
-	toSerialize["user_id"] = o.UserId
-	if o.TeamId.IsSet() {
-		toSerialize["team_id"] = o.TeamId.Get()
-	}
-	toSerialize["collection_scope"] = o.CollectionScope
-	toSerialize["created_at"] = o.CreatedAt
-	toSerialize["updated_at"] = o.UpdatedAt
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if o.Binaries != nil {
 		toSerialize["binaries"] = o.Binaries
 	}
+	toSerialize["collection_id"] = o.CollectionId
+	toSerialize["collection_name"] = o.CollectionName
+	toSerialize["collection_scope"] = o.CollectionScope
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["description"] = o.Description
+	toSerialize["model_id"] = o.ModelId
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
+	}
+	if o.TeamId.IsSet() {
+		toSerialize["team_id"] = o.TeamId.Get()
+	}
+	toSerialize["updated_at"] = o.UpdatedAt
+	toSerialize["user_id"] = o.UserId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -411,12 +411,12 @@ func (o *CollectionResponse) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"collection_id",
 		"collection_name",
-		"description",
-		"model_id",
-		"user_id",
 		"collection_scope",
 		"created_at",
+		"description",
+		"model_id",
 		"updated_at",
+		"user_id",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -446,17 +446,17 @@ func (o *CollectionResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binaries")
 		delete(additionalProperties, "collection_id")
 		delete(additionalProperties, "collection_name")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "model_id")
-		delete(additionalProperties, "user_id")
-		delete(additionalProperties, "team_id")
 		delete(additionalProperties, "collection_scope")
 		delete(additionalProperties, "created_at")
-		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "model_id")
 		delete(additionalProperties, "tags")
-		delete(additionalProperties, "binaries")
+		delete(additionalProperties, "team_id")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "user_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

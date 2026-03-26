@@ -19,10 +19,10 @@ var _ MappedNullable = &FunctionParamResponse{}
 
 // FunctionParamResponse struct for FunctionParamResponse
 type FunctionParamResponse struct {
-	DType string `json:"d_type"`
-	Loc string `json:"loc"`
 	Addr string `json:"addr"`
+	DType string `json:"d_type"`
 	Length int32 `json:"length"`
+	Loc string `json:"loc"`
 	Name string `json:"name"`
 	AdditionalProperties map[string]interface{}
 }
@@ -33,12 +33,12 @@ type _FunctionParamResponse FunctionParamResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionParamResponse(dType string, loc string, addr string, length int32, name string) *FunctionParamResponse {
+func NewFunctionParamResponse(addr string, dType string, length int32, loc string, name string) *FunctionParamResponse {
 	this := FunctionParamResponse{}
-	this.DType = dType
-	this.Loc = loc
 	this.Addr = addr
+	this.DType = dType
 	this.Length = length
+	this.Loc = loc
 	this.Name = name
 	return &this
 }
@@ -49,54 +49,6 @@ func NewFunctionParamResponse(dType string, loc string, addr string, length int3
 func NewFunctionParamResponseWithDefaults() *FunctionParamResponse {
 	this := FunctionParamResponse{}
 	return &this
-}
-
-// GetDType returns the DType field value
-func (o *FunctionParamResponse) GetDType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.DType
-}
-
-// GetDTypeOk returns a tuple with the DType field value
-// and a boolean to check if the value has been set.
-func (o *FunctionParamResponse) GetDTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.DType, true
-}
-
-// SetDType sets field value
-func (o *FunctionParamResponse) SetDType(v string) {
-	o.DType = v
-}
-
-// GetLoc returns the Loc field value
-func (o *FunctionParamResponse) GetLoc() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Loc
-}
-
-// GetLocOk returns a tuple with the Loc field value
-// and a boolean to check if the value has been set.
-func (o *FunctionParamResponse) GetLocOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Loc, true
-}
-
-// SetLoc sets field value
-func (o *FunctionParamResponse) SetLoc(v string) {
-	o.Loc = v
 }
 
 // GetAddr returns the Addr field value
@@ -123,6 +75,30 @@ func (o *FunctionParamResponse) SetAddr(v string) {
 	o.Addr = v
 }
 
+// GetDType returns the DType field value
+func (o *FunctionParamResponse) GetDType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.DType
+}
+
+// GetDTypeOk returns a tuple with the DType field value
+// and a boolean to check if the value has been set.
+func (o *FunctionParamResponse) GetDTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DType, true
+}
+
+// SetDType sets field value
+func (o *FunctionParamResponse) SetDType(v string) {
+	o.DType = v
+}
+
 // GetLength returns the Length field value
 func (o *FunctionParamResponse) GetLength() int32 {
 	if o == nil {
@@ -145,6 +121,30 @@ func (o *FunctionParamResponse) GetLengthOk() (*int32, bool) {
 // SetLength sets field value
 func (o *FunctionParamResponse) SetLength(v int32) {
 	o.Length = v
+}
+
+// GetLoc returns the Loc field value
+func (o *FunctionParamResponse) GetLoc() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Loc
+}
+
+// GetLocOk returns a tuple with the Loc field value
+// and a boolean to check if the value has been set.
+func (o *FunctionParamResponse) GetLocOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Loc, true
+}
+
+// SetLoc sets field value
+func (o *FunctionParamResponse) SetLoc(v string) {
+	o.Loc = v
 }
 
 // GetName returns the Name field value
@@ -181,10 +181,10 @@ func (o FunctionParamResponse) MarshalJSON() ([]byte, error) {
 
 func (o FunctionParamResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["d_type"] = o.DType
-	toSerialize["loc"] = o.Loc
 	toSerialize["addr"] = o.Addr
+	toSerialize["d_type"] = o.DType
 	toSerialize["length"] = o.Length
+	toSerialize["loc"] = o.Loc
 	toSerialize["name"] = o.Name
 
 	for key, value := range o.AdditionalProperties {
@@ -199,10 +199,10 @@ func (o *FunctionParamResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"d_type",
-		"loc",
 		"addr",
+		"d_type",
 		"length",
+		"loc",
 		"name",
 	}
 
@@ -233,10 +233,10 @@ func (o *FunctionParamResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "d_type")
-		delete(additionalProperties, "loc")
 		delete(additionalProperties, "addr")
+		delete(additionalProperties, "d_type")
 		delete(additionalProperties, "length")
+		delete(additionalProperties, "loc")
 		delete(additionalProperties, "name")
 		o.AdditionalProperties = additionalProperties
 	}

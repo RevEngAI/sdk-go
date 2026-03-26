@@ -19,8 +19,8 @@ var _ MappedNullable = &SingleCodeSignatureModel{}
 
 // SingleCodeSignatureModel struct for SingleCodeSignatureModel
 type SingleCodeSignatureModel struct {
-	Certificates []SingleCodeCertificateModel `json:"certificates"`
 	AuthenticodeDigest string `json:"authenticode_digest"`
+	Certificates []SingleCodeCertificateModel `json:"certificates"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,10 +30,10 @@ type _SingleCodeSignatureModel SingleCodeSignatureModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSingleCodeSignatureModel(certificates []SingleCodeCertificateModel, authenticodeDigest string) *SingleCodeSignatureModel {
+func NewSingleCodeSignatureModel(authenticodeDigest string, certificates []SingleCodeCertificateModel) *SingleCodeSignatureModel {
 	this := SingleCodeSignatureModel{}
-	this.Certificates = certificates
 	this.AuthenticodeDigest = authenticodeDigest
+	this.Certificates = certificates
 	return &this
 }
 
@@ -43,30 +43,6 @@ func NewSingleCodeSignatureModel(certificates []SingleCodeCertificateModel, auth
 func NewSingleCodeSignatureModelWithDefaults() *SingleCodeSignatureModel {
 	this := SingleCodeSignatureModel{}
 	return &this
-}
-
-// GetCertificates returns the Certificates field value
-func (o *SingleCodeSignatureModel) GetCertificates() []SingleCodeCertificateModel {
-	if o == nil {
-		var ret []SingleCodeCertificateModel
-		return ret
-	}
-
-	return o.Certificates
-}
-
-// GetCertificatesOk returns a tuple with the Certificates field value
-// and a boolean to check if the value has been set.
-func (o *SingleCodeSignatureModel) GetCertificatesOk() ([]SingleCodeCertificateModel, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Certificates, true
-}
-
-// SetCertificates sets field value
-func (o *SingleCodeSignatureModel) SetCertificates(v []SingleCodeCertificateModel) {
-	o.Certificates = v
 }
 
 // GetAuthenticodeDigest returns the AuthenticodeDigest field value
@@ -93,6 +69,30 @@ func (o *SingleCodeSignatureModel) SetAuthenticodeDigest(v string) {
 	o.AuthenticodeDigest = v
 }
 
+// GetCertificates returns the Certificates field value
+func (o *SingleCodeSignatureModel) GetCertificates() []SingleCodeCertificateModel {
+	if o == nil {
+		var ret []SingleCodeCertificateModel
+		return ret
+	}
+
+	return o.Certificates
+}
+
+// GetCertificatesOk returns a tuple with the Certificates field value
+// and a boolean to check if the value has been set.
+func (o *SingleCodeSignatureModel) GetCertificatesOk() ([]SingleCodeCertificateModel, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Certificates, true
+}
+
+// SetCertificates sets field value
+func (o *SingleCodeSignatureModel) SetCertificates(v []SingleCodeCertificateModel) {
+	o.Certificates = v
+}
+
 func (o SingleCodeSignatureModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,8 +103,8 @@ func (o SingleCodeSignatureModel) MarshalJSON() ([]byte, error) {
 
 func (o SingleCodeSignatureModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["certificates"] = o.Certificates
 	toSerialize["authenticode_digest"] = o.AuthenticodeDigest
+	toSerialize["certificates"] = o.Certificates
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -118,8 +118,8 @@ func (o *SingleCodeSignatureModel) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"certificates",
 		"authenticode_digest",
+		"certificates",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -149,8 +149,8 @@ func (o *SingleCodeSignatureModel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "certificates")
 		delete(additionalProperties, "authenticode_digest")
+		delete(additionalProperties, "certificates")
 		o.AdditionalProperties = additionalProperties
 	}
 

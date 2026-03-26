@@ -20,26 +20,26 @@ var _ MappedNullable = &CollectionListItem{}
 
 // CollectionListItem struct for CollectionListItem
 type CollectionListItem struct {
-	// The name of the collection
-	CollectionName string `json:"collection_name"`
-	// The description of the collection
-	Description string `json:"description"`
-	// The scope of the collection
-	CollectionScope string `json:"collection_scope"`
-	// The owner of the collection
-	CollectionOwner string `json:"collection_owner"`
-	// Whether the collection is maintained by RevEng.AI
-	OfficialCollection bool `json:"official_collection"`
-	// The tags of the collection
-	CollectionTags []string `json:"collection_tags,omitempty"`
-	// The size of the collection
-	CollectionSize int32 `json:"collection_size"`
 	// The ID of the collection
 	CollectionId int32 `json:"collection_id"`
+	// The name of the collection
+	CollectionName string `json:"collection_name"`
+	// The owner of the collection
+	CollectionOwner string `json:"collection_owner"`
+	// The scope of the collection
+	CollectionScope string `json:"collection_scope"`
+	// The size of the collection
+	CollectionSize int32 `json:"collection_size"`
+	// The tags of the collection
+	CollectionTags []string `json:"collection_tags,omitempty"`
 	// The datetime of when the collection was created
 	Creation time.Time `json:"creation"`
+	// The description of the collection
+	Description string `json:"description"`
 	// The model being used for the collection
 	ModelName string `json:"model_name"`
+	// Whether the collection is maintained by RevEng.AI
+	OfficialCollection bool `json:"official_collection"`
 	TeamId NullableInt32 `json:"team_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -50,17 +50,17 @@ type _CollectionListItem CollectionListItem
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCollectionListItem(collectionName string, description string, collectionScope string, collectionOwner string, officialCollection bool, collectionSize int32, collectionId int32, creation time.Time, modelName string) *CollectionListItem {
+func NewCollectionListItem(collectionId int32, collectionName string, collectionOwner string, collectionScope string, collectionSize int32, creation time.Time, description string, modelName string, officialCollection bool) *CollectionListItem {
 	this := CollectionListItem{}
-	this.CollectionName = collectionName
-	this.Description = description
-	this.CollectionScope = collectionScope
-	this.CollectionOwner = collectionOwner
-	this.OfficialCollection = officialCollection
-	this.CollectionSize = collectionSize
 	this.CollectionId = collectionId
+	this.CollectionName = collectionName
+	this.CollectionOwner = collectionOwner
+	this.CollectionScope = collectionScope
+	this.CollectionSize = collectionSize
 	this.Creation = creation
+	this.Description = description
 	this.ModelName = modelName
+	this.OfficialCollection = officialCollection
 	return &this
 }
 
@@ -70,6 +70,30 @@ func NewCollectionListItem(collectionName string, description string, collection
 func NewCollectionListItemWithDefaults() *CollectionListItem {
 	this := CollectionListItem{}
 	return &this
+}
+
+// GetCollectionId returns the CollectionId field value
+func (o *CollectionListItem) GetCollectionId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.CollectionId
+}
+
+// GetCollectionIdOk returns a tuple with the CollectionId field value
+// and a boolean to check if the value has been set.
+func (o *CollectionListItem) GetCollectionIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CollectionId, true
+}
+
+// SetCollectionId sets field value
+func (o *CollectionListItem) SetCollectionId(v int32) {
+	o.CollectionId = v
 }
 
 // GetCollectionName returns the CollectionName field value
@@ -96,28 +120,28 @@ func (o *CollectionListItem) SetCollectionName(v string) {
 	o.CollectionName = v
 }
 
-// GetDescription returns the Description field value
-func (o *CollectionListItem) GetDescription() string {
+// GetCollectionOwner returns the CollectionOwner field value
+func (o *CollectionListItem) GetCollectionOwner() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Description
+	return o.CollectionOwner
 }
 
-// GetDescriptionOk returns a tuple with the Description field value
+// GetCollectionOwnerOk returns a tuple with the CollectionOwner field value
 // and a boolean to check if the value has been set.
-func (o *CollectionListItem) GetDescriptionOk() (*string, bool) {
+func (o *CollectionListItem) GetCollectionOwnerOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Description, true
+	return &o.CollectionOwner, true
 }
 
-// SetDescription sets field value
-func (o *CollectionListItem) SetDescription(v string) {
-	o.Description = v
+// SetCollectionOwner sets field value
+func (o *CollectionListItem) SetCollectionOwner(v string) {
+	o.CollectionOwner = v
 }
 
 // GetCollectionScope returns the CollectionScope field value
@@ -144,52 +168,28 @@ func (o *CollectionListItem) SetCollectionScope(v string) {
 	o.CollectionScope = v
 }
 
-// GetCollectionOwner returns the CollectionOwner field value
-func (o *CollectionListItem) GetCollectionOwner() string {
+// GetCollectionSize returns the CollectionSize field value
+func (o *CollectionListItem) GetCollectionSize() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
-	return o.CollectionOwner
+	return o.CollectionSize
 }
 
-// GetCollectionOwnerOk returns a tuple with the CollectionOwner field value
+// GetCollectionSizeOk returns a tuple with the CollectionSize field value
 // and a boolean to check if the value has been set.
-func (o *CollectionListItem) GetCollectionOwnerOk() (*string, bool) {
+func (o *CollectionListItem) GetCollectionSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.CollectionOwner, true
+	return &o.CollectionSize, true
 }
 
-// SetCollectionOwner sets field value
-func (o *CollectionListItem) SetCollectionOwner(v string) {
-	o.CollectionOwner = v
-}
-
-// GetOfficialCollection returns the OfficialCollection field value
-func (o *CollectionListItem) GetOfficialCollection() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.OfficialCollection
-}
-
-// GetOfficialCollectionOk returns a tuple with the OfficialCollection field value
-// and a boolean to check if the value has been set.
-func (o *CollectionListItem) GetOfficialCollectionOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.OfficialCollection, true
-}
-
-// SetOfficialCollection sets field value
-func (o *CollectionListItem) SetOfficialCollection(v bool) {
-	o.OfficialCollection = v
+// SetCollectionSize sets field value
+func (o *CollectionListItem) SetCollectionSize(v int32) {
+	o.CollectionSize = v
 }
 
 // GetCollectionTags returns the CollectionTags field value if set, zero value otherwise.
@@ -224,54 +224,6 @@ func (o *CollectionListItem) SetCollectionTags(v []string) {
 	o.CollectionTags = v
 }
 
-// GetCollectionSize returns the CollectionSize field value
-func (o *CollectionListItem) GetCollectionSize() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.CollectionSize
-}
-
-// GetCollectionSizeOk returns a tuple with the CollectionSize field value
-// and a boolean to check if the value has been set.
-func (o *CollectionListItem) GetCollectionSizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CollectionSize, true
-}
-
-// SetCollectionSize sets field value
-func (o *CollectionListItem) SetCollectionSize(v int32) {
-	o.CollectionSize = v
-}
-
-// GetCollectionId returns the CollectionId field value
-func (o *CollectionListItem) GetCollectionId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.CollectionId
-}
-
-// GetCollectionIdOk returns a tuple with the CollectionId field value
-// and a boolean to check if the value has been set.
-func (o *CollectionListItem) GetCollectionIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CollectionId, true
-}
-
-// SetCollectionId sets field value
-func (o *CollectionListItem) SetCollectionId(v int32) {
-	o.CollectionId = v
-}
-
 // GetCreation returns the Creation field value
 func (o *CollectionListItem) GetCreation() time.Time {
 	if o == nil {
@@ -296,6 +248,30 @@ func (o *CollectionListItem) SetCreation(v time.Time) {
 	o.Creation = v
 }
 
+// GetDescription returns the Description field value
+func (o *CollectionListItem) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *CollectionListItem) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *CollectionListItem) SetDescription(v string) {
+	o.Description = v
+}
+
 // GetModelName returns the ModelName field value
 func (o *CollectionListItem) GetModelName() string {
 	if o == nil {
@@ -318,6 +294,30 @@ func (o *CollectionListItem) GetModelNameOk() (*string, bool) {
 // SetModelName sets field value
 func (o *CollectionListItem) SetModelName(v string) {
 	o.ModelName = v
+}
+
+// GetOfficialCollection returns the OfficialCollection field value
+func (o *CollectionListItem) GetOfficialCollection() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.OfficialCollection
+}
+
+// GetOfficialCollectionOk returns a tuple with the OfficialCollection field value
+// and a boolean to check if the value has been set.
+func (o *CollectionListItem) GetOfficialCollectionOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OfficialCollection, true
+}
+
+// SetOfficialCollection sets field value
+func (o *CollectionListItem) SetOfficialCollection(v bool) {
+	o.OfficialCollection = v
 }
 
 // GetTeamId returns the TeamId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -372,18 +372,18 @@ func (o CollectionListItem) MarshalJSON() ([]byte, error) {
 
 func (o CollectionListItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["collection_id"] = o.CollectionId
 	toSerialize["collection_name"] = o.CollectionName
-	toSerialize["description"] = o.Description
-	toSerialize["collection_scope"] = o.CollectionScope
 	toSerialize["collection_owner"] = o.CollectionOwner
-	toSerialize["official_collection"] = o.OfficialCollection
+	toSerialize["collection_scope"] = o.CollectionScope
+	toSerialize["collection_size"] = o.CollectionSize
 	if !IsNil(o.CollectionTags) {
 		toSerialize["collection_tags"] = o.CollectionTags
 	}
-	toSerialize["collection_size"] = o.CollectionSize
-	toSerialize["collection_id"] = o.CollectionId
 	toSerialize["creation"] = o.Creation
+	toSerialize["description"] = o.Description
 	toSerialize["model_name"] = o.ModelName
+	toSerialize["official_collection"] = o.OfficialCollection
 	if o.TeamId.IsSet() {
 		toSerialize["team_id"] = o.TeamId.Get()
 	}
@@ -400,15 +400,15 @@ func (o *CollectionListItem) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"collection_name",
-		"description",
-		"collection_scope",
-		"collection_owner",
-		"official_collection",
-		"collection_size",
 		"collection_id",
+		"collection_name",
+		"collection_owner",
+		"collection_scope",
+		"collection_size",
 		"creation",
+		"description",
 		"model_name",
+		"official_collection",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -438,16 +438,16 @@ func (o *CollectionListItem) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "collection_name")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "collection_scope")
-		delete(additionalProperties, "collection_owner")
-		delete(additionalProperties, "official_collection")
-		delete(additionalProperties, "collection_tags")
-		delete(additionalProperties, "collection_size")
 		delete(additionalProperties, "collection_id")
+		delete(additionalProperties, "collection_name")
+		delete(additionalProperties, "collection_owner")
+		delete(additionalProperties, "collection_scope")
+		delete(additionalProperties, "collection_size")
+		delete(additionalProperties, "collection_tags")
 		delete(additionalProperties, "creation")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "model_name")
+		delete(additionalProperties, "official_collection")
 		delete(additionalProperties, "team_id")
 		o.AdditionalProperties = additionalProperties
 	}

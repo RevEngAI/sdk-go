@@ -7,17 +7,17 @@ Name | Type | Description | Notes
 **Md5** | **NullableString** |  | 
 **Sha1** | **NullableString** |  | 
 **Sha256** | **NullableString** |  | 
-**Sha512** | **NullableString** |  | 
 **Sha3224** | **NullableString** |  | 
 **Sha3256** | **NullableString** |  | 
 **Sha3384** | **NullableString** |  | 
 **Sha3512** | **NullableString** |  | 
+**Sha512** | **NullableString** |  | 
 
 ## Methods
 
 ### NewFileHashes
 
-`func NewFileHashes(md5 NullableString, sha1 NullableString, sha256 NullableString, sha512 NullableString, sha3224 NullableString, sha3256 NullableString, sha3384 NullableString, sha3512 NullableString, ) *FileHashes`
+`func NewFileHashes(md5 NullableString, sha1 NullableString, sha256 NullableString, sha3224 NullableString, sha3256 NullableString, sha3384 NullableString, sha3512 NullableString, sha512 NullableString, ) *FileHashes`
 
 NewFileHashes instantiates a new FileHashes object
 This constructor will assign default values to properties that have it defined,
@@ -122,36 +122,6 @@ SetSha256 sets Sha256 field to given value.
 `func (o *FileHashes) UnsetSha256()`
 
 UnsetSha256 ensures that no value is present for Sha256, not even an explicit nil
-### GetSha512
-
-`func (o *FileHashes) GetSha512() string`
-
-GetSha512 returns the Sha512 field if non-nil, zero value otherwise.
-
-### GetSha512Ok
-
-`func (o *FileHashes) GetSha512Ok() (*string, bool)`
-
-GetSha512Ok returns a tuple with the Sha512 field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSha512
-
-`func (o *FileHashes) SetSha512(v string)`
-
-SetSha512 sets Sha512 field to given value.
-
-
-### SetSha512Nil
-
-`func (o *FileHashes) SetSha512Nil(b bool)`
-
- SetSha512Nil sets the value for Sha512 to be an explicit nil
-
-### UnsetSha512
-`func (o *FileHashes) UnsetSha512()`
-
-UnsetSha512 ensures that no value is present for Sha512, not even an explicit nil
 ### GetSha3224
 
 `func (o *FileHashes) GetSha3224() string`
@@ -272,6 +242,36 @@ SetSha3512 sets Sha3512 field to given value.
 `func (o *FileHashes) UnsetSha3512()`
 
 UnsetSha3512 ensures that no value is present for Sha3512, not even an explicit nil
+### GetSha512
+
+`func (o *FileHashes) GetSha512() string`
+
+GetSha512 returns the Sha512 field if non-nil, zero value otherwise.
+
+### GetSha512Ok
+
+`func (o *FileHashes) GetSha512Ok() (*string, bool)`
+
+GetSha512Ok returns a tuple with the Sha512 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSha512
+
+`func (o *FileHashes) SetSha512(v string)`
+
+SetSha512 sets Sha512 field to given value.
+
+
+### SetSha512Nil
+
+`func (o *FileHashes) SetSha512Nil(b bool)`
+
+ SetSha512Nil sets the value for Sha512 to be an explicit nil
+
+### UnsetSha512
+`func (o *FileHashes) UnsetSha512()`
+
+UnsetSha512 ensures that no value is present for Sha512, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

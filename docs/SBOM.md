@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Packages** | [**[]SBOMPackage**](SBOMPackage.md) | The packages found | 
 **ImportedLibs** | **[]string** | The import libraries found | 
+**Packages** | [**[]SBOMPackage**](SBOMPackage.md) | The packages found | 
 
 ## Methods
 
 ### NewSBOM
 
-`func NewSBOM(packages []SBOMPackage, importedLibs []string, ) *SBOM`
+`func NewSBOM(importedLibs []string, packages []SBOMPackage, ) *SBOM`
 
 NewSBOM instantiates a new SBOM object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewSBOMWithDefaults instantiates a new SBOM object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetPackages
-
-`func (o *SBOM) GetPackages() []SBOMPackage`
-
-GetPackages returns the Packages field if non-nil, zero value otherwise.
-
-### GetPackagesOk
-
-`func (o *SBOM) GetPackagesOk() (*[]SBOMPackage, bool)`
-
-GetPackagesOk returns a tuple with the Packages field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPackages
-
-`func (o *SBOM) SetPackages(v []SBOMPackage)`
-
-SetPackages sets Packages field to given value.
-
 
 ### GetImportedLibs
 
@@ -64,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *SBOM) SetImportedLibs(v []string)`
 
 SetImportedLibs sets ImportedLibs field to given value.
+
+
+### GetPackages
+
+`func (o *SBOM) GetPackages() []SBOMPackage`
+
+GetPackages returns the Packages field if non-nil, zero value otherwise.
+
+### GetPackagesOk
+
+`func (o *SBOM) GetPackagesOk() (*[]SBOMPackage, bool)`
+
+GetPackagesOk returns a tuple with the Packages field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPackages
+
+`func (o *SBOM) SetPackages(v []SBOMPackage)`
+
+SetPackages sets Packages field to given value.
 
 
 

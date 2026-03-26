@@ -19,8 +19,8 @@ var _ MappedNullable = &NetworkOverviewDnsAnswer{}
 
 // NetworkOverviewDnsAnswer struct for NetworkOverviewDnsAnswer
 type NetworkOverviewDnsAnswer struct {
-	Type string `json:"type"`
 	Data string `json:"data"`
+	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,10 +30,10 @@ type _NetworkOverviewDnsAnswer NetworkOverviewDnsAnswer
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkOverviewDnsAnswer(type_ string, data string) *NetworkOverviewDnsAnswer {
+func NewNetworkOverviewDnsAnswer(data string, type_ string) *NetworkOverviewDnsAnswer {
 	this := NetworkOverviewDnsAnswer{}
-	this.Type = type_
 	this.Data = data
+	this.Type = type_
 	return &this
 }
 
@@ -43,30 +43,6 @@ func NewNetworkOverviewDnsAnswer(type_ string, data string) *NetworkOverviewDnsA
 func NewNetworkOverviewDnsAnswerWithDefaults() *NetworkOverviewDnsAnswer {
 	this := NetworkOverviewDnsAnswer{}
 	return &this
-}
-
-// GetType returns the Type field value
-func (o *NetworkOverviewDnsAnswer) GetType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *NetworkOverviewDnsAnswer) GetTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *NetworkOverviewDnsAnswer) SetType(v string) {
-	o.Type = v
 }
 
 // GetData returns the Data field value
@@ -93,6 +69,30 @@ func (o *NetworkOverviewDnsAnswer) SetData(v string) {
 	o.Data = v
 }
 
+// GetType returns the Type field value
+func (o *NetworkOverviewDnsAnswer) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *NetworkOverviewDnsAnswer) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *NetworkOverviewDnsAnswer) SetType(v string) {
+	o.Type = v
+}
+
 func (o NetworkOverviewDnsAnswer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,8 +103,8 @@ func (o NetworkOverviewDnsAnswer) MarshalJSON() ([]byte, error) {
 
 func (o NetworkOverviewDnsAnswer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["type"] = o.Type
 	toSerialize["data"] = o.Data
+	toSerialize["type"] = o.Type
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -118,8 +118,8 @@ func (o *NetworkOverviewDnsAnswer) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"type",
 		"data",
+		"type",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -149,8 +149,8 @@ func (o *NetworkOverviewDnsAnswer) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "type")
 		delete(additionalProperties, "data")
+		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
 	}
 

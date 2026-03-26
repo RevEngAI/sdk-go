@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ScrapeThirdPartyConfig** | Pointer to [**ScrapeThirdPartyConfig**](ScrapeThirdPartyConfig.md) | Settings to scrape third party sources | [optional] 
+**AdvancedAnalysis** | Pointer to **bool** | Enables an advanced security analysis. | [optional] [default to false]
+**GenerateCapabilities** | Pointer to **bool** | A configuration option for generating capabilities of a binary | [optional] [default to false]
 **GenerateCves** | Pointer to **bool** | A configuration option for fetching CVEs data. | [optional] [default to false]
 **GenerateSbom** | Pointer to **bool** | A configuration option for generating software bill of materials data. | [optional] [default to false]
-**GenerateCapabilities** | Pointer to **bool** | A configuration option for generating capabilities of a binary | [optional] [default to false]
 **NoCache** | Pointer to **bool** | When enabled, skips using cached data within the processing. | [optional] [default to false]
-**AdvancedAnalysis** | Pointer to **bool** | Enables an advanced security analysis. | [optional] [default to false]
 **SandboxConfig** | Pointer to [**SandboxOptions**](SandboxOptions.md) | Including a sandbox config enables the dynamic execution sandbox | [optional] 
+**ScrapeThirdPartyConfig** | Pointer to [**ScrapeThirdPartyConfig**](ScrapeThirdPartyConfig.md) | Settings to scrape third party sources | [optional] 
 
 ## Methods
 
@@ -31,30 +31,55 @@ NewAnalysisConfigWithDefaults instantiates a new AnalysisConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetScrapeThirdPartyConfig
+### GetAdvancedAnalysis
 
-`func (o *AnalysisConfig) GetScrapeThirdPartyConfig() ScrapeThirdPartyConfig`
+`func (o *AnalysisConfig) GetAdvancedAnalysis() bool`
 
-GetScrapeThirdPartyConfig returns the ScrapeThirdPartyConfig field if non-nil, zero value otherwise.
+GetAdvancedAnalysis returns the AdvancedAnalysis field if non-nil, zero value otherwise.
 
-### GetScrapeThirdPartyConfigOk
+### GetAdvancedAnalysisOk
 
-`func (o *AnalysisConfig) GetScrapeThirdPartyConfigOk() (*ScrapeThirdPartyConfig, bool)`
+`func (o *AnalysisConfig) GetAdvancedAnalysisOk() (*bool, bool)`
 
-GetScrapeThirdPartyConfigOk returns a tuple with the ScrapeThirdPartyConfig field if it's non-nil, zero value otherwise
+GetAdvancedAnalysisOk returns a tuple with the AdvancedAnalysis field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetScrapeThirdPartyConfig
+### SetAdvancedAnalysis
 
-`func (o *AnalysisConfig) SetScrapeThirdPartyConfig(v ScrapeThirdPartyConfig)`
+`func (o *AnalysisConfig) SetAdvancedAnalysis(v bool)`
 
-SetScrapeThirdPartyConfig sets ScrapeThirdPartyConfig field to given value.
+SetAdvancedAnalysis sets AdvancedAnalysis field to given value.
 
-### HasScrapeThirdPartyConfig
+### HasAdvancedAnalysis
 
-`func (o *AnalysisConfig) HasScrapeThirdPartyConfig() bool`
+`func (o *AnalysisConfig) HasAdvancedAnalysis() bool`
 
-HasScrapeThirdPartyConfig returns a boolean if a field has been set.
+HasAdvancedAnalysis returns a boolean if a field has been set.
+
+### GetGenerateCapabilities
+
+`func (o *AnalysisConfig) GetGenerateCapabilities() bool`
+
+GetGenerateCapabilities returns the GenerateCapabilities field if non-nil, zero value otherwise.
+
+### GetGenerateCapabilitiesOk
+
+`func (o *AnalysisConfig) GetGenerateCapabilitiesOk() (*bool, bool)`
+
+GetGenerateCapabilitiesOk returns a tuple with the GenerateCapabilities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGenerateCapabilities
+
+`func (o *AnalysisConfig) SetGenerateCapabilities(v bool)`
+
+SetGenerateCapabilities sets GenerateCapabilities field to given value.
+
+### HasGenerateCapabilities
+
+`func (o *AnalysisConfig) HasGenerateCapabilities() bool`
+
+HasGenerateCapabilities returns a boolean if a field has been set.
 
 ### GetGenerateCves
 
@@ -106,31 +131,6 @@ SetGenerateSbom sets GenerateSbom field to given value.
 
 HasGenerateSbom returns a boolean if a field has been set.
 
-### GetGenerateCapabilities
-
-`func (o *AnalysisConfig) GetGenerateCapabilities() bool`
-
-GetGenerateCapabilities returns the GenerateCapabilities field if non-nil, zero value otherwise.
-
-### GetGenerateCapabilitiesOk
-
-`func (o *AnalysisConfig) GetGenerateCapabilitiesOk() (*bool, bool)`
-
-GetGenerateCapabilitiesOk returns a tuple with the GenerateCapabilities field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetGenerateCapabilities
-
-`func (o *AnalysisConfig) SetGenerateCapabilities(v bool)`
-
-SetGenerateCapabilities sets GenerateCapabilities field to given value.
-
-### HasGenerateCapabilities
-
-`func (o *AnalysisConfig) HasGenerateCapabilities() bool`
-
-HasGenerateCapabilities returns a boolean if a field has been set.
-
 ### GetNoCache
 
 `func (o *AnalysisConfig) GetNoCache() bool`
@@ -156,31 +156,6 @@ SetNoCache sets NoCache field to given value.
 
 HasNoCache returns a boolean if a field has been set.
 
-### GetAdvancedAnalysis
-
-`func (o *AnalysisConfig) GetAdvancedAnalysis() bool`
-
-GetAdvancedAnalysis returns the AdvancedAnalysis field if non-nil, zero value otherwise.
-
-### GetAdvancedAnalysisOk
-
-`func (o *AnalysisConfig) GetAdvancedAnalysisOk() (*bool, bool)`
-
-GetAdvancedAnalysisOk returns a tuple with the AdvancedAnalysis field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAdvancedAnalysis
-
-`func (o *AnalysisConfig) SetAdvancedAnalysis(v bool)`
-
-SetAdvancedAnalysis sets AdvancedAnalysis field to given value.
-
-### HasAdvancedAnalysis
-
-`func (o *AnalysisConfig) HasAdvancedAnalysis() bool`
-
-HasAdvancedAnalysis returns a boolean if a field has been set.
-
 ### GetSandboxConfig
 
 `func (o *AnalysisConfig) GetSandboxConfig() SandboxOptions`
@@ -205,6 +180,31 @@ SetSandboxConfig sets SandboxConfig field to given value.
 `func (o *AnalysisConfig) HasSandboxConfig() bool`
 
 HasSandboxConfig returns a boolean if a field has been set.
+
+### GetScrapeThirdPartyConfig
+
+`func (o *AnalysisConfig) GetScrapeThirdPartyConfig() ScrapeThirdPartyConfig`
+
+GetScrapeThirdPartyConfig returns the ScrapeThirdPartyConfig field if non-nil, zero value otherwise.
+
+### GetScrapeThirdPartyConfigOk
+
+`func (o *AnalysisConfig) GetScrapeThirdPartyConfigOk() (*ScrapeThirdPartyConfig, bool)`
+
+GetScrapeThirdPartyConfigOk returns a tuple with the ScrapeThirdPartyConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScrapeThirdPartyConfig
+
+`func (o *AnalysisConfig) SetScrapeThirdPartyConfig(v ScrapeThirdPartyConfig)`
+
+SetScrapeThirdPartyConfig sets ScrapeThirdPartyConfig field to given value.
+
+### HasScrapeThirdPartyConfig
+
+`func (o *AnalysisConfig) HasScrapeThirdPartyConfig() bool`
+
+HasScrapeThirdPartyConfig returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

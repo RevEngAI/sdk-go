@@ -19,16 +19,16 @@ var _ MappedNullable = &GetAiDecompilationTask{}
 
 // GetAiDecompilationTask struct for GetAiDecompilationTask
 type GetAiDecompilationTask struct {
-	// The status of the AI decompilation task
-	Status AiDecompilationTaskStatus `json:"status"`
+	AiSummary NullableString `json:"ai_summary,omitempty"`
 	Decompilation NullableString `json:"decompilation"`
-	RawDecompilation NullableString `json:"raw_decompilation"`
 	FunctionMapping map[string]InverseFunctionMapItem `json:"function_mapping"`
 	FunctionMappingFull NullableFunctionMappingFull `json:"function_mapping_full"`
-	Summary NullableString `json:"summary,omitempty"`
-	AiSummary NullableString `json:"ai_summary,omitempty"`
-	RawAiSummary NullableString `json:"raw_ai_summary,omitempty"`
 	PredictedFunctionName NullableString `json:"predicted_function_name,omitempty"`
+	RawAiSummary NullableString `json:"raw_ai_summary,omitempty"`
+	RawDecompilation NullableString `json:"raw_decompilation"`
+	// The status of the AI decompilation task
+	Status AiDecompilationTaskStatus `json:"status"`
+	Summary NullableString `json:"summary,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -38,13 +38,13 @@ type _GetAiDecompilationTask GetAiDecompilationTask
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAiDecompilationTask(status AiDecompilationTaskStatus, decompilation NullableString, rawDecompilation NullableString, functionMapping map[string]InverseFunctionMapItem, functionMappingFull NullableFunctionMappingFull) *GetAiDecompilationTask {
+func NewGetAiDecompilationTask(decompilation NullableString, functionMapping map[string]InverseFunctionMapItem, functionMappingFull NullableFunctionMappingFull, rawDecompilation NullableString, status AiDecompilationTaskStatus) *GetAiDecompilationTask {
 	this := GetAiDecompilationTask{}
-	this.Status = status
 	this.Decompilation = decompilation
-	this.RawDecompilation = rawDecompilation
 	this.FunctionMapping = functionMapping
 	this.FunctionMappingFull = functionMappingFull
+	this.RawDecompilation = rawDecompilation
+	this.Status = status
 	return &this
 }
 
@@ -56,28 +56,46 @@ func NewGetAiDecompilationTaskWithDefaults() *GetAiDecompilationTask {
 	return &this
 }
 
-// GetStatus returns the Status field value
-func (o *GetAiDecompilationTask) GetStatus() AiDecompilationTaskStatus {
-	if o == nil {
-		var ret AiDecompilationTaskStatus
+// GetAiSummary returns the AiSummary field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetAiDecompilationTask) GetAiSummary() string {
+	if o == nil || IsNil(o.AiSummary.Get()) {
+		var ret string
 		return ret
 	}
-
-	return o.Status
+	return *o.AiSummary.Get()
 }
 
-// GetStatusOk returns a tuple with the Status field value
+// GetAiSummaryOk returns a tuple with the AiSummary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAiDecompilationTask) GetStatusOk() (*AiDecompilationTaskStatus, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetAiDecompilationTask) GetAiSummaryOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Status, true
+	return o.AiSummary.Get(), o.AiSummary.IsSet()
 }
 
-// SetStatus sets field value
-func (o *GetAiDecompilationTask) SetStatus(v AiDecompilationTaskStatus) {
-	o.Status = v
+// HasAiSummary returns a boolean if a field has been set.
+func (o *GetAiDecompilationTask) HasAiSummary() bool {
+	if o != nil && o.AiSummary.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAiSummary gets a reference to the given NullableString and assigns it to the AiSummary field.
+func (o *GetAiDecompilationTask) SetAiSummary(v string) {
+	o.AiSummary.Set(&v)
+}
+// SetAiSummaryNil sets the value for AiSummary to be an explicit nil
+func (o *GetAiDecompilationTask) SetAiSummaryNil() {
+	o.AiSummary.Set(nil)
+}
+
+// UnsetAiSummary ensures that no value is present for AiSummary, not even an explicit nil
+func (o *GetAiDecompilationTask) UnsetAiSummary() {
+	o.AiSummary.Unset()
 }
 
 // GetDecompilation returns the Decompilation field value
@@ -104,32 +122,6 @@ func (o *GetAiDecompilationTask) GetDecompilationOk() (*string, bool) {
 // SetDecompilation sets field value
 func (o *GetAiDecompilationTask) SetDecompilation(v string) {
 	o.Decompilation.Set(&v)
-}
-
-// GetRawDecompilation returns the RawDecompilation field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *GetAiDecompilationTask) GetRawDecompilation() string {
-	if o == nil || o.RawDecompilation.Get() == nil {
-		var ret string
-		return ret
-	}
-
-	return *o.RawDecompilation.Get()
-}
-
-// GetRawDecompilationOk returns a tuple with the RawDecompilation field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetAiDecompilationTask) GetRawDecompilationOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.RawDecompilation.Get(), o.RawDecompilation.IsSet()
-}
-
-// SetRawDecompilation sets field value
-func (o *GetAiDecompilationTask) SetRawDecompilation(v string) {
-	o.RawDecompilation.Set(&v)
 }
 
 // GetFunctionMapping returns the FunctionMapping field value
@@ -184,88 +176,46 @@ func (o *GetAiDecompilationTask) SetFunctionMappingFull(v FunctionMappingFull) {
 	o.FunctionMappingFull.Set(&v)
 }
 
-// GetSummary returns the Summary field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetAiDecompilationTask) GetSummary() string {
-	if o == nil || IsNil(o.Summary.Get()) {
+// GetPredictedFunctionName returns the PredictedFunctionName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetAiDecompilationTask) GetPredictedFunctionName() string {
+	if o == nil || IsNil(o.PredictedFunctionName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Summary.Get()
+	return *o.PredictedFunctionName.Get()
 }
 
-// GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
+// GetPredictedFunctionNameOk returns a tuple with the PredictedFunctionName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetAiDecompilationTask) GetSummaryOk() (*string, bool) {
+func (o *GetAiDecompilationTask) GetPredictedFunctionNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Summary.Get(), o.Summary.IsSet()
+	return o.PredictedFunctionName.Get(), o.PredictedFunctionName.IsSet()
 }
 
-// HasSummary returns a boolean if a field has been set.
-func (o *GetAiDecompilationTask) HasSummary() bool {
-	if o != nil && o.Summary.IsSet() {
+// HasPredictedFunctionName returns a boolean if a field has been set.
+func (o *GetAiDecompilationTask) HasPredictedFunctionName() bool {
+	if o != nil && o.PredictedFunctionName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSummary gets a reference to the given NullableString and assigns it to the Summary field.
-func (o *GetAiDecompilationTask) SetSummary(v string) {
-	o.Summary.Set(&v)
+// SetPredictedFunctionName gets a reference to the given NullableString and assigns it to the PredictedFunctionName field.
+func (o *GetAiDecompilationTask) SetPredictedFunctionName(v string) {
+	o.PredictedFunctionName.Set(&v)
 }
-// SetSummaryNil sets the value for Summary to be an explicit nil
-func (o *GetAiDecompilationTask) SetSummaryNil() {
-	o.Summary.Set(nil)
-}
-
-// UnsetSummary ensures that no value is present for Summary, not even an explicit nil
-func (o *GetAiDecompilationTask) UnsetSummary() {
-	o.Summary.Unset()
+// SetPredictedFunctionNameNil sets the value for PredictedFunctionName to be an explicit nil
+func (o *GetAiDecompilationTask) SetPredictedFunctionNameNil() {
+	o.PredictedFunctionName.Set(nil)
 }
 
-// GetAiSummary returns the AiSummary field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetAiDecompilationTask) GetAiSummary() string {
-	if o == nil || IsNil(o.AiSummary.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.AiSummary.Get()
-}
-
-// GetAiSummaryOk returns a tuple with the AiSummary field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetAiDecompilationTask) GetAiSummaryOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.AiSummary.Get(), o.AiSummary.IsSet()
-}
-
-// HasAiSummary returns a boolean if a field has been set.
-func (o *GetAiDecompilationTask) HasAiSummary() bool {
-	if o != nil && o.AiSummary.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAiSummary gets a reference to the given NullableString and assigns it to the AiSummary field.
-func (o *GetAiDecompilationTask) SetAiSummary(v string) {
-	o.AiSummary.Set(&v)
-}
-// SetAiSummaryNil sets the value for AiSummary to be an explicit nil
-func (o *GetAiDecompilationTask) SetAiSummaryNil() {
-	o.AiSummary.Set(nil)
-}
-
-// UnsetAiSummary ensures that no value is present for AiSummary, not even an explicit nil
-func (o *GetAiDecompilationTask) UnsetAiSummary() {
-	o.AiSummary.Unset()
+// UnsetPredictedFunctionName ensures that no value is present for PredictedFunctionName, not even an explicit nil
+func (o *GetAiDecompilationTask) UnsetPredictedFunctionName() {
+	o.PredictedFunctionName.Unset()
 }
 
 // GetRawAiSummary returns the RawAiSummary field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -310,46 +260,96 @@ func (o *GetAiDecompilationTask) UnsetRawAiSummary() {
 	o.RawAiSummary.Unset()
 }
 
-// GetPredictedFunctionName returns the PredictedFunctionName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetAiDecompilationTask) GetPredictedFunctionName() string {
-	if o == nil || IsNil(o.PredictedFunctionName.Get()) {
+// GetRawDecompilation returns the RawDecompilation field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *GetAiDecompilationTask) GetRawDecompilation() string {
+	if o == nil || o.RawDecompilation.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.PredictedFunctionName.Get()
+
+	return *o.RawDecompilation.Get()
 }
 
-// GetPredictedFunctionNameOk returns a tuple with the PredictedFunctionName field value if set, nil otherwise
+// GetRawDecompilationOk returns a tuple with the RawDecompilation field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetAiDecompilationTask) GetPredictedFunctionNameOk() (*string, bool) {
+func (o *GetAiDecompilationTask) GetRawDecompilationOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.PredictedFunctionName.Get(), o.PredictedFunctionName.IsSet()
+	return o.RawDecompilation.Get(), o.RawDecompilation.IsSet()
 }
 
-// HasPredictedFunctionName returns a boolean if a field has been set.
-func (o *GetAiDecompilationTask) HasPredictedFunctionName() bool {
-	if o != nil && o.PredictedFunctionName.IsSet() {
+// SetRawDecompilation sets field value
+func (o *GetAiDecompilationTask) SetRawDecompilation(v string) {
+	o.RawDecompilation.Set(&v)
+}
+
+// GetStatus returns the Status field value
+func (o *GetAiDecompilationTask) GetStatus() AiDecompilationTaskStatus {
+	if o == nil {
+		var ret AiDecompilationTaskStatus
+		return ret
+	}
+
+	return o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value
+// and a boolean to check if the value has been set.
+func (o *GetAiDecompilationTask) GetStatusOk() (*AiDecompilationTaskStatus, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Status, true
+}
+
+// SetStatus sets field value
+func (o *GetAiDecompilationTask) SetStatus(v AiDecompilationTaskStatus) {
+	o.Status = v
+}
+
+// GetSummary returns the Summary field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetAiDecompilationTask) GetSummary() string {
+	if o == nil || IsNil(o.Summary.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Summary.Get()
+}
+
+// GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetAiDecompilationTask) GetSummaryOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Summary.Get(), o.Summary.IsSet()
+}
+
+// HasSummary returns a boolean if a field has been set.
+func (o *GetAiDecompilationTask) HasSummary() bool {
+	if o != nil && o.Summary.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPredictedFunctionName gets a reference to the given NullableString and assigns it to the PredictedFunctionName field.
-func (o *GetAiDecompilationTask) SetPredictedFunctionName(v string) {
-	o.PredictedFunctionName.Set(&v)
+// SetSummary gets a reference to the given NullableString and assigns it to the Summary field.
+func (o *GetAiDecompilationTask) SetSummary(v string) {
+	o.Summary.Set(&v)
 }
-// SetPredictedFunctionNameNil sets the value for PredictedFunctionName to be an explicit nil
-func (o *GetAiDecompilationTask) SetPredictedFunctionNameNil() {
-	o.PredictedFunctionName.Set(nil)
+// SetSummaryNil sets the value for Summary to be an explicit nil
+func (o *GetAiDecompilationTask) SetSummaryNil() {
+	o.Summary.Set(nil)
 }
 
-// UnsetPredictedFunctionName ensures that no value is present for PredictedFunctionName, not even an explicit nil
-func (o *GetAiDecompilationTask) UnsetPredictedFunctionName() {
-	o.PredictedFunctionName.Unset()
+// UnsetSummary ensures that no value is present for Summary, not even an explicit nil
+func (o *GetAiDecompilationTask) UnsetSummary() {
+	o.Summary.Unset()
 }
 
 func (o GetAiDecompilationTask) MarshalJSON() ([]byte, error) {
@@ -362,24 +362,24 @@ func (o GetAiDecompilationTask) MarshalJSON() ([]byte, error) {
 
 func (o GetAiDecompilationTask) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["status"] = o.Status
+	if o.AiSummary.IsSet() {
+		toSerialize["ai_summary"] = o.AiSummary.Get()
+	}
 	toSerialize["decompilation"] = o.Decompilation.Get()
-	toSerialize["raw_decompilation"] = o.RawDecompilation.Get()
 	if o.FunctionMapping != nil {
 		toSerialize["function_mapping"] = o.FunctionMapping
 	}
 	toSerialize["function_mapping_full"] = o.FunctionMappingFull.Get()
-	if o.Summary.IsSet() {
-		toSerialize["summary"] = o.Summary.Get()
-	}
-	if o.AiSummary.IsSet() {
-		toSerialize["ai_summary"] = o.AiSummary.Get()
+	if o.PredictedFunctionName.IsSet() {
+		toSerialize["predicted_function_name"] = o.PredictedFunctionName.Get()
 	}
 	if o.RawAiSummary.IsSet() {
 		toSerialize["raw_ai_summary"] = o.RawAiSummary.Get()
 	}
-	if o.PredictedFunctionName.IsSet() {
-		toSerialize["predicted_function_name"] = o.PredictedFunctionName.Get()
+	toSerialize["raw_decompilation"] = o.RawDecompilation.Get()
+	toSerialize["status"] = o.Status
+	if o.Summary.IsSet() {
+		toSerialize["summary"] = o.Summary.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -394,11 +394,11 @@ func (o *GetAiDecompilationTask) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"status",
 		"decompilation",
-		"raw_decompilation",
 		"function_mapping",
 		"function_mapping_full",
+		"raw_decompilation",
+		"status",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -428,15 +428,15 @@ func (o *GetAiDecompilationTask) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "status")
+		delete(additionalProperties, "ai_summary")
 		delete(additionalProperties, "decompilation")
-		delete(additionalProperties, "raw_decompilation")
 		delete(additionalProperties, "function_mapping")
 		delete(additionalProperties, "function_mapping_full")
-		delete(additionalProperties, "summary")
-		delete(additionalProperties, "ai_summary")
-		delete(additionalProperties, "raw_ai_summary")
 		delete(additionalProperties, "predicted_function_name")
+		delete(additionalProperties, "raw_ai_summary")
+		delete(additionalProperties, "raw_decompilation")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "summary")
 		o.AdditionalProperties = additionalProperties
 	}
 

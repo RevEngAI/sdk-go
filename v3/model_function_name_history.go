@@ -19,20 +19,20 @@ var _ MappedNullable = &FunctionNameHistory{}
 
 // FunctionNameHistory struct for FunctionNameHistory
 type FunctionNameHistory struct {
-	// The ID of the history record
-	HistoryId int32 `json:"history_id"`
 	// The user who made the change
 	ChangeMadeBy string `json:"change_made_by"`
-	// The name of the function
-	FunctionName string `json:"function_name"`
-	// The mangled name of the function
-	MangledName string `json:"mangled_name"`
-	// Whether the function is debugged
-	IsDebug bool `json:"is_debug"`
-	// The source type of the function
-	SourceType FunctionSourceType `json:"source_type"`
 	// The timestamp when the function name was created
 	CreatedAt string `json:"created_at"`
+	// The name of the function
+	FunctionName string `json:"function_name"`
+	// The ID of the history record
+	HistoryId int32 `json:"history_id"`
+	// Whether the function is debugged
+	IsDebug bool `json:"is_debug"`
+	// The mangled name of the function
+	MangledName string `json:"mangled_name"`
+	// The source type of the function
+	SourceType FunctionSourceType `json:"source_type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -42,15 +42,15 @@ type _FunctionNameHistory FunctionNameHistory
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionNameHistory(historyId int32, changeMadeBy string, functionName string, mangledName string, isDebug bool, sourceType FunctionSourceType, createdAt string) *FunctionNameHistory {
+func NewFunctionNameHistory(changeMadeBy string, createdAt string, functionName string, historyId int32, isDebug bool, mangledName string, sourceType FunctionSourceType) *FunctionNameHistory {
 	this := FunctionNameHistory{}
-	this.HistoryId = historyId
 	this.ChangeMadeBy = changeMadeBy
-	this.FunctionName = functionName
-	this.MangledName = mangledName
-	this.IsDebug = isDebug
-	this.SourceType = sourceType
 	this.CreatedAt = createdAt
+	this.FunctionName = functionName
+	this.HistoryId = historyId
+	this.IsDebug = isDebug
+	this.MangledName = mangledName
+	this.SourceType = sourceType
 	return &this
 }
 
@@ -60,30 +60,6 @@ func NewFunctionNameHistory(historyId int32, changeMadeBy string, functionName s
 func NewFunctionNameHistoryWithDefaults() *FunctionNameHistory {
 	this := FunctionNameHistory{}
 	return &this
-}
-
-// GetHistoryId returns the HistoryId field value
-func (o *FunctionNameHistory) GetHistoryId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.HistoryId
-}
-
-// GetHistoryIdOk returns a tuple with the HistoryId field value
-// and a boolean to check if the value has been set.
-func (o *FunctionNameHistory) GetHistoryIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.HistoryId, true
-}
-
-// SetHistoryId sets field value
-func (o *FunctionNameHistory) SetHistoryId(v int32) {
-	o.HistoryId = v
 }
 
 // GetChangeMadeBy returns the ChangeMadeBy field value
@@ -110,6 +86,30 @@ func (o *FunctionNameHistory) SetChangeMadeBy(v string) {
 	o.ChangeMadeBy = v
 }
 
+// GetCreatedAt returns the CreatedAt field value
+func (o *FunctionNameHistory) GetCreatedAt() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+func (o *FunctionNameHistory) GetCreatedAtOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CreatedAt, true
+}
+
+// SetCreatedAt sets field value
+func (o *FunctionNameHistory) SetCreatedAt(v string) {
+	o.CreatedAt = v
+}
+
 // GetFunctionName returns the FunctionName field value
 func (o *FunctionNameHistory) GetFunctionName() string {
 	if o == nil {
@@ -134,28 +134,28 @@ func (o *FunctionNameHistory) SetFunctionName(v string) {
 	o.FunctionName = v
 }
 
-// GetMangledName returns the MangledName field value
-func (o *FunctionNameHistory) GetMangledName() string {
+// GetHistoryId returns the HistoryId field value
+func (o *FunctionNameHistory) GetHistoryId() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
-	return o.MangledName
+	return o.HistoryId
 }
 
-// GetMangledNameOk returns a tuple with the MangledName field value
+// GetHistoryIdOk returns a tuple with the HistoryId field value
 // and a boolean to check if the value has been set.
-func (o *FunctionNameHistory) GetMangledNameOk() (*string, bool) {
+func (o *FunctionNameHistory) GetHistoryIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.MangledName, true
+	return &o.HistoryId, true
 }
 
-// SetMangledName sets field value
-func (o *FunctionNameHistory) SetMangledName(v string) {
-	o.MangledName = v
+// SetHistoryId sets field value
+func (o *FunctionNameHistory) SetHistoryId(v int32) {
+	o.HistoryId = v
 }
 
 // GetIsDebug returns the IsDebug field value
@@ -182,6 +182,30 @@ func (o *FunctionNameHistory) SetIsDebug(v bool) {
 	o.IsDebug = v
 }
 
+// GetMangledName returns the MangledName field value
+func (o *FunctionNameHistory) GetMangledName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.MangledName
+}
+
+// GetMangledNameOk returns a tuple with the MangledName field value
+// and a boolean to check if the value has been set.
+func (o *FunctionNameHistory) GetMangledNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MangledName, true
+}
+
+// SetMangledName sets field value
+func (o *FunctionNameHistory) SetMangledName(v string) {
+	o.MangledName = v
+}
+
 // GetSourceType returns the SourceType field value
 func (o *FunctionNameHistory) GetSourceType() FunctionSourceType {
 	if o == nil {
@@ -206,30 +230,6 @@ func (o *FunctionNameHistory) SetSourceType(v FunctionSourceType) {
 	o.SourceType = v
 }
 
-// GetCreatedAt returns the CreatedAt field value
-func (o *FunctionNameHistory) GetCreatedAt() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value
-// and a boolean to check if the value has been set.
-func (o *FunctionNameHistory) GetCreatedAtOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CreatedAt, true
-}
-
-// SetCreatedAt sets field value
-func (o *FunctionNameHistory) SetCreatedAt(v string) {
-	o.CreatedAt = v
-}
-
 func (o FunctionNameHistory) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -240,13 +240,13 @@ func (o FunctionNameHistory) MarshalJSON() ([]byte, error) {
 
 func (o FunctionNameHistory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["history_id"] = o.HistoryId
 	toSerialize["change_made_by"] = o.ChangeMadeBy
-	toSerialize["function_name"] = o.FunctionName
-	toSerialize["mangled_name"] = o.MangledName
-	toSerialize["is_debug"] = o.IsDebug
-	toSerialize["source_type"] = o.SourceType
 	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["function_name"] = o.FunctionName
+	toSerialize["history_id"] = o.HistoryId
+	toSerialize["is_debug"] = o.IsDebug
+	toSerialize["mangled_name"] = o.MangledName
+	toSerialize["source_type"] = o.SourceType
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -260,13 +260,13 @@ func (o *FunctionNameHistory) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"history_id",
 		"change_made_by",
-		"function_name",
-		"mangled_name",
-		"is_debug",
-		"source_type",
 		"created_at",
+		"function_name",
+		"history_id",
+		"is_debug",
+		"mangled_name",
+		"source_type",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -296,13 +296,13 @@ func (o *FunctionNameHistory) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "history_id")
 		delete(additionalProperties, "change_made_by")
-		delete(additionalProperties, "function_name")
-		delete(additionalProperties, "mangled_name")
-		delete(additionalProperties, "is_debug")
-		delete(additionalProperties, "source_type")
 		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "history_id")
+		delete(additionalProperties, "is_debug")
+		delete(additionalProperties, "mangled_name")
+		delete(additionalProperties, "source_type")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Display** | **string** | Human-readable description from DIE&#39;s &#39;string&#39; field; suitable for UI/logs, not for parsing. | 
 **Name** | **string** | Canonical name of the matched signature/technology (e.g., &#39;UPX&#39;, &#39;GCC&#39;, &#39;MSVC&#39;). | 
 **Type** | **string** | Category assigned by DIE for the match (e.g., &#39;compiler&#39;, &#39;packer&#39;, &#39;file&#39;). | 
-**Display** | **string** | Human-readable description from DIE&#39;s &#39;string&#39; field; suitable for UI/logs, not for parsing. | 
 **Version** | **string** | Extracted version string when available; may be empty/None if unknown. | 
 
 ## Methods
 
 ### NewDieMatch
 
-`func NewDieMatch(name string, type_ string, display string, version string, ) *DieMatch`
+`func NewDieMatch(display string, name string, type_ string, version string, ) *DieMatch`
 
 NewDieMatch instantiates a new DieMatch object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +27,26 @@ will change when the set of required properties is changed
 NewDieMatchWithDefaults instantiates a new DieMatch object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetDisplay
+
+`func (o *DieMatch) GetDisplay() string`
+
+GetDisplay returns the Display field if non-nil, zero value otherwise.
+
+### GetDisplayOk
+
+`func (o *DieMatch) GetDisplayOk() (*string, bool)`
+
+GetDisplayOk returns a tuple with the Display field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisplay
+
+`func (o *DieMatch) SetDisplay(v string)`
+
+SetDisplay sets Display field to given value.
+
 
 ### GetName
 
@@ -66,26 +86,6 @@ and a boolean to check if the value has been set.
 `func (o *DieMatch) SetType(v string)`
 
 SetType sets Type field to given value.
-
-
-### GetDisplay
-
-`func (o *DieMatch) GetDisplay() string`
-
-GetDisplay returns the Display field if non-nil, zero value otherwise.
-
-### GetDisplayOk
-
-`func (o *DieMatch) GetDisplayOk() (*string, bool)`
-
-GetDisplayOk returns a tuple with the Display field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDisplay
-
-`func (o *DieMatch) SetDisplay(v string)`
-
-SetDisplay sets Display field to given value.
 
 
 ### GetVersion

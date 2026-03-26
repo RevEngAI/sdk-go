@@ -19,8 +19,8 @@ var _ MappedNullable = &ProcessDumps{}
 
 // ProcessDumps struct for ProcessDumps
 type ProcessDumps struct {
-	Success bool `json:"success"`
 	Data ProcessDumpsData `json:"data"`
+	Success bool `json:"success"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,10 +30,10 @@ type _ProcessDumps ProcessDumps
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProcessDumps(success bool, data ProcessDumpsData) *ProcessDumps {
+func NewProcessDumps(data ProcessDumpsData, success bool) *ProcessDumps {
 	this := ProcessDumps{}
-	this.Success = success
 	this.Data = data
+	this.Success = success
 	return &this
 }
 
@@ -43,30 +43,6 @@ func NewProcessDumps(success bool, data ProcessDumpsData) *ProcessDumps {
 func NewProcessDumpsWithDefaults() *ProcessDumps {
 	this := ProcessDumps{}
 	return &this
-}
-
-// GetSuccess returns the Success field value
-func (o *ProcessDumps) GetSuccess() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Success
-}
-
-// GetSuccessOk returns a tuple with the Success field value
-// and a boolean to check if the value has been set.
-func (o *ProcessDumps) GetSuccessOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Success, true
-}
-
-// SetSuccess sets field value
-func (o *ProcessDumps) SetSuccess(v bool) {
-	o.Success = v
 }
 
 // GetData returns the Data field value
@@ -93,6 +69,30 @@ func (o *ProcessDumps) SetData(v ProcessDumpsData) {
 	o.Data = v
 }
 
+// GetSuccess returns the Success field value
+func (o *ProcessDumps) GetSuccess() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Success
+}
+
+// GetSuccessOk returns a tuple with the Success field value
+// and a boolean to check if the value has been set.
+func (o *ProcessDumps) GetSuccessOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Success, true
+}
+
+// SetSuccess sets field value
+func (o *ProcessDumps) SetSuccess(v bool) {
+	o.Success = v
+}
+
 func (o ProcessDumps) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,8 +103,8 @@ func (o ProcessDumps) MarshalJSON() ([]byte, error) {
 
 func (o ProcessDumps) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["success"] = o.Success
 	toSerialize["data"] = o.Data
+	toSerialize["success"] = o.Success
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -118,8 +118,8 @@ func (o *ProcessDumps) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"success",
 		"data",
+		"success",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -149,8 +149,8 @@ func (o *ProcessDumps) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "success")
 		delete(additionalProperties, "data")
+		delete(additionalProperties, "success")
 		o.AdditionalProperties = additionalProperties
 	}
 

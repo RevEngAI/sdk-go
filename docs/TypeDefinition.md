@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ArtifactType** | Pointer to **string** | Type of artifact the type definition is associated with | [optional] 
 **LastChange** | Pointer to **NullableString** |  | [optional] 
 **Name** | **string** | Name of the type definition | 
 **Type** | **string** | Underlying type of the type definition | 
-**ArtifactType** | Pointer to **string** | Type of artifact the type definition is associated with | [optional] 
 
 ## Methods
 
@@ -27,6 +27,31 @@ will change when the set of required properties is changed
 NewTypeDefinitionWithDefaults instantiates a new TypeDefinition object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetArtifactType
+
+`func (o *TypeDefinition) GetArtifactType() string`
+
+GetArtifactType returns the ArtifactType field if non-nil, zero value otherwise.
+
+### GetArtifactTypeOk
+
+`func (o *TypeDefinition) GetArtifactTypeOk() (*string, bool)`
+
+GetArtifactTypeOk returns a tuple with the ArtifactType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArtifactType
+
+`func (o *TypeDefinition) SetArtifactType(v string)`
+
+SetArtifactType sets ArtifactType field to given value.
+
+### HasArtifactType
+
+`func (o *TypeDefinition) HasArtifactType() bool`
+
+HasArtifactType returns a boolean if a field has been set.
 
 ### GetLastChange
 
@@ -102,31 +127,6 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
-
-### GetArtifactType
-
-`func (o *TypeDefinition) GetArtifactType() string`
-
-GetArtifactType returns the ArtifactType field if non-nil, zero value otherwise.
-
-### GetArtifactTypeOk
-
-`func (o *TypeDefinition) GetArtifactTypeOk() (*string, bool)`
-
-GetArtifactTypeOk returns a tuple with the ArtifactType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetArtifactType
-
-`func (o *TypeDefinition) SetArtifactType(v string)`
-
-SetArtifactType sets ArtifactType field to given value.
-
-### HasArtifactType
-
-`func (o *TypeDefinition) HasArtifactType() bool`
-
-HasArtifactType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

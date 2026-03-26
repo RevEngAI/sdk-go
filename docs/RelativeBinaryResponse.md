@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BinaryId** | **int32** | ID of the relative binary | 
 **AnalysisId** | Pointer to **NullableInt32** |  | [optional] 
+**BinaryId** | **int32** | ID of the relative binary | 
 **Name** | **string** | Name of the relative binary | 
 **Sha256** | **string** | SHA256 hash of the relative binary | 
 
@@ -27,26 +27,6 @@ will change when the set of required properties is changed
 NewRelativeBinaryResponseWithDefaults instantiates a new RelativeBinaryResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetBinaryId
-
-`func (o *RelativeBinaryResponse) GetBinaryId() int32`
-
-GetBinaryId returns the BinaryId field if non-nil, zero value otherwise.
-
-### GetBinaryIdOk
-
-`func (o *RelativeBinaryResponse) GetBinaryIdOk() (*int32, bool)`
-
-GetBinaryIdOk returns a tuple with the BinaryId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBinaryId
-
-`func (o *RelativeBinaryResponse) SetBinaryId(v int32)`
-
-SetBinaryId sets BinaryId field to given value.
-
 
 ### GetAnalysisId
 
@@ -83,6 +63,26 @@ HasAnalysisId returns a boolean if a field has been set.
 `func (o *RelativeBinaryResponse) UnsetAnalysisId()`
 
 UnsetAnalysisId ensures that no value is present for AnalysisId, not even an explicit nil
+### GetBinaryId
+
+`func (o *RelativeBinaryResponse) GetBinaryId() int32`
+
+GetBinaryId returns the BinaryId field if non-nil, zero value otherwise.
+
+### GetBinaryIdOk
+
+`func (o *RelativeBinaryResponse) GetBinaryIdOk() (*int32, bool)`
+
+GetBinaryIdOk returns a tuple with the BinaryId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBinaryId
+
+`func (o *RelativeBinaryResponse) SetBinaryId(v int32)`
+
+SetBinaryId sets BinaryId field to given value.
+
+
 ### GetName
 
 `func (o *RelativeBinaryResponse) GetName() string`

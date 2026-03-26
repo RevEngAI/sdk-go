@@ -23,6 +23,7 @@ type AnalysisDetailResponse struct {
 	AnalysisId int32 `json:"analysis_id"`
 	AnalysisScope string `json:"analysis_scope"`
 	Architecture string `json:"architecture"`
+	AutoRunAgents AutoRunAgents `json:"auto_run_agents"`
 	BinaryDynamic bool `json:"binary_dynamic"`
 	BinaryFormat string `json:"binary_format"`
 	BinaryName string `json:"binary_name"`
@@ -35,7 +36,6 @@ type AnalysisDetailResponse struct {
 	ModelName string `json:"model_name"`
 	Sbom map[string]interface{} `json:"sbom,omitempty"`
 	Sha256Hash string `json:"sha_256_hash"`
-	AutoRunAgents AutoRunAgents `json:"auto_run_agents"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,12 +45,13 @@ type _AnalysisDetailResponse AnalysisDetailResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, analysisScope string, architecture string, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int32, binaryType string, creation string, dashboardUrl string, debug bool, modelName string, sha256Hash string, autoRunAgents AutoRunAgents) *AnalysisDetailResponse {
+func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, analysisScope string, architecture string, autoRunAgents AutoRunAgents, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int32, binaryType string, creation string, dashboardUrl string, debug bool, modelName string, sha256Hash string) *AnalysisDetailResponse {
 	this := AnalysisDetailResponse{}
 	this.Access = access
 	this.AnalysisId = analysisId
 	this.AnalysisScope = analysisScope
 	this.Architecture = architecture
+	this.AutoRunAgents = autoRunAgents
 	this.BinaryDynamic = binaryDynamic
 	this.BinaryFormat = binaryFormat
 	this.BinaryName = binaryName
@@ -61,7 +62,6 @@ func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, anal
 	this.Debug = debug
 	this.ModelName = modelName
 	this.Sha256Hash = sha256Hash
-	this.AutoRunAgents = autoRunAgents
 	return &this
 }
 
@@ -167,6 +167,30 @@ func (o *AnalysisDetailResponse) GetArchitectureOk() (*string, bool) {
 // SetArchitecture sets field value
 func (o *AnalysisDetailResponse) SetArchitecture(v string) {
 	o.Architecture = v
+}
+
+// GetAutoRunAgents returns the AutoRunAgents field value
+func (o *AnalysisDetailResponse) GetAutoRunAgents() AutoRunAgents {
+	if o == nil {
+		var ret AutoRunAgents
+		return ret
+	}
+
+	return o.AutoRunAgents
+}
+
+// GetAutoRunAgentsOk returns a tuple with the AutoRunAgents field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisDetailResponse) GetAutoRunAgentsOk() (*AutoRunAgents, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AutoRunAgents, true
+}
+
+// SetAutoRunAgents sets field value
+func (o *AnalysisDetailResponse) SetAutoRunAgents(v AutoRunAgents) {
+	o.AutoRunAgents = v
 }
 
 // GetBinaryDynamic returns the BinaryDynamic field value
@@ -442,30 +466,6 @@ func (o *AnalysisDetailResponse) SetSha256Hash(v string) {
 	o.Sha256Hash = v
 }
 
-// GetAutoRunAgents returns the AutoRunAgents field value
-func (o *AnalysisDetailResponse) GetAutoRunAgents() AutoRunAgents {
-	if o == nil {
-		var ret AutoRunAgents
-		return ret
-	}
-
-	return o.AutoRunAgents
-}
-
-// GetAutoRunAgentsOk returns a tuple with the AutoRunAgents field value
-// and a boolean to check if the value has been set.
-func (o *AnalysisDetailResponse) GetAutoRunAgentsOk() (*AutoRunAgents, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.AutoRunAgents, true
-}
-
-// SetAutoRunAgents sets field value
-func (o *AnalysisDetailResponse) SetAutoRunAgents(v AutoRunAgents) {
-	o.AutoRunAgents = v
-}
-
 func (o AnalysisDetailResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -480,6 +480,7 @@ func (o AnalysisDetailResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["analysis_id"] = o.AnalysisId
 	toSerialize["analysis_scope"] = o.AnalysisScope
 	toSerialize["architecture"] = o.Architecture
+	toSerialize["auto_run_agents"] = o.AutoRunAgents
 	toSerialize["binary_dynamic"] = o.BinaryDynamic
 	toSerialize["binary_format"] = o.BinaryFormat
 	toSerialize["binary_name"] = o.BinaryName
@@ -493,7 +494,6 @@ func (o AnalysisDetailResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["sbom"] = o.Sbom
 	}
 	toSerialize["sha_256_hash"] = o.Sha256Hash
-	toSerialize["auto_run_agents"] = o.AutoRunAgents
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -511,6 +511,7 @@ func (o *AnalysisDetailResponse) UnmarshalJSON(data []byte) (err error) {
 		"analysis_id",
 		"analysis_scope",
 		"architecture",
+		"auto_run_agents",
 		"binary_dynamic",
 		"binary_format",
 		"binary_name",
@@ -521,7 +522,6 @@ func (o *AnalysisDetailResponse) UnmarshalJSON(data []byte) (err error) {
 		"debug",
 		"model_name",
 		"sha_256_hash",
-		"auto_run_agents",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -555,6 +555,7 @@ func (o *AnalysisDetailResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "analysis_id")
 		delete(additionalProperties, "analysis_scope")
 		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "auto_run_agents")
 		delete(additionalProperties, "binary_dynamic")
 		delete(additionalProperties, "binary_format")
 		delete(additionalProperties, "binary_name")
@@ -566,7 +567,6 @@ func (o *AnalysisDetailResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "model_name")
 		delete(additionalProperties, "sbom")
 		delete(additionalProperties, "sha_256_hash")
-		delete(additionalProperties, "auto_run_agents")
 		o.AdditionalProperties = additionalProperties
 	}
 

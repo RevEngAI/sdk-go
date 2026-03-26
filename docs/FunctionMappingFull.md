@@ -4,25 +4,25 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**InverseStringMap** | [**map[string]InverseStringMapItem**](InverseStringMapItem.md) |  | 
-**InverseFunctionMap** | [**map[string]InverseFunctionMapItem**](InverseFunctionMapItem.md) |  | 
-**UnmatchedFunctions** | [**map[string]InverseValue**](InverseValue.md) |  | 
-**UnmatchedCustomTypes** | [**map[string]InverseValue**](InverseValue.md) |  | 
-**UnmatchedStrings** | [**map[string]InverseValue**](InverseValue.md) |  | 
-**UnmatchedVars** | [**map[string]InverseValue**](InverseValue.md) |  | 
-**UnmatchedGoToLabels** | [**map[string]InverseValue**](InverseValue.md) |  | 
-**UnmatchedCustomFunctionPointers** | [**map[string]InverseValue**](InverseValue.md) |  | 
-**UnmatchedVariadicLists** | [**map[string]InverseValue**](InverseValue.md) |  | 
-**UnmatchedEnums** | [**map[string]InverseValue**](InverseValue.md) |  | 
-**UnmatchedGlobalVars** | [**map[string]InverseValue**](InverseValue.md) |  | 
 **Fields** | [**map[string]map[string]InverseValue**](map.md) |  | 
+**InverseFunctionMap** | [**map[string]InverseFunctionMapItem**](InverseFunctionMapItem.md) |  | 
+**InverseStringMap** | [**map[string]InverseStringMapItem**](InverseStringMapItem.md) |  | 
+**UnmatchedCustomFunctionPointers** | [**map[string]InverseValue**](InverseValue.md) |  | 
+**UnmatchedCustomTypes** | [**map[string]InverseValue**](InverseValue.md) |  | 
+**UnmatchedEnums** | [**map[string]InverseValue**](InverseValue.md) |  | 
 **UnmatchedExternalVars** | Pointer to [**map[string]InverseValue**](InverseValue.md) | No longer provided. | [optional] [default to {}]
+**UnmatchedFunctions** | [**map[string]InverseValue**](InverseValue.md) |  | 
+**UnmatchedGlobalVars** | [**map[string]InverseValue**](InverseValue.md) |  | 
+**UnmatchedGoToLabels** | [**map[string]InverseValue**](InverseValue.md) |  | 
+**UnmatchedStrings** | [**map[string]InverseValue**](InverseValue.md) |  | 
+**UnmatchedVariadicLists** | [**map[string]InverseValue**](InverseValue.md) |  | 
+**UnmatchedVars** | [**map[string]InverseValue**](InverseValue.md) |  | 
 
 ## Methods
 
 ### NewFunctionMappingFull
 
-`func NewFunctionMappingFull(inverseStringMap map[string]InverseStringMapItem, inverseFunctionMap map[string]InverseFunctionMapItem, unmatchedFunctions map[string]InverseValue, unmatchedCustomTypes map[string]InverseValue, unmatchedStrings map[string]InverseValue, unmatchedVars map[string]InverseValue, unmatchedGoToLabels map[string]InverseValue, unmatchedCustomFunctionPointers map[string]InverseValue, unmatchedVariadicLists map[string]InverseValue, unmatchedEnums map[string]InverseValue, unmatchedGlobalVars map[string]InverseValue, fields map[string]map[string]InverseValue, ) *FunctionMappingFull`
+`func NewFunctionMappingFull(fields map[string]map[string]InverseValue, inverseFunctionMap map[string]InverseFunctionMapItem, inverseStringMap map[string]InverseStringMapItem, unmatchedCustomFunctionPointers map[string]InverseValue, unmatchedCustomTypes map[string]InverseValue, unmatchedEnums map[string]InverseValue, unmatchedFunctions map[string]InverseValue, unmatchedGlobalVars map[string]InverseValue, unmatchedGoToLabels map[string]InverseValue, unmatchedStrings map[string]InverseValue, unmatchedVariadicLists map[string]InverseValue, unmatchedVars map[string]InverseValue, ) *FunctionMappingFull`
 
 NewFunctionMappingFull instantiates a new FunctionMappingFull object
 This constructor will assign default values to properties that have it defined,
@@ -37,24 +37,24 @@ NewFunctionMappingFullWithDefaults instantiates a new FunctionMappingFull object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetInverseStringMap
+### GetFields
 
-`func (o *FunctionMappingFull) GetInverseStringMap() map[string]InverseStringMapItem`
+`func (o *FunctionMappingFull) GetFields() map[string]map[string]InverseValue`
 
-GetInverseStringMap returns the InverseStringMap field if non-nil, zero value otherwise.
+GetFields returns the Fields field if non-nil, zero value otherwise.
 
-### GetInverseStringMapOk
+### GetFieldsOk
 
-`func (o *FunctionMappingFull) GetInverseStringMapOk() (*map[string]InverseStringMapItem, bool)`
+`func (o *FunctionMappingFull) GetFieldsOk() (*map[string]map[string]InverseValue, bool)`
 
-GetInverseStringMapOk returns a tuple with the InverseStringMap field if it's non-nil, zero value otherwise
+GetFieldsOk returns a tuple with the Fields field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetInverseStringMap
+### SetFields
 
-`func (o *FunctionMappingFull) SetInverseStringMap(v map[string]InverseStringMapItem)`
+`func (o *FunctionMappingFull) SetFields(v map[string]map[string]InverseValue)`
 
-SetInverseStringMap sets InverseStringMap field to given value.
+SetFields sets Fields field to given value.
 
 
 ### GetInverseFunctionMap
@@ -77,104 +77,24 @@ and a boolean to check if the value has been set.
 SetInverseFunctionMap sets InverseFunctionMap field to given value.
 
 
-### GetUnmatchedFunctions
+### GetInverseStringMap
 
-`func (o *FunctionMappingFull) GetUnmatchedFunctions() map[string]InverseValue`
+`func (o *FunctionMappingFull) GetInverseStringMap() map[string]InverseStringMapItem`
 
-GetUnmatchedFunctions returns the UnmatchedFunctions field if non-nil, zero value otherwise.
+GetInverseStringMap returns the InverseStringMap field if non-nil, zero value otherwise.
 
-### GetUnmatchedFunctionsOk
+### GetInverseStringMapOk
 
-`func (o *FunctionMappingFull) GetUnmatchedFunctionsOk() (*map[string]InverseValue, bool)`
+`func (o *FunctionMappingFull) GetInverseStringMapOk() (*map[string]InverseStringMapItem, bool)`
 
-GetUnmatchedFunctionsOk returns a tuple with the UnmatchedFunctions field if it's non-nil, zero value otherwise
+GetInverseStringMapOk returns a tuple with the InverseStringMap field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUnmatchedFunctions
+### SetInverseStringMap
 
-`func (o *FunctionMappingFull) SetUnmatchedFunctions(v map[string]InverseValue)`
+`func (o *FunctionMappingFull) SetInverseStringMap(v map[string]InverseStringMapItem)`
 
-SetUnmatchedFunctions sets UnmatchedFunctions field to given value.
-
-
-### GetUnmatchedCustomTypes
-
-`func (o *FunctionMappingFull) GetUnmatchedCustomTypes() map[string]InverseValue`
-
-GetUnmatchedCustomTypes returns the UnmatchedCustomTypes field if non-nil, zero value otherwise.
-
-### GetUnmatchedCustomTypesOk
-
-`func (o *FunctionMappingFull) GetUnmatchedCustomTypesOk() (*map[string]InverseValue, bool)`
-
-GetUnmatchedCustomTypesOk returns a tuple with the UnmatchedCustomTypes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUnmatchedCustomTypes
-
-`func (o *FunctionMappingFull) SetUnmatchedCustomTypes(v map[string]InverseValue)`
-
-SetUnmatchedCustomTypes sets UnmatchedCustomTypes field to given value.
-
-
-### GetUnmatchedStrings
-
-`func (o *FunctionMappingFull) GetUnmatchedStrings() map[string]InverseValue`
-
-GetUnmatchedStrings returns the UnmatchedStrings field if non-nil, zero value otherwise.
-
-### GetUnmatchedStringsOk
-
-`func (o *FunctionMappingFull) GetUnmatchedStringsOk() (*map[string]InverseValue, bool)`
-
-GetUnmatchedStringsOk returns a tuple with the UnmatchedStrings field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUnmatchedStrings
-
-`func (o *FunctionMappingFull) SetUnmatchedStrings(v map[string]InverseValue)`
-
-SetUnmatchedStrings sets UnmatchedStrings field to given value.
-
-
-### GetUnmatchedVars
-
-`func (o *FunctionMappingFull) GetUnmatchedVars() map[string]InverseValue`
-
-GetUnmatchedVars returns the UnmatchedVars field if non-nil, zero value otherwise.
-
-### GetUnmatchedVarsOk
-
-`func (o *FunctionMappingFull) GetUnmatchedVarsOk() (*map[string]InverseValue, bool)`
-
-GetUnmatchedVarsOk returns a tuple with the UnmatchedVars field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUnmatchedVars
-
-`func (o *FunctionMappingFull) SetUnmatchedVars(v map[string]InverseValue)`
-
-SetUnmatchedVars sets UnmatchedVars field to given value.
-
-
-### GetUnmatchedGoToLabels
-
-`func (o *FunctionMappingFull) GetUnmatchedGoToLabels() map[string]InverseValue`
-
-GetUnmatchedGoToLabels returns the UnmatchedGoToLabels field if non-nil, zero value otherwise.
-
-### GetUnmatchedGoToLabelsOk
-
-`func (o *FunctionMappingFull) GetUnmatchedGoToLabelsOk() (*map[string]InverseValue, bool)`
-
-GetUnmatchedGoToLabelsOk returns a tuple with the UnmatchedGoToLabels field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUnmatchedGoToLabels
-
-`func (o *FunctionMappingFull) SetUnmatchedGoToLabels(v map[string]InverseValue)`
-
-SetUnmatchedGoToLabels sets UnmatchedGoToLabels field to given value.
+SetInverseStringMap sets InverseStringMap field to given value.
 
 
 ### GetUnmatchedCustomFunctionPointers
@@ -197,24 +117,24 @@ and a boolean to check if the value has been set.
 SetUnmatchedCustomFunctionPointers sets UnmatchedCustomFunctionPointers field to given value.
 
 
-### GetUnmatchedVariadicLists
+### GetUnmatchedCustomTypes
 
-`func (o *FunctionMappingFull) GetUnmatchedVariadicLists() map[string]InverseValue`
+`func (o *FunctionMappingFull) GetUnmatchedCustomTypes() map[string]InverseValue`
 
-GetUnmatchedVariadicLists returns the UnmatchedVariadicLists field if non-nil, zero value otherwise.
+GetUnmatchedCustomTypes returns the UnmatchedCustomTypes field if non-nil, zero value otherwise.
 
-### GetUnmatchedVariadicListsOk
+### GetUnmatchedCustomTypesOk
 
-`func (o *FunctionMappingFull) GetUnmatchedVariadicListsOk() (*map[string]InverseValue, bool)`
+`func (o *FunctionMappingFull) GetUnmatchedCustomTypesOk() (*map[string]InverseValue, bool)`
 
-GetUnmatchedVariadicListsOk returns a tuple with the UnmatchedVariadicLists field if it's non-nil, zero value otherwise
+GetUnmatchedCustomTypesOk returns a tuple with the UnmatchedCustomTypes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUnmatchedVariadicLists
+### SetUnmatchedCustomTypes
 
-`func (o *FunctionMappingFull) SetUnmatchedVariadicLists(v map[string]InverseValue)`
+`func (o *FunctionMappingFull) SetUnmatchedCustomTypes(v map[string]InverseValue)`
 
-SetUnmatchedVariadicLists sets UnmatchedVariadicLists field to given value.
+SetUnmatchedCustomTypes sets UnmatchedCustomTypes field to given value.
 
 
 ### GetUnmatchedEnums
@@ -235,46 +155,6 @@ and a boolean to check if the value has been set.
 `func (o *FunctionMappingFull) SetUnmatchedEnums(v map[string]InverseValue)`
 
 SetUnmatchedEnums sets UnmatchedEnums field to given value.
-
-
-### GetUnmatchedGlobalVars
-
-`func (o *FunctionMappingFull) GetUnmatchedGlobalVars() map[string]InverseValue`
-
-GetUnmatchedGlobalVars returns the UnmatchedGlobalVars field if non-nil, zero value otherwise.
-
-### GetUnmatchedGlobalVarsOk
-
-`func (o *FunctionMappingFull) GetUnmatchedGlobalVarsOk() (*map[string]InverseValue, bool)`
-
-GetUnmatchedGlobalVarsOk returns a tuple with the UnmatchedGlobalVars field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUnmatchedGlobalVars
-
-`func (o *FunctionMappingFull) SetUnmatchedGlobalVars(v map[string]InverseValue)`
-
-SetUnmatchedGlobalVars sets UnmatchedGlobalVars field to given value.
-
-
-### GetFields
-
-`func (o *FunctionMappingFull) GetFields() map[string]map[string]InverseValue`
-
-GetFields returns the Fields field if non-nil, zero value otherwise.
-
-### GetFieldsOk
-
-`func (o *FunctionMappingFull) GetFieldsOk() (*map[string]map[string]InverseValue, bool)`
-
-GetFieldsOk returns a tuple with the Fields field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFields
-
-`func (o *FunctionMappingFull) SetFields(v map[string]map[string]InverseValue)`
-
-SetFields sets Fields field to given value.
 
 
 ### GetUnmatchedExternalVars
@@ -301,6 +181,126 @@ SetUnmatchedExternalVars sets UnmatchedExternalVars field to given value.
 `func (o *FunctionMappingFull) HasUnmatchedExternalVars() bool`
 
 HasUnmatchedExternalVars returns a boolean if a field has been set.
+
+### GetUnmatchedFunctions
+
+`func (o *FunctionMappingFull) GetUnmatchedFunctions() map[string]InverseValue`
+
+GetUnmatchedFunctions returns the UnmatchedFunctions field if non-nil, zero value otherwise.
+
+### GetUnmatchedFunctionsOk
+
+`func (o *FunctionMappingFull) GetUnmatchedFunctionsOk() (*map[string]InverseValue, bool)`
+
+GetUnmatchedFunctionsOk returns a tuple with the UnmatchedFunctions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnmatchedFunctions
+
+`func (o *FunctionMappingFull) SetUnmatchedFunctions(v map[string]InverseValue)`
+
+SetUnmatchedFunctions sets UnmatchedFunctions field to given value.
+
+
+### GetUnmatchedGlobalVars
+
+`func (o *FunctionMappingFull) GetUnmatchedGlobalVars() map[string]InverseValue`
+
+GetUnmatchedGlobalVars returns the UnmatchedGlobalVars field if non-nil, zero value otherwise.
+
+### GetUnmatchedGlobalVarsOk
+
+`func (o *FunctionMappingFull) GetUnmatchedGlobalVarsOk() (*map[string]InverseValue, bool)`
+
+GetUnmatchedGlobalVarsOk returns a tuple with the UnmatchedGlobalVars field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnmatchedGlobalVars
+
+`func (o *FunctionMappingFull) SetUnmatchedGlobalVars(v map[string]InverseValue)`
+
+SetUnmatchedGlobalVars sets UnmatchedGlobalVars field to given value.
+
+
+### GetUnmatchedGoToLabels
+
+`func (o *FunctionMappingFull) GetUnmatchedGoToLabels() map[string]InverseValue`
+
+GetUnmatchedGoToLabels returns the UnmatchedGoToLabels field if non-nil, zero value otherwise.
+
+### GetUnmatchedGoToLabelsOk
+
+`func (o *FunctionMappingFull) GetUnmatchedGoToLabelsOk() (*map[string]InverseValue, bool)`
+
+GetUnmatchedGoToLabelsOk returns a tuple with the UnmatchedGoToLabels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnmatchedGoToLabels
+
+`func (o *FunctionMappingFull) SetUnmatchedGoToLabels(v map[string]InverseValue)`
+
+SetUnmatchedGoToLabels sets UnmatchedGoToLabels field to given value.
+
+
+### GetUnmatchedStrings
+
+`func (o *FunctionMappingFull) GetUnmatchedStrings() map[string]InverseValue`
+
+GetUnmatchedStrings returns the UnmatchedStrings field if non-nil, zero value otherwise.
+
+### GetUnmatchedStringsOk
+
+`func (o *FunctionMappingFull) GetUnmatchedStringsOk() (*map[string]InverseValue, bool)`
+
+GetUnmatchedStringsOk returns a tuple with the UnmatchedStrings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnmatchedStrings
+
+`func (o *FunctionMappingFull) SetUnmatchedStrings(v map[string]InverseValue)`
+
+SetUnmatchedStrings sets UnmatchedStrings field to given value.
+
+
+### GetUnmatchedVariadicLists
+
+`func (o *FunctionMappingFull) GetUnmatchedVariadicLists() map[string]InverseValue`
+
+GetUnmatchedVariadicLists returns the UnmatchedVariadicLists field if non-nil, zero value otherwise.
+
+### GetUnmatchedVariadicListsOk
+
+`func (o *FunctionMappingFull) GetUnmatchedVariadicListsOk() (*map[string]InverseValue, bool)`
+
+GetUnmatchedVariadicListsOk returns a tuple with the UnmatchedVariadicLists field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnmatchedVariadicLists
+
+`func (o *FunctionMappingFull) SetUnmatchedVariadicLists(v map[string]InverseValue)`
+
+SetUnmatchedVariadicLists sets UnmatchedVariadicLists field to given value.
+
+
+### GetUnmatchedVars
+
+`func (o *FunctionMappingFull) GetUnmatchedVars() map[string]InverseValue`
+
+GetUnmatchedVars returns the UnmatchedVars field if non-nil, zero value otherwise.
+
+### GetUnmatchedVarsOk
+
+`func (o *FunctionMappingFull) GetUnmatchedVarsOk() (*map[string]InverseValue, bool)`
+
+GetUnmatchedVarsOk returns a tuple with the UnmatchedVars field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnmatchedVars
+
+`func (o *FunctionMappingFull) SetUnmatchedVars(v map[string]InverseValue)`
+
+SetUnmatchedVars sets UnmatchedVars field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

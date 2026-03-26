@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**StartLine** | **int32** |  | 
 **EndLine** | **int32** |  | 
+**StartLine** | **int32** |  | 
 
 ## Methods
 
 ### NewContext
 
-`func NewContext(startLine int32, endLine int32, ) *Context`
+`func NewContext(endLine int32, startLine int32, ) *Context`
 
 NewContext instantiates a new Context object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewContextWithDefaults instantiates a new Context object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetStartLine
-
-`func (o *Context) GetStartLine() int32`
-
-GetStartLine returns the StartLine field if non-nil, zero value otherwise.
-
-### GetStartLineOk
-
-`func (o *Context) GetStartLineOk() (*int32, bool)`
-
-GetStartLineOk returns a tuple with the StartLine field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStartLine
-
-`func (o *Context) SetStartLine(v int32)`
-
-SetStartLine sets StartLine field to given value.
-
 
 ### GetEndLine
 
@@ -64,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *Context) SetEndLine(v int32)`
 
 SetEndLine sets EndLine field to given value.
+
+
+### GetStartLine
+
+`func (o *Context) GetStartLine() int32`
+
+GetStartLine returns the StartLine field if non-nil, zero value otherwise.
+
+### GetStartLineOk
+
+`func (o *Context) GetStartLineOk() (*int32, bool)`
+
+GetStartLineOk returns a tuple with the StartLine field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartLine
+
+`func (o *Context) SetStartLine(v int32)`
+
+SetStartLine sets StartLine field to given value.
 
 
 

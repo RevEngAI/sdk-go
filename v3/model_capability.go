@@ -19,12 +19,12 @@ var _ MappedNullable = &Capability{}
 
 // Capability struct for Capability
 type Capability struct {
+	// The list of capabilities associated with the function
+	Capabilities []string `json:"capabilities"`
 	// The name of the function with a capability
 	FunctionName string `json:"function_name"`
 	// The virtual address of the function where the capability comes from
 	FunctionVaddr int64 `json:"function_vaddr"`
-	// The list of capabilities associated with the function
-	Capabilities []string `json:"capabilities"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,11 +34,11 @@ type _Capability Capability
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCapability(functionName string, functionVaddr int64, capabilities []string) *Capability {
+func NewCapability(capabilities []string, functionName string, functionVaddr int64) *Capability {
 	this := Capability{}
+	this.Capabilities = capabilities
 	this.FunctionName = functionName
 	this.FunctionVaddr = functionVaddr
-	this.Capabilities = capabilities
 	return &this
 }
 
@@ -48,6 +48,30 @@ func NewCapability(functionName string, functionVaddr int64, capabilities []stri
 func NewCapabilityWithDefaults() *Capability {
 	this := Capability{}
 	return &this
+}
+
+// GetCapabilities returns the Capabilities field value
+func (o *Capability) GetCapabilities() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Capabilities
+}
+
+// GetCapabilitiesOk returns a tuple with the Capabilities field value
+// and a boolean to check if the value has been set.
+func (o *Capability) GetCapabilitiesOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Capabilities, true
+}
+
+// SetCapabilities sets field value
+func (o *Capability) SetCapabilities(v []string) {
+	o.Capabilities = v
 }
 
 // GetFunctionName returns the FunctionName field value
@@ -98,30 +122,6 @@ func (o *Capability) SetFunctionVaddr(v int64) {
 	o.FunctionVaddr = v
 }
 
-// GetCapabilities returns the Capabilities field value
-func (o *Capability) GetCapabilities() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.Capabilities
-}
-
-// GetCapabilitiesOk returns a tuple with the Capabilities field value
-// and a boolean to check if the value has been set.
-func (o *Capability) GetCapabilitiesOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Capabilities, true
-}
-
-// SetCapabilities sets field value
-func (o *Capability) SetCapabilities(v []string) {
-	o.Capabilities = v
-}
-
 func (o Capability) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -132,9 +132,9 @@ func (o Capability) MarshalJSON() ([]byte, error) {
 
 func (o Capability) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["capabilities"] = o.Capabilities
 	toSerialize["function_name"] = o.FunctionName
 	toSerialize["function_vaddr"] = o.FunctionVaddr
-	toSerialize["capabilities"] = o.Capabilities
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -148,9 +148,9 @@ func (o *Capability) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"capabilities",
 		"function_name",
 		"function_vaddr",
-		"capabilities",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -180,9 +180,9 @@ func (o *Capability) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "capabilities")
 		delete(additionalProperties, "function_name")
 		delete(additionalProperties, "function_vaddr")
-		delete(additionalProperties, "capabilities")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Guid** | **string** |  | 
 **Age** | **int32** |  | 
+**Guid** | **string** |  | 
 **Path** | **string** |  | 
 
 ## Methods
 
 ### NewSinglePDBEntryModel
 
-`func NewSinglePDBEntryModel(guid string, age int32, path string, ) *SinglePDBEntryModel`
+`func NewSinglePDBEntryModel(age int32, guid string, path string, ) *SinglePDBEntryModel`
 
 NewSinglePDBEntryModel instantiates a new SinglePDBEntryModel object
 This constructor will assign default values to properties that have it defined,
@@ -26,26 +26,6 @@ will change when the set of required properties is changed
 NewSinglePDBEntryModelWithDefaults instantiates a new SinglePDBEntryModel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetGuid
-
-`func (o *SinglePDBEntryModel) GetGuid() string`
-
-GetGuid returns the Guid field if non-nil, zero value otherwise.
-
-### GetGuidOk
-
-`func (o *SinglePDBEntryModel) GetGuidOk() (*string, bool)`
-
-GetGuidOk returns a tuple with the Guid field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetGuid
-
-`func (o *SinglePDBEntryModel) SetGuid(v string)`
-
-SetGuid sets Guid field to given value.
-
 
 ### GetAge
 
@@ -65,6 +45,26 @@ and a boolean to check if the value has been set.
 `func (o *SinglePDBEntryModel) SetAge(v int32)`
 
 SetAge sets Age field to given value.
+
+
+### GetGuid
+
+`func (o *SinglePDBEntryModel) GetGuid() string`
+
+GetGuid returns the Guid field if non-nil, zero value otherwise.
+
+### GetGuidOk
+
+`func (o *SinglePDBEntryModel) GetGuidOk() (*string, bool)`
+
+GetGuidOk returns a tuple with the Guid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGuid
+
+`func (o *SinglePDBEntryModel) SetGuid(v string)`
+
+SetGuid sets Guid field to given value.
 
 
 ### GetPath

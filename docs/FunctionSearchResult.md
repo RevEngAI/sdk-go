@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FunctionId** | **int64** | The function ID | 
-**FunctionName** | **string** | The name of the function | 
 **BinaryName** | **string** | The name of the binary the function belongs to | 
 **CreatedAt** | **time.Time** | The creation date of the function | 
+**FunctionId** | **int64** | The function ID | 
+**FunctionName** | **string** | The name of the function | 
 **ModelId** | **int32** | The model ID used to analyze the binary the function belongs to | 
 **ModelName** | **string** | The name of the model used to analyze the binary the function belongs to | 
 **OwnedBy** | **string** | The owner of the binary the function belongs to | 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewFunctionSearchResult
 
-`func NewFunctionSearchResult(functionId int64, functionName string, binaryName string, createdAt time.Time, modelId int32, modelName string, ownedBy string, ) *FunctionSearchResult`
+`func NewFunctionSearchResult(binaryName string, createdAt time.Time, functionId int64, functionName string, modelId int32, modelName string, ownedBy string, ) *FunctionSearchResult`
 
 NewFunctionSearchResult instantiates a new FunctionSearchResult object
 This constructor will assign default values to properties that have it defined,
@@ -30,46 +30,6 @@ will change when the set of required properties is changed
 NewFunctionSearchResultWithDefaults instantiates a new FunctionSearchResult object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetFunctionId
-
-`func (o *FunctionSearchResult) GetFunctionId() int64`
-
-GetFunctionId returns the FunctionId field if non-nil, zero value otherwise.
-
-### GetFunctionIdOk
-
-`func (o *FunctionSearchResult) GetFunctionIdOk() (*int64, bool)`
-
-GetFunctionIdOk returns a tuple with the FunctionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFunctionId
-
-`func (o *FunctionSearchResult) SetFunctionId(v int64)`
-
-SetFunctionId sets FunctionId field to given value.
-
-
-### GetFunctionName
-
-`func (o *FunctionSearchResult) GetFunctionName() string`
-
-GetFunctionName returns the FunctionName field if non-nil, zero value otherwise.
-
-### GetFunctionNameOk
-
-`func (o *FunctionSearchResult) GetFunctionNameOk() (*string, bool)`
-
-GetFunctionNameOk returns a tuple with the FunctionName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFunctionName
-
-`func (o *FunctionSearchResult) SetFunctionName(v string)`
-
-SetFunctionName sets FunctionName field to given value.
-
 
 ### GetBinaryName
 
@@ -109,6 +69,46 @@ and a boolean to check if the value has been set.
 `func (o *FunctionSearchResult) SetCreatedAt(v time.Time)`
 
 SetCreatedAt sets CreatedAt field to given value.
+
+
+### GetFunctionId
+
+`func (o *FunctionSearchResult) GetFunctionId() int64`
+
+GetFunctionId returns the FunctionId field if non-nil, zero value otherwise.
+
+### GetFunctionIdOk
+
+`func (o *FunctionSearchResult) GetFunctionIdOk() (*int64, bool)`
+
+GetFunctionIdOk returns a tuple with the FunctionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFunctionId
+
+`func (o *FunctionSearchResult) SetFunctionId(v int64)`
+
+SetFunctionId sets FunctionId field to given value.
+
+
+### GetFunctionName
+
+`func (o *FunctionSearchResult) GetFunctionName() string`
+
+GetFunctionName returns the FunctionName field if non-nil, zero value otherwise.
+
+### GetFunctionNameOk
+
+`func (o *FunctionSearchResult) GetFunctionNameOk() (*string, bool)`
+
+GetFunctionNameOk returns a tuple with the FunctionName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFunctionName
+
+`func (o *FunctionSearchResult) SetFunctionName(v string)`
+
+SetFunctionName sets FunctionName field to given value.
 
 
 ### GetModelId

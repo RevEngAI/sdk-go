@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | The suggested function name | 
 **Confidence** | **float32** | Confidence score as a percentage | 
+**Name** | **string** | The suggested function name | 
 
 ## Methods
 
 ### NewNameConfidence
 
-`func NewNameConfidence(name string, confidence float32, ) *NameConfidence`
+`func NewNameConfidence(confidence float32, name string, ) *NameConfidence`
 
 NewNameConfidence instantiates a new NameConfidence object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewNameConfidenceWithDefaults instantiates a new NameConfidence object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetName
-
-`func (o *NameConfidence) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *NameConfidence) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *NameConfidence) SetName(v string)`
-
-SetName sets Name field to given value.
-
 
 ### GetConfidence
 
@@ -64,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *NameConfidence) SetConfidence(v float32)`
 
 SetConfidence sets Confidence field to given value.
+
+
+### GetName
+
+`func (o *NameConfidence) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *NameConfidence) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *NameConfidence) SetName(v string)`
+
+SetName sets Name field to given value.
 
 
 

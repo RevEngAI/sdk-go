@@ -19,8 +19,8 @@ var _ MappedNullable = &InverseStringMapItem{}
 
 // InverseStringMapItem struct for InverseStringMapItem
 type InverseStringMapItem struct {
-	String string `json:"string"`
 	Addr NullableInt64 `json:"addr"`
+	String string `json:"string"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,10 +30,10 @@ type _InverseStringMapItem InverseStringMapItem
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInverseStringMapItem(string_ string, addr NullableInt64) *InverseStringMapItem {
+func NewInverseStringMapItem(addr NullableInt64, string_ string) *InverseStringMapItem {
 	this := InverseStringMapItem{}
-	this.String = string_
 	this.Addr = addr
+	this.String = string_
 	return &this
 }
 
@@ -43,30 +43,6 @@ func NewInverseStringMapItem(string_ string, addr NullableInt64) *InverseStringM
 func NewInverseStringMapItemWithDefaults() *InverseStringMapItem {
 	this := InverseStringMapItem{}
 	return &this
-}
-
-// GetString returns the String field value
-func (o *InverseStringMapItem) GetString() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.String
-}
-
-// GetStringOk returns a tuple with the String field value
-// and a boolean to check if the value has been set.
-func (o *InverseStringMapItem) GetStringOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.String, true
-}
-
-// SetString sets field value
-func (o *InverseStringMapItem) SetString(v string) {
-	o.String = v
 }
 
 // GetAddr returns the Addr field value
@@ -95,6 +71,30 @@ func (o *InverseStringMapItem) SetAddr(v int64) {
 	o.Addr.Set(&v)
 }
 
+// GetString returns the String field value
+func (o *InverseStringMapItem) GetString() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.String
+}
+
+// GetStringOk returns a tuple with the String field value
+// and a boolean to check if the value has been set.
+func (o *InverseStringMapItem) GetStringOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.String, true
+}
+
+// SetString sets field value
+func (o *InverseStringMapItem) SetString(v string) {
+	o.String = v
+}
+
 func (o InverseStringMapItem) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -105,8 +105,8 @@ func (o InverseStringMapItem) MarshalJSON() ([]byte, error) {
 
 func (o InverseStringMapItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["string"] = o.String
 	toSerialize["addr"] = o.Addr.Get()
+	toSerialize["string"] = o.String
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -120,8 +120,8 @@ func (o *InverseStringMapItem) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"string",
 		"addr",
+		"string",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -151,8 +151,8 @@ func (o *InverseStringMapItem) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "string")
 		delete(additionalProperties, "addr")
+		delete(additionalProperties, "string")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -24,34 +24,34 @@ type AnalysisRecord struct {
 	AnalysisId int32 `json:"analysis_id"`
 	// Scope of the analysis
 	AnalysisScope string `json:"analysis_scope"`
+	// The base address of the binary
+	BaseAddress int32 `json:"base_address"`
 	// ID to identify the binary analyse
 	BinaryId int32 `json:"binary_id"`
+	// The name of the file uploaded
+	BinaryName string `json:"binary_name"`
+	// The size of the binary
+	BinarySize int32 `json:"binary_size"`
+	// The datetime of when the analysis was created
+	Creation time.Time `json:"creation"`
+	DynamicExecutionStatus NullableAppApiRestV2AnalysesEnumsDynamicExecutionStatus `json:"dynamic_execution_status,omitempty"`
+	DynamicExecutionTaskId NullableInt32 `json:"dynamic_execution_task_id,omitempty"`
+	// The hash of the function boundaries
+	FunctionBoundariesHash string `json:"function_boundaries_hash"`
+	// Whether the current user is the owner of a binary
+	IsOwner bool `json:"is_owner"`
 	// ID to identify the model used for analysis
 	ModelId int32 `json:"model_id"`
 	// Name of the model used for analysis
 	ModelName string `json:"model_name"`
-	// The current status of analysis
-	Status string `json:"status"`
-	// The datetime of when the analysis was created
-	Creation time.Time `json:"creation"`
-	// Whether the current user is the owner of a binary
-	IsOwner bool `json:"is_owner"`
-	// The name of the file uploaded
-	BinaryName string `json:"binary_name"`
 	// The hash of the binary
 	Sha256Hash string `json:"sha_256_hash"`
-	// The hash of the function boundaries
-	FunctionBoundariesHash string `json:"function_boundaries_hash"`
-	// The size of the binary
-	BinarySize int32 `json:"binary_size"`
-	// The username of the analysis owner
-	Username string `json:"username"`
-	DynamicExecutionStatus NullableAppApiRestV2AnalysesEnumsDynamicExecutionStatus `json:"dynamic_execution_status,omitempty"`
-	DynamicExecutionTaskId NullableInt32 `json:"dynamic_execution_task_id,omitempty"`
-	// The base address of the binary
-	BaseAddress int32 `json:"base_address"`
+	// The current status of analysis
+	Status string `json:"status"`
 	// List of tags associated with the analysis
 	Tags []TagItem `json:"tags,omitempty"`
+	// The username of the analysis owner
+	Username string `json:"username"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -61,22 +61,22 @@ type _AnalysisRecord AnalysisRecord
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisRecord(analysisId int32, analysisScope string, binaryId int32, modelId int32, modelName string, status string, creation time.Time, isOwner bool, binaryName string, sha256Hash string, functionBoundariesHash string, binarySize int32, username string, baseAddress int32) *AnalysisRecord {
+func NewAnalysisRecord(analysisId int32, analysisScope string, baseAddress int32, binaryId int32, binaryName string, binarySize int32, creation time.Time, functionBoundariesHash string, isOwner bool, modelId int32, modelName string, sha256Hash string, status string, username string) *AnalysisRecord {
 	this := AnalysisRecord{}
 	this.AnalysisId = analysisId
 	this.AnalysisScope = analysisScope
+	this.BaseAddress = baseAddress
 	this.BinaryId = binaryId
+	this.BinaryName = binaryName
+	this.BinarySize = binarySize
+	this.Creation = creation
+	this.FunctionBoundariesHash = functionBoundariesHash
+	this.IsOwner = isOwner
 	this.ModelId = modelId
 	this.ModelName = modelName
-	this.Status = status
-	this.Creation = creation
-	this.IsOwner = isOwner
-	this.BinaryName = binaryName
 	this.Sha256Hash = sha256Hash
-	this.FunctionBoundariesHash = functionBoundariesHash
-	this.BinarySize = binarySize
+	this.Status = status
 	this.Username = username
-	this.BaseAddress = baseAddress
 	return &this
 }
 
@@ -136,6 +136,30 @@ func (o *AnalysisRecord) SetAnalysisScope(v string) {
 	o.AnalysisScope = v
 }
 
+// GetBaseAddress returns the BaseAddress field value
+func (o *AnalysisRecord) GetBaseAddress() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.BaseAddress
+}
+
+// GetBaseAddressOk returns a tuple with the BaseAddress field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisRecord) GetBaseAddressOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.BaseAddress, true
+}
+
+// SetBaseAddress sets field value
+func (o *AnalysisRecord) SetBaseAddress(v int32) {
+	o.BaseAddress = v
+}
+
 // GetBinaryId returns the BinaryId field value
 func (o *AnalysisRecord) GetBinaryId() int32 {
 	if o == nil {
@@ -158,126 +182,6 @@ func (o *AnalysisRecord) GetBinaryIdOk() (*int32, bool) {
 // SetBinaryId sets field value
 func (o *AnalysisRecord) SetBinaryId(v int32) {
 	o.BinaryId = v
-}
-
-// GetModelId returns the ModelId field value
-func (o *AnalysisRecord) GetModelId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.ModelId
-}
-
-// GetModelIdOk returns a tuple with the ModelId field value
-// and a boolean to check if the value has been set.
-func (o *AnalysisRecord) GetModelIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelId, true
-}
-
-// SetModelId sets field value
-func (o *AnalysisRecord) SetModelId(v int32) {
-	o.ModelId = v
-}
-
-// GetModelName returns the ModelName field value
-func (o *AnalysisRecord) GetModelName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ModelName
-}
-
-// GetModelNameOk returns a tuple with the ModelName field value
-// and a boolean to check if the value has been set.
-func (o *AnalysisRecord) GetModelNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelName, true
-}
-
-// SetModelName sets field value
-func (o *AnalysisRecord) SetModelName(v string) {
-	o.ModelName = v
-}
-
-// GetStatus returns the Status field value
-func (o *AnalysisRecord) GetStatus() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Status
-}
-
-// GetStatusOk returns a tuple with the Status field value
-// and a boolean to check if the value has been set.
-func (o *AnalysisRecord) GetStatusOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Status, true
-}
-
-// SetStatus sets field value
-func (o *AnalysisRecord) SetStatus(v string) {
-	o.Status = v
-}
-
-// GetCreation returns the Creation field value
-func (o *AnalysisRecord) GetCreation() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.Creation
-}
-
-// GetCreationOk returns a tuple with the Creation field value
-// and a boolean to check if the value has been set.
-func (o *AnalysisRecord) GetCreationOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Creation, true
-}
-
-// SetCreation sets field value
-func (o *AnalysisRecord) SetCreation(v time.Time) {
-	o.Creation = v
-}
-
-// GetIsOwner returns the IsOwner field value
-func (o *AnalysisRecord) GetIsOwner() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.IsOwner
-}
-
-// GetIsOwnerOk returns a tuple with the IsOwner field value
-// and a boolean to check if the value has been set.
-func (o *AnalysisRecord) GetIsOwnerOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.IsOwner, true
-}
-
-// SetIsOwner sets field value
-func (o *AnalysisRecord) SetIsOwner(v bool) {
-	o.IsOwner = v
 }
 
 // GetBinaryName returns the BinaryName field value
@@ -304,54 +208,6 @@ func (o *AnalysisRecord) SetBinaryName(v string) {
 	o.BinaryName = v
 }
 
-// GetSha256Hash returns the Sha256Hash field value
-func (o *AnalysisRecord) GetSha256Hash() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Sha256Hash
-}
-
-// GetSha256HashOk returns a tuple with the Sha256Hash field value
-// and a boolean to check if the value has been set.
-func (o *AnalysisRecord) GetSha256HashOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Sha256Hash, true
-}
-
-// SetSha256Hash sets field value
-func (o *AnalysisRecord) SetSha256Hash(v string) {
-	o.Sha256Hash = v
-}
-
-// GetFunctionBoundariesHash returns the FunctionBoundariesHash field value
-func (o *AnalysisRecord) GetFunctionBoundariesHash() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.FunctionBoundariesHash
-}
-
-// GetFunctionBoundariesHashOk returns a tuple with the FunctionBoundariesHash field value
-// and a boolean to check if the value has been set.
-func (o *AnalysisRecord) GetFunctionBoundariesHashOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionBoundariesHash, true
-}
-
-// SetFunctionBoundariesHash sets field value
-func (o *AnalysisRecord) SetFunctionBoundariesHash(v string) {
-	o.FunctionBoundariesHash = v
-}
-
 // GetBinarySize returns the BinarySize field value
 func (o *AnalysisRecord) GetBinarySize() int32 {
 	if o == nil {
@@ -376,28 +232,28 @@ func (o *AnalysisRecord) SetBinarySize(v int32) {
 	o.BinarySize = v
 }
 
-// GetUsername returns the Username field value
-func (o *AnalysisRecord) GetUsername() string {
+// GetCreation returns the Creation field value
+func (o *AnalysisRecord) GetCreation() time.Time {
 	if o == nil {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 
-	return o.Username
+	return o.Creation
 }
 
-// GetUsernameOk returns a tuple with the Username field value
+// GetCreationOk returns a tuple with the Creation field value
 // and a boolean to check if the value has been set.
-func (o *AnalysisRecord) GetUsernameOk() (*string, bool) {
+func (o *AnalysisRecord) GetCreationOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Username, true
+	return &o.Creation, true
 }
 
-// SetUsername sets field value
-func (o *AnalysisRecord) SetUsername(v string) {
-	o.Username = v
+// SetCreation sets field value
+func (o *AnalysisRecord) SetCreation(v time.Time) {
+	o.Creation = v
 }
 
 // GetDynamicExecutionStatus returns the DynamicExecutionStatus field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -484,28 +340,148 @@ func (o *AnalysisRecord) UnsetDynamicExecutionTaskId() {
 	o.DynamicExecutionTaskId.Unset()
 }
 
-// GetBaseAddress returns the BaseAddress field value
-func (o *AnalysisRecord) GetBaseAddress() int32 {
+// GetFunctionBoundariesHash returns the FunctionBoundariesHash field value
+func (o *AnalysisRecord) GetFunctionBoundariesHash() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FunctionBoundariesHash
+}
+
+// GetFunctionBoundariesHashOk returns a tuple with the FunctionBoundariesHash field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisRecord) GetFunctionBoundariesHashOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionBoundariesHash, true
+}
+
+// SetFunctionBoundariesHash sets field value
+func (o *AnalysisRecord) SetFunctionBoundariesHash(v string) {
+	o.FunctionBoundariesHash = v
+}
+
+// GetIsOwner returns the IsOwner field value
+func (o *AnalysisRecord) GetIsOwner() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsOwner
+}
+
+// GetIsOwnerOk returns a tuple with the IsOwner field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisRecord) GetIsOwnerOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsOwner, true
+}
+
+// SetIsOwner sets field value
+func (o *AnalysisRecord) SetIsOwner(v bool) {
+	o.IsOwner = v
+}
+
+// GetModelId returns the ModelId field value
+func (o *AnalysisRecord) GetModelId() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.BaseAddress
+	return o.ModelId
 }
 
-// GetBaseAddressOk returns a tuple with the BaseAddress field value
+// GetModelIdOk returns a tuple with the ModelId field value
 // and a boolean to check if the value has been set.
-func (o *AnalysisRecord) GetBaseAddressOk() (*int32, bool) {
+func (o *AnalysisRecord) GetModelIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.BaseAddress, true
+	return &o.ModelId, true
 }
 
-// SetBaseAddress sets field value
-func (o *AnalysisRecord) SetBaseAddress(v int32) {
-	o.BaseAddress = v
+// SetModelId sets field value
+func (o *AnalysisRecord) SetModelId(v int32) {
+	o.ModelId = v
+}
+
+// GetModelName returns the ModelName field value
+func (o *AnalysisRecord) GetModelName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ModelName
+}
+
+// GetModelNameOk returns a tuple with the ModelName field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisRecord) GetModelNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ModelName, true
+}
+
+// SetModelName sets field value
+func (o *AnalysisRecord) SetModelName(v string) {
+	o.ModelName = v
+}
+
+// GetSha256Hash returns the Sha256Hash field value
+func (o *AnalysisRecord) GetSha256Hash() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Sha256Hash
+}
+
+// GetSha256HashOk returns a tuple with the Sha256Hash field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisRecord) GetSha256HashOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Sha256Hash, true
+}
+
+// SetSha256Hash sets field value
+func (o *AnalysisRecord) SetSha256Hash(v string) {
+	o.Sha256Hash = v
+}
+
+// GetStatus returns the Status field value
+func (o *AnalysisRecord) GetStatus() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisRecord) GetStatusOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Status, true
+}
+
+// SetStatus sets field value
+func (o *AnalysisRecord) SetStatus(v string) {
+	o.Status = v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
@@ -540,6 +516,30 @@ func (o *AnalysisRecord) SetTags(v []TagItem) {
 	o.Tags = v
 }
 
+// GetUsername returns the Username field value
+func (o *AnalysisRecord) GetUsername() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Username
+}
+
+// GetUsernameOk returns a tuple with the Username field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisRecord) GetUsernameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Username, true
+}
+
+// SetUsername sets field value
+func (o *AnalysisRecord) SetUsername(v string) {
+	o.Username = v
+}
+
 func (o AnalysisRecord) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -552,27 +552,27 @@ func (o AnalysisRecord) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["analysis_id"] = o.AnalysisId
 	toSerialize["analysis_scope"] = o.AnalysisScope
+	toSerialize["base_address"] = o.BaseAddress
 	toSerialize["binary_id"] = o.BinaryId
-	toSerialize["model_id"] = o.ModelId
-	toSerialize["model_name"] = o.ModelName
-	toSerialize["status"] = o.Status
-	toSerialize["creation"] = o.Creation
-	toSerialize["is_owner"] = o.IsOwner
 	toSerialize["binary_name"] = o.BinaryName
-	toSerialize["sha_256_hash"] = o.Sha256Hash
-	toSerialize["function_boundaries_hash"] = o.FunctionBoundariesHash
 	toSerialize["binary_size"] = o.BinarySize
-	toSerialize["username"] = o.Username
+	toSerialize["creation"] = o.Creation
 	if o.DynamicExecutionStatus.IsSet() {
 		toSerialize["dynamic_execution_status"] = o.DynamicExecutionStatus.Get()
 	}
 	if o.DynamicExecutionTaskId.IsSet() {
 		toSerialize["dynamic_execution_task_id"] = o.DynamicExecutionTaskId.Get()
 	}
-	toSerialize["base_address"] = o.BaseAddress
+	toSerialize["function_boundaries_hash"] = o.FunctionBoundariesHash
+	toSerialize["is_owner"] = o.IsOwner
+	toSerialize["model_id"] = o.ModelId
+	toSerialize["model_name"] = o.ModelName
+	toSerialize["sha_256_hash"] = o.Sha256Hash
+	toSerialize["status"] = o.Status
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
+	toSerialize["username"] = o.Username
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -588,18 +588,18 @@ func (o *AnalysisRecord) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"analysis_id",
 		"analysis_scope",
+		"base_address",
 		"binary_id",
+		"binary_name",
+		"binary_size",
+		"creation",
+		"function_boundaries_hash",
+		"is_owner",
 		"model_id",
 		"model_name",
-		"status",
-		"creation",
-		"is_owner",
-		"binary_name",
 		"sha_256_hash",
-		"function_boundaries_hash",
-		"binary_size",
+		"status",
 		"username",
-		"base_address",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -631,21 +631,21 @@ func (o *AnalysisRecord) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "analysis_id")
 		delete(additionalProperties, "analysis_scope")
+		delete(additionalProperties, "base_address")
 		delete(additionalProperties, "binary_id")
-		delete(additionalProperties, "model_id")
-		delete(additionalProperties, "model_name")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "creation")
-		delete(additionalProperties, "is_owner")
 		delete(additionalProperties, "binary_name")
-		delete(additionalProperties, "sha_256_hash")
-		delete(additionalProperties, "function_boundaries_hash")
 		delete(additionalProperties, "binary_size")
-		delete(additionalProperties, "username")
+		delete(additionalProperties, "creation")
 		delete(additionalProperties, "dynamic_execution_status")
 		delete(additionalProperties, "dynamic_execution_task_id")
-		delete(additionalProperties, "base_address")
+		delete(additionalProperties, "function_boundaries_hash")
+		delete(additionalProperties, "is_owner")
+		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "model_name")
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "status")
 		delete(additionalProperties, "tags")
+		delete(additionalProperties, "username")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Sha256Hash** | **string** |  | 
 **FileType** | [**UploadFileType**](UploadFileType.md) |  | 
 **Filename** | **string** |  | 
+**Sha256Hash** | **string** |  | 
 
 ## Methods
 
 ### NewUploadResponse
 
-`func NewUploadResponse(sha256Hash string, fileType UploadFileType, filename string, ) *UploadResponse`
+`func NewUploadResponse(fileType UploadFileType, filename string, sha256Hash string, ) *UploadResponse`
 
 NewUploadResponse instantiates a new UploadResponse object
 This constructor will assign default values to properties that have it defined,
@@ -26,26 +26,6 @@ will change when the set of required properties is changed
 NewUploadResponseWithDefaults instantiates a new UploadResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetSha256Hash
-
-`func (o *UploadResponse) GetSha256Hash() string`
-
-GetSha256Hash returns the Sha256Hash field if non-nil, zero value otherwise.
-
-### GetSha256HashOk
-
-`func (o *UploadResponse) GetSha256HashOk() (*string, bool)`
-
-GetSha256HashOk returns a tuple with the Sha256Hash field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSha256Hash
-
-`func (o *UploadResponse) SetSha256Hash(v string)`
-
-SetSha256Hash sets Sha256Hash field to given value.
-
 
 ### GetFileType
 
@@ -85,6 +65,26 @@ and a boolean to check if the value has been set.
 `func (o *UploadResponse) SetFilename(v string)`
 
 SetFilename sets Filename field to given value.
+
+
+### GetSha256Hash
+
+`func (o *UploadResponse) GetSha256Hash() string`
+
+GetSha256Hash returns the Sha256Hash field if non-nil, zero value otherwise.
+
+### GetSha256HashOk
+
+`func (o *UploadResponse) GetSha256HashOk() (*string, bool)`
+
+GetSha256HashOk returns a tuple with the Sha256Hash field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSha256Hash
+
+`func (o *UploadResponse) SetSha256Hash(v string)`
+
+SetSha256Hash sets Sha256Hash field to given value.
 
 
 

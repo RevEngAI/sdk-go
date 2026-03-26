@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Size** | **int32** |  | 
-**FriendlySize** | **string** |  | 
 **Entropy** | **float32** |  | 
+**FriendlySize** | **string** |  | 
 **Hashes** | [**FileHashes**](FileHashes.md) |  | 
+**Size** | **int32** |  | 
 
 ## Methods
 
 ### NewFileMetadata
 
-`func NewFileMetadata(size int32, friendlySize string, entropy float32, hashes FileHashes, ) *FileMetadata`
+`func NewFileMetadata(entropy float32, friendlySize string, hashes FileHashes, size int32, ) *FileMetadata`
 
 NewFileMetadata instantiates a new FileMetadata object
 This constructor will assign default values to properties that have it defined,
@@ -28,24 +28,24 @@ NewFileMetadataWithDefaults instantiates a new FileMetadata object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetSize
+### GetEntropy
 
-`func (o *FileMetadata) GetSize() int32`
+`func (o *FileMetadata) GetEntropy() float32`
 
-GetSize returns the Size field if non-nil, zero value otherwise.
+GetEntropy returns the Entropy field if non-nil, zero value otherwise.
 
-### GetSizeOk
+### GetEntropyOk
 
-`func (o *FileMetadata) GetSizeOk() (*int32, bool)`
+`func (o *FileMetadata) GetEntropyOk() (*float32, bool)`
 
-GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
+GetEntropyOk returns a tuple with the Entropy field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSize
+### SetEntropy
 
-`func (o *FileMetadata) SetSize(v int32)`
+`func (o *FileMetadata) SetEntropy(v float32)`
 
-SetSize sets Size field to given value.
+SetEntropy sets Entropy field to given value.
 
 
 ### GetFriendlySize
@@ -68,26 +68,6 @@ and a boolean to check if the value has been set.
 SetFriendlySize sets FriendlySize field to given value.
 
 
-### GetEntropy
-
-`func (o *FileMetadata) GetEntropy() float32`
-
-GetEntropy returns the Entropy field if non-nil, zero value otherwise.
-
-### GetEntropyOk
-
-`func (o *FileMetadata) GetEntropyOk() (*float32, bool)`
-
-GetEntropyOk returns a tuple with the Entropy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEntropy
-
-`func (o *FileMetadata) SetEntropy(v float32)`
-
-SetEntropy sets Entropy field to given value.
-
-
 ### GetHashes
 
 `func (o *FileMetadata) GetHashes() FileHashes`
@@ -106,6 +86,26 @@ and a boolean to check if the value has been set.
 `func (o *FileMetadata) SetHashes(v FileHashes)`
 
 SetHashes sets Hashes field to given value.
+
+
+### GetSize
+
+`func (o *FileMetadata) GetSize() int32`
+
+GetSize returns the Size field if non-nil, zero value otherwise.
+
+### GetSizeOk
+
+`func (o *FileMetadata) GetSizeOk() (*int32, bool)`
+
+GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSize
+
+`func (o *FileMetadata) SetSize(v int32)`
+
+SetSize sets Size field to given value.
 
 
 

@@ -23,9 +23,9 @@ type FunctionBlocksResponse struct {
 	Blocks []FunctionBlockResponse `json:"blocks"`
 	// Local variables associated with this function
 	LocalVariables []FunctionLocalVariableResponse `json:"local_variables"`
+	OverviewComment NullableString `json:"overview_comment"`
 	// Params associated with this function
 	Params []FunctionParamResponse `json:"params"`
-	OverviewComment NullableString `json:"overview_comment"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,12 +35,12 @@ type _FunctionBlocksResponse FunctionBlocksResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionBlocksResponse(blocks []FunctionBlockResponse, localVariables []FunctionLocalVariableResponse, params []FunctionParamResponse, overviewComment NullableString) *FunctionBlocksResponse {
+func NewFunctionBlocksResponse(blocks []FunctionBlockResponse, localVariables []FunctionLocalVariableResponse, overviewComment NullableString, params []FunctionParamResponse) *FunctionBlocksResponse {
 	this := FunctionBlocksResponse{}
 	this.Blocks = blocks
 	this.LocalVariables = localVariables
-	this.Params = params
 	this.OverviewComment = overviewComment
+	this.Params = params
 	return &this
 }
 
@@ -100,30 +100,6 @@ func (o *FunctionBlocksResponse) SetLocalVariables(v []FunctionLocalVariableResp
 	o.LocalVariables = v
 }
 
-// GetParams returns the Params field value
-func (o *FunctionBlocksResponse) GetParams() []FunctionParamResponse {
-	if o == nil {
-		var ret []FunctionParamResponse
-		return ret
-	}
-
-	return o.Params
-}
-
-// GetParamsOk returns a tuple with the Params field value
-// and a boolean to check if the value has been set.
-func (o *FunctionBlocksResponse) GetParamsOk() ([]FunctionParamResponse, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Params, true
-}
-
-// SetParams sets field value
-func (o *FunctionBlocksResponse) SetParams(v []FunctionParamResponse) {
-	o.Params = v
-}
-
 // GetOverviewComment returns the OverviewComment field value
 // If the value is explicit nil, the zero value for string will be returned
 func (o *FunctionBlocksResponse) GetOverviewComment() string {
@@ -150,6 +126,30 @@ func (o *FunctionBlocksResponse) SetOverviewComment(v string) {
 	o.OverviewComment.Set(&v)
 }
 
+// GetParams returns the Params field value
+func (o *FunctionBlocksResponse) GetParams() []FunctionParamResponse {
+	if o == nil {
+		var ret []FunctionParamResponse
+		return ret
+	}
+
+	return o.Params
+}
+
+// GetParamsOk returns a tuple with the Params field value
+// and a boolean to check if the value has been set.
+func (o *FunctionBlocksResponse) GetParamsOk() ([]FunctionParamResponse, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Params, true
+}
+
+// SetParams sets field value
+func (o *FunctionBlocksResponse) SetParams(v []FunctionParamResponse) {
+	o.Params = v
+}
+
 func (o FunctionBlocksResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -162,8 +162,8 @@ func (o FunctionBlocksResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["blocks"] = o.Blocks
 	toSerialize["local_variables"] = o.LocalVariables
-	toSerialize["params"] = o.Params
 	toSerialize["overview_comment"] = o.OverviewComment.Get()
+	toSerialize["params"] = o.Params
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -179,8 +179,8 @@ func (o *FunctionBlocksResponse) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"blocks",
 		"local_variables",
-		"params",
 		"overview_comment",
+		"params",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -212,8 +212,8 @@ func (o *FunctionBlocksResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "blocks")
 		delete(additionalProperties, "local_variables")
-		delete(additionalProperties, "params")
 		delete(additionalProperties, "overview_comment")
+		delete(additionalProperties, "params")
 		o.AdditionalProperties = additionalProperties
 	}
 
