@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MinSimilarity** | Pointer to **float32** | Minimum similarity expected for a match as a percentage, default is 90 | [optional] [default to 90.0]
+**MinSimilarity** | Pointer to **float32** | Minimum similarity expected for a match as a percentage, default is 90 | [optional] [default to 90]
 **Apply** | Pointer to **bool** | Whether to apply the matched function names to the target binary, default is False | [optional] [default to false]
-**ConfidenceThreshold** | Pointer to **float32** | Confidence threshold for applying function names as a percentage, default is 90 | [optional] [default to 90.0]
+**ConfidenceThreshold** | Pointer to **float32** | Confidence threshold for applying function names as a percentage, default is 90 | [optional] [default to 90]
 **MinGroupSize** | Pointer to **int32** | Minimum number of matching functions required to consider for a match, default is 10 | [optional] [default to 10]
 **StatusOnly** | Pointer to **bool** | If set to true, only returns the status of the auto-unstrip operation without the actual results | [optional] [default to false]
 **NoCache** | Pointer to **bool** | If set to true, forces the system to bypass any cached results and perform a fresh computation | [optional] [default to false]

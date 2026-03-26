@@ -54,7 +54,7 @@ func NewFunctionMatchingRequest(modelId int32, functionIds []int64) *FunctionMat
 	this := FunctionMatchingRequest{}
 	this.ModelId = modelId
 	this.FunctionIds = functionIds
-	var minSimilarity float32 = 90.0
+	var minSimilarity float32 = 90
 	this.MinSimilarity = &minSimilarity
 	var resultsPerFunction int32 = 1
 	this.ResultsPerFunction = &resultsPerFunction
@@ -76,7 +76,7 @@ func NewFunctionMatchingRequest(modelId int32, functionIds []int64) *FunctionMat
 // but it doesn't guarantee that properties required by API are set
 func NewFunctionMatchingRequestWithDefaults() *FunctionMatchingRequest {
 	this := FunctionMatchingRequest{}
-	var minSimilarity float32 = 90.0
+	var minSimilarity float32 = 90
 	this.MinSimilarity = &minSimilarity
 	var resultsPerFunction int32 = 1
 	this.ResultsPerFunction = &resultsPerFunction

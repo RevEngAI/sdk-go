@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Value** | **string** | The value of the string literal | 
 **Functions** | [**[]AppApiRestV2FunctionsResponsesFunction**](AppApiRestV2FunctionsResponsesFunction.md) | The function ids the string literal was found within | 
+**Source** | Pointer to [**StringSource**](StringSource.md) | The source of the string | [optional] [default to STRINGSOURCE_SYSTEM]
 
 ## Methods
 
@@ -65,6 +66,31 @@ and a boolean to check if the value has been set.
 
 SetFunctions sets Functions field to given value.
 
+
+### GetSource
+
+`func (o *StringFunctions) GetSource() StringSource`
+
+GetSource returns the Source field if non-nil, zero value otherwise.
+
+### GetSourceOk
+
+`func (o *StringFunctions) GetSourceOk() (*StringSource, bool)`
+
+GetSourceOk returns a tuple with the Source field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSource
+
+`func (o *StringFunctions) SetSource(v StringSource)`
+
+SetSource sets Source field to given value.
+
+### HasSource
+
+`func (o *StringFunctions) HasSource() bool`
+
+HasSource returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

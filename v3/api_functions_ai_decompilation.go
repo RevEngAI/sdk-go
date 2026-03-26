@@ -764,7 +764,7 @@ func (r ApiGetAiDecompilationTaskResultRequest) Summarise(summarise bool) ApiGet
 	return r
 }
 
-// Generate inline comments for the decompilation (only works if summarise is enabled)
+// Generate inline comments for the decompilation
 func (r ApiGetAiDecompilationTaskResultRequest) GenerateInlineComments(generateInlineComments bool) ApiGetAiDecompilationTaskResultRequest {
 	r.generateInlineComments = &generateInlineComments
 	return r

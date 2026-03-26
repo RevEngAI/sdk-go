@@ -392,7 +392,7 @@ import (
 func main() {
 	functionId := int64(789) // int64 | The ID of the function being decompiled
 	summarise := true // bool | Generate a summary for the decompilation (optional) (default to true)
-	generateInlineComments := true // bool | Generate inline comments for the decompilation (only works if summarise is enabled) (optional) (default to true)
+	generateInlineComments := true // bool | Generate inline comments for the decompilation (optional) (default to true)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
@@ -423,7 +423,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **summarise** | **bool** | Generate a summary for the decompilation | [default to true]
- **generateInlineComments** | **bool** | Generate inline comments for the decompilation (only works if summarise is enabled) | [default to true]
+ **generateInlineComments** | **bool** | Generate inline comments for the decompilation | [default to true]
 
 ### Return type
 

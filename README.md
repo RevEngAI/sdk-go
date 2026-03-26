@@ -86,6 +86,7 @@ Class | Method | HTTP request | Description
 *AnalysesCoreAPI* | [**InsertAnalysisLog**](docs/AnalysesCoreAPI.md#insertanalysislog) | **Post** /v2/analyses/{analysis_id}/logs | Insert a log entry for an analysis
 *AnalysesCoreAPI* | [**ListAnalyses**](docs/AnalysesCoreAPI.md#listanalyses) | **Get** /v2/analyses/list | Gets the most recent analyses
 *AnalysesCoreAPI* | [**LookupBinaryId**](docs/AnalysesCoreAPI.md#lookupbinaryid) | **Get** /v2/analyses/lookup/{binary_id} | Gets the analysis ID from binary ID
+*AnalysesCoreAPI* | [**PutAnalysisStrings**](docs/AnalysesCoreAPI.md#putanalysisstrings) | **Put** /v2/analyses/{analysis_id}/strings | Add strings to the analysis
 *AnalysesCoreAPI* | [**RequeueAnalysis**](docs/AnalysesCoreAPI.md#requeueanalysis) | **Post** /v2/analyses/{analysis_id}/requeue | Requeue Analysis
 *AnalysesCoreAPI* | [**UpdateAnalysis**](docs/AnalysesCoreAPI.md#updateanalysis) | **Patch** /v2/analyses/{analysis_id} | Update Analysis
 *AnalysesCoreAPI* | [**UpdateAnalysisTags**](docs/AnalysesCoreAPI.md#updateanalysistags) | **Patch** /v2/analyses/{analysis_id}/tags | Update Analysis Tags
@@ -208,6 +209,7 @@ Class | Method | HTTP request | Description
  - [AnalysisStage](docs/AnalysisStage.md)
  - [AnalysisStageStatus](docs/AnalysisStageStatus.md)
  - [AnalysisStagesResponse](docs/AnalysisStagesResponse.md)
+ - [AnalysisStringInput](docs/AnalysisStringInput.md)
  - [AnalysisStringsResponse](docs/AnalysisStringsResponse.md)
  - [AnalysisStringsStatusResponse](docs/AnalysisStringsStatusResponse.md)
  - [AnalysisTags](docs/AnalysisTags.md)
@@ -447,6 +449,7 @@ Class | Method | HTTP request | Description
  - [ProcessDumpsData](docs/ProcessDumpsData.md)
  - [ProcessRegistry](docs/ProcessRegistry.md)
  - [ProcessTree](docs/ProcessTree.md)
+ - [PutAnalysisStringsRequest](docs/PutAnalysisStringsRequest.md)
  - [QueuedSecurityChecksTaskResponse](docs/QueuedSecurityChecksTaskResponse.md)
  - [ReAnalysisForm](docs/ReAnalysisForm.md)
  - [Recent](docs/Recent.md)
@@ -472,6 +475,7 @@ Class | Method | HTTP request | Description
  - [StatusInput](docs/StatusInput.md)
  - [StatusOutput](docs/StatusOutput.md)
  - [StringFunctions](docs/StringFunctions.md)
+ - [StringSource](docs/StringSource.md)
  - [Structure](docs/Structure.md)
  - [StructureMember](docs/StructureMember.md)
  - [Symbols](docs/Symbols.md)

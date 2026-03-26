@@ -14,47 +14,44 @@ import (
 	"fmt"
 )
 
-// checks if the FunctionString type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &FunctionString{}
+// checks if the AnalysisStringInput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AnalysisStringInput{}
 
-// FunctionString struct for FunctionString
-type FunctionString struct {
-	// The value of the string literal
+// AnalysisStringInput Input model for inserting a string into an analysis.
+type AnalysisStringInput struct {
+	// The string literal value
 	Value string `json:"value"`
-	// The vaddr of the string value
+	// The virtual address of the string
 	Vaddr int32 `json:"vaddr"`
 	// The source of the string
-	Source *StringSource `json:"source,omitempty"`
+	Source StringSource `json:"source"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _FunctionString FunctionString
+type _AnalysisStringInput AnalysisStringInput
 
-// NewFunctionString instantiates a new FunctionString object
+// NewAnalysisStringInput instantiates a new AnalysisStringInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionString(value string, vaddr int32) *FunctionString {
-	this := FunctionString{}
+func NewAnalysisStringInput(value string, vaddr int32, source StringSource) *AnalysisStringInput {
+	this := AnalysisStringInput{}
 	this.Value = value
 	this.Vaddr = vaddr
-	var source StringSource = STRINGSOURCE_SYSTEM
-	this.Source = &source
+	this.Source = source
 	return &this
 }
 
-// NewFunctionStringWithDefaults instantiates a new FunctionString object
+// NewAnalysisStringInputWithDefaults instantiates a new AnalysisStringInput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFunctionStringWithDefaults() *FunctionString {
-	this := FunctionString{}
-	var source StringSource = STRINGSOURCE_SYSTEM
-	this.Source = &source
+func NewAnalysisStringInputWithDefaults() *AnalysisStringInput {
+	this := AnalysisStringInput{}
 	return &this
 }
 
 // GetValue returns the Value field value
-func (o *FunctionString) GetValue() string {
+func (o *AnalysisStringInput) GetValue() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -65,7 +62,7 @@ func (o *FunctionString) GetValue() string {
 
 // GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-func (o *FunctionString) GetValueOk() (*string, bool) {
+func (o *AnalysisStringInput) GetValueOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,12 +70,12 @@ func (o *FunctionString) GetValueOk() (*string, bool) {
 }
 
 // SetValue sets field value
-func (o *FunctionString) SetValue(v string) {
+func (o *AnalysisStringInput) SetValue(v string) {
 	o.Value = v
 }
 
 // GetVaddr returns the Vaddr field value
-func (o *FunctionString) GetVaddr() int32 {
+func (o *AnalysisStringInput) GetVaddr() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -89,7 +86,7 @@ func (o *FunctionString) GetVaddr() int32 {
 
 // GetVaddrOk returns a tuple with the Vaddr field value
 // and a boolean to check if the value has been set.
-func (o *FunctionString) GetVaddrOk() (*int32, bool) {
+func (o *AnalysisStringInput) GetVaddrOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -97,43 +94,35 @@ func (o *FunctionString) GetVaddrOk() (*int32, bool) {
 }
 
 // SetVaddr sets field value
-func (o *FunctionString) SetVaddr(v int32) {
+func (o *AnalysisStringInput) SetVaddr(v int32) {
 	o.Vaddr = v
 }
 
-// GetSource returns the Source field value if set, zero value otherwise.
-func (o *FunctionString) GetSource() StringSource {
-	if o == nil || IsNil(o.Source) {
+// GetSource returns the Source field value
+func (o *AnalysisStringInput) GetSource() StringSource {
+	if o == nil {
 		var ret StringSource
 		return ret
 	}
-	return *o.Source
+
+	return o.Source
 }
 
-// GetSourceOk returns a tuple with the Source field value if set, nil otherwise
+// GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
-func (o *FunctionString) GetSourceOk() (*StringSource, bool) {
-	if o == nil || IsNil(o.Source) {
+func (o *AnalysisStringInput) GetSourceOk() (*StringSource, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Source, true
+	return &o.Source, true
 }
 
-// HasSource returns a boolean if a field has been set.
-func (o *FunctionString) HasSource() bool {
-	if o != nil && !IsNil(o.Source) {
-		return true
-	}
-
-	return false
+// SetSource sets field value
+func (o *AnalysisStringInput) SetSource(v StringSource) {
+	o.Source = v
 }
 
-// SetSource gets a reference to the given StringSource and assigns it to the Source field.
-func (o *FunctionString) SetSource(v StringSource) {
-	o.Source = &v
-}
-
-func (o FunctionString) MarshalJSON() ([]byte, error) {
+func (o AnalysisStringInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -141,13 +130,11 @@ func (o FunctionString) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FunctionString) ToMap() (map[string]interface{}, error) {
+func (o AnalysisStringInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
 	toSerialize["vaddr"] = o.Vaddr
-	if !IsNil(o.Source) {
-		toSerialize["source"] = o.Source
-	}
+	toSerialize["source"] = o.Source
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -156,13 +143,14 @@ func (o FunctionString) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *FunctionString) UnmarshalJSON(data []byte) (err error) {
+func (o *AnalysisStringInput) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"value",
 		"vaddr",
+		"source",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -179,15 +167,15 @@ func (o *FunctionString) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varFunctionString := _FunctionString{}
+	varAnalysisStringInput := _AnalysisStringInput{}
 
-	err = json.Unmarshal(data, &varFunctionString)
+	err = json.Unmarshal(data, &varAnalysisStringInput)
 
 	if err != nil {
 		return err
 	}
 
-	*o = FunctionString(varFunctionString)
+	*o = AnalysisStringInput(varAnalysisStringInput)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -201,38 +189,38 @@ func (o *FunctionString) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableFunctionString struct {
-	value *FunctionString
+type NullableAnalysisStringInput struct {
+	value *AnalysisStringInput
 	isSet bool
 }
 
-func (v NullableFunctionString) Get() *FunctionString {
+func (v NullableAnalysisStringInput) Get() *AnalysisStringInput {
 	return v.value
 }
 
-func (v *NullableFunctionString) Set(val *FunctionString) {
+func (v *NullableAnalysisStringInput) Set(val *AnalysisStringInput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFunctionString) IsSet() bool {
+func (v NullableAnalysisStringInput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFunctionString) Unset() {
+func (v *NullableAnalysisStringInput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFunctionString(val *FunctionString) *NullableFunctionString {
-	return &NullableFunctionString{value: val, isSet: true}
+func NewNullableAnalysisStringInput(val *AnalysisStringInput) *NullableAnalysisStringInput {
+	return &NullableAnalysisStringInput{value: val, isSet: true}
 }
 
-func (v NullableFunctionString) MarshalJSON() ([]byte, error) {
+func (v NullableAnalysisStringInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFunctionString) UnmarshalJSON(src []byte) error {
+func (v *NullableAnalysisStringInput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

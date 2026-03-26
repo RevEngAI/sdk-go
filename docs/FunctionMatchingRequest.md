@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ModelId** | **int32** | ID of the model used for function matching, used to determine the embedding model | 
 **FunctionIds** | **[]int64** | ID&#39;s of functions to find matches for, must be at least one function ID | 
-**MinSimilarity** | Pointer to **float32** | Minimum similarity expected for a match as a percentage, default is 90 | [optional] [default to 90.0]
+**MinSimilarity** | Pointer to **float32** | Minimum similarity expected for a match as a percentage, default is 90 | [optional] [default to 90]
 **Filters** | Pointer to [**NullableFunctionMatchingFilters**](FunctionMatchingFilters.md) |  | [optional] 
 **ResultsPerFunction** | Pointer to **int32** | Maximum number of matches to return per function, default is 1, max is 50 | [optional] [default to 1]
 **Page** | Pointer to **int32** | Page number for paginated results, default is 1 (first page) | [optional] [default to 1]
