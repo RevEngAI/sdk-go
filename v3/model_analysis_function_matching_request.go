@@ -21,7 +21,7 @@ type AnalysisFunctionMatchingRequest struct {
 	// Minimum similarity expected for a match as a percentage, default is 90
 	MinSimilarity *float32 `json:"min_similarity,omitempty"`
 	Filters NullableFunctionMatchingFilters `json:"filters,omitempty"`
-	// Maximum number of matches to return per function, default is 1, max is 10
+	// Maximum number of matches to return per function, default is 1, max is 30
 	ResultsPerFunction *int32 `json:"results_per_function,omitempty"`
 	// Page number for paginated results, default is 1 (first page)
 	// Deprecated
