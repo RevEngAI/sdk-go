@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MinSimilarity** | Pointer to **float32** | Minimum similarity expected for a match as a percentage, default is 90 | [optional] [default to 90]
 **Filters** | Pointer to [**NullableFunctionMatchingFilters**](FunctionMatchingFilters.md) |  | [optional] 
-**ResultsPerFunction** | Pointer to **int32** | Maximum number of matches to return per function, default is 1, max is 10 | [optional] [default to 1]
+**ResultsPerFunction** | Pointer to **int32** | Maximum number of matches to return per function, default is 1, max is 30 | [optional] [default to 1]
 **Page** | Pointer to **int32** | Page number for paginated results, default is 1 (first page) | [optional] [default to 1]
 **PageSize** | Pointer to **int32** | Number of functions to return per page, default is 0 (all functions), max is 1000 | [optional] [default to 0]
 **StatusOnly** | Pointer to **bool** | If set to true, only returns the status of the matching operation without the actual results | [optional] [default to false]
