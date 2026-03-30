@@ -21,9 +21,9 @@ var _ MappedNullable = &AnalysisCreateRequest{}
 type AnalysisCreateRequest struct {
 	// The name of the file
 	Filename string `json:"filename"`
-	// The name of the file
+	// The sha256 hash of the file
 	Sha256Hash string `json:"sha_256_hash"`
-	// List of community tags to assign to an analysis
+	// List of tags to assign to an analysis
 	Tags []Tag `json:"tags,omitempty"`
 	// The scope of the analysis determines who can access it
 	AnalysisScope *AnalysisScope `json:"analysis_scope,omitempty"`

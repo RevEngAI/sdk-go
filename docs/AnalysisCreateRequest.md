@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Filename** | **string** | The name of the file | 
-**Sha256Hash** | **string** | The name of the file | 
-**Tags** | Pointer to [**[]Tag**](Tag.md) | List of community tags to assign to an analysis | [optional] [default to {}]
+**Sha256Hash** | **string** | The sha256 hash of the file | 
+**Tags** | Pointer to [**[]Tag**](Tag.md) | List of tags to assign to an analysis | [optional] [default to {}]
 **AnalysisScope** | Pointer to [**AnalysisScope**](AnalysisScope.md) | The scope of the analysis determines who can access it | [optional] [default to ANALYSISSCOPE_PRIVATE]
 **Symbols** | Pointer to [**NullableSymbols**](Symbols.md) |  | [optional] 
 **DebugHash** | Pointer to **NullableString** |  | [optional] 
