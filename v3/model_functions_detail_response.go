@@ -31,8 +31,6 @@ type FunctionsDetailResponse struct {
 	Sha256Hash string `json:"sha_256_hash"`
 	DebugHash NullableString `json:"debug_hash"`
 	Debug bool `json:"debug"`
-	Embedding3d []float32 `json:"embedding_3d,omitempty"`
-	Embedding1d []float32 `json:"embedding_1d,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -332,72 +330,6 @@ func (o *FunctionsDetailResponse) SetDebug(v bool) {
 	o.Debug = v
 }
 
-// GetEmbedding3d returns the Embedding3d field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionsDetailResponse) GetEmbedding3d() []float32 {
-	if o == nil {
-		var ret []float32
-		return ret
-	}
-	return o.Embedding3d
-}
-
-// GetEmbedding3dOk returns a tuple with the Embedding3d field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionsDetailResponse) GetEmbedding3dOk() ([]float32, bool) {
-	if o == nil || IsNil(o.Embedding3d) {
-		return nil, false
-	}
-	return o.Embedding3d, true
-}
-
-// HasEmbedding3d returns a boolean if a field has been set.
-func (o *FunctionsDetailResponse) HasEmbedding3d() bool {
-	if o != nil && !IsNil(o.Embedding3d) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmbedding3d gets a reference to the given []float32 and assigns it to the Embedding3d field.
-func (o *FunctionsDetailResponse) SetEmbedding3d(v []float32) {
-	o.Embedding3d = v
-}
-
-// GetEmbedding1d returns the Embedding1d field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionsDetailResponse) GetEmbedding1d() []float32 {
-	if o == nil {
-		var ret []float32
-		return ret
-	}
-	return o.Embedding1d
-}
-
-// GetEmbedding1dOk returns a tuple with the Embedding1d field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionsDetailResponse) GetEmbedding1dOk() ([]float32, bool) {
-	if o == nil || IsNil(o.Embedding1d) {
-		return nil, false
-	}
-	return o.Embedding1d, true
-}
-
-// HasEmbedding1d returns a boolean if a field has been set.
-func (o *FunctionsDetailResponse) HasEmbedding1d() bool {
-	if o != nil && !IsNil(o.Embedding1d) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmbedding1d gets a reference to the given []float32 and assigns it to the Embedding1d field.
-func (o *FunctionsDetailResponse) SetEmbedding1d(v []float32) {
-	o.Embedding1d = v
-}
-
 func (o FunctionsDetailResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -419,12 +351,6 @@ func (o FunctionsDetailResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["sha_256_hash"] = o.Sha256Hash
 	toSerialize["debug_hash"] = o.DebugHash.Get()
 	toSerialize["debug"] = o.Debug
-	if o.Embedding3d != nil {
-		toSerialize["embedding_3d"] = o.Embedding3d
-	}
-	if o.Embedding1d != nil {
-		toSerialize["embedding_1d"] = o.Embedding1d
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -489,8 +415,6 @@ func (o *FunctionsDetailResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "sha_256_hash")
 		delete(additionalProperties, "debug_hash")
 		delete(additionalProperties, "debug")
-		delete(additionalProperties, "embedding_3d")
-		delete(additionalProperties, "embedding_1d")
 		o.AdditionalProperties = additionalProperties
 	}
 
