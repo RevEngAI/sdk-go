@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## UploadFirmware
 
-> interface{} UploadFirmware(ctx).File(file).Password(password).Execute()
+> interface{} UploadFirmware(ctx).File(file).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Password(password).Execute()
 
 Upload firmware for unpacking
 
@@ -101,11 +101,17 @@ import (
 
 func main() {
 	file := os.NewFile(1234, "some_file") // *os.File | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 	password := "password_example" // string |  (optional)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareAPI.UploadFirmware(context.Background()).File(file).Password(password).Execute()
+	resp, r, err := apiClient.FirmwareAPI.UploadFirmware(context.Background()).File(file).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Password(password).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareAPI.UploadFirmware``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -127,6 +133,12 @@ Other parameters are passed through a pointer to a apiUploadFirmwareRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file** | ***os.File** |  | 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
  **password** | **string** |  | 
 
 ### Return type

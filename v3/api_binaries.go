@@ -27,6 +27,42 @@ type ApiDownloadZippedBinaryRequest struct {
 	ctx context.Context
 	ApiService *BinariesAPIService
 	binaryId int32
+	endpointUrl *string
+	localCacheDir *string
+	localCacheMaxSizeMb *int32
+	customerSamplesBucket *string
+	firmwareSamplesBucket *string
+	maxRetryAttempts *int32
+}
+
+func (r ApiDownloadZippedBinaryRequest) EndpointUrl(endpointUrl string) ApiDownloadZippedBinaryRequest {
+	r.endpointUrl = &endpointUrl
+	return r
+}
+
+func (r ApiDownloadZippedBinaryRequest) LocalCacheDir(localCacheDir string) ApiDownloadZippedBinaryRequest {
+	r.localCacheDir = &localCacheDir
+	return r
+}
+
+func (r ApiDownloadZippedBinaryRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiDownloadZippedBinaryRequest {
+	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
+	return r
+}
+
+func (r ApiDownloadZippedBinaryRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiDownloadZippedBinaryRequest {
+	r.customerSamplesBucket = &customerSamplesBucket
+	return r
+}
+
+func (r ApiDownloadZippedBinaryRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiDownloadZippedBinaryRequest {
+	r.firmwareSamplesBucket = &firmwareSamplesBucket
+	return r
+}
+
+func (r ApiDownloadZippedBinaryRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiDownloadZippedBinaryRequest {
+	r.maxRetryAttempts = &maxRetryAttempts
+	return r
 }
 
 func (r ApiDownloadZippedBinaryRequest) Execute() (*os.File, *http.Response, error) {
@@ -70,6 +106,28 @@ func (a *BinariesAPIService) DownloadZippedBinaryExecute(r ApiDownloadZippedBina
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.endpointUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
+	}
+	if r.localCacheDir != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
+	}
+	if r.localCacheMaxSizeMb != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
+	}
+	if r.customerSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
+	}
+	if r.firmwareSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
+	}
+	if r.maxRetryAttempts != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
+	} else {
+		var defaultValue int32 = 5
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
+		r.maxRetryAttempts = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -152,6 +210,42 @@ type ApiGetBinaryAdditionalDetailsRequest struct {
 	ctx context.Context
 	ApiService *BinariesAPIService
 	binaryId int32
+	endpointUrl *string
+	localCacheDir *string
+	localCacheMaxSizeMb *int32
+	customerSamplesBucket *string
+	firmwareSamplesBucket *string
+	maxRetryAttempts *int32
+}
+
+func (r ApiGetBinaryAdditionalDetailsRequest) EndpointUrl(endpointUrl string) ApiGetBinaryAdditionalDetailsRequest {
+	r.endpointUrl = &endpointUrl
+	return r
+}
+
+func (r ApiGetBinaryAdditionalDetailsRequest) LocalCacheDir(localCacheDir string) ApiGetBinaryAdditionalDetailsRequest {
+	r.localCacheDir = &localCacheDir
+	return r
+}
+
+func (r ApiGetBinaryAdditionalDetailsRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiGetBinaryAdditionalDetailsRequest {
+	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
+	return r
+}
+
+func (r ApiGetBinaryAdditionalDetailsRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiGetBinaryAdditionalDetailsRequest {
+	r.customerSamplesBucket = &customerSamplesBucket
+	return r
+}
+
+func (r ApiGetBinaryAdditionalDetailsRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiGetBinaryAdditionalDetailsRequest {
+	r.firmwareSamplesBucket = &firmwareSamplesBucket
+	return r
+}
+
+func (r ApiGetBinaryAdditionalDetailsRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiGetBinaryAdditionalDetailsRequest {
+	r.maxRetryAttempts = &maxRetryAttempts
+	return r
 }
 
 func (r ApiGetBinaryAdditionalDetailsRequest) Execute() (*BaseResponseBinaryAdditionalResponse, *http.Response, error) {
@@ -195,6 +289,28 @@ func (a *BinariesAPIService) GetBinaryAdditionalDetailsExecute(r ApiGetBinaryAdd
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.endpointUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
+	}
+	if r.localCacheDir != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
+	}
+	if r.localCacheMaxSizeMb != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
+	}
+	if r.customerSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
+	}
+	if r.firmwareSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
+	}
+	if r.maxRetryAttempts != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
+	} else {
+		var defaultValue int32 = 5
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
+		r.maxRetryAttempts = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -277,6 +393,42 @@ type ApiGetBinaryAdditionalDetailsStatusRequest struct {
 	ctx context.Context
 	ApiService *BinariesAPIService
 	binaryId int32
+	endpointUrl *string
+	localCacheDir *string
+	localCacheMaxSizeMb *int32
+	customerSamplesBucket *string
+	firmwareSamplesBucket *string
+	maxRetryAttempts *int32
+}
+
+func (r ApiGetBinaryAdditionalDetailsStatusRequest) EndpointUrl(endpointUrl string) ApiGetBinaryAdditionalDetailsStatusRequest {
+	r.endpointUrl = &endpointUrl
+	return r
+}
+
+func (r ApiGetBinaryAdditionalDetailsStatusRequest) LocalCacheDir(localCacheDir string) ApiGetBinaryAdditionalDetailsStatusRequest {
+	r.localCacheDir = &localCacheDir
+	return r
+}
+
+func (r ApiGetBinaryAdditionalDetailsStatusRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiGetBinaryAdditionalDetailsStatusRequest {
+	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
+	return r
+}
+
+func (r ApiGetBinaryAdditionalDetailsStatusRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiGetBinaryAdditionalDetailsStatusRequest {
+	r.customerSamplesBucket = &customerSamplesBucket
+	return r
+}
+
+func (r ApiGetBinaryAdditionalDetailsStatusRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiGetBinaryAdditionalDetailsStatusRequest {
+	r.firmwareSamplesBucket = &firmwareSamplesBucket
+	return r
+}
+
+func (r ApiGetBinaryAdditionalDetailsStatusRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiGetBinaryAdditionalDetailsStatusRequest {
+	r.maxRetryAttempts = &maxRetryAttempts
+	return r
 }
 
 func (r ApiGetBinaryAdditionalDetailsStatusRequest) Execute() (*BaseResponseAdditionalDetailsStatusResponse, *http.Response, error) {
@@ -320,6 +472,28 @@ func (a *BinariesAPIService) GetBinaryAdditionalDetailsStatusExecute(r ApiGetBin
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.endpointUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
+	}
+	if r.localCacheDir != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
+	}
+	if r.localCacheMaxSizeMb != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
+	}
+	if r.customerSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
+	}
+	if r.firmwareSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
+	}
+	if r.maxRetryAttempts != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
+	} else {
+		var defaultValue int32 = 5
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
+		r.maxRetryAttempts = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -402,6 +576,42 @@ type ApiGetBinaryDetailsRequest struct {
 	ctx context.Context
 	ApiService *BinariesAPIService
 	binaryId int32
+	endpointUrl *string
+	localCacheDir *string
+	localCacheMaxSizeMb *int32
+	customerSamplesBucket *string
+	firmwareSamplesBucket *string
+	maxRetryAttempts *int32
+}
+
+func (r ApiGetBinaryDetailsRequest) EndpointUrl(endpointUrl string) ApiGetBinaryDetailsRequest {
+	r.endpointUrl = &endpointUrl
+	return r
+}
+
+func (r ApiGetBinaryDetailsRequest) LocalCacheDir(localCacheDir string) ApiGetBinaryDetailsRequest {
+	r.localCacheDir = &localCacheDir
+	return r
+}
+
+func (r ApiGetBinaryDetailsRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiGetBinaryDetailsRequest {
+	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
+	return r
+}
+
+func (r ApiGetBinaryDetailsRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiGetBinaryDetailsRequest {
+	r.customerSamplesBucket = &customerSamplesBucket
+	return r
+}
+
+func (r ApiGetBinaryDetailsRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiGetBinaryDetailsRequest {
+	r.firmwareSamplesBucket = &firmwareSamplesBucket
+	return r
+}
+
+func (r ApiGetBinaryDetailsRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiGetBinaryDetailsRequest {
+	r.maxRetryAttempts = &maxRetryAttempts
+	return r
 }
 
 func (r ApiGetBinaryDetailsRequest) Execute() (*BaseResponseBinaryDetailsResponse, *http.Response, error) {
@@ -445,6 +655,28 @@ func (a *BinariesAPIService) GetBinaryDetailsExecute(r ApiGetBinaryDetailsReques
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.endpointUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
+	}
+	if r.localCacheDir != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
+	}
+	if r.localCacheMaxSizeMb != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
+	}
+	if r.customerSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
+	}
+	if r.firmwareSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
+	}
+	if r.maxRetryAttempts != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
+	} else {
+		var defaultValue int32 = 5
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
+		r.maxRetryAttempts = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -527,6 +759,42 @@ type ApiGetBinaryDieInfoRequest struct {
 	ctx context.Context
 	ApiService *BinariesAPIService
 	binaryId int32
+	endpointUrl *string
+	localCacheDir *string
+	localCacheMaxSizeMb *int32
+	customerSamplesBucket *string
+	firmwareSamplesBucket *string
+	maxRetryAttempts *int32
+}
+
+func (r ApiGetBinaryDieInfoRequest) EndpointUrl(endpointUrl string) ApiGetBinaryDieInfoRequest {
+	r.endpointUrl = &endpointUrl
+	return r
+}
+
+func (r ApiGetBinaryDieInfoRequest) LocalCacheDir(localCacheDir string) ApiGetBinaryDieInfoRequest {
+	r.localCacheDir = &localCacheDir
+	return r
+}
+
+func (r ApiGetBinaryDieInfoRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiGetBinaryDieInfoRequest {
+	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
+	return r
+}
+
+func (r ApiGetBinaryDieInfoRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiGetBinaryDieInfoRequest {
+	r.customerSamplesBucket = &customerSamplesBucket
+	return r
+}
+
+func (r ApiGetBinaryDieInfoRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiGetBinaryDieInfoRequest {
+	r.firmwareSamplesBucket = &firmwareSamplesBucket
+	return r
+}
+
+func (r ApiGetBinaryDieInfoRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiGetBinaryDieInfoRequest {
+	r.maxRetryAttempts = &maxRetryAttempts
+	return r
 }
 
 func (r ApiGetBinaryDieInfoRequest) Execute() (*BaseResponseListDieMatch, *http.Response, error) {
@@ -570,6 +838,28 @@ func (a *BinariesAPIService) GetBinaryDieInfoExecute(r ApiGetBinaryDieInfoReques
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.endpointUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
+	}
+	if r.localCacheDir != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
+	}
+	if r.localCacheMaxSizeMb != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
+	}
+	if r.customerSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
+	}
+	if r.firmwareSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
+	}
+	if r.maxRetryAttempts != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
+	} else {
+		var defaultValue int32 = 5
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
+		r.maxRetryAttempts = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -652,6 +942,42 @@ type ApiGetBinaryExternalsRequest struct {
 	ctx context.Context
 	ApiService *BinariesAPIService
 	binaryId int32
+	endpointUrl *string
+	localCacheDir *string
+	localCacheMaxSizeMb *int32
+	customerSamplesBucket *string
+	firmwareSamplesBucket *string
+	maxRetryAttempts *int32
+}
+
+func (r ApiGetBinaryExternalsRequest) EndpointUrl(endpointUrl string) ApiGetBinaryExternalsRequest {
+	r.endpointUrl = &endpointUrl
+	return r
+}
+
+func (r ApiGetBinaryExternalsRequest) LocalCacheDir(localCacheDir string) ApiGetBinaryExternalsRequest {
+	r.localCacheDir = &localCacheDir
+	return r
+}
+
+func (r ApiGetBinaryExternalsRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiGetBinaryExternalsRequest {
+	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
+	return r
+}
+
+func (r ApiGetBinaryExternalsRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiGetBinaryExternalsRequest {
+	r.customerSamplesBucket = &customerSamplesBucket
+	return r
+}
+
+func (r ApiGetBinaryExternalsRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiGetBinaryExternalsRequest {
+	r.firmwareSamplesBucket = &firmwareSamplesBucket
+	return r
+}
+
+func (r ApiGetBinaryExternalsRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiGetBinaryExternalsRequest {
+	r.maxRetryAttempts = &maxRetryAttempts
+	return r
 }
 
 func (r ApiGetBinaryExternalsRequest) Execute() (*BaseResponseBinaryExternalsResponse, *http.Response, error) {
@@ -695,6 +1021,28 @@ func (a *BinariesAPIService) GetBinaryExternalsExecute(r ApiGetBinaryExternalsRe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.endpointUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
+	}
+	if r.localCacheDir != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
+	}
+	if r.localCacheMaxSizeMb != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
+	}
+	if r.customerSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
+	}
+	if r.firmwareSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
+	}
+	if r.maxRetryAttempts != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
+	} else {
+		var defaultValue int32 = 5
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
+		r.maxRetryAttempts = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -777,6 +1125,42 @@ type ApiGetBinaryRelatedStatusRequest struct {
 	ctx context.Context
 	ApiService *BinariesAPIService
 	binaryId int32
+	endpointUrl *string
+	localCacheDir *string
+	localCacheMaxSizeMb *int32
+	customerSamplesBucket *string
+	firmwareSamplesBucket *string
+	maxRetryAttempts *int32
+}
+
+func (r ApiGetBinaryRelatedStatusRequest) EndpointUrl(endpointUrl string) ApiGetBinaryRelatedStatusRequest {
+	r.endpointUrl = &endpointUrl
+	return r
+}
+
+func (r ApiGetBinaryRelatedStatusRequest) LocalCacheDir(localCacheDir string) ApiGetBinaryRelatedStatusRequest {
+	r.localCacheDir = &localCacheDir
+	return r
+}
+
+func (r ApiGetBinaryRelatedStatusRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiGetBinaryRelatedStatusRequest {
+	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
+	return r
+}
+
+func (r ApiGetBinaryRelatedStatusRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiGetBinaryRelatedStatusRequest {
+	r.customerSamplesBucket = &customerSamplesBucket
+	return r
+}
+
+func (r ApiGetBinaryRelatedStatusRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiGetBinaryRelatedStatusRequest {
+	r.firmwareSamplesBucket = &firmwareSamplesBucket
+	return r
+}
+
+func (r ApiGetBinaryRelatedStatusRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiGetBinaryRelatedStatusRequest {
+	r.maxRetryAttempts = &maxRetryAttempts
+	return r
 }
 
 func (r ApiGetBinaryRelatedStatusRequest) Execute() (*BaseResponseBinariesRelatedStatusResponse, *http.Response, error) {
@@ -820,6 +1204,28 @@ func (a *BinariesAPIService) GetBinaryRelatedStatusExecute(r ApiGetBinaryRelated
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.endpointUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
+	}
+	if r.localCacheDir != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
+	}
+	if r.localCacheMaxSizeMb != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
+	}
+	if r.customerSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
+	}
+	if r.firmwareSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
+	}
+	if r.maxRetryAttempts != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
+	} else {
+		var defaultValue int32 = 5
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
+		r.maxRetryAttempts = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -902,6 +1308,42 @@ type ApiGetRelatedBinariesRequest struct {
 	ctx context.Context
 	ApiService *BinariesAPIService
 	binaryId int32
+	endpointUrl *string
+	localCacheDir *string
+	localCacheMaxSizeMb *int32
+	customerSamplesBucket *string
+	firmwareSamplesBucket *string
+	maxRetryAttempts *int32
+}
+
+func (r ApiGetRelatedBinariesRequest) EndpointUrl(endpointUrl string) ApiGetRelatedBinariesRequest {
+	r.endpointUrl = &endpointUrl
+	return r
+}
+
+func (r ApiGetRelatedBinariesRequest) LocalCacheDir(localCacheDir string) ApiGetRelatedBinariesRequest {
+	r.localCacheDir = &localCacheDir
+	return r
+}
+
+func (r ApiGetRelatedBinariesRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiGetRelatedBinariesRequest {
+	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
+	return r
+}
+
+func (r ApiGetRelatedBinariesRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiGetRelatedBinariesRequest {
+	r.customerSamplesBucket = &customerSamplesBucket
+	return r
+}
+
+func (r ApiGetRelatedBinariesRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiGetRelatedBinariesRequest {
+	r.firmwareSamplesBucket = &firmwareSamplesBucket
+	return r
+}
+
+func (r ApiGetRelatedBinariesRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiGetRelatedBinariesRequest {
+	r.maxRetryAttempts = &maxRetryAttempts
+	return r
 }
 
 func (r ApiGetRelatedBinariesRequest) Execute() (*BaseResponseChildBinariesResponse, *http.Response, error) {
@@ -945,6 +1387,28 @@ func (a *BinariesAPIService) GetRelatedBinariesExecute(r ApiGetRelatedBinariesRe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.endpointUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
+	}
+	if r.localCacheDir != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
+	}
+	if r.localCacheMaxSizeMb != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
+	}
+	if r.customerSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
+	}
+	if r.firmwareSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
+	}
+	if r.maxRetryAttempts != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
+	} else {
+		var defaultValue int32 = 5
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
+		r.maxRetryAttempts = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

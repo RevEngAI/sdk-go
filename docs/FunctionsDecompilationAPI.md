@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateDecompilationComment
 
-> BaseResponseCommentResponse CreateDecompilationComment(ctx, functionId).FunctionCommentCreateRequest(functionCommentCreateRequest).Execute()
+> BaseResponseCommentResponse CreateDecompilationComment(ctx, functionId).FunctionCommentCreateRequest(functionCommentCreateRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Create a comment for this function
 
@@ -34,10 +34,16 @@ import (
 func main() {
 	functionId := int32(56) // int32 | 
 	functionCommentCreateRequest := *revengai.NewFunctionCommentCreateRequest("Content_example") // FunctionCommentCreateRequest | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsDecompilationAPI.CreateDecompilationComment(context.Background(), functionId).FunctionCommentCreateRequest(functionCommentCreateRequest).Execute()
+	resp, r, err := apiClient.FunctionsDecompilationAPI.CreateDecompilationComment(context.Background(), functionId).FunctionCommentCreateRequest(functionCommentCreateRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsDecompilationAPI.CreateDecompilationComment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,6 +70,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **functionCommentCreateRequest** | [**FunctionCommentCreateRequest**](FunctionCommentCreateRequest.md) |  | 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -85,7 +97,7 @@ Name | Type | Description  | Notes
 
 ## DeleteDecompilationComment
 
-> BaseResponseBool DeleteDecompilationComment(ctx, commentId, functionId).Execute()
+> BaseResponseBool DeleteDecompilationComment(ctx, commentId, functionId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Delete a comment
 
@@ -106,10 +118,16 @@ import (
 func main() {
 	commentId := int32(56) // int32 | 
 	functionId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsDecompilationAPI.DeleteDecompilationComment(context.Background(), commentId, functionId).Execute()
+	resp, r, err := apiClient.FunctionsDecompilationAPI.DeleteDecompilationComment(context.Background(), commentId, functionId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsDecompilationAPI.DeleteDecompilationComment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -137,6 +155,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -158,7 +182,7 @@ Name | Type | Description  | Notes
 
 ## GetDecompilationComments
 
-> BaseResponseListCommentResponse GetDecompilationComments(ctx, functionId).Execute()
+> BaseResponseListCommentResponse GetDecompilationComments(ctx, functionId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Get comments for this function
 
@@ -178,10 +202,16 @@ import (
 
 func main() {
 	functionId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsDecompilationAPI.GetDecompilationComments(context.Background(), functionId).Execute()
+	resp, r, err := apiClient.FunctionsDecompilationAPI.GetDecompilationComments(context.Background(), functionId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsDecompilationAPI.GetDecompilationComments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -207,6 +237,12 @@ Other parameters are passed through a pointer to a apiGetDecompilationCommentsRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -228,7 +264,7 @@ Name | Type | Description  | Notes
 
 ## UpdateDecompilationComment
 
-> BaseResponseCommentResponse UpdateDecompilationComment(ctx, commentId, functionId).CommentUpdateRequest(commentUpdateRequest).Execute()
+> BaseResponseCommentResponse UpdateDecompilationComment(ctx, commentId, functionId).CommentUpdateRequest(commentUpdateRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Update a comment
 
@@ -250,10 +286,16 @@ func main() {
 	commentId := int32(56) // int32 | 
 	functionId := int32(56) // int32 | 
 	commentUpdateRequest := *revengai.NewCommentUpdateRequest("Content_example") // CommentUpdateRequest | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsDecompilationAPI.UpdateDecompilationComment(context.Background(), commentId, functionId).CommentUpdateRequest(commentUpdateRequest).Execute()
+	resp, r, err := apiClient.FunctionsDecompilationAPI.UpdateDecompilationComment(context.Background(), commentId, functionId).CommentUpdateRequest(commentUpdateRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsDecompilationAPI.UpdateDecompilationComment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -282,6 +324,12 @@ Name | Type | Description  | Notes
 
 
  **commentUpdateRequest** | [**CommentUpdateRequest**](CommentUpdateRequest.md) |  | 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 

@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## DownloadZippedBinary
 
-> *os.File DownloadZippedBinary(ctx, binaryId).Execute()
+> *os.File DownloadZippedBinary(ctx, binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Downloads a zipped binary with password protection
 
@@ -35,10 +35,16 @@ import (
 
 func main() {
 	binaryId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.BinariesAPI.DownloadZippedBinary(context.Background(), binaryId).Execute()
+	resp, r, err := apiClient.BinariesAPI.DownloadZippedBinary(context.Background(), binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.DownloadZippedBinary``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,6 +70,12 @@ Other parameters are passed through a pointer to a apiDownloadZippedBinaryReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -85,7 +97,7 @@ Name | Type | Description  | Notes
 
 ## GetBinaryAdditionalDetails
 
-> BaseResponseBinaryAdditionalResponse GetBinaryAdditionalDetails(ctx, binaryId).Execute()
+> BaseResponseBinaryAdditionalResponse GetBinaryAdditionalDetails(ctx, binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Gets the additional details of a binary
 
@@ -103,10 +115,16 @@ import (
 
 func main() {
 	binaryId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.BinariesAPI.GetBinaryAdditionalDetails(context.Background(), binaryId).Execute()
+	resp, r, err := apiClient.BinariesAPI.GetBinaryAdditionalDetails(context.Background(), binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryAdditionalDetails``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -132,6 +150,12 @@ Other parameters are passed through a pointer to a apiGetBinaryAdditionalDetails
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -153,7 +177,7 @@ Name | Type | Description  | Notes
 
 ## GetBinaryAdditionalDetailsStatus
 
-> BaseResponseAdditionalDetailsStatusResponse GetBinaryAdditionalDetailsStatus(ctx, binaryId).Execute()
+> BaseResponseAdditionalDetailsStatusResponse GetBinaryAdditionalDetailsStatus(ctx, binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Gets the status of the additional details task for a binary
 
@@ -171,10 +195,16 @@ import (
 
 func main() {
 	binaryId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.BinariesAPI.GetBinaryAdditionalDetailsStatus(context.Background(), binaryId).Execute()
+	resp, r, err := apiClient.BinariesAPI.GetBinaryAdditionalDetailsStatus(context.Background(), binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryAdditionalDetailsStatus``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -200,6 +230,12 @@ Other parameters are passed through a pointer to a apiGetBinaryAdditionalDetails
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -221,7 +257,7 @@ Name | Type | Description  | Notes
 
 ## GetBinaryDetails
 
-> BaseResponseBinaryDetailsResponse GetBinaryDetails(ctx, binaryId).Execute()
+> BaseResponseBinaryDetailsResponse GetBinaryDetails(ctx, binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Gets the details of a binary
 
@@ -239,10 +275,16 @@ import (
 
 func main() {
 	binaryId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.BinariesAPI.GetBinaryDetails(context.Background(), binaryId).Execute()
+	resp, r, err := apiClient.BinariesAPI.GetBinaryDetails(context.Background(), binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryDetails``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -268,6 +310,12 @@ Other parameters are passed through a pointer to a apiGetBinaryDetailsRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -289,7 +337,7 @@ Name | Type | Description  | Notes
 
 ## GetBinaryDieInfo
 
-> BaseResponseListDieMatch GetBinaryDieInfo(ctx, binaryId).Execute()
+> BaseResponseListDieMatch GetBinaryDieInfo(ctx, binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Gets the die info of a binary
 
@@ -307,10 +355,16 @@ import (
 
 func main() {
 	binaryId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.BinariesAPI.GetBinaryDieInfo(context.Background(), binaryId).Execute()
+	resp, r, err := apiClient.BinariesAPI.GetBinaryDieInfo(context.Background(), binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryDieInfo``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -336,6 +390,12 @@ Other parameters are passed through a pointer to a apiGetBinaryDieInfoRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -357,7 +417,7 @@ Name | Type | Description  | Notes
 
 ## GetBinaryExternals
 
-> BaseResponseBinaryExternalsResponse GetBinaryExternals(ctx, binaryId).Execute()
+> BaseResponseBinaryExternalsResponse GetBinaryExternals(ctx, binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Gets the external details of a binary
 
@@ -375,10 +435,16 @@ import (
 
 func main() {
 	binaryId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.BinariesAPI.GetBinaryExternals(context.Background(), binaryId).Execute()
+	resp, r, err := apiClient.BinariesAPI.GetBinaryExternals(context.Background(), binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryExternals``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -404,6 +470,12 @@ Other parameters are passed through a pointer to a apiGetBinaryExternalsRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -425,7 +497,7 @@ Name | Type | Description  | Notes
 
 ## GetBinaryRelatedStatus
 
-> BaseResponseBinariesRelatedStatusResponse GetBinaryRelatedStatus(ctx, binaryId).Execute()
+> BaseResponseBinariesRelatedStatusResponse GetBinaryRelatedStatus(ctx, binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Gets the status of the unpack binary task for a binary
 
@@ -443,10 +515,16 @@ import (
 
 func main() {
 	binaryId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.BinariesAPI.GetBinaryRelatedStatus(context.Background(), binaryId).Execute()
+	resp, r, err := apiClient.BinariesAPI.GetBinaryRelatedStatus(context.Background(), binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryRelatedStatus``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -472,6 +550,12 @@ Other parameters are passed through a pointer to a apiGetBinaryRelatedStatusRequ
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -493,7 +577,7 @@ Name | Type | Description  | Notes
 
 ## GetRelatedBinaries
 
-> BaseResponseChildBinariesResponse GetRelatedBinaries(ctx, binaryId).Execute()
+> BaseResponseChildBinariesResponse GetRelatedBinaries(ctx, binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Gets the related binaries of a binary.
 
@@ -511,10 +595,16 @@ import (
 
 func main() {
 	binaryId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.BinariesAPI.GetRelatedBinaries(context.Background(), binaryId).Execute()
+	resp, r, err := apiClient.BinariesAPI.GetRelatedBinaries(context.Background(), binaryId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetRelatedBinaries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -540,6 +630,12 @@ Other parameters are passed through a pointer to a apiGetRelatedBinariesRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
