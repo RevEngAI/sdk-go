@@ -200,7 +200,7 @@ Other parameters are passed through a pointer to a apiGetUserActivityRequest str
 
 ## GetUserComments
 
-> BaseResponseListCommentResponse GetUserComments(ctx).Execute()
+> BaseResponseListCommentResponse GetUserComments(ctx).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Get comments by user
 
@@ -219,10 +219,16 @@ import (
 )
 
 func main() {
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AuthenticationUsersAPI.GetUserComments(context.Background()).Execute()
+	resp, r, err := apiClient.AuthenticationUsersAPI.GetUserComments(context.Background()).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationUsersAPI.GetUserComments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -234,12 +240,21 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetUserCommentsRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 

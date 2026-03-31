@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 ## BulkAddAnalysisTags
 
-> BaseResponseAnalysisBulkAddTagsResponse BulkAddAnalysisTags(ctx).AnalysisBulkAddTagsRequest(analysisBulkAddTagsRequest).Execute()
+> BaseResponseAnalysisBulkAddTagsResponse BulkAddAnalysisTags(ctx).AnalysisBulkAddTagsRequest(analysisBulkAddTagsRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Bulk Add Analysis Tags
 
@@ -45,10 +45,16 @@ import (
 
 func main() {
 	analysisBulkAddTagsRequest := *revengai.NewAnalysisBulkAddTagsRequest([]string{"Tags_example"}, []int32{int32(123)}) // AnalysisBulkAddTagsRequest | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.BulkAddAnalysisTags(context.Background()).AnalysisBulkAddTagsRequest(analysisBulkAddTagsRequest).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.BulkAddAnalysisTags(context.Background()).AnalysisBulkAddTagsRequest(analysisBulkAddTagsRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.BulkAddAnalysisTags``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -70,6 +76,12 @@ Other parameters are passed through a pointer to a apiBulkAddAnalysisTagsRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **analysisBulkAddTagsRequest** | [**AnalysisBulkAddTagsRequest**](AnalysisBulkAddTagsRequest.md) |  | 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -91,7 +103,7 @@ Name | Type | Description  | Notes
 
 ## CreateAnalysis
 
-> BaseResponseAnalysisCreateResponse CreateAnalysis(ctx).AnalysisCreateRequest(analysisCreateRequest).XRevEngApplication(xRevEngApplication).Execute()
+> BaseResponseAnalysisCreateResponse CreateAnalysis(ctx).AnalysisCreateRequest(analysisCreateRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).XRevEngApplication(xRevEngApplication).Execute()
 
 Create Analysis
 
@@ -111,11 +123,17 @@ import (
 
 func main() {
 	analysisCreateRequest := *revengai.NewAnalysisCreateRequest("Filename_example", "Sha256Hash_example") // AnalysisCreateRequest | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 	xRevEngApplication := "xRevEngApplication_example" // string |  (optional)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.CreateAnalysis(context.Background()).AnalysisCreateRequest(analysisCreateRequest).XRevEngApplication(xRevEngApplication).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.CreateAnalysis(context.Background()).AnalysisCreateRequest(analysisCreateRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).XRevEngApplication(xRevEngApplication).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.CreateAnalysis``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -137,6 +155,12 @@ Other parameters are passed through a pointer to a apiCreateAnalysisRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **analysisCreateRequest** | [**AnalysisCreateRequest**](AnalysisCreateRequest.md) |  | 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
  **xRevEngApplication** | **string** |  | 
 
 ### Return type
@@ -159,7 +183,7 @@ Name | Type | Description  | Notes
 
 ## DeleteAnalysis
 
-> BaseResponseDict DeleteAnalysis(ctx, analysisId).Execute()
+> BaseResponseDict DeleteAnalysis(ctx, analysisId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Delete Analysis
 
@@ -179,10 +203,16 @@ import (
 
 func main() {
 	analysisId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.DeleteAnalysis(context.Background(), analysisId).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.DeleteAnalysis(context.Background(), analysisId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.DeleteAnalysis``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -208,6 +238,12 @@ Other parameters are passed through a pointer to a apiDeleteAnalysisRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -299,7 +335,7 @@ Name | Type | Description  | Notes
 
 ## GetAnalysisFunctionMap
 
-> BaseResponseAnalysisFunctionMapping GetAnalysisFunctionMap(ctx, analysisId).Execute()
+> BaseResponseAnalysisFunctionMapping GetAnalysisFunctionMap(ctx, analysisId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Get Analysis Function Map
 
@@ -319,10 +355,16 @@ import (
 
 func main() {
 	analysisId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.GetAnalysisFunctionMap(context.Background(), analysisId).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.GetAnalysisFunctionMap(context.Background(), analysisId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.GetAnalysisFunctionMap``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -348,6 +390,12 @@ Other parameters are passed through a pointer to a apiGetAnalysisFunctionMapRequ
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -369,7 +417,7 @@ Name | Type | Description  | Notes
 
 ## GetAnalysisLogs
 
-> BaseResponseLogs GetAnalysisLogs(ctx, analysisId).Execute()
+> BaseResponseLogs GetAnalysisLogs(ctx, analysisId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Gets the logs of an analysis
 
@@ -389,10 +437,16 @@ import (
 
 func main() {
 	analysisId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.GetAnalysisLogs(context.Background(), analysisId).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.GetAnalysisLogs(context.Background(), analysisId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.GetAnalysisLogs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -418,6 +472,12 @@ Other parameters are passed through a pointer to a apiGetAnalysisLogsRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -439,7 +499,7 @@ Name | Type | Description  | Notes
 
 ## GetAnalysisParams
 
-> BaseResponseParams GetAnalysisParams(ctx, analysisId).Execute()
+> BaseResponseParams GetAnalysisParams(ctx, analysisId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Gets analysis param information
 
@@ -459,10 +519,16 @@ import (
 
 func main() {
 	analysisId := int32(56) // int32 | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.GetAnalysisParams(context.Background(), analysisId).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.GetAnalysisParams(context.Background(), analysisId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.GetAnalysisParams``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -488,6 +554,12 @@ Other parameters are passed through a pointer to a apiGetAnalysisParamsRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -579,7 +651,7 @@ Name | Type | Description  | Notes
 
 ## InsertAnalysisLog
 
-> BaseResponse InsertAnalysisLog(ctx, analysisId).InsertAnalysisLogRequest(insertAnalysisLogRequest).Execute()
+> BaseResponse InsertAnalysisLog(ctx, analysisId).InsertAnalysisLogRequest(insertAnalysisLogRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Insert a log entry for an analysis
 
@@ -600,10 +672,16 @@ import (
 func main() {
 	analysisId := int32(56) // int32 | 
 	insertAnalysisLogRequest := *revengai.NewInsertAnalysisLogRequest("Log_example") // InsertAnalysisLogRequest | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.InsertAnalysisLog(context.Background(), analysisId).InsertAnalysisLogRequest(insertAnalysisLogRequest).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.InsertAnalysisLog(context.Background(), analysisId).InsertAnalysisLogRequest(insertAnalysisLogRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.InsertAnalysisLog``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -630,6 +708,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **insertAnalysisLogRequest** | [**InsertAnalysisLogRequest**](InsertAnalysisLogRequest.md) |  | 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -879,7 +963,7 @@ Name | Type | Description  | Notes
 
 ## RequeueAnalysis
 
-> BaseResponseCreated RequeueAnalysis(ctx, analysisId).ReAnalysisForm(reAnalysisForm).XRevEngApplication(xRevEngApplication).Execute()
+> BaseResponseCreated RequeueAnalysis(ctx, analysisId).ReAnalysisForm(reAnalysisForm).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).XRevEngApplication(xRevEngApplication).Execute()
 
 Requeue Analysis
 
@@ -900,11 +984,17 @@ import (
 func main() {
 	analysisId := int32(56) // int32 | 
 	reAnalysisForm := *revengai.NewReAnalysisForm() // ReAnalysisForm | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 	xRevEngApplication := "xRevEngApplication_example" // string |  (optional)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.RequeueAnalysis(context.Background(), analysisId).ReAnalysisForm(reAnalysisForm).XRevEngApplication(xRevEngApplication).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.RequeueAnalysis(context.Background(), analysisId).ReAnalysisForm(reAnalysisForm).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).XRevEngApplication(xRevEngApplication).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.RequeueAnalysis``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -931,6 +1021,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **reAnalysisForm** | [**ReAnalysisForm**](ReAnalysisForm.md) |  | 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
  **xRevEngApplication** | **string** |  | 
 
 ### Return type
@@ -953,7 +1049,7 @@ Name | Type | Description  | Notes
 
 ## UpdateAnalysis
 
-> BaseResponseAnalysisDetailResponse UpdateAnalysis(ctx, analysisId).AnalysisUpdateRequest(analysisUpdateRequest).Execute()
+> BaseResponseAnalysisDetailResponse UpdateAnalysis(ctx, analysisId).AnalysisUpdateRequest(analysisUpdateRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Update Analysis
 
@@ -974,10 +1070,16 @@ import (
 func main() {
 	analysisId := int32(56) // int32 | 
 	analysisUpdateRequest := *revengai.NewAnalysisUpdateRequest() // AnalysisUpdateRequest | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.UpdateAnalysis(context.Background(), analysisId).AnalysisUpdateRequest(analysisUpdateRequest).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.UpdateAnalysis(context.Background(), analysisId).AnalysisUpdateRequest(analysisUpdateRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.UpdateAnalysis``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1004,6 +1106,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **analysisUpdateRequest** | [**AnalysisUpdateRequest**](AnalysisUpdateRequest.md) |  | 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -1025,7 +1133,7 @@ Name | Type | Description  | Notes
 
 ## UpdateAnalysisTags
 
-> BaseResponseAnalysisUpdateTagsResponse UpdateAnalysisTags(ctx, analysisId).AnalysisUpdateTagsRequest(analysisUpdateTagsRequest).Execute()
+> BaseResponseAnalysisUpdateTagsResponse UpdateAnalysisTags(ctx, analysisId).AnalysisUpdateTagsRequest(analysisUpdateTagsRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 
 Update Analysis Tags
 
@@ -1046,10 +1154,16 @@ import (
 func main() {
 	analysisId := int32(56) // int32 | 
 	analysisUpdateTagsRequest := *revengai.NewAnalysisUpdateTagsRequest([]string{"Tags_example"}) // AnalysisUpdateTagsRequest | 
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.UpdateAnalysisTags(context.Background(), analysisId).AnalysisUpdateTagsRequest(analysisUpdateTagsRequest).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.UpdateAnalysisTags(context.Background(), analysisId).AnalysisUpdateTagsRequest(analysisUpdateTagsRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.UpdateAnalysisTags``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1076,6 +1190,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **analysisUpdateTagsRequest** | [**AnalysisUpdateTagsRequest**](AnalysisUpdateTagsRequest.md) |  | 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -1097,7 +1217,7 @@ Name | Type | Description  | Notes
 
 ## UploadFile
 
-> BaseResponseUploadResponse UploadFile(ctx).UploadFileType(uploadFileType).File(file).PackedPassword(packedPassword).ForceOverwrite(forceOverwrite).Execute()
+> BaseResponseUploadResponse UploadFile(ctx).UploadFileType(uploadFileType).File(file).PackedPassword(packedPassword).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).ForceOverwrite(forceOverwrite).Execute()
 
 Upload File
 
@@ -1117,11 +1237,17 @@ func main() {
 	uploadFileType := revengai.UploadFileType("BINARY") // UploadFileType | 
 	file := os.NewFile(1234, "some_file") // *os.File | 
 	packedPassword := "packedPassword_example" // string |  (optional)
+	endpointUrl := "endpointUrl_example" // string |  (optional)
+	localCacheDir := "localCacheDir_example" // string |  (optional)
+	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
+	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
+	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
+	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 	forceOverwrite := true // bool |  (optional) (default to false)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.UploadFile(context.Background()).UploadFileType(uploadFileType).File(file).PackedPassword(packedPassword).ForceOverwrite(forceOverwrite).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.UploadFile(context.Background()).UploadFileType(uploadFileType).File(file).PackedPassword(packedPassword).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).ForceOverwrite(forceOverwrite).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.UploadFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1145,6 +1271,12 @@ Name | Type | Description  | Notes
  **uploadFileType** | [**UploadFileType**](UploadFileType.md) |  | 
  **file** | ***os.File** |  | 
  **packedPassword** | **string** |  | 
+ **endpointUrl** | **string** |  | 
+ **localCacheDir** | **string** |  | 
+ **localCacheMaxSizeMb** | **int32** |  | 
+ **customerSamplesBucket** | **string** |  | 
+ **firmwareSamplesBucket** | **string** |  | 
+ **maxRetryAttempts** | **int32** |  | [default to 5]
  **forceOverwrite** | **bool** |  | [default to false]
 
 ### Return type

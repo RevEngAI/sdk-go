@@ -27,10 +27,46 @@ type ApiCreateDecompilationCommentRequest struct {
 	ApiService *FunctionsDecompilationAPIService
 	functionId int32
 	functionCommentCreateRequest *FunctionCommentCreateRequest
+	endpointUrl *string
+	localCacheDir *string
+	localCacheMaxSizeMb *int32
+	customerSamplesBucket *string
+	firmwareSamplesBucket *string
+	maxRetryAttempts *int32
 }
 
 func (r ApiCreateDecompilationCommentRequest) FunctionCommentCreateRequest(functionCommentCreateRequest FunctionCommentCreateRequest) ApiCreateDecompilationCommentRequest {
 	r.functionCommentCreateRequest = &functionCommentCreateRequest
+	return r
+}
+
+func (r ApiCreateDecompilationCommentRequest) EndpointUrl(endpointUrl string) ApiCreateDecompilationCommentRequest {
+	r.endpointUrl = &endpointUrl
+	return r
+}
+
+func (r ApiCreateDecompilationCommentRequest) LocalCacheDir(localCacheDir string) ApiCreateDecompilationCommentRequest {
+	r.localCacheDir = &localCacheDir
+	return r
+}
+
+func (r ApiCreateDecompilationCommentRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiCreateDecompilationCommentRequest {
+	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
+	return r
+}
+
+func (r ApiCreateDecompilationCommentRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiCreateDecompilationCommentRequest {
+	r.customerSamplesBucket = &customerSamplesBucket
+	return r
+}
+
+func (r ApiCreateDecompilationCommentRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiCreateDecompilationCommentRequest {
+	r.firmwareSamplesBucket = &firmwareSamplesBucket
+	return r
+}
+
+func (r ApiCreateDecompilationCommentRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiCreateDecompilationCommentRequest {
+	r.maxRetryAttempts = &maxRetryAttempts
 	return r
 }
 
@@ -80,6 +116,28 @@ func (a *FunctionsDecompilationAPIService) CreateDecompilationCommentExecute(r A
 		return localVarReturnValue, nil, reportError("functionCommentCreateRequest is required and must be specified")
 	}
 
+	if r.endpointUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
+	}
+	if r.localCacheDir != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
+	}
+	if r.localCacheMaxSizeMb != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
+	}
+	if r.customerSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
+	}
+	if r.firmwareSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
+	}
+	if r.maxRetryAttempts != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
+	} else {
+		var defaultValue int32 = 5
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
+		r.maxRetryAttempts = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -176,6 +234,42 @@ type ApiDeleteDecompilationCommentRequest struct {
 	ApiService *FunctionsDecompilationAPIService
 	commentId int32
 	functionId int32
+	endpointUrl *string
+	localCacheDir *string
+	localCacheMaxSizeMb *int32
+	customerSamplesBucket *string
+	firmwareSamplesBucket *string
+	maxRetryAttempts *int32
+}
+
+func (r ApiDeleteDecompilationCommentRequest) EndpointUrl(endpointUrl string) ApiDeleteDecompilationCommentRequest {
+	r.endpointUrl = &endpointUrl
+	return r
+}
+
+func (r ApiDeleteDecompilationCommentRequest) LocalCacheDir(localCacheDir string) ApiDeleteDecompilationCommentRequest {
+	r.localCacheDir = &localCacheDir
+	return r
+}
+
+func (r ApiDeleteDecompilationCommentRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiDeleteDecompilationCommentRequest {
+	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
+	return r
+}
+
+func (r ApiDeleteDecompilationCommentRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiDeleteDecompilationCommentRequest {
+	r.customerSamplesBucket = &customerSamplesBucket
+	return r
+}
+
+func (r ApiDeleteDecompilationCommentRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiDeleteDecompilationCommentRequest {
+	r.firmwareSamplesBucket = &firmwareSamplesBucket
+	return r
+}
+
+func (r ApiDeleteDecompilationCommentRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiDeleteDecompilationCommentRequest {
+	r.maxRetryAttempts = &maxRetryAttempts
+	return r
 }
 
 func (r ApiDeleteDecompilationCommentRequest) Execute() (*BaseResponseBool, *http.Response, error) {
@@ -227,6 +321,28 @@ func (a *FunctionsDecompilationAPIService) DeleteDecompilationCommentExecute(r A
 		return localVarReturnValue, nil, reportError("commentId must be greater than 1")
 	}
 
+	if r.endpointUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
+	}
+	if r.localCacheDir != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
+	}
+	if r.localCacheMaxSizeMb != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
+	}
+	if r.customerSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
+	}
+	if r.firmwareSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
+	}
+	if r.maxRetryAttempts != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
+	} else {
+		var defaultValue int32 = 5
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
+		r.maxRetryAttempts = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -331,6 +447,42 @@ type ApiGetDecompilationCommentsRequest struct {
 	ctx context.Context
 	ApiService *FunctionsDecompilationAPIService
 	functionId int32
+	endpointUrl *string
+	localCacheDir *string
+	localCacheMaxSizeMb *int32
+	customerSamplesBucket *string
+	firmwareSamplesBucket *string
+	maxRetryAttempts *int32
+}
+
+func (r ApiGetDecompilationCommentsRequest) EndpointUrl(endpointUrl string) ApiGetDecompilationCommentsRequest {
+	r.endpointUrl = &endpointUrl
+	return r
+}
+
+func (r ApiGetDecompilationCommentsRequest) LocalCacheDir(localCacheDir string) ApiGetDecompilationCommentsRequest {
+	r.localCacheDir = &localCacheDir
+	return r
+}
+
+func (r ApiGetDecompilationCommentsRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiGetDecompilationCommentsRequest {
+	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
+	return r
+}
+
+func (r ApiGetDecompilationCommentsRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiGetDecompilationCommentsRequest {
+	r.customerSamplesBucket = &customerSamplesBucket
+	return r
+}
+
+func (r ApiGetDecompilationCommentsRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiGetDecompilationCommentsRequest {
+	r.firmwareSamplesBucket = &firmwareSamplesBucket
+	return r
+}
+
+func (r ApiGetDecompilationCommentsRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiGetDecompilationCommentsRequest {
+	r.maxRetryAttempts = &maxRetryAttempts
+	return r
 }
 
 func (r ApiGetDecompilationCommentsRequest) Execute() (*BaseResponseListCommentResponse, *http.Response, error) {
@@ -376,6 +528,28 @@ func (a *FunctionsDecompilationAPIService) GetDecompilationCommentsExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.endpointUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
+	}
+	if r.localCacheDir != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
+	}
+	if r.localCacheMaxSizeMb != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
+	}
+	if r.customerSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
+	}
+	if r.firmwareSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
+	}
+	if r.maxRetryAttempts != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
+	} else {
+		var defaultValue int32 = 5
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
+		r.maxRetryAttempts = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -460,10 +634,46 @@ type ApiUpdateDecompilationCommentRequest struct {
 	commentId int32
 	functionId int32
 	commentUpdateRequest *CommentUpdateRequest
+	endpointUrl *string
+	localCacheDir *string
+	localCacheMaxSizeMb *int32
+	customerSamplesBucket *string
+	firmwareSamplesBucket *string
+	maxRetryAttempts *int32
 }
 
 func (r ApiUpdateDecompilationCommentRequest) CommentUpdateRequest(commentUpdateRequest CommentUpdateRequest) ApiUpdateDecompilationCommentRequest {
 	r.commentUpdateRequest = &commentUpdateRequest
+	return r
+}
+
+func (r ApiUpdateDecompilationCommentRequest) EndpointUrl(endpointUrl string) ApiUpdateDecompilationCommentRequest {
+	r.endpointUrl = &endpointUrl
+	return r
+}
+
+func (r ApiUpdateDecompilationCommentRequest) LocalCacheDir(localCacheDir string) ApiUpdateDecompilationCommentRequest {
+	r.localCacheDir = &localCacheDir
+	return r
+}
+
+func (r ApiUpdateDecompilationCommentRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiUpdateDecompilationCommentRequest {
+	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
+	return r
+}
+
+func (r ApiUpdateDecompilationCommentRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiUpdateDecompilationCommentRequest {
+	r.customerSamplesBucket = &customerSamplesBucket
+	return r
+}
+
+func (r ApiUpdateDecompilationCommentRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiUpdateDecompilationCommentRequest {
+	r.firmwareSamplesBucket = &firmwareSamplesBucket
+	return r
+}
+
+func (r ApiUpdateDecompilationCommentRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiUpdateDecompilationCommentRequest {
+	r.maxRetryAttempts = &maxRetryAttempts
 	return r
 }
 
@@ -519,6 +729,28 @@ func (a *FunctionsDecompilationAPIService) UpdateDecompilationCommentExecute(r A
 		return localVarReturnValue, nil, reportError("commentUpdateRequest is required and must be specified")
 	}
 
+	if r.endpointUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
+	}
+	if r.localCacheDir != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
+	}
+	if r.localCacheMaxSizeMb != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
+	}
+	if r.customerSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
+	}
+	if r.firmwareSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
+	}
+	if r.maxRetryAttempts != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
+	} else {
+		var defaultValue int32 = 5
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
+		r.maxRetryAttempts = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

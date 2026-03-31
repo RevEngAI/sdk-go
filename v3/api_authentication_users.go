@@ -392,6 +392,42 @@ func (a *AuthenticationUsersAPIService) GetUserActivityExecute(r ApiGetUserActiv
 type ApiGetUserCommentsRequest struct {
 	ctx context.Context
 	ApiService *AuthenticationUsersAPIService
+	endpointUrl *string
+	localCacheDir *string
+	localCacheMaxSizeMb *int32
+	customerSamplesBucket *string
+	firmwareSamplesBucket *string
+	maxRetryAttempts *int32
+}
+
+func (r ApiGetUserCommentsRequest) EndpointUrl(endpointUrl string) ApiGetUserCommentsRequest {
+	r.endpointUrl = &endpointUrl
+	return r
+}
+
+func (r ApiGetUserCommentsRequest) LocalCacheDir(localCacheDir string) ApiGetUserCommentsRequest {
+	r.localCacheDir = &localCacheDir
+	return r
+}
+
+func (r ApiGetUserCommentsRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiGetUserCommentsRequest {
+	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
+	return r
+}
+
+func (r ApiGetUserCommentsRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiGetUserCommentsRequest {
+	r.customerSamplesBucket = &customerSamplesBucket
+	return r
+}
+
+func (r ApiGetUserCommentsRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiGetUserCommentsRequest {
+	r.firmwareSamplesBucket = &firmwareSamplesBucket
+	return r
+}
+
+func (r ApiGetUserCommentsRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiGetUserCommentsRequest {
+	r.maxRetryAttempts = &maxRetryAttempts
+	return r
 }
 
 func (r ApiGetUserCommentsRequest) Execute() (*BaseResponseListCommentResponse, *http.Response, error) {
@@ -434,6 +470,28 @@ func (a *AuthenticationUsersAPIService) GetUserCommentsExecute(r ApiGetUserComme
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.endpointUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
+	}
+	if r.localCacheDir != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
+	}
+	if r.localCacheMaxSizeMb != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
+	}
+	if r.customerSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
+	}
+	if r.firmwareSamplesBucket != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
+	}
+	if r.maxRetryAttempts != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
+	} else {
+		var defaultValue int32 = 5
+		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
+		r.maxRetryAttempts = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
