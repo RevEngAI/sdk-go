@@ -13,11 +13,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the BaseResponseGetAiDecompilationRatingResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &BaseResponseGetAiDecompilationRatingResponse{}
+// checks if the BaseResponseUnionGetAiDecompilationRatingResponseNoneType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BaseResponseUnionGetAiDecompilationRatingResponseNoneType{}
 
-// BaseResponseGetAiDecompilationRatingResponse struct for BaseResponseGetAiDecompilationRatingResponse
-type BaseResponseGetAiDecompilationRatingResponse struct {
+// BaseResponseUnionGetAiDecompilationRatingResponseNoneType struct for BaseResponseUnionGetAiDecompilationRatingResponseNoneType
+type BaseResponseUnionGetAiDecompilationRatingResponseNoneType struct {
 	// Response status on whether the request succeeded
 	Status *bool `json:"status,omitempty"`
 	Data NullableGetAiDecompilationRatingResponse `json:"data,omitempty"`
@@ -28,31 +28,31 @@ type BaseResponseGetAiDecompilationRatingResponse struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _BaseResponseGetAiDecompilationRatingResponse BaseResponseGetAiDecompilationRatingResponse
+type _BaseResponseUnionGetAiDecompilationRatingResponseNoneType BaseResponseUnionGetAiDecompilationRatingResponseNoneType
 
-// NewBaseResponseGetAiDecompilationRatingResponse instantiates a new BaseResponseGetAiDecompilationRatingResponse object
+// NewBaseResponseUnionGetAiDecompilationRatingResponseNoneType instantiates a new BaseResponseUnionGetAiDecompilationRatingResponseNoneType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBaseResponseGetAiDecompilationRatingResponse() *BaseResponseGetAiDecompilationRatingResponse {
-	this := BaseResponseGetAiDecompilationRatingResponse{}
+func NewBaseResponseUnionGetAiDecompilationRatingResponseNoneType() *BaseResponseUnionGetAiDecompilationRatingResponseNoneType {
+	this := BaseResponseUnionGetAiDecompilationRatingResponseNoneType{}
 	var status bool = true
 	this.Status = &status
 	return &this
 }
 
-// NewBaseResponseGetAiDecompilationRatingResponseWithDefaults instantiates a new BaseResponseGetAiDecompilationRatingResponse object
+// NewBaseResponseUnionGetAiDecompilationRatingResponseNoneTypeWithDefaults instantiates a new BaseResponseUnionGetAiDecompilationRatingResponseNoneType object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBaseResponseGetAiDecompilationRatingResponseWithDefaults() *BaseResponseGetAiDecompilationRatingResponse {
-	this := BaseResponseGetAiDecompilationRatingResponse{}
+func NewBaseResponseUnionGetAiDecompilationRatingResponseNoneTypeWithDefaults() *BaseResponseUnionGetAiDecompilationRatingResponseNoneType {
+	this := BaseResponseUnionGetAiDecompilationRatingResponseNoneType{}
 	var status bool = true
 	this.Status = &status
 	return &this
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *BaseResponseGetAiDecompilationRatingResponse) GetStatus() bool {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetStatus() bool {
 	if o == nil || IsNil(o.Status) {
 		var ret bool
 		return ret
@@ -62,7 +62,7 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) GetStatus() bool {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BaseResponseGetAiDecompilationRatingResponse) GetStatusOk() (*bool, bool) {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetStatusOk() (*bool, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) GetStatusOk() (*bool, boo
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *BaseResponseGetAiDecompilationRatingResponse) HasStatus() bool {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) HasStatus() bool {
 	if o != nil && !IsNil(o.Status) {
 		return true
 	}
@@ -79,12 +79,12 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given bool and assigns it to the Status field.
-func (o *BaseResponseGetAiDecompilationRatingResponse) SetStatus(v bool) {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetStatus(v bool) {
 	o.Status = &v
 }
 
 // GetData returns the Data field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseResponseGetAiDecompilationRatingResponse) GetData() GetAiDecompilationRatingResponse {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetData() GetAiDecompilationRatingResponse {
 	if o == nil || IsNil(o.Data.Get()) {
 		var ret GetAiDecompilationRatingResponse
 		return ret
@@ -95,7 +95,7 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) GetData() GetAiDecompilat
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseResponseGetAiDecompilationRatingResponse) GetDataOk() (*GetAiDecompilationRatingResponse, bool) {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetDataOk() (*GetAiDecompilationRatingResponse, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,7 +103,7 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) GetDataOk() (*GetAiDecomp
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *BaseResponseGetAiDecompilationRatingResponse) HasData() bool {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) HasData() bool {
 	if o != nil && o.Data.IsSet() {
 		return true
 	}
@@ -112,21 +112,21 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) HasData() bool {
 }
 
 // SetData gets a reference to the given NullableGetAiDecompilationRatingResponse and assigns it to the Data field.
-func (o *BaseResponseGetAiDecompilationRatingResponse) SetData(v GetAiDecompilationRatingResponse) {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetData(v GetAiDecompilationRatingResponse) {
 	o.Data.Set(&v)
 }
 // SetDataNil sets the value for Data to be an explicit nil
-func (o *BaseResponseGetAiDecompilationRatingResponse) SetDataNil() {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetDataNil() {
 	o.Data.Set(nil)
 }
 
 // UnsetData ensures that no value is present for Data, not even an explicit nil
-func (o *BaseResponseGetAiDecompilationRatingResponse) UnsetData() {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) UnsetData() {
 	o.Data.Unset()
 }
 
 // GetMessage returns the Message field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseResponseGetAiDecompilationRatingResponse) GetMessage() string {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetMessage() string {
 	if o == nil || IsNil(o.Message.Get()) {
 		var ret string
 		return ret
@@ -137,7 +137,7 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseResponseGetAiDecompilationRatingResponse) GetMessageOk() (*string, bool) {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -145,7 +145,7 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) GetMessageOk() (*string, 
 }
 
 // HasMessage returns a boolean if a field has been set.
-func (o *BaseResponseGetAiDecompilationRatingResponse) HasMessage() bool {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) HasMessage() bool {
 	if o != nil && o.Message.IsSet() {
 		return true
 	}
@@ -154,21 +154,21 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) HasMessage() bool {
 }
 
 // SetMessage gets a reference to the given NullableString and assigns it to the Message field.
-func (o *BaseResponseGetAiDecompilationRatingResponse) SetMessage(v string) {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetMessage(v string) {
 	o.Message.Set(&v)
 }
 // SetMessageNil sets the value for Message to be an explicit nil
-func (o *BaseResponseGetAiDecompilationRatingResponse) SetMessageNil() {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetMessageNil() {
 	o.Message.Set(nil)
 }
 
 // UnsetMessage ensures that no value is present for Message, not even an explicit nil
-func (o *BaseResponseGetAiDecompilationRatingResponse) UnsetMessage() {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) UnsetMessage() {
 	o.Message.Unset()
 }
 
 // GetErrors returns the Errors field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseResponseGetAiDecompilationRatingResponse) GetErrors() []ErrorModel {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetErrors() []ErrorModel {
 	if o == nil {
 		var ret []ErrorModel
 		return ret
@@ -179,7 +179,7 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) GetErrors() []ErrorModel 
 // GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseResponseGetAiDecompilationRatingResponse) GetErrorsOk() ([]ErrorModel, bool) {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetErrorsOk() ([]ErrorModel, bool) {
 	if o == nil || IsNil(o.Errors) {
 		return nil, false
 	}
@@ -187,7 +187,7 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) GetErrorsOk() ([]ErrorMod
 }
 
 // HasErrors returns a boolean if a field has been set.
-func (o *BaseResponseGetAiDecompilationRatingResponse) HasErrors() bool {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) HasErrors() bool {
 	if o != nil && !IsNil(o.Errors) {
 		return true
 	}
@@ -196,12 +196,12 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) HasErrors() bool {
 }
 
 // SetErrors gets a reference to the given []ErrorModel and assigns it to the Errors field.
-func (o *BaseResponseGetAiDecompilationRatingResponse) SetErrors(v []ErrorModel) {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetErrors(v []ErrorModel) {
 	o.Errors = v
 }
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
-func (o *BaseResponseGetAiDecompilationRatingResponse) GetMeta() MetaModel {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetMeta() MetaModel {
 	if o == nil || IsNil(o.Meta) {
 		var ret MetaModel
 		return ret
@@ -211,7 +211,7 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) GetMeta() MetaModel {
 
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BaseResponseGetAiDecompilationRatingResponse) GetMetaOk() (*MetaModel, bool) {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetMetaOk() (*MetaModel, bool) {
 	if o == nil || IsNil(o.Meta) {
 		return nil, false
 	}
@@ -219,7 +219,7 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) GetMetaOk() (*MetaModel, 
 }
 
 // HasMeta returns a boolean if a field has been set.
-func (o *BaseResponseGetAiDecompilationRatingResponse) HasMeta() bool {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) HasMeta() bool {
 	if o != nil && !IsNil(o.Meta) {
 		return true
 	}
@@ -228,11 +228,11 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) HasMeta() bool {
 }
 
 // SetMeta gets a reference to the given MetaModel and assigns it to the Meta field.
-func (o *BaseResponseGetAiDecompilationRatingResponse) SetMeta(v MetaModel) {
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetMeta(v MetaModel) {
 	o.Meta = &v
 }
 
-func (o BaseResponseGetAiDecompilationRatingResponse) MarshalJSON() ([]byte, error) {
+func (o BaseResponseUnionGetAiDecompilationRatingResponseNoneType) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -240,7 +240,7 @@ func (o BaseResponseGetAiDecompilationRatingResponse) MarshalJSON() ([]byte, err
 	return json.Marshal(toSerialize)
 }
 
-func (o BaseResponseGetAiDecompilationRatingResponse) ToMap() (map[string]interface{}, error) {
+func (o BaseResponseUnionGetAiDecompilationRatingResponseNoneType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
@@ -265,16 +265,16 @@ func (o BaseResponseGetAiDecompilationRatingResponse) ToMap() (map[string]interf
 	return toSerialize, nil
 }
 
-func (o *BaseResponseGetAiDecompilationRatingResponse) UnmarshalJSON(data []byte) (err error) {
-	varBaseResponseGetAiDecompilationRatingResponse := _BaseResponseGetAiDecompilationRatingResponse{}
+func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) UnmarshalJSON(data []byte) (err error) {
+	varBaseResponseUnionGetAiDecompilationRatingResponseNoneType := _BaseResponseUnionGetAiDecompilationRatingResponseNoneType{}
 
-	err = json.Unmarshal(data, &varBaseResponseGetAiDecompilationRatingResponse)
+	err = json.Unmarshal(data, &varBaseResponseUnionGetAiDecompilationRatingResponseNoneType)
 
 	if err != nil {
 		return err
 	}
 
-	*o = BaseResponseGetAiDecompilationRatingResponse(varBaseResponseGetAiDecompilationRatingResponse)
+	*o = BaseResponseUnionGetAiDecompilationRatingResponseNoneType(varBaseResponseUnionGetAiDecompilationRatingResponseNoneType)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -290,38 +290,38 @@ func (o *BaseResponseGetAiDecompilationRatingResponse) UnmarshalJSON(data []byte
 	return err
 }
 
-type NullableBaseResponseGetAiDecompilationRatingResponse struct {
-	value *BaseResponseGetAiDecompilationRatingResponse
+type NullableBaseResponseUnionGetAiDecompilationRatingResponseNoneType struct {
+	value *BaseResponseUnionGetAiDecompilationRatingResponseNoneType
 	isSet bool
 }
 
-func (v NullableBaseResponseGetAiDecompilationRatingResponse) Get() *BaseResponseGetAiDecompilationRatingResponse {
+func (v NullableBaseResponseUnionGetAiDecompilationRatingResponseNoneType) Get() *BaseResponseUnionGetAiDecompilationRatingResponseNoneType {
 	return v.value
 }
 
-func (v *NullableBaseResponseGetAiDecompilationRatingResponse) Set(val *BaseResponseGetAiDecompilationRatingResponse) {
+func (v *NullableBaseResponseUnionGetAiDecompilationRatingResponseNoneType) Set(val *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBaseResponseGetAiDecompilationRatingResponse) IsSet() bool {
+func (v NullableBaseResponseUnionGetAiDecompilationRatingResponseNoneType) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBaseResponseGetAiDecompilationRatingResponse) Unset() {
+func (v *NullableBaseResponseUnionGetAiDecompilationRatingResponseNoneType) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBaseResponseGetAiDecompilationRatingResponse(val *BaseResponseGetAiDecompilationRatingResponse) *NullableBaseResponseGetAiDecompilationRatingResponse {
-	return &NullableBaseResponseGetAiDecompilationRatingResponse{value: val, isSet: true}
+func NewNullableBaseResponseUnionGetAiDecompilationRatingResponseNoneType(val *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) *NullableBaseResponseUnionGetAiDecompilationRatingResponseNoneType {
+	return &NullableBaseResponseUnionGetAiDecompilationRatingResponseNoneType{value: val, isSet: true}
 }
 
-func (v NullableBaseResponseGetAiDecompilationRatingResponse) MarshalJSON() ([]byte, error) {
+func (v NullableBaseResponseUnionGetAiDecompilationRatingResponseNoneType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBaseResponseGetAiDecompilationRatingResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableBaseResponseUnionGetAiDecompilationRatingResponseNoneType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

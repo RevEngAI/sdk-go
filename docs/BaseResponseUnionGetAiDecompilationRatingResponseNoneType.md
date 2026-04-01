@@ -1,4 +1,4 @@
-# BaseResponseGetAiDecompilationRatingResponse
+# BaseResponseUnionGetAiDecompilationRatingResponseNoneType
 
 ## Properties
 
@@ -12,175 +12,175 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewBaseResponseGetAiDecompilationRatingResponse
+### NewBaseResponseUnionGetAiDecompilationRatingResponseNoneType
 
-`func NewBaseResponseGetAiDecompilationRatingResponse() *BaseResponseGetAiDecompilationRatingResponse`
+`func NewBaseResponseUnionGetAiDecompilationRatingResponseNoneType() *BaseResponseUnionGetAiDecompilationRatingResponseNoneType`
 
-NewBaseResponseGetAiDecompilationRatingResponse instantiates a new BaseResponseGetAiDecompilationRatingResponse object
+NewBaseResponseUnionGetAiDecompilationRatingResponseNoneType instantiates a new BaseResponseUnionGetAiDecompilationRatingResponseNoneType object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewBaseResponseGetAiDecompilationRatingResponseWithDefaults
+### NewBaseResponseUnionGetAiDecompilationRatingResponseNoneTypeWithDefaults
 
-`func NewBaseResponseGetAiDecompilationRatingResponseWithDefaults() *BaseResponseGetAiDecompilationRatingResponse`
+`func NewBaseResponseUnionGetAiDecompilationRatingResponseNoneTypeWithDefaults() *BaseResponseUnionGetAiDecompilationRatingResponseNoneType`
 
-NewBaseResponseGetAiDecompilationRatingResponseWithDefaults instantiates a new BaseResponseGetAiDecompilationRatingResponse object
+NewBaseResponseUnionGetAiDecompilationRatingResponseNoneTypeWithDefaults instantiates a new BaseResponseUnionGetAiDecompilationRatingResponseNoneType object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetStatus
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) GetStatus() bool`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetStatus() bool`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) GetStatusOk() (*bool, bool)`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetStatusOk() (*bool, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) SetStatus(v bool)`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetStatus(v bool)`
 
 SetStatus sets Status field to given value.
 
 ### HasStatus
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) HasStatus() bool`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
 
 ### GetData
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) GetData() GetAiDecompilationRatingResponse`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetData() GetAiDecompilationRatingResponse`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) GetDataOk() (*GetAiDecompilationRatingResponse, bool)`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetDataOk() (*GetAiDecompilationRatingResponse, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) SetData(v GetAiDecompilationRatingResponse)`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetData(v GetAiDecompilationRatingResponse)`
 
 SetData sets Data field to given value.
 
 ### HasData
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) HasData() bool`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) HasData() bool`
 
 HasData returns a boolean if a field has been set.
 
 ### SetDataNil
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) SetDataNil(b bool)`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetDataNil(b bool)`
 
  SetDataNil sets the value for Data to be an explicit nil
 
 ### UnsetData
-`func (o *BaseResponseGetAiDecompilationRatingResponse) UnsetData()`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) UnsetData()`
 
 UnsetData ensures that no value is present for Data, not even an explicit nil
 ### GetMessage
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) GetMessage() string`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetMessage() string`
 
 GetMessage returns the Message field if non-nil, zero value otherwise.
 
 ### GetMessageOk
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) GetMessageOk() (*string, bool)`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetMessageOk() (*string, bool)`
 
 GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMessage
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) SetMessage(v string)`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetMessage(v string)`
 
 SetMessage sets Message field to given value.
 
 ### HasMessage
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) HasMessage() bool`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) HasMessage() bool`
 
 HasMessage returns a boolean if a field has been set.
 
 ### SetMessageNil
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) SetMessageNil(b bool)`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetMessageNil(b bool)`
 
  SetMessageNil sets the value for Message to be an explicit nil
 
 ### UnsetMessage
-`func (o *BaseResponseGetAiDecompilationRatingResponse) UnsetMessage()`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) UnsetMessage()`
 
 UnsetMessage ensures that no value is present for Message, not even an explicit nil
 ### GetErrors
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) GetErrors() []ErrorModel`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetErrors() []ErrorModel`
 
 GetErrors returns the Errors field if non-nil, zero value otherwise.
 
 ### GetErrorsOk
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) GetErrorsOk() (*[]ErrorModel, bool)`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetErrorsOk() (*[]ErrorModel, bool)`
 
 GetErrorsOk returns a tuple with the Errors field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetErrors
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) SetErrors(v []ErrorModel)`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetErrors(v []ErrorModel)`
 
 SetErrors sets Errors field to given value.
 
 ### HasErrors
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) HasErrors() bool`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) HasErrors() bool`
 
 HasErrors returns a boolean if a field has been set.
 
 ### SetErrorsNil
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) SetErrorsNil(b bool)`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetErrorsNil(b bool)`
 
  SetErrorsNil sets the value for Errors to be an explicit nil
 
 ### UnsetErrors
-`func (o *BaseResponseGetAiDecompilationRatingResponse) UnsetErrors()`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) UnsetErrors()`
 
 UnsetErrors ensures that no value is present for Errors, not even an explicit nil
 ### GetMeta
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) GetMeta() MetaModel`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetMeta() MetaModel`
 
 GetMeta returns the Meta field if non-nil, zero value otherwise.
 
 ### GetMetaOk
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) GetMetaOk() (*MetaModel, bool)`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) GetMetaOk() (*MetaModel, bool)`
 
 GetMetaOk returns a tuple with the Meta field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMeta
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) SetMeta(v MetaModel)`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) SetMeta(v MetaModel)`
 
 SetMeta sets Meta field to given value.
 
 ### HasMeta
 
-`func (o *BaseResponseGetAiDecompilationRatingResponse) HasMeta() bool`
+`func (o *BaseResponseUnionGetAiDecompilationRatingResponseNoneType) HasMeta() bool`
 
 HasMeta returns a boolean if a field has been set.
 
