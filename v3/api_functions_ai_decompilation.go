@@ -805,7 +805,7 @@ type ApiGetAiDecompilationRatingRequest struct {
 	functionId int64
 }
 
-func (r ApiGetAiDecompilationRatingRequest) Execute() (*BaseResponseGetAiDecompilationRatingResponse, *http.Response, error) {
+func (r ApiGetAiDecompilationRatingRequest) Execute() (*BaseResponseUnionGetAiDecompilationRatingResponseNoneType, *http.Response, error) {
 	return r.ApiService.GetAiDecompilationRatingExecute(r)
 }
 
@@ -825,13 +825,13 @@ func (a *FunctionsAIDecompilationAPIService) GetAiDecompilationRating(ctx contex
 }
 
 // Execute executes the request
-//  @return BaseResponseGetAiDecompilationRatingResponse
-func (a *FunctionsAIDecompilationAPIService) GetAiDecompilationRatingExecute(r ApiGetAiDecompilationRatingRequest) (*BaseResponseGetAiDecompilationRatingResponse, *http.Response, error) {
+//  @return BaseResponseUnionGetAiDecompilationRatingResponseNoneType
+func (a *FunctionsAIDecompilationAPIService) GetAiDecompilationRatingExecute(r ApiGetAiDecompilationRatingRequest) (*BaseResponseUnionGetAiDecompilationRatingResponseNoneType, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *BaseResponseGetAiDecompilationRatingResponse
+		localVarReturnValue  *BaseResponseUnionGetAiDecompilationRatingResponseNoneType
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionsAIDecompilationAPIService.GetAiDecompilationRating")

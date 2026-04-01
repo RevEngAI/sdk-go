@@ -339,7 +339,7 @@ Name | Type | Description  | Notes
 
 ## GetAiDecompilationRating
 
-> BaseResponseGetAiDecompilationRatingResponse GetAiDecompilationRating(ctx, functionId).Execute()
+> BaseResponseUnionGetAiDecompilationRatingResponseNoneType GetAiDecompilationRating(ctx, functionId).Execute()
 
 Get rating for AI decompilation
 
@@ -365,7 +365,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilationRating``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAiDecompilationRating`: BaseResponseGetAiDecompilationRatingResponse
+	// response from `GetAiDecompilationRating`: BaseResponseUnionGetAiDecompilationRatingResponseNoneType
 	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.GetAiDecompilationRating`: %v\n", resp)
 }
 ```
@@ -389,7 +389,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BaseResponseGetAiDecompilationRatingResponse**](BaseResponseGetAiDecompilationRatingResponse.md)
+[**BaseResponseUnionGetAiDecompilationRatingResponseNoneType**](BaseResponseUnionGetAiDecompilationRatingResponseNoneType.md)
 
 ### Authorization
 
