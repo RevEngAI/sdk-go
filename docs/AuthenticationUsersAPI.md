@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**GetUserActivity**](AuthenticationUsersAPI.md#GetUserActivity) | **Get** /v2/users/activity | Get auth user activity
 [**GetUserComments**](AuthenticationUsersAPI.md#GetUserComments) | **Get** /v2/users/me/comments | Get comments by user
 [**LoginUser**](AuthenticationUsersAPI.md#LoginUser) | **Post** /v2/auth/login | Authenticate a user
+[**SubmitUserFeedback**](AuthenticationUsersAPI.md#SubmitUserFeedback) | **Post** /v2/users/feedback | Submit feedback about the application
 
 
 
@@ -325,6 +326,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseLoginResponse**](BaseResponseLoginResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SubmitUserFeedback
+
+> BaseResponse SubmitUserFeedback(ctx).SubmitUserFeedbackRequest(submitUserFeedbackRequest).Execute()
+
+Submit feedback about the application
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	submitUserFeedbackRequest := *revengai.NewSubmitUserFeedbackRequest("CurrentRoute_example", "Feedback_example") // SubmitUserFeedbackRequest | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AuthenticationUsersAPI.SubmitUserFeedback(context.Background()).SubmitUserFeedbackRequest(submitUserFeedbackRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationUsersAPI.SubmitUserFeedback``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SubmitUserFeedback`: BaseResponse
+	fmt.Fprintf(os.Stdout, "Response from `AuthenticationUsersAPI.SubmitUserFeedback`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSubmitUserFeedbackRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **submitUserFeedbackRequest** | [**SubmitUserFeedbackRequest**](SubmitUserFeedbackRequest.md) |  | 
+
+### Return type
+
+[**BaseResponse**](BaseResponse.md)
 
 ### Authorization
 
