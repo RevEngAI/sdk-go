@@ -117,6 +117,7 @@ Class | Method | HTTP request | Description
 *AuthenticationUsersAPI* | [**GetUserActivity**](docs/AuthenticationUsersAPI.md#getuseractivity) | **Get** /v2/users/activity | Get auth user activity
 *AuthenticationUsersAPI* | [**GetUserComments**](docs/AuthenticationUsersAPI.md#getusercomments) | **Get** /v2/users/me/comments | Get comments by user
 *AuthenticationUsersAPI* | [**LoginUser**](docs/AuthenticationUsersAPI.md#loginuser) | **Post** /v2/auth/login | Authenticate a user
+*AuthenticationUsersAPI* | [**SubmitUserFeedback**](docs/AuthenticationUsersAPI.md#submituserfeedback) | **Post** /v2/users/feedback | Submit feedback about the application
 *BinariesAPI* | [**DownloadZippedBinary**](docs/BinariesAPI.md#downloadzippedbinary) | **Get** /v2/binaries/{binary_id}/download-zipped | Downloads a zipped binary with password protection
 *BinariesAPI* | [**GetBinaryAdditionalDetails**](docs/BinariesAPI.md#getbinaryadditionaldetails) | **Get** /v2/binaries/{binary_id}/additional-details | Gets the additional details of a binary
 *BinariesAPI* | [**GetBinaryAdditionalDetailsStatus**](docs/BinariesAPI.md#getbinaryadditionaldetailsstatus) | **Get** /v2/binaries/{binary_id}/additional-details/status | Gets the status of the additional details task for a binary
@@ -476,6 +477,7 @@ Class | Method | HTTP request | Description
  - [StringSource](docs/StringSource.md)
  - [Structure](docs/Structure.md)
  - [StructureMember](docs/StructureMember.md)
+ - [SubmitUserFeedbackRequest](docs/SubmitUserFeedbackRequest.md)
  - [Symbols](docs/Symbols.md)
  - [TTPS](docs/TTPS.md)
  - [TTPSAttack](docs/TTPSAttack.md)
