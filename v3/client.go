@@ -40,7 +40,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the RevEng.AI API API vv3.61.1
+// APIClient manages communication with the RevEng.AI API API vv3.63.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
