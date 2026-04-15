@@ -25,7 +25,7 @@ type FunctionBlocksResponse struct {
 	LocalVariables []FunctionLocalVariableResponse `json:"local_variables"`
 	// Params associated with this function
 	Params []FunctionParamResponse `json:"params"`
-	OverviewComment NullableString `json:"overview_comment"`
+	OverviewComment NullableString `json:"overview_comment,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,12 +35,11 @@ type _FunctionBlocksResponse FunctionBlocksResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionBlocksResponse(blocks []FunctionBlockResponse, localVariables []FunctionLocalVariableResponse, params []FunctionParamResponse, overviewComment NullableString) *FunctionBlocksResponse {
+func NewFunctionBlocksResponse(blocks []FunctionBlockResponse, localVariables []FunctionLocalVariableResponse, params []FunctionParamResponse) *FunctionBlocksResponse {
 	this := FunctionBlocksResponse{}
 	this.Blocks = blocks
 	this.LocalVariables = localVariables
 	this.Params = params
-	this.OverviewComment = overviewComment
 	return &this
 }
 
@@ -124,18 +123,16 @@ func (o *FunctionBlocksResponse) SetParams(v []FunctionParamResponse) {
 	o.Params = v
 }
 
-// GetOverviewComment returns the OverviewComment field value
-// If the value is explicit nil, the zero value for string will be returned
+// GetOverviewComment returns the OverviewComment field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FunctionBlocksResponse) GetOverviewComment() string {
-	if o == nil || o.OverviewComment.Get() == nil {
+	if o == nil || IsNil(o.OverviewComment.Get()) {
 		var ret string
 		return ret
 	}
-
 	return *o.OverviewComment.Get()
 }
 
-// GetOverviewCommentOk returns a tuple with the OverviewComment field value
+// GetOverviewCommentOk returns a tuple with the OverviewComment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FunctionBlocksResponse) GetOverviewCommentOk() (*string, bool) {
@@ -145,9 +142,27 @@ func (o *FunctionBlocksResponse) GetOverviewCommentOk() (*string, bool) {
 	return o.OverviewComment.Get(), o.OverviewComment.IsSet()
 }
 
-// SetOverviewComment sets field value
+// HasOverviewComment returns a boolean if a field has been set.
+func (o *FunctionBlocksResponse) HasOverviewComment() bool {
+	if o != nil && o.OverviewComment.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOverviewComment gets a reference to the given NullableString and assigns it to the OverviewComment field.
 func (o *FunctionBlocksResponse) SetOverviewComment(v string) {
 	o.OverviewComment.Set(&v)
+}
+// SetOverviewCommentNil sets the value for OverviewComment to be an explicit nil
+func (o *FunctionBlocksResponse) SetOverviewCommentNil() {
+	o.OverviewComment.Set(nil)
+}
+
+// UnsetOverviewComment ensures that no value is present for OverviewComment, not even an explicit nil
+func (o *FunctionBlocksResponse) UnsetOverviewComment() {
+	o.OverviewComment.Unset()
 }
 
 func (o FunctionBlocksResponse) MarshalJSON() ([]byte, error) {
@@ -163,7 +178,9 @@ func (o FunctionBlocksResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["blocks"] = o.Blocks
 	toSerialize["local_variables"] = o.LocalVariables
 	toSerialize["params"] = o.Params
-	toSerialize["overview_comment"] = o.OverviewComment.Get()
+	if o.OverviewComment.IsSet() {
+		toSerialize["overview_comment"] = o.OverviewComment.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -180,7 +197,6 @@ func (o *FunctionBlocksResponse) UnmarshalJSON(data []byte) (err error) {
 		"blocks",
 		"local_variables",
 		"params",
-		"overview_comment",
 	}
 
 	allProperties := make(map[string]interface{})

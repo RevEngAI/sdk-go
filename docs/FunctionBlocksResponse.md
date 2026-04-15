@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **Blocks** | [**[]FunctionBlockResponse**](FunctionBlockResponse.md) | Disassembly is broken into control flow blocks | 
 **LocalVariables** | [**[]FunctionLocalVariableResponse**](FunctionLocalVariableResponse.md) | Local variables associated with this function | 
 **Params** | [**[]FunctionParamResponse**](FunctionParamResponse.md) | Params associated with this function | 
-**OverviewComment** | **NullableString** |  | 
+**OverviewComment** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
 ### NewFunctionBlocksResponse
 
-`func NewFunctionBlocksResponse(blocks []FunctionBlockResponse, localVariables []FunctionLocalVariableResponse, params []FunctionParamResponse, overviewComment NullableString, ) *FunctionBlocksResponse`
+`func NewFunctionBlocksResponse(blocks []FunctionBlockResponse, localVariables []FunctionLocalVariableResponse, params []FunctionParamResponse, ) *FunctionBlocksResponse`
 
 NewFunctionBlocksResponse instantiates a new FunctionBlocksResponse object
 This constructor will assign default values to properties that have it defined,
@@ -107,6 +107,11 @@ and a boolean to check if the value has been set.
 
 SetOverviewComment sets OverviewComment field to given value.
 
+### HasOverviewComment
+
+`func (o *FunctionBlocksResponse) HasOverviewComment() bool`
+
+HasOverviewComment returns a boolean if a field has been set.
 
 ### SetOverviewCommentNil
 
