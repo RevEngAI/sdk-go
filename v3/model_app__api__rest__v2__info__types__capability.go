@@ -14,11 +14,11 @@ import (
 	"fmt"
 )
 
-// checks if the Capability type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Capability{}
+// checks if the AppApiRestV2InfoTypesCapability type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AppApiRestV2InfoTypesCapability{}
 
-// Capability struct for Capability
-type Capability struct {
+// AppApiRestV2InfoTypesCapability struct for AppApiRestV2InfoTypesCapability
+type AppApiRestV2InfoTypesCapability struct {
 	// The name of the function with a capability
 	FunctionName string `json:"function_name"`
 	// The virtual address of the function where the capability comes from
@@ -28,30 +28,30 @@ type Capability struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _Capability Capability
+type _AppApiRestV2InfoTypesCapability AppApiRestV2InfoTypesCapability
 
-// NewCapability instantiates a new Capability object
+// NewAppApiRestV2InfoTypesCapability instantiates a new AppApiRestV2InfoTypesCapability object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCapability(functionName string, functionVaddr int64, capabilities []string) *Capability {
-	this := Capability{}
+func NewAppApiRestV2InfoTypesCapability(functionName string, functionVaddr int64, capabilities []string) *AppApiRestV2InfoTypesCapability {
+	this := AppApiRestV2InfoTypesCapability{}
 	this.FunctionName = functionName
 	this.FunctionVaddr = functionVaddr
 	this.Capabilities = capabilities
 	return &this
 }
 
-// NewCapabilityWithDefaults instantiates a new Capability object
+// NewAppApiRestV2InfoTypesCapabilityWithDefaults instantiates a new AppApiRestV2InfoTypesCapability object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCapabilityWithDefaults() *Capability {
-	this := Capability{}
+func NewAppApiRestV2InfoTypesCapabilityWithDefaults() *AppApiRestV2InfoTypesCapability {
+	this := AppApiRestV2InfoTypesCapability{}
 	return &this
 }
 
 // GetFunctionName returns the FunctionName field value
-func (o *Capability) GetFunctionName() string {
+func (o *AppApiRestV2InfoTypesCapability) GetFunctionName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -62,7 +62,7 @@ func (o *Capability) GetFunctionName() string {
 
 // GetFunctionNameOk returns a tuple with the FunctionName field value
 // and a boolean to check if the value has been set.
-func (o *Capability) GetFunctionNameOk() (*string, bool) {
+func (o *AppApiRestV2InfoTypesCapability) GetFunctionNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,12 +70,12 @@ func (o *Capability) GetFunctionNameOk() (*string, bool) {
 }
 
 // SetFunctionName sets field value
-func (o *Capability) SetFunctionName(v string) {
+func (o *AppApiRestV2InfoTypesCapability) SetFunctionName(v string) {
 	o.FunctionName = v
 }
 
 // GetFunctionVaddr returns the FunctionVaddr field value
-func (o *Capability) GetFunctionVaddr() int64 {
+func (o *AppApiRestV2InfoTypesCapability) GetFunctionVaddr() int64 {
 	if o == nil {
 		var ret int64
 		return ret
@@ -86,7 +86,7 @@ func (o *Capability) GetFunctionVaddr() int64 {
 
 // GetFunctionVaddrOk returns a tuple with the FunctionVaddr field value
 // and a boolean to check if the value has been set.
-func (o *Capability) GetFunctionVaddrOk() (*int64, bool) {
+func (o *AppApiRestV2InfoTypesCapability) GetFunctionVaddrOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,12 +94,12 @@ func (o *Capability) GetFunctionVaddrOk() (*int64, bool) {
 }
 
 // SetFunctionVaddr sets field value
-func (o *Capability) SetFunctionVaddr(v int64) {
+func (o *AppApiRestV2InfoTypesCapability) SetFunctionVaddr(v int64) {
 	o.FunctionVaddr = v
 }
 
 // GetCapabilities returns the Capabilities field value
-func (o *Capability) GetCapabilities() []string {
+func (o *AppApiRestV2InfoTypesCapability) GetCapabilities() []string {
 	if o == nil {
 		var ret []string
 		return ret
@@ -110,7 +110,7 @@ func (o *Capability) GetCapabilities() []string {
 
 // GetCapabilitiesOk returns a tuple with the Capabilities field value
 // and a boolean to check if the value has been set.
-func (o *Capability) GetCapabilitiesOk() ([]string, bool) {
+func (o *AppApiRestV2InfoTypesCapability) GetCapabilitiesOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -118,11 +118,11 @@ func (o *Capability) GetCapabilitiesOk() ([]string, bool) {
 }
 
 // SetCapabilities sets field value
-func (o *Capability) SetCapabilities(v []string) {
+func (o *AppApiRestV2InfoTypesCapability) SetCapabilities(v []string) {
 	o.Capabilities = v
 }
 
-func (o Capability) MarshalJSON() ([]byte, error) {
+func (o AppApiRestV2InfoTypesCapability) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -130,7 +130,7 @@ func (o Capability) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Capability) ToMap() (map[string]interface{}, error) {
+func (o AppApiRestV2InfoTypesCapability) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["function_name"] = o.FunctionName
 	toSerialize["function_vaddr"] = o.FunctionVaddr
@@ -143,7 +143,7 @@ func (o Capability) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *Capability) UnmarshalJSON(data []byte) (err error) {
+func (o *AppApiRestV2InfoTypesCapability) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -167,15 +167,15 @@ func (o *Capability) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCapability := _Capability{}
+	varAppApiRestV2InfoTypesCapability := _AppApiRestV2InfoTypesCapability{}
 
-	err = json.Unmarshal(data, &varCapability)
+	err = json.Unmarshal(data, &varAppApiRestV2InfoTypesCapability)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Capability(varCapability)
+	*o = AppApiRestV2InfoTypesCapability(varAppApiRestV2InfoTypesCapability)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -189,38 +189,38 @@ func (o *Capability) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCapability struct {
-	value *Capability
+type NullableAppApiRestV2InfoTypesCapability struct {
+	value *AppApiRestV2InfoTypesCapability
 	isSet bool
 }
 
-func (v NullableCapability) Get() *Capability {
+func (v NullableAppApiRestV2InfoTypesCapability) Get() *AppApiRestV2InfoTypesCapability {
 	return v.value
 }
 
-func (v *NullableCapability) Set(val *Capability) {
+func (v *NullableAppApiRestV2InfoTypesCapability) Set(val *AppApiRestV2InfoTypesCapability) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCapability) IsSet() bool {
+func (v NullableAppApiRestV2InfoTypesCapability) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCapability) Unset() {
+func (v *NullableAppApiRestV2InfoTypesCapability) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCapability(val *Capability) *NullableCapability {
-	return &NullableCapability{value: val, isSet: true}
+func NewNullableAppApiRestV2InfoTypesCapability(val *AppApiRestV2InfoTypesCapability) *NullableAppApiRestV2InfoTypesCapability {
+	return &NullableAppApiRestV2InfoTypesCapability{value: val, isSet: true}
 }
 
-func (v NullableCapability) MarshalJSON() ([]byte, error) {
+func (v NullableAppApiRestV2InfoTypesCapability) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCapability) UnmarshalJSON(src []byte) error {
+func (v *NullableAppApiRestV2InfoTypesCapability) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
