@@ -14,40 +14,40 @@ import (
 	"fmt"
 )
 
-// checks if the Capabilities type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Capabilities{}
+// checks if the CapabilitiesAgentResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilitiesAgentResponse{}
 
-// Capabilities struct for Capabilities
-type Capabilities struct {
-	// List of capabilities for a given analysis
-	Capabilities []AppApiRestV2InfoTypesCapability `json:"capabilities"`
+// CapabilitiesAgentResponse struct for CapabilitiesAgentResponse
+type CapabilitiesAgentResponse struct {
+	// List of enriched capability data
+	Capabilities []AppApiRestV2AgentSchemaCapability `json:"capabilities"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _Capabilities Capabilities
+type _CapabilitiesAgentResponse CapabilitiesAgentResponse
 
-// NewCapabilities instantiates a new Capabilities object
+// NewCapabilitiesAgentResponse instantiates a new CapabilitiesAgentResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCapabilities(capabilities []AppApiRestV2InfoTypesCapability) *Capabilities {
-	this := Capabilities{}
+func NewCapabilitiesAgentResponse(capabilities []AppApiRestV2AgentSchemaCapability) *CapabilitiesAgentResponse {
+	this := CapabilitiesAgentResponse{}
 	this.Capabilities = capabilities
 	return &this
 }
 
-// NewCapabilitiesWithDefaults instantiates a new Capabilities object
+// NewCapabilitiesAgentResponseWithDefaults instantiates a new CapabilitiesAgentResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCapabilitiesWithDefaults() *Capabilities {
-	this := Capabilities{}
+func NewCapabilitiesAgentResponseWithDefaults() *CapabilitiesAgentResponse {
+	this := CapabilitiesAgentResponse{}
 	return &this
 }
 
 // GetCapabilities returns the Capabilities field value
-func (o *Capabilities) GetCapabilities() []AppApiRestV2InfoTypesCapability {
+func (o *CapabilitiesAgentResponse) GetCapabilities() []AppApiRestV2AgentSchemaCapability {
 	if o == nil {
-		var ret []AppApiRestV2InfoTypesCapability
+		var ret []AppApiRestV2AgentSchemaCapability
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *Capabilities) GetCapabilities() []AppApiRestV2InfoTypesCapability {
 
 // GetCapabilitiesOk returns a tuple with the Capabilities field value
 // and a boolean to check if the value has been set.
-func (o *Capabilities) GetCapabilitiesOk() ([]AppApiRestV2InfoTypesCapability, bool) {
+func (o *CapabilitiesAgentResponse) GetCapabilitiesOk() ([]AppApiRestV2AgentSchemaCapability, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,11 +64,11 @@ func (o *Capabilities) GetCapabilitiesOk() ([]AppApiRestV2InfoTypesCapability, b
 }
 
 // SetCapabilities sets field value
-func (o *Capabilities) SetCapabilities(v []AppApiRestV2InfoTypesCapability) {
+func (o *CapabilitiesAgentResponse) SetCapabilities(v []AppApiRestV2AgentSchemaCapability) {
 	o.Capabilities = v
 }
 
-func (o Capabilities) MarshalJSON() ([]byte, error) {
+func (o CapabilitiesAgentResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -76,7 +76,7 @@ func (o Capabilities) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Capabilities) ToMap() (map[string]interface{}, error) {
+func (o CapabilitiesAgentResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["capabilities"] = o.Capabilities
 
@@ -87,7 +87,7 @@ func (o Capabilities) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *Capabilities) UnmarshalJSON(data []byte) (err error) {
+func (o *CapabilitiesAgentResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -109,15 +109,15 @@ func (o *Capabilities) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCapabilities := _Capabilities{}
+	varCapabilitiesAgentResponse := _CapabilitiesAgentResponse{}
 
-	err = json.Unmarshal(data, &varCapabilities)
+	err = json.Unmarshal(data, &varCapabilitiesAgentResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Capabilities(varCapabilities)
+	*o = CapabilitiesAgentResponse(varCapabilitiesAgentResponse)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -129,38 +129,38 @@ func (o *Capabilities) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCapabilities struct {
-	value *Capabilities
+type NullableCapabilitiesAgentResponse struct {
+	value *CapabilitiesAgentResponse
 	isSet bool
 }
 
-func (v NullableCapabilities) Get() *Capabilities {
+func (v NullableCapabilitiesAgentResponse) Get() *CapabilitiesAgentResponse {
 	return v.value
 }
 
-func (v *NullableCapabilities) Set(val *Capabilities) {
+func (v *NullableCapabilitiesAgentResponse) Set(val *CapabilitiesAgentResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCapabilities) IsSet() bool {
+func (v NullableCapabilitiesAgentResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCapabilities) Unset() {
+func (v *NullableCapabilitiesAgentResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCapabilities(val *Capabilities) *NullableCapabilities {
-	return &NullableCapabilities{value: val, isSet: true}
+func NewNullableCapabilitiesAgentResponse(val *CapabilitiesAgentResponse) *NullableCapabilitiesAgentResponse {
+	return &NullableCapabilitiesAgentResponse{value: val, isSet: true}
 }
 
-func (v NullableCapabilities) MarshalJSON() ([]byte, error) {
+func (v NullableCapabilitiesAgentResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCapabilities) UnmarshalJSON(src []byte) error {
+func (v *NullableCapabilitiesAgentResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
