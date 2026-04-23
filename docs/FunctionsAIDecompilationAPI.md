@@ -407,7 +407,7 @@ Name | Type | Description  | Notes
 
 ## GetAiDecompilationTaskResult
 
-> BaseResponseGetAiDecompilationTask GetAiDecompilationTaskResult(ctx, functionId).Summarise(summarise).GenerateInlineComments(generateInlineComments).Execute()
+> BaseResponseGetAiDecompilationTask GetAiDecompilationTaskResult(ctx, functionId).Summarise(summarise).GenerateInlineComments(generateInlineComments).ForceRegenerate(forceRegenerate).Execute()
 
 Polls AI Decompilation Process
 
@@ -429,10 +429,11 @@ func main() {
 	functionId := int64(789) // int64 | The ID of the function being decompiled
 	summarise := true // bool | Generate a summary for the decompilation (optional) (default to true)
 	generateInlineComments := true // bool | Generate inline comments for the decompilation (optional) (default to true)
+	forceRegenerate := []revengai.RegenerateTarget{revengai.RegenerateTarget("summary")} // []RegenerateTarget | Force regeneration of summary and/or comments. (optional) (default to {})
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilationTaskResult(context.Background(), functionId).Summarise(summarise).GenerateInlineComments(generateInlineComments).Execute()
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilationTaskResult(context.Background(), functionId).Summarise(summarise).GenerateInlineComments(generateInlineComments).ForceRegenerate(forceRegenerate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilationTaskResult``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -460,6 +461,7 @@ Name | Type | Description  | Notes
 
  **summarise** | **bool** | Generate a summary for the decompilation | [default to true]
  **generateInlineComments** | **bool** | Generate inline comments for the decompilation | [default to true]
+ **forceRegenerate** | [**[]RegenerateTarget**](RegenerateTarget.md) | Force regeneration of summary and/or comments. | [default to {}]
 
 ### Return type
 

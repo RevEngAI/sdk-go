@@ -16,6 +16,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -930,6 +931,7 @@ type ApiGetAiDecompilationTaskResultRequest struct {
 	functionId int64
 	summarise *bool
 	generateInlineComments *bool
+	forceRegenerate *[]RegenerateTarget
 }
 
 // Generate a summary for the decompilation
@@ -941,6 +943,12 @@ func (r ApiGetAiDecompilationTaskResultRequest) Summarise(summarise bool) ApiGet
 // Generate inline comments for the decompilation
 func (r ApiGetAiDecompilationTaskResultRequest) GenerateInlineComments(generateInlineComments bool) ApiGetAiDecompilationTaskResultRequest {
 	r.generateInlineComments = &generateInlineComments
+	return r
+}
+
+// Force regeneration of summary and/or comments.
+func (r ApiGetAiDecompilationTaskResultRequest) ForceRegenerate(forceRegenerate []RegenerateTarget) ApiGetAiDecompilationTaskResultRequest {
+	r.forceRegenerate = &forceRegenerate
 	return r
 }
 
@@ -1000,6 +1008,21 @@ func (a *FunctionsAIDecompilationAPIService) GetAiDecompilationTaskResultExecute
 		var defaultValue bool = true
 		parameterAddToHeaderOrQuery(localVarQueryParams, "generate_inline_comments", defaultValue, "form", "")
 		r.generateInlineComments = &defaultValue
+	}
+	if r.forceRegenerate != nil {
+		t := *r.forceRegenerate
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "force_regenerate", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "force_regenerate", t, "form", "multi")
+		}
+	} else {
+		var defaultValue []RegenerateTarget = []RegenerateTarget{}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "force_regenerate", defaultValue, "form", "multi")
+		r.forceRegenerate = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

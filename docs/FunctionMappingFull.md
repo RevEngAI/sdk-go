@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **UnmatchedGlobalVars** | [**map[string]InverseValue**](InverseValue.md) |  | 
 **Fields** | [**map[string]map[string]InverseValue**](map.md) |  | 
 **UnmatchedExternalVars** | Pointer to [**map[string]InverseValue**](InverseValue.md) | No longer provided. | [optional] [default to {}]
+**UserOverrideMappings** | Pointer to **map[string]string** |  | [optional] 
 
 ## Methods
 
@@ -301,6 +302,31 @@ SetUnmatchedExternalVars sets UnmatchedExternalVars field to given value.
 `func (o *FunctionMappingFull) HasUnmatchedExternalVars() bool`
 
 HasUnmatchedExternalVars returns a boolean if a field has been set.
+
+### GetUserOverrideMappings
+
+`func (o *FunctionMappingFull) GetUserOverrideMappings() map[string]string`
+
+GetUserOverrideMappings returns the UserOverrideMappings field if non-nil, zero value otherwise.
+
+### GetUserOverrideMappingsOk
+
+`func (o *FunctionMappingFull) GetUserOverrideMappingsOk() (*map[string]string, bool)`
+
+GetUserOverrideMappingsOk returns a tuple with the UserOverrideMappings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserOverrideMappings
+
+`func (o *FunctionMappingFull) SetUserOverrideMappings(v map[string]string)`
+
+SetUserOverrideMappings sets UserOverrideMappings field to given value.
+
+### HasUserOverrideMappings
+
+`func (o *FunctionMappingFull) HasUserOverrideMappings() bool`
+
+HasUserOverrideMappings returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
