@@ -34,6 +34,7 @@ type FunctionMappingFull struct {
 	// No longer provided.
 	// Deprecated
 	UnmatchedExternalVars map[string]InverseValue `json:"unmatched_external_vars,omitempty"`
+	UserOverrideMappings map[string]string `json:"user_override_mappings,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -391,6 +392,38 @@ func (o *FunctionMappingFull) SetUnmatchedExternalVars(v map[string]InverseValue
 	o.UnmatchedExternalVars = v
 }
 
+// GetUserOverrideMappings returns the UserOverrideMappings field value if set, zero value otherwise.
+func (o *FunctionMappingFull) GetUserOverrideMappings() map[string]string {
+	if o == nil || IsNil(o.UserOverrideMappings) {
+		var ret map[string]string
+		return ret
+	}
+	return o.UserOverrideMappings
+}
+
+// GetUserOverrideMappingsOk returns a tuple with the UserOverrideMappings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionMappingFull) GetUserOverrideMappingsOk() (map[string]string, bool) {
+	if o == nil || IsNil(o.UserOverrideMappings) {
+		return map[string]string{}, false
+	}
+	return o.UserOverrideMappings, true
+}
+
+// HasUserOverrideMappings returns a boolean if a field has been set.
+func (o *FunctionMappingFull) HasUserOverrideMappings() bool {
+	if o != nil && !IsNil(o.UserOverrideMappings) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserOverrideMappings gets a reference to the given map[string]string and assigns it to the UserOverrideMappings field.
+func (o *FunctionMappingFull) SetUserOverrideMappings(v map[string]string) {
+	o.UserOverrideMappings = v
+}
+
 func (o FunctionMappingFull) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -415,6 +448,9 @@ func (o FunctionMappingFull) ToMap() (map[string]interface{}, error) {
 	toSerialize["fields"] = o.Fields
 	if !IsNil(o.UnmatchedExternalVars) {
 		toSerialize["unmatched_external_vars"] = o.UnmatchedExternalVars
+	}
+	if !IsNil(o.UserOverrideMappings) {
+		toSerialize["user_override_mappings"] = o.UserOverrideMappings
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -483,6 +519,7 @@ func (o *FunctionMappingFull) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "unmatched_global_vars")
 		delete(additionalProperties, "fields")
 		delete(additionalProperties, "unmatched_external_vars")
+		delete(additionalProperties, "user_override_mappings")
 		o.AdditionalProperties = additionalProperties
 	}
 

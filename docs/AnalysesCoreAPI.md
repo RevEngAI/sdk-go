@@ -1156,7 +1156,7 @@ import (
 
 func main() {
 	uploadFileType := revengai.UploadFileType("BINARY") // UploadFileType | 
-	file := os.NewFile(1234, "some_file") // *os.File | 
+	file := "file_example" // string | 
 	packedPassword := "packedPassword_example" // string |  (optional)
 	endpointUrl := "endpointUrl_example" // string |  (optional)
 	localCacheDir := "localCacheDir_example" // string |  (optional)
@@ -1190,7 +1190,7 @@ Other parameters are passed through a pointer to a apiUploadFileRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uploadFileType** | [**UploadFileType**](UploadFileType.md) |  | 
- **file** | ***os.File** |  | 
+ **file** | **string** |  | 
  **packedPassword** | **string** |  | 
  **endpointUrl** | **string** |  | 
  **localCacheDir** | **string** |  | 

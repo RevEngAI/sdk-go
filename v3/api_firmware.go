@@ -16,7 +16,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"os"
 )
 
 
@@ -153,7 +152,7 @@ func (a *FirmwareAPIService) GetBinariesForFirmwareTaskExecute(r ApiGetBinariesF
 type ApiUploadFirmwareRequest struct {
 	ctx context.Context
 	ApiService *FirmwareAPIService
-	file *os.File
+	file *string
 	endpointUrl *string
 	localCacheDir *string
 	localCacheMaxSizeMb *int32
@@ -163,8 +162,8 @@ type ApiUploadFirmwareRequest struct {
 	password *string
 }
 
-func (r ApiUploadFirmwareRequest) File(file *os.File) ApiUploadFirmwareRequest {
-	r.file = file
+func (r ApiUploadFirmwareRequest) File(file string) ApiUploadFirmwareRequest {
+	r.file = &file
 	return r
 }
 
@@ -285,21 +284,7 @@ func (a *FirmwareAPIService) UploadFirmwareExecute(r ApiUploadFirmwareRequest) (
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var fileLocalVarFormFileName string
-	var fileLocalVarFileName     string
-	var fileLocalVarFileBytes    []byte
-
-	fileLocalVarFormFileName = "file"
-	fileLocalVarFile := r.file
-
-	if fileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(fileLocalVarFile)
-
-		fileLocalVarFileBytes = fbs
-		fileLocalVarFileName = fileLocalVarFile.Name()
-		fileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "file", r.file, "", "")
 	if r.password != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "password", r.password, "", "")
 	}

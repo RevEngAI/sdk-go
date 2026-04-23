@@ -100,7 +100,7 @@ import (
 )
 
 func main() {
-	file := os.NewFile(1234, "some_file") // *os.File | 
+	file := "file_example" // string | 
 	endpointUrl := "endpointUrl_example" // string |  (optional)
 	localCacheDir := "localCacheDir_example" // string |  (optional)
 	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
@@ -132,7 +132,7 @@ Other parameters are passed through a pointer to a apiUploadFirmwareRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file** | ***os.File** |  | 
+ **file** | **string** |  | 
  **endpointUrl** | **string** |  | 
  **localCacheDir** | **string** |  | 
  **localCacheMaxSizeMb** | **int32** |  | 
