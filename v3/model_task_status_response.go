@@ -20,6 +20,7 @@ var _ MappedNullable = &TaskStatusResponse{}
 // TaskStatusResponse struct for TaskStatusResponse
 type TaskStatusResponse struct {
 	Status BinaryTaskStatus `json:"status"`
+	LogHistory [][]interface{} `json:"log_history,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -67,6 +68,39 @@ func (o *TaskStatusResponse) SetStatus(v BinaryTaskStatus) {
 	o.Status = v
 }
 
+// GetLogHistory returns the LogHistory field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TaskStatusResponse) GetLogHistory() [][]interface{} {
+	if o == nil {
+		var ret [][]interface{}
+		return ret
+	}
+	return o.LogHistory
+}
+
+// GetLogHistoryOk returns a tuple with the LogHistory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TaskStatusResponse) GetLogHistoryOk() ([][]interface{}, bool) {
+	if o == nil || IsNil(o.LogHistory) {
+		return nil, false
+	}
+	return o.LogHistory, true
+}
+
+// HasLogHistory returns a boolean if a field has been set.
+func (o *TaskStatusResponse) HasLogHistory() bool {
+	if o != nil && !IsNil(o.LogHistory) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogHistory gets a reference to the given [][]interface{} and assigns it to the LogHistory field.
+func (o *TaskStatusResponse) SetLogHistory(v [][]interface{}) {
+	o.LogHistory = v
+}
+
 func (o TaskStatusResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -78,6 +112,9 @@ func (o TaskStatusResponse) MarshalJSON() ([]byte, error) {
 func (o TaskStatusResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
+	if o.LogHistory != nil {
+		toSerialize["log_history"] = o.LogHistory
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -122,6 +159,7 @@ func (o *TaskStatusResponse) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "status")
+		delete(additionalProperties, "log_history")
 		o.AdditionalProperties = additionalProperties
 	}
 

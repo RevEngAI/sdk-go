@@ -8,7 +8,6 @@ Method | HTTP request | Description
 [**GetUser**](AuthenticationUsersAPI.md#GetUser) | **Get** /v2/users/{user_id} | Get a user&#39;s public information
 [**GetUserActivity**](AuthenticationUsersAPI.md#GetUserActivity) | **Get** /v2/users/activity | Get auth user activity
 [**GetUserComments**](AuthenticationUsersAPI.md#GetUserComments) | **Get** /v2/users/me/comments | Get comments by user
-[**LoginUser**](AuthenticationUsersAPI.md#LoginUser) | **Post** /v2/auth/login | Authenticate a user
 [**SubmitUserFeedback**](AuthenticationUsersAPI.md#SubmitUserFeedback) | **Post** /v2/users/feedback | Submit feedback about the application
 
 
@@ -268,72 +267,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## LoginUser
-
-> BaseResponseLoginResponse LoginUser(ctx).LoginRequest(loginRequest).Execute()
-
-Authenticate a user
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
-)
-
-func main() {
-	loginRequest := *revengai.NewLoginRequest("Username_example", "Password_example") // LoginRequest | 
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AuthenticationUsersAPI.LoginUser(context.Background()).LoginRequest(loginRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationUsersAPI.LoginUser``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `LoginUser`: BaseResponseLoginResponse
-	fmt.Fprintf(os.Stdout, "Response from `AuthenticationUsersAPI.LoginUser`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiLoginUserRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **loginRequest** | [**LoginRequest**](LoginRequest.md) |  | 
-
-### Return type
-
-[**BaseResponseLoginResponse**](BaseResponseLoginResponse.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
