@@ -40,7 +40,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the RevEng.AI API API vv3.74.4
+// APIClient manages communication with the RevEng.AI API API vv3.78.1
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -56,8 +56,6 @@ type APIClient struct {
 
 	AnalysesCoreAPI *AnalysesCoreAPIService
 
-	AnalysesDynamicExecutionAPI *AnalysesDynamicExecutionAPIService
-
 	AnalysesResultsMetadataAPI *AnalysesResultsMetadataAPIService
 
 	AnalysesXRefsAPI *AnalysesXRefsAPIService
@@ -71,6 +69,8 @@ type APIClient struct {
 	CollectionsAPI *CollectionsAPIService
 
 	ConfigAPI *ConfigAPIService
+
+	ConversationsAPI *ConversationsAPIService
 
 	ExternalSourcesAPI *ExternalSourcesAPIService
 
@@ -109,7 +109,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AnalysesBulkActionsAPI = (*AnalysesBulkActionsAPIService)(&c.common)
 	c.AnalysesCommentsAPI = (*AnalysesCommentsAPIService)(&c.common)
 	c.AnalysesCoreAPI = (*AnalysesCoreAPIService)(&c.common)
-	c.AnalysesDynamicExecutionAPI = (*AnalysesDynamicExecutionAPIService)(&c.common)
 	c.AnalysesResultsMetadataAPI = (*AnalysesResultsMetadataAPIService)(&c.common)
 	c.AnalysesXRefsAPI = (*AnalysesXRefsAPIService)(&c.common)
 	c.AnalysisStagesAPI = (*AnalysisStagesAPIService)(&c.common)
@@ -117,6 +116,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.BinariesAPI = (*BinariesAPIService)(&c.common)
 	c.CollectionsAPI = (*CollectionsAPIService)(&c.common)
 	c.ConfigAPI = (*ConfigAPIService)(&c.common)
+	c.ConversationsAPI = (*ConversationsAPIService)(&c.common)
 	c.ExternalSourcesAPI = (*ExternalSourcesAPIService)(&c.common)
 	c.FirmwareAPI = (*FirmwareAPIService)(&c.common)
 	c.FunctionsAIDecompilationAPI = (*FunctionsAIDecompilationAPIService)(&c.common)

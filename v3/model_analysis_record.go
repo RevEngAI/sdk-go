@@ -46,7 +46,7 @@ type AnalysisRecord struct {
 	BinarySize int32 `json:"binary_size"`
 	// The username of the analysis owner
 	Username string `json:"username"`
-	DynamicExecutionStatus NullableAppApiRestV2AnalysesEnumsDynamicExecutionStatus `json:"dynamic_execution_status,omitempty"`
+	DynamicExecutionStatus NullableDynamicExecutionStatus `json:"dynamic_execution_status,omitempty"`
 	DynamicExecutionTaskId NullableInt32 `json:"dynamic_execution_task_id,omitempty"`
 	// The base address of the binary
 	BaseAddress int32 `json:"base_address"`
@@ -401,9 +401,9 @@ func (o *AnalysisRecord) SetUsername(v string) {
 }
 
 // GetDynamicExecutionStatus returns the DynamicExecutionStatus field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AnalysisRecord) GetDynamicExecutionStatus() AppApiRestV2AnalysesEnumsDynamicExecutionStatus {
+func (o *AnalysisRecord) GetDynamicExecutionStatus() DynamicExecutionStatus {
 	if o == nil || IsNil(o.DynamicExecutionStatus.Get()) {
-		var ret AppApiRestV2AnalysesEnumsDynamicExecutionStatus
+		var ret DynamicExecutionStatus
 		return ret
 	}
 	return *o.DynamicExecutionStatus.Get()
@@ -412,7 +412,7 @@ func (o *AnalysisRecord) GetDynamicExecutionStatus() AppApiRestV2AnalysesEnumsDy
 // GetDynamicExecutionStatusOk returns a tuple with the DynamicExecutionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AnalysisRecord) GetDynamicExecutionStatusOk() (*AppApiRestV2AnalysesEnumsDynamicExecutionStatus, bool) {
+func (o *AnalysisRecord) GetDynamicExecutionStatusOk() (*DynamicExecutionStatus, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -428,8 +428,8 @@ func (o *AnalysisRecord) HasDynamicExecutionStatus() bool {
 	return false
 }
 
-// SetDynamicExecutionStatus gets a reference to the given NullableAppApiRestV2AnalysesEnumsDynamicExecutionStatus and assigns it to the DynamicExecutionStatus field.
-func (o *AnalysisRecord) SetDynamicExecutionStatus(v AppApiRestV2AnalysesEnumsDynamicExecutionStatus) {
+// SetDynamicExecutionStatus gets a reference to the given NullableDynamicExecutionStatus and assigns it to the DynamicExecutionStatus field.
+func (o *AnalysisRecord) SetDynamicExecutionStatus(v DynamicExecutionStatus) {
 	o.DynamicExecutionStatus.Set(&v)
 }
 // SetDynamicExecutionStatusNil sets the value for DynamicExecutionStatus to be an explicit nil

@@ -1465,7 +1465,7 @@ type ApiListAnalysesRequest struct {
 	workspace *[]Workspace
 	status *[]StatusInput
 	modelName *[]ModelName
-	dynamicExecutionStatus *DynamicExecutionStatusInput
+	dynamicExecutionStatus *DynamicExecutionStatus
 	usernames *[]*string
 	sha256Hash *string
 	limit *int32
@@ -1498,7 +1498,7 @@ func (r ApiListAnalysesRequest) ModelName(modelName []ModelName) ApiListAnalyses
 }
 
 // Show analysis that have a dynamic execution with the given status
-func (r ApiListAnalysesRequest) DynamicExecutionStatus(dynamicExecutionStatus DynamicExecutionStatusInput) ApiListAnalysesRequest {
+func (r ApiListAnalysesRequest) DynamicExecutionStatus(dynamicExecutionStatus DynamicExecutionStatus) ApiListAnalysesRequest {
 	r.dynamicExecutionStatus = &dynamicExecutionStatus
 	return r
 }
