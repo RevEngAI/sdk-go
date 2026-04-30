@@ -679,7 +679,7 @@ func main() {
 	workspace := []revengai.Workspace{revengai.Workspace("personal")} // []Workspace | The workspace to be viewed (optional) (default to {"personal"})
 	status := []revengai.StatusInput{revengai.Status-Input("Uploaded")} // []StatusInput | The status of the analysis (optional) (default to {"All"})
 	modelName := []revengai.ModelName{revengai.ModelName("binnet-0.7-x86-64-windows")} // []ModelName | Show analysis belonging to the model (optional)
-	dynamicExecutionStatus := revengai.DynamicExecutionStatus-Input("PENDING") // DynamicExecutionStatusInput | Show analysis that have a dynamic execution with the given status (optional)
+	dynamicExecutionStatus := revengai.DynamicExecutionStatus("PENDING") // DynamicExecutionStatus | Show analysis that have a dynamic execution with the given status (optional)
 	usernames := []*string{"Inner_example"} // []*string | Show analysis belonging to the user (optional) (default to {})
 	sha256Hash := "sha256Hash_example" // string |  (optional)
 	limit := int32(56) // int32 |  (optional) (default to 20)
@@ -714,7 +714,7 @@ Name | Type | Description  | Notes
  **workspace** | [**[]Workspace**](Workspace.md) | The workspace to be viewed | [default to {&quot;personal&quot;}]
  **status** | [**[]StatusInput**](StatusInput.md) | The status of the analysis | [default to {&quot;All&quot;}]
  **modelName** | [**[]ModelName**](ModelName.md) | Show analysis belonging to the model | 
- **dynamicExecutionStatus** | [**DynamicExecutionStatusInput**](DynamicExecutionStatusInput.md) | Show analysis that have a dynamic execution with the given status | 
+ **dynamicExecutionStatus** | [**DynamicExecutionStatus**](DynamicExecutionStatus.md) | Show analysis that have a dynamic execution with the given status | 
  **usernames** | **[]string** | Show analysis belonging to the user | [default to {}]
  **sha256Hash** | **string** |  | 
  **limit** | **int32** |  | [default to 20]

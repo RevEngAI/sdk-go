@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **FunctionBoundariesHash** | **string** | The hash of the function boundaries | 
 **BinarySize** | **int32** | The size of the binary | 
 **Username** | **string** | The username of the analysis owner | 
-**DynamicExecutionStatus** | Pointer to [**NullableAppApiRestV2AnalysesEnumsDynamicExecutionStatus**](AppApiRestV2AnalysesEnumsDynamicExecutionStatus.md) |  | [optional] 
+**DynamicExecutionStatus** | Pointer to [**NullableDynamicExecutionStatus**](DynamicExecutionStatus.md) |  | [optional] 
 **DynamicExecutionTaskId** | Pointer to **NullableInt32** |  | [optional] 
 **BaseAddress** | **int32** | The base address of the binary | 
 **Tags** | Pointer to [**[]TagItem**](TagItem.md) | List of tags associated with the analysis | [optional] 
@@ -303,20 +303,20 @@ SetUsername sets Username field to given value.
 
 ### GetDynamicExecutionStatus
 
-`func (o *AnalysisRecord) GetDynamicExecutionStatus() AppApiRestV2AnalysesEnumsDynamicExecutionStatus`
+`func (o *AnalysisRecord) GetDynamicExecutionStatus() DynamicExecutionStatus`
 
 GetDynamicExecutionStatus returns the DynamicExecutionStatus field if non-nil, zero value otherwise.
 
 ### GetDynamicExecutionStatusOk
 
-`func (o *AnalysisRecord) GetDynamicExecutionStatusOk() (*AppApiRestV2AnalysesEnumsDynamicExecutionStatus, bool)`
+`func (o *AnalysisRecord) GetDynamicExecutionStatusOk() (*DynamicExecutionStatus, bool)`
 
 GetDynamicExecutionStatusOk returns a tuple with the DynamicExecutionStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDynamicExecutionStatus
 
-`func (o *AnalysisRecord) SetDynamicExecutionStatus(v AppApiRestV2AnalysesEnumsDynamicExecutionStatus)`
+`func (o *AnalysisRecord) SetDynamicExecutionStatus(v DynamicExecutionStatus)`
 
 SetDynamicExecutionStatus sets DynamicExecutionStatus field to given value.
 
