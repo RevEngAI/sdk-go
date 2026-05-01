@@ -50,8 +50,6 @@ type APIClient struct {
 
 	AgentAPI *AgentAPIService
 
-	AnalysesAPI *AnalysesAPIService
-
 	AnalysesBulkActionsAPI *AnalysesBulkActionsAPIService
 
 	AnalysesCommentsAPI *AnalysesCommentsAPIService
@@ -106,7 +104,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.AgentAPI = (*AgentAPIService)(&c.common)
-	c.AnalysesAPI = (*AnalysesAPIService)(&c.common)
 	c.AnalysesBulkActionsAPI = (*AnalysesBulkActionsAPIService)(&c.common)
 	c.AnalysesCommentsAPI = (*AnalysesCommentsAPIService)(&c.common)
 	c.AnalysesCoreAPI = (*AnalysesCoreAPIService)(&c.common)
