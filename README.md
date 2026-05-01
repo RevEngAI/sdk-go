@@ -80,7 +80,6 @@ Class | Method | HTTP request | Description
 *AgentAPI* | [**GetCapabilitiesResultV2AnalysesAnalysisIdAgentCapabilitiesGet**](docs/AgentAPI.md#getcapabilitiesresultv2analysesanalysisidagentcapabilitiesget) | **Get** /v2/analyses/{analysis_id}/agent/capabilities | Get Capabilities Result
 *AgentAPI* | [**GetReportAnalysisResultV2AnalysesAnalysisIdAgentReportAnalysisGet**](docs/AgentAPI.md#getreportanalysisresultv2analysesanalysisidagentreportanalysisget) | **Get** /v2/analyses/{analysis_id}/agent/report-analysis | Get Report Analysis Result
 *AgentAPI* | [**GetTriageResultV2AnalysesAnalysisIdAgentTriageGet**](docs/AgentAPI.md#gettriageresultv2analysesanalysisidagenttriageget) | **Get** /v2/analyses/{analysis_id}/agent/triage | Get Triage Result
-*AnalysesAPI* | [**GetAnalysisQueuePosition**](docs/AnalysesAPI.md#getanalysisqueueposition) | **Get** /v2/analyses/{analysis_id}/queue-position | Get the queue position of an analysis
 *AnalysesBulkActionsAPI* | [**BulkAddAnalysisTags**](docs/AnalysesBulkActionsAPI.md#bulkaddanalysistags) | **Patch** /v2/analyses/tags/add | Bulk Add Analysis Tags
 *AnalysesBulkActionsAPI* | [**BulkDeleteAnalyses**](docs/AnalysesBulkActionsAPI.md#bulkdeleteanalyses) | **Patch** /v2/analyses/delete | Bulk Delete Analyses
 *AnalysesCommentsAPI* | [**CreateAnalysisComment**](docs/AnalysesCommentsAPI.md#createanalysiscomment) | **Post** /v2/analyses/{analysis_id}/comments | Create a comment for this analysis
@@ -93,6 +92,7 @@ Class | Method | HTTP request | Description
 *AnalysesCoreAPI* | [**GetAnalysisFunctionMap**](docs/AnalysesCoreAPI.md#getanalysisfunctionmap) | **Get** /v2/analyses/{analysis_id}/func_maps | Get Analysis Function Map
 *AnalysesCoreAPI* | [**GetAnalysisLogs**](docs/AnalysesCoreAPI.md#getanalysislogs) | **Get** /v2/analyses/{analysis_id}/logs | Gets the logs of an analysis
 *AnalysesCoreAPI* | [**GetAnalysisParams**](docs/AnalysesCoreAPI.md#getanalysisparams) | **Get** /v2/analyses/{analysis_id}/params | Gets analysis param information
+*AnalysesCoreAPI* | [**GetAnalysisQueuePosition**](docs/AnalysesCoreAPI.md#getanalysisqueueposition) | **Get** /v2/analyses/{analysis_id}/queue-position | Get the queue position of an analysis
 *AnalysesCoreAPI* | [**GetAnalysisStatus**](docs/AnalysesCoreAPI.md#getanalysisstatus) | **Get** /v2/analyses/{analysis_id}/status | Gets the status of an analysis
 *AnalysesCoreAPI* | [**InsertAnalysisLog**](docs/AnalysesCoreAPI.md#insertanalysislog) | **Post** /v2/analyses/{analysis_id}/logs | Insert a log entry for an analysis
 *AnalysesCoreAPI* | [**ListAnalyses**](docs/AnalysesCoreAPI.md#listanalyses) | **Get** /v2/analyses/list | Gets the most recent analyses
