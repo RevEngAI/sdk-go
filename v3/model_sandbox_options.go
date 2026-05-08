@@ -21,6 +21,9 @@ type SandboxOptions struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	// The command line parameters to pass to the dynamic execution sandbox. Requires `sandbox` to be True.
 	CommandLineArgs *string `json:"command_line_args,omitempty"`
+	StartMethod NullableSandboxStartMethod `json:"start_method,omitempty"`
+	// Maximum execution time for the sandbox run, in seconds. Allowed values: 120 (2m), 180 (3m), 300 (5m), 600 (10m).
+	Timeout *SandboxTimeout `json:"timeout,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,6 +39,8 @@ func NewSandboxOptions() *SandboxOptions {
 	this.Enabled = &enabled
 	var commandLineArgs string = ""
 	this.CommandLineArgs = &commandLineArgs
+	var timeout SandboxTimeout = SANDBOXTIMEOUT__120
+	this.Timeout = &timeout
 	return &this
 }
 
@@ -48,6 +53,8 @@ func NewSandboxOptionsWithDefaults() *SandboxOptions {
 	this.Enabled = &enabled
 	var commandLineArgs string = ""
 	this.CommandLineArgs = &commandLineArgs
+	var timeout SandboxTimeout = SANDBOXTIMEOUT__120
+	this.Timeout = &timeout
 	return &this
 }
 
@@ -115,6 +122,80 @@ func (o *SandboxOptions) SetCommandLineArgs(v string) {
 	o.CommandLineArgs = &v
 }
 
+// GetStartMethod returns the StartMethod field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SandboxOptions) GetStartMethod() SandboxStartMethod {
+	if o == nil || IsNil(o.StartMethod.Get()) {
+		var ret SandboxStartMethod
+		return ret
+	}
+	return *o.StartMethod.Get()
+}
+
+// GetStartMethodOk returns a tuple with the StartMethod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SandboxOptions) GetStartMethodOk() (*SandboxStartMethod, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StartMethod.Get(), o.StartMethod.IsSet()
+}
+
+// HasStartMethod returns a boolean if a field has been set.
+func (o *SandboxOptions) HasStartMethod() bool {
+	if o != nil && o.StartMethod.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStartMethod gets a reference to the given NullableSandboxStartMethod and assigns it to the StartMethod field.
+func (o *SandboxOptions) SetStartMethod(v SandboxStartMethod) {
+	o.StartMethod.Set(&v)
+}
+// SetStartMethodNil sets the value for StartMethod to be an explicit nil
+func (o *SandboxOptions) SetStartMethodNil() {
+	o.StartMethod.Set(nil)
+}
+
+// UnsetStartMethod ensures that no value is present for StartMethod, not even an explicit nil
+func (o *SandboxOptions) UnsetStartMethod() {
+	o.StartMethod.Unset()
+}
+
+// GetTimeout returns the Timeout field value if set, zero value otherwise.
+func (o *SandboxOptions) GetTimeout() SandboxTimeout {
+	if o == nil || IsNil(o.Timeout) {
+		var ret SandboxTimeout
+		return ret
+	}
+	return *o.Timeout
+}
+
+// GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SandboxOptions) GetTimeoutOk() (*SandboxTimeout, bool) {
+	if o == nil || IsNil(o.Timeout) {
+		return nil, false
+	}
+	return o.Timeout, true
+}
+
+// HasTimeout returns a boolean if a field has been set.
+func (o *SandboxOptions) HasTimeout() bool {
+	if o != nil && !IsNil(o.Timeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeout gets a reference to the given SandboxTimeout and assigns it to the Timeout field.
+func (o *SandboxOptions) SetTimeout(v SandboxTimeout) {
+	o.Timeout = &v
+}
+
 func (o SandboxOptions) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,6 +211,12 @@ func (o SandboxOptions) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CommandLineArgs) {
 		toSerialize["command_line_args"] = o.CommandLineArgs
+	}
+	if o.StartMethod.IsSet() {
+		toSerialize["start_method"] = o.StartMethod.Get()
+	}
+	if !IsNil(o.Timeout) {
+		toSerialize["timeout"] = o.Timeout
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -155,6 +242,8 @@ func (o *SandboxOptions) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "enabled")
 		delete(additionalProperties, "command_line_args")
+		delete(additionalProperties, "start_method")
+		delete(additionalProperties, "timeout")
 		o.AdditionalProperties = additionalProperties
 	}
 
