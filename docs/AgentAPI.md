@@ -498,6 +498,8 @@ Name | Type | Description  | Notes
 
 Get Report Analysis Result
 
+
+
 ### Example
 
 ```go

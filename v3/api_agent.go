@@ -921,6 +921,14 @@ func (r ApiGetReportAnalysisResultV2AnalysesAnalysisIdAgentReportAnalysisGetRequ
 /*
 GetReportAnalysisResultV2AnalysesAnalysisIdAgentReportAnalysisGet Get Report Analysis Result
 
+Returns:
+- A summary of the analysis
+- The software type of the binary
+- An attack flow summary
+- List of IOCs
+- List of MITRE executable techniques
+- A YARA rule
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiGetReportAnalysisResultV2AnalysesAnalysisIdAgentReportAnalysisGetRequest
