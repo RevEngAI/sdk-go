@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## BulkAddAnalysisTags
 
-> BaseResponseAnalysisBulkAddTagsResponse BulkAddAnalysisTags(ctx).AnalysisBulkAddTagsRequest(analysisBulkAddTagsRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
+> BaseResponseAnalysisBulkAddTagsResponse BulkAddAnalysisTags(ctx).AnalysisBulkAddTagsRequest(analysisBulkAddTagsRequest).Execute()
 
 Bulk Add Analysis Tags
 
@@ -31,16 +31,10 @@ import (
 
 func main() {
 	analysisBulkAddTagsRequest := *revengai.NewAnalysisBulkAddTagsRequest([]string{"Tags_example"}, []int32{int32(123)}) // AnalysisBulkAddTagsRequest | 
-	endpointUrl := "endpointUrl_example" // string |  (optional)
-	localCacheDir := "localCacheDir_example" // string |  (optional)
-	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
-	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
-	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
-	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesBulkActionsAPI.BulkAddAnalysisTags(context.Background()).AnalysisBulkAddTagsRequest(analysisBulkAddTagsRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
+	resp, r, err := apiClient.AnalysesBulkActionsAPI.BulkAddAnalysisTags(context.Background()).AnalysisBulkAddTagsRequest(analysisBulkAddTagsRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesBulkActionsAPI.BulkAddAnalysisTags``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -62,12 +56,6 @@ Other parameters are passed through a pointer to a apiBulkAddAnalysisTagsRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **analysisBulkAddTagsRequest** | [**AnalysisBulkAddTagsRequest**](AnalysisBulkAddTagsRequest.md) |  | 
- **endpointUrl** | **string** |  | 
- **localCacheDir** | **string** |  | 
- **localCacheMaxSizeMb** | **int32** |  | 
- **customerSamplesBucket** | **string** |  | 
- **firmwareSamplesBucket** | **string** |  | 
- **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -89,7 +77,7 @@ Name | Type | Description  | Notes
 
 ## BulkDeleteAnalyses
 
-> BaseResponseDict BulkDeleteAnalyses(ctx).BulkDeleteAnalysesRequest(bulkDeleteAnalysesRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
+> BaseResponseDict BulkDeleteAnalyses(ctx).BulkDeleteAnalysesRequest(bulkDeleteAnalysesRequest).Execute()
 
 Bulk Delete Analyses
 
@@ -109,16 +97,10 @@ import (
 
 func main() {
 	bulkDeleteAnalysesRequest := *revengai.NewBulkDeleteAnalysesRequest([]int32{int32(123)}) // BulkDeleteAnalysesRequest | 
-	endpointUrl := "endpointUrl_example" // string |  (optional)
-	localCacheDir := "localCacheDir_example" // string |  (optional)
-	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
-	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
-	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
-	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesBulkActionsAPI.BulkDeleteAnalyses(context.Background()).BulkDeleteAnalysesRequest(bulkDeleteAnalysesRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
+	resp, r, err := apiClient.AnalysesBulkActionsAPI.BulkDeleteAnalyses(context.Background()).BulkDeleteAnalysesRequest(bulkDeleteAnalysesRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesBulkActionsAPI.BulkDeleteAnalyses``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -140,12 +122,6 @@ Other parameters are passed through a pointer to a apiBulkDeleteAnalysesRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **bulkDeleteAnalysesRequest** | [**BulkDeleteAnalysesRequest**](BulkDeleteAnalysesRequest.md) |  | 
- **endpointUrl** | **string** |  | 
- **localCacheDir** | **string** |  | 
- **localCacheMaxSizeMb** | **int32** |  | 
- **customerSamplesBucket** | **string** |  | 
- **firmwareSamplesBucket** | **string** |  | 
- **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 

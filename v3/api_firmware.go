@@ -153,47 +153,11 @@ type ApiUploadFirmwareRequest struct {
 	ctx context.Context
 	ApiService *FirmwareAPIService
 	file *string
-	endpointUrl *string
-	localCacheDir *string
-	localCacheMaxSizeMb *int32
-	customerSamplesBucket *string
-	firmwareSamplesBucket *string
-	maxRetryAttempts *int32
 	password *string
 }
 
 func (r ApiUploadFirmwareRequest) File(file string) ApiUploadFirmwareRequest {
 	r.file = &file
-	return r
-}
-
-func (r ApiUploadFirmwareRequest) EndpointUrl(endpointUrl string) ApiUploadFirmwareRequest {
-	r.endpointUrl = &endpointUrl
-	return r
-}
-
-func (r ApiUploadFirmwareRequest) LocalCacheDir(localCacheDir string) ApiUploadFirmwareRequest {
-	r.localCacheDir = &localCacheDir
-	return r
-}
-
-func (r ApiUploadFirmwareRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiUploadFirmwareRequest {
-	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
-	return r
-}
-
-func (r ApiUploadFirmwareRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiUploadFirmwareRequest {
-	r.customerSamplesBucket = &customerSamplesBucket
-	return r
-}
-
-func (r ApiUploadFirmwareRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiUploadFirmwareRequest {
-	r.firmwareSamplesBucket = &firmwareSamplesBucket
-	return r
-}
-
-func (r ApiUploadFirmwareRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiUploadFirmwareRequest {
-	r.maxRetryAttempts = &maxRetryAttempts
 	return r
 }
 
@@ -245,28 +209,6 @@ func (a *FirmwareAPIService) UploadFirmwareExecute(r ApiUploadFirmwareRequest) (
 		return localVarReturnValue, nil, reportError("file is required and must be specified")
 	}
 
-	if r.endpointUrl != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
-	}
-	if r.localCacheDir != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
-	}
-	if r.localCacheMaxSizeMb != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
-	}
-	if r.customerSamplesBucket != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
-	}
-	if r.firmwareSamplesBucket != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
-	}
-	if r.maxRetryAttempts != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
-	} else {
-		var defaultValue int32 = 5
-		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
-		r.maxRetryAttempts = &defaultValue
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
 
