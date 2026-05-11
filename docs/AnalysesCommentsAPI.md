@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateAnalysisComment
 
-> BaseResponseCommentResponse CreateAnalysisComment(ctx, analysisId).CommentBase(commentBase).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
+> BaseResponseCommentResponse CreateAnalysisComment(ctx, analysisId).CommentBase(commentBase).Execute()
 
 Create a comment for this analysis
 
@@ -34,16 +34,10 @@ import (
 func main() {
 	analysisId := int32(56) // int32 | 
 	commentBase := *revengai.NewCommentBase("Content_example") // CommentBase | 
-	endpointUrl := "endpointUrl_example" // string |  (optional)
-	localCacheDir := "localCacheDir_example" // string |  (optional)
-	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
-	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
-	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
-	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCommentsAPI.CreateAnalysisComment(context.Background(), analysisId).CommentBase(commentBase).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
+	resp, r, err := apiClient.AnalysesCommentsAPI.CreateAnalysisComment(context.Background(), analysisId).CommentBase(commentBase).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCommentsAPI.CreateAnalysisComment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -70,12 +64,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **commentBase** | [**CommentBase**](CommentBase.md) |  | 
- **endpointUrl** | **string** |  | 
- **localCacheDir** | **string** |  | 
- **localCacheMaxSizeMb** | **int32** |  | 
- **customerSamplesBucket** | **string** |  | 
- **firmwareSamplesBucket** | **string** |  | 
- **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -97,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## DeleteAnalysisComment
 
-> BaseResponseBool DeleteAnalysisComment(ctx, commentId, analysisId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
+> BaseResponseBool DeleteAnalysisComment(ctx, commentId, analysisId).Execute()
 
 Delete a comment
 
@@ -118,16 +106,10 @@ import (
 func main() {
 	commentId := int32(56) // int32 | 
 	analysisId := int32(56) // int32 | 
-	endpointUrl := "endpointUrl_example" // string |  (optional)
-	localCacheDir := "localCacheDir_example" // string |  (optional)
-	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
-	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
-	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
-	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCommentsAPI.DeleteAnalysisComment(context.Background(), commentId, analysisId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
+	resp, r, err := apiClient.AnalysesCommentsAPI.DeleteAnalysisComment(context.Background(), commentId, analysisId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCommentsAPI.DeleteAnalysisComment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -155,12 +137,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **endpointUrl** | **string** |  | 
- **localCacheDir** | **string** |  | 
- **localCacheMaxSizeMb** | **int32** |  | 
- **customerSamplesBucket** | **string** |  | 
- **firmwareSamplesBucket** | **string** |  | 
- **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -182,7 +158,7 @@ Name | Type | Description  | Notes
 
 ## GetAnalysisComments
 
-> BaseResponseListCommentResponse GetAnalysisComments(ctx, analysisId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
+> BaseResponseListCommentResponse GetAnalysisComments(ctx, analysisId).Execute()
 
 Get comments for this analysis
 
@@ -202,16 +178,10 @@ import (
 
 func main() {
 	analysisId := int32(56) // int32 | 
-	endpointUrl := "endpointUrl_example" // string |  (optional)
-	localCacheDir := "localCacheDir_example" // string |  (optional)
-	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
-	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
-	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
-	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCommentsAPI.GetAnalysisComments(context.Background(), analysisId).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
+	resp, r, err := apiClient.AnalysesCommentsAPI.GetAnalysisComments(context.Background(), analysisId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCommentsAPI.GetAnalysisComments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -237,12 +207,6 @@ Other parameters are passed through a pointer to a apiGetAnalysisCommentsRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **endpointUrl** | **string** |  | 
- **localCacheDir** | **string** |  | 
- **localCacheMaxSizeMb** | **int32** |  | 
- **customerSamplesBucket** | **string** |  | 
- **firmwareSamplesBucket** | **string** |  | 
- **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 
@@ -264,7 +228,7 @@ Name | Type | Description  | Notes
 
 ## UpdateAnalysisComment
 
-> BaseResponseCommentResponse UpdateAnalysisComment(ctx, commentId, analysisId).CommentUpdateRequest(commentUpdateRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
+> BaseResponseCommentResponse UpdateAnalysisComment(ctx, commentId, analysisId).CommentUpdateRequest(commentUpdateRequest).Execute()
 
 Update a comment
 
@@ -286,16 +250,10 @@ func main() {
 	commentId := int32(56) // int32 | 
 	analysisId := int32(56) // int32 | 
 	commentUpdateRequest := *revengai.NewCommentUpdateRequest("Content_example") // CommentUpdateRequest | 
-	endpointUrl := "endpointUrl_example" // string |  (optional)
-	localCacheDir := "localCacheDir_example" // string |  (optional)
-	localCacheMaxSizeMb := int32(56) // int32 |  (optional)
-	customerSamplesBucket := "customerSamplesBucket_example" // string |  (optional)
-	firmwareSamplesBucket := "firmwareSamplesBucket_example" // string |  (optional)
-	maxRetryAttempts := int32(56) // int32 |  (optional) (default to 5)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCommentsAPI.UpdateAnalysisComment(context.Background(), commentId, analysisId).CommentUpdateRequest(commentUpdateRequest).EndpointUrl(endpointUrl).LocalCacheDir(localCacheDir).LocalCacheMaxSizeMb(localCacheMaxSizeMb).CustomerSamplesBucket(customerSamplesBucket).FirmwareSamplesBucket(firmwareSamplesBucket).MaxRetryAttempts(maxRetryAttempts).Execute()
+	resp, r, err := apiClient.AnalysesCommentsAPI.UpdateAnalysisComment(context.Background(), commentId, analysisId).CommentUpdateRequest(commentUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCommentsAPI.UpdateAnalysisComment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -324,12 +282,6 @@ Name | Type | Description  | Notes
 
 
  **commentUpdateRequest** | [**CommentUpdateRequest**](CommentUpdateRequest.md) |  | 
- **endpointUrl** | **string** |  | 
- **localCacheDir** | **string** |  | 
- **localCacheMaxSizeMb** | **int32** |  | 
- **customerSamplesBucket** | **string** |  | 
- **firmwareSamplesBucket** | **string** |  | 
- **maxRetryAttempts** | **int32** |  | [default to 5]
 
 ### Return type
 

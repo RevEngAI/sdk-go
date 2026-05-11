@@ -25,46 +25,10 @@ type ApiBulkAddAnalysisTagsRequest struct {
 	ctx context.Context
 	ApiService *AnalysesBulkActionsAPIService
 	analysisBulkAddTagsRequest *AnalysisBulkAddTagsRequest
-	endpointUrl *string
-	localCacheDir *string
-	localCacheMaxSizeMb *int32
-	customerSamplesBucket *string
-	firmwareSamplesBucket *string
-	maxRetryAttempts *int32
 }
 
 func (r ApiBulkAddAnalysisTagsRequest) AnalysisBulkAddTagsRequest(analysisBulkAddTagsRequest AnalysisBulkAddTagsRequest) ApiBulkAddAnalysisTagsRequest {
 	r.analysisBulkAddTagsRequest = &analysisBulkAddTagsRequest
-	return r
-}
-
-func (r ApiBulkAddAnalysisTagsRequest) EndpointUrl(endpointUrl string) ApiBulkAddAnalysisTagsRequest {
-	r.endpointUrl = &endpointUrl
-	return r
-}
-
-func (r ApiBulkAddAnalysisTagsRequest) LocalCacheDir(localCacheDir string) ApiBulkAddAnalysisTagsRequest {
-	r.localCacheDir = &localCacheDir
-	return r
-}
-
-func (r ApiBulkAddAnalysisTagsRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiBulkAddAnalysisTagsRequest {
-	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
-	return r
-}
-
-func (r ApiBulkAddAnalysisTagsRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiBulkAddAnalysisTagsRequest {
-	r.customerSamplesBucket = &customerSamplesBucket
-	return r
-}
-
-func (r ApiBulkAddAnalysisTagsRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiBulkAddAnalysisTagsRequest {
-	r.firmwareSamplesBucket = &firmwareSamplesBucket
-	return r
-}
-
-func (r ApiBulkAddAnalysisTagsRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiBulkAddAnalysisTagsRequest {
-	r.maxRetryAttempts = &maxRetryAttempts
 	return r
 }
 
@@ -111,28 +75,6 @@ func (a *AnalysesBulkActionsAPIService) BulkAddAnalysisTagsExecute(r ApiBulkAddA
 		return localVarReturnValue, nil, reportError("analysisBulkAddTagsRequest is required and must be specified")
 	}
 
-	if r.endpointUrl != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
-	}
-	if r.localCacheDir != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
-	}
-	if r.localCacheMaxSizeMb != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
-	}
-	if r.customerSamplesBucket != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
-	}
-	if r.firmwareSamplesBucket != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
-	}
-	if r.maxRetryAttempts != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
-	} else {
-		var defaultValue int32 = 5
-		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
-		r.maxRetryAttempts = &defaultValue
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -217,46 +159,10 @@ type ApiBulkDeleteAnalysesRequest struct {
 	ctx context.Context
 	ApiService *AnalysesBulkActionsAPIService
 	bulkDeleteAnalysesRequest *BulkDeleteAnalysesRequest
-	endpointUrl *string
-	localCacheDir *string
-	localCacheMaxSizeMb *int32
-	customerSamplesBucket *string
-	firmwareSamplesBucket *string
-	maxRetryAttempts *int32
 }
 
 func (r ApiBulkDeleteAnalysesRequest) BulkDeleteAnalysesRequest(bulkDeleteAnalysesRequest BulkDeleteAnalysesRequest) ApiBulkDeleteAnalysesRequest {
 	r.bulkDeleteAnalysesRequest = &bulkDeleteAnalysesRequest
-	return r
-}
-
-func (r ApiBulkDeleteAnalysesRequest) EndpointUrl(endpointUrl string) ApiBulkDeleteAnalysesRequest {
-	r.endpointUrl = &endpointUrl
-	return r
-}
-
-func (r ApiBulkDeleteAnalysesRequest) LocalCacheDir(localCacheDir string) ApiBulkDeleteAnalysesRequest {
-	r.localCacheDir = &localCacheDir
-	return r
-}
-
-func (r ApiBulkDeleteAnalysesRequest) LocalCacheMaxSizeMb(localCacheMaxSizeMb int32) ApiBulkDeleteAnalysesRequest {
-	r.localCacheMaxSizeMb = &localCacheMaxSizeMb
-	return r
-}
-
-func (r ApiBulkDeleteAnalysesRequest) CustomerSamplesBucket(customerSamplesBucket string) ApiBulkDeleteAnalysesRequest {
-	r.customerSamplesBucket = &customerSamplesBucket
-	return r
-}
-
-func (r ApiBulkDeleteAnalysesRequest) FirmwareSamplesBucket(firmwareSamplesBucket string) ApiBulkDeleteAnalysesRequest {
-	r.firmwareSamplesBucket = &firmwareSamplesBucket
-	return r
-}
-
-func (r ApiBulkDeleteAnalysesRequest) MaxRetryAttempts(maxRetryAttempts int32) ApiBulkDeleteAnalysesRequest {
-	r.maxRetryAttempts = &maxRetryAttempts
 	return r
 }
 
@@ -303,28 +209,6 @@ func (a *AnalysesBulkActionsAPIService) BulkDeleteAnalysesExecute(r ApiBulkDelet
 		return localVarReturnValue, nil, reportError("bulkDeleteAnalysesRequest is required and must be specified")
 	}
 
-	if r.endpointUrl != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endpoint_url", r.endpointUrl, "form", "")
-	}
-	if r.localCacheDir != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_dir", r.localCacheDir, "form", "")
-	}
-	if r.localCacheMaxSizeMb != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "local_cache_max_size_mb", r.localCacheMaxSizeMb, "form", "")
-	}
-	if r.customerSamplesBucket != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "customer_samples_bucket", r.customerSamplesBucket, "form", "")
-	}
-	if r.firmwareSamplesBucket != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "firmware_samples_bucket", r.firmwareSamplesBucket, "form", "")
-	}
-	if r.maxRetryAttempts != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", r.maxRetryAttempts, "form", "")
-	} else {
-		var defaultValue int32 = 5
-		parameterAddToHeaderOrQuery(localVarQueryParams, "max_retry_attempts", defaultValue, "form", "")
-		r.maxRetryAttempts = &defaultValue
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
