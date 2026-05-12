@@ -7,3 +7,8 @@ additionalProperties:
    goImportAlias: revengai
 # Allow unknown properties to avoid breaking when the API adds new fields, and we haven't updated the SDK yet
 disallowAdditionalPropertiesIfNotPresent: false
+# When an unknown enum value is found map to unknown_default_open_api
+enumUnknownDefaultCase: true
+globalProperties:
+  apiTests: "false"
+  modelTests: "false"
