@@ -47,7 +47,8 @@ func (v *AiDecompilationRating) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid AiDecompilationRating", value)
+	*v = AIDECOMPILATIONRATING_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewAiDecompilationRatingFromValue returns a pointer to a valid AiDecompilationRating

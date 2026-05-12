@@ -47,7 +47,8 @@ func (v *StringSource) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid StringSource", value)
+	*v = STRINGSOURCE_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewStringSourceFromValue returns a pointer to a valid StringSource

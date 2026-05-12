@@ -49,7 +49,8 @@ func (v *CollectionScope) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid CollectionScope", value)
+	*v = COLLECTIONSCOPE_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewCollectionScopeFromValue returns a pointer to a valid CollectionScope

@@ -51,7 +51,8 @@ func (v *BinariesTaskStatus) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid BinariesTaskStatus", value)
+	*v = BINARIESTASKSTATUS_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewBinariesTaskStatusFromValue returns a pointer to a valid BinariesTaskStatus

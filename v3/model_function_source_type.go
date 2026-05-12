@@ -51,7 +51,8 @@ func (v *FunctionSourceType) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid FunctionSourceType", value)
+	*v = FUNCTIONSOURCETYPE_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewFunctionSourceTypeFromValue returns a pointer to a valid FunctionSourceType

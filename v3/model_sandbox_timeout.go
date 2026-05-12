@@ -49,7 +49,8 @@ func (v *SandboxTimeout) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid SandboxTimeout", value)
+	*v = SANDBOXTIMEOUT__unknown_default_open_api
+	return nil
 }
 
 // NewSandboxTimeoutFromValue returns a pointer to a valid SandboxTimeout

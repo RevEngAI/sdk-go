@@ -47,7 +47,8 @@ func (v *AppApiRestV2AnalysesEnumsOrderBy) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid AppApiRestV2AnalysesEnumsOrderBy", value)
+	*v = APPAPIRESTV2ANALYSESENUMSORDERBY_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewAppApiRestV2AnalysesEnumsOrderByFromValue returns a pointer to a valid AppApiRestV2AnalysesEnumsOrderBy

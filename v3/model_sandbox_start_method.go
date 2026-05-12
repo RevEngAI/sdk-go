@@ -45,7 +45,8 @@ func (v *SandboxStartMethod) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid SandboxStartMethod", value)
+	*v = SANDBOXSTARTMETHOD_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewSandboxStartMethodFromValue returns a pointer to a valid SandboxStartMethod

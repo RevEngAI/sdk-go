@@ -51,7 +51,8 @@ func (v *TaskStatus) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid TaskStatus", value)
+	*v = TASKSTATUS_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewTaskStatusFromValue returns a pointer to a valid TaskStatus

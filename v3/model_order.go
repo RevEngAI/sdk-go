@@ -45,7 +45,8 @@ func (v *Order) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid Order", value)
+	*v = ORDER_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewOrderFromValue returns a pointer to a valid Order

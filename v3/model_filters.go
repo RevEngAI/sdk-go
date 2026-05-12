@@ -51,7 +51,8 @@ func (v *Filters) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid Filters", value)
+	*v = FILTERS_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewFiltersFromValue returns a pointer to a valid Filters

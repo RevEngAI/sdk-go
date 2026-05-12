@@ -49,7 +49,8 @@ func (v *UploadFileType) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid UploadFileType", value)
+	*v = UPLOADFILETYPE_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewUploadFileTypeFromValue returns a pointer to a valid UploadFileType

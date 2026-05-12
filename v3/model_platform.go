@@ -47,7 +47,8 @@ func (v *Platform) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid Platform", value)
+	*v = PLATFORM_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewPlatformFromValue returns a pointer to a valid Platform

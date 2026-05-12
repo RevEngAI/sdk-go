@@ -47,7 +47,8 @@ func (v *ISA) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid ISA", value)
+	*v = ISA_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewISAFromValue returns a pointer to a valid ISA

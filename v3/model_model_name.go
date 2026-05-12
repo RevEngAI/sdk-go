@@ -59,7 +59,8 @@ func (v *ModelName) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid ModelName", value)
+	*v = MODELNAME_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewModelNameFromValue returns a pointer to a valid ModelName

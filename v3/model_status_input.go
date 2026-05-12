@@ -53,7 +53,8 @@ func (v *StatusInput) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid StatusInput", value)
+	*v = STATUSINPUT_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewStatusInputFromValue returns a pointer to a valid StatusInput

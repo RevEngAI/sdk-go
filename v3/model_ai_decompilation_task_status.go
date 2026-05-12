@@ -49,7 +49,8 @@ func (v *AiDecompilationTaskStatus) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid AiDecompilationTaskStatus", value)
+	*v = AIDECOMPILATIONTASKSTATUS_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewAiDecompilationTaskStatusFromValue returns a pointer to a valid AiDecompilationTaskStatus

@@ -45,7 +45,8 @@ func (v *RegenerateTarget) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid RegenerateTarget", value)
+	*v = REGENERATETARGET_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewRegenerateTargetFromValue returns a pointer to a valid RegenerateTarget

@@ -49,7 +49,8 @@ func (v *DynamicExecutionStatus) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid DynamicExecutionStatus", value)
+	*v = DYNAMICEXECUTIONSTATUS_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewDynamicExecutionStatusFromValue returns a pointer to a valid DynamicExecutionStatus
