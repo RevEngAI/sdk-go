@@ -4,16 +4,99 @@ All URIs are relative to *https://api.reveng.ai*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateAiDecompilation**](FunctionsAIDecompilationAPI.md#CreateAiDecompilation) | **Post** /v3/functions/{function_id}/ai-decompilation | Start AI decompilation
 [**CreateAiDecompilationComment**](FunctionsAIDecompilationAPI.md#CreateAiDecompilationComment) | **Post** /v2/functions/{function_id}/ai-decompilation/comments | Create a comment for this function
 [**CreateAiDecompilationTask**](FunctionsAIDecompilationAPI.md#CreateAiDecompilationTask) | **Post** /v2/functions/{function_id}/ai-decompilation | Begins AI Decompilation Process
 [**DeleteAiDecompilationComment**](FunctionsAIDecompilationAPI.md#DeleteAiDecompilationComment) | **Delete** /v2/functions/{function_id}/ai-decompilation/comments/{comment_id} | Delete a comment
+[**GetAiDecompilation**](FunctionsAIDecompilationAPI.md#GetAiDecompilation) | **Get** /v3/functions/{function_id}/ai-decompilation | Get AI decompilation result
 [**GetAiDecompilationComments**](FunctionsAIDecompilationAPI.md#GetAiDecompilationComments) | **Get** /v2/functions/{function_id}/ai-decompilation/comments | Get comments for this function
+[**GetAiDecompilationInlineComments**](FunctionsAIDecompilationAPI.md#GetAiDecompilationInlineComments) | **Get** /v3/functions/{function_id}/ai-decompilation/inline-comments | Get AI decompilation inline comments
+[**GetAiDecompilationInlineCommentsStatus**](FunctionsAIDecompilationAPI.md#GetAiDecompilationInlineCommentsStatus) | **Get** /v3/functions/{function_id}/ai-decompilation/inline-comments/status | Get inline comments generation workflow status
 [**GetAiDecompilationRating**](FunctionsAIDecompilationAPI.md#GetAiDecompilationRating) | **Get** /v2/functions/{function_id}/ai-decompilation/rating | Get rating for AI decompilation
+[**GetAiDecompilationStatus**](FunctionsAIDecompilationAPI.md#GetAiDecompilationStatus) | **Get** /v3/functions/{function_id}/ai-decompilation/status | Get AI decompilation workflow status
+[**GetAiDecompilationSummary**](FunctionsAIDecompilationAPI.md#GetAiDecompilationSummary) | **Get** /v3/functions/{function_id}/ai-decompilation/summary | Get AI decompilation summary
+[**GetAiDecompilationSummaryStatus**](FunctionsAIDecompilationAPI.md#GetAiDecompilationSummaryStatus) | **Get** /v3/functions/{function_id}/ai-decompilation/summary/status | Get summary generation workflow status
 [**GetAiDecompilationTaskResult**](FunctionsAIDecompilationAPI.md#GetAiDecompilationTaskResult) | **Get** /v2/functions/{function_id}/ai-decompilation | Polls AI Decompilation Process
 [**GetAiDecompilationTaskStatus**](FunctionsAIDecompilationAPI.md#GetAiDecompilationTaskStatus) | **Get** /v2/functions/{function_id}/ai-decompilation/status | Check the status of a function ai decompilation
+[**GetAiDecompilationTokenised**](FunctionsAIDecompilationAPI.md#GetAiDecompilationTokenised) | **Get** /v3/functions/{function_id}/ai-decompilation/tokenised | Get tokenised AI decompilation with function mapping
+[**RegenerateAiDecompilationInlineComments**](FunctionsAIDecompilationAPI.md#RegenerateAiDecompilationInlineComments) | **Post** /v3/functions/{function_id}/ai-decompilation/inline-comments | Regenerate AI decompilation inline comments
+[**RegenerateAiDecompilationSummary**](FunctionsAIDecompilationAPI.md#RegenerateAiDecompilationSummary) | **Post** /v3/functions/{function_id}/ai-decompilation/summary | Regenerate AI decompilation summary
 [**UpdateAiDecompilationComment**](FunctionsAIDecompilationAPI.md#UpdateAiDecompilationComment) | **Patch** /v2/functions/{function_id}/ai-decompilation/comments/{comment_id} | Update a comment
+[**UpsertAiDecompilationOverrides**](FunctionsAIDecompilationAPI.md#UpsertAiDecompilationOverrides) | **Patch** /v3/functions/{function_id}/ai-decompilation/overrides | Upsert variable/function name overrides
 [**UpsertAiDecompilationRating**](FunctionsAIDecompilationAPI.md#UpsertAiDecompilationRating) | **Patch** /v2/functions/{function_id}/ai-decompilation/rating | Upsert rating for AI decompilation
 
+
+
+## CreateAiDecompilation
+
+> CreateAIDecompOutputBody CreateAiDecompilation(ctx, functionId).ContextAware(contextAware).Execute()
+
+Start AI decompilation
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+	contextAware := true // bool | Use context-aware decompilation (optional) (default to false)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.CreateAiDecompilation(context.Background(), functionId).ContextAware(contextAware).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.CreateAiDecompilation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateAiDecompilation`: CreateAIDecompOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.CreateAiDecompilation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateAiDecompilationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **contextAware** | **bool** | Use context-aware decompilation | [default to false]
+
+### Return type
+
+[**CreateAIDecompOutputBody**](CreateAIDecompOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreateAiDecompilationComment
@@ -231,6 +314,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetAiDecompilation
+
+> DecompilationData GetAiDecompilation(ctx, functionId).Execute()
+
+Get AI decompilation result
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilation(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAiDecompilation`: DecompilationData
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.GetAiDecompilation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAiDecompilationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**DecompilationData**](DecompilationData.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetAiDecompilationComments
 
 > BaseResponseListCommentResponse GetAiDecompilationComments(ctx, functionId).Execute()
@@ -301,6 +454,146 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetAiDecompilationInlineComments
+
+> CommentsData GetAiDecompilationInlineComments(ctx, functionId).Execute()
+
+Get AI decompilation inline comments
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilationInlineComments(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilationInlineComments``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAiDecompilationInlineComments`: CommentsData
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.GetAiDecompilationInlineComments`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAiDecompilationInlineCommentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CommentsData**](CommentsData.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAiDecompilationInlineCommentsStatus
+
+> WorkflowProgress GetAiDecompilationInlineCommentsStatus(ctx, functionId).Execute()
+
+Get inline comments generation workflow status
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilationInlineCommentsStatus(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilationInlineCommentsStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAiDecompilationInlineCommentsStatus`: WorkflowProgress
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.GetAiDecompilationInlineCommentsStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAiDecompilationInlineCommentsStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**WorkflowProgress**](WorkflowProgress.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetAiDecompilationRating
 
 > BaseResponseUnionGetAiDecompilationRatingResponseNoneType GetAiDecompilationRating(ctx, functionId).Execute()
@@ -354,6 +647,216 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseUnionGetAiDecompilationRatingResponseNoneType**](BaseResponseUnionGetAiDecompilationRatingResponseNoneType.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAiDecompilationStatus
+
+> WorkflowProgress GetAiDecompilationStatus(ctx, functionId).Execute()
+
+Get AI decompilation workflow status
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilationStatus(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilationStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAiDecompilationStatus`: WorkflowProgress
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.GetAiDecompilationStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAiDecompilationStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**WorkflowProgress**](WorkflowProgress.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAiDecompilationSummary
+
+> SummaryData GetAiDecompilationSummary(ctx, functionId).Execute()
+
+Get AI decompilation summary
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilationSummary(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilationSummary``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAiDecompilationSummary`: SummaryData
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.GetAiDecompilationSummary`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAiDecompilationSummaryRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**SummaryData**](SummaryData.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAiDecompilationSummaryStatus
+
+> WorkflowProgress GetAiDecompilationSummaryStatus(ctx, functionId).Execute()
+
+Get summary generation workflow status
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilationSummaryStatus(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilationSummaryStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAiDecompilationSummaryStatus`: WorkflowProgress
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.GetAiDecompilationSummaryStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAiDecompilationSummaryStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**WorkflowProgress**](WorkflowProgress.md)
 
 ### Authorization
 
@@ -513,6 +1016,216 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetAiDecompilationTokenised
+
+> TokenisedData GetAiDecompilationTokenised(ctx, functionId).Execute()
+
+Get tokenised AI decompilation with function mapping
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilationTokenised(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilationTokenised``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAiDecompilationTokenised`: TokenisedData
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.GetAiDecompilationTokenised`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAiDecompilationTokenisedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**TokenisedData**](TokenisedData.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RegenerateAiDecompilationInlineComments
+
+> RegenerateOutputBody RegenerateAiDecompilationInlineComments(ctx, functionId).Execute()
+
+Regenerate AI decompilation inline comments
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.RegenerateAiDecompilationInlineComments(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.RegenerateAiDecompilationInlineComments``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RegenerateAiDecompilationInlineComments`: RegenerateOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.RegenerateAiDecompilationInlineComments`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRegenerateAiDecompilationInlineCommentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**RegenerateOutputBody**](RegenerateOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RegenerateAiDecompilationSummary
+
+> RegenerateOutputBody RegenerateAiDecompilationSummary(ctx, functionId).Execute()
+
+Regenerate AI decompilation summary
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.RegenerateAiDecompilationSummary(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.RegenerateAiDecompilationSummary``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RegenerateAiDecompilationSummary`: RegenerateOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.RegenerateAiDecompilationSummary`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRegenerateAiDecompilationSummaryRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**RegenerateOutputBody**](RegenerateOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateAiDecompilationComment
 
 > BaseResponseCommentResponse UpdateAiDecompilationComment(ctx, commentId, functionId).CommentUpdateRequest(commentUpdateRequest).Execute()
@@ -573,6 +1286,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseCommentResponse**](BaseResponseCommentResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpsertAiDecompilationOverrides
+
+> UpsertOverridesData UpsertAiDecompilationOverrides(ctx, functionId).UpsertOverridesInputBody(upsertOverridesInputBody).Execute()
+
+Upsert variable/function name overrides
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+	upsertOverridesInputBody := *revengai.NewUpsertOverridesInputBody(map[string]string{"key": "Inner_example"}) // UpsertOverridesInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.UpsertAiDecompilationOverrides(context.Background(), functionId).UpsertOverridesInputBody(upsertOverridesInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.UpsertAiDecompilationOverrides``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpsertAiDecompilationOverrides`: UpsertOverridesData
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.UpsertAiDecompilationOverrides`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpsertAiDecompilationOverridesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **upsertOverridesInputBody** | [**UpsertOverridesInputBody**](UpsertOverridesInputBody.md) |  | 
+
+### Return type
+
+[**UpsertOverridesData**](UpsertOverridesData.md)
 
 ### Authorization
 
