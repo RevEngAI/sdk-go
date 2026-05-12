@@ -22,6 +22,7 @@ const (
 	AIDECOMPILATIONRATING_POSITIVE AiDecompilationRating = "POSITIVE"
 	AIDECOMPILATIONRATING_NEGATIVE AiDecompilationRating = "NEGATIVE"
 	AIDECOMPILATIONRATING_NEUTRAL AiDecompilationRating = "NEUTRAL"
+	AIDECOMPILATIONRATING_UNKNOWN_DEFAULT_OPEN_API AiDecompilationRating = "11184809"
 )
 
 // All allowed values of AiDecompilationRating enum
@@ -29,6 +30,7 @@ var AllowedAiDecompilationRatingEnumValues = []AiDecompilationRating{
 	"POSITIVE",
 	"NEGATIVE",
 	"NEUTRAL",
+	"11184809",
 }
 
 func (v *AiDecompilationRating) UnmarshalJSON(src []byte) error {

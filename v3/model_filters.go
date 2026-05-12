@@ -24,6 +24,7 @@ const (
 	FILTERS_TEAM_ONLY Filters = "team_only"
 	FILTERS_PUBLIC_ONLY Filters = "public_only"
 	FILTERS_HIDE_EMPTY Filters = "hide_empty"
+	FILTERS_UNKNOWN_DEFAULT_OPEN_API Filters = "11184809"
 )
 
 // All allowed values of Filters enum
@@ -33,6 +34,7 @@ var AllowedFiltersEnumValues = []Filters{
 	"team_only",
 	"public_only",
 	"hide_empty",
+	"11184809",
 }
 
 func (v *Filters) UnmarshalJSON(src []byte) error {

@@ -21,12 +21,14 @@ type Order string
 const (
 	ORDER_ASC Order = "ASC"
 	ORDER_DESC Order = "DESC"
+	ORDER_UNKNOWN_DEFAULT_OPEN_API Order = "11184809"
 )
 
 // All allowed values of Order enum
 var AllowedOrderEnumValues = []Order{
 	"ASC",
 	"DESC",
+	"11184809",
 }
 
 func (v *Order) UnmarshalJSON(src []byte) error {

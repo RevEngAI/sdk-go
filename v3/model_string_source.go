@@ -22,6 +22,7 @@ const (
 	STRINGSOURCE_SYSTEM StringSource = "SYSTEM"
 	STRINGSOURCE_USER StringSource = "USER"
 	STRINGSOURCE_AI_AGENT StringSource = "AI_AGENT"
+	STRINGSOURCE_UNKNOWN_DEFAULT_OPEN_API StringSource = "11184809"
 )
 
 // All allowed values of StringSource enum
@@ -29,6 +30,7 @@ var AllowedStringSourceEnumValues = []StringSource{
 	"SYSTEM",
 	"USER",
 	"AI_AGENT",
+	"11184809",
 }
 
 func (v *StringSource) UnmarshalJSON(src []byte) error {

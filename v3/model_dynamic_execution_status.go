@@ -23,6 +23,7 @@ const (
 	DYNAMICEXECUTIONSTATUS_ERROR DynamicExecutionStatus = "ERROR"
 	DYNAMICEXECUTIONSTATUS_SUCCESS DynamicExecutionStatus = "SUCCESS"
 	DYNAMICEXECUTIONSTATUS_ALL DynamicExecutionStatus = "ALL"
+	DYNAMICEXECUTIONSTATUS_UNKNOWN_DEFAULT_OPEN_API DynamicExecutionStatus = "11184809"
 )
 
 // All allowed values of DynamicExecutionStatus enum
@@ -31,6 +32,7 @@ var AllowedDynamicExecutionStatusEnumValues = []DynamicExecutionStatus{
 	"ERROR",
 	"SUCCESS",
 	"ALL",
+	"11184809",
 }
 
 func (v *DynamicExecutionStatus) UnmarshalJSON(src []byte) error {

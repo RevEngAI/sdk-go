@@ -24,6 +24,7 @@ const (
 	TASKSTATUS_RUNNING TaskStatus = "RUNNING"
 	TASKSTATUS_COMPLETED TaskStatus = "COMPLETED"
 	TASKSTATUS_FAILED TaskStatus = "FAILED"
+	TASKSTATUS_UNKNOWN_DEFAULT_OPEN_API TaskStatus = "11184809"
 )
 
 // All allowed values of TaskStatus enum
@@ -33,6 +34,7 @@ var AllowedTaskStatusEnumValues = []TaskStatus{
 	"RUNNING",
 	"COMPLETED",
 	"FAILED",
+	"11184809",
 }
 
 func (v *TaskStatus) UnmarshalJSON(src []byte) error {

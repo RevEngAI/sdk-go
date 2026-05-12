@@ -24,6 +24,7 @@ const (
 	FUNCTIONSOURCETYPE_EXTERNAL FunctionSourceType = "EXTERNAL"
 	FUNCTIONSOURCETYPE_AUTO_UNSTRIP FunctionSourceType = "AUTO_UNSTRIP"
 	FUNCTIONSOURCETYPE_AI_UNSTRIP FunctionSourceType = "AI_UNSTRIP"
+	FUNCTIONSOURCETYPE_UNKNOWN_DEFAULT_OPEN_API FunctionSourceType = "11184809"
 )
 
 // All allowed values of FunctionSourceType enum
@@ -33,6 +34,7 @@ var AllowedFunctionSourceTypeEnumValues = []FunctionSourceType{
 	"EXTERNAL",
 	"AUTO_UNSTRIP",
 	"AI_UNSTRIP",
+	"11184809",
 }
 
 func (v *FunctionSourceType) UnmarshalJSON(src []byte) error {

@@ -25,6 +25,7 @@ const (
 	STATUSINPUT_ERROR StatusInput = "Error"
 	STATUSINPUT_PROCESSING StatusInput = "Processing"
 	STATUSINPUT_ALL StatusInput = "All"
+	STATUSINPUT_UNKNOWN_DEFAULT_OPEN_API StatusInput = "11184809"
 )
 
 // All allowed values of StatusInput enum
@@ -35,6 +36,7 @@ var AllowedStatusInputEnumValues = []StatusInput{
 	"Error",
 	"Processing",
 	"All",
+	"11184809",
 }
 
 func (v *StatusInput) UnmarshalJSON(src []byte) error {

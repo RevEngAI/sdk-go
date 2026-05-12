@@ -28,11 +28,18 @@ type ApiCreateAiDecompilationRequest struct {
 	ApiService *FunctionsAIDecompilationAPIService
 	functionId int64
 	contextAware *bool
+	temperature *float64
 }
 
 // Use context-aware decompilation
 func (r ApiCreateAiDecompilationRequest) ContextAware(contextAware bool) ApiCreateAiDecompilationRequest {
 	r.contextAware = &contextAware
+	return r
+}
+
+// LLM temperature (0.0-1.0). Overrides the server default when set. Omit or set to -1 to use the server default.
+func (r ApiCreateAiDecompilationRequest) Temperature(temperature float64) ApiCreateAiDecompilationRequest {
+	r.temperature = &temperature
 	return r
 }
 
@@ -93,6 +100,13 @@ func (a *FunctionsAIDecompilationAPIService) CreateAiDecompilationExecute(r ApiC
 		var defaultValue bool = false
 		parameterAddToHeaderOrQuery(localVarQueryParams, "context_aware", defaultValue, "form", "")
 		r.contextAware = &defaultValue
+	}
+	if r.temperature != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "temperature", r.temperature, "form", "")
+	} else {
+		var defaultValue float64 = -1
+		parameterAddToHeaderOrQuery(localVarQueryParams, "temperature", defaultValue, "form", "")
+		r.temperature = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
