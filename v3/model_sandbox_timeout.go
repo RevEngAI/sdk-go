@@ -23,6 +23,7 @@ const (
 	SANDBOXTIMEOUT__180 SandboxTimeout = 180
 	SANDBOXTIMEOUT__300 SandboxTimeout = 300
 	SANDBOXTIMEOUT__600 SandboxTimeout = 600
+	SANDBOXTIMEOUT__unknown_default_open_api SandboxTimeout = 11184809
 )
 
 // All allowed values of SandboxTimeout enum
@@ -31,6 +32,7 @@ var AllowedSandboxTimeoutEnumValues = []SandboxTimeout{
 	180,
 	300,
 	600,
+	11184809,
 }
 
 func (v *SandboxTimeout) UnmarshalJSON(src []byte) error {
@@ -47,7 +49,8 @@ func (v *SandboxTimeout) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid SandboxTimeout", value)
+	*v = SANDBOXTIMEOUT__unknown_default_open_api
+	return nil
 }
 
 // NewSandboxTimeoutFromValue returns a pointer to a valid SandboxTimeout

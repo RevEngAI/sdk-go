@@ -22,6 +22,7 @@ const (
 	APPAPIRESTV2ANALYSESENUMSORDERBY_CREATED AppApiRestV2AnalysesEnumsOrderBy = "created"
 	APPAPIRESTV2ANALYSESENUMSORDERBY_NAME AppApiRestV2AnalysesEnumsOrderBy = "name"
 	APPAPIRESTV2ANALYSESENUMSORDERBY_SIZE AppApiRestV2AnalysesEnumsOrderBy = "size"
+	APPAPIRESTV2ANALYSESENUMSORDERBY_UNKNOWN_DEFAULT_OPEN_API AppApiRestV2AnalysesEnumsOrderBy = "11184809"
 )
 
 // All allowed values of AppApiRestV2AnalysesEnumsOrderBy enum
@@ -29,6 +30,7 @@ var AllowedAppApiRestV2AnalysesEnumsOrderByEnumValues = []AppApiRestV2AnalysesEn
 	"created",
 	"name",
 	"size",
+	"11184809",
 }
 
 func (v *AppApiRestV2AnalysesEnumsOrderBy) UnmarshalJSON(src []byte) error {
@@ -45,7 +47,8 @@ func (v *AppApiRestV2AnalysesEnumsOrderBy) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid AppApiRestV2AnalysesEnumsOrderBy", value)
+	*v = APPAPIRESTV2ANALYSESENUMSORDERBY_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewAppApiRestV2AnalysesEnumsOrderByFromValue returns a pointer to a valid AppApiRestV2AnalysesEnumsOrderBy

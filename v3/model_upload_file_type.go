@@ -23,6 +23,7 @@ const (
 	UPLOADFILETYPE_DEBUG UploadFileType = "DEBUG"
 	UPLOADFILETYPE_PACKED UploadFileType = "PACKED"
 	UPLOADFILETYPE_FIRMWARE UploadFileType = "FIRMWARE"
+	UPLOADFILETYPE_UNKNOWN_DEFAULT_OPEN_API UploadFileType = "11184809"
 )
 
 // All allowed values of UploadFileType enum
@@ -31,6 +32,7 @@ var AllowedUploadFileTypeEnumValues = []UploadFileType{
 	"DEBUG",
 	"PACKED",
 	"FIRMWARE",
+	"11184809",
 }
 
 func (v *UploadFileType) UnmarshalJSON(src []byte) error {
@@ -47,7 +49,8 @@ func (v *UploadFileType) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid UploadFileType", value)
+	*v = UPLOADFILETYPE_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewUploadFileTypeFromValue returns a pointer to a valid UploadFileType

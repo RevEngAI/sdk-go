@@ -25,6 +25,7 @@ const (
 	APPAPIRESTV2COLLECTIONSENUMSORDERBY_OWNER AppApiRestV2CollectionsEnumsOrderBy = "owner"
 	APPAPIRESTV2COLLECTIONSENUMSORDERBY_COLLECTION_SIZE AppApiRestV2CollectionsEnumsOrderBy = "collection_size"
 	APPAPIRESTV2COLLECTIONSENUMSORDERBY_UPDATED AppApiRestV2CollectionsEnumsOrderBy = "updated"
+	APPAPIRESTV2COLLECTIONSENUMSORDERBY_UNKNOWN_DEFAULT_OPEN_API AppApiRestV2CollectionsEnumsOrderBy = "11184809"
 )
 
 // All allowed values of AppApiRestV2CollectionsEnumsOrderBy enum
@@ -35,6 +36,7 @@ var AllowedAppApiRestV2CollectionsEnumsOrderByEnumValues = []AppApiRestV2Collect
 	"owner",
 	"collection_size",
 	"updated",
+	"11184809",
 }
 
 func (v *AppApiRestV2CollectionsEnumsOrderBy) UnmarshalJSON(src []byte) error {
@@ -51,7 +53,8 @@ func (v *AppApiRestV2CollectionsEnumsOrderBy) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid AppApiRestV2CollectionsEnumsOrderBy", value)
+	*v = APPAPIRESTV2COLLECTIONSENUMSORDERBY_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewAppApiRestV2CollectionsEnumsOrderByFromValue returns a pointer to a valid AppApiRestV2CollectionsEnumsOrderBy

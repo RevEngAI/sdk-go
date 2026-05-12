@@ -22,6 +22,7 @@ const (
 	PLATFORM_LINUX Platform = "linux"
 	PLATFORM_WINDOWS Platform = "windows"
 	PLATFORM_ANDROID Platform = "android"
+	PLATFORM_UNKNOWN_DEFAULT_OPEN_API Platform = "11184809"
 )
 
 // All allowed values of Platform enum
@@ -29,6 +30,7 @@ var AllowedPlatformEnumValues = []Platform{
 	"linux",
 	"windows",
 	"android",
+	"11184809",
 }
 
 func (v *Platform) UnmarshalJSON(src []byte) error {
@@ -45,7 +47,8 @@ func (v *Platform) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid Platform", value)
+	*v = PLATFORM_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewPlatformFromValue returns a pointer to a valid Platform

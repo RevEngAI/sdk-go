@@ -21,12 +21,14 @@ type RegenerateTarget string
 const (
 	REGENERATETARGET_SUMMARY RegenerateTarget = "summary"
 	REGENERATETARGET_COMMENTS RegenerateTarget = "comments"
+	REGENERATETARGET_UNKNOWN_DEFAULT_OPEN_API RegenerateTarget = "11184809"
 )
 
 // All allowed values of RegenerateTarget enum
 var AllowedRegenerateTargetEnumValues = []RegenerateTarget{
 	"summary",
 	"comments",
+	"11184809",
 }
 
 func (v *RegenerateTarget) UnmarshalJSON(src []byte) error {
@@ -43,7 +45,8 @@ func (v *RegenerateTarget) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid RegenerateTarget", value)
+	*v = REGENERATETARGET_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewRegenerateTargetFromValue returns a pointer to a valid RegenerateTarget

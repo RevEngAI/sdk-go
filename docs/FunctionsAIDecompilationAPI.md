@@ -29,7 +29,7 @@ Method | HTTP request | Description
 
 ## CreateAiDecompilation
 
-> CreateAIDecompOutputBody CreateAiDecompilation(ctx, functionId).ContextAware(contextAware).Execute()
+> CreateAIDecompOutputBody CreateAiDecompilation(ctx, functionId).ContextAware(contextAware).Temperature(temperature).Execute()
 
 Start AI decompilation
 
@@ -50,10 +50,11 @@ import (
 func main() {
 	functionId := int64(789) // int64 | Function ID
 	contextAware := true // bool | Use context-aware decompilation (optional) (default to false)
+	temperature := float64(1.2) // float64 | LLM temperature (0.0-1.0). Overrides the server default when set. Omit or set to -1 to use the server default. (optional) (default to -1)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsAIDecompilationAPI.CreateAiDecompilation(context.Background(), functionId).ContextAware(contextAware).Execute()
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.CreateAiDecompilation(context.Background(), functionId).ContextAware(contextAware).Temperature(temperature).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.CreateAiDecompilation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -80,6 +81,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **contextAware** | **bool** | Use context-aware decompilation | [default to false]
+ **temperature** | **float64** | LLM temperature (0.0-1.0). Overrides the server default when set. Omit or set to -1 to use the server default. | [default to -1]
 
 ### Return type
 

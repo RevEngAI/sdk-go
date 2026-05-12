@@ -28,6 +28,7 @@ const (
 	MODELNAME_BINNET_0_7_X86_64_ANDROID ModelName = "binnet-0.7-x86-64-android"
 	MODELNAME_BINNET_0_7_X86_32_ANDROID ModelName = "binnet-0.7-x86-32-android"
 	MODELNAME_BINNET_0_7_ARM_64_ANDROID ModelName = "binnet-0.7-arm-64-android"
+	MODELNAME_UNKNOWN_DEFAULT_OPEN_API ModelName = "11184809"
 )
 
 // All allowed values of ModelName enum
@@ -41,6 +42,7 @@ var AllowedModelNameEnumValues = []ModelName{
 	"binnet-0.7-x86-64-android",
 	"binnet-0.7-x86-32-android",
 	"binnet-0.7-arm-64-android",
+	"11184809",
 }
 
 func (v *ModelName) UnmarshalJSON(src []byte) error {
@@ -57,7 +59,8 @@ func (v *ModelName) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid ModelName", value)
+	*v = MODELNAME_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewModelNameFromValue returns a pointer to a valid ModelName

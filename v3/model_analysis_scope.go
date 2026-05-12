@@ -21,12 +21,14 @@ type AnalysisScope string
 const (
 	ANALYSISSCOPE_PRIVATE AnalysisScope = "PRIVATE"
 	ANALYSISSCOPE_PUBLIC AnalysisScope = "PUBLIC"
+	ANALYSISSCOPE_UNKNOWN_DEFAULT_OPEN_API AnalysisScope = "11184809"
 )
 
 // All allowed values of AnalysisScope enum
 var AllowedAnalysisScopeEnumValues = []AnalysisScope{
 	"PRIVATE",
 	"PUBLIC",
+	"11184809",
 }
 
 func (v *AnalysisScope) UnmarshalJSON(src []byte) error {
@@ -43,7 +45,8 @@ func (v *AnalysisScope) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid AnalysisScope", value)
+	*v = ANALYSISSCOPE_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewAnalysisScopeFromValue returns a pointer to a valid AnalysisScope

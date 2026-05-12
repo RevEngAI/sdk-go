@@ -22,6 +22,7 @@ const (
 	ISA_X86 ISA = "x86"
 	ISA_X86_64 ISA = "x86_64"
 	ISA_ARM ISA = "arm"
+	ISA_UNKNOWN_DEFAULT_OPEN_API ISA = "11184809"
 )
 
 // All allowed values of ISA enum
@@ -29,6 +30,7 @@ var AllowedISAEnumValues = []ISA{
 	"x86",
 	"x86_64",
 	"arm",
+	"11184809",
 }
 
 func (v *ISA) UnmarshalJSON(src []byte) error {
@@ -45,7 +47,8 @@ func (v *ISA) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid ISA", value)
+	*v = ISA_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewISAFromValue returns a pointer to a valid ISA

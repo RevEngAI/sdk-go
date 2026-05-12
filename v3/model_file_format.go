@@ -22,6 +22,7 @@ const (
 	FILEFORMAT_PE FileFormat = "pe"
 	FILEFORMAT_ELF FileFormat = "elf"
 	FILEFORMAT_BLOB FileFormat = "blob"
+	FILEFORMAT_UNKNOWN_DEFAULT_OPEN_API FileFormat = "11184809"
 )
 
 // All allowed values of FileFormat enum
@@ -29,6 +30,7 @@ var AllowedFileFormatEnumValues = []FileFormat{
 	"pe",
 	"elf",
 	"blob",
+	"11184809",
 }
 
 func (v *FileFormat) UnmarshalJSON(src []byte) error {
@@ -45,7 +47,8 @@ func (v *FileFormat) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid FileFormat", value)
+	*v = FILEFORMAT_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewFileFormatFromValue returns a pointer to a valid FileFormat

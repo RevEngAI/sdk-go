@@ -21,12 +21,14 @@ type SandboxStartMethod string
 const (
 	SANDBOXSTARTMETHOD_STANDARD_USER_PROCESS SandboxStartMethod = "standard_user_process"
 	SANDBOXSTARTMETHOD_ADMINISTRATOR_PROCESS SandboxStartMethod = "administrator_process"
+	SANDBOXSTARTMETHOD_UNKNOWN_DEFAULT_OPEN_API SandboxStartMethod = "11184809"
 )
 
 // All allowed values of SandboxStartMethod enum
 var AllowedSandboxStartMethodEnumValues = []SandboxStartMethod{
 	"standard_user_process",
 	"administrator_process",
+	"11184809",
 }
 
 func (v *SandboxStartMethod) UnmarshalJSON(src []byte) error {
@@ -43,7 +45,8 @@ func (v *SandboxStartMethod) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid SandboxStartMethod", value)
+	*v = SANDBOXSTARTMETHOD_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewSandboxStartMethodFromValue returns a pointer to a valid SandboxStartMethod

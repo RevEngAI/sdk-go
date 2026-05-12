@@ -22,6 +22,7 @@ const (
 	WORKSPACE_PERSONAL Workspace = "personal"
 	WORKSPACE_TEAM Workspace = "team"
 	WORKSPACE_PUBLIC Workspace = "public"
+	WORKSPACE_UNKNOWN_DEFAULT_OPEN_API Workspace = "11184809"
 )
 
 // All allowed values of Workspace enum
@@ -29,6 +30,7 @@ var AllowedWorkspaceEnumValues = []Workspace{
 	"personal",
 	"team",
 	"public",
+	"11184809",
 }
 
 func (v *Workspace) UnmarshalJSON(src []byte) error {
@@ -45,7 +47,8 @@ func (v *Workspace) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid Workspace", value)
+	*v = WORKSPACE_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewWorkspaceFromValue returns a pointer to a valid Workspace

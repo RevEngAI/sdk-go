@@ -23,6 +23,7 @@ const (
 	COLLECTIONSCOPE_PUBLIC CollectionScope = "PUBLIC"
 	COLLECTIONSCOPE_PROTECTED CollectionScope = "PROTECTED"
 	COLLECTIONSCOPE_TEAM CollectionScope = "TEAM"
+	COLLECTIONSCOPE_UNKNOWN_DEFAULT_OPEN_API CollectionScope = "11184809"
 )
 
 // All allowed values of CollectionScope enum
@@ -31,6 +32,7 @@ var AllowedCollectionScopeEnumValues = []CollectionScope{
 	"PUBLIC",
 	"PROTECTED",
 	"TEAM",
+	"11184809",
 }
 
 func (v *CollectionScope) UnmarshalJSON(src []byte) error {
@@ -47,7 +49,8 @@ func (v *CollectionScope) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid CollectionScope", value)
+	*v = COLLECTIONSCOPE_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewCollectionScopeFromValue returns a pointer to a valid CollectionScope

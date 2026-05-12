@@ -24,6 +24,7 @@ const (
 	FUNCTIONTASKSTATUS_RUNNING FunctionTaskStatus = "RUNNING"
 	FUNCTIONTASKSTATUS_COMPLETED FunctionTaskStatus = "COMPLETED"
 	FUNCTIONTASKSTATUS_FAILED FunctionTaskStatus = "FAILED"
+	FUNCTIONTASKSTATUS_UNKNOWN_DEFAULT_OPEN_API FunctionTaskStatus = "11184809"
 )
 
 // All allowed values of FunctionTaskStatus enum
@@ -33,6 +34,7 @@ var AllowedFunctionTaskStatusEnumValues = []FunctionTaskStatus{
 	"RUNNING",
 	"COMPLETED",
 	"FAILED",
+	"11184809",
 }
 
 func (v *FunctionTaskStatus) UnmarshalJSON(src []byte) error {
@@ -49,7 +51,8 @@ func (v *FunctionTaskStatus) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid FunctionTaskStatus", value)
+	*v = FUNCTIONTASKSTATUS_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewFunctionTaskStatusFromValue returns a pointer to a valid FunctionTaskStatus
