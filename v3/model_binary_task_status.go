@@ -24,6 +24,7 @@ const (
 	BINARYTASKSTATUS_RUNNING BinaryTaskStatus = "RUNNING"
 	BINARYTASKSTATUS_COMPLETED BinaryTaskStatus = "COMPLETED"
 	BINARYTASKSTATUS_FAILED BinaryTaskStatus = "FAILED"
+	BINARYTASKSTATUS_UNKNOWN_DEFAULT_OPEN_API BinaryTaskStatus = "unknown_default_open_api"
 )
 
 // All allowed values of BinaryTaskStatus enum
@@ -33,6 +34,7 @@ var AllowedBinaryTaskStatusEnumValues = []BinaryTaskStatus{
 	"RUNNING",
 	"COMPLETED",
 	"FAILED",
+	"unknown_default_open_api",
 }
 
 func (v *BinaryTaskStatus) UnmarshalJSON(src []byte) error {
@@ -49,7 +51,8 @@ func (v *BinaryTaskStatus) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid BinaryTaskStatus", value)
+	*v = BINARYTASKSTATUS_UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewBinaryTaskStatusFromValue returns a pointer to a valid BinaryTaskStatus
