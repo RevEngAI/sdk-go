@@ -184,9 +184,13 @@ Class | Method | HTTP request | Description
 *FunctionsDataTypesAPI* | [**ListFunctionDataTypesForFunctions**](docs/FunctionsDataTypesAPI.md#listfunctiondatatypesforfunctions) | **Get** /v2/functions/data_types | List Function Data Types
 *FunctionsDataTypesAPI* | [**UpdateFunctionDataTypes**](docs/FunctionsDataTypesAPI.md#updatefunctiondatatypes) | **Put** /v2/analyses/{analysis_id}/functions/{function_id}/data_types | Update Function Data Types
 *FunctionsRenamingHistoryAPI* | [**BatchRenameFunction**](docs/FunctionsRenamingHistoryAPI.md#batchrenamefunction) | **Post** /v2/functions/rename/batch | Batch Rename Functions
+*FunctionsRenamingHistoryAPI* | [**BatchRenameFunctions**](docs/FunctionsRenamingHistoryAPI.md#batchrenamefunctions) | **Post** /v3/functions/rename | Batch rename functions
+*FunctionsRenamingHistoryAPI* | [**GetFunctionHistory**](docs/FunctionsRenamingHistoryAPI.md#getfunctionhistory) | **Get** /v3/functions/{function_id}/history | Get function name history
 *FunctionsRenamingHistoryAPI* | [**GetFunctionNameHistory**](docs/FunctionsRenamingHistoryAPI.md#getfunctionnamehistory) | **Get** /v2/functions/history/{function_id} | Get Function Name History
+*FunctionsRenamingHistoryAPI* | [**RenameFunction**](docs/FunctionsRenamingHistoryAPI.md#renamefunction) | **Post** /v3/functions/{function_id}/rename | Rename a function
 *FunctionsRenamingHistoryAPI* | [**RenameFunctionId**](docs/FunctionsRenamingHistoryAPI.md#renamefunctionid) | **Post** /v2/functions/rename/{function_id} | Rename Function
 *FunctionsRenamingHistoryAPI* | [**RevertFunctionName**](docs/FunctionsRenamingHistoryAPI.md#revertfunctionname) | **Post** /v2/functions/history/{function_id}/{history_id} | Revert the function name
+*FunctionsRenamingHistoryAPI* | [**RevertFunctionName_0**](docs/FunctionsRenamingHistoryAPI.md#revertfunctionname_0) | **Post** /v3/functions/{function_id}/history/{history_id}/revert | Revert function name
 *ModelsAPI* | [**GetModels**](docs/ModelsAPI.md#getmodels) | **Get** /v2/models | Gets models
 *ReportsAPI* | [**CreatePdfReport**](docs/ReportsAPI.md#createpdfreport) | **Post** /v3/analysis/{analysis_id}/pdf | Start PDF report generation
 *ReportsAPI* | [**DownloadPdfReport**](docs/ReportsAPI.md#downloadpdfreport) | **Get** /v3/analysis/{analysis_id}/pdf/{task_id} | Download generated PDF report
@@ -307,6 +311,9 @@ Class | Method | HTTP request | Description
  - [BaseResponseVulnerabilities](docs/BaseResponseVulnerabilities.md)
  - [BaseResponseXrefResponse](docs/BaseResponseXrefResponse.md)
  - [Basic](docs/Basic.md)
+ - [BatchRenameInputBody](docs/BatchRenameInputBody.md)
+ - [BatchRenameItem](docs/BatchRenameItem.md)
+ - [BatchRenameOutputBody](docs/BatchRenameOutputBody.md)
  - [BinariesRelatedStatusResponse](docs/BinariesRelatedStatusResponse.md)
  - [BinariesTaskStatus](docs/BinariesTaskStatus.md)
  - [BinaryAdditionalDetailsDataResponse](docs/BinaryAdditionalDetailsDataResponse.md)
@@ -442,6 +449,7 @@ Class | Method | HTTP request | Description
  - [GetMeResponse](docs/GetMeResponse.md)
  - [GetPublicUserResponse](docs/GetPublicUserResponse.md)
  - [GlobalVariable](docs/GlobalVariable.md)
+ - [HistoryEntry](docs/HistoryEntry.md)
  - [HttpRequest](docs/HttpRequest.md)
  - [IOC](docs/IOC.md)
  - [ISA](docs/ISA.md)
@@ -487,11 +495,14 @@ Class | Method | HTTP request | Description
  - [RegenerateTarget](docs/RegenerateTarget.md)
  - [RegistryOperation](docs/RegistryOperation.md)
  - [RelativeBinaryResponse](docs/RelativeBinaryResponse.md)
+ - [RenameInputBody](docs/RenameInputBody.md)
+ - [RenameOutputBody](docs/RenameOutputBody.md)
  - [ReplacementValue](docs/ReplacementValue.md)
  - [ReportAnalysisResponse](docs/ReportAnalysisResponse.md)
  - [ReportEvent](docs/ReportEvent.md)
  - [ReportInfo](docs/ReportInfo.md)
  - [ReportOptions](docs/ReportOptions.md)
+ - [RevertOutputBody](docs/RevertOutputBody.md)
  - [SBOM](docs/SBOM.md)
  - [SBOMPackage](docs/SBOMPackage.md)
  - [SandboxOptions](docs/SandboxOptions.md)
