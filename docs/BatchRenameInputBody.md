@@ -1,0 +1,87 @@
+# BatchRenameInputBody
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Schema** | Pointer to **string** | A URL to the JSON Schema for this object. | [optional] [readonly] 
+**Functions** | [**[]BatchRenameItem**](BatchRenameItem.md) | List of functions to rename | 
+
+## Methods
+
+### NewBatchRenameInputBody
+
+`func NewBatchRenameInputBody(functions []BatchRenameItem, ) *BatchRenameInputBody`
+
+NewBatchRenameInputBody instantiates a new BatchRenameInputBody object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewBatchRenameInputBodyWithDefaults
+
+`func NewBatchRenameInputBodyWithDefaults() *BatchRenameInputBody`
+
+NewBatchRenameInputBodyWithDefaults instantiates a new BatchRenameInputBody object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetSchema
+
+`func (o *BatchRenameInputBody) GetSchema() string`
+
+GetSchema returns the Schema field if non-nil, zero value otherwise.
+
+### GetSchemaOk
+
+`func (o *BatchRenameInputBody) GetSchemaOk() (*string, bool)`
+
+GetSchemaOk returns a tuple with the Schema field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchema
+
+`func (o *BatchRenameInputBody) SetSchema(v string)`
+
+SetSchema sets Schema field to given value.
+
+### HasSchema
+
+`func (o *BatchRenameInputBody) HasSchema() bool`
+
+HasSchema returns a boolean if a field has been set.
+
+### GetFunctions
+
+`func (o *BatchRenameInputBody) GetFunctions() []BatchRenameItem`
+
+GetFunctions returns the Functions field if non-nil, zero value otherwise.
+
+### GetFunctionsOk
+
+`func (o *BatchRenameInputBody) GetFunctionsOk() (*[]BatchRenameItem, bool)`
+
+GetFunctionsOk returns a tuple with the Functions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFunctions
+
+`func (o *BatchRenameInputBody) SetFunctions(v []BatchRenameItem)`
+
+SetFunctions sets Functions field to given value.
+
+
+### SetFunctionsNil
+
+`func (o *BatchRenameInputBody) SetFunctionsNil(b bool)`
+
+ SetFunctionsNil sets the value for Functions to be an explicit nil
+
+### UnsetFunctions
+`func (o *BatchRenameInputBody) UnsetFunctions()`
+
+UnsetFunctions ensures that no value is present for Functions, not even an explicit nil
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
