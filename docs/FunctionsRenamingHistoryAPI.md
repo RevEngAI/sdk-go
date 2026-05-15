@@ -506,7 +506,7 @@ Name | Type | Description  | Notes
 
 ## RevertFunctionName_0
 
-> RevertOutputBody RevertFunctionName_0(ctx, functionId, historyId).Execute()
+> map[string]interface{} RevertFunctionName_0(ctx, functionId, historyId).Execute()
 
 Revert function name
 
@@ -535,7 +535,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsRenamingHistoryAPI.RevertFunctionName_0``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RevertFunctionName_0`: RevertOutputBody
+	// response from `RevertFunctionName_0`: map[string]interface{}
 	fmt.Fprintf(os.Stdout, "Response from `FunctionsRenamingHistoryAPI.RevertFunctionName_0`: %v\n", resp)
 }
 ```
@@ -561,7 +561,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RevertOutputBody**](RevertOutputBody.md)
+**map[string]interface{}**
 
 ### Authorization
 

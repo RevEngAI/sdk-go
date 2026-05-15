@@ -21,12 +21,13 @@ Name | Type | Description | Notes
 **BaseAddress** | **NullableInt32** |  | 
 **BinaryUuid** | Pointer to **NullableString** |  | [optional] 
 **SequencerVersion** | Pointer to **NullableString** |  | [optional] 
+**TeamId** | **int32** | The team ID of the analysis | 
 
 ## Methods
 
 ### NewBasic
 
-`func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time.Time, sha256Hash string, modelName string, modelId int32, ownerUsername string, isSystem bool, analysisScope string, isOwner bool, debug bool, functionCount int32, isAdvanced bool, baseAddress NullableInt32, ) *Basic`
+`func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time.Time, sha256Hash string, modelName string, modelId int32, ownerUsername string, isSystem bool, analysisScope string, isOwner bool, debug bool, functionCount int32, isAdvanced bool, baseAddress NullableInt32, teamId int32, ) *Basic`
 
 NewBasic instantiates a new Basic object
 This constructor will assign default values to properties that have it defined,
@@ -421,6 +422,26 @@ HasSequencerVersion returns a boolean if a field has been set.
 `func (o *Basic) UnsetSequencerVersion()`
 
 UnsetSequencerVersion ensures that no value is present for SequencerVersion, not even an explicit nil
+### GetTeamId
+
+`func (o *Basic) GetTeamId() int32`
+
+GetTeamId returns the TeamId field if non-nil, zero value otherwise.
+
+### GetTeamIdOk
+
+`func (o *Basic) GetTeamIdOk() (*int32, bool)`
+
+GetTeamIdOk returns a tuple with the TeamId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeamId
+
+`func (o *Basic) SetTeamId(v int32)`
+
+SetTeamId sets TeamId field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

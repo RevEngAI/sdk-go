@@ -20,8 +20,6 @@ var _ MappedNullable = &CreateAIDecompOutputBody{}
 
 // CreateAIDecompOutputBody struct for CreateAIDecompOutputBody
 type CreateAIDecompOutputBody struct {
-	// A URL to the JSON Schema for this object.
-	Schema *string `json:"$schema,omitempty"`
 	Status bool `json:"status"`
 }
 
@@ -43,38 +41,6 @@ func NewCreateAIDecompOutputBody(status bool) *CreateAIDecompOutputBody {
 func NewCreateAIDecompOutputBodyWithDefaults() *CreateAIDecompOutputBody {
 	this := CreateAIDecompOutputBody{}
 	return &this
-}
-
-// GetSchema returns the Schema field value if set, zero value otherwise.
-func (o *CreateAIDecompOutputBody) GetSchema() string {
-	if o == nil || IsNil(o.Schema) {
-		var ret string
-		return ret
-	}
-	return *o.Schema
-}
-
-// GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAIDecompOutputBody) GetSchemaOk() (*string, bool) {
-	if o == nil || IsNil(o.Schema) {
-		return nil, false
-	}
-	return o.Schema, true
-}
-
-// HasSchema returns a boolean if a field has been set.
-func (o *CreateAIDecompOutputBody) HasSchema() bool {
-	if o != nil && !IsNil(o.Schema) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchema gets a reference to the given string and assigns it to the Schema field.
-func (o *CreateAIDecompOutputBody) SetSchema(v string) {
-	o.Schema = &v
 }
 
 // GetStatus returns the Status field value
@@ -111,9 +77,6 @@ func (o CreateAIDecompOutputBody) MarshalJSON() ([]byte, error) {
 
 func (o CreateAIDecompOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Schema) {
-		toSerialize["$schema"] = o.Schema
-	}
 	toSerialize["status"] = o.Status
 	return toSerialize, nil
 }

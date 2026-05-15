@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Schema** | Pointer to **string** | A URL to the JSON Schema for this object. | [optional] [readonly] 
 **Context** | Pointer to [**ConversationContext**](ConversationContext.md) |  | [optional] 
 **Title** | Pointer to **string** |  | [optional] 
 
@@ -26,31 +25,6 @@ will change when the set of required properties is changed
 NewCreateConversationRequestWithDefaults instantiates a new CreateConversationRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetSchema
-
-`func (o *CreateConversationRequest) GetSchema() string`
-
-GetSchema returns the Schema field if non-nil, zero value otherwise.
-
-### GetSchemaOk
-
-`func (o *CreateConversationRequest) GetSchemaOk() (*string, bool)`
-
-GetSchemaOk returns a tuple with the Schema field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSchema
-
-`func (o *CreateConversationRequest) SetSchema(v string)`
-
-SetSchema sets Schema field to given value.
-
-### HasSchema
-
-`func (o *CreateConversationRequest) HasSchema() bool`
-
-HasSchema returns a boolean if a field has been set.
 
 ### GetContext
 

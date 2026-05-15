@@ -20,8 +20,6 @@ var _ MappedNullable = &WorkflowProgress{}
 
 // WorkflowProgress struct for WorkflowProgress
 type WorkflowProgress struct {
-	// A URL to the JSON Schema for this object.
-	Schema *string `json:"$schema,omitempty"`
 	// Log messages emitted during execution
 	Messages []ProgressMessage `json:"messages"`
 	// Current workflow status
@@ -56,38 +54,6 @@ func NewWorkflowProgress(messages []ProgressMessage, status string, step string,
 func NewWorkflowProgressWithDefaults() *WorkflowProgress {
 	this := WorkflowProgress{}
 	return &this
-}
-
-// GetSchema returns the Schema field value if set, zero value otherwise.
-func (o *WorkflowProgress) GetSchema() string {
-	if o == nil || IsNil(o.Schema) {
-		var ret string
-		return ret
-	}
-	return *o.Schema
-}
-
-// GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowProgress) GetSchemaOk() (*string, bool) {
-	if o == nil || IsNil(o.Schema) {
-		return nil, false
-	}
-	return o.Schema, true
-}
-
-// HasSchema returns a boolean if a field has been set.
-func (o *WorkflowProgress) HasSchema() bool {
-	if o != nil && !IsNil(o.Schema) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchema gets a reference to the given string and assigns it to the Schema field.
-func (o *WorkflowProgress) SetSchema(v string) {
-	o.Schema = &v
 }
 
 // GetMessages returns the Messages field value
@@ -222,9 +188,6 @@ func (o WorkflowProgress) MarshalJSON() ([]byte, error) {
 
 func (o WorkflowProgress) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Schema) {
-		toSerialize["$schema"] = o.Schema
-	}
 	if o.Messages != nil {
 		toSerialize["messages"] = o.Messages
 	}

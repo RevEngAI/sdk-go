@@ -20,8 +20,6 @@ var _ MappedNullable = &CommentsData{}
 
 // CommentsData struct for CommentsData
 type CommentsData struct {
-	// A URL to the JSON Schema for this object.
-	Schema *string `json:"$schema,omitempty"`
 	// Structured inline comments with line numbers
 	InlineComments []InlineComment `json:"inline_comments"`
 	// Task status
@@ -47,38 +45,6 @@ func NewCommentsData(inlineComments []InlineComment, taskStatus string) *Comment
 func NewCommentsDataWithDefaults() *CommentsData {
 	this := CommentsData{}
 	return &this
-}
-
-// GetSchema returns the Schema field value if set, zero value otherwise.
-func (o *CommentsData) GetSchema() string {
-	if o == nil || IsNil(o.Schema) {
-		var ret string
-		return ret
-	}
-	return *o.Schema
-}
-
-// GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CommentsData) GetSchemaOk() (*string, bool) {
-	if o == nil || IsNil(o.Schema) {
-		return nil, false
-	}
-	return o.Schema, true
-}
-
-// HasSchema returns a boolean if a field has been set.
-func (o *CommentsData) HasSchema() bool {
-	if o != nil && !IsNil(o.Schema) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchema gets a reference to the given string and assigns it to the Schema field.
-func (o *CommentsData) SetSchema(v string) {
-	o.Schema = &v
 }
 
 // GetInlineComments returns the InlineComments field value
@@ -141,9 +107,6 @@ func (o CommentsData) MarshalJSON() ([]byte, error) {
 
 func (o CommentsData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Schema) {
-		toSerialize["$schema"] = o.Schema
-	}
 	if o.InlineComments != nil {
 		toSerialize["inline_comments"] = o.InlineComments
 	}

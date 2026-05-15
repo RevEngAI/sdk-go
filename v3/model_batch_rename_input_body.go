@@ -20,8 +20,6 @@ var _ MappedNullable = &BatchRenameInputBody{}
 
 // BatchRenameInputBody struct for BatchRenameInputBody
 type BatchRenameInputBody struct {
-	// A URL to the JSON Schema for this object.
-	Schema *string `json:"$schema,omitempty"`
 	// List of functions to rename
 	Functions []BatchRenameItem `json:"functions"`
 }
@@ -44,38 +42,6 @@ func NewBatchRenameInputBody(functions []BatchRenameItem) *BatchRenameInputBody 
 func NewBatchRenameInputBodyWithDefaults() *BatchRenameInputBody {
 	this := BatchRenameInputBody{}
 	return &this
-}
-
-// GetSchema returns the Schema field value if set, zero value otherwise.
-func (o *BatchRenameInputBody) GetSchema() string {
-	if o == nil || IsNil(o.Schema) {
-		var ret string
-		return ret
-	}
-	return *o.Schema
-}
-
-// GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BatchRenameInputBody) GetSchemaOk() (*string, bool) {
-	if o == nil || IsNil(o.Schema) {
-		return nil, false
-	}
-	return o.Schema, true
-}
-
-// HasSchema returns a boolean if a field has been set.
-func (o *BatchRenameInputBody) HasSchema() bool {
-	if o != nil && !IsNil(o.Schema) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchema gets a reference to the given string and assigns it to the Schema field.
-func (o *BatchRenameInputBody) SetSchema(v string) {
-	o.Schema = &v
 }
 
 // GetFunctions returns the Functions field value
@@ -114,9 +80,6 @@ func (o BatchRenameInputBody) MarshalJSON() ([]byte, error) {
 
 func (o BatchRenameInputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Schema) {
-		toSerialize["$schema"] = o.Schema
-	}
 	if o.Functions != nil {
 		toSerialize["functions"] = o.Functions
 	}

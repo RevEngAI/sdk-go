@@ -20,8 +20,6 @@ var _ MappedNullable = &BatchRenameOutputBody{}
 
 // BatchRenameOutputBody struct for BatchRenameOutputBody
 type BatchRenameOutputBody struct {
-	// A URL to the JSON Schema for this object.
-	Schema *string `json:"$schema,omitempty"`
 	// Number of functions renamed
 	RenamedCount int64 `json:"renamed_count"`
 }
@@ -44,38 +42,6 @@ func NewBatchRenameOutputBody(renamedCount int64) *BatchRenameOutputBody {
 func NewBatchRenameOutputBodyWithDefaults() *BatchRenameOutputBody {
 	this := BatchRenameOutputBody{}
 	return &this
-}
-
-// GetSchema returns the Schema field value if set, zero value otherwise.
-func (o *BatchRenameOutputBody) GetSchema() string {
-	if o == nil || IsNil(o.Schema) {
-		var ret string
-		return ret
-	}
-	return *o.Schema
-}
-
-// GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BatchRenameOutputBody) GetSchemaOk() (*string, bool) {
-	if o == nil || IsNil(o.Schema) {
-		return nil, false
-	}
-	return o.Schema, true
-}
-
-// HasSchema returns a boolean if a field has been set.
-func (o *BatchRenameOutputBody) HasSchema() bool {
-	if o != nil && !IsNil(o.Schema) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchema gets a reference to the given string and assigns it to the Schema field.
-func (o *BatchRenameOutputBody) SetSchema(v string) {
-	o.Schema = &v
 }
 
 // GetRenamedCount returns the RenamedCount field value
@@ -112,9 +78,6 @@ func (o BatchRenameOutputBody) MarshalJSON() ([]byte, error) {
 
 func (o BatchRenameOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Schema) {
-		toSerialize["$schema"] = o.Schema
-	}
 	toSerialize["renamed_count"] = o.RenamedCount
 	return toSerialize, nil
 }

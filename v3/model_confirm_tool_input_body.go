@@ -20,8 +20,6 @@ var _ MappedNullable = &ConfirmToolInputBody{}
 
 // ConfirmToolInputBody struct for ConfirmToolInputBody
 type ConfirmToolInputBody struct {
-	// A URL to the JSON Schema for this object.
-	Schema *string `json:"$schema,omitempty"`
 	// Whether the user approves the pending tool call.
 	Approved bool `json:"approved"`
 }
@@ -44,38 +42,6 @@ func NewConfirmToolInputBody(approved bool) *ConfirmToolInputBody {
 func NewConfirmToolInputBodyWithDefaults() *ConfirmToolInputBody {
 	this := ConfirmToolInputBody{}
 	return &this
-}
-
-// GetSchema returns the Schema field value if set, zero value otherwise.
-func (o *ConfirmToolInputBody) GetSchema() string {
-	if o == nil || IsNil(o.Schema) {
-		var ret string
-		return ret
-	}
-	return *o.Schema
-}
-
-// GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfirmToolInputBody) GetSchemaOk() (*string, bool) {
-	if o == nil || IsNil(o.Schema) {
-		return nil, false
-	}
-	return o.Schema, true
-}
-
-// HasSchema returns a boolean if a field has been set.
-func (o *ConfirmToolInputBody) HasSchema() bool {
-	if o != nil && !IsNil(o.Schema) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchema gets a reference to the given string and assigns it to the Schema field.
-func (o *ConfirmToolInputBody) SetSchema(v string) {
-	o.Schema = &v
 }
 
 // GetApproved returns the Approved field value
@@ -112,9 +78,6 @@ func (o ConfirmToolInputBody) MarshalJSON() ([]byte, error) {
 
 func (o ConfirmToolInputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Schema) {
-		toSerialize["$schema"] = o.Schema
-	}
 	toSerialize["approved"] = o.Approved
 	return toSerialize, nil
 }

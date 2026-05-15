@@ -397,6 +397,8 @@ Begins the AI Decompilation Process
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param functionId The ID of the function for which we are creating the decompilation task
  @return ApiCreateAiDecompilationTaskRequest
+
+Deprecated
 */
 func (a *FunctionsAIDecompilationAPIService) CreateAiDecompilationTask(ctx context.Context, functionId int64) ApiCreateAiDecompilationTaskRequest {
 	return ApiCreateAiDecompilationTaskRequest{
@@ -408,6 +410,7 @@ func (a *FunctionsAIDecompilationAPIService) CreateAiDecompilationTask(ctx conte
 
 // Execute executes the request
 //  @return BaseResponse
+// Deprecated
 func (a *FunctionsAIDecompilationAPIService) CreateAiDecompilationTaskExecute(r ApiCreateAiDecompilationTaskRequest) (*BaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -2000,6 +2003,8 @@ Polls the AI Decompilation Process
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param functionId The ID of the function being decompiled
  @return ApiGetAiDecompilationTaskResultRequest
+
+Deprecated
 */
 func (a *FunctionsAIDecompilationAPIService) GetAiDecompilationTaskResult(ctx context.Context, functionId int64) ApiGetAiDecompilationTaskResultRequest {
 	return ApiGetAiDecompilationTaskResultRequest{
@@ -2011,6 +2016,7 @@ func (a *FunctionsAIDecompilationAPIService) GetAiDecompilationTaskResult(ctx co
 
 // Execute executes the request
 //  @return BaseResponseGetAiDecompilationTask
+// Deprecated
 func (a *FunctionsAIDecompilationAPIService) GetAiDecompilationTaskResultExecute(r ApiGetAiDecompilationTaskResultRequest) (*BaseResponseGetAiDecompilationTask, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -2165,6 +2171,8 @@ GetAiDecompilationTaskStatus Check the status of a function ai decompilation
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param functionId The ID of the function being checked
  @return ApiGetAiDecompilationTaskStatusRequest
+
+Deprecated
 */
 func (a *FunctionsAIDecompilationAPIService) GetAiDecompilationTaskStatus(ctx context.Context, functionId int64) ApiGetAiDecompilationTaskStatusRequest {
 	return ApiGetAiDecompilationTaskStatusRequest{
@@ -2176,6 +2184,7 @@ func (a *FunctionsAIDecompilationAPIService) GetAiDecompilationTaskStatus(ctx co
 
 // Execute executes the request
 //  @return BaseResponseFunctionTaskResponse
+// Deprecated
 func (a *FunctionsAIDecompilationAPIService) GetAiDecompilationTaskStatusExecute(r ApiGetAiDecompilationTaskStatusRequest) (*BaseResponseFunctionTaskResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

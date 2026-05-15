@@ -20,8 +20,6 @@ var _ MappedNullable = &UpsertOverridesData{}
 
 // UpsertOverridesData struct for UpsertOverridesData
 type UpsertOverridesData struct {
-	// A URL to the JSON Schema for this object.
-	Schema *string `json:"$schema,omitempty"`
 	// Merged override mappings after applying changes
 	UserOverrideMappings map[string]string `json:"user_override_mappings"`
 }
@@ -44,38 +42,6 @@ func NewUpsertOverridesData(userOverrideMappings map[string]string) *UpsertOverr
 func NewUpsertOverridesDataWithDefaults() *UpsertOverridesData {
 	this := UpsertOverridesData{}
 	return &this
-}
-
-// GetSchema returns the Schema field value if set, zero value otherwise.
-func (o *UpsertOverridesData) GetSchema() string {
-	if o == nil || IsNil(o.Schema) {
-		var ret string
-		return ret
-	}
-	return *o.Schema
-}
-
-// GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpsertOverridesData) GetSchemaOk() (*string, bool) {
-	if o == nil || IsNil(o.Schema) {
-		return nil, false
-	}
-	return o.Schema, true
-}
-
-// HasSchema returns a boolean if a field has been set.
-func (o *UpsertOverridesData) HasSchema() bool {
-	if o != nil && !IsNil(o.Schema) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchema gets a reference to the given string and assigns it to the Schema field.
-func (o *UpsertOverridesData) SetSchema(v string) {
-	o.Schema = &v
 }
 
 // GetUserOverrideMappings returns the UserOverrideMappings field value
@@ -112,9 +78,6 @@ func (o UpsertOverridesData) MarshalJSON() ([]byte, error) {
 
 func (o UpsertOverridesData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Schema) {
-		toSerialize["$schema"] = o.Schema
-	}
 	toSerialize["user_override_mappings"] = o.UserOverrideMappings
 	return toSerialize, nil
 }

@@ -51,6 +51,8 @@ type Basic struct {
 	BaseAddress NullableInt32 `json:"base_address"`
 	BinaryUuid NullableString `json:"binary_uuid,omitempty"`
 	SequencerVersion NullableString `json:"sequencer_version,omitempty"`
+	// The team ID of the analysis
+	TeamId int32 `json:"team_id"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -60,7 +62,7 @@ type _Basic Basic
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time.Time, sha256Hash string, modelName string, modelId int32, ownerUsername string, isSystem bool, analysisScope string, isOwner bool, debug bool, functionCount int32, isAdvanced bool, baseAddress NullableInt32) *Basic {
+func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time.Time, sha256Hash string, modelName string, modelId int32, ownerUsername string, isSystem bool, analysisScope string, isOwner bool, debug bool, functionCount int32, isAdvanced bool, baseAddress NullableInt32, teamId int32) *Basic {
 	this := Basic{}
 	this.BinaryId = binaryId
 	this.BinaryName = binaryName
@@ -77,6 +79,7 @@ func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time
 	this.FunctionCount = functionCount
 	this.IsAdvanced = isAdvanced
 	this.BaseAddress = baseAddress
+	this.TeamId = teamId
 	return &this
 }
 
@@ -534,6 +537,30 @@ func (o *Basic) UnsetSequencerVersion() {
 	o.SequencerVersion.Unset()
 }
 
+// GetTeamId returns the TeamId field value
+func (o *Basic) GetTeamId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.TeamId
+}
+
+// GetTeamIdOk returns a tuple with the TeamId field value
+// and a boolean to check if the value has been set.
+func (o *Basic) GetTeamIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TeamId, true
+}
+
+// SetTeamId sets field value
+func (o *Basic) SetTeamId(v int32) {
+	o.TeamId = v
+}
+
 func (o Basic) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -565,6 +592,7 @@ func (o Basic) ToMap() (map[string]interface{}, error) {
 	if o.SequencerVersion.IsSet() {
 		toSerialize["sequencer_version"] = o.SequencerVersion.Get()
 	}
+	toSerialize["team_id"] = o.TeamId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -593,6 +621,7 @@ func (o *Basic) UnmarshalJSON(data []byte) (err error) {
 		"function_count",
 		"is_advanced",
 		"base_address",
+		"team_id",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -639,6 +668,7 @@ func (o *Basic) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "base_address")
 		delete(additionalProperties, "binary_uuid")
 		delete(additionalProperties, "sequencer_version")
+		delete(additionalProperties, "team_id")
 		o.AdditionalProperties = additionalProperties
 	}
 
