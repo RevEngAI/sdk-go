@@ -68,7 +68,7 @@ func (a *ReportsAPIService) CreatePdfReportExecute(r ApiCreatePdfReportRequest) 
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/analysis/{analysis_id}/pdf"
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/pdf"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -238,7 +238,7 @@ func (a *ReportsAPIService) DownloadPdfReportExecute(r ApiDownloadPdfReportReque
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/analysis/{analysis_id}/pdf/{task_id}"
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/pdf/{task_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"task_id"+"}", url.PathEscape(parameterValueToString(r.taskId, "taskId")), -1)
 
@@ -417,7 +417,7 @@ func (a *ReportsAPIService) GetPdfReportStatusExecute(r ApiGetPdfReportStatusReq
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/analysis/{analysis_id}/pdf/{task_id}/status"
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/pdf/{task_id}/status"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"task_id"+"}", url.PathEscape(parameterValueToString(r.taskId, "taskId")), -1)
 

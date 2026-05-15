@@ -4,9 +4,9 @@ All URIs are relative to *https://api.reveng.ai*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreatePdfReport**](ReportsAPI.md#CreatePdfReport) | **Post** /v3/analysis/{analysis_id}/pdf | Start PDF report generation
-[**DownloadPdfReport**](ReportsAPI.md#DownloadPdfReport) | **Get** /v3/analysis/{analysis_id}/pdf/{task_id} | Download generated PDF report
-[**GetPdfReportStatus**](ReportsAPI.md#GetPdfReportStatus) | **Get** /v3/analysis/{analysis_id}/pdf/{task_id}/status | Get PDF report workflow status
+[**CreatePdfReport**](ReportsAPI.md#CreatePdfReport) | **Post** /v3/analyses/{analysis_id}/pdf | Start PDF report generation
+[**DownloadPdfReport**](ReportsAPI.md#DownloadPdfReport) | **Get** /v3/analyses/{analysis_id}/pdf/{task_id} | Download generated PDF report
+[**GetPdfReportStatus**](ReportsAPI.md#GetPdfReportStatus) | **Get** /v3/analyses/{analysis_id}/pdf/{task_id}/status | Get PDF report workflow status
 
 
 

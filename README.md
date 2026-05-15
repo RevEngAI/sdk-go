@@ -105,7 +105,6 @@ Class | Method | HTTP request | Description
 *AnalysesResultsMetadataAPI* | [**GetAnalysisFunctionsPaginated**](docs/AnalysesResultsMetadataAPI.md#getanalysisfunctionspaginated) | **Get** /v2/analyses/{analysis_id}/functions | Get functions from analysis
 *AnalysesResultsMetadataAPI* | [**GetCapabilities**](docs/AnalysesResultsMetadataAPI.md#getcapabilities) | **Get** /v2/analyses/{analysis_id}/capabilities | Gets the capabilities from the analysis
 *AnalysesResultsMetadataAPI* | [**GetFunctionsList**](docs/AnalysesResultsMetadataAPI.md#getfunctionslist) | **Get** /v2/analyses/{analysis_id}/functions/list | Gets functions from analysis
-*AnalysesResultsMetadataAPI* | [**GetPdf**](docs/AnalysesResultsMetadataAPI.md#getpdf) | **Get** /v2/analyses/{analysis_id}/pdf | Gets the PDF found in the analysis
 *AnalysesResultsMetadataAPI* | [**GetSbom**](docs/AnalysesResultsMetadataAPI.md#getsbom) | **Get** /v2/analyses/{analysis_id}/sbom | Gets the software-bill-of-materials (SBOM) found in the analysis
 *AnalysesResultsMetadataAPI* | [**GetTags**](docs/AnalysesResultsMetadataAPI.md#gettags) | **Get** /v2/analyses/{analysis_id}/tags | Get function tags with maliciousness score
 *AnalysesResultsMetadataAPI* | [**GetVulnerabilities**](docs/AnalysesResultsMetadataAPI.md#getvulnerabilities) | **Get** /v2/analyses/{analysis_id}/vulnerabilities | Gets the vulnerabilities found in the analysis
@@ -192,9 +191,9 @@ Class | Method | HTTP request | Description
 *FunctionsRenamingHistoryAPI* | [**RevertFunctionName**](docs/FunctionsRenamingHistoryAPI.md#revertfunctionname) | **Post** /v2/functions/history/{function_id}/{history_id} | Revert the function name
 *FunctionsRenamingHistoryAPI* | [**RevertFunctionName_0**](docs/FunctionsRenamingHistoryAPI.md#revertfunctionname_0) | **Post** /v3/functions/{function_id}/history/{history_id}/revert | Revert function name
 *ModelsAPI* | [**GetModels**](docs/ModelsAPI.md#getmodels) | **Get** /v2/models | Gets models
-*ReportsAPI* | [**CreatePdfReport**](docs/ReportsAPI.md#createpdfreport) | **Post** /v3/analysis/{analysis_id}/pdf | Start PDF report generation
-*ReportsAPI* | [**DownloadPdfReport**](docs/ReportsAPI.md#downloadpdfreport) | **Get** /v3/analysis/{analysis_id}/pdf/{task_id} | Download generated PDF report
-*ReportsAPI* | [**GetPdfReportStatus**](docs/ReportsAPI.md#getpdfreportstatus) | **Get** /v3/analysis/{analysis_id}/pdf/{task_id}/status | Get PDF report workflow status
+*ReportsAPI* | [**CreatePdfReport**](docs/ReportsAPI.md#createpdfreport) | **Post** /v3/analyses/{analysis_id}/pdf | Start PDF report generation
+*ReportsAPI* | [**DownloadPdfReport**](docs/ReportsAPI.md#downloadpdfreport) | **Get** /v3/analyses/{analysis_id}/pdf/{task_id} | Download generated PDF report
+*ReportsAPI* | [**GetPdfReportStatus**](docs/ReportsAPI.md#getpdfreportstatus) | **Get** /v3/analyses/{analysis_id}/pdf/{task_id}/status | Get PDF report workflow status
 *SearchAPI* | [**SearchBinaries**](docs/SearchAPI.md#searchbinaries) | **Get** /v2/search/binaries | Binaries search
 *SearchAPI* | [**SearchCollections**](docs/SearchAPI.md#searchcollections) | **Get** /v2/search/collections | Collections search
 *SearchAPI* | [**SearchFunctions**](docs/SearchAPI.md#searchfunctions) | **Get** /v2/search/functions | Functions search
@@ -502,7 +501,6 @@ Class | Method | HTTP request | Description
  - [ReportEvent](docs/ReportEvent.md)
  - [ReportInfo](docs/ReportInfo.md)
  - [ReportOptions](docs/ReportOptions.md)
- - [RevertOutputBody](docs/RevertOutputBody.md)
  - [SBOM](docs/SBOM.md)
  - [SBOMPackage](docs/SBOMPackage.md)
  - [SandboxOptions](docs/SandboxOptions.md)

@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Schema** | Pointer to **string** | A URL to the JSON Schema for this object. | [optional] [readonly] 
 **AlreadyRunning** | Pointer to **bool** | True when an existing PDF generation is in progress for this analysis and user | [optional] 
 **TaskId** | **string** | Workflow task ID — use to poll status and download the PDF | 
 
@@ -26,31 +25,6 @@ will change when the set of required properties is changed
 NewGeneratePDFOutputBodyWithDefaults instantiates a new GeneratePDFOutputBody object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetSchema
-
-`func (o *GeneratePDFOutputBody) GetSchema() string`
-
-GetSchema returns the Schema field if non-nil, zero value otherwise.
-
-### GetSchemaOk
-
-`func (o *GeneratePDFOutputBody) GetSchemaOk() (*string, bool)`
-
-GetSchemaOk returns a tuple with the Schema field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSchema
-
-`func (o *GeneratePDFOutputBody) SetSchema(v string)`
-
-SetSchema sets Schema field to given value.
-
-### HasSchema
-
-`func (o *GeneratePDFOutputBody) HasSchema() bool`
-
-HasSchema returns a boolean if a field has been set.
 
 ### GetAlreadyRunning
 

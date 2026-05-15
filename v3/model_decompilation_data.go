@@ -20,8 +20,6 @@ var _ MappedNullable = &DecompilationData{}
 
 // DecompilationData struct for DecompilationData
 type DecompilationData struct {
-	// A URL to the JSON Schema for this object.
-	Schema *string `json:"$schema,omitempty"`
 	// Source code with placeholders replaced
 	Decompilation *string `json:"decompilation,omitempty"`
 	// Task status
@@ -46,38 +44,6 @@ func NewDecompilationData(status string) *DecompilationData {
 func NewDecompilationDataWithDefaults() *DecompilationData {
 	this := DecompilationData{}
 	return &this
-}
-
-// GetSchema returns the Schema field value if set, zero value otherwise.
-func (o *DecompilationData) GetSchema() string {
-	if o == nil || IsNil(o.Schema) {
-		var ret string
-		return ret
-	}
-	return *o.Schema
-}
-
-// GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DecompilationData) GetSchemaOk() (*string, bool) {
-	if o == nil || IsNil(o.Schema) {
-		return nil, false
-	}
-	return o.Schema, true
-}
-
-// HasSchema returns a boolean if a field has been set.
-func (o *DecompilationData) HasSchema() bool {
-	if o != nil && !IsNil(o.Schema) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchema gets a reference to the given string and assigns it to the Schema field.
-func (o *DecompilationData) SetSchema(v string) {
-	o.Schema = &v
 }
 
 // GetDecompilation returns the Decompilation field value if set, zero value otherwise.
@@ -146,9 +112,6 @@ func (o DecompilationData) MarshalJSON() ([]byte, error) {
 
 func (o DecompilationData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Schema) {
-		toSerialize["$schema"] = o.Schema
-	}
 	if !IsNil(o.Decompilation) {
 		toSerialize["decompilation"] = o.Decompilation
 	}

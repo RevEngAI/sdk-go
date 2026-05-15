@@ -20,8 +20,6 @@ var _ MappedNullable = &SummaryData{}
 
 // SummaryData struct for SummaryData
 type SummaryData struct {
-	// A URL to the JSON Schema for this object.
-	Schema *string `json:"$schema,omitempty"`
 	// Summary with code tags removed
 	AiSummary string `json:"ai_summary"`
 	// Raw summary from the model
@@ -50,38 +48,6 @@ func NewSummaryData(aiSummary string, summary string, taskStatus string) *Summar
 func NewSummaryDataWithDefaults() *SummaryData {
 	this := SummaryData{}
 	return &this
-}
-
-// GetSchema returns the Schema field value if set, zero value otherwise.
-func (o *SummaryData) GetSchema() string {
-	if o == nil || IsNil(o.Schema) {
-		var ret string
-		return ret
-	}
-	return *o.Schema
-}
-
-// GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SummaryData) GetSchemaOk() (*string, bool) {
-	if o == nil || IsNil(o.Schema) {
-		return nil, false
-	}
-	return o.Schema, true
-}
-
-// HasSchema returns a boolean if a field has been set.
-func (o *SummaryData) HasSchema() bool {
-	if o != nil && !IsNil(o.Schema) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchema gets a reference to the given string and assigns it to the Schema field.
-func (o *SummaryData) SetSchema(v string) {
-	o.Schema = &v
 }
 
 // GetAiSummary returns the AiSummary field value
@@ -166,9 +132,6 @@ func (o SummaryData) MarshalJSON() ([]byte, error) {
 
 func (o SummaryData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Schema) {
-		toSerialize["$schema"] = o.Schema
-	}
 	toSerialize["ai_summary"] = o.AiSummary
 	toSerialize["summary"] = o.Summary
 	toSerialize["task_status"] = o.TaskStatus

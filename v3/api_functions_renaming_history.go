@@ -1077,7 +1077,7 @@ type ApiRevertFunctionName_0Request struct {
 	historyId int64
 }
 
-func (r ApiRevertFunctionName_0Request) Execute() (*RevertOutputBody, *http.Response, error) {
+func (r ApiRevertFunctionName_0Request) Execute() (map[string]interface{}, *http.Response, error) {
 	return r.ApiService.RevertFunctionName_1Execute(r)
 }
 
@@ -1105,13 +1105,13 @@ func (a *FunctionsRenamingHistoryAPIService) RevertFunctionName_1(ctx context.Co
 }
 
 // Execute executes the request
-//  @return RevertOutputBody
-func (a *FunctionsRenamingHistoryAPIService) RevertFunctionName_1Execute(r ApiRevertFunctionName_0Request) (*RevertOutputBody, *http.Response, error) {
+//  @return map[string]interface{}
+func (a *FunctionsRenamingHistoryAPIService) RevertFunctionName_1Execute(r ApiRevertFunctionName_0Request) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RevertOutputBody
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionsRenamingHistoryAPIService.RevertFunctionName_1")

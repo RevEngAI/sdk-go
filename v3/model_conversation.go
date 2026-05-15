@@ -21,8 +21,6 @@ var _ MappedNullable = &Conversation{}
 
 // Conversation struct for Conversation
 type Conversation struct {
-	// A URL to the JSON Schema for this object.
-	Schema *string `json:"$schema,omitempty"`
 	Context interface{} `json:"context,omitempty"`
 	ConversationUuid string `json:"conversation_uuid"`
 	CreatedAt time.Time `json:"created_at"`
@@ -53,38 +51,6 @@ func NewConversation(conversationUuid string, createdAt time.Time, title string,
 func NewConversationWithDefaults() *Conversation {
 	this := Conversation{}
 	return &this
-}
-
-// GetSchema returns the Schema field value if set, zero value otherwise.
-func (o *Conversation) GetSchema() string {
-	if o == nil || IsNil(o.Schema) {
-		var ret string
-		return ret
-	}
-	return *o.Schema
-}
-
-// GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Conversation) GetSchemaOk() (*string, bool) {
-	if o == nil || IsNil(o.Schema) {
-		return nil, false
-	}
-	return o.Schema, true
-}
-
-// HasSchema returns a boolean if a field has been set.
-func (o *Conversation) HasSchema() bool {
-	if o != nil && !IsNil(o.Schema) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchema gets a reference to the given string and assigns it to the Schema field.
-func (o *Conversation) SetSchema(v string) {
-	o.Schema = &v
 }
 
 // GetContext returns the Context field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -250,9 +216,6 @@ func (o Conversation) MarshalJSON() ([]byte, error) {
 
 func (o Conversation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Schema) {
-		toSerialize["$schema"] = o.Schema
-	}
 	if o.Context != nil {
 		toSerialize["context"] = o.Context
 	}

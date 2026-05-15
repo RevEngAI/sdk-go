@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**GetAnalysisFunctionsPaginated**](AnalysesResultsMetadataAPI.md#GetAnalysisFunctionsPaginated) | **Get** /v2/analyses/{analysis_id}/functions | Get functions from analysis
 [**GetCapabilities**](AnalysesResultsMetadataAPI.md#GetCapabilities) | **Get** /v2/analyses/{analysis_id}/capabilities | Gets the capabilities from the analysis
 [**GetFunctionsList**](AnalysesResultsMetadataAPI.md#GetFunctionsList) | **Get** /v2/analyses/{analysis_id}/functions/list | Gets functions from analysis
-[**GetPdf**](AnalysesResultsMetadataAPI.md#GetPdf) | **Get** /v2/analyses/{analysis_id}/pdf | Gets the PDF found in the analysis
 [**GetSbom**](AnalysesResultsMetadataAPI.md#GetSbom) | **Get** /v2/analyses/{analysis_id}/sbom | Gets the software-bill-of-materials (SBOM) found in the analysis
 [**GetTags**](AnalysesResultsMetadataAPI.md#GetTags) | **Get** /v2/analyses/{analysis_id}/tags | Get function tags with maliciousness score
 [**GetVulnerabilities**](AnalysesResultsMetadataAPI.md#GetVulnerabilities) | **Get** /v2/analyses/{analysis_id}/vulnerabilities | Gets the vulnerabilities found in the analysis
@@ -223,74 +222,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseAnalysisFunctions**](BaseResponseAnalysisFunctions.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetPdf
-
-> interface{} GetPdf(ctx, analysisId).Execute()
-
-Gets the PDF found in the analysis
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
-)
-
-func main() {
-	analysisId := int32(56) // int32 | 
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesResultsMetadataAPI.GetPdf(context.Background(), analysisId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesResultsMetadataAPI.GetPdf``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPdf`: interface{}
-	fmt.Fprintf(os.Stdout, "Response from `AnalysesResultsMetadataAPI.GetPdf`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int32** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetPdfRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-**interface{}**
 
 ### Authorization
 
