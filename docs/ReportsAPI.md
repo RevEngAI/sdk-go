@@ -5,8 +5,8 @@ All URIs are relative to *https://api.reveng.ai*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreatePdfReport**](ReportsAPI.md#CreatePdfReport) | **Post** /v3/analyses/{analysis_id}/pdf | Start PDF report generation
-[**DownloadPdfReport**](ReportsAPI.md#DownloadPdfReport) | **Get** /v3/analyses/{analysis_id}/pdf/{task_id} | Download generated PDF report
-[**GetPdfReportStatus**](ReportsAPI.md#GetPdfReportStatus) | **Get** /v3/analyses/{analysis_id}/pdf/{task_id}/status | Get PDF report workflow status
+[**DownloadPdfReport**](ReportsAPI.md#DownloadPdfReport) | **Get** /v3/analyses/{analysis_id}/pdf | Download generated PDF report
+[**GetPdfReportStatus**](ReportsAPI.md#GetPdfReportStatus) | **Get** /v3/analyses/{analysis_id}/pdf/status | Get PDF report workflow status
 
 
 
@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 ## DownloadPdfReport
 
-> DownloadPdfReport(ctx, analysisId, taskId).Execute()
+> DownloadPdfReport(ctx, analysisId).Execute()
 
 Download generated PDF report
 
@@ -102,11 +102,10 @@ import (
 
 func main() {
 	analysisId := int64(789) // int64 | Analysis ID
-	taskId := "taskId_example" // string | Task ID returned by the create endpoint
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	r, err := apiClient.ReportsAPI.DownloadPdfReport(context.Background(), analysisId, taskId).Execute()
+	r, err := apiClient.ReportsAPI.DownloadPdfReport(context.Background(), analysisId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.DownloadPdfReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -121,7 +120,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **analysisId** | **int64** | Analysis ID | 
-**taskId** | **string** | Task ID returned by the create endpoint | 
 
 ### Other Parameters
 
@@ -130,7 +128,6 @@ Other parameters are passed through a pointer to a apiDownloadPdfReportRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
 
 
 ### Return type
@@ -153,7 +150,7 @@ Name | Type | Description  | Notes
 
 ## GetPdfReportStatus
 
-> WorkflowProgress GetPdfReportStatus(ctx, analysisId, taskId).Execute()
+> WorkflowProgress GetPdfReportStatus(ctx, analysisId).Execute()
 
 Get PDF report workflow status
 
@@ -173,11 +170,10 @@ import (
 
 func main() {
 	analysisId := int64(789) // int64 | Analysis ID
-	taskId := "taskId_example" // string | Task ID returned by the create endpoint
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.ReportsAPI.GetPdfReportStatus(context.Background(), analysisId, taskId).Execute()
+	resp, r, err := apiClient.ReportsAPI.GetPdfReportStatus(context.Background(), analysisId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetPdfReportStatus``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -194,7 +190,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **analysisId** | **int64** | Analysis ID | 
-**taskId** | **string** | Task ID returned by the create endpoint | 
 
 ### Other Parameters
 
@@ -203,7 +198,6 @@ Other parameters are passed through a pointer to a apiGetPdfReportStatusRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
 
 
 ### Return type

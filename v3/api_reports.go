@@ -35,7 +35,7 @@ func (r ApiCreatePdfReportRequest) Execute() (*GeneratePDFOutputBody, *http.Resp
 /*
 CreatePdfReport Start PDF report generation
 
-Starts an asynchronous PDF report generation workflow for the given analysis. Returns a deterministic task_id used to poll status and download the resulting PDF. Idempotent: if a workflow is already running for this analysis and user, the same task_id is returned with `already_running: true` so the caller can rejoin the in-flight workflow.
+Starts an asynchronous PDF report generation workflow for the given analysis. Poll status and download the resulting PDF using the same analysis ID. Idempotent: if a workflow is already running for this analysis and user, the response sets `already_running: true` and the caller rejoins the in-flight workflow.
 
 **Error codes:**
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
@@ -193,7 +193,6 @@ type ApiDownloadPdfReportRequest struct {
 	ctx context.Context
 	ApiService *ReportsAPIService
 	analysisId int64
-	taskId string
 }
 
 func (r ApiDownloadPdfReportRequest) Execute() (*http.Response, error) {
@@ -203,7 +202,7 @@ func (r ApiDownloadPdfReportRequest) Execute() (*http.Response, error) {
 /*
 DownloadPdfReport Download generated PDF report
 
-Streams the rendered PDF report. Returns 409 when the workflow is still running and 404 when the task does not exist or the caller is not authorised to see it.
+Streams the rendered PDF report. Returns 409 when the workflow is still running and 404 when no report generation exists for this analysis or the caller is not authorised to see it.
 
 **Error codes:**
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
@@ -213,15 +212,13 @@ Streams the rendered PDF report. Returns 409 when the workflow is still running 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
- @param taskId Task ID returned by the create endpoint
  @return ApiDownloadPdfReportRequest
 */
-func (a *ReportsAPIService) DownloadPdfReport(ctx context.Context, analysisId int64, taskId string) ApiDownloadPdfReportRequest {
+func (a *ReportsAPIService) DownloadPdfReport(ctx context.Context, analysisId int64) ApiDownloadPdfReportRequest {
 	return ApiDownloadPdfReportRequest{
 		ApiService: a,
 		ctx: ctx,
 		analysisId: analysisId,
-		taskId: taskId,
 	}
 }
 
@@ -238,21 +235,14 @@ func (a *ReportsAPIService) DownloadPdfReportExecute(r ApiDownloadPdfReportReque
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/pdf/{task_id}"
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/pdf"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"task_id"+"}", url.PathEscape(parameterValueToString(r.taskId, "taskId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.analysisId < 1 {
 		return nil, reportError("analysisId must be greater than 1")
-	}
-	if strlen(r.taskId) < 1 {
-		return nil, reportError("taskId must have at least 1 elements")
-	}
-	if strlen(r.taskId) > 64 {
-		return nil, reportError("taskId must have less than 64 elements")
 	}
 
 	// to determine the Content-Type header
@@ -372,7 +362,6 @@ type ApiGetPdfReportStatusRequest struct {
 	ctx context.Context
 	ApiService *ReportsAPIService
 	analysisId int64
-	taskId string
 }
 
 func (r ApiGetPdfReportStatusRequest) Execute() (*WorkflowProgress, *http.Response, error) {
@@ -382,7 +371,7 @@ func (r ApiGetPdfReportStatusRequest) Execute() (*WorkflowProgress, *http.Respon
 /*
 GetPdfReportStatus Get PDF report workflow status
 
-Returns live workflow progress for the given task. Returns 404 when the task does not exist or the caller is not authorised to see it.
+Returns live workflow progress for the given analysis. Returns 404 when no report generation exists for this analysis or the caller is not authorised to see it.
 
 **Error codes:**
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
@@ -390,15 +379,13 @@ Returns live workflow progress for the given task. Returns 404 when the task doe
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
- @param taskId Task ID returned by the create endpoint
  @return ApiGetPdfReportStatusRequest
 */
-func (a *ReportsAPIService) GetPdfReportStatus(ctx context.Context, analysisId int64, taskId string) ApiGetPdfReportStatusRequest {
+func (a *ReportsAPIService) GetPdfReportStatus(ctx context.Context, analysisId int64) ApiGetPdfReportStatusRequest {
 	return ApiGetPdfReportStatusRequest{
 		ApiService: a,
 		ctx: ctx,
 		analysisId: analysisId,
-		taskId: taskId,
 	}
 }
 
@@ -417,21 +404,14 @@ func (a *ReportsAPIService) GetPdfReportStatusExecute(r ApiGetPdfReportStatusReq
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/pdf/{task_id}/status"
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/pdf/status"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"task_id"+"}", url.PathEscape(parameterValueToString(r.taskId, "taskId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.analysisId < 1 {
 		return localVarReturnValue, nil, reportError("analysisId must be greater than 1")
-	}
-	if strlen(r.taskId) < 1 {
-		return localVarReturnValue, nil, reportError("taskId must have at least 1 elements")
-	}
-	if strlen(r.taskId) > 64 {
-		return localVarReturnValue, nil, reportError("taskId must have less than 64 elements")
 	}
 
 	// to determine the Content-Type header
