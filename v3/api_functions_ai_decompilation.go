@@ -56,6 +56,7 @@ Begins the AI decompilation process for a function. Charges team credits and sta
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
 - `400` [`BAD_REQUEST`](/errors/BAD_REQUEST) — Bad Request
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
+- `402` [`INSUFFICIENT_CREDITS`](/errors/INSUFFICIENT_CREDITS) — Insufficient Credits
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param functionId Function ID
@@ -162,6 +163,17 @@ func (a *FunctionsAIDecompilationAPIService) CreateAiDecompilationExecute(r ApiC
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 402 {
 			var v APIError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
