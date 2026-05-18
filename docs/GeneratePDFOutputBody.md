@@ -5,13 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AlreadyRunning** | Pointer to **bool** | True when an existing PDF generation is in progress for this analysis and user | [optional] 
-**TaskId** | **string** | Workflow task ID — use to poll status and download the PDF | 
 
 ## Methods
 
 ### NewGeneratePDFOutputBody
 
-`func NewGeneratePDFOutputBody(taskId string, ) *GeneratePDFOutputBody`
+`func NewGeneratePDFOutputBody() *GeneratePDFOutputBody`
 
 NewGeneratePDFOutputBody instantiates a new GeneratePDFOutputBody object
 This constructor will assign default values to properties that have it defined,
@@ -50,26 +49,6 @@ SetAlreadyRunning sets AlreadyRunning field to given value.
 `func (o *GeneratePDFOutputBody) HasAlreadyRunning() bool`
 
 HasAlreadyRunning returns a boolean if a field has been set.
-
-### GetTaskId
-
-`func (o *GeneratePDFOutputBody) GetTaskId() string`
-
-GetTaskId returns the TaskId field if non-nil, zero value otherwise.
-
-### GetTaskIdOk
-
-`func (o *GeneratePDFOutputBody) GetTaskIdOk() (*string, bool)`
-
-GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTaskId
-
-`func (o *GeneratePDFOutputBody) SetTaskId(v string)`
-
-SetTaskId sets TaskId field to given value.
-
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

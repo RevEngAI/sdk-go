@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**CreateAiDecompilationComment**](FunctionsAIDecompilationAPI.md#CreateAiDecompilationComment) | **Post** /v2/functions/{function_id}/ai-decompilation/comments | Create a comment for this function
 [**CreateAiDecompilationTask**](FunctionsAIDecompilationAPI.md#CreateAiDecompilationTask) | **Post** /v2/functions/{function_id}/ai-decompilation | Begins AI Decompilation Process
 [**DeleteAiDecompilationComment**](FunctionsAIDecompilationAPI.md#DeleteAiDecompilationComment) | **Delete** /v2/functions/{function_id}/ai-decompilation/comments/{comment_id} | Delete a comment
+[**DeleteAiDecompilationInlineComment**](FunctionsAIDecompilationAPI.md#DeleteAiDecompilationInlineComment) | **Delete** /v3/functions/{function_id}/ai-decompilation/inline-comments/{line} | Delete a single inline comment
 [**GetAiDecompilation**](FunctionsAIDecompilationAPI.md#GetAiDecompilation) | **Get** /v3/functions/{function_id}/ai-decompilation | Get AI decompilation result
 [**GetAiDecompilationComments**](FunctionsAIDecompilationAPI.md#GetAiDecompilationComments) | **Get** /v2/functions/{function_id}/ai-decompilation/comments | Get comments for this function
 [**GetAiDecompilationInlineComments**](FunctionsAIDecompilationAPI.md#GetAiDecompilationInlineComments) | **Get** /v3/functions/{function_id}/ai-decompilation/inline-comments | Get AI decompilation inline comments
@@ -19,6 +20,7 @@ Method | HTTP request | Description
 [**GetAiDecompilationTaskResult**](FunctionsAIDecompilationAPI.md#GetAiDecompilationTaskResult) | **Get** /v2/functions/{function_id}/ai-decompilation | Polls AI Decompilation Process
 [**GetAiDecompilationTaskStatus**](FunctionsAIDecompilationAPI.md#GetAiDecompilationTaskStatus) | **Get** /v2/functions/{function_id}/ai-decompilation/status | Check the status of a function ai decompilation
 [**GetAiDecompilationTokenised**](FunctionsAIDecompilationAPI.md#GetAiDecompilationTokenised) | **Get** /v3/functions/{function_id}/ai-decompilation/tokenised | Get tokenised AI decompilation with function mapping
+[**PatchAiDecompilationInlineComment**](FunctionsAIDecompilationAPI.md#PatchAiDecompilationInlineComment) | **Patch** /v3/functions/{function_id}/ai-decompilation/inline-comments | Update a single inline comment
 [**RegenerateAiDecompilationInlineComments**](FunctionsAIDecompilationAPI.md#RegenerateAiDecompilationInlineComments) | **Post** /v3/functions/{function_id}/ai-decompilation/inline-comments | Regenerate AI decompilation inline comments
 [**RegenerateAiDecompilationSummary**](FunctionsAIDecompilationAPI.md#RegenerateAiDecompilationSummary) | **Post** /v3/functions/{function_id}/ai-decompilation/summary | Regenerate AI decompilation summary
 [**UpdateAiDecompilationComment**](FunctionsAIDecompilationAPI.md#UpdateAiDecompilationComment) | **Patch** /v2/functions/{function_id}/ai-decompilation/comments/{comment_id} | Update a comment
@@ -301,6 +303,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseBool**](BaseResponseBool.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteAiDecompilationInlineComment
+
+> CommentsData DeleteAiDecompilationInlineComment(ctx, functionId, line).Execute()
+
+Delete a single inline comment
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+	line := int64(789) // int64 | Line number of the comment to delete
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.DeleteAiDecompilationInlineComment(context.Background(), functionId, line).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.DeleteAiDecompilationInlineComment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteAiDecompilationInlineComment`: CommentsData
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.DeleteAiDecompilationInlineComment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+**line** | **int64** | Line number of the comment to delete | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteAiDecompilationInlineCommentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**CommentsData**](CommentsData.md)
 
 ### Authorization
 
@@ -1081,6 +1156,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchAiDecompilationInlineComment
+
+> CommentsData PatchAiDecompilationInlineComment(ctx, functionId).PatchCommentBody(patchCommentBody).Execute()
+
+Update a single inline comment
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+	patchCommentBody := *revengai.NewPatchCommentBody("Comment_example", int64(123)) // PatchCommentBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.PatchAiDecompilationInlineComment(context.Background(), functionId).PatchCommentBody(patchCommentBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.PatchAiDecompilationInlineComment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchAiDecompilationInlineComment`: CommentsData
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.PatchAiDecompilationInlineComment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchAiDecompilationInlineCommentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **patchCommentBody** | [**PatchCommentBody**](PatchCommentBody.md) |  | 
+
+### Return type
+
+[**CommentsData**](CommentsData.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

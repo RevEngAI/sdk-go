@@ -11,8 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GeneratePDFOutputBody type satisfies the MappedNullable interface at compile time
@@ -22,19 +20,14 @@ var _ MappedNullable = &GeneratePDFOutputBody{}
 type GeneratePDFOutputBody struct {
 	// True when an existing PDF generation is in progress for this analysis and user
 	AlreadyRunning *bool `json:"already_running,omitempty"`
-	// Workflow task ID — use to poll status and download the PDF
-	TaskId string `json:"task_id"`
 }
-
-type _GeneratePDFOutputBody GeneratePDFOutputBody
 
 // NewGeneratePDFOutputBody instantiates a new GeneratePDFOutputBody object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGeneratePDFOutputBody(taskId string) *GeneratePDFOutputBody {
+func NewGeneratePDFOutputBody() *GeneratePDFOutputBody {
 	this := GeneratePDFOutputBody{}
-	this.TaskId = taskId
 	return &this
 }
 
@@ -78,30 +71,6 @@ func (o *GeneratePDFOutputBody) SetAlreadyRunning(v bool) {
 	o.AlreadyRunning = &v
 }
 
-// GetTaskId returns the TaskId field value
-func (o *GeneratePDFOutputBody) GetTaskId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.TaskId
-}
-
-// GetTaskIdOk returns a tuple with the TaskId field value
-// and a boolean to check if the value has been set.
-func (o *GeneratePDFOutputBody) GetTaskIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TaskId, true
-}
-
-// SetTaskId sets field value
-func (o *GeneratePDFOutputBody) SetTaskId(v string) {
-	o.TaskId = v
-}
-
 func (o GeneratePDFOutputBody) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -115,45 +84,7 @@ func (o GeneratePDFOutputBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AlreadyRunning) {
 		toSerialize["already_running"] = o.AlreadyRunning
 	}
-	toSerialize["task_id"] = o.TaskId
 	return toSerialize, nil
-}
-
-func (o *GeneratePDFOutputBody) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"task_id",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGeneratePDFOutputBody := _GeneratePDFOutputBody{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGeneratePDFOutputBody)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GeneratePDFOutputBody(varGeneratePDFOutputBody)
-
-	return err
 }
 
 type NullableGeneratePDFOutputBody struct {

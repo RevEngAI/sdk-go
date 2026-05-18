@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**CreateAnalysis**](AnalysesCoreAPI.md#CreateAnalysis) | **Post** /v2/analyses | Create Analysis
 [**DeleteAnalysis**](AnalysesCoreAPI.md#DeleteAnalysis) | **Delete** /v2/analyses/{analysis_id} | Delete Analysis
 [**GetAnalysisBasicInfo**](AnalysesCoreAPI.md#GetAnalysisBasicInfo) | **Get** /v2/analyses/{analysis_id}/basic | Gets basic analysis information
+[**GetAnalysisBytes**](AnalysesCoreAPI.md#GetAnalysisBytes) | **Get** /v3/analyses/{analysis_id}/bytes | Get the bytes of a binary
 [**GetAnalysisFunctionMap**](AnalysesCoreAPI.md#GetAnalysisFunctionMap) | **Get** /v2/analyses/{analysis_id}/func_maps | Get Analysis Function Map
 [**GetAnalysisLogs**](AnalysesCoreAPI.md#GetAnalysisLogs) | **Get** /v2/analyses/{analysis_id}/logs | Gets the logs of an analysis
 [**GetAnalysisParams**](AnalysesCoreAPI.md#GetAnalysisParams) | **Get** /v2/analyses/{analysis_id}/params | Gets analysis param information
@@ -216,6 +217,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseBasic**](BaseResponseBasic.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAnalysisBytes
+
+> GetAnalysisBytes(ctx, analysisId).Page(page).Execute()
+
+Get the bytes of a binary
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	page := int64(789) // int64 | 64kb page of binary data (optional)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.AnalysesCoreAPI.GetAnalysisBytes(context.Background(), analysisId).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.GetAnalysisBytes``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAnalysisBytesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int64** | 64kb page of binary data | 
+
+### Return type
+
+ (empty response body)
 
 ### Authorization
 
