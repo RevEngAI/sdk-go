@@ -23,6 +23,7 @@ Method | HTTP request | Description
 [**PatchAiDecompilationInlineComment**](FunctionsAIDecompilationAPI.md#PatchAiDecompilationInlineComment) | **Patch** /v3/functions/{function_id}/ai-decompilation/inline-comments | Update a single inline comment
 [**RegenerateAiDecompilationInlineComments**](FunctionsAIDecompilationAPI.md#RegenerateAiDecompilationInlineComments) | **Post** /v3/functions/{function_id}/ai-decompilation/inline-comments | Regenerate AI decompilation inline comments
 [**RegenerateAiDecompilationSummary**](FunctionsAIDecompilationAPI.md#RegenerateAiDecompilationSummary) | **Post** /v3/functions/{function_id}/ai-decompilation/summary | Regenerate AI decompilation summary
+[**StreamAiDecompilation**](FunctionsAIDecompilationAPI.md#StreamAiDecompilation) | **Get** /v3/functions/{function_id}/ai-decompilation/events | Stream live AI decompilation output (SSE)
 [**UpdateAiDecompilationComment**](FunctionsAIDecompilationAPI.md#UpdateAiDecompilationComment) | **Patch** /v2/functions/{function_id}/ai-decompilation/comments/{comment_id} | Update a comment
 [**UpsertAiDecompilationOverrides**](FunctionsAIDecompilationAPI.md#UpsertAiDecompilationOverrides) | **Patch** /v3/functions/{function_id}/ai-decompilation/overrides | Upsert variable/function name overrides
 [**UpsertAiDecompilationRating**](FunctionsAIDecompilationAPI.md#UpsertAiDecompilationRating) | **Patch** /v2/functions/{function_id}/ai-decompilation/rating | Upsert rating for AI decompilation
@@ -1369,6 +1370,76 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## StreamAiDecompilation
+
+> []ServerSentEventsInner1 StreamAiDecompilation(ctx, functionId).Execute()
+
+Stream live AI decompilation output (SSE)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.StreamAiDecompilation(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.StreamAiDecompilation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `StreamAiDecompilation`: []ServerSentEventsInner1
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.StreamAiDecompilation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiStreamAiDecompilationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]ServerSentEventsInner1**](ServerSentEventsInner1.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/event-stream, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
