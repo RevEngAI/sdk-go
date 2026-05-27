@@ -4,71 +4,10 @@ All URIs are relative to *https://api.reveng.ai*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetRequesterUserInfo**](AuthenticationUsersAPI.md#GetRequesterUserInfo) | **Get** /v2/users/me | Get the requesters user information
 [**GetUser**](AuthenticationUsersAPI.md#GetUser) | **Get** /v2/users/{user_id} | Get a user&#39;s public information
 [**GetUserActivity**](AuthenticationUsersAPI.md#GetUserActivity) | **Get** /v2/users/activity | Get auth user activity
-[**GetUserComments**](AuthenticationUsersAPI.md#GetUserComments) | **Get** /v2/users/me/comments | Get comments by user
 [**SubmitUserFeedback**](AuthenticationUsersAPI.md#SubmitUserFeedback) | **Post** /v2/users/feedback | Submit feedback about the application
 
-
-
-## GetRequesterUserInfo
-
-> BaseResponseGetMeResponse GetRequesterUserInfo(ctx).Execute()
-
-Get the requesters user information
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
-)
-
-func main() {
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AuthenticationUsersAPI.GetRequesterUserInfo(context.Background()).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationUsersAPI.GetRequesterUserInfo``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetRequesterUserInfo`: BaseResponseGetMeResponse
-	fmt.Fprintf(os.Stdout, "Response from `AuthenticationUsersAPI.GetRequesterUserInfo`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetRequesterUserInfoRequest struct via the builder pattern
-
-
-### Return type
-
-[**BaseResponseGetMeResponse**](BaseResponseGetMeResponse.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## GetUser
@@ -183,67 +122,6 @@ Other parameters are passed through a pointer to a apiGetUserActivityRequest str
 ### Return type
 
 [**BaseResponseListUserActivityResponse**](BaseResponseListUserActivityResponse.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetUserComments
-
-> BaseResponseListCommentResponse GetUserComments(ctx).Execute()
-
-Get comments by user
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
-)
-
-func main() {
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AuthenticationUsersAPI.GetUserComments(context.Background()).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationUsersAPI.GetUserComments``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetUserComments`: BaseResponseListCommentResponse
-	fmt.Fprintf(os.Stdout, "Response from `AuthenticationUsersAPI.GetUserComments`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetUserCommentsRequest struct via the builder pattern
-
-
-### Return type
-
-[**BaseResponseListCommentResponse**](BaseResponseListCommentResponse.md)
 
 ### Authorization
 
