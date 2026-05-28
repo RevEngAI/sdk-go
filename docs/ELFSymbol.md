@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Binding** | **string** |  | 
 **Visibility** | **string** |  | 
 **SectionIndex** | **int32** |  | 
+**IsUnicodeName** | Pointer to **bool** |  | [optional] [default to true]
 
 ## Methods
 
@@ -170,6 +171,31 @@ and a boolean to check if the value has been set.
 
 SetSectionIndex sets SectionIndex field to given value.
 
+
+### GetIsUnicodeName
+
+`func (o *ELFSymbol) GetIsUnicodeName() bool`
+
+GetIsUnicodeName returns the IsUnicodeName field if non-nil, zero value otherwise.
+
+### GetIsUnicodeNameOk
+
+`func (o *ELFSymbol) GetIsUnicodeNameOk() (*bool, bool)`
+
+GetIsUnicodeNameOk returns a tuple with the IsUnicodeName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsUnicodeName
+
+`func (o *ELFSymbol) SetIsUnicodeName(v bool)`
+
+SetIsUnicodeName sets IsUnicodeName field to given value.
+
+### HasIsUnicodeName
+
+`func (o *ELFSymbol) HasIsUnicodeName() bool`
+
+HasIsUnicodeName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

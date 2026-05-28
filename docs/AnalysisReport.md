@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ExtractedFiles** | Pointer to [**[]ProcessExtractedFiles**](ProcessExtractedFiles.md) |  | [optional] 
 **FileActivity** | Pointer to [**[]FileActivityEntry**](FileActivityEntry.md) |  | [optional] 
 **Info** | [**ReportInfo**](ReportInfo.md) |  | 
 **Memdumps** | Pointer to [**[]ProcessMemdumps**](ProcessMemdumps.md) |  | [optional] 
@@ -38,6 +39,41 @@ NewAnalysisReportWithDefaults instantiates a new AnalysisReport object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetExtractedFiles
+
+`func (o *AnalysisReport) GetExtractedFiles() []ProcessExtractedFiles`
+
+GetExtractedFiles returns the ExtractedFiles field if non-nil, zero value otherwise.
+
+### GetExtractedFilesOk
+
+`func (o *AnalysisReport) GetExtractedFilesOk() (*[]ProcessExtractedFiles, bool)`
+
+GetExtractedFilesOk returns a tuple with the ExtractedFiles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtractedFiles
+
+`func (o *AnalysisReport) SetExtractedFiles(v []ProcessExtractedFiles)`
+
+SetExtractedFiles sets ExtractedFiles field to given value.
+
+### HasExtractedFiles
+
+`func (o *AnalysisReport) HasExtractedFiles() bool`
+
+HasExtractedFiles returns a boolean if a field has been set.
+
+### SetExtractedFilesNil
+
+`func (o *AnalysisReport) SetExtractedFilesNil(b bool)`
+
+ SetExtractedFilesNil sets the value for ExtractedFiles to be an explicit nil
+
+### UnsetExtractedFiles
+`func (o *AnalysisReport) UnsetExtractedFiles()`
+
+UnsetExtractedFiles ensures that no value is present for ExtractedFiles, not even an explicit nil
 ### GetFileActivity
 
 `func (o *AnalysisReport) GetFileActivity() []FileActivityEntry`

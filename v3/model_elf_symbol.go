@@ -26,6 +26,7 @@ type ELFSymbol struct {
 	Binding string `json:"binding"`
 	Visibility string `json:"visibility"`
 	SectionIndex int32 `json:"section_index"`
+	IsUnicodeName *bool `json:"is_unicode_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,6 +45,8 @@ func NewELFSymbol(name string, value int32, size int32, type_ string, binding st
 	this.Binding = binding
 	this.Visibility = visibility
 	this.SectionIndex = sectionIndex
+	var isUnicodeName bool = true
+	this.IsUnicodeName = &isUnicodeName
 	return &this
 }
 
@@ -52,6 +55,8 @@ func NewELFSymbol(name string, value int32, size int32, type_ string, binding st
 // but it doesn't guarantee that properties required by API are set
 func NewELFSymbolWithDefaults() *ELFSymbol {
 	this := ELFSymbol{}
+	var isUnicodeName bool = true
+	this.IsUnicodeName = &isUnicodeName
 	return &this
 }
 
@@ -223,6 +228,38 @@ func (o *ELFSymbol) SetSectionIndex(v int32) {
 	o.SectionIndex = v
 }
 
+// GetIsUnicodeName returns the IsUnicodeName field value if set, zero value otherwise.
+func (o *ELFSymbol) GetIsUnicodeName() bool {
+	if o == nil || IsNil(o.IsUnicodeName) {
+		var ret bool
+		return ret
+	}
+	return *o.IsUnicodeName
+}
+
+// GetIsUnicodeNameOk returns a tuple with the IsUnicodeName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ELFSymbol) GetIsUnicodeNameOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsUnicodeName) {
+		return nil, false
+	}
+	return o.IsUnicodeName, true
+}
+
+// HasIsUnicodeName returns a boolean if a field has been set.
+func (o *ELFSymbol) HasIsUnicodeName() bool {
+	if o != nil && !IsNil(o.IsUnicodeName) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsUnicodeName gets a reference to the given bool and assigns it to the IsUnicodeName field.
+func (o *ELFSymbol) SetIsUnicodeName(v bool) {
+	o.IsUnicodeName = &v
+}
+
 func (o ELFSymbol) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -240,6 +277,9 @@ func (o ELFSymbol) ToMap() (map[string]interface{}, error) {
 	toSerialize["binding"] = o.Binding
 	toSerialize["visibility"] = o.Visibility
 	toSerialize["section_index"] = o.SectionIndex
+	if !IsNil(o.IsUnicodeName) {
+		toSerialize["is_unicode_name"] = o.IsUnicodeName
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -296,6 +336,7 @@ func (o *ELFSymbol) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "binding")
 		delete(additionalProperties, "visibility")
 		delete(additionalProperties, "section_index")
+		delete(additionalProperties, "is_unicode_name")
 		o.AdditionalProperties = additionalProperties
 	}
 

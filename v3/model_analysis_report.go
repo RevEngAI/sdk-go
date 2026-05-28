@@ -19,6 +19,7 @@ var _ MappedNullable = &AnalysisReport{}
 
 // AnalysisReport struct for AnalysisReport
 type AnalysisReport struct {
+	ExtractedFiles []ProcessExtractedFiles `json:"extracted_files,omitempty"`
 	FileActivity []FileActivityEntry `json:"file_activity,omitempty"`
 	Info ReportInfo `json:"info"`
 	Memdumps []ProcessMemdumps `json:"memdumps,omitempty"`
@@ -55,6 +56,39 @@ func NewAnalysisReport(info ReportInfo, threatScore int64) *AnalysisReport {
 func NewAnalysisReportWithDefaults() *AnalysisReport {
 	this := AnalysisReport{}
 	return &this
+}
+
+// GetExtractedFiles returns the ExtractedFiles field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AnalysisReport) GetExtractedFiles() []ProcessExtractedFiles {
+	if o == nil {
+		var ret []ProcessExtractedFiles
+		return ret
+	}
+	return o.ExtractedFiles
+}
+
+// GetExtractedFilesOk returns a tuple with the ExtractedFiles field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AnalysisReport) GetExtractedFilesOk() ([]ProcessExtractedFiles, bool) {
+	if o == nil || IsNil(o.ExtractedFiles) {
+		return nil, false
+	}
+	return o.ExtractedFiles, true
+}
+
+// HasExtractedFiles returns a boolean if a field has been set.
+func (o *AnalysisReport) HasExtractedFiles() bool {
+	if o != nil && !IsNil(o.ExtractedFiles) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtractedFiles gets a reference to the given []ProcessExtractedFiles and assigns it to the ExtractedFiles field.
+func (o *AnalysisReport) SetExtractedFiles(v []ProcessExtractedFiles) {
+	o.ExtractedFiles = v
 }
 
 // GetFileActivity returns the FileActivity field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -508,6 +542,9 @@ func (o AnalysisReport) MarshalJSON() ([]byte, error) {
 
 func (o AnalysisReport) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if o.ExtractedFiles != nil {
+		toSerialize["extracted_files"] = o.ExtractedFiles
+	}
 	if o.FileActivity != nil {
 		toSerialize["file_activity"] = o.FileActivity
 	}
@@ -590,6 +627,7 @@ func (o *AnalysisReport) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "extracted_files")
 		delete(additionalProperties, "file_activity")
 		delete(additionalProperties, "info")
 		delete(additionalProperties, "memdumps")
