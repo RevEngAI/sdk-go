@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **SymbolName** | **string** |  | 
 **IsDynamic** | **bool** |  | 
 **IsPltgot** | **bool** |  | 
+**IsUnicodeSymbolName** | Pointer to **bool** |  | [optional] [default to true]
 
 ## Methods
 
@@ -170,6 +171,31 @@ and a boolean to check if the value has been set.
 
 SetIsPltgot sets IsPltgot field to given value.
 
+
+### GetIsUnicodeSymbolName
+
+`func (o *ELFRelocation) GetIsUnicodeSymbolName() bool`
+
+GetIsUnicodeSymbolName returns the IsUnicodeSymbolName field if non-nil, zero value otherwise.
+
+### GetIsUnicodeSymbolNameOk
+
+`func (o *ELFRelocation) GetIsUnicodeSymbolNameOk() (*bool, bool)`
+
+GetIsUnicodeSymbolNameOk returns a tuple with the IsUnicodeSymbolName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsUnicodeSymbolName
+
+`func (o *ELFRelocation) SetIsUnicodeSymbolName(v bool)`
+
+SetIsUnicodeSymbolName sets IsUnicodeSymbolName field to given value.
+
+### HasIsUnicodeSymbolName
+
+`func (o *ELFRelocation) HasIsUnicodeSymbolName() bool`
+
+HasIsUnicodeSymbolName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -26,6 +26,7 @@ type ELFRelocation struct {
 	SymbolName string `json:"symbol_name"`
 	IsDynamic bool `json:"is_dynamic"`
 	IsPltgot bool `json:"is_pltgot"`
+	IsUnicodeSymbolName *bool `json:"is_unicode_symbol_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,6 +45,8 @@ func NewELFRelocation(address int32, type_ string, size int32, addend int32, sym
 	this.SymbolName = symbolName
 	this.IsDynamic = isDynamic
 	this.IsPltgot = isPltgot
+	var isUnicodeSymbolName bool = true
+	this.IsUnicodeSymbolName = &isUnicodeSymbolName
 	return &this
 }
 
@@ -52,6 +55,8 @@ func NewELFRelocation(address int32, type_ string, size int32, addend int32, sym
 // but it doesn't guarantee that properties required by API are set
 func NewELFRelocationWithDefaults() *ELFRelocation {
 	this := ELFRelocation{}
+	var isUnicodeSymbolName bool = true
+	this.IsUnicodeSymbolName = &isUnicodeSymbolName
 	return &this
 }
 
@@ -223,6 +228,38 @@ func (o *ELFRelocation) SetIsPltgot(v bool) {
 	o.IsPltgot = v
 }
 
+// GetIsUnicodeSymbolName returns the IsUnicodeSymbolName field value if set, zero value otherwise.
+func (o *ELFRelocation) GetIsUnicodeSymbolName() bool {
+	if o == nil || IsNil(o.IsUnicodeSymbolName) {
+		var ret bool
+		return ret
+	}
+	return *o.IsUnicodeSymbolName
+}
+
+// GetIsUnicodeSymbolNameOk returns a tuple with the IsUnicodeSymbolName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ELFRelocation) GetIsUnicodeSymbolNameOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsUnicodeSymbolName) {
+		return nil, false
+	}
+	return o.IsUnicodeSymbolName, true
+}
+
+// HasIsUnicodeSymbolName returns a boolean if a field has been set.
+func (o *ELFRelocation) HasIsUnicodeSymbolName() bool {
+	if o != nil && !IsNil(o.IsUnicodeSymbolName) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsUnicodeSymbolName gets a reference to the given bool and assigns it to the IsUnicodeSymbolName field.
+func (o *ELFRelocation) SetIsUnicodeSymbolName(v bool) {
+	o.IsUnicodeSymbolName = &v
+}
+
 func (o ELFRelocation) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -240,6 +277,9 @@ func (o ELFRelocation) ToMap() (map[string]interface{}, error) {
 	toSerialize["symbol_name"] = o.SymbolName
 	toSerialize["is_dynamic"] = o.IsDynamic
 	toSerialize["is_pltgot"] = o.IsPltgot
+	if !IsNil(o.IsUnicodeSymbolName) {
+		toSerialize["is_unicode_symbol_name"] = o.IsUnicodeSymbolName
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -296,6 +336,7 @@ func (o *ELFRelocation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "symbol_name")
 		delete(additionalProperties, "is_dynamic")
 		delete(additionalProperties, "is_pltgot")
+		delete(additionalProperties, "is_unicode_symbol_name")
 		o.AdditionalProperties = additionalProperties
 	}
 

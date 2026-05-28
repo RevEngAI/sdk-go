@@ -17,6 +17,7 @@ import (
 	"net/url"
 	"strings"
 	"reflect"
+	"os"
 )
 
 
@@ -2460,7 +2461,7 @@ type ApiUploadFileRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
 	uploadFileType *UploadFileType
-	file *string
+	file *os.File
 	packedPassword *string
 	forceOverwrite *bool
 }
@@ -2470,8 +2471,8 @@ func (r ApiUploadFileRequest) UploadFileType(uploadFileType UploadFileType) ApiU
 	return r
 }
 
-func (r ApiUploadFileRequest) File(file string) ApiUploadFileRequest {
-	r.file = &file
+func (r ApiUploadFileRequest) File(file *os.File) ApiUploadFileRequest {
+	r.file = file
 	return r
 }
 
@@ -2550,7 +2551,21 @@ func (a *AnalysesCoreAPIService) UploadFileExecute(r ApiUploadFileRequest) (*Bas
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	parameterAddToHeaderOrQuery(localVarFormParams, "upload_file_type", r.uploadFileType, "", "")
-	parameterAddToHeaderOrQuery(localVarFormParams, "file", r.file, "", "")
+	var fileLocalVarFormFileName string
+	var fileLocalVarFileName     string
+	var fileLocalVarFileBytes    []byte
+
+	fileLocalVarFormFileName = "file"
+	fileLocalVarFile := r.file
+
+	if fileLocalVarFile != nil {
+		fbs, _ := io.ReadAll(fileLocalVarFile)
+
+		fileLocalVarFileBytes = fbs
+		fileLocalVarFileName = fileLocalVarFile.Name()
+		fileLocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
+	}
 	if r.forceOverwrite != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "force_overwrite", r.forceOverwrite, "", "")
 	}
