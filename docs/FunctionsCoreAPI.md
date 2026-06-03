@@ -4,6 +4,8 @@ All URIs are relative to *https://api.reveng.ai*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AddFunctionCallee**](FunctionsCoreAPI.md#AddFunctionCallee) | **Post** /v3/functions/{function_id}/callees | Add a callee to a function
+[**AddUserStringToFunction**](FunctionsCoreAPI.md#AddUserStringToFunction) | **Post** /v3/functions/{function_id}/user-provided-strings | Add a user-provided string to a function.
 [**AiUnstrip**](FunctionsCoreAPI.md#AiUnstrip) | **Post** /v2/analyses/{analysis_id}/functions/ai-unstrip | Performs matching and auto-unstrip for an analysis and its functions
 [**AnalysisFunctionMatching**](FunctionsCoreAPI.md#AnalysisFunctionMatching) | **Post** /v2/analyses/{analysis_id}/functions/matches | Perform matching for the functions of an analysis
 [**AutoUnstrip**](FunctionsCoreAPI.md#AutoUnstrip) | **Post** /v2/analyses/{analysis_id}/functions/auto-unstrip | Performs matching and auto-unstrip for an analysis and its functions
@@ -18,7 +20,152 @@ Method | HTTP request | Description
 [**GetFunctionCapabilities**](FunctionsCoreAPI.md#GetFunctionCapabilities) | **Get** /v2/functions/{function_id}/capabilities | Retrieve a functions capabilities
 [**GetFunctionDetails**](FunctionsCoreAPI.md#GetFunctionDetails) | **Get** /v2/functions/{function_id} | Get function details
 [**GetFunctionStrings**](FunctionsCoreAPI.md#GetFunctionStrings) | **Get** /v2/functions/{function_id}/strings | Get string information found in the function
+[**GetFunctionStrings_0**](FunctionsCoreAPI.md#GetFunctionStrings_0) | **Get** /v3/functions/{function_id}/strings | List strings for a function.
 
+
+
+## AddFunctionCallee
+
+> map[string]interface{} AddFunctionCallee(ctx, functionId).AddCalleeInputBody(addCalleeInputBody).Execute()
+
+Add a callee to a function
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+	addCalleeInputBody := *revengai.NewAddCalleeInputBody(int64(123), false) // AddCalleeInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsCoreAPI.AddFunctionCallee(context.Background(), functionId).AddCalleeInputBody(addCalleeInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.AddFunctionCallee``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddFunctionCallee`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.AddFunctionCallee`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddFunctionCalleeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **addCalleeInputBody** | [**AddCalleeInputBody**](AddCalleeInputBody.md) |  | 
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AddUserStringToFunction
+
+> map[string]interface{} AddUserStringToFunction(ctx, functionId).AddUserStringToFunctionInputBody(addUserStringToFunctionInputBody).Execute()
+
+Add a user-provided string to a function.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+	addUserStringToFunctionInputBody := *revengai.NewAddUserStringToFunctionInputBody("String_example", int64(123)) // AddUserStringToFunctionInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsCoreAPI.AddUserStringToFunction(context.Background(), functionId).AddUserStringToFunctionInputBody(addUserStringToFunctionInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.AddUserStringToFunction``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddUserStringToFunction`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.AddUserStringToFunction`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddUserStringToFunctionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **addUserStringToFunctionInputBody** | [**AddUserStringToFunctionInputBody**](AddUserStringToFunctionInputBody.md) |  | 
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## AiUnstrip
@@ -994,6 +1141,82 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseFunctionStringsResponse**](BaseResponseFunctionStringsResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetFunctionStrings_0
+
+> ListFunctionStringsOutputBody GetFunctionStrings_0(ctx, functionId).Page(page).PageSize(pageSize).Search(search).Execute()
+
+List strings for a function.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+	page := int64(789) // int64 | Page number (1-indexed). (optional) (default to 1)
+	pageSize := int64(789) // int64 | Number of results per page. (optional) (default to 100)
+	search := "search_example" // string | Filter by string value (case-insensitive substring match). (optional)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsCoreAPI.GetFunctionStrings_0(context.Background(), functionId).Page(page).PageSize(pageSize).Search(search).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.GetFunctionStrings_0``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetFunctionStrings_0`: ListFunctionStringsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.GetFunctionStrings_0`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetFunctionStrings_1Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int64** | Page number (1-indexed). | [default to 1]
+ **pageSize** | **int64** | Number of results per page. | [default to 100]
+ **search** | **string** | Filter by string value (case-insensitive substring match). | 
+
+### Return type
+
+[**ListFunctionStringsOutputBody**](ListFunctionStringsOutputBody.md)
 
 ### Authorization
 

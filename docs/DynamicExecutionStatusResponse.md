@@ -5,13 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ErrorMessage** | Pointer to **string** | Error detail, set when status is ERROR | [optional] 
+**Logs** | [**AnalysisLogs**](AnalysisLogs.md) | Sandbox status log messages captured during the run. Contains a single \&quot;No logs available\&quot; message when none have been captured yet. | 
 **Status** | **string** | Task status: UNINITIALISED, PENDING, RUNNING, COMPLETED, or ERROR | 
 
 ## Methods
 
 ### NewDynamicExecutionStatusResponse
 
-`func NewDynamicExecutionStatusResponse(status string, ) *DynamicExecutionStatusResponse`
+`func NewDynamicExecutionStatusResponse(logs AnalysisLogs, status string, ) *DynamicExecutionStatusResponse`
 
 NewDynamicExecutionStatusResponse instantiates a new DynamicExecutionStatusResponse object
 This constructor will assign default values to properties that have it defined,
@@ -50,6 +51,26 @@ SetErrorMessage sets ErrorMessage field to given value.
 `func (o *DynamicExecutionStatusResponse) HasErrorMessage() bool`
 
 HasErrorMessage returns a boolean if a field has been set.
+
+### GetLogs
+
+`func (o *DynamicExecutionStatusResponse) GetLogs() AnalysisLogs`
+
+GetLogs returns the Logs field if non-nil, zero value otherwise.
+
+### GetLogsOk
+
+`func (o *DynamicExecutionStatusResponse) GetLogsOk() (*AnalysisLogs, bool)`
+
+GetLogsOk returns a tuple with the Logs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogs
+
+`func (o *DynamicExecutionStatusResponse) SetLogs(v AnalysisLogs)`
+
+SetLogs sets Logs field to given value.
+
 
 ### GetStatus
 

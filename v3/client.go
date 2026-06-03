@@ -87,8 +87,6 @@ type APIClient struct {
 	ReportsAPI *ReportsAPIService
 
 	SearchAPI *SearchAPIService
-
-	StringsAPI *StringsAPIService
 }
 
 type service struct {
@@ -127,7 +125,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ModelsAPI = (*ModelsAPIService)(&c.common)
 	c.ReportsAPI = (*ReportsAPIService)(&c.common)
 	c.SearchAPI = (*SearchAPIService)(&c.common)
-	c.StringsAPI = (*StringsAPIService)(&c.common)
 
 	return c
 }
