@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Data** | **interface{}** |  | 
 **EventId** | **int64** |  | 
+**SourceRunId** | Pointer to **string** |  | [optional] 
 **Type** | **string** |  | 
 
 ## Methods
@@ -76,6 +77,31 @@ and a boolean to check if the value has been set.
 
 SetEventId sets EventId field to given value.
 
+
+### GetSourceRunId
+
+`func (o *SseEventToolCallResultData) GetSourceRunId() string`
+
+GetSourceRunId returns the SourceRunId field if non-nil, zero value otherwise.
+
+### GetSourceRunIdOk
+
+`func (o *SseEventToolCallResultData) GetSourceRunIdOk() (*string, bool)`
+
+GetSourceRunIdOk returns a tuple with the SourceRunId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceRunId
+
+`func (o *SseEventToolCallResultData) SetSourceRunId(v string)`
+
+SetSourceRunId sets SourceRunId field to given value.
+
+### HasSourceRunId
+
+`func (o *SseEventToolCallResultData) HasSourceRunId() bool`
+
+HasSourceRunId returns a boolean if a field has been set.
 
 ### GetType
 

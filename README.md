@@ -86,9 +86,11 @@ Class | Method | HTTP request | Description
 *AnalysesCommentsAPI* | [**DeleteAnalysisComment**](docs/AnalysesCommentsAPI.md#deleteanalysiscomment) | **Delete** /v2/analyses/{analysis_id}/comments/{comment_id} | Delete a comment
 *AnalysesCommentsAPI* | [**GetAnalysisComments**](docs/AnalysesCommentsAPI.md#getanalysiscomments) | **Get** /v2/analyses/{analysis_id}/comments | Get comments for this analysis
 *AnalysesCommentsAPI* | [**UpdateAnalysisComment**](docs/AnalysesCommentsAPI.md#updateanalysiscomment) | **Patch** /v2/analyses/{analysis_id}/comments/{comment_id} | Update a comment
+*AnalysesCoreAPI* | [**AddUserStringToAnalysis**](docs/AnalysesCoreAPI.md#adduserstringtoanalysis) | **Post** /v3/analyses/{analysis_id}/user-provided-strings | Add a user-provided string to an analysis.
 *AnalysesCoreAPI* | [**CreateAnalysis**](docs/AnalysesCoreAPI.md#createanalysis) | **Post** /v2/analyses | Create Analysis
 *AnalysesCoreAPI* | [**DeleteAnalysis**](docs/AnalysesCoreAPI.md#deleteanalysis) | **Delete** /v2/analyses/{analysis_id} | Delete Analysis
 *AnalysesCoreAPI* | [**GetAnalysisBasicInfo**](docs/AnalysesCoreAPI.md#getanalysisbasicinfo) | **Get** /v2/analyses/{analysis_id}/basic | Gets basic analysis information
+*AnalysesCoreAPI* | [**GetAnalysisBasicInfo_0**](docs/AnalysesCoreAPI.md#getanalysisbasicinfo_0) | **Get** /v3/analyses/{analysis_id}/basic | Get basic analysis information
 *AnalysesCoreAPI* | [**GetAnalysisBytes**](docs/AnalysesCoreAPI.md#getanalysisbytes) | **Get** /v3/analyses/{analysis_id}/bytes | Get the bytes of a binary
 *AnalysesCoreAPI* | [**GetAnalysisFunctionMap**](docs/AnalysesCoreAPI.md#getanalysisfunctionmap) | **Get** /v2/analyses/{analysis_id}/func_maps | Get Analysis Function Map
 *AnalysesCoreAPI* | [**GetAnalysisLogs**](docs/AnalysesCoreAPI.md#getanalysislogs) | **Get** /v2/analyses/{analysis_id}/logs | Gets the logs of an analysis
@@ -103,6 +105,8 @@ Class | Method | HTTP request | Description
 *AnalysesCoreAPI* | [**UpdateAnalysis**](docs/AnalysesCoreAPI.md#updateanalysis) | **Patch** /v2/analyses/{analysis_id} | Update Analysis
 *AnalysesCoreAPI* | [**UpdateAnalysisTags**](docs/AnalysesCoreAPI.md#updateanalysistags) | **Patch** /v2/analyses/{analysis_id}/tags | Update Analysis Tags
 *AnalysesCoreAPI* | [**UploadFile**](docs/AnalysesCoreAPI.md#uploadfile) | **Post** /v2/upload | Upload File
+*AnalysesCoreAPI* | [**V3GetAnalysisStrings**](docs/AnalysesCoreAPI.md#v3getanalysisstrings) | **Get** /v3/analyses/{analysis_id}/functions/strings | List strings for an analysis.
+*AnalysesCoreAPI* | [**V3GetAnalysisStringsStatus**](docs/AnalysesCoreAPI.md#v3getanalysisstringsstatus) | **Get** /v3/analyses/{analysis_id}/functions/strings/status | Get the string-extraction status for an analysis.
 *AnalysesResultsMetadataAPI* | [**GetAnalysisFunctionsPaginated**](docs/AnalysesResultsMetadataAPI.md#getanalysisfunctionspaginated) | **Get** /v2/analyses/{analysis_id}/functions | Get functions from analysis
 *AnalysesResultsMetadataAPI* | [**GetCapabilities**](docs/AnalysesResultsMetadataAPI.md#getcapabilities) | **Get** /v2/analyses/{analysis_id}/capabilities | Gets the capabilities from the analysis
 *AnalysesResultsMetadataAPI* | [**GetFunctionsList**](docs/AnalysesResultsMetadataAPI.md#getfunctionslist) | **Get** /v2/analyses/{analysis_id}/functions/list | Gets functions from analysis
@@ -116,12 +120,15 @@ Class | Method | HTTP request | Description
 *BinariesAPI* | [**DownloadZippedBinary**](docs/BinariesAPI.md#downloadzippedbinary) | **Get** /v2/binaries/{binary_id}/download-zipped | Downloads a zipped binary with password protection
 *BinariesAPI* | [**GetBinaryAdditionalDetails**](docs/BinariesAPI.md#getbinaryadditionaldetails) | **Get** /v2/binaries/{binary_id}/additional-details | Gets the additional details of a binary
 *BinariesAPI* | [**GetBinaryAdditionalDetailsStatus**](docs/BinariesAPI.md#getbinaryadditionaldetailsstatus) | **Get** /v2/binaries/{binary_id}/additional-details/status | Gets the status of the additional details task for a binary
+*BinariesAPI* | [**GetBinaryAdditionalDetailsStatus_0**](docs/BinariesAPI.md#getbinaryadditionaldetailsstatus_0) | **Get** /v3/binaries/{binary_id}/additional-details/status | Get the additional-details extraction status for a binary.
+*BinariesAPI* | [**GetBinaryAdditionalDetails_0**](docs/BinariesAPI.md#getbinaryadditionaldetails_0) | **Get** /v3/binaries/{binary_id}/additional-details | Get additional details for a binary.
 *BinariesAPI* | [**GetBinaryDetails**](docs/BinariesAPI.md#getbinarydetails) | **Get** /v2/binaries/{binary_id}/details | Gets the details of a binary
 *BinariesAPI* | [**GetBinaryDieInfo**](docs/BinariesAPI.md#getbinarydieinfo) | **Get** /v2/binaries/{binary_id}/die-info | Gets the die info of a binary
 *BinariesAPI* | [**GetBinaryExternals**](docs/BinariesAPI.md#getbinaryexternals) | **Get** /v2/binaries/{binary_id}/externals | Gets the external details of a binary
 *BinariesAPI* | [**GetBinaryRelatedStatus**](docs/BinariesAPI.md#getbinaryrelatedstatus) | **Get** /v2/binaries/{binary_id}/related/status | Gets the status of the unpack binary task for a binary
 *BinariesAPI* | [**GetRelatedBinaries**](docs/BinariesAPI.md#getrelatedbinaries) | **Get** /v2/binaries/{binary_id}/related | Gets the related binaries of a binary.
 *CollectionsAPI* | [**CreateCollection**](docs/CollectionsAPI.md#createcollection) | **Post** /v2/collections | Creates new collection information
+*CollectionsAPI* | [**CreateCollection_0**](docs/CollectionsAPI.md#createcollection_0) | **Post** /v3/collections | Create a collection.
 *CollectionsAPI* | [**DeleteCollection**](docs/CollectionsAPI.md#deletecollection) | **Delete** /v2/collections/{collection_id} | Deletes a collection
 *CollectionsAPI* | [**GetCollection**](docs/CollectionsAPI.md#getcollection) | **Get** /v2/collections/{collection_id} | Returns a collection
 *CollectionsAPI* | [**ListCollections**](docs/CollectionsAPI.md#listcollections) | **Get** /v2/collections | Gets basic collections information
@@ -164,6 +171,8 @@ Class | Method | HTTP request | Description
 *FunctionsAIDecompilationAPI* | [**UpdateAiDecompilationComment**](docs/FunctionsAIDecompilationAPI.md#updateaidecompilationcomment) | **Patch** /v2/functions/{function_id}/ai-decompilation/comments/{comment_id} | Update a comment
 *FunctionsAIDecompilationAPI* | [**UpsertAiDecompilationOverrides**](docs/FunctionsAIDecompilationAPI.md#upsertaidecompilationoverrides) | **Patch** /v3/functions/{function_id}/ai-decompilation/overrides | Upsert variable/function name overrides
 *FunctionsAIDecompilationAPI* | [**UpsertAiDecompilationRating**](docs/FunctionsAIDecompilationAPI.md#upsertaidecompilationrating) | **Patch** /v2/functions/{function_id}/ai-decompilation/rating | Upsert rating for AI decompilation
+*FunctionsCoreAPI* | [**AddFunctionCallee**](docs/FunctionsCoreAPI.md#addfunctioncallee) | **Post** /v3/functions/{function_id}/callees | Add a callee to a function
+*FunctionsCoreAPI* | [**AddUserStringToFunction**](docs/FunctionsCoreAPI.md#adduserstringtofunction) | **Post** /v3/functions/{function_id}/user-provided-strings | Add a user-provided string to a function.
 *FunctionsCoreAPI* | [**AiUnstrip**](docs/FunctionsCoreAPI.md#aiunstrip) | **Post** /v2/analyses/{analysis_id}/functions/ai-unstrip | Performs matching and auto-unstrip for an analysis and its functions
 *FunctionsCoreAPI* | [**AnalysisFunctionMatching**](docs/FunctionsCoreAPI.md#analysisfunctionmatching) | **Post** /v2/analyses/{analysis_id}/functions/matches | Perform matching for the functions of an analysis
 *FunctionsCoreAPI* | [**AutoUnstrip**](docs/FunctionsCoreAPI.md#autounstrip) | **Post** /v2/analyses/{analysis_id}/functions/auto-unstrip | Performs matching and auto-unstrip for an analysis and its functions
@@ -178,6 +187,7 @@ Class | Method | HTTP request | Description
 *FunctionsCoreAPI* | [**GetFunctionCapabilities**](docs/FunctionsCoreAPI.md#getfunctioncapabilities) | **Get** /v2/functions/{function_id}/capabilities | Retrieve a functions capabilities
 *FunctionsCoreAPI* | [**GetFunctionDetails**](docs/FunctionsCoreAPI.md#getfunctiondetails) | **Get** /v2/functions/{function_id} | Get function details
 *FunctionsCoreAPI* | [**GetFunctionStrings**](docs/FunctionsCoreAPI.md#getfunctionstrings) | **Get** /v2/functions/{function_id}/strings | Get string information found in the function
+*FunctionsCoreAPI* | [**GetFunctionStrings_0**](docs/FunctionsCoreAPI.md#getfunctionstrings_0) | **Get** /v3/functions/{function_id}/strings | List strings for a function.
 *FunctionsDataTypesAPI* | [**GenerateFunctionDataTypesForAnalysis**](docs/FunctionsDataTypesAPI.md#generatefunctiondatatypesforanalysis) | **Post** /v2/analyses/{analysis_id}/functions/data_types | Generate Function Data Types
 *FunctionsDataTypesAPI* | [**GenerateFunctionDataTypesForFunctions**](docs/FunctionsDataTypesAPI.md#generatefunctiondatatypesforfunctions) | **Post** /v2/functions/data_types | Generate Function Data Types for an arbitrary list of functions
 *FunctionsDataTypesAPI* | [**GetFunctionDataTypes**](docs/FunctionsDataTypesAPI.md#getfunctiondatatypes) | **Get** /v2/analyses/{analysis_id}/functions/{function_id}/data_types | Get Function Data Types
@@ -200,13 +210,12 @@ Class | Method | HTTP request | Description
 *SearchAPI* | [**SearchCollections**](docs/SearchAPI.md#searchcollections) | **Get** /v2/search/collections | Collections search
 *SearchAPI* | [**SearchFunctions**](docs/SearchAPI.md#searchfunctions) | **Get** /v2/search/functions | Functions search
 *SearchAPI* | [**SearchTags**](docs/SearchAPI.md#searchtags) | **Get** /v2/search/tags | Tags search
-*StringsAPI* | [**AddUserStringToAnalysis**](docs/StringsAPI.md#adduserstringtoanalysis) | **Post** /v3/analyses/{analysis_id}/user-provided-strings | Add a user-provided string to an analysis.
-*StringsAPI* | [**AddUserStringToFunction**](docs/StringsAPI.md#adduserstringtofunction) | **Post** /v3/functions/{function_id}/user-provided-strings | Add a user-provided string to a function.
 
 
 ## Documentation For Models
 
  - [APIError](docs/APIError.md)
+ - [AddCalleeInputBody](docs/AddCalleeInputBody.md)
  - [AddUserStringInputBody](docs/AddUserStringInputBody.md)
  - [AddUserStringToFunctionInputBody](docs/AddUserStringToFunctionInputBody.md)
  - [AdditionalDetailsStatusResponse](docs/AdditionalDetailsStatusResponse.md)
@@ -215,6 +224,7 @@ Class | Method | HTTP request | Description
  - [AiDecompilationTaskStatus](docs/AiDecompilationTaskStatus.md)
  - [AiUnstripRequest](docs/AiUnstripRequest.md)
  - [AnalysisAccessInfo](docs/AnalysisAccessInfo.md)
+ - [AnalysisBasicInfoOutputBody](docs/AnalysisBasicInfoOutputBody.md)
  - [AnalysisBulkAddTagsRequest](docs/AnalysisBulkAddTagsRequest.md)
  - [AnalysisBulkAddTagsResponse](docs/AnalysisBulkAddTagsResponse.md)
  - [AnalysisBulkAddTagsResponseItem](docs/AnalysisBulkAddTagsResponseItem.md)
@@ -226,10 +236,14 @@ Class | Method | HTTP request | Description
  - [AnalysisFunctionMatchingRequest](docs/AnalysisFunctionMatchingRequest.md)
  - [AnalysisFunctions](docs/AnalysisFunctions.md)
  - [AnalysisFunctionsList](docs/AnalysisFunctionsList.md)
+ - [AnalysisLogMessage](docs/AnalysisLogMessage.md)
+ - [AnalysisLogs](docs/AnalysisLogs.md)
  - [AnalysisRecord](docs/AnalysisRecord.md)
  - [AnalysisReport](docs/AnalysisReport.md)
  - [AnalysisScope](docs/AnalysisScope.md)
+ - [AnalysisStringFunction](docs/AnalysisStringFunction.md)
  - [AnalysisStringInput](docs/AnalysisStringInput.md)
+ - [AnalysisStringItem](docs/AnalysisStringItem.md)
  - [AnalysisStringsResponse](docs/AnalysisStringsResponse.md)
  - [AnalysisStringsStatusResponse](docs/AnalysisStringsStatusResponse.md)
  - [AnalysisTags](docs/AnalysisTags.md)
@@ -322,6 +336,7 @@ Class | Method | HTTP request | Description
  - [BatchRenameOutputBody](docs/BatchRenameOutputBody.md)
  - [BinariesRelatedStatusResponse](docs/BinariesRelatedStatusResponse.md)
  - [BinariesTaskStatus](docs/BinariesTaskStatus.md)
+ - [Binary](docs/Binary.md)
  - [BinaryAdditionalDetailsDataResponse](docs/BinaryAdditionalDetailsDataResponse.md)
  - [BinaryAdditionalResponse](docs/BinaryAdditionalResponse.md)
  - [BinaryConfig](docs/BinaryConfig.md)
@@ -363,7 +378,11 @@ Class | Method | HTTP request | Description
  - [ConversationContext](docs/ConversationContext.md)
  - [ConversationWithEvents](docs/ConversationWithEvents.md)
  - [CreateAIDecompOutputBody](docs/CreateAIDecompOutputBody.md)
+ - [CreateCheckoutSessionInputBody](docs/CreateCheckoutSessionInputBody.md)
+ - [CreateCollectionInputBody](docs/CreateCollectionInputBody.md)
+ - [CreateCollectionOutputBody](docs/CreateCollectionOutputBody.md)
  - [CreateConversationRequest](docs/CreateConversationRequest.md)
+ - [CreatePortalSessionInputBody](docs/CreatePortalSessionInputBody.md)
  - [Created](docs/Created.md)
  - [DecompFailedEvent](docs/DecompFailedEvent.md)
  - [DecompFinishedEvent](docs/DecompFinishedEvent.md)
@@ -452,6 +471,7 @@ Class | Method | HTTP request | Description
  - [FunctionSearchResult](docs/FunctionSearchResult.md)
  - [FunctionSourceType](docs/FunctionSourceType.md)
  - [FunctionString](docs/FunctionString.md)
+ - [FunctionStringItem](docs/FunctionStringItem.md)
  - [FunctionStringsResponse](docs/FunctionStringsResponse.md)
  - [FunctionTaskResponse](docs/FunctionTaskResponse.md)
  - [FunctionTaskStatus](docs/FunctionTaskStatus.md)
@@ -462,9 +482,14 @@ Class | Method | HTTP request | Description
  - [GenerateFunctionDataTypes](docs/GenerateFunctionDataTypes.md)
  - [GeneratePDFOutputBody](docs/GeneratePDFOutputBody.md)
  - [GenerationStatusList](docs/GenerationStatusList.md)
+ - [GetAdditionalDetailsOutputBody](docs/GetAdditionalDetailsOutputBody.md)
+ - [GetAdditionalDetailsStatusOutputBody](docs/GetAdditionalDetailsStatusOutputBody.md)
  - [GetAiDecompilationRatingResponse](docs/GetAiDecompilationRatingResponse.md)
  - [GetAiDecompilationTask](docs/GetAiDecompilationTask.md)
+ - [GetAnalysisStringsStatusOutputBody](docs/GetAnalysisStringsStatusOutputBody.md)
+ - [GetProductsOutputBody](docs/GetProductsOutputBody.md)
  - [GetPublicUserResponse](docs/GetPublicUserResponse.md)
+ - [GetSubscriptionOutputBody](docs/GetSubscriptionOutputBody.md)
  - [GlobalVariable](docs/GlobalVariable.md)
  - [HistoryEntry](docs/HistoryEntry.md)
  - [HttpRequest](docs/HttpRequest.md)
@@ -477,7 +502,9 @@ Class | Method | HTTP request | Description
  - [InverseFunctionMapItem](docs/InverseFunctionMapItem.md)
  - [InverseStringMapItem](docs/InverseStringMapItem.md)
  - [InverseValue](docs/InverseValue.md)
+ - [ListAnalysisStringsOutputBody](docs/ListAnalysisStringsOutputBody.md)
  - [ListCollectionResults](docs/ListCollectionResults.md)
+ - [ListFunctionStringsOutputBody](docs/ListFunctionStringsOutputBody.md)
  - [Logs](docs/Logs.md)
  - [MITRETechnique](docs/MITRETechnique.md)
  - [MatchedFunction](docs/MatchedFunction.md)
@@ -499,11 +526,15 @@ Class | Method | HTTP request | Description
  - [Params](docs/Params.md)
  - [PatchCommentBody](docs/PatchCommentBody.md)
  - [Platform](docs/Platform.md)
+ - [PriceOutput](docs/PriceOutput.md)
+ - [PriceSummary](docs/PriceSummary.md)
  - [ProcessActivityEntry](docs/ProcessActivityEntry.md)
  - [ProcessExtractedFiles](docs/ProcessExtractedFiles.md)
  - [ProcessMemdumps](docs/ProcessMemdumps.md)
  - [ProcessNode](docs/ProcessNode.md)
  - [ProcessTree](docs/ProcessTree.md)
+ - [ProductOutput](docs/ProductOutput.md)
+ - [ProductSummary](docs/ProductSummary.md)
  - [ProgressMessage](docs/ProgressMessage.md)
  - [ProseEvent](docs/ProseEvent.md)
  - [PutAnalysisStringsRequest](docs/PutAnalysisStringsRequest.md)
@@ -537,6 +568,7 @@ Class | Method | HTTP request | Description
  - [ServerSentEventsInner](docs/ServerSentEventsInner.md)
  - [ServerSentEventsInner1](docs/ServerSentEventsInner1.md)
  - [ServiceEntry](docs/ServiceEntry.md)
+ - [SessionOutputBody](docs/SessionOutputBody.md)
  - [SingleCodeCertificateModel](docs/SingleCodeCertificateModel.md)
  - [SingleCodeSignatureModel](docs/SingleCodeSignatureModel.md)
  - [SinglePDBEntryModel](docs/SinglePDBEntryModel.md)

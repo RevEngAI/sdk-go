@@ -21,6 +21,8 @@ var _ MappedNullable = &DynamicExecutionStatusResponse{}
 type DynamicExecutionStatusResponse struct {
 	// Error detail, set when status is ERROR
 	ErrorMessage *string `json:"error_message,omitempty"`
+	// Sandbox status log messages captured during the run. Contains a single \"No logs available\" message when none have been captured yet.
+	Logs AnalysisLogs `json:"logs"`
 	// Task status: UNINITIALISED, PENDING, RUNNING, COMPLETED, or ERROR
 	Status string `json:"status"`
 	AdditionalProperties map[string]interface{}
@@ -32,8 +34,9 @@ type _DynamicExecutionStatusResponse DynamicExecutionStatusResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDynamicExecutionStatusResponse(status string) *DynamicExecutionStatusResponse {
+func NewDynamicExecutionStatusResponse(logs AnalysisLogs, status string) *DynamicExecutionStatusResponse {
 	this := DynamicExecutionStatusResponse{}
+	this.Logs = logs
 	this.Status = status
 	return &this
 }
@@ -78,6 +81,30 @@ func (o *DynamicExecutionStatusResponse) SetErrorMessage(v string) {
 	o.ErrorMessage = &v
 }
 
+// GetLogs returns the Logs field value
+func (o *DynamicExecutionStatusResponse) GetLogs() AnalysisLogs {
+	if o == nil {
+		var ret AnalysisLogs
+		return ret
+	}
+
+	return o.Logs
+}
+
+// GetLogsOk returns a tuple with the Logs field value
+// and a boolean to check if the value has been set.
+func (o *DynamicExecutionStatusResponse) GetLogsOk() (*AnalysisLogs, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Logs, true
+}
+
+// SetLogs sets field value
+func (o *DynamicExecutionStatusResponse) SetLogs(v AnalysisLogs) {
+	o.Logs = v
+}
+
 // GetStatus returns the Status field value
 func (o *DynamicExecutionStatusResponse) GetStatus() string {
 	if o == nil {
@@ -115,6 +142,7 @@ func (o DynamicExecutionStatusResponse) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.ErrorMessage) {
 		toSerialize["error_message"] = o.ErrorMessage
 	}
+	toSerialize["logs"] = o.Logs
 	toSerialize["status"] = o.Status
 
 	for key, value := range o.AdditionalProperties {
@@ -129,6 +157,7 @@ func (o *DynamicExecutionStatusResponse) UnmarshalJSON(data []byte) (err error) 
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"logs",
 		"status",
 	}
 
@@ -160,6 +189,7 @@ func (o *DynamicExecutionStatusResponse) UnmarshalJSON(data []byte) (err error) 
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "error_message")
+		delete(additionalProperties, "logs")
 		delete(additionalProperties, "status")
 		o.AdditionalProperties = additionalProperties
 	}

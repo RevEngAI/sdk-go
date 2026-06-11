@@ -5,6 +5,7 @@ All URIs are relative to *https://api.reveng.ai*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateCollection**](CollectionsAPI.md#CreateCollection) | **Post** /v2/collections | Creates new collection information
+[**CreateCollection_0**](CollectionsAPI.md#CreateCollection_0) | **Post** /v3/collections | Create a collection.
 [**DeleteCollection**](CollectionsAPI.md#DeleteCollection) | **Delete** /v2/collections/{collection_id} | Deletes a collection
 [**GetCollection**](CollectionsAPI.md#GetCollection) | **Get** /v2/collections/{collection_id} | Returns a collection
 [**ListCollections**](CollectionsAPI.md#ListCollections) | **Get** /v2/collections | Gets basic collections information
@@ -65,6 +66,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseCollectionResponse**](BaseResponseCollectionResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateCollection_0
+
+> CreateCollectionOutputBody CreateCollection_0(ctx).CreateCollectionInputBody(createCollectionInputBody).Execute()
+
+Create a collection.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	createCollectionInputBody := *revengai.NewCreateCollectionInputBody("CollectionName_example", "CollectionScope_example", "Description_example", int64(123)) // CreateCollectionInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.CollectionsAPI.CreateCollection_0(context.Background()).CreateCollectionInputBody(createCollectionInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.CreateCollection_0``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateCollection_0`: CreateCollectionOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `CollectionsAPI.CreateCollection_0`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateCollection_1Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createCollectionInputBody** | [**CreateCollectionInputBody**](CreateCollectionInputBody.md) |  | 
+
+### Return type
+
+[**CreateCollectionOutputBody**](CreateCollectionOutputBody.md)
 
 ### Authorization
 
