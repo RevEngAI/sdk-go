@@ -4,9 +4,11 @@ All URIs are relative to *https://api.reveng.ai*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AddUserStringToAnalysis**](AnalysesCoreAPI.md#AddUserStringToAnalysis) | **Post** /v3/analyses/{analysis_id}/user-provided-strings | Add a user-provided string to an analysis.
 [**CreateAnalysis**](AnalysesCoreAPI.md#CreateAnalysis) | **Post** /v2/analyses | Create Analysis
 [**DeleteAnalysis**](AnalysesCoreAPI.md#DeleteAnalysis) | **Delete** /v2/analyses/{analysis_id} | Delete Analysis
 [**GetAnalysisBasicInfo**](AnalysesCoreAPI.md#GetAnalysisBasicInfo) | **Get** /v2/analyses/{analysis_id}/basic | Gets basic analysis information
+[**GetAnalysisBasicInfo_0**](AnalysesCoreAPI.md#GetAnalysisBasicInfo_0) | **Get** /v3/analyses/{analysis_id}/basic | Get basic analysis information
 [**GetAnalysisBytes**](AnalysesCoreAPI.md#GetAnalysisBytes) | **Get** /v3/analyses/{analysis_id}/bytes | Get the bytes of a binary
 [**GetAnalysisFunctionMap**](AnalysesCoreAPI.md#GetAnalysisFunctionMap) | **Get** /v2/analyses/{analysis_id}/func_maps | Get Analysis Function Map
 [**GetAnalysisLogs**](AnalysesCoreAPI.md#GetAnalysisLogs) | **Get** /v2/analyses/{analysis_id}/logs | Gets the logs of an analysis
@@ -21,7 +23,81 @@ Method | HTTP request | Description
 [**UpdateAnalysis**](AnalysesCoreAPI.md#UpdateAnalysis) | **Patch** /v2/analyses/{analysis_id} | Update Analysis
 [**UpdateAnalysisTags**](AnalysesCoreAPI.md#UpdateAnalysisTags) | **Patch** /v2/analyses/{analysis_id}/tags | Update Analysis Tags
 [**UploadFile**](AnalysesCoreAPI.md#UploadFile) | **Post** /v2/upload | Upload File
+[**V3GetAnalysisStrings**](AnalysesCoreAPI.md#V3GetAnalysisStrings) | **Get** /v3/analyses/{analysis_id}/functions/strings | List strings for an analysis.
+[**V3GetAnalysisStringsStatus**](AnalysesCoreAPI.md#V3GetAnalysisStringsStatus) | **Get** /v3/analyses/{analysis_id}/functions/strings/status | Get the string-extraction status for an analysis.
 
+
+
+## AddUserStringToAnalysis
+
+> map[string]interface{} AddUserStringToAnalysis(ctx, analysisId).AddUserStringInputBody(addUserStringInputBody).Execute()
+
+Add a user-provided string to an analysis.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	addUserStringInputBody := *revengai.NewAddUserStringInputBody("String_example", int64(123)) // AddUserStringInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.AddUserStringToAnalysis(context.Background(), analysisId).AddUserStringInputBody(addUserStringInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.AddUserStringToAnalysis``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddUserStringToAnalysis`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.AddUserStringToAnalysis`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddUserStringToAnalysisRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **addUserStringInputBody** | [**AddUserStringInputBody**](AddUserStringInputBody.md) |  | 
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreateAnalysis
@@ -217,6 +293,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseBasic**](BaseResponseBasic.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAnalysisBasicInfo_0
+
+> AnalysisBasicInfoOutputBody GetAnalysisBasicInfo_0(ctx, analysisId).Execute()
+
+Get basic analysis information
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.GetAnalysisBasicInfo_0(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.GetAnalysisBasicInfo_0``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAnalysisBasicInfo_0`: AnalysisBasicInfoOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.GetAnalysisBasicInfo_0`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAnalysisBasicInfo_1Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AnalysisBasicInfoOutputBody**](AnalysisBasicInfoOutputBody.md)
 
 ### Authorization
 
@@ -1233,6 +1379,158 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: multipart/form-data
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetAnalysisStrings
+
+> ListAnalysisStringsOutputBody V3GetAnalysisStrings(ctx, analysisId).Page(page).PageSize(pageSize).Search(search).FunctionSearch(functionSearch).OrderBy(orderBy).SortOrder(sortOrder).Execute()
+
+List strings for an analysis.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	page := int64(789) // int64 | Page number (1-indexed). (optional) (default to 1)
+	pageSize := int64(789) // int64 | Number of results per page. (optional) (default to 100)
+	search := "search_example" // string | Filter by string value (case-insensitive substring match). (optional)
+	functionSearch := "functionSearch_example" // string | Filter by function name (case-insensitive substring match). (optional)
+	orderBy := "orderBy_example" // string | Field to order results by. (optional) (default to "value")
+	sortOrder := "sortOrder_example" // string | Sort direction. (optional) (default to "ASC")
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3GetAnalysisStrings(context.Background(), analysisId).Page(page).PageSize(pageSize).Search(search).FunctionSearch(functionSearch).OrderBy(orderBy).SortOrder(sortOrder).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetAnalysisStrings``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetAnalysisStrings`: ListAnalysisStringsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3GetAnalysisStrings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetAnalysisStringsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int64** | Page number (1-indexed). | [default to 1]
+ **pageSize** | **int64** | Number of results per page. | [default to 100]
+ **search** | **string** | Filter by string value (case-insensitive substring match). | 
+ **functionSearch** | **string** | Filter by function name (case-insensitive substring match). | 
+ **orderBy** | **string** | Field to order results by. | [default to &quot;value&quot;]
+ **sortOrder** | **string** | Sort direction. | [default to &quot;ASC&quot;]
+
+### Return type
+
+[**ListAnalysisStringsOutputBody**](ListAnalysisStringsOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetAnalysisStringsStatus
+
+> GetAnalysisStringsStatusOutputBody V3GetAnalysisStringsStatus(ctx, analysisId).Execute()
+
+Get the string-extraction status for an analysis.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3GetAnalysisStringsStatus(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetAnalysisStringsStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetAnalysisStringsStatus`: GetAnalysisStringsStatusOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3GetAnalysisStringsStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetAnalysisStringsStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetAnalysisStringsStatusOutputBody**](GetAnalysisStringsStatusOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

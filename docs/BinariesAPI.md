@@ -7,6 +7,8 @@ Method | HTTP request | Description
 [**DownloadZippedBinary**](BinariesAPI.md#DownloadZippedBinary) | **Get** /v2/binaries/{binary_id}/download-zipped | Downloads a zipped binary with password protection
 [**GetBinaryAdditionalDetails**](BinariesAPI.md#GetBinaryAdditionalDetails) | **Get** /v2/binaries/{binary_id}/additional-details | Gets the additional details of a binary
 [**GetBinaryAdditionalDetailsStatus**](BinariesAPI.md#GetBinaryAdditionalDetailsStatus) | **Get** /v2/binaries/{binary_id}/additional-details/status | Gets the status of the additional details task for a binary
+[**GetBinaryAdditionalDetailsStatus_0**](BinariesAPI.md#GetBinaryAdditionalDetailsStatus_0) | **Get** /v3/binaries/{binary_id}/additional-details/status | Get the additional-details extraction status for a binary.
+[**GetBinaryAdditionalDetails_0**](BinariesAPI.md#GetBinaryAdditionalDetails_0) | **Get** /v3/binaries/{binary_id}/additional-details | Get additional details for a binary.
 [**GetBinaryDetails**](BinariesAPI.md#GetBinaryDetails) | **Get** /v2/binaries/{binary_id}/details | Gets the details of a binary
 [**GetBinaryDieInfo**](BinariesAPI.md#GetBinaryDieInfo) | **Get** /v2/binaries/{binary_id}/die-info | Gets the die info of a binary
 [**GetBinaryExternals**](BinariesAPI.md#GetBinaryExternals) | **Get** /v2/binaries/{binary_id}/externals | Gets the external details of a binary
@@ -204,6 +206,146 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseAdditionalDetailsStatusResponse**](BaseResponseAdditionalDetailsStatusResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBinaryAdditionalDetailsStatus_0
+
+> GetAdditionalDetailsStatusOutputBody GetBinaryAdditionalDetailsStatus_0(ctx, binaryId).Execute()
+
+Get the additional-details extraction status for a binary.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	binaryId := int64(789) // int64 | Binary ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.BinariesAPI.GetBinaryAdditionalDetailsStatus_0(context.Background(), binaryId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryAdditionalDetailsStatus_0``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetBinaryAdditionalDetailsStatus_0`: GetAdditionalDetailsStatusOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `BinariesAPI.GetBinaryAdditionalDetailsStatus_0`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**binaryId** | **int64** | Binary ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBinaryAdditionalDetailsStatus_1Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetAdditionalDetailsStatusOutputBody**](GetAdditionalDetailsStatusOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBinaryAdditionalDetails_0
+
+> GetAdditionalDetailsOutputBody GetBinaryAdditionalDetails_0(ctx, binaryId).Execute()
+
+Get additional details for a binary.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	binaryId := int64(789) // int64 | Binary ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.BinariesAPI.GetBinaryAdditionalDetails_0(context.Background(), binaryId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.GetBinaryAdditionalDetails_0``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetBinaryAdditionalDetails_0`: GetAdditionalDetailsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `BinariesAPI.GetBinaryAdditionalDetails_0`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**binaryId** | **int64** | Binary ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBinaryAdditionalDetails_2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetAdditionalDetailsOutputBody**](GetAdditionalDetailsOutputBody.md)
 
 ### Authorization
 

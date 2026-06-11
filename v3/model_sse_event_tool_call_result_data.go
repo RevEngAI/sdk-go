@@ -22,6 +22,7 @@ var _ MappedNullable = &SseEventToolCallResultData{}
 type SseEventToolCallResultData struct {
 	Data interface{} `json:"data"`
 	EventId int64 `json:"event_id"`
+	SourceRunId *string `json:"source_run_id,omitempty"`
 	Type string `json:"type"`
 }
 
@@ -97,6 +98,38 @@ func (o *SseEventToolCallResultData) SetEventId(v int64) {
 	o.EventId = v
 }
 
+// GetSourceRunId returns the SourceRunId field value if set, zero value otherwise.
+func (o *SseEventToolCallResultData) GetSourceRunId() string {
+	if o == nil || IsNil(o.SourceRunId) {
+		var ret string
+		return ret
+	}
+	return *o.SourceRunId
+}
+
+// GetSourceRunIdOk returns a tuple with the SourceRunId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SseEventToolCallResultData) GetSourceRunIdOk() (*string, bool) {
+	if o == nil || IsNil(o.SourceRunId) {
+		return nil, false
+	}
+	return o.SourceRunId, true
+}
+
+// HasSourceRunId returns a boolean if a field has been set.
+func (o *SseEventToolCallResultData) HasSourceRunId() bool {
+	if o != nil && !IsNil(o.SourceRunId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceRunId gets a reference to the given string and assigns it to the SourceRunId field.
+func (o *SseEventToolCallResultData) SetSourceRunId(v string) {
+	o.SourceRunId = &v
+}
+
 // GetType returns the Type field value
 func (o *SseEventToolCallResultData) GetType() string {
 	if o == nil {
@@ -135,6 +168,9 @@ func (o SseEventToolCallResultData) ToMap() (map[string]interface{}, error) {
 		toSerialize["data"] = o.Data
 	}
 	toSerialize["event_id"] = o.EventId
+	if !IsNil(o.SourceRunId) {
+		toSerialize["source_run_id"] = o.SourceRunId
+	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
