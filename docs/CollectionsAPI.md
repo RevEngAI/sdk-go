@@ -5,13 +5,15 @@ All URIs are relative to *https://api.reveng.ai*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateCollection**](CollectionsAPI.md#CreateCollection) | **Post** /v2/collections | Creates new collection information
-[**CreateCollection_0**](CollectionsAPI.md#CreateCollection_0) | **Post** /v3/collections | Create a collection.
 [**DeleteCollection**](CollectionsAPI.md#DeleteCollection) | **Delete** /v2/collections/{collection_id} | Deletes a collection
 [**GetCollection**](CollectionsAPI.md#GetCollection) | **Get** /v2/collections/{collection_id} | Returns a collection
 [**ListCollections**](CollectionsAPI.md#ListCollections) | **Get** /v2/collections | Gets basic collections information
 [**UpdateCollection**](CollectionsAPI.md#UpdateCollection) | **Patch** /v2/collections/{collection_id} | Updates a collection
 [**UpdateCollectionBinaries**](CollectionsAPI.md#UpdateCollectionBinaries) | **Patch** /v2/collections/{collection_id}/binaries | Updates a collection binaries
 [**UpdateCollectionTags**](CollectionsAPI.md#UpdateCollectionTags) | **Patch** /v2/collections/{collection_id}/tags | Updates a collection tags
+[**V3CreateCollection**](CollectionsAPI.md#V3CreateCollection) | **Post** /v3/collections | Create a collection.
+[**V3GetCollection**](CollectionsAPI.md#V3GetCollection) | **Get** /v3/collections/{collection_id} | Get a collection.
+[**V3ListCollections**](CollectionsAPI.md#V3ListCollections) | **Get** /v3/collections | List collections.
 
 
 
@@ -66,72 +68,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseCollectionResponse**](BaseResponseCollectionResponse.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateCollection_0
-
-> CreateCollectionOutputBody CreateCollection_0(ctx).CreateCollectionInputBody(createCollectionInputBody).Execute()
-
-Create a collection.
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
-)
-
-func main() {
-	createCollectionInputBody := *revengai.NewCreateCollectionInputBody("CollectionName_example", "CollectionScope_example", "Description_example", int64(123)) // CreateCollectionInputBody | 
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.CollectionsAPI.CreateCollection_0(context.Background()).CreateCollectionInputBody(createCollectionInputBody).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.CreateCollection_0``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateCollection_0`: CreateCollectionOutputBody
-	fmt.Fprintf(os.Stdout, "Response from `CollectionsAPI.CreateCollection_0`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateCollection_1Request struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createCollectionInputBody** | [**CreateCollectionInputBody**](CreateCollectionInputBody.md) |  | 
-
-### Return type
-
-[**CreateCollectionOutputBody**](CreateCollectionOutputBody.md)
 
 ### Authorization
 
@@ -582,6 +518,228 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3CreateCollection
+
+> CreateCollectionOutputBody V3CreateCollection(ctx).CreateCollectionInputBody(createCollectionInputBody).Execute()
+
+Create a collection.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	createCollectionInputBody := *revengai.NewCreateCollectionInputBody("CollectionName_example", "CollectionScope_example", "Description_example", int64(123)) // CreateCollectionInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.CollectionsAPI.V3CreateCollection(context.Background()).CreateCollectionInputBody(createCollectionInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.V3CreateCollection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3CreateCollection`: CreateCollectionOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `CollectionsAPI.V3CreateCollection`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3CreateCollectionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createCollectionInputBody** | [**CreateCollectionInputBody**](CreateCollectionInputBody.md) |  | 
+
+### Return type
+
+[**CreateCollectionOutputBody**](CreateCollectionOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetCollection
+
+> GetCollectionOutputBody V3GetCollection(ctx, collectionId).IncludeTags(includeTags).IncludeBinaries(includeBinaries).PageSize(pageSize).PageNumber(pageNumber).BinarySearchStr(binarySearchStr).Execute()
+
+Get a collection.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	collectionId := int64(789) // int64 | 
+	includeTags := true // bool |  (optional)
+	includeBinaries := true // bool |  (optional)
+	pageSize := int64(789) // int64 |  (optional) (default to 10)
+	pageNumber := int64(789) // int64 |  (optional) (default to 1)
+	binarySearchStr := "binarySearchStr_example" // string |  (optional)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.CollectionsAPI.V3GetCollection(context.Background(), collectionId).IncludeTags(includeTags).IncludeBinaries(includeBinaries).PageSize(pageSize).PageNumber(pageNumber).BinarySearchStr(binarySearchStr).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.V3GetCollection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetCollection`: GetCollectionOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `CollectionsAPI.V3GetCollection`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**collectionId** | **int64** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetCollectionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **includeTags** | **bool** |  | 
+ **includeBinaries** | **bool** |  | 
+ **pageSize** | **int64** |  | [default to 10]
+ **pageNumber** | **int64** |  | [default to 1]
+ **binarySearchStr** | **string** |  | 
+
+### Return type
+
+[**GetCollectionOutputBody**](GetCollectionOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3ListCollections
+
+> ListCollectionsOutputBody V3ListCollections(ctx).SearchTerm(searchTerm).Filters(filters).Limit(limit).Offset(offset).OrderBy(orderBy).Order(order).Execute()
+
+List collections.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	searchTerm := "searchTerm_example" // string |  (optional)
+	filters := []string{"Filters_example"} // []string |  (optional)
+	limit := int64(789) // int64 |  (optional) (default to 20)
+	offset := int64(789) // int64 |  (optional) (default to 0)
+	orderBy := "orderBy_example" // string |  (optional) (default to "collection")
+	order := "order_example" // string |  (optional) (default to "ASC")
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.CollectionsAPI.V3ListCollections(context.Background()).SearchTerm(searchTerm).Filters(filters).Limit(limit).Offset(offset).OrderBy(orderBy).Order(order).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.V3ListCollections``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3ListCollections`: ListCollectionsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `CollectionsAPI.V3ListCollections`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3ListCollectionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **searchTerm** | **string** |  | 
+ **filters** | **[]string** |  | 
+ **limit** | **int64** |  | [default to 20]
+ **offset** | **int64** |  | [default to 0]
+ **orderBy** | **string** |  | [default to &quot;collection&quot;]
+ **order** | **string** |  | [default to &quot;ASC&quot;]
+
+### Return type
+
+[**ListCollectionsOutputBody**](ListCollectionsOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
