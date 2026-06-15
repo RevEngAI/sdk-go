@@ -14,6 +14,8 @@ Method | HTTP request | Description
 [**V3CreateCollection**](CollectionsAPI.md#V3CreateCollection) | **Post** /v3/collections | Create a collection.
 [**V3GetCollection**](CollectionsAPI.md#V3GetCollection) | **Get** /v3/collections/{collection_id} | Get a collection.
 [**V3ListCollections**](CollectionsAPI.md#V3ListCollections) | **Get** /v3/collections | List collections.
+[**V3PatchCollectionBinaries**](CollectionsAPI.md#V3PatchCollectionBinaries) | **Patch** /v3/collections/{collection_id}/binaries | Replace the binaries in a collection.
+[**V3PatchCollectionTags**](CollectionsAPI.md#V3PatchCollectionTags) | **Patch** /v3/collections/{collection_id}/tags | Replace the tags on a collection.
 
 
 
@@ -740,6 +742,150 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3PatchCollectionBinaries
+
+> PatchCollectionBinariesOutputBody V3PatchCollectionBinaries(ctx, collectionId).PatchCollectionBinariesInputBody(patchCollectionBinariesInputBody).Execute()
+
+Replace the binaries in a collection.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	collectionId := int64(789) // int64 | 
+	patchCollectionBinariesInputBody := *revengai.NewPatchCollectionBinariesInputBody([]int64{int64(123)}) // PatchCollectionBinariesInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.CollectionsAPI.V3PatchCollectionBinaries(context.Background(), collectionId).PatchCollectionBinariesInputBody(patchCollectionBinariesInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.V3PatchCollectionBinaries``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3PatchCollectionBinaries`: PatchCollectionBinariesOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `CollectionsAPI.V3PatchCollectionBinaries`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**collectionId** | **int64** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3PatchCollectionBinariesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **patchCollectionBinariesInputBody** | [**PatchCollectionBinariesInputBody**](PatchCollectionBinariesInputBody.md) |  | 
+
+### Return type
+
+[**PatchCollectionBinariesOutputBody**](PatchCollectionBinariesOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3PatchCollectionTags
+
+> PatchCollectionTagsOutputBody V3PatchCollectionTags(ctx, collectionId).PatchCollectionTagsInputBody(patchCollectionTagsInputBody).Execute()
+
+Replace the tags on a collection.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	collectionId := int64(789) // int64 | 
+	patchCollectionTagsInputBody := *revengai.NewPatchCollectionTagsInputBody([]string{"Tags_example"}) // PatchCollectionTagsInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.CollectionsAPI.V3PatchCollectionTags(context.Background(), collectionId).PatchCollectionTagsInputBody(patchCollectionTagsInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.V3PatchCollectionTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3PatchCollectionTags`: PatchCollectionTagsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `CollectionsAPI.V3PatchCollectionTags`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**collectionId** | **int64** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3PatchCollectionTagsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **patchCollectionTagsInputBody** | [**PatchCollectionTagsInputBody**](PatchCollectionTagsInputBody.md) |  | 
+
+### Return type
+
+[**PatchCollectionTagsOutputBody**](PatchCollectionTagsOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
