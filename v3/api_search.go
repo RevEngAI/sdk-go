@@ -32,6 +32,7 @@ type ApiSearchBinariesRequest struct {
 	tags *[]string
 	modelName *string
 	userFilesOnly *bool
+	excludeBinaryId *int32
 }
 
 // The page number to retrieve.
@@ -73,6 +74,12 @@ func (r ApiSearchBinariesRequest) ModelName(modelName string) ApiSearchBinariesR
 // Whether to only search user&#39;s uploaded files
 func (r ApiSearchBinariesRequest) UserFilesOnly(userFilesOnly bool) ApiSearchBinariesRequest {
 	r.userFilesOnly = &userFilesOnly
+	return r
+}
+
+// A binary ID to exclude from the results
+func (r ApiSearchBinariesRequest) ExcludeBinaryId(excludeBinaryId int32) ApiSearchBinariesRequest {
+	r.excludeBinaryId = &excludeBinaryId
 	return r
 }
 
@@ -156,6 +163,9 @@ func (a *SearchAPIService) SearchBinariesExecute(r ApiSearchBinariesRequest) (*B
 		var defaultValue bool = false
 		parameterAddToHeaderOrQuery(localVarQueryParams, "user_files_only", defaultValue, "form", "")
 		r.userFilesOnly = &defaultValue
+	}
+	if r.excludeBinaryId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "exclude_binary_id", r.excludeBinaryId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

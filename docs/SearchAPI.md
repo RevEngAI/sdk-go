@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## SearchBinaries
 
-> BaseResponseBinarySearchResponse SearchBinaries(ctx).Page(page).PageSize(pageSize).PartialName(partialName).PartialSha256(partialSha256).Tags(tags).ModelName(modelName).UserFilesOnly(userFilesOnly).Execute()
+> BaseResponseBinarySearchResponse SearchBinaries(ctx).Page(page).PageSize(pageSize).PartialName(partialName).PartialSha256(partialSha256).Tags(tags).ModelName(modelName).UserFilesOnly(userFilesOnly).ExcludeBinaryId(excludeBinaryId).Execute()
 
 Binaries search
 
@@ -39,10 +39,11 @@ func main() {
 	tags := []string{"Inner_example"} // []string | The tags to be searched for (optional)
 	modelName := "modelName_example" // string | The name of the model used to analyze the binary the function belongs to (optional)
 	userFilesOnly := true // bool | Whether to only search user's uploaded files (optional) (default to false)
+	excludeBinaryId := int32(56) // int32 | A binary ID to exclude from the results (optional)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.SearchAPI.SearchBinaries(context.Background()).Page(page).PageSize(pageSize).PartialName(partialName).PartialSha256(partialSha256).Tags(tags).ModelName(modelName).UserFilesOnly(userFilesOnly).Execute()
+	resp, r, err := apiClient.SearchAPI.SearchBinaries(context.Background()).Page(page).PageSize(pageSize).PartialName(partialName).PartialSha256(partialSha256).Tags(tags).ModelName(modelName).UserFilesOnly(userFilesOnly).ExcludeBinaryId(excludeBinaryId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.SearchBinaries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -70,6 +71,7 @@ Name | Type | Description  | Notes
  **tags** | **[]string** | The tags to be searched for | 
  **modelName** | **string** | The name of the model used to analyze the binary the function belongs to | 
  **userFilesOnly** | **bool** | Whether to only search user&#39;s uploaded files | [default to false]
+ **excludeBinaryId** | **int32** | A binary ID to exclude from the results | 
 
 ### Return type
 

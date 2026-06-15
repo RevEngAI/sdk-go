@@ -136,6 +136,8 @@ Class | Method | HTTP request | Description
 *CollectionsAPI* | [**V3CreateCollection**](docs/CollectionsAPI.md#v3createcollection) | **Post** /v3/collections | Create a collection.
 *CollectionsAPI* | [**V3GetCollection**](docs/CollectionsAPI.md#v3getcollection) | **Get** /v3/collections/{collection_id} | Get a collection.
 *CollectionsAPI* | [**V3ListCollections**](docs/CollectionsAPI.md#v3listcollections) | **Get** /v3/collections | List collections.
+*CollectionsAPI* | [**V3PatchCollectionBinaries**](docs/CollectionsAPI.md#v3patchcollectionbinaries) | **Patch** /v3/collections/{collection_id}/binaries | Replace the binaries in a collection.
+*CollectionsAPI* | [**V3PatchCollectionTags**](docs/CollectionsAPI.md#v3patchcollectiontags) | **Patch** /v3/collections/{collection_id}/tags | Replace the tags on a collection.
 *ConfigAPI* | [**GetConfig**](docs/ConfigAPI.md#getconfig) | **Get** /v2/config | Get Config
 *ConversationsAPI* | [**CancelRun**](docs/ConversationsAPI.md#cancelrun) | **Post** /v2/conversations/{id}/cancel | Cancel an active run
 *ConversationsAPI* | [**ConfirmTool**](docs/ConversationsAPI.md#confirmtool) | **Post** /v2/conversations/{id}/confirm | Approve or reject a pending tool confirmation
@@ -528,6 +530,10 @@ Class | Method | HTTP request | Description
  - [PEModel](docs/PEModel.md)
  - [PaginationModel](docs/PaginationModel.md)
  - [Params](docs/Params.md)
+ - [PatchCollectionBinariesInputBody](docs/PatchCollectionBinariesInputBody.md)
+ - [PatchCollectionBinariesOutputBody](docs/PatchCollectionBinariesOutputBody.md)
+ - [PatchCollectionTagsInputBody](docs/PatchCollectionTagsInputBody.md)
+ - [PatchCollectionTagsOutputBody](docs/PatchCollectionTagsOutputBody.md)
  - [PatchCommentBody](docs/PatchCommentBody.md)
  - [Platform](docs/Platform.md)
  - [PriceOutput](docs/PriceOutput.md)
