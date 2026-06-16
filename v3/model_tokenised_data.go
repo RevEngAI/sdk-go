@@ -21,7 +21,7 @@ var _ MappedNullable = &TokenisedData{}
 // TokenisedData struct for TokenisedData
 type TokenisedData struct {
 	// Complete mapping data for token resolution
-	FunctionMapping *FunctionMapping `json:"function_mapping,omitempty"`
+	FunctionMapping *AIDecompFunctionMapping `json:"function_mapping,omitempty"`
 	// Predicted function name from the AI model
 	PredictedFunctionName *string `json:"predicted_function_name,omitempty"`
 	// Task status
@@ -51,9 +51,9 @@ func NewTokenisedDataWithDefaults() *TokenisedData {
 }
 
 // GetFunctionMapping returns the FunctionMapping field value if set, zero value otherwise.
-func (o *TokenisedData) GetFunctionMapping() FunctionMapping {
+func (o *TokenisedData) GetFunctionMapping() AIDecompFunctionMapping {
 	if o == nil || IsNil(o.FunctionMapping) {
-		var ret FunctionMapping
+		var ret AIDecompFunctionMapping
 		return ret
 	}
 	return *o.FunctionMapping
@@ -61,7 +61,7 @@ func (o *TokenisedData) GetFunctionMapping() FunctionMapping {
 
 // GetFunctionMappingOk returns a tuple with the FunctionMapping field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TokenisedData) GetFunctionMappingOk() (*FunctionMapping, bool) {
+func (o *TokenisedData) GetFunctionMappingOk() (*AIDecompFunctionMapping, bool) {
 	if o == nil || IsNil(o.FunctionMapping) {
 		return nil, false
 	}
@@ -77,8 +77,8 @@ func (o *TokenisedData) HasFunctionMapping() bool {
 	return false
 }
 
-// SetFunctionMapping gets a reference to the given FunctionMapping and assigns it to the FunctionMapping field.
-func (o *TokenisedData) SetFunctionMapping(v FunctionMapping) {
+// SetFunctionMapping gets a reference to the given AIDecompFunctionMapping and assigns it to the FunctionMapping field.
+func (o *TokenisedData) SetFunctionMapping(v AIDecompFunctionMapping) {
 	o.FunctionMapping = &v
 }
 

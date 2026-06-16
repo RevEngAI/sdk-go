@@ -45,6 +45,8 @@ A collection is a group of binaries that are related in some way. This endpoint 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateCollectionRequest
+
+Deprecated
 */
 func (a *CollectionsAPIService) CreateCollection(ctx context.Context) ApiCreateCollectionRequest {
 	return ApiCreateCollectionRequest{
@@ -55,6 +57,7 @@ func (a *CollectionsAPIService) CreateCollection(ctx context.Context) ApiCreateC
 
 // Execute executes the request
 //  @return BaseResponseCollectionResponse
+// Deprecated
 func (a *CollectionsAPIService) CreateCollectionExecute(r ApiCreateCollectionRequest) (*BaseResponseCollectionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -175,6 +178,8 @@ Deletes a collection
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param collectionId
  @return ApiDeleteCollectionRequest
+
+Deprecated
 */
 func (a *CollectionsAPIService) DeleteCollection(ctx context.Context, collectionId int32) ApiDeleteCollectionRequest {
 	return ApiDeleteCollectionRequest{
@@ -186,6 +191,7 @@ func (a *CollectionsAPIService) DeleteCollection(ctx context.Context, collection
 
 // Execute executes the request
 //  @return BaseResponseBool
+// Deprecated
 func (a *CollectionsAPIService) DeleteCollectionExecute(r ApiDeleteCollectionRequest) (*BaseResponseBool, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
@@ -332,6 +338,8 @@ Gets a single collection. The collection can include binaries and tags if reques
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param collectionId
  @return ApiGetCollectionRequest
+
+Deprecated
 */
 func (a *CollectionsAPIService) GetCollection(ctx context.Context, collectionId int32) ApiGetCollectionRequest {
 	return ApiGetCollectionRequest{
@@ -343,6 +351,7 @@ func (a *CollectionsAPIService) GetCollection(ctx context.Context, collectionId 
 
 // Execute executes the request
 //  @return BaseResponseCollectionResponse
+// Deprecated
 func (a *CollectionsAPIService) GetCollectionExecute(r ApiGetCollectionRequest) (*BaseResponseCollectionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -524,6 +533,8 @@ Returns a list of collections
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListCollectionsRequest
+
+Deprecated
 */
 func (a *CollectionsAPIService) ListCollections(ctx context.Context) ApiListCollectionsRequest {
 	return ApiListCollectionsRequest{
@@ -534,6 +545,7 @@ func (a *CollectionsAPIService) ListCollections(ctx context.Context) ApiListColl
 
 // Execute executes the request
 //  @return BaseResponseListCollectionResults
+// Deprecated
 func (a *CollectionsAPIService) ListCollectionsExecute(r ApiListCollectionsRequest) (*BaseResponseListCollectionResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -705,6 +717,8 @@ Updates a collection, you can update the collection name, description, and scope
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param collectionId
  @return ApiUpdateCollectionRequest
+
+Deprecated
 */
 func (a *CollectionsAPIService) UpdateCollection(ctx context.Context, collectionId int32) ApiUpdateCollectionRequest {
 	return ApiUpdateCollectionRequest{
@@ -716,6 +730,7 @@ func (a *CollectionsAPIService) UpdateCollection(ctx context.Context, collection
 
 // Execute executes the request
 //  @return BaseResponseCollectionResponse
+// Deprecated
 func (a *CollectionsAPIService) UpdateCollectionExecute(r ApiUpdateCollectionRequest) (*BaseResponseCollectionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
@@ -843,6 +858,8 @@ Updates/changes a collection binaries to whatever is provided in the request. Af
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param collectionId
  @return ApiUpdateCollectionBinariesRequest
+
+Deprecated
 */
 func (a *CollectionsAPIService) UpdateCollectionBinaries(ctx context.Context, collectionId int32) ApiUpdateCollectionBinariesRequest {
 	return ApiUpdateCollectionBinariesRequest{
@@ -854,6 +871,7 @@ func (a *CollectionsAPIService) UpdateCollectionBinaries(ctx context.Context, co
 
 // Execute executes the request
 //  @return BaseResponseCollectionBinariesUpdateResponse
+// Deprecated
 func (a *CollectionsAPIService) UpdateCollectionBinariesExecute(r ApiUpdateCollectionBinariesRequest) (*BaseResponseCollectionBinariesUpdateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
@@ -981,6 +999,8 @@ Updates/changes a collection tags to whatever is provided in the request. After 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param collectionId
  @return ApiUpdateCollectionTagsRequest
+
+Deprecated
 */
 func (a *CollectionsAPIService) UpdateCollectionTags(ctx context.Context, collectionId int32) ApiUpdateCollectionTagsRequest {
 	return ApiUpdateCollectionTagsRequest{
@@ -992,6 +1012,7 @@ func (a *CollectionsAPIService) UpdateCollectionTags(ctx context.Context, collec
 
 // Execute executes the request
 //  @return BaseResponseCollectionTagsUpdateResponse
+// Deprecated
 func (a *CollectionsAPIService) UpdateCollectionTagsExecute(r ApiUpdateCollectionTagsRequest) (*BaseResponseCollectionTagsUpdateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
@@ -1253,6 +1274,174 @@ func (a *CollectionsAPIService) V3CreateCollectionExecute(r ApiV3CreateCollectio
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV3DeleteCollectionRequest struct {
+	ctx context.Context
+	ApiService *CollectionsAPIService
+	collectionId int64
+}
+
+func (r ApiV3DeleteCollectionRequest) Execute() (*http.Response, error) {
+	return r.ApiService.V3DeleteCollectionExecute(r)
+}
+
+/*
+V3DeleteCollection Delete a collection.
+
+Deletes a collection. The collection must not have any linked binaries (call PATCH /v3/collections/{collection_id}/binaries with an empty list first).
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+- `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param collectionId
+ @return ApiV3DeleteCollectionRequest
+*/
+func (a *CollectionsAPIService) V3DeleteCollection(ctx context.Context, collectionId int64) ApiV3DeleteCollectionRequest {
+	return ApiV3DeleteCollectionRequest{
+		ApiService: a,
+		ctx: ctx,
+		collectionId: collectionId,
+	}
+}
+
+// Execute executes the request
+func (a *CollectionsAPIService) V3DeleteCollectionExecute(r ApiV3DeleteCollectionRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CollectionsAPIService.V3DeleteCollection")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/collections/{collection_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"collection_id"+"}", url.PathEscape(parameterValueToString(r.collectionId, "collectionId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.collectionId < 1 {
+		return nil, reportError("collectionId must be greater than 1")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
 }
 
 type ApiV3GetCollectionRequest struct {
@@ -1633,6 +1822,185 @@ func (a *CollectionsAPIService) V3ListCollectionsExecute(r ApiV3ListCollectionsR
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV3PatchCollectionRequest struct {
+	ctx context.Context
+	ApiService *CollectionsAPIService
+	collectionId int64
+	patchCollectionInputBody *PatchCollectionInputBody
+}
+
+func (r ApiV3PatchCollectionRequest) PatchCollectionInputBody(patchCollectionInputBody PatchCollectionInputBody) ApiV3PatchCollectionRequest {
+	r.patchCollectionInputBody = &patchCollectionInputBody
+	return r
+}
+
+func (r ApiV3PatchCollectionRequest) Execute() (*PatchCollectionOutputBody, *http.Response, error) {
+	return r.ApiService.V3PatchCollectionExecute(r)
+}
+
+/*
+V3PatchCollection Update a collection.
+
+Updates a collection's name, description, and/or scope. Omitted fields keep their existing values.
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+- `422` [`VALIDATION_FAILED`](/errors/VALIDATION_FAILED) — Validation Failed
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param collectionId
+ @return ApiV3PatchCollectionRequest
+*/
+func (a *CollectionsAPIService) V3PatchCollection(ctx context.Context, collectionId int64) ApiV3PatchCollectionRequest {
+	return ApiV3PatchCollectionRequest{
+		ApiService: a,
+		ctx: ctx,
+		collectionId: collectionId,
+	}
+}
+
+// Execute executes the request
+//  @return PatchCollectionOutputBody
+func (a *CollectionsAPIService) V3PatchCollectionExecute(r ApiV3PatchCollectionRequest) (*PatchCollectionOutputBody, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PatchCollectionOutputBody
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CollectionsAPIService.V3PatchCollection")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/collections/{collection_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"collection_id"+"}", url.PathEscape(parameterValueToString(r.collectionId, "collectionId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.collectionId < 1 {
+		return localVarReturnValue, nil, reportError("collectionId must be greater than 1")
+	}
+	if r.patchCollectionInputBody == nil {
+		return localVarReturnValue, nil, reportError("patchCollectionInputBody is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.patchCollectionInputBody
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v APIError

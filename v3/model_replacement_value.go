@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -19,8 +20,7 @@ var _ MappedNullable = &ReplacementValue{}
 
 // ReplacementValue struct for ReplacementValue
 type ReplacementValue struct {
-	Value NullableString `json:"value"`
-	AdditionalProperties map[string]interface{}
+	Value string `json:"value"`
 }
 
 type _ReplacementValue ReplacementValue
@@ -29,7 +29,7 @@ type _ReplacementValue ReplacementValue
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReplacementValue(value NullableString) *ReplacementValue {
+func NewReplacementValue(value string) *ReplacementValue {
 	this := ReplacementValue{}
 	this.Value = value
 	return &this
@@ -44,29 +44,27 @@ func NewReplacementValueWithDefaults() *ReplacementValue {
 }
 
 // GetValue returns the Value field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *ReplacementValue) GetValue() string {
-	if o == nil || o.Value.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Value.Get()
+	return o.Value
 }
 
 // GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ReplacementValue) GetValueOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Value.Get(), o.Value.IsSet()
+	return &o.Value, true
 }
 
 // SetValue sets field value
 func (o *ReplacementValue) SetValue(v string) {
-	o.Value.Set(&v)
+	o.Value = v
 }
 
 func (o ReplacementValue) MarshalJSON() ([]byte, error) {
@@ -79,12 +77,7 @@ func (o ReplacementValue) MarshalJSON() ([]byte, error) {
 
 func (o ReplacementValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["value"] = o.Value.Get()
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
+	toSerialize["value"] = o.Value
 	return toSerialize, nil
 }
 
@@ -112,20 +105,15 @@ func (o *ReplacementValue) UnmarshalJSON(data []byte) (err error) {
 
 	varReplacementValue := _ReplacementValue{}
 
-	err = json.Unmarshal(data, &varReplacementValue)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varReplacementValue)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReplacementValue(varReplacementValue)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "value")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

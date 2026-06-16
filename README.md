@@ -134,8 +134,10 @@ Class | Method | HTTP request | Description
 *CollectionsAPI* | [**UpdateCollectionBinaries**](docs/CollectionsAPI.md#updatecollectionbinaries) | **Patch** /v2/collections/{collection_id}/binaries | Updates a collection binaries
 *CollectionsAPI* | [**UpdateCollectionTags**](docs/CollectionsAPI.md#updatecollectiontags) | **Patch** /v2/collections/{collection_id}/tags | Updates a collection tags
 *CollectionsAPI* | [**V3CreateCollection**](docs/CollectionsAPI.md#v3createcollection) | **Post** /v3/collections | Create a collection.
+*CollectionsAPI* | [**V3DeleteCollection**](docs/CollectionsAPI.md#v3deletecollection) | **Delete** /v3/collections/{collection_id} | Delete a collection.
 *CollectionsAPI* | [**V3GetCollection**](docs/CollectionsAPI.md#v3getcollection) | **Get** /v3/collections/{collection_id} | Get a collection.
 *CollectionsAPI* | [**V3ListCollections**](docs/CollectionsAPI.md#v3listcollections) | **Get** /v3/collections | List collections.
+*CollectionsAPI* | [**V3PatchCollection**](docs/CollectionsAPI.md#v3patchcollection) | **Patch** /v3/collections/{collection_id} | Update a collection.
 *CollectionsAPI* | [**V3PatchCollectionBinaries**](docs/CollectionsAPI.md#v3patchcollectionbinaries) | **Patch** /v3/collections/{collection_id}/binaries | Replace the binaries in a collection.
 *CollectionsAPI* | [**V3PatchCollectionTags**](docs/CollectionsAPI.md#v3patchcollectiontags) | **Patch** /v3/collections/{collection_id}/tags | Replace the tags on a collection.
 *ConfigAPI* | [**GetConfig**](docs/ConfigAPI.md#getconfig) | **Get** /v2/config | Get Config
@@ -217,6 +219,9 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [AIDecompFunctionMapping](docs/AIDecompFunctionMapping.md)
+ - [AIDecompInverseFunctionMapItem](docs/AIDecompInverseFunctionMapItem.md)
+ - [AIDecompInverseStringMapItem](docs/AIDecompInverseStringMapItem.md)
  - [APIError](docs/APIError.md)
  - [AddCalleeInputBody](docs/AddCalleeInputBody.md)
  - [AddUserStringInputBody](docs/AddUserStringInputBody.md)
@@ -532,6 +537,8 @@ Class | Method | HTTP request | Description
  - [Params](docs/Params.md)
  - [PatchCollectionBinariesInputBody](docs/PatchCollectionBinariesInputBody.md)
  - [PatchCollectionBinariesOutputBody](docs/PatchCollectionBinariesOutputBody.md)
+ - [PatchCollectionInputBody](docs/PatchCollectionInputBody.md)
+ - [PatchCollectionOutputBody](docs/PatchCollectionOutputBody.md)
  - [PatchCollectionTagsInputBody](docs/PatchCollectionTagsInputBody.md)
  - [PatchCollectionTagsOutputBody](docs/PatchCollectionTagsOutputBody.md)
  - [PatchCommentBody](docs/PatchCommentBody.md)
