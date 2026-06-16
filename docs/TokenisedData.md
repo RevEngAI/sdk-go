@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FunctionMapping** | Pointer to [**FunctionMapping**](FunctionMapping.md) | Complete mapping data for token resolution | [optional] 
+**FunctionMapping** | Pointer to [**AIDecompFunctionMapping**](AIDecompFunctionMapping.md) | Complete mapping data for token resolution | [optional] 
 **PredictedFunctionName** | Pointer to **string** | Predicted function name from the AI model | [optional] 
 **Status** | **string** | Task status | 
 **TokenisedDecompilation** | Pointer to **string** | Source code with placeholder tokens | [optional] 
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetFunctionMapping
 
-`func (o *TokenisedData) GetFunctionMapping() FunctionMapping`
+`func (o *TokenisedData) GetFunctionMapping() AIDecompFunctionMapping`
 
 GetFunctionMapping returns the FunctionMapping field if non-nil, zero value otherwise.
 
 ### GetFunctionMappingOk
 
-`func (o *TokenisedData) GetFunctionMappingOk() (*FunctionMapping, bool)`
+`func (o *TokenisedData) GetFunctionMappingOk() (*AIDecompFunctionMapping, bool)`
 
 GetFunctionMappingOk returns a tuple with the FunctionMapping field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFunctionMapping
 
-`func (o *TokenisedData) SetFunctionMapping(v FunctionMapping)`
+`func (o *TokenisedData) SetFunctionMapping(v AIDecompFunctionMapping)`
 
 SetFunctionMapping sets FunctionMapping field to given value.
 

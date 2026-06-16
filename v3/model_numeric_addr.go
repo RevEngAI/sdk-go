@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -20,7 +21,6 @@ var _ MappedNullable = &NumericAddr{}
 // NumericAddr struct for NumericAddr
 type NumericAddr struct {
 	Value NullableInt64 `json:"Value"`
-	AdditionalProperties map[string]interface{}
 }
 
 type _NumericAddr NumericAddr
@@ -80,11 +80,6 @@ func (o NumericAddr) MarshalJSON() ([]byte, error) {
 func (o NumericAddr) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["Value"] = o.Value.Get()
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -112,20 +107,15 @@ func (o *NumericAddr) UnmarshalJSON(data []byte) (err error) {
 
 	varNumericAddr := _NumericAddr{}
 
-	err = json.Unmarshal(data, &varNumericAddr)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varNumericAddr)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NumericAddr(varNumericAddr)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "Value")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }
