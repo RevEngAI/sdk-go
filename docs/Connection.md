@@ -4,12 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BytesReceived** | Pointer to **int64** |  | [optional] 
+**BytesSent** | Pointer to **int64** |  | [optional] 
 **Events** | Pointer to [**[]ReportEvent**](ReportEvent.md) |  | [optional] 
+**Ja3** | Pointer to **string** |  | [optional] 
+**Ja3s** | Pointer to **string** |  | [optional] 
 **LocalIp** | **string** |  | 
 **LocalPort** | **interface{}** |  | 
 **Protocol** | **string** |  | 
 **RemoteIp** | **string** |  | 
 **RemotePort** | **interface{}** |  | 
+**TcpCarvedFiles** | Pointer to [**[]TcpCarvedFile**](TcpCarvedFile.md) |  | [optional] 
 
 ## Methods
 
@@ -29,6 +34,56 @@ will change when the set of required properties is changed
 NewConnectionWithDefaults instantiates a new Connection object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBytesReceived
+
+`func (o *Connection) GetBytesReceived() int64`
+
+GetBytesReceived returns the BytesReceived field if non-nil, zero value otherwise.
+
+### GetBytesReceivedOk
+
+`func (o *Connection) GetBytesReceivedOk() (*int64, bool)`
+
+GetBytesReceivedOk returns a tuple with the BytesReceived field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBytesReceived
+
+`func (o *Connection) SetBytesReceived(v int64)`
+
+SetBytesReceived sets BytesReceived field to given value.
+
+### HasBytesReceived
+
+`func (o *Connection) HasBytesReceived() bool`
+
+HasBytesReceived returns a boolean if a field has been set.
+
+### GetBytesSent
+
+`func (o *Connection) GetBytesSent() int64`
+
+GetBytesSent returns the BytesSent field if non-nil, zero value otherwise.
+
+### GetBytesSentOk
+
+`func (o *Connection) GetBytesSentOk() (*int64, bool)`
+
+GetBytesSentOk returns a tuple with the BytesSent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBytesSent
+
+`func (o *Connection) SetBytesSent(v int64)`
+
+SetBytesSent sets BytesSent field to given value.
+
+### HasBytesSent
+
+`func (o *Connection) HasBytesSent() bool`
+
+HasBytesSent returns a boolean if a field has been set.
 
 ### GetEvents
 
@@ -65,6 +120,56 @@ HasEvents returns a boolean if a field has been set.
 `func (o *Connection) UnsetEvents()`
 
 UnsetEvents ensures that no value is present for Events, not even an explicit nil
+### GetJa3
+
+`func (o *Connection) GetJa3() string`
+
+GetJa3 returns the Ja3 field if non-nil, zero value otherwise.
+
+### GetJa3Ok
+
+`func (o *Connection) GetJa3Ok() (*string, bool)`
+
+GetJa3Ok returns a tuple with the Ja3 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJa3
+
+`func (o *Connection) SetJa3(v string)`
+
+SetJa3 sets Ja3 field to given value.
+
+### HasJa3
+
+`func (o *Connection) HasJa3() bool`
+
+HasJa3 returns a boolean if a field has been set.
+
+### GetJa3s
+
+`func (o *Connection) GetJa3s() string`
+
+GetJa3s returns the Ja3s field if non-nil, zero value otherwise.
+
+### GetJa3sOk
+
+`func (o *Connection) GetJa3sOk() (*string, bool)`
+
+GetJa3sOk returns a tuple with the Ja3s field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJa3s
+
+`func (o *Connection) SetJa3s(v string)`
+
+SetJa3s sets Ja3s field to given value.
+
+### HasJa3s
+
+`func (o *Connection) HasJa3s() bool`
+
+HasJa3s returns a boolean if a field has been set.
+
 ### GetLocalIp
 
 `func (o *Connection) GetLocalIp() string`
@@ -185,6 +290,41 @@ SetRemotePort sets RemotePort field to given value.
 `func (o *Connection) UnsetRemotePort()`
 
 UnsetRemotePort ensures that no value is present for RemotePort, not even an explicit nil
+### GetTcpCarvedFiles
+
+`func (o *Connection) GetTcpCarvedFiles() []TcpCarvedFile`
+
+GetTcpCarvedFiles returns the TcpCarvedFiles field if non-nil, zero value otherwise.
+
+### GetTcpCarvedFilesOk
+
+`func (o *Connection) GetTcpCarvedFilesOk() (*[]TcpCarvedFile, bool)`
+
+GetTcpCarvedFilesOk returns a tuple with the TcpCarvedFiles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTcpCarvedFiles
+
+`func (o *Connection) SetTcpCarvedFiles(v []TcpCarvedFile)`
+
+SetTcpCarvedFiles sets TcpCarvedFiles field to given value.
+
+### HasTcpCarvedFiles
+
+`func (o *Connection) HasTcpCarvedFiles() bool`
+
+HasTcpCarvedFiles returns a boolean if a field has been set.
+
+### SetTcpCarvedFilesNil
+
+`func (o *Connection) SetTcpCarvedFilesNil(b bool)`
+
+ SetTcpCarvedFilesNil sets the value for TcpCarvedFiles to be an explicit nil
+
+### UnsetTcpCarvedFiles
+`func (o *Connection) UnsetTcpCarvedFiles()`
+
+UnsetTcpCarvedFiles ensures that no value is present for TcpCarvedFiles, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

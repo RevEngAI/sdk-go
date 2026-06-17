@@ -20,7 +20,7 @@ var _ MappedNullable = &AIDecompInverseStringMapItem{}
 
 // AIDecompInverseStringMapItem struct for AIDecompInverseStringMapItem
 type AIDecompInverseStringMapItem struct {
-	Addr NumericAddr `json:"addr"`
+	Addr NullableInt64 `json:"addr"`
 	String string `json:"string"`
 }
 
@@ -30,7 +30,7 @@ type _AIDecompInverseStringMapItem AIDecompInverseStringMapItem
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIDecompInverseStringMapItem(addr NumericAddr, string_ string) *AIDecompInverseStringMapItem {
+func NewAIDecompInverseStringMapItem(addr NullableInt64, string_ string) *AIDecompInverseStringMapItem {
 	this := AIDecompInverseStringMapItem{}
 	this.Addr = addr
 	this.String = string_
@@ -46,27 +46,29 @@ func NewAIDecompInverseStringMapItemWithDefaults() *AIDecompInverseStringMapItem
 }
 
 // GetAddr returns the Addr field value
-func (o *AIDecompInverseStringMapItem) GetAddr() NumericAddr {
-	if o == nil {
-		var ret NumericAddr
+// If the value is explicit nil, the zero value for int64 will be returned
+func (o *AIDecompInverseStringMapItem) GetAddr() int64 {
+	if o == nil || o.Addr.Get() == nil {
+		var ret int64
 		return ret
 	}
 
-	return o.Addr
+	return *o.Addr.Get()
 }
 
 // GetAddrOk returns a tuple with the Addr field value
 // and a boolean to check if the value has been set.
-func (o *AIDecompInverseStringMapItem) GetAddrOk() (*NumericAddr, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AIDecompInverseStringMapItem) GetAddrOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Addr, true
+	return o.Addr.Get(), o.Addr.IsSet()
 }
 
 // SetAddr sets field value
-func (o *AIDecompInverseStringMapItem) SetAddr(v NumericAddr) {
-	o.Addr = v
+func (o *AIDecompInverseStringMapItem) SetAddr(v int64) {
+	o.Addr.Set(&v)
 }
 
 // GetString returns the String field value
@@ -103,7 +105,7 @@ func (o AIDecompInverseStringMapItem) MarshalJSON() ([]byte, error) {
 
 func (o AIDecompInverseStringMapItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["addr"] = o.Addr
+	toSerialize["addr"] = o.Addr.Get()
 	toSerialize["string"] = o.String
 	return toSerialize, nil
 }

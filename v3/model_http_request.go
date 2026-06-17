@@ -18,15 +18,22 @@ var _ MappedNullable = &HttpRequest{}
 
 // HttpRequest struct for HttpRequest
 type HttpRequest struct {
+	BytesReceived *int64 `json:"bytes_received,omitempty"`
+	BytesSent *int64 `json:"bytes_sent,omitempty"`
 	Events []ReportEvent `json:"events,omitempty"`
 	ExtraHeaders []string `json:"extra_headers,omitempty"`
 	Flags *int64 `json:"flags,omitempty"`
 	Password *string `json:"password,omitempty"`
 	Path *string `json:"path,omitempty"`
+	PcapStreamId *int64 `json:"pcap_stream_id,omitempty"`
 	PostData *string `json:"post_data,omitempty"`
 	Proxy *string `json:"proxy,omitempty"`
 	ProxyBypass *string `json:"proxy_bypass,omitempty"`
 	Referer *string `json:"referer,omitempty"`
+	RequestBody *PcapBodyInfo `json:"request_body,omitempty"`
+	ResponseBody *PcapBodyInfo `json:"response_body,omitempty"`
+	ResponseStatus *int64 `json:"response_status,omitempty"`
+	ServerIp *string `json:"server_ip,omitempty"`
 	ServerName *string `json:"server_name,omitempty"`
 	ServerPort *int64 `json:"server_port,omitempty"`
 	Service *int64 `json:"service,omitempty"`
@@ -51,6 +58,70 @@ func NewHttpRequest() *HttpRequest {
 func NewHttpRequestWithDefaults() *HttpRequest {
 	this := HttpRequest{}
 	return &this
+}
+
+// GetBytesReceived returns the BytesReceived field value if set, zero value otherwise.
+func (o *HttpRequest) GetBytesReceived() int64 {
+	if o == nil || IsNil(o.BytesReceived) {
+		var ret int64
+		return ret
+	}
+	return *o.BytesReceived
+}
+
+// GetBytesReceivedOk returns a tuple with the BytesReceived field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HttpRequest) GetBytesReceivedOk() (*int64, bool) {
+	if o == nil || IsNil(o.BytesReceived) {
+		return nil, false
+	}
+	return o.BytesReceived, true
+}
+
+// HasBytesReceived returns a boolean if a field has been set.
+func (o *HttpRequest) HasBytesReceived() bool {
+	if o != nil && !IsNil(o.BytesReceived) {
+		return true
+	}
+
+	return false
+}
+
+// SetBytesReceived gets a reference to the given int64 and assigns it to the BytesReceived field.
+func (o *HttpRequest) SetBytesReceived(v int64) {
+	o.BytesReceived = &v
+}
+
+// GetBytesSent returns the BytesSent field value if set, zero value otherwise.
+func (o *HttpRequest) GetBytesSent() int64 {
+	if o == nil || IsNil(o.BytesSent) {
+		var ret int64
+		return ret
+	}
+	return *o.BytesSent
+}
+
+// GetBytesSentOk returns a tuple with the BytesSent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HttpRequest) GetBytesSentOk() (*int64, bool) {
+	if o == nil || IsNil(o.BytesSent) {
+		return nil, false
+	}
+	return o.BytesSent, true
+}
+
+// HasBytesSent returns a boolean if a field has been set.
+func (o *HttpRequest) HasBytesSent() bool {
+	if o != nil && !IsNil(o.BytesSent) {
+		return true
+	}
+
+	return false
+}
+
+// SetBytesSent gets a reference to the given int64 and assigns it to the BytesSent field.
+func (o *HttpRequest) SetBytesSent(v int64) {
+	o.BytesSent = &v
 }
 
 // GetEvents returns the Events field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -215,6 +286,38 @@ func (o *HttpRequest) SetPath(v string) {
 	o.Path = &v
 }
 
+// GetPcapStreamId returns the PcapStreamId field value if set, zero value otherwise.
+func (o *HttpRequest) GetPcapStreamId() int64 {
+	if o == nil || IsNil(o.PcapStreamId) {
+		var ret int64
+		return ret
+	}
+	return *o.PcapStreamId
+}
+
+// GetPcapStreamIdOk returns a tuple with the PcapStreamId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HttpRequest) GetPcapStreamIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.PcapStreamId) {
+		return nil, false
+	}
+	return o.PcapStreamId, true
+}
+
+// HasPcapStreamId returns a boolean if a field has been set.
+func (o *HttpRequest) HasPcapStreamId() bool {
+	if o != nil && !IsNil(o.PcapStreamId) {
+		return true
+	}
+
+	return false
+}
+
+// SetPcapStreamId gets a reference to the given int64 and assigns it to the PcapStreamId field.
+func (o *HttpRequest) SetPcapStreamId(v int64) {
+	o.PcapStreamId = &v
+}
+
 // GetPostData returns the PostData field value if set, zero value otherwise.
 func (o *HttpRequest) GetPostData() string {
 	if o == nil || IsNil(o.PostData) {
@@ -341,6 +444,134 @@ func (o *HttpRequest) HasReferer() bool {
 // SetReferer gets a reference to the given string and assigns it to the Referer field.
 func (o *HttpRequest) SetReferer(v string) {
 	o.Referer = &v
+}
+
+// GetRequestBody returns the RequestBody field value if set, zero value otherwise.
+func (o *HttpRequest) GetRequestBody() PcapBodyInfo {
+	if o == nil || IsNil(o.RequestBody) {
+		var ret PcapBodyInfo
+		return ret
+	}
+	return *o.RequestBody
+}
+
+// GetRequestBodyOk returns a tuple with the RequestBody field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HttpRequest) GetRequestBodyOk() (*PcapBodyInfo, bool) {
+	if o == nil || IsNil(o.RequestBody) {
+		return nil, false
+	}
+	return o.RequestBody, true
+}
+
+// HasRequestBody returns a boolean if a field has been set.
+func (o *HttpRequest) HasRequestBody() bool {
+	if o != nil && !IsNil(o.RequestBody) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestBody gets a reference to the given PcapBodyInfo and assigns it to the RequestBody field.
+func (o *HttpRequest) SetRequestBody(v PcapBodyInfo) {
+	o.RequestBody = &v
+}
+
+// GetResponseBody returns the ResponseBody field value if set, zero value otherwise.
+func (o *HttpRequest) GetResponseBody() PcapBodyInfo {
+	if o == nil || IsNil(o.ResponseBody) {
+		var ret PcapBodyInfo
+		return ret
+	}
+	return *o.ResponseBody
+}
+
+// GetResponseBodyOk returns a tuple with the ResponseBody field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HttpRequest) GetResponseBodyOk() (*PcapBodyInfo, bool) {
+	if o == nil || IsNil(o.ResponseBody) {
+		return nil, false
+	}
+	return o.ResponseBody, true
+}
+
+// HasResponseBody returns a boolean if a field has been set.
+func (o *HttpRequest) HasResponseBody() bool {
+	if o != nil && !IsNil(o.ResponseBody) {
+		return true
+	}
+
+	return false
+}
+
+// SetResponseBody gets a reference to the given PcapBodyInfo and assigns it to the ResponseBody field.
+func (o *HttpRequest) SetResponseBody(v PcapBodyInfo) {
+	o.ResponseBody = &v
+}
+
+// GetResponseStatus returns the ResponseStatus field value if set, zero value otherwise.
+func (o *HttpRequest) GetResponseStatus() int64 {
+	if o == nil || IsNil(o.ResponseStatus) {
+		var ret int64
+		return ret
+	}
+	return *o.ResponseStatus
+}
+
+// GetResponseStatusOk returns a tuple with the ResponseStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HttpRequest) GetResponseStatusOk() (*int64, bool) {
+	if o == nil || IsNil(o.ResponseStatus) {
+		return nil, false
+	}
+	return o.ResponseStatus, true
+}
+
+// HasResponseStatus returns a boolean if a field has been set.
+func (o *HttpRequest) HasResponseStatus() bool {
+	if o != nil && !IsNil(o.ResponseStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetResponseStatus gets a reference to the given int64 and assigns it to the ResponseStatus field.
+func (o *HttpRequest) SetResponseStatus(v int64) {
+	o.ResponseStatus = &v
+}
+
+// GetServerIp returns the ServerIp field value if set, zero value otherwise.
+func (o *HttpRequest) GetServerIp() string {
+	if o == nil || IsNil(o.ServerIp) {
+		var ret string
+		return ret
+	}
+	return *o.ServerIp
+}
+
+// GetServerIpOk returns a tuple with the ServerIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HttpRequest) GetServerIpOk() (*string, bool) {
+	if o == nil || IsNil(o.ServerIp) {
+		return nil, false
+	}
+	return o.ServerIp, true
+}
+
+// HasServerIp returns a boolean if a field has been set.
+func (o *HttpRequest) HasServerIp() bool {
+	if o != nil && !IsNil(o.ServerIp) {
+		return true
+	}
+
+	return false
+}
+
+// SetServerIp gets a reference to the given string and assigns it to the ServerIp field.
+func (o *HttpRequest) SetServerIp(v string) {
+	o.ServerIp = &v
 }
 
 // GetServerName returns the ServerName field value if set, zero value otherwise.
@@ -577,6 +808,12 @@ func (o HttpRequest) MarshalJSON() ([]byte, error) {
 
 func (o HttpRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.BytesReceived) {
+		toSerialize["bytes_received"] = o.BytesReceived
+	}
+	if !IsNil(o.BytesSent) {
+		toSerialize["bytes_sent"] = o.BytesSent
+	}
 	if o.Events != nil {
 		toSerialize["events"] = o.Events
 	}
@@ -592,6 +829,9 @@ func (o HttpRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Path) {
 		toSerialize["path"] = o.Path
 	}
+	if !IsNil(o.PcapStreamId) {
+		toSerialize["pcap_stream_id"] = o.PcapStreamId
+	}
 	if !IsNil(o.PostData) {
 		toSerialize["post_data"] = o.PostData
 	}
@@ -603,6 +843,18 @@ func (o HttpRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Referer) {
 		toSerialize["referer"] = o.Referer
+	}
+	if !IsNil(o.RequestBody) {
+		toSerialize["request_body"] = o.RequestBody
+	}
+	if !IsNil(o.ResponseBody) {
+		toSerialize["response_body"] = o.ResponseBody
+	}
+	if !IsNil(o.ResponseStatus) {
+		toSerialize["response_status"] = o.ResponseStatus
+	}
+	if !IsNil(o.ServerIp) {
+		toSerialize["server_ip"] = o.ServerIp
 	}
 	if !IsNil(o.ServerName) {
 		toSerialize["server_name"] = o.ServerName

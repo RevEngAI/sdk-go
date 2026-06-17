@@ -20,7 +20,7 @@ var _ MappedNullable = &AIDecompInverseFunctionMapItem{}
 
 // AIDecompInverseFunctionMapItem struct for AIDecompInverseFunctionMapItem
 type AIDecompInverseFunctionMapItem struct {
-	Addr NumericAddr `json:"addr"`
+	Addr NullableInt64 `json:"addr"`
 	IsExternal bool `json:"is_external"`
 	Name string `json:"name"`
 }
@@ -31,7 +31,7 @@ type _AIDecompInverseFunctionMapItem AIDecompInverseFunctionMapItem
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIDecompInverseFunctionMapItem(addr NumericAddr, isExternal bool, name string) *AIDecompInverseFunctionMapItem {
+func NewAIDecompInverseFunctionMapItem(addr NullableInt64, isExternal bool, name string) *AIDecompInverseFunctionMapItem {
 	this := AIDecompInverseFunctionMapItem{}
 	this.Addr = addr
 	this.IsExternal = isExternal
@@ -48,27 +48,29 @@ func NewAIDecompInverseFunctionMapItemWithDefaults() *AIDecompInverseFunctionMap
 }
 
 // GetAddr returns the Addr field value
-func (o *AIDecompInverseFunctionMapItem) GetAddr() NumericAddr {
-	if o == nil {
-		var ret NumericAddr
+// If the value is explicit nil, the zero value for int64 will be returned
+func (o *AIDecompInverseFunctionMapItem) GetAddr() int64 {
+	if o == nil || o.Addr.Get() == nil {
+		var ret int64
 		return ret
 	}
 
-	return o.Addr
+	return *o.Addr.Get()
 }
 
 // GetAddrOk returns a tuple with the Addr field value
 // and a boolean to check if the value has been set.
-func (o *AIDecompInverseFunctionMapItem) GetAddrOk() (*NumericAddr, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AIDecompInverseFunctionMapItem) GetAddrOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Addr, true
+	return o.Addr.Get(), o.Addr.IsSet()
 }
 
 // SetAddr sets field value
-func (o *AIDecompInverseFunctionMapItem) SetAddr(v NumericAddr) {
-	o.Addr = v
+func (o *AIDecompInverseFunctionMapItem) SetAddr(v int64) {
+	o.Addr.Set(&v)
 }
 
 // GetIsExternal returns the IsExternal field value
@@ -129,7 +131,7 @@ func (o AIDecompInverseFunctionMapItem) MarshalJSON() ([]byte, error) {
 
 func (o AIDecompInverseFunctionMapItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["addr"] = o.Addr
+	toSerialize["addr"] = o.Addr.Get()
 	toSerialize["is_external"] = o.IsExternal
 	toSerialize["name"] = o.Name
 	return toSerialize, nil

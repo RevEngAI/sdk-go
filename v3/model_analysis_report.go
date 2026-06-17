@@ -19,7 +19,8 @@ var _ MappedNullable = &AnalysisReport{}
 
 // AnalysisReport struct for AnalysisReport
 type AnalysisReport struct {
-	ExtractedFiles []ProcessExtractedFiles `json:"extracted_files,omitempty"`
+	Artifacts []Artifact `json:"artifacts,omitempty"`
+	ConsoleOutput []ConsoleOutputEntry `json:"console_output,omitempty"`
 	FileActivity []FileActivityEntry `json:"file_activity,omitempty"`
 	Info ReportInfo `json:"info"`
 	Memdumps []ProcessMemdumps `json:"memdumps,omitempty"`
@@ -32,7 +33,6 @@ type AnalysisReport struct {
 	ScheduledTasks []ScheduledTaskEntry `json:"scheduled_tasks,omitempty"`
 	Services []ServiceEntry `json:"services,omitempty"`
 	Startup *StartupInfo `json:"startup,omitempty"`
-	ThreatScore int64 `json:"threat_score"`
 	Ttps []Ttp `json:"ttps,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -43,10 +43,9 @@ type _AnalysisReport AnalysisReport
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisReport(info ReportInfo, threatScore int64) *AnalysisReport {
+func NewAnalysisReport(info ReportInfo) *AnalysisReport {
 	this := AnalysisReport{}
 	this.Info = info
-	this.ThreatScore = threatScore
 	return &this
 }
 
@@ -58,37 +57,70 @@ func NewAnalysisReportWithDefaults() *AnalysisReport {
 	return &this
 }
 
-// GetExtractedFiles returns the ExtractedFiles field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AnalysisReport) GetExtractedFiles() []ProcessExtractedFiles {
+// GetArtifacts returns the Artifacts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AnalysisReport) GetArtifacts() []Artifact {
 	if o == nil {
-		var ret []ProcessExtractedFiles
+		var ret []Artifact
 		return ret
 	}
-	return o.ExtractedFiles
+	return o.Artifacts
 }
 
-// GetExtractedFilesOk returns a tuple with the ExtractedFiles field value if set, nil otherwise
+// GetArtifactsOk returns a tuple with the Artifacts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AnalysisReport) GetExtractedFilesOk() ([]ProcessExtractedFiles, bool) {
-	if o == nil || IsNil(o.ExtractedFiles) {
+func (o *AnalysisReport) GetArtifactsOk() ([]Artifact, bool) {
+	if o == nil || IsNil(o.Artifacts) {
 		return nil, false
 	}
-	return o.ExtractedFiles, true
+	return o.Artifacts, true
 }
 
-// HasExtractedFiles returns a boolean if a field has been set.
-func (o *AnalysisReport) HasExtractedFiles() bool {
-	if o != nil && !IsNil(o.ExtractedFiles) {
+// HasArtifacts returns a boolean if a field has been set.
+func (o *AnalysisReport) HasArtifacts() bool {
+	if o != nil && !IsNil(o.Artifacts) {
 		return true
 	}
 
 	return false
 }
 
-// SetExtractedFiles gets a reference to the given []ProcessExtractedFiles and assigns it to the ExtractedFiles field.
-func (o *AnalysisReport) SetExtractedFiles(v []ProcessExtractedFiles) {
-	o.ExtractedFiles = v
+// SetArtifacts gets a reference to the given []Artifact and assigns it to the Artifacts field.
+func (o *AnalysisReport) SetArtifacts(v []Artifact) {
+	o.Artifacts = v
+}
+
+// GetConsoleOutput returns the ConsoleOutput field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AnalysisReport) GetConsoleOutput() []ConsoleOutputEntry {
+	if o == nil {
+		var ret []ConsoleOutputEntry
+		return ret
+	}
+	return o.ConsoleOutput
+}
+
+// GetConsoleOutputOk returns a tuple with the ConsoleOutput field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AnalysisReport) GetConsoleOutputOk() ([]ConsoleOutputEntry, bool) {
+	if o == nil || IsNil(o.ConsoleOutput) {
+		return nil, false
+	}
+	return o.ConsoleOutput, true
+}
+
+// HasConsoleOutput returns a boolean if a field has been set.
+func (o *AnalysisReport) HasConsoleOutput() bool {
+	if o != nil && !IsNil(o.ConsoleOutput) {
+		return true
+	}
+
+	return false
+}
+
+// SetConsoleOutput gets a reference to the given []ConsoleOutputEntry and assigns it to the ConsoleOutput field.
+func (o *AnalysisReport) SetConsoleOutput(v []ConsoleOutputEntry) {
+	o.ConsoleOutput = v
 }
 
 // GetFileActivity returns the FileActivity field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -475,30 +507,6 @@ func (o *AnalysisReport) SetStartup(v StartupInfo) {
 	o.Startup = &v
 }
 
-// GetThreatScore returns the ThreatScore field value
-func (o *AnalysisReport) GetThreatScore() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.ThreatScore
-}
-
-// GetThreatScoreOk returns a tuple with the ThreatScore field value
-// and a boolean to check if the value has been set.
-func (o *AnalysisReport) GetThreatScoreOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ThreatScore, true
-}
-
-// SetThreatScore sets field value
-func (o *AnalysisReport) SetThreatScore(v int64) {
-	o.ThreatScore = v
-}
-
 // GetTtps returns the Ttps field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AnalysisReport) GetTtps() []Ttp {
 	if o == nil {
@@ -542,8 +550,11 @@ func (o AnalysisReport) MarshalJSON() ([]byte, error) {
 
 func (o AnalysisReport) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ExtractedFiles != nil {
-		toSerialize["extracted_files"] = o.ExtractedFiles
+	if o.Artifacts != nil {
+		toSerialize["artifacts"] = o.Artifacts
+	}
+	if o.ConsoleOutput != nil {
+		toSerialize["console_output"] = o.ConsoleOutput
 	}
 	if o.FileActivity != nil {
 		toSerialize["file_activity"] = o.FileActivity
@@ -579,7 +590,6 @@ func (o AnalysisReport) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Startup) {
 		toSerialize["startup"] = o.Startup
 	}
-	toSerialize["threat_score"] = o.ThreatScore
 	if o.Ttps != nil {
 		toSerialize["ttps"] = o.Ttps
 	}
@@ -597,7 +607,6 @@ func (o *AnalysisReport) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"info",
-		"threat_score",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -627,7 +636,8 @@ func (o *AnalysisReport) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "extracted_files")
+		delete(additionalProperties, "artifacts")
+		delete(additionalProperties, "console_output")
 		delete(additionalProperties, "file_activity")
 		delete(additionalProperties, "info")
 		delete(additionalProperties, "memdumps")
@@ -640,7 +650,6 @@ func (o *AnalysisReport) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scheduled_tasks")
 		delete(additionalProperties, "services")
 		delete(additionalProperties, "startup")
-		delete(additionalProperties, "threat_score")
 		delete(additionalProperties, "ttps")
 		o.AdditionalProperties = additionalProperties
 	}
