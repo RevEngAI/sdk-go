@@ -4,15 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BytesReceived** | Pointer to **int64** |  | [optional] 
+**BytesSent** | Pointer to **int64** |  | [optional] 
 **Events** | Pointer to [**[]ReportEvent**](ReportEvent.md) |  | [optional] 
 **ExtraHeaders** | Pointer to **[]string** |  | [optional] 
 **Flags** | Pointer to **int64** |  | [optional] 
 **Password** | Pointer to **string** |  | [optional] 
 **Path** | Pointer to **string** |  | [optional] 
+**PcapStreamId** | Pointer to **int64** |  | [optional] 
 **PostData** | Pointer to **string** |  | [optional] 
 **Proxy** | Pointer to **string** |  | [optional] 
 **ProxyBypass** | Pointer to **string** |  | [optional] 
 **Referer** | Pointer to **string** |  | [optional] 
+**RequestBody** | Pointer to [**PcapBodyInfo**](PcapBodyInfo.md) |  | [optional] 
+**ResponseBody** | Pointer to [**PcapBodyInfo**](PcapBodyInfo.md) |  | [optional] 
+**ResponseStatus** | Pointer to **int64** |  | [optional] 
+**ServerIp** | Pointer to **string** |  | [optional] 
 **ServerName** | Pointer to **string** |  | [optional] 
 **ServerPort** | Pointer to **int64** |  | [optional] 
 **Service** | Pointer to **int64** |  | [optional] 
@@ -39,6 +46,56 @@ will change when the set of required properties is changed
 NewHttpRequestWithDefaults instantiates a new HttpRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBytesReceived
+
+`func (o *HttpRequest) GetBytesReceived() int64`
+
+GetBytesReceived returns the BytesReceived field if non-nil, zero value otherwise.
+
+### GetBytesReceivedOk
+
+`func (o *HttpRequest) GetBytesReceivedOk() (*int64, bool)`
+
+GetBytesReceivedOk returns a tuple with the BytesReceived field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBytesReceived
+
+`func (o *HttpRequest) SetBytesReceived(v int64)`
+
+SetBytesReceived sets BytesReceived field to given value.
+
+### HasBytesReceived
+
+`func (o *HttpRequest) HasBytesReceived() bool`
+
+HasBytesReceived returns a boolean if a field has been set.
+
+### GetBytesSent
+
+`func (o *HttpRequest) GetBytesSent() int64`
+
+GetBytesSent returns the BytesSent field if non-nil, zero value otherwise.
+
+### GetBytesSentOk
+
+`func (o *HttpRequest) GetBytesSentOk() (*int64, bool)`
+
+GetBytesSentOk returns a tuple with the BytesSent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBytesSent
+
+`func (o *HttpRequest) SetBytesSent(v int64)`
+
+SetBytesSent sets BytesSent field to given value.
+
+### HasBytesSent
+
+`func (o *HttpRequest) HasBytesSent() bool`
+
+HasBytesSent returns a boolean if a field has been set.
 
 ### GetEvents
 
@@ -185,6 +242,31 @@ SetPath sets Path field to given value.
 
 HasPath returns a boolean if a field has been set.
 
+### GetPcapStreamId
+
+`func (o *HttpRequest) GetPcapStreamId() int64`
+
+GetPcapStreamId returns the PcapStreamId field if non-nil, zero value otherwise.
+
+### GetPcapStreamIdOk
+
+`func (o *HttpRequest) GetPcapStreamIdOk() (*int64, bool)`
+
+GetPcapStreamIdOk returns a tuple with the PcapStreamId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPcapStreamId
+
+`func (o *HttpRequest) SetPcapStreamId(v int64)`
+
+SetPcapStreamId sets PcapStreamId field to given value.
+
+### HasPcapStreamId
+
+`func (o *HttpRequest) HasPcapStreamId() bool`
+
+HasPcapStreamId returns a boolean if a field has been set.
+
 ### GetPostData
 
 `func (o *HttpRequest) GetPostData() string`
@@ -284,6 +366,106 @@ SetReferer sets Referer field to given value.
 `func (o *HttpRequest) HasReferer() bool`
 
 HasReferer returns a boolean if a field has been set.
+
+### GetRequestBody
+
+`func (o *HttpRequest) GetRequestBody() PcapBodyInfo`
+
+GetRequestBody returns the RequestBody field if non-nil, zero value otherwise.
+
+### GetRequestBodyOk
+
+`func (o *HttpRequest) GetRequestBodyOk() (*PcapBodyInfo, bool)`
+
+GetRequestBodyOk returns a tuple with the RequestBody field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestBody
+
+`func (o *HttpRequest) SetRequestBody(v PcapBodyInfo)`
+
+SetRequestBody sets RequestBody field to given value.
+
+### HasRequestBody
+
+`func (o *HttpRequest) HasRequestBody() bool`
+
+HasRequestBody returns a boolean if a field has been set.
+
+### GetResponseBody
+
+`func (o *HttpRequest) GetResponseBody() PcapBodyInfo`
+
+GetResponseBody returns the ResponseBody field if non-nil, zero value otherwise.
+
+### GetResponseBodyOk
+
+`func (o *HttpRequest) GetResponseBodyOk() (*PcapBodyInfo, bool)`
+
+GetResponseBodyOk returns a tuple with the ResponseBody field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResponseBody
+
+`func (o *HttpRequest) SetResponseBody(v PcapBodyInfo)`
+
+SetResponseBody sets ResponseBody field to given value.
+
+### HasResponseBody
+
+`func (o *HttpRequest) HasResponseBody() bool`
+
+HasResponseBody returns a boolean if a field has been set.
+
+### GetResponseStatus
+
+`func (o *HttpRequest) GetResponseStatus() int64`
+
+GetResponseStatus returns the ResponseStatus field if non-nil, zero value otherwise.
+
+### GetResponseStatusOk
+
+`func (o *HttpRequest) GetResponseStatusOk() (*int64, bool)`
+
+GetResponseStatusOk returns a tuple with the ResponseStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResponseStatus
+
+`func (o *HttpRequest) SetResponseStatus(v int64)`
+
+SetResponseStatus sets ResponseStatus field to given value.
+
+### HasResponseStatus
+
+`func (o *HttpRequest) HasResponseStatus() bool`
+
+HasResponseStatus returns a boolean if a field has been set.
+
+### GetServerIp
+
+`func (o *HttpRequest) GetServerIp() string`
+
+GetServerIp returns the ServerIp field if non-nil, zero value otherwise.
+
+### GetServerIpOk
+
+`func (o *HttpRequest) GetServerIpOk() (*string, bool)`
+
+GetServerIpOk returns a tuple with the ServerIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerIp
+
+`func (o *HttpRequest) SetServerIp(v string)`
+
+SetServerIp sets ServerIp field to given value.
+
+### HasServerIp
+
+`func (o *HttpRequest) HasServerIp() bool`
+
+HasServerIp returns a boolean if a field has been set.
 
 ### GetServerName
 

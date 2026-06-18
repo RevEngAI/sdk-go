@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExtractedFiles** | Pointer to [**[]ProcessExtractedFiles**](ProcessExtractedFiles.md) |  | [optional] 
+**Artifacts** | Pointer to [**[]Artifact**](Artifact.md) |  | [optional] 
+**ConsoleOutput** | Pointer to [**[]ConsoleOutputEntry**](ConsoleOutputEntry.md) |  | [optional] 
 **FileActivity** | Pointer to [**[]FileActivityEntry**](FileActivityEntry.md) |  | [optional] 
 **Info** | [**ReportInfo**](ReportInfo.md) |  | 
 **Memdumps** | Pointer to [**[]ProcessMemdumps**](ProcessMemdumps.md) |  | [optional] 
@@ -17,14 +18,13 @@ Name | Type | Description | Notes
 **ScheduledTasks** | Pointer to [**[]ScheduledTaskEntry**](ScheduledTaskEntry.md) |  | [optional] 
 **Services** | Pointer to [**[]ServiceEntry**](ServiceEntry.md) |  | [optional] 
 **Startup** | Pointer to [**StartupInfo**](StartupInfo.md) |  | [optional] 
-**ThreatScore** | **int64** |  | 
 **Ttps** | Pointer to [**[]Ttp**](Ttp.md) |  | [optional] 
 
 ## Methods
 
 ### NewAnalysisReport
 
-`func NewAnalysisReport(info ReportInfo, threatScore int64, ) *AnalysisReport`
+`func NewAnalysisReport(info ReportInfo, ) *AnalysisReport`
 
 NewAnalysisReport instantiates a new AnalysisReport object
 This constructor will assign default values to properties that have it defined,
@@ -39,41 +39,76 @@ NewAnalysisReportWithDefaults instantiates a new AnalysisReport object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetExtractedFiles
+### GetArtifacts
 
-`func (o *AnalysisReport) GetExtractedFiles() []ProcessExtractedFiles`
+`func (o *AnalysisReport) GetArtifacts() []Artifact`
 
-GetExtractedFiles returns the ExtractedFiles field if non-nil, zero value otherwise.
+GetArtifacts returns the Artifacts field if non-nil, zero value otherwise.
 
-### GetExtractedFilesOk
+### GetArtifactsOk
 
-`func (o *AnalysisReport) GetExtractedFilesOk() (*[]ProcessExtractedFiles, bool)`
+`func (o *AnalysisReport) GetArtifactsOk() (*[]Artifact, bool)`
 
-GetExtractedFilesOk returns a tuple with the ExtractedFiles field if it's non-nil, zero value otherwise
+GetArtifactsOk returns a tuple with the Artifacts field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetExtractedFiles
+### SetArtifacts
 
-`func (o *AnalysisReport) SetExtractedFiles(v []ProcessExtractedFiles)`
+`func (o *AnalysisReport) SetArtifacts(v []Artifact)`
 
-SetExtractedFiles sets ExtractedFiles field to given value.
+SetArtifacts sets Artifacts field to given value.
 
-### HasExtractedFiles
+### HasArtifacts
 
-`func (o *AnalysisReport) HasExtractedFiles() bool`
+`func (o *AnalysisReport) HasArtifacts() bool`
 
-HasExtractedFiles returns a boolean if a field has been set.
+HasArtifacts returns a boolean if a field has been set.
 
-### SetExtractedFilesNil
+### SetArtifactsNil
 
-`func (o *AnalysisReport) SetExtractedFilesNil(b bool)`
+`func (o *AnalysisReport) SetArtifactsNil(b bool)`
 
- SetExtractedFilesNil sets the value for ExtractedFiles to be an explicit nil
+ SetArtifactsNil sets the value for Artifacts to be an explicit nil
 
-### UnsetExtractedFiles
-`func (o *AnalysisReport) UnsetExtractedFiles()`
+### UnsetArtifacts
+`func (o *AnalysisReport) UnsetArtifacts()`
 
-UnsetExtractedFiles ensures that no value is present for ExtractedFiles, not even an explicit nil
+UnsetArtifacts ensures that no value is present for Artifacts, not even an explicit nil
+### GetConsoleOutput
+
+`func (o *AnalysisReport) GetConsoleOutput() []ConsoleOutputEntry`
+
+GetConsoleOutput returns the ConsoleOutput field if non-nil, zero value otherwise.
+
+### GetConsoleOutputOk
+
+`func (o *AnalysisReport) GetConsoleOutputOk() (*[]ConsoleOutputEntry, bool)`
+
+GetConsoleOutputOk returns a tuple with the ConsoleOutput field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConsoleOutput
+
+`func (o *AnalysisReport) SetConsoleOutput(v []ConsoleOutputEntry)`
+
+SetConsoleOutput sets ConsoleOutput field to given value.
+
+### HasConsoleOutput
+
+`func (o *AnalysisReport) HasConsoleOutput() bool`
+
+HasConsoleOutput returns a boolean if a field has been set.
+
+### SetConsoleOutputNil
+
+`func (o *AnalysisReport) SetConsoleOutputNil(b bool)`
+
+ SetConsoleOutputNil sets the value for ConsoleOutput to be an explicit nil
+
+### UnsetConsoleOutput
+`func (o *AnalysisReport) UnsetConsoleOutput()`
+
+UnsetConsoleOutput ensures that no value is present for ConsoleOutput, not even an explicit nil
 ### GetFileActivity
 
 `func (o *AnalysisReport) GetFileActivity() []FileActivityEntry`
@@ -448,26 +483,6 @@ SetStartup sets Startup field to given value.
 `func (o *AnalysisReport) HasStartup() bool`
 
 HasStartup returns a boolean if a field has been set.
-
-### GetThreatScore
-
-`func (o *AnalysisReport) GetThreatScore() int64`
-
-GetThreatScore returns the ThreatScore field if non-nil, zero value otherwise.
-
-### GetThreatScoreOk
-
-`func (o *AnalysisReport) GetThreatScoreOk() (*int64, bool)`
-
-GetThreatScoreOk returns a tuple with the ThreatScore field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetThreatScore
-
-`func (o *AnalysisReport) SetThreatScore(v int64)`
-
-SetThreatScore sets ThreatScore field to given value.
-
 
 ### GetTtps
 

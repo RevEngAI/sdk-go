@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **NewMangledName** | Pointer to **string** | New mangled function name | [optional] 
 **NewName** | **string** | New function name | 
+**PreserveAiDecompilation** | Pointer to **bool** | Keep the cached AI decompilation, summary and inline comments. Set when the new name comes from the model&#39;s own prediction (e.g. Transfer Name) so existing AI output is not discarded and regenerated. | [optional] 
 
 ## Methods
 
@@ -70,6 +71,31 @@ and a boolean to check if the value has been set.
 
 SetNewName sets NewName field to given value.
 
+
+### GetPreserveAiDecompilation
+
+`func (o *RenameInputBody) GetPreserveAiDecompilation() bool`
+
+GetPreserveAiDecompilation returns the PreserveAiDecompilation field if non-nil, zero value otherwise.
+
+### GetPreserveAiDecompilationOk
+
+`func (o *RenameInputBody) GetPreserveAiDecompilationOk() (*bool, bool)`
+
+GetPreserveAiDecompilationOk returns a tuple with the PreserveAiDecompilation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreserveAiDecompilation
+
+`func (o *RenameInputBody) SetPreserveAiDecompilation(v bool)`
+
+SetPreserveAiDecompilation sets PreserveAiDecompilation field to given value.
+
+### HasPreserveAiDecompilation
+
+`func (o *RenameInputBody) HasPreserveAiDecompilation() bool`
+
+HasPreserveAiDecompilation returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

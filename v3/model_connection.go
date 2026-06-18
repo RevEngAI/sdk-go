@@ -20,12 +20,17 @@ var _ MappedNullable = &Connection{}
 
 // Connection struct for Connection
 type Connection struct {
+	BytesReceived *int64 `json:"bytes_received,omitempty"`
+	BytesSent *int64 `json:"bytes_sent,omitempty"`
 	Events []ReportEvent `json:"events,omitempty"`
+	Ja3 *string `json:"ja3,omitempty"`
+	Ja3s *string `json:"ja3s,omitempty"`
 	LocalIp string `json:"local_ip"`
 	LocalPort interface{} `json:"local_port"`
 	Protocol string `json:"protocol"`
 	RemoteIp string `json:"remote_ip"`
 	RemotePort interface{} `json:"remote_port"`
+	TcpCarvedFiles []TcpCarvedFile `json:"tcp_carved_files,omitempty"`
 }
 
 type _Connection Connection
@@ -50,6 +55,70 @@ func NewConnection(localIp string, localPort interface{}, protocol string, remot
 func NewConnectionWithDefaults() *Connection {
 	this := Connection{}
 	return &this
+}
+
+// GetBytesReceived returns the BytesReceived field value if set, zero value otherwise.
+func (o *Connection) GetBytesReceived() int64 {
+	if o == nil || IsNil(o.BytesReceived) {
+		var ret int64
+		return ret
+	}
+	return *o.BytesReceived
+}
+
+// GetBytesReceivedOk returns a tuple with the BytesReceived field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Connection) GetBytesReceivedOk() (*int64, bool) {
+	if o == nil || IsNil(o.BytesReceived) {
+		return nil, false
+	}
+	return o.BytesReceived, true
+}
+
+// HasBytesReceived returns a boolean if a field has been set.
+func (o *Connection) HasBytesReceived() bool {
+	if o != nil && !IsNil(o.BytesReceived) {
+		return true
+	}
+
+	return false
+}
+
+// SetBytesReceived gets a reference to the given int64 and assigns it to the BytesReceived field.
+func (o *Connection) SetBytesReceived(v int64) {
+	o.BytesReceived = &v
+}
+
+// GetBytesSent returns the BytesSent field value if set, zero value otherwise.
+func (o *Connection) GetBytesSent() int64 {
+	if o == nil || IsNil(o.BytesSent) {
+		var ret int64
+		return ret
+	}
+	return *o.BytesSent
+}
+
+// GetBytesSentOk returns a tuple with the BytesSent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Connection) GetBytesSentOk() (*int64, bool) {
+	if o == nil || IsNil(o.BytesSent) {
+		return nil, false
+	}
+	return o.BytesSent, true
+}
+
+// HasBytesSent returns a boolean if a field has been set.
+func (o *Connection) HasBytesSent() bool {
+	if o != nil && !IsNil(o.BytesSent) {
+		return true
+	}
+
+	return false
+}
+
+// SetBytesSent gets a reference to the given int64 and assigns it to the BytesSent field.
+func (o *Connection) SetBytesSent(v int64) {
+	o.BytesSent = &v
 }
 
 // GetEvents returns the Events field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -83,6 +152,70 @@ func (o *Connection) HasEvents() bool {
 // SetEvents gets a reference to the given []ReportEvent and assigns it to the Events field.
 func (o *Connection) SetEvents(v []ReportEvent) {
 	o.Events = v
+}
+
+// GetJa3 returns the Ja3 field value if set, zero value otherwise.
+func (o *Connection) GetJa3() string {
+	if o == nil || IsNil(o.Ja3) {
+		var ret string
+		return ret
+	}
+	return *o.Ja3
+}
+
+// GetJa3Ok returns a tuple with the Ja3 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Connection) GetJa3Ok() (*string, bool) {
+	if o == nil || IsNil(o.Ja3) {
+		return nil, false
+	}
+	return o.Ja3, true
+}
+
+// HasJa3 returns a boolean if a field has been set.
+func (o *Connection) HasJa3() bool {
+	if o != nil && !IsNil(o.Ja3) {
+		return true
+	}
+
+	return false
+}
+
+// SetJa3 gets a reference to the given string and assigns it to the Ja3 field.
+func (o *Connection) SetJa3(v string) {
+	o.Ja3 = &v
+}
+
+// GetJa3s returns the Ja3s field value if set, zero value otherwise.
+func (o *Connection) GetJa3s() string {
+	if o == nil || IsNil(o.Ja3s) {
+		var ret string
+		return ret
+	}
+	return *o.Ja3s
+}
+
+// GetJa3sOk returns a tuple with the Ja3s field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Connection) GetJa3sOk() (*string, bool) {
+	if o == nil || IsNil(o.Ja3s) {
+		return nil, false
+	}
+	return o.Ja3s, true
+}
+
+// HasJa3s returns a boolean if a field has been set.
+func (o *Connection) HasJa3s() bool {
+	if o != nil && !IsNil(o.Ja3s) {
+		return true
+	}
+
+	return false
+}
+
+// SetJa3s gets a reference to the given string and assigns it to the Ja3s field.
+func (o *Connection) SetJa3s(v string) {
+	o.Ja3s = &v
 }
 
 // GetLocalIp returns the LocalIp field value
@@ -209,6 +342,39 @@ func (o *Connection) SetRemotePort(v interface{}) {
 	o.RemotePort = v
 }
 
+// GetTcpCarvedFiles returns the TcpCarvedFiles field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Connection) GetTcpCarvedFiles() []TcpCarvedFile {
+	if o == nil {
+		var ret []TcpCarvedFile
+		return ret
+	}
+	return o.TcpCarvedFiles
+}
+
+// GetTcpCarvedFilesOk returns a tuple with the TcpCarvedFiles field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Connection) GetTcpCarvedFilesOk() ([]TcpCarvedFile, bool) {
+	if o == nil || IsNil(o.TcpCarvedFiles) {
+		return nil, false
+	}
+	return o.TcpCarvedFiles, true
+}
+
+// HasTcpCarvedFiles returns a boolean if a field has been set.
+func (o *Connection) HasTcpCarvedFiles() bool {
+	if o != nil && !IsNil(o.TcpCarvedFiles) {
+		return true
+	}
+
+	return false
+}
+
+// SetTcpCarvedFiles gets a reference to the given []TcpCarvedFile and assigns it to the TcpCarvedFiles field.
+func (o *Connection) SetTcpCarvedFiles(v []TcpCarvedFile) {
+	o.TcpCarvedFiles = v
+}
+
 func (o Connection) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -219,8 +385,20 @@ func (o Connection) MarshalJSON() ([]byte, error) {
 
 func (o Connection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.BytesReceived) {
+		toSerialize["bytes_received"] = o.BytesReceived
+	}
+	if !IsNil(o.BytesSent) {
+		toSerialize["bytes_sent"] = o.BytesSent
+	}
 	if o.Events != nil {
 		toSerialize["events"] = o.Events
+	}
+	if !IsNil(o.Ja3) {
+		toSerialize["ja3"] = o.Ja3
+	}
+	if !IsNil(o.Ja3s) {
+		toSerialize["ja3s"] = o.Ja3s
 	}
 	toSerialize["local_ip"] = o.LocalIp
 	if o.LocalPort != nil {
@@ -230,6 +408,9 @@ func (o Connection) ToMap() (map[string]interface{}, error) {
 	toSerialize["remote_ip"] = o.RemoteIp
 	if o.RemotePort != nil {
 		toSerialize["remote_port"] = o.RemotePort
+	}
+	if o.TcpCarvedFiles != nil {
+		toSerialize["tcp_carved_files"] = o.TcpCarvedFiles
 	}
 	return toSerialize, nil
 }

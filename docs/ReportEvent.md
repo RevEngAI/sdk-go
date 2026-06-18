@@ -5,12 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApiCalls** | Pointer to [**[]ApiCall**](ApiCall.md) |  | [optional] 
+**Count** | Pointer to **int64** |  | [optional] 
+**DesiredAccess** | Pointer to **[]string** |  | [optional] 
 **ProcessSeqid** | Pointer to **int64** |  | [optional] 
-**TotalBytesRequested** | Pointer to **int64** |  | [optional] 
+**TotalBytes** | Pointer to **int64** |  | [optional] 
 **Type** | **string** |  | 
 **Value** | Pointer to **string** |  | [optional] 
 **ValueName** | Pointer to **string** |  | [optional] 
-**WriteCount** | Pointer to **int64** |  | [optional] 
 
 ## Methods
 
@@ -66,6 +67,66 @@ HasApiCalls returns a boolean if a field has been set.
 `func (o *ReportEvent) UnsetApiCalls()`
 
 UnsetApiCalls ensures that no value is present for ApiCalls, not even an explicit nil
+### GetCount
+
+`func (o *ReportEvent) GetCount() int64`
+
+GetCount returns the Count field if non-nil, zero value otherwise.
+
+### GetCountOk
+
+`func (o *ReportEvent) GetCountOk() (*int64, bool)`
+
+GetCountOk returns a tuple with the Count field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCount
+
+`func (o *ReportEvent) SetCount(v int64)`
+
+SetCount sets Count field to given value.
+
+### HasCount
+
+`func (o *ReportEvent) HasCount() bool`
+
+HasCount returns a boolean if a field has been set.
+
+### GetDesiredAccess
+
+`func (o *ReportEvent) GetDesiredAccess() []string`
+
+GetDesiredAccess returns the DesiredAccess field if non-nil, zero value otherwise.
+
+### GetDesiredAccessOk
+
+`func (o *ReportEvent) GetDesiredAccessOk() (*[]string, bool)`
+
+GetDesiredAccessOk returns a tuple with the DesiredAccess field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDesiredAccess
+
+`func (o *ReportEvent) SetDesiredAccess(v []string)`
+
+SetDesiredAccess sets DesiredAccess field to given value.
+
+### HasDesiredAccess
+
+`func (o *ReportEvent) HasDesiredAccess() bool`
+
+HasDesiredAccess returns a boolean if a field has been set.
+
+### SetDesiredAccessNil
+
+`func (o *ReportEvent) SetDesiredAccessNil(b bool)`
+
+ SetDesiredAccessNil sets the value for DesiredAccess to be an explicit nil
+
+### UnsetDesiredAccess
+`func (o *ReportEvent) UnsetDesiredAccess()`
+
+UnsetDesiredAccess ensures that no value is present for DesiredAccess, not even an explicit nil
 ### GetProcessSeqid
 
 `func (o *ReportEvent) GetProcessSeqid() int64`
@@ -91,30 +152,30 @@ SetProcessSeqid sets ProcessSeqid field to given value.
 
 HasProcessSeqid returns a boolean if a field has been set.
 
-### GetTotalBytesRequested
+### GetTotalBytes
 
-`func (o *ReportEvent) GetTotalBytesRequested() int64`
+`func (o *ReportEvent) GetTotalBytes() int64`
 
-GetTotalBytesRequested returns the TotalBytesRequested field if non-nil, zero value otherwise.
+GetTotalBytes returns the TotalBytes field if non-nil, zero value otherwise.
 
-### GetTotalBytesRequestedOk
+### GetTotalBytesOk
 
-`func (o *ReportEvent) GetTotalBytesRequestedOk() (*int64, bool)`
+`func (o *ReportEvent) GetTotalBytesOk() (*int64, bool)`
 
-GetTotalBytesRequestedOk returns a tuple with the TotalBytesRequested field if it's non-nil, zero value otherwise
+GetTotalBytesOk returns a tuple with the TotalBytes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTotalBytesRequested
+### SetTotalBytes
 
-`func (o *ReportEvent) SetTotalBytesRequested(v int64)`
+`func (o *ReportEvent) SetTotalBytes(v int64)`
 
-SetTotalBytesRequested sets TotalBytesRequested field to given value.
+SetTotalBytes sets TotalBytes field to given value.
 
-### HasTotalBytesRequested
+### HasTotalBytes
 
-`func (o *ReportEvent) HasTotalBytesRequested() bool`
+`func (o *ReportEvent) HasTotalBytes() bool`
 
-HasTotalBytesRequested returns a boolean if a field has been set.
+HasTotalBytes returns a boolean if a field has been set.
 
 ### GetType
 
@@ -185,31 +246,6 @@ SetValueName sets ValueName field to given value.
 `func (o *ReportEvent) HasValueName() bool`
 
 HasValueName returns a boolean if a field has been set.
-
-### GetWriteCount
-
-`func (o *ReportEvent) GetWriteCount() int64`
-
-GetWriteCount returns the WriteCount field if non-nil, zero value otherwise.
-
-### GetWriteCountOk
-
-`func (o *ReportEvent) GetWriteCountOk() (*int64, bool)`
-
-GetWriteCountOk returns a tuple with the WriteCount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWriteCount
-
-`func (o *ReportEvent) SetWriteCount(v int64)`
-
-SetWriteCount sets WriteCount field to given value.
-
-### HasWriteCount
-
-`func (o *ReportEvent) HasWriteCount() bool`
-
-HasWriteCount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -24,6 +24,8 @@ type RenameInputBody struct {
 	NewMangledName *string `json:"new_mangled_name,omitempty"`
 	// New function name
 	NewName string `json:"new_name"`
+	// Keep the cached AI decompilation, summary and inline comments. Set when the new name comes from the model's own prediction (e.g. Transfer Name) so existing AI output is not discarded and regenerated.
+	PreserveAiDecompilation *bool `json:"preserve_ai_decompilation,omitempty"`
 }
 
 type _RenameInputBody RenameInputBody
@@ -102,6 +104,38 @@ func (o *RenameInputBody) SetNewName(v string) {
 	o.NewName = v
 }
 
+// GetPreserveAiDecompilation returns the PreserveAiDecompilation field value if set, zero value otherwise.
+func (o *RenameInputBody) GetPreserveAiDecompilation() bool {
+	if o == nil || IsNil(o.PreserveAiDecompilation) {
+		var ret bool
+		return ret
+	}
+	return *o.PreserveAiDecompilation
+}
+
+// GetPreserveAiDecompilationOk returns a tuple with the PreserveAiDecompilation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RenameInputBody) GetPreserveAiDecompilationOk() (*bool, bool) {
+	if o == nil || IsNil(o.PreserveAiDecompilation) {
+		return nil, false
+	}
+	return o.PreserveAiDecompilation, true
+}
+
+// HasPreserveAiDecompilation returns a boolean if a field has been set.
+func (o *RenameInputBody) HasPreserveAiDecompilation() bool {
+	if o != nil && !IsNil(o.PreserveAiDecompilation) {
+		return true
+	}
+
+	return false
+}
+
+// SetPreserveAiDecompilation gets a reference to the given bool and assigns it to the PreserveAiDecompilation field.
+func (o *RenameInputBody) SetPreserveAiDecompilation(v bool) {
+	o.PreserveAiDecompilation = &v
+}
+
 func (o RenameInputBody) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -116,6 +150,9 @@ func (o RenameInputBody) ToMap() (map[string]interface{}, error) {
 		toSerialize["new_mangled_name"] = o.NewMangledName
 	}
 	toSerialize["new_name"] = o.NewName
+	if !IsNil(o.PreserveAiDecompilation) {
+		toSerialize["preserve_ai_decompilation"] = o.PreserveAiDecompilation
+	}
 	return toSerialize, nil
 }
 

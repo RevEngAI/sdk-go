@@ -21,12 +21,13 @@ var _ MappedNullable = &ReportEvent{}
 // ReportEvent struct for ReportEvent
 type ReportEvent struct {
 	ApiCalls []ApiCall `json:"api_calls,omitempty"`
+	Count *int64 `json:"count,omitempty"`
+	DesiredAccess []string `json:"desired_access,omitempty"`
 	ProcessSeqid *int64 `json:"process_seqid,omitempty"`
-	TotalBytesRequested *int64 `json:"total_bytes_requested,omitempty"`
+	TotalBytes *int64 `json:"total_bytes,omitempty"`
 	Type string `json:"type"`
 	Value *string `json:"value,omitempty"`
 	ValueName *string `json:"value_name,omitempty"`
-	WriteCount *int64 `json:"write_count,omitempty"`
 }
 
 type _ReportEvent ReportEvent
@@ -82,6 +83,71 @@ func (o *ReportEvent) SetApiCalls(v []ApiCall) {
 	o.ApiCalls = v
 }
 
+// GetCount returns the Count field value if set, zero value otherwise.
+func (o *ReportEvent) GetCount() int64 {
+	if o == nil || IsNil(o.Count) {
+		var ret int64
+		return ret
+	}
+	return *o.Count
+}
+
+// GetCountOk returns a tuple with the Count field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReportEvent) GetCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.Count) {
+		return nil, false
+	}
+	return o.Count, true
+}
+
+// HasCount returns a boolean if a field has been set.
+func (o *ReportEvent) HasCount() bool {
+	if o != nil && !IsNil(o.Count) {
+		return true
+	}
+
+	return false
+}
+
+// SetCount gets a reference to the given int64 and assigns it to the Count field.
+func (o *ReportEvent) SetCount(v int64) {
+	o.Count = &v
+}
+
+// GetDesiredAccess returns the DesiredAccess field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ReportEvent) GetDesiredAccess() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.DesiredAccess
+}
+
+// GetDesiredAccessOk returns a tuple with the DesiredAccess field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ReportEvent) GetDesiredAccessOk() ([]string, bool) {
+	if o == nil || IsNil(o.DesiredAccess) {
+		return nil, false
+	}
+	return o.DesiredAccess, true
+}
+
+// HasDesiredAccess returns a boolean if a field has been set.
+func (o *ReportEvent) HasDesiredAccess() bool {
+	if o != nil && !IsNil(o.DesiredAccess) {
+		return true
+	}
+
+	return false
+}
+
+// SetDesiredAccess gets a reference to the given []string and assigns it to the DesiredAccess field.
+func (o *ReportEvent) SetDesiredAccess(v []string) {
+	o.DesiredAccess = v
+}
+
 // GetProcessSeqid returns the ProcessSeqid field value if set, zero value otherwise.
 func (o *ReportEvent) GetProcessSeqid() int64 {
 	if o == nil || IsNil(o.ProcessSeqid) {
@@ -114,36 +180,36 @@ func (o *ReportEvent) SetProcessSeqid(v int64) {
 	o.ProcessSeqid = &v
 }
 
-// GetTotalBytesRequested returns the TotalBytesRequested field value if set, zero value otherwise.
-func (o *ReportEvent) GetTotalBytesRequested() int64 {
-	if o == nil || IsNil(o.TotalBytesRequested) {
+// GetTotalBytes returns the TotalBytes field value if set, zero value otherwise.
+func (o *ReportEvent) GetTotalBytes() int64 {
+	if o == nil || IsNil(o.TotalBytes) {
 		var ret int64
 		return ret
 	}
-	return *o.TotalBytesRequested
+	return *o.TotalBytes
 }
 
-// GetTotalBytesRequestedOk returns a tuple with the TotalBytesRequested field value if set, nil otherwise
+// GetTotalBytesOk returns a tuple with the TotalBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReportEvent) GetTotalBytesRequestedOk() (*int64, bool) {
-	if o == nil || IsNil(o.TotalBytesRequested) {
+func (o *ReportEvent) GetTotalBytesOk() (*int64, bool) {
+	if o == nil || IsNil(o.TotalBytes) {
 		return nil, false
 	}
-	return o.TotalBytesRequested, true
+	return o.TotalBytes, true
 }
 
-// HasTotalBytesRequested returns a boolean if a field has been set.
-func (o *ReportEvent) HasTotalBytesRequested() bool {
-	if o != nil && !IsNil(o.TotalBytesRequested) {
+// HasTotalBytes returns a boolean if a field has been set.
+func (o *ReportEvent) HasTotalBytes() bool {
+	if o != nil && !IsNil(o.TotalBytes) {
 		return true
 	}
 
 	return false
 }
 
-// SetTotalBytesRequested gets a reference to the given int64 and assigns it to the TotalBytesRequested field.
-func (o *ReportEvent) SetTotalBytesRequested(v int64) {
-	o.TotalBytesRequested = &v
+// SetTotalBytes gets a reference to the given int64 and assigns it to the TotalBytes field.
+func (o *ReportEvent) SetTotalBytes(v int64) {
+	o.TotalBytes = &v
 }
 
 // GetType returns the Type field value
@@ -234,38 +300,6 @@ func (o *ReportEvent) SetValueName(v string) {
 	o.ValueName = &v
 }
 
-// GetWriteCount returns the WriteCount field value if set, zero value otherwise.
-func (o *ReportEvent) GetWriteCount() int64 {
-	if o == nil || IsNil(o.WriteCount) {
-		var ret int64
-		return ret
-	}
-	return *o.WriteCount
-}
-
-// GetWriteCountOk returns a tuple with the WriteCount field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ReportEvent) GetWriteCountOk() (*int64, bool) {
-	if o == nil || IsNil(o.WriteCount) {
-		return nil, false
-	}
-	return o.WriteCount, true
-}
-
-// HasWriteCount returns a boolean if a field has been set.
-func (o *ReportEvent) HasWriteCount() bool {
-	if o != nil && !IsNil(o.WriteCount) {
-		return true
-	}
-
-	return false
-}
-
-// SetWriteCount gets a reference to the given int64 and assigns it to the WriteCount field.
-func (o *ReportEvent) SetWriteCount(v int64) {
-	o.WriteCount = &v
-}
-
 func (o ReportEvent) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -279,11 +313,17 @@ func (o ReportEvent) ToMap() (map[string]interface{}, error) {
 	if o.ApiCalls != nil {
 		toSerialize["api_calls"] = o.ApiCalls
 	}
+	if !IsNil(o.Count) {
+		toSerialize["count"] = o.Count
+	}
+	if o.DesiredAccess != nil {
+		toSerialize["desired_access"] = o.DesiredAccess
+	}
 	if !IsNil(o.ProcessSeqid) {
 		toSerialize["process_seqid"] = o.ProcessSeqid
 	}
-	if !IsNil(o.TotalBytesRequested) {
-		toSerialize["total_bytes_requested"] = o.TotalBytesRequested
+	if !IsNil(o.TotalBytes) {
+		toSerialize["total_bytes"] = o.TotalBytes
 	}
 	toSerialize["type"] = o.Type
 	if !IsNil(o.Value) {
@@ -291,9 +331,6 @@ func (o ReportEvent) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ValueName) {
 		toSerialize["value_name"] = o.ValueName
-	}
-	if !IsNil(o.WriteCount) {
-		toSerialize["write_count"] = o.WriteCount
 	}
 	return toSerialize, nil
 }

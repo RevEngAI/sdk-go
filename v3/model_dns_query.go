@@ -20,8 +20,11 @@ var _ MappedNullable = &DnsQuery{}
 
 // DnsQuery struct for DnsQuery
 type DnsQuery struct {
+	CnameChain []string `json:"cname_chain,omitempty"`
 	Domain string `json:"domain"`
 	Events []ReportEvent `json:"events,omitempty"`
+	MinTtl *int64 `json:"min_ttl,omitempty"`
+	ResolvedIps []string `json:"resolved_ips,omitempty"`
 }
 
 type _DnsQuery DnsQuery
@@ -42,6 +45,39 @@ func NewDnsQuery(domain string) *DnsQuery {
 func NewDnsQueryWithDefaults() *DnsQuery {
 	this := DnsQuery{}
 	return &this
+}
+
+// GetCnameChain returns the CnameChain field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DnsQuery) GetCnameChain() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.CnameChain
+}
+
+// GetCnameChainOk returns a tuple with the CnameChain field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DnsQuery) GetCnameChainOk() ([]string, bool) {
+	if o == nil || IsNil(o.CnameChain) {
+		return nil, false
+	}
+	return o.CnameChain, true
+}
+
+// HasCnameChain returns a boolean if a field has been set.
+func (o *DnsQuery) HasCnameChain() bool {
+	if o != nil && !IsNil(o.CnameChain) {
+		return true
+	}
+
+	return false
+}
+
+// SetCnameChain gets a reference to the given []string and assigns it to the CnameChain field.
+func (o *DnsQuery) SetCnameChain(v []string) {
+	o.CnameChain = v
 }
 
 // GetDomain returns the Domain field value
@@ -101,6 +137,71 @@ func (o *DnsQuery) SetEvents(v []ReportEvent) {
 	o.Events = v
 }
 
+// GetMinTtl returns the MinTtl field value if set, zero value otherwise.
+func (o *DnsQuery) GetMinTtl() int64 {
+	if o == nil || IsNil(o.MinTtl) {
+		var ret int64
+		return ret
+	}
+	return *o.MinTtl
+}
+
+// GetMinTtlOk returns a tuple with the MinTtl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DnsQuery) GetMinTtlOk() (*int64, bool) {
+	if o == nil || IsNil(o.MinTtl) {
+		return nil, false
+	}
+	return o.MinTtl, true
+}
+
+// HasMinTtl returns a boolean if a field has been set.
+func (o *DnsQuery) HasMinTtl() bool {
+	if o != nil && !IsNil(o.MinTtl) {
+		return true
+	}
+
+	return false
+}
+
+// SetMinTtl gets a reference to the given int64 and assigns it to the MinTtl field.
+func (o *DnsQuery) SetMinTtl(v int64) {
+	o.MinTtl = &v
+}
+
+// GetResolvedIps returns the ResolvedIps field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DnsQuery) GetResolvedIps() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.ResolvedIps
+}
+
+// GetResolvedIpsOk returns a tuple with the ResolvedIps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DnsQuery) GetResolvedIpsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ResolvedIps) {
+		return nil, false
+	}
+	return o.ResolvedIps, true
+}
+
+// HasResolvedIps returns a boolean if a field has been set.
+func (o *DnsQuery) HasResolvedIps() bool {
+	if o != nil && !IsNil(o.ResolvedIps) {
+		return true
+	}
+
+	return false
+}
+
+// SetResolvedIps gets a reference to the given []string and assigns it to the ResolvedIps field.
+func (o *DnsQuery) SetResolvedIps(v []string) {
+	o.ResolvedIps = v
+}
+
 func (o DnsQuery) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -111,9 +212,18 @@ func (o DnsQuery) MarshalJSON() ([]byte, error) {
 
 func (o DnsQuery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if o.CnameChain != nil {
+		toSerialize["cname_chain"] = o.CnameChain
+	}
 	toSerialize["domain"] = o.Domain
 	if o.Events != nil {
 		toSerialize["events"] = o.Events
+	}
+	if !IsNil(o.MinTtl) {
+		toSerialize["min_ttl"] = o.MinTtl
+	}
+	if o.ResolvedIps != nil {
+		toSerialize["resolved_ips"] = o.ResolvedIps
 	}
 	return toSerialize, nil
 }

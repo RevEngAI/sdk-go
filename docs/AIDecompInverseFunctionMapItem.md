@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Addr** | [**NumericAddr**](NumericAddr.md) |  | 
+**Addr** | **NullableInt64** |  | 
 **IsExternal** | **bool** |  | 
 **Name** | **string** |  | 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewAIDecompInverseFunctionMapItem
 
-`func NewAIDecompInverseFunctionMapItem(addr NumericAddr, isExternal bool, name string, ) *AIDecompInverseFunctionMapItem`
+`func NewAIDecompInverseFunctionMapItem(addr NullableInt64, isExternal bool, name string, ) *AIDecompInverseFunctionMapItem`
 
 NewAIDecompInverseFunctionMapItem instantiates a new AIDecompInverseFunctionMapItem object
 This constructor will assign default values to properties that have it defined,
@@ -29,24 +29,34 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAddr
 
-`func (o *AIDecompInverseFunctionMapItem) GetAddr() NumericAddr`
+`func (o *AIDecompInverseFunctionMapItem) GetAddr() int64`
 
 GetAddr returns the Addr field if non-nil, zero value otherwise.
 
 ### GetAddrOk
 
-`func (o *AIDecompInverseFunctionMapItem) GetAddrOk() (*NumericAddr, bool)`
+`func (o *AIDecompInverseFunctionMapItem) GetAddrOk() (*int64, bool)`
 
 GetAddrOk returns a tuple with the Addr field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAddr
 
-`func (o *AIDecompInverseFunctionMapItem) SetAddr(v NumericAddr)`
+`func (o *AIDecompInverseFunctionMapItem) SetAddr(v int64)`
 
 SetAddr sets Addr field to given value.
 
 
+### SetAddrNil
+
+`func (o *AIDecompInverseFunctionMapItem) SetAddrNil(b bool)`
+
+ SetAddrNil sets the value for Addr to be an explicit nil
+
+### UnsetAddr
+`func (o *AIDecompInverseFunctionMapItem) UnsetAddr()`
+
+UnsetAddr ensures that no value is present for Addr, not even an explicit nil
 ### GetIsExternal
 
 `func (o *AIDecompInverseFunctionMapItem) GetIsExternal() bool`
