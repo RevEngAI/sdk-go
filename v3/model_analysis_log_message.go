@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -19,9 +20,8 @@ var _ MappedNullable = &AnalysisLogMessage{}
 
 // AnalysisLogMessage struct for AnalysisLogMessage
 type AnalysisLogMessage struct {
-	Message NullableString `json:"message"`
-	Time NullableString `json:"time"`
-	AdditionalProperties map[string]interface{}
+	Message string `json:"message"`
+	Time string `json:"time"`
 }
 
 type _AnalysisLogMessage AnalysisLogMessage
@@ -30,7 +30,7 @@ type _AnalysisLogMessage AnalysisLogMessage
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisLogMessage(message NullableString, time NullableString) *AnalysisLogMessage {
+func NewAnalysisLogMessage(message string, time string) *AnalysisLogMessage {
 	this := AnalysisLogMessage{}
 	this.Message = message
 	this.Time = time
@@ -46,55 +46,51 @@ func NewAnalysisLogMessageWithDefaults() *AnalysisLogMessage {
 }
 
 // GetMessage returns the Message field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *AnalysisLogMessage) GetMessage() string {
-	if o == nil || o.Message.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Message.Get()
+	return o.Message
 }
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AnalysisLogMessage) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Message.Get(), o.Message.IsSet()
+	return &o.Message, true
 }
 
 // SetMessage sets field value
 func (o *AnalysisLogMessage) SetMessage(v string) {
-	o.Message.Set(&v)
+	o.Message = v
 }
 
 // GetTime returns the Time field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *AnalysisLogMessage) GetTime() string {
-	if o == nil || o.Time.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Time.Get()
+	return o.Time
 }
 
 // GetTimeOk returns a tuple with the Time field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AnalysisLogMessage) GetTimeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Time.Get(), o.Time.IsSet()
+	return &o.Time, true
 }
 
 // SetTime sets field value
 func (o *AnalysisLogMessage) SetTime(v string) {
-	o.Time.Set(&v)
+	o.Time = v
 }
 
 func (o AnalysisLogMessage) MarshalJSON() ([]byte, error) {
@@ -107,13 +103,8 @@ func (o AnalysisLogMessage) MarshalJSON() ([]byte, error) {
 
 func (o AnalysisLogMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message.Get()
-	toSerialize["time"] = o.Time.Get()
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
+	toSerialize["message"] = o.Message
+	toSerialize["time"] = o.Time
 	return toSerialize, nil
 }
 
@@ -142,21 +133,15 @@ func (o *AnalysisLogMessage) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisLogMessage := _AnalysisLogMessage{}
 
-	err = json.Unmarshal(data, &varAnalysisLogMessage)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAnalysisLogMessage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisLogMessage(varAnalysisLogMessage)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "time")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }
