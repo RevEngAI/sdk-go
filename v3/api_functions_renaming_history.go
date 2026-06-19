@@ -45,6 +45,8 @@ Renames a list of functions using the function IDs
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiBatchRenameFunctionRequest
+
+Deprecated
 */
 func (a *FunctionsRenamingHistoryAPIService) BatchRenameFunction(ctx context.Context) ApiBatchRenameFunctionRequest {
 	return ApiBatchRenameFunctionRequest{
@@ -55,6 +57,7 @@ func (a *FunctionsRenamingHistoryAPIService) BatchRenameFunction(ctx context.Con
 
 // Execute executes the request
 //  @return BaseResponse
+// Deprecated
 func (a *FunctionsRenamingHistoryAPIService) BatchRenameFunctionExecute(r ApiBatchRenameFunctionRequest) (*BaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -513,6 +516,8 @@ Gets the name history of a function using the function ID
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param functionId
  @return ApiGetFunctionNameHistoryRequest
+
+Deprecated
 */
 func (a *FunctionsRenamingHistoryAPIService) GetFunctionNameHistory(ctx context.Context, functionId int32) ApiGetFunctionNameHistoryRequest {
 	return ApiGetFunctionNameHistoryRequest{
@@ -524,6 +529,7 @@ func (a *FunctionsRenamingHistoryAPIService) GetFunctionNameHistory(ctx context.
 
 // Execute executes the request
 //  @return BaseResponseListFunctionNameHistory
+// Deprecated
 func (a *FunctionsRenamingHistoryAPIService) GetFunctionNameHistoryExecute(r ApiGetFunctionNameHistoryRequest) (*BaseResponseListFunctionNameHistory, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -825,6 +831,8 @@ Renames a function using the function ID
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param functionId
  @return ApiRenameFunctionIdRequest
+
+Deprecated
 */
 func (a *FunctionsRenamingHistoryAPIService) RenameFunctionId(ctx context.Context, functionId int32) ApiRenameFunctionIdRequest {
 	return ApiRenameFunctionIdRequest{
@@ -836,6 +844,7 @@ func (a *FunctionsRenamingHistoryAPIService) RenameFunctionId(ctx context.Contex
 
 // Execute executes the request
 //  @return BaseResponse
+// Deprecated
 func (a *FunctionsRenamingHistoryAPIService) RenameFunctionIdExecute(r ApiRenameFunctionIdRequest) (*BaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -959,6 +968,8 @@ Reverts the function name to a previous name using the function ID and history I
  @param functionId
  @param historyId
  @return ApiRevertFunctionNameRequest
+
+Deprecated
 */
 func (a *FunctionsRenamingHistoryAPIService) RevertFunctionName(ctx context.Context, functionId int32, historyId int32) ApiRevertFunctionNameRequest {
 	return ApiRevertFunctionNameRequest{
@@ -971,6 +982,7 @@ func (a *FunctionsRenamingHistoryAPIService) RevertFunctionName(ctx context.Cont
 
 // Execute executes the request
 //  @return BaseResponse
+// Deprecated
 func (a *FunctionsRenamingHistoryAPIService) RevertFunctionNameExecute(r ApiRevertFunctionNameRequest) (*BaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost

@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -19,13 +20,12 @@ var _ MappedNullable = &DynamicExecutionStatusResponse{}
 
 // DynamicExecutionStatusResponse struct for DynamicExecutionStatusResponse
 type DynamicExecutionStatusResponse struct {
-	// Error detail, set when status is ERROR
+	// Error detail, set when status is FAILED
 	ErrorMessage *string `json:"error_message,omitempty"`
 	// Sandbox status log messages captured during the run. Contains a single \"No logs available\" message when none have been captured yet.
 	Logs AnalysisLogs `json:"logs"`
-	// Task status: UNINITIALISED, PENDING, RUNNING, COMPLETED, or ERROR
+	// Task status: UNINITIALISED, PENDING, RUNNING, COMPLETED, or FAILED
 	Status string `json:"status"`
-	AdditionalProperties map[string]interface{}
 }
 
 type _DynamicExecutionStatusResponse DynamicExecutionStatusResponse
@@ -144,11 +144,6 @@ func (o DynamicExecutionStatusResponse) ToMap() (map[string]interface{}, error) 
 	}
 	toSerialize["logs"] = o.Logs
 	toSerialize["status"] = o.Status
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -177,22 +172,15 @@ func (o *DynamicExecutionStatusResponse) UnmarshalJSON(data []byte) (err error) 
 
 	varDynamicExecutionStatusResponse := _DynamicExecutionStatusResponse{}
 
-	err = json.Unmarshal(data, &varDynamicExecutionStatusResponse)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDynamicExecutionStatusResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DynamicExecutionStatusResponse(varDynamicExecutionStatusResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "error_message")
-		delete(additionalProperties, "logs")
-		delete(additionalProperties, "status")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ErrorMessage** | Pointer to **string** | Error detail, set when status is ERROR | [optional] 
+**ErrorMessage** | Pointer to **string** | Error detail, set when status is FAILED | [optional] 
 **Logs** | [**AnalysisLogs**](AnalysisLogs.md) | Sandbox status log messages captured during the run. Contains a single \&quot;No logs available\&quot; message when none have been captured yet. | 
-**Status** | **string** | Task status: UNINITIALISED, PENDING, RUNNING, COMPLETED, or ERROR | 
+**Status** | **string** | Task status: UNINITIALISED, PENDING, RUNNING, COMPLETED, or FAILED | 
 
 ## Methods
 

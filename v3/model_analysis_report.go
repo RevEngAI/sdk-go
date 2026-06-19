@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -34,7 +35,6 @@ type AnalysisReport struct {
 	Services []ServiceEntry `json:"services,omitempty"`
 	Startup *StartupInfo `json:"startup,omitempty"`
 	Ttps []Ttp `json:"ttps,omitempty"`
-	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisReport AnalysisReport
@@ -593,11 +593,6 @@ func (o AnalysisReport) ToMap() (map[string]interface{}, error) {
 	if o.Ttps != nil {
 		toSerialize["ttps"] = o.Ttps
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -625,34 +620,15 @@ func (o *AnalysisReport) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisReport := _AnalysisReport{}
 
-	err = json.Unmarshal(data, &varAnalysisReport)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAnalysisReport)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisReport(varAnalysisReport)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "artifacts")
-		delete(additionalProperties, "console_output")
-		delete(additionalProperties, "file_activity")
-		delete(additionalProperties, "info")
-		delete(additionalProperties, "memdumps")
-		delete(additionalProperties, "module_load_addresses")
-		delete(additionalProperties, "mutexes")
-		delete(additionalProperties, "network_activity")
-		delete(additionalProperties, "process_activity")
-		delete(additionalProperties, "process_tree")
-		delete(additionalProperties, "registry_operations")
-		delete(additionalProperties, "scheduled_tasks")
-		delete(additionalProperties, "services")
-		delete(additionalProperties, "startup")
-		delete(additionalProperties, "ttps")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }
