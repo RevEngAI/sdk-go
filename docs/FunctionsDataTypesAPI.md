@@ -4,13 +4,85 @@ All URIs are relative to *https://api.reveng.ai*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**BatchUpdateFunctionDataTypes**](FunctionsDataTypesAPI.md#BatchUpdateFunctionDataTypes) | **Put** /v3/analyses/{analysis_id}/functions/data-types | Batch update function data types
 [**GenerateFunctionDataTypesForAnalysis**](FunctionsDataTypesAPI.md#GenerateFunctionDataTypesForAnalysis) | **Post** /v2/analyses/{analysis_id}/functions/data_types | Generate Function Data Types
 [**GenerateFunctionDataTypesForFunctions**](FunctionsDataTypesAPI.md#GenerateFunctionDataTypesForFunctions) | **Post** /v2/functions/data_types | Generate Function Data Types for an arbitrary list of functions
 [**GetFunctionDataTypes**](FunctionsDataTypesAPI.md#GetFunctionDataTypes) | **Get** /v2/analyses/{analysis_id}/functions/{function_id}/data_types | Get Function Data Types
 [**ListFunctionDataTypesForAnalysis**](FunctionsDataTypesAPI.md#ListFunctionDataTypesForAnalysis) | **Get** /v2/analyses/{analysis_id}/functions/data_types | List Function Data Types
 [**ListFunctionDataTypesForFunctions**](FunctionsDataTypesAPI.md#ListFunctionDataTypesForFunctions) | **Get** /v2/functions/data_types | List Function Data Types
-[**UpdateFunctionDataTypes**](FunctionsDataTypesAPI.md#UpdateFunctionDataTypes) | **Put** /v2/analyses/{analysis_id}/functions/{function_id}/data_types | Update Function Data Types
 
+
+
+## BatchUpdateFunctionDataTypes
+
+> BatchUpdateDataTypesOutputBody BatchUpdateFunctionDataTypes(ctx, analysisId).BatchUpdateDataTypesInputBody(batchUpdateDataTypesInputBody).Execute()
+
+Batch update function data types
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	batchUpdateDataTypesInputBody := *revengai.NewBatchUpdateDataTypesInputBody([]revengai.BatchUpdateDataTypesItem{*revengai.NewBatchUpdateDataTypesItem(interface{}(123), int64(123), int64(123))}) // BatchUpdateDataTypesInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsDataTypesAPI.BatchUpdateFunctionDataTypes(context.Background(), analysisId).BatchUpdateDataTypesInputBody(batchUpdateDataTypesInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsDataTypesAPI.BatchUpdateFunctionDataTypes``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `BatchUpdateFunctionDataTypes`: BatchUpdateDataTypesOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsDataTypesAPI.BatchUpdateFunctionDataTypes`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiBatchUpdateFunctionDataTypesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **batchUpdateDataTypesInputBody** | [**BatchUpdateDataTypesInputBody**](BatchUpdateDataTypesInputBody.md) |  | 
+
+### Return type
+
+[**BatchUpdateDataTypesOutputBody**](BatchUpdateDataTypesOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GenerateFunctionDataTypesForAnalysis
@@ -355,81 +427,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateFunctionDataTypes
-
-> BaseResponseFunctionDataTypes UpdateFunctionDataTypes(ctx, analysisId, functionId).UpdateFunctionDataTypes(updateFunctionDataTypes).Execute()
-
-Update Function Data Types
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
-)
-
-func main() {
-	analysisId := int32(56) // int32 | 
-	functionId := int32(56) // int32 | 
-	updateFunctionDataTypes := *revengai.NewUpdateFunctionDataTypes(int32(123), *revengai.NewFunctionInfoInput([]revengai.FuncDepsInner{*revengai.NewFuncDepsInner("Name_example", int32(123), map[string]int32{"key": int32(123)}, "Type_example", int32(123))})) // UpdateFunctionDataTypes | 
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsDataTypesAPI.UpdateFunctionDataTypes(context.Background(), analysisId, functionId).UpdateFunctionDataTypes(updateFunctionDataTypes).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsDataTypesAPI.UpdateFunctionDataTypes``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFunctionDataTypes`: BaseResponseFunctionDataTypes
-	fmt.Fprintf(os.Stdout, "Response from `FunctionsDataTypesAPI.UpdateFunctionDataTypes`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int32** |  | 
-**functionId** | **int32** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFunctionDataTypesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **updateFunctionDataTypes** | [**UpdateFunctionDataTypes**](UpdateFunctionDataTypes.md) |  | 
-
-### Return type
-
-[**BaseResponseFunctionDataTypes**](BaseResponseFunctionDataTypes.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

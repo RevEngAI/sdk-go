@@ -23,7 +23,7 @@ type FunctionDataTypesListItem struct {
 	Completed bool `json:"completed"`
 	// The current status of the data types service
 	Status string `json:"status"`
-	DataTypes NullableFunctionInfoOutput `json:"data_types,omitempty"`
+	DataTypes NullableFunctionInfo `json:"data_types,omitempty"`
 	DataTypesVersion NullableInt32 `json:"data_types_version,omitempty"`
 	// Function id
 	FunctionId int64 `json:"function_id"`
@@ -101,9 +101,9 @@ func (o *FunctionDataTypesListItem) SetStatus(v string) {
 }
 
 // GetDataTypes returns the DataTypes field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionDataTypesListItem) GetDataTypes() FunctionInfoOutput {
+func (o *FunctionDataTypesListItem) GetDataTypes() FunctionInfo {
 	if o == nil || IsNil(o.DataTypes.Get()) {
-		var ret FunctionInfoOutput
+		var ret FunctionInfo
 		return ret
 	}
 	return *o.DataTypes.Get()
@@ -112,7 +112,7 @@ func (o *FunctionDataTypesListItem) GetDataTypes() FunctionInfoOutput {
 // GetDataTypesOk returns a tuple with the DataTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionDataTypesListItem) GetDataTypesOk() (*FunctionInfoOutput, bool) {
+func (o *FunctionDataTypesListItem) GetDataTypesOk() (*FunctionInfo, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -128,8 +128,8 @@ func (o *FunctionDataTypesListItem) HasDataTypes() bool {
 	return false
 }
 
-// SetDataTypes gets a reference to the given NullableFunctionInfoOutput and assigns it to the DataTypes field.
-func (o *FunctionDataTypesListItem) SetDataTypes(v FunctionInfoOutput) {
+// SetDataTypes gets a reference to the given NullableFunctionInfo and assigns it to the DataTypes field.
+func (o *FunctionDataTypesListItem) SetDataTypes(v FunctionInfo) {
 	o.DataTypes.Set(&v)
 }
 // SetDataTypesNil sets the value for DataTypes to be an explicit nil

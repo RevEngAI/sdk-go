@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Completed** | **bool** | Whether the service has completed data types generation | 
 **Status** | **string** | The current status of the data types service | 
-**DataTypes** | Pointer to [**NullableFunctionInfoOutput**](FunctionInfoOutput.md) |  | [optional] 
+**DataTypes** | Pointer to [**NullableFunctionInfo**](FunctionInfo.md) |  | [optional] 
 **DataTypesVersion** | Pointer to **NullableInt32** |  | [optional] 
 **FunctionId** | **int64** | Function id | 
 
@@ -71,20 +71,20 @@ SetStatus sets Status field to given value.
 
 ### GetDataTypes
 
-`func (o *FunctionDataTypesListItem) GetDataTypes() FunctionInfoOutput`
+`func (o *FunctionDataTypesListItem) GetDataTypes() FunctionInfo`
 
 GetDataTypes returns the DataTypes field if non-nil, zero value otherwise.
 
 ### GetDataTypesOk
 
-`func (o *FunctionDataTypesListItem) GetDataTypesOk() (*FunctionInfoOutput, bool)`
+`func (o *FunctionDataTypesListItem) GetDataTypesOk() (*FunctionInfo, bool)`
 
 GetDataTypesOk returns a tuple with the DataTypes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDataTypes
 
-`func (o *FunctionDataTypesListItem) SetDataTypes(v FunctionInfoOutput)`
+`func (o *FunctionDataTypesListItem) SetDataTypes(v FunctionInfo)`
 
 SetDataTypes sets DataTypes field to given value.
 

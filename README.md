@@ -188,12 +188,12 @@ Class | Method | HTTP request | Description
 *FunctionsCoreAPI* | [**GetFunctionDetails**](docs/FunctionsCoreAPI.md#getfunctiondetails) | **Get** /v2/functions/{function_id} | Get function details
 *FunctionsCoreAPI* | [**GetFunctionStrings**](docs/FunctionsCoreAPI.md#getfunctionstrings) | **Get** /v2/functions/{function_id}/strings | Get string information found in the function
 *FunctionsCoreAPI* | [**GetFunctionStrings_0**](docs/FunctionsCoreAPI.md#getfunctionstrings_0) | **Get** /v3/functions/{function_id}/strings | List strings for a function.
+*FunctionsDataTypesAPI* | [**BatchUpdateFunctionDataTypes**](docs/FunctionsDataTypesAPI.md#batchupdatefunctiondatatypes) | **Put** /v3/analyses/{analysis_id}/functions/data-types | Batch update function data types
 *FunctionsDataTypesAPI* | [**GenerateFunctionDataTypesForAnalysis**](docs/FunctionsDataTypesAPI.md#generatefunctiondatatypesforanalysis) | **Post** /v2/analyses/{analysis_id}/functions/data_types | Generate Function Data Types
 *FunctionsDataTypesAPI* | [**GenerateFunctionDataTypesForFunctions**](docs/FunctionsDataTypesAPI.md#generatefunctiondatatypesforfunctions) | **Post** /v2/functions/data_types | Generate Function Data Types for an arbitrary list of functions
 *FunctionsDataTypesAPI* | [**GetFunctionDataTypes**](docs/FunctionsDataTypesAPI.md#getfunctiondatatypes) | **Get** /v2/analyses/{analysis_id}/functions/{function_id}/data_types | Get Function Data Types
 *FunctionsDataTypesAPI* | [**ListFunctionDataTypesForAnalysis**](docs/FunctionsDataTypesAPI.md#listfunctiondatatypesforanalysis) | **Get** /v2/analyses/{analysis_id}/functions/data_types | List Function Data Types
 *FunctionsDataTypesAPI* | [**ListFunctionDataTypesForFunctions**](docs/FunctionsDataTypesAPI.md#listfunctiondatatypesforfunctions) | **Get** /v2/functions/data_types | List Function Data Types
-*FunctionsDataTypesAPI* | [**UpdateFunctionDataTypes**](docs/FunctionsDataTypesAPI.md#updatefunctiondatatypes) | **Put** /v2/analyses/{analysis_id}/functions/{function_id}/data_types | Update Function Data Types
 *FunctionsRenamingHistoryAPI* | [**BatchRenameFunction**](docs/FunctionsRenamingHistoryAPI.md#batchrenamefunction) | **Post** /v2/functions/rename/batch | Batch Rename Functions
 *FunctionsRenamingHistoryAPI* | [**BatchRenameFunctions**](docs/FunctionsRenamingHistoryAPI.md#batchrenamefunctions) | **Post** /v3/functions/rename | Batch rename functions
 *FunctionsRenamingHistoryAPI* | [**GetFunctionHistory**](docs/FunctionsRenamingHistoryAPI.md#getfunctionhistory) | **Get** /v3/functions/{function_id}/history | Get function name history
@@ -334,6 +334,10 @@ Class | Method | HTTP request | Description
  - [BatchRenameInputBody](docs/BatchRenameInputBody.md)
  - [BatchRenameItem](docs/BatchRenameItem.md)
  - [BatchRenameOutputBody](docs/BatchRenameOutputBody.md)
+ - [BatchUpdateDataTypesInputBody](docs/BatchUpdateDataTypesInputBody.md)
+ - [BatchUpdateDataTypesItem](docs/BatchUpdateDataTypesItem.md)
+ - [BatchUpdateDataTypesOutputBody](docs/BatchUpdateDataTypesOutputBody.md)
+ - [BatchUpdateDataTypesResult](docs/BatchUpdateDataTypesResult.md)
  - [BinariesRelatedStatusResponse](docs/BinariesRelatedStatusResponse.md)
  - [BinariesTaskStatus](docs/BinariesTaskStatus.md)
  - [Binary](docs/Binary.md)
@@ -453,8 +457,7 @@ Class | Method | HTTP request | Description
  - [FunctionDataTypesParams](docs/FunctionDataTypesParams.md)
  - [FunctionDataTypesStatus](docs/FunctionDataTypesStatus.md)
  - [FunctionHeader](docs/FunctionHeader.md)
- - [FunctionInfoInput](docs/FunctionInfoInput.md)
- - [FunctionInfoOutput](docs/FunctionInfoOutput.md)
+ - [FunctionInfo](docs/FunctionInfo.md)
  - [FunctionListItem](docs/FunctionListItem.md)
  - [FunctionLocalVariableResponse](docs/FunctionLocalVariableResponse.md)
  - [FunctionMapping](docs/FunctionMapping.md)
@@ -472,8 +475,7 @@ Class | Method | HTTP request | Description
  - [FunctionString](docs/FunctionString.md)
  - [FunctionStringItem](docs/FunctionStringItem.md)
  - [FunctionStringsResponse](docs/FunctionStringsResponse.md)
- - [FunctionTypeInput](docs/FunctionTypeInput.md)
- - [FunctionTypeOutput](docs/FunctionTypeOutput.md)
+ - [FunctionType](docs/FunctionType.md)
  - [FunctionsDetailResponse](docs/FunctionsDetailResponse.md)
  - [FunctionsListRename](docs/FunctionsListRename.md)
  - [GenerateFunctionDataTypes](docs/GenerateFunctionDataTypes.md)
@@ -617,7 +619,8 @@ Class | Method | HTTP request | Description
  - [TriggerDynamicExecutionInputBody](docs/TriggerDynamicExecutionInputBody.md)
  - [Ttp](docs/Ttp.md)
  - [TypeDefinition](docs/TypeDefinition.md)
- - [UpdateFunctionDataTypes](docs/UpdateFunctionDataTypes.md)
+ - [UpdateDataTypesInputBody](docs/UpdateDataTypesInputBody.md)
+ - [UpdateDataTypesOutputBody](docs/UpdateDataTypesOutputBody.md)
  - [UploadFileType](docs/UploadFileType.md)
  - [UploadResponse](docs/UploadResponse.md)
  - [UpsertAiDecomplationRatingRequest](docs/UpsertAiDecomplationRatingRequest.md)
