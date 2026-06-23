@@ -1,82 +1,82 @@
-# FunctionInfoOutput
+# FunctionInfo
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FuncTypes** | Pointer to [**NullableFunctionTypeOutput**](FunctionTypeOutput.md) |  | [optional] 
+**FuncTypes** | Pointer to [**NullableFunctionType**](FunctionType.md) |  | [optional] 
 **FuncDeps** | [**[]FuncDepsInner**](FuncDepsInner.md) | List of function dependencies | 
 
 ## Methods
 
-### NewFunctionInfoOutput
+### NewFunctionInfo
 
-`func NewFunctionInfoOutput(funcDeps []FuncDepsInner, ) *FunctionInfoOutput`
+`func NewFunctionInfo(funcDeps []FuncDepsInner, ) *FunctionInfo`
 
-NewFunctionInfoOutput instantiates a new FunctionInfoOutput object
+NewFunctionInfo instantiates a new FunctionInfo object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewFunctionInfoOutputWithDefaults
+### NewFunctionInfoWithDefaults
 
-`func NewFunctionInfoOutputWithDefaults() *FunctionInfoOutput`
+`func NewFunctionInfoWithDefaults() *FunctionInfo`
 
-NewFunctionInfoOutputWithDefaults instantiates a new FunctionInfoOutput object
+NewFunctionInfoWithDefaults instantiates a new FunctionInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetFuncTypes
 
-`func (o *FunctionInfoOutput) GetFuncTypes() FunctionTypeOutput`
+`func (o *FunctionInfo) GetFuncTypes() FunctionType`
 
 GetFuncTypes returns the FuncTypes field if non-nil, zero value otherwise.
 
 ### GetFuncTypesOk
 
-`func (o *FunctionInfoOutput) GetFuncTypesOk() (*FunctionTypeOutput, bool)`
+`func (o *FunctionInfo) GetFuncTypesOk() (*FunctionType, bool)`
 
 GetFuncTypesOk returns a tuple with the FuncTypes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFuncTypes
 
-`func (o *FunctionInfoOutput) SetFuncTypes(v FunctionTypeOutput)`
+`func (o *FunctionInfo) SetFuncTypes(v FunctionType)`
 
 SetFuncTypes sets FuncTypes field to given value.
 
 ### HasFuncTypes
 
-`func (o *FunctionInfoOutput) HasFuncTypes() bool`
+`func (o *FunctionInfo) HasFuncTypes() bool`
 
 HasFuncTypes returns a boolean if a field has been set.
 
 ### SetFuncTypesNil
 
-`func (o *FunctionInfoOutput) SetFuncTypesNil(b bool)`
+`func (o *FunctionInfo) SetFuncTypesNil(b bool)`
 
  SetFuncTypesNil sets the value for FuncTypes to be an explicit nil
 
 ### UnsetFuncTypes
-`func (o *FunctionInfoOutput) UnsetFuncTypes()`
+`func (o *FunctionInfo) UnsetFuncTypes()`
 
 UnsetFuncTypes ensures that no value is present for FuncTypes, not even an explicit nil
 ### GetFuncDeps
 
-`func (o *FunctionInfoOutput) GetFuncDeps() []FuncDepsInner`
+`func (o *FunctionInfo) GetFuncDeps() []FuncDepsInner`
 
 GetFuncDeps returns the FuncDeps field if non-nil, zero value otherwise.
 
 ### GetFuncDepsOk
 
-`func (o *FunctionInfoOutput) GetFuncDepsOk() (*[]FuncDepsInner, bool)`
+`func (o *FunctionInfo) GetFuncDepsOk() (*[]FuncDepsInner, bool)`
 
 GetFuncDepsOk returns a tuple with the FuncDeps field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFuncDeps
 
-`func (o *FunctionInfoOutput) SetFuncDeps(v []FuncDepsInner)`
+`func (o *FunctionInfo) SetFuncDeps(v []FuncDepsInner)`
 
 SetFuncDeps sets FuncDeps field to given value.
 

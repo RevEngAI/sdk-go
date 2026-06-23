@@ -14,41 +14,41 @@ import (
 	"fmt"
 )
 
-// checks if the FunctionInfoInput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &FunctionInfoInput{}
+// checks if the FunctionInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FunctionInfo{}
 
-// FunctionInfoInput struct for FunctionInfoInput
-type FunctionInfoInput struct {
-	FuncTypes NullableFunctionTypeInput `json:"func_types,omitempty"`
+// FunctionInfo struct for FunctionInfo
+type FunctionInfo struct {
+	FuncTypes NullableFunctionType `json:"func_types,omitempty"`
 	// List of function dependencies
 	FuncDeps []FuncDepsInner `json:"func_deps"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _FunctionInfoInput FunctionInfoInput
+type _FunctionInfo FunctionInfo
 
-// NewFunctionInfoInput instantiates a new FunctionInfoInput object
+// NewFunctionInfo instantiates a new FunctionInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionInfoInput(funcDeps []FuncDepsInner) *FunctionInfoInput {
-	this := FunctionInfoInput{}
+func NewFunctionInfo(funcDeps []FuncDepsInner) *FunctionInfo {
+	this := FunctionInfo{}
 	this.FuncDeps = funcDeps
 	return &this
 }
 
-// NewFunctionInfoInputWithDefaults instantiates a new FunctionInfoInput object
+// NewFunctionInfoWithDefaults instantiates a new FunctionInfo object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFunctionInfoInputWithDefaults() *FunctionInfoInput {
-	this := FunctionInfoInput{}
+func NewFunctionInfoWithDefaults() *FunctionInfo {
+	this := FunctionInfo{}
 	return &this
 }
 
 // GetFuncTypes returns the FuncTypes field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionInfoInput) GetFuncTypes() FunctionTypeInput {
+func (o *FunctionInfo) GetFuncTypes() FunctionType {
 	if o == nil || IsNil(o.FuncTypes.Get()) {
-		var ret FunctionTypeInput
+		var ret FunctionType
 		return ret
 	}
 	return *o.FuncTypes.Get()
@@ -57,7 +57,7 @@ func (o *FunctionInfoInput) GetFuncTypes() FunctionTypeInput {
 // GetFuncTypesOk returns a tuple with the FuncTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionInfoInput) GetFuncTypesOk() (*FunctionTypeInput, bool) {
+func (o *FunctionInfo) GetFuncTypesOk() (*FunctionType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -65,7 +65,7 @@ func (o *FunctionInfoInput) GetFuncTypesOk() (*FunctionTypeInput, bool) {
 }
 
 // HasFuncTypes returns a boolean if a field has been set.
-func (o *FunctionInfoInput) HasFuncTypes() bool {
+func (o *FunctionInfo) HasFuncTypes() bool {
 	if o != nil && o.FuncTypes.IsSet() {
 		return true
 	}
@@ -73,22 +73,22 @@ func (o *FunctionInfoInput) HasFuncTypes() bool {
 	return false
 }
 
-// SetFuncTypes gets a reference to the given NullableFunctionTypeInput and assigns it to the FuncTypes field.
-func (o *FunctionInfoInput) SetFuncTypes(v FunctionTypeInput) {
+// SetFuncTypes gets a reference to the given NullableFunctionType and assigns it to the FuncTypes field.
+func (o *FunctionInfo) SetFuncTypes(v FunctionType) {
 	o.FuncTypes.Set(&v)
 }
 // SetFuncTypesNil sets the value for FuncTypes to be an explicit nil
-func (o *FunctionInfoInput) SetFuncTypesNil() {
+func (o *FunctionInfo) SetFuncTypesNil() {
 	o.FuncTypes.Set(nil)
 }
 
 // UnsetFuncTypes ensures that no value is present for FuncTypes, not even an explicit nil
-func (o *FunctionInfoInput) UnsetFuncTypes() {
+func (o *FunctionInfo) UnsetFuncTypes() {
 	o.FuncTypes.Unset()
 }
 
 // GetFuncDeps returns the FuncDeps field value
-func (o *FunctionInfoInput) GetFuncDeps() []FuncDepsInner {
+func (o *FunctionInfo) GetFuncDeps() []FuncDepsInner {
 	if o == nil {
 		var ret []FuncDepsInner
 		return ret
@@ -99,7 +99,7 @@ func (o *FunctionInfoInput) GetFuncDeps() []FuncDepsInner {
 
 // GetFuncDepsOk returns a tuple with the FuncDeps field value
 // and a boolean to check if the value has been set.
-func (o *FunctionInfoInput) GetFuncDepsOk() ([]FuncDepsInner, bool) {
+func (o *FunctionInfo) GetFuncDepsOk() ([]FuncDepsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -107,11 +107,11 @@ func (o *FunctionInfoInput) GetFuncDepsOk() ([]FuncDepsInner, bool) {
 }
 
 // SetFuncDeps sets field value
-func (o *FunctionInfoInput) SetFuncDeps(v []FuncDepsInner) {
+func (o *FunctionInfo) SetFuncDeps(v []FuncDepsInner) {
 	o.FuncDeps = v
 }
 
-func (o FunctionInfoInput) MarshalJSON() ([]byte, error) {
+func (o FunctionInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -119,7 +119,7 @@ func (o FunctionInfoInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FunctionInfoInput) ToMap() (map[string]interface{}, error) {
+func (o FunctionInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.FuncTypes.IsSet() {
 		toSerialize["func_types"] = o.FuncTypes.Get()
@@ -133,7 +133,7 @@ func (o FunctionInfoInput) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *FunctionInfoInput) UnmarshalJSON(data []byte) (err error) {
+func (o *FunctionInfo) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -155,15 +155,15 @@ func (o *FunctionInfoInput) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varFunctionInfoInput := _FunctionInfoInput{}
+	varFunctionInfo := _FunctionInfo{}
 
-	err = json.Unmarshal(data, &varFunctionInfoInput)
+	err = json.Unmarshal(data, &varFunctionInfo)
 
 	if err != nil {
 		return err
 	}
 
-	*o = FunctionInfoInput(varFunctionInfoInput)
+	*o = FunctionInfo(varFunctionInfo)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -176,38 +176,38 @@ func (o *FunctionInfoInput) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableFunctionInfoInput struct {
-	value *FunctionInfoInput
+type NullableFunctionInfo struct {
+	value *FunctionInfo
 	isSet bool
 }
 
-func (v NullableFunctionInfoInput) Get() *FunctionInfoInput {
+func (v NullableFunctionInfo) Get() *FunctionInfo {
 	return v.value
 }
 
-func (v *NullableFunctionInfoInput) Set(val *FunctionInfoInput) {
+func (v *NullableFunctionInfo) Set(val *FunctionInfo) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFunctionInfoInput) IsSet() bool {
+func (v NullableFunctionInfo) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFunctionInfoInput) Unset() {
+func (v *NullableFunctionInfo) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFunctionInfoInput(val *FunctionInfoInput) *NullableFunctionInfoInput {
-	return &NullableFunctionInfoInput{value: val, isSet: true}
+func NewNullableFunctionInfo(val *FunctionInfo) *NullableFunctionInfo {
+	return &NullableFunctionInfo{value: val, isSet: true}
 }
 
-func (v NullableFunctionInfoInput) MarshalJSON() ([]byte, error) {
+func (v NullableFunctionInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFunctionInfoInput) UnmarshalJSON(src []byte) error {
+func (v *NullableFunctionInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

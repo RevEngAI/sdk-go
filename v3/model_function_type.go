@@ -14,11 +14,11 @@ import (
 	"fmt"
 )
 
-// checks if the FunctionTypeOutput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &FunctionTypeOutput{}
+// checks if the FunctionType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FunctionType{}
 
-// FunctionTypeOutput struct for FunctionTypeOutput
-type FunctionTypeOutput struct {
+// FunctionType struct for FunctionType
+type FunctionType struct {
 	LastChange NullableString `json:"last_change,omitempty"`
 	// Memory address of the function
 	Addr int32 `json:"addr"`
@@ -36,14 +36,14 @@ type FunctionTypeOutput struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _FunctionTypeOutput FunctionTypeOutput
+type _FunctionType FunctionType
 
-// NewFunctionTypeOutput instantiates a new FunctionTypeOutput object
+// NewFunctionType instantiates a new FunctionType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionTypeOutput(addr int32, size int32, header FunctionHeader, name string, type_ string) *FunctionTypeOutput {
-	this := FunctionTypeOutput{}
+func NewFunctionType(addr int32, size int32, header FunctionHeader, name string, type_ string) *FunctionType {
+	this := FunctionType{}
 	this.Addr = addr
 	this.Size = size
 	this.Header = header
@@ -54,18 +54,18 @@ func NewFunctionTypeOutput(addr int32, size int32, header FunctionHeader, name s
 	return &this
 }
 
-// NewFunctionTypeOutputWithDefaults instantiates a new FunctionTypeOutput object
+// NewFunctionTypeWithDefaults instantiates a new FunctionType object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFunctionTypeOutputWithDefaults() *FunctionTypeOutput {
-	this := FunctionTypeOutput{}
+func NewFunctionTypeWithDefaults() *FunctionType {
+	this := FunctionType{}
 	var artifactType string = "Function"
 	this.ArtifactType = &artifactType
 	return &this
 }
 
 // GetLastChange returns the LastChange field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionTypeOutput) GetLastChange() string {
+func (o *FunctionType) GetLastChange() string {
 	if o == nil || IsNil(o.LastChange.Get()) {
 		var ret string
 		return ret
@@ -76,7 +76,7 @@ func (o *FunctionTypeOutput) GetLastChange() string {
 // GetLastChangeOk returns a tuple with the LastChange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionTypeOutput) GetLastChangeOk() (*string, bool) {
+func (o *FunctionType) GetLastChangeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -84,7 +84,7 @@ func (o *FunctionTypeOutput) GetLastChangeOk() (*string, bool) {
 }
 
 // HasLastChange returns a boolean if a field has been set.
-func (o *FunctionTypeOutput) HasLastChange() bool {
+func (o *FunctionType) HasLastChange() bool {
 	if o != nil && o.LastChange.IsSet() {
 		return true
 	}
@@ -93,21 +93,21 @@ func (o *FunctionTypeOutput) HasLastChange() bool {
 }
 
 // SetLastChange gets a reference to the given NullableString and assigns it to the LastChange field.
-func (o *FunctionTypeOutput) SetLastChange(v string) {
+func (o *FunctionType) SetLastChange(v string) {
 	o.LastChange.Set(&v)
 }
 // SetLastChangeNil sets the value for LastChange to be an explicit nil
-func (o *FunctionTypeOutput) SetLastChangeNil() {
+func (o *FunctionType) SetLastChangeNil() {
 	o.LastChange.Set(nil)
 }
 
 // UnsetLastChange ensures that no value is present for LastChange, not even an explicit nil
-func (o *FunctionTypeOutput) UnsetLastChange() {
+func (o *FunctionType) UnsetLastChange() {
 	o.LastChange.Unset()
 }
 
 // GetAddr returns the Addr field value
-func (o *FunctionTypeOutput) GetAddr() int32 {
+func (o *FunctionType) GetAddr() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -118,7 +118,7 @@ func (o *FunctionTypeOutput) GetAddr() int32 {
 
 // GetAddrOk returns a tuple with the Addr field value
 // and a boolean to check if the value has been set.
-func (o *FunctionTypeOutput) GetAddrOk() (*int32, bool) {
+func (o *FunctionType) GetAddrOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -126,12 +126,12 @@ func (o *FunctionTypeOutput) GetAddrOk() (*int32, bool) {
 }
 
 // SetAddr sets field value
-func (o *FunctionTypeOutput) SetAddr(v int32) {
+func (o *FunctionType) SetAddr(v int32) {
 	o.Addr = v
 }
 
 // GetSize returns the Size field value
-func (o *FunctionTypeOutput) GetSize() int32 {
+func (o *FunctionType) GetSize() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -142,7 +142,7 @@ func (o *FunctionTypeOutput) GetSize() int32 {
 
 // GetSizeOk returns a tuple with the Size field value
 // and a boolean to check if the value has been set.
-func (o *FunctionTypeOutput) GetSizeOk() (*int32, bool) {
+func (o *FunctionType) GetSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -150,12 +150,12 @@ func (o *FunctionTypeOutput) GetSizeOk() (*int32, bool) {
 }
 
 // SetSize sets field value
-func (o *FunctionTypeOutput) SetSize(v int32) {
+func (o *FunctionType) SetSize(v int32) {
 	o.Size = v
 }
 
 // GetHeader returns the Header field value
-func (o *FunctionTypeOutput) GetHeader() FunctionHeader {
+func (o *FunctionType) GetHeader() FunctionHeader {
 	if o == nil {
 		var ret FunctionHeader
 		return ret
@@ -166,7 +166,7 @@ func (o *FunctionTypeOutput) GetHeader() FunctionHeader {
 
 // GetHeaderOk returns a tuple with the Header field value
 // and a boolean to check if the value has been set.
-func (o *FunctionTypeOutput) GetHeaderOk() (*FunctionHeader, bool) {
+func (o *FunctionType) GetHeaderOk() (*FunctionHeader, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -174,12 +174,12 @@ func (o *FunctionTypeOutput) GetHeaderOk() (*FunctionHeader, bool) {
 }
 
 // SetHeader sets field value
-func (o *FunctionTypeOutput) SetHeader(v FunctionHeader) {
+func (o *FunctionType) SetHeader(v FunctionHeader) {
 	o.Header = v
 }
 
 // GetStackVars returns the StackVars field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionTypeOutput) GetStackVars() map[string]StackVariable {
+func (o *FunctionType) GetStackVars() map[string]StackVariable {
 	if o == nil {
 		var ret map[string]StackVariable
 		return ret
@@ -190,7 +190,7 @@ func (o *FunctionTypeOutput) GetStackVars() map[string]StackVariable {
 // GetStackVarsOk returns a tuple with the StackVars field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionTypeOutput) GetStackVarsOk() (map[string]StackVariable, bool) {
+func (o *FunctionType) GetStackVarsOk() (map[string]StackVariable, bool) {
 	if o == nil || IsNil(o.StackVars) {
 		return map[string]StackVariable{}, false
 	}
@@ -198,7 +198,7 @@ func (o *FunctionTypeOutput) GetStackVarsOk() (map[string]StackVariable, bool) {
 }
 
 // HasStackVars returns a boolean if a field has been set.
-func (o *FunctionTypeOutput) HasStackVars() bool {
+func (o *FunctionType) HasStackVars() bool {
 	if o != nil && !IsNil(o.StackVars) {
 		return true
 	}
@@ -207,12 +207,12 @@ func (o *FunctionTypeOutput) HasStackVars() bool {
 }
 
 // SetStackVars gets a reference to the given map[string]StackVariable and assigns it to the StackVars field.
-func (o *FunctionTypeOutput) SetStackVars(v map[string]StackVariable) {
+func (o *FunctionType) SetStackVars(v map[string]StackVariable) {
 	o.StackVars = v
 }
 
 // GetName returns the Name field value
-func (o *FunctionTypeOutput) GetName() string {
+func (o *FunctionType) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -223,7 +223,7 @@ func (o *FunctionTypeOutput) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *FunctionTypeOutput) GetNameOk() (*string, bool) {
+func (o *FunctionType) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -231,12 +231,12 @@ func (o *FunctionTypeOutput) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *FunctionTypeOutput) SetName(v string) {
+func (o *FunctionType) SetName(v string) {
 	o.Name = v
 }
 
 // GetType returns the Type field value
-func (o *FunctionTypeOutput) GetType() string {
+func (o *FunctionType) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -247,7 +247,7 @@ func (o *FunctionTypeOutput) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *FunctionTypeOutput) GetTypeOk() (*string, bool) {
+func (o *FunctionType) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -255,12 +255,12 @@ func (o *FunctionTypeOutput) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *FunctionTypeOutput) SetType(v string) {
+func (o *FunctionType) SetType(v string) {
 	o.Type = v
 }
 
 // GetArtifactType returns the ArtifactType field value if set, zero value otherwise.
-func (o *FunctionTypeOutput) GetArtifactType() string {
+func (o *FunctionType) GetArtifactType() string {
 	if o == nil || IsNil(o.ArtifactType) {
 		var ret string
 		return ret
@@ -270,7 +270,7 @@ func (o *FunctionTypeOutput) GetArtifactType() string {
 
 // GetArtifactTypeOk returns a tuple with the ArtifactType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FunctionTypeOutput) GetArtifactTypeOk() (*string, bool) {
+func (o *FunctionType) GetArtifactTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.ArtifactType) {
 		return nil, false
 	}
@@ -278,7 +278,7 @@ func (o *FunctionTypeOutput) GetArtifactTypeOk() (*string, bool) {
 }
 
 // HasArtifactType returns a boolean if a field has been set.
-func (o *FunctionTypeOutput) HasArtifactType() bool {
+func (o *FunctionType) HasArtifactType() bool {
 	if o != nil && !IsNil(o.ArtifactType) {
 		return true
 	}
@@ -287,11 +287,11 @@ func (o *FunctionTypeOutput) HasArtifactType() bool {
 }
 
 // SetArtifactType gets a reference to the given string and assigns it to the ArtifactType field.
-func (o *FunctionTypeOutput) SetArtifactType(v string) {
+func (o *FunctionType) SetArtifactType(v string) {
 	o.ArtifactType = &v
 }
 
-func (o FunctionTypeOutput) MarshalJSON() ([]byte, error) {
+func (o FunctionType) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -299,7 +299,7 @@ func (o FunctionTypeOutput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FunctionTypeOutput) ToMap() (map[string]interface{}, error) {
+func (o FunctionType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.LastChange.IsSet() {
 		toSerialize["last_change"] = o.LastChange.Get()
@@ -323,7 +323,7 @@ func (o FunctionTypeOutput) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *FunctionTypeOutput) UnmarshalJSON(data []byte) (err error) {
+func (o *FunctionType) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -349,15 +349,15 @@ func (o *FunctionTypeOutput) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varFunctionTypeOutput := _FunctionTypeOutput{}
+	varFunctionType := _FunctionType{}
 
-	err = json.Unmarshal(data, &varFunctionTypeOutput)
+	err = json.Unmarshal(data, &varFunctionType)
 
 	if err != nil {
 		return err
 	}
 
-	*o = FunctionTypeOutput(varFunctionTypeOutput)
+	*o = FunctionType(varFunctionType)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -376,38 +376,38 @@ func (o *FunctionTypeOutput) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableFunctionTypeOutput struct {
-	value *FunctionTypeOutput
+type NullableFunctionType struct {
+	value *FunctionType
 	isSet bool
 }
 
-func (v NullableFunctionTypeOutput) Get() *FunctionTypeOutput {
+func (v NullableFunctionType) Get() *FunctionType {
 	return v.value
 }
 
-func (v *NullableFunctionTypeOutput) Set(val *FunctionTypeOutput) {
+func (v *NullableFunctionType) Set(val *FunctionType) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFunctionTypeOutput) IsSet() bool {
+func (v NullableFunctionType) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFunctionTypeOutput) Unset() {
+func (v *NullableFunctionType) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFunctionTypeOutput(val *FunctionTypeOutput) *NullableFunctionTypeOutput {
-	return &NullableFunctionTypeOutput{value: val, isSet: true}
+func NewNullableFunctionType(val *FunctionType) *NullableFunctionType {
+	return &NullableFunctionType{value: val, isSet: true}
 }
 
-func (v NullableFunctionTypeOutput) MarshalJSON() ([]byte, error) {
+func (v NullableFunctionType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFunctionTypeOutput) UnmarshalJSON(src []byte) error {
+func (v *NullableFunctionType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
