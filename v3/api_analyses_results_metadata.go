@@ -54,6 +54,8 @@ Returns a paginated list of functions identified during analysis
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiGetAnalysisFunctionsPaginatedRequest
+
+Deprecated
 */
 func (a *AnalysesResultsMetadataAPIService) GetAnalysisFunctionsPaginated(ctx context.Context, analysisId int32) ApiGetAnalysisFunctionsPaginatedRequest {
 	return ApiGetAnalysisFunctionsPaginatedRequest{
@@ -65,6 +67,7 @@ func (a *AnalysesResultsMetadataAPIService) GetAnalysisFunctionsPaginated(ctx co
 
 // Execute executes the request
 //  @return BaseResponseAnalysisFunctionsList
+// Deprecated
 func (a *AnalysesResultsMetadataAPIService) GetAnalysisFunctionsPaginatedExecute(r ApiGetAnalysisFunctionsPaginatedRequest) (*BaseResponseAnalysisFunctionsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
