@@ -29,6 +29,7 @@ Method | HTTP request | Description
 [**UploadFile**](AnalysesCoreAPI.md#UploadFile) | **Post** /v2/upload | Upload File
 [**V3GetAnalysisStrings**](AnalysesCoreAPI.md#V3GetAnalysisStrings) | **Get** /v3/analyses/{analysis_id}/functions/strings | List strings for an analysis.
 [**V3GetAnalysisStringsStatus**](AnalysesCoreAPI.md#V3GetAnalysisStringsStatus) | **Get** /v3/analyses/{analysis_id}/functions/strings/status | Get the string-extraction status for an analysis.
+[**V3ListExampleAnalyses**](AnalysesCoreAPI.md#V3ListExampleAnalyses) | **Get** /v3/analyses/examples | List example analyses
 
 
 
@@ -1809,6 +1810,67 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetAnalysisStringsStatusOutputBody**](GetAnalysisStringsStatusOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3ListExampleAnalyses
+
+> ListExampleAnalysesOutputBody V3ListExampleAnalyses(ctx).Execute()
+
+List example analyses
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3ListExampleAnalyses(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3ListExampleAnalyses``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3ListExampleAnalyses`: ListExampleAnalysesOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3ListExampleAnalyses`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3ListExampleAnalysesRequest struct via the builder pattern
+
+
+### Return type
+
+[**ListExampleAnalysesOutputBody**](ListExampleAnalysesOutputBody.md)
 
 ### Authorization
 
