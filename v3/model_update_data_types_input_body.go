@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -22,7 +23,6 @@ type UpdateDataTypesInputBody struct {
 	DataTypes interface{} `json:"data_types"`
 	// Current version of the function data types. The update is rejected if the stored version has moved on. Pass 0 on the first write.
 	DataTypesVersion int64 `json:"data_types_version"`
-	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateDataTypesInputBody UpdateDataTypesInputBody
@@ -110,11 +110,6 @@ func (o UpdateDataTypesInputBody) ToMap() (map[string]interface{}, error) {
 		toSerialize["data_types"] = o.DataTypes
 	}
 	toSerialize["data_types_version"] = o.DataTypesVersion
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -143,21 +138,15 @@ func (o *UpdateDataTypesInputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateDataTypesInputBody := _UpdateDataTypesInputBody{}
 
-	err = json.Unmarshal(data, &varUpdateDataTypesInputBody)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUpdateDataTypesInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateDataTypesInputBody(varUpdateDataTypesInputBody)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "data_types")
-		delete(additionalProperties, "data_types_version")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

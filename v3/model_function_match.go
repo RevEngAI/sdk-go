@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -19,11 +20,12 @@ var _ MappedNullable = &FunctionMatch{}
 
 // FunctionMatch struct for FunctionMatch
 type FunctionMatch struct {
-	// Unique identifier of the function
-	FunctionId int64 `json:"function_id"`
-	MatchedFunctions []MatchedFunction `json:"matched_functions"`
+	// Per-name confidences when canonify was requested
 	Confidences []NameConfidence `json:"confidences,omitempty"`
-	AdditionalProperties map[string]interface{}
+	// Source function ID
+	FunctionId int64 `json:"function_id"`
+	// Top candidate matches in similarity-descending order
+	MatchedFunctions []MatchedFunction `json:"matched_functions"`
 }
 
 type _FunctionMatch FunctionMatch
@@ -45,54 +47,6 @@ func NewFunctionMatch(functionId int64, matchedFunctions []MatchedFunction) *Fun
 func NewFunctionMatchWithDefaults() *FunctionMatch {
 	this := FunctionMatch{}
 	return &this
-}
-
-// GetFunctionId returns the FunctionId field value
-func (o *FunctionMatch) GetFunctionId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.FunctionId
-}
-
-// GetFunctionIdOk returns a tuple with the FunctionId field value
-// and a boolean to check if the value has been set.
-func (o *FunctionMatch) GetFunctionIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FunctionId, true
-}
-
-// SetFunctionId sets field value
-func (o *FunctionMatch) SetFunctionId(v int64) {
-	o.FunctionId = v
-}
-
-// GetMatchedFunctions returns the MatchedFunctions field value
-func (o *FunctionMatch) GetMatchedFunctions() []MatchedFunction {
-	if o == nil {
-		var ret []MatchedFunction
-		return ret
-	}
-
-	return o.MatchedFunctions
-}
-
-// GetMatchedFunctionsOk returns a tuple with the MatchedFunctions field value
-// and a boolean to check if the value has been set.
-func (o *FunctionMatch) GetMatchedFunctionsOk() ([]MatchedFunction, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.MatchedFunctions, true
-}
-
-// SetMatchedFunctions sets field value
-func (o *FunctionMatch) SetMatchedFunctions(v []MatchedFunction) {
-	o.MatchedFunctions = v
 }
 
 // GetConfidences returns the Confidences field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -128,6 +82,56 @@ func (o *FunctionMatch) SetConfidences(v []NameConfidence) {
 	o.Confidences = v
 }
 
+// GetFunctionId returns the FunctionId field value
+func (o *FunctionMatch) GetFunctionId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.FunctionId
+}
+
+// GetFunctionIdOk returns a tuple with the FunctionId field value
+// and a boolean to check if the value has been set.
+func (o *FunctionMatch) GetFunctionIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FunctionId, true
+}
+
+// SetFunctionId sets field value
+func (o *FunctionMatch) SetFunctionId(v int64) {
+	o.FunctionId = v
+}
+
+// GetMatchedFunctions returns the MatchedFunctions field value
+// If the value is explicit nil, the zero value for []MatchedFunction will be returned
+func (o *FunctionMatch) GetMatchedFunctions() []MatchedFunction {
+	if o == nil {
+		var ret []MatchedFunction
+		return ret
+	}
+
+	return o.MatchedFunctions
+}
+
+// GetMatchedFunctionsOk returns a tuple with the MatchedFunctions field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FunctionMatch) GetMatchedFunctionsOk() ([]MatchedFunction, bool) {
+	if o == nil || IsNil(o.MatchedFunctions) {
+		return nil, false
+	}
+	return o.MatchedFunctions, true
+}
+
+// SetMatchedFunctions sets field value
+func (o *FunctionMatch) SetMatchedFunctions(v []MatchedFunction) {
+	o.MatchedFunctions = v
+}
+
 func (o FunctionMatch) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -138,16 +142,13 @@ func (o FunctionMatch) MarshalJSON() ([]byte, error) {
 
 func (o FunctionMatch) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["function_id"] = o.FunctionId
-	toSerialize["matched_functions"] = o.MatchedFunctions
 	if o.Confidences != nil {
 		toSerialize["confidences"] = o.Confidences
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
+	toSerialize["function_id"] = o.FunctionId
+	if o.MatchedFunctions != nil {
+		toSerialize["matched_functions"] = o.MatchedFunctions
 	}
-
 	return toSerialize, nil
 }
 
@@ -176,22 +177,15 @@ func (o *FunctionMatch) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionMatch := _FunctionMatch{}
 
-	err = json.Unmarshal(data, &varFunctionMatch)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFunctionMatch)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionMatch(varFunctionMatch)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "function_id")
-		delete(additionalProperties, "matched_functions")
-		delete(additionalProperties, "confidences")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

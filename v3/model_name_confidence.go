@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -19,11 +20,10 @@ var _ MappedNullable = &NameConfidence{}
 
 // NameConfidence struct for NameConfidence
 type NameConfidence struct {
-	// The suggested function name
+	// Softmax-normalised confidence for this name
+	Confidence float64 `json:"confidence"`
+	// Candidate name
 	Name string `json:"name"`
-	// Confidence score as a percentage
-	Confidence float32 `json:"confidence"`
-	AdditionalProperties map[string]interface{}
 }
 
 type _NameConfidence NameConfidence
@@ -32,10 +32,10 @@ type _NameConfidence NameConfidence
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNameConfidence(name string, confidence float32) *NameConfidence {
+func NewNameConfidence(confidence float64, name string) *NameConfidence {
 	this := NameConfidence{}
-	this.Name = name
 	this.Confidence = confidence
+	this.Name = name
 	return &this
 }
 
@@ -45,6 +45,30 @@ func NewNameConfidence(name string, confidence float32) *NameConfidence {
 func NewNameConfidenceWithDefaults() *NameConfidence {
 	this := NameConfidence{}
 	return &this
+}
+
+// GetConfidence returns the Confidence field value
+func (o *NameConfidence) GetConfidence() float64 {
+	if o == nil {
+		var ret float64
+		return ret
+	}
+
+	return o.Confidence
+}
+
+// GetConfidenceOk returns a tuple with the Confidence field value
+// and a boolean to check if the value has been set.
+func (o *NameConfidence) GetConfidenceOk() (*float64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Confidence, true
+}
+
+// SetConfidence sets field value
+func (o *NameConfidence) SetConfidence(v float64) {
+	o.Confidence = v
 }
 
 // GetName returns the Name field value
@@ -71,30 +95,6 @@ func (o *NameConfidence) SetName(v string) {
 	o.Name = v
 }
 
-// GetConfidence returns the Confidence field value
-func (o *NameConfidence) GetConfidence() float32 {
-	if o == nil {
-		var ret float32
-		return ret
-	}
-
-	return o.Confidence
-}
-
-// GetConfidenceOk returns a tuple with the Confidence field value
-// and a boolean to check if the value has been set.
-func (o *NameConfidence) GetConfidenceOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Confidence, true
-}
-
-// SetConfidence sets field value
-func (o *NameConfidence) SetConfidence(v float32) {
-	o.Confidence = v
-}
-
 func (o NameConfidence) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -105,13 +105,8 @@ func (o NameConfidence) MarshalJSON() ([]byte, error) {
 
 func (o NameConfidence) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
 	toSerialize["confidence"] = o.Confidence
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
+	toSerialize["name"] = o.Name
 	return toSerialize, nil
 }
 
@@ -120,8 +115,8 @@ func (o *NameConfidence) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"name",
 		"confidence",
+		"name",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -140,21 +135,15 @@ func (o *NameConfidence) UnmarshalJSON(data []byte) (err error) {
 
 	varNameConfidence := _NameConfidence{}
 
-	err = json.Unmarshal(data, &varNameConfidence)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varNameConfidence)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NameConfidence(varNameConfidence)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "confidence")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

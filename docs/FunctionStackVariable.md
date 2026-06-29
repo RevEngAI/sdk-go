@@ -5,18 +5,18 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Addr** | **int64** |  | 
-**LastChange** | Pointer to **NullableString** |  | [optional] 
-**Name** | **NullableString** |  | 
+**LastChange** | Pointer to **string** |  | [optional] 
+**Name** | **string** |  | 
 **Offset** | **int64** |  | 
-**Scope** | Pointer to **NullableString** |  | [optional] 
+**Scope** | Pointer to **string** |  | [optional] 
 **Size** | **int64** |  | 
-**Type** | **NullableString** |  | 
+**Type** | **string** |  | 
 
 ## Methods
 
 ### NewFunctionStackVariable
 
-`func NewFunctionStackVariable(addr int64, name NullableString, offset int64, size int64, type_ NullableString, ) *FunctionStackVariable`
+`func NewFunctionStackVariable(addr int64, name string, offset int64, size int64, type_ string, ) *FunctionStackVariable`
 
 NewFunctionStackVariable instantiates a new FunctionStackVariable object
 This constructor will assign default values to properties that have it defined,
@@ -76,16 +76,6 @@ SetLastChange sets LastChange field to given value.
 
 HasLastChange returns a boolean if a field has been set.
 
-### SetLastChangeNil
-
-`func (o *FunctionStackVariable) SetLastChangeNil(b bool)`
-
- SetLastChangeNil sets the value for LastChange to be an explicit nil
-
-### UnsetLastChange
-`func (o *FunctionStackVariable) UnsetLastChange()`
-
-UnsetLastChange ensures that no value is present for LastChange, not even an explicit nil
 ### GetName
 
 `func (o *FunctionStackVariable) GetName() string`
@@ -106,16 +96,6 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
-### SetNameNil
-
-`func (o *FunctionStackVariable) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *FunctionStackVariable) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetOffset
 
 `func (o *FunctionStackVariable) GetOffset() int64`
@@ -161,16 +141,6 @@ SetScope sets Scope field to given value.
 
 HasScope returns a boolean if a field has been set.
 
-### SetScopeNil
-
-`func (o *FunctionStackVariable) SetScopeNil(b bool)`
-
- SetScopeNil sets the value for Scope to be an explicit nil
-
-### UnsetScope
-`func (o *FunctionStackVariable) UnsetScope()`
-
-UnsetScope ensures that no value is present for Scope, not even an explicit nil
 ### GetSize
 
 `func (o *FunctionStackVariable) GetSize() int64`
@@ -211,16 +181,6 @@ and a boolean to check if the value has been set.
 SetType sets Type field to given value.
 
 
-### SetTypeNil
-
-`func (o *FunctionStackVariable) SetTypeNil(b bool)`
-
- SetTypeNil sets the value for Type to be an explicit nil
-
-### UnsetType
-`func (o *FunctionStackVariable) UnsetType()`
-
-UnsetType ensures that no value is present for Type, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

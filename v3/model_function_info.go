@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -19,10 +20,8 @@ var _ MappedNullable = &FunctionInfo{}
 
 // FunctionInfo struct for FunctionInfo
 type FunctionInfo struct {
-	FuncTypes NullableFunctionType `json:"func_types,omitempty"`
-	// List of function dependencies
-	FuncDeps []FuncDepsInner `json:"func_deps"`
-	AdditionalProperties map[string]interface{}
+	FuncDeps []FunctionDependency `json:"func_deps"`
+	FuncTypes *FunctionType `json:"func_types,omitempty"`
 }
 
 type _FunctionInfo FunctionInfo
@@ -31,7 +30,7 @@ type _FunctionInfo FunctionInfo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionInfo(funcDeps []FuncDepsInner) *FunctionInfo {
+func NewFunctionInfo(funcDeps []FunctionDependency) *FunctionInfo {
 	this := FunctionInfo{}
 	this.FuncDeps = funcDeps
 	return &this
@@ -45,52 +44,11 @@ func NewFunctionInfoWithDefaults() *FunctionInfo {
 	return &this
 }
 
-// GetFuncTypes returns the FuncTypes field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionInfo) GetFuncTypes() FunctionType {
-	if o == nil || IsNil(o.FuncTypes.Get()) {
-		var ret FunctionType
-		return ret
-	}
-	return *o.FuncTypes.Get()
-}
-
-// GetFuncTypesOk returns a tuple with the FuncTypes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionInfo) GetFuncTypesOk() (*FunctionType, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.FuncTypes.Get(), o.FuncTypes.IsSet()
-}
-
-// HasFuncTypes returns a boolean if a field has been set.
-func (o *FunctionInfo) HasFuncTypes() bool {
-	if o != nil && o.FuncTypes.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFuncTypes gets a reference to the given NullableFunctionType and assigns it to the FuncTypes field.
-func (o *FunctionInfo) SetFuncTypes(v FunctionType) {
-	o.FuncTypes.Set(&v)
-}
-// SetFuncTypesNil sets the value for FuncTypes to be an explicit nil
-func (o *FunctionInfo) SetFuncTypesNil() {
-	o.FuncTypes.Set(nil)
-}
-
-// UnsetFuncTypes ensures that no value is present for FuncTypes, not even an explicit nil
-func (o *FunctionInfo) UnsetFuncTypes() {
-	o.FuncTypes.Unset()
-}
-
 // GetFuncDeps returns the FuncDeps field value
-func (o *FunctionInfo) GetFuncDeps() []FuncDepsInner {
+// If the value is explicit nil, the zero value for []FunctionDependency will be returned
+func (o *FunctionInfo) GetFuncDeps() []FunctionDependency {
 	if o == nil {
-		var ret []FuncDepsInner
+		var ret []FunctionDependency
 		return ret
 	}
 
@@ -99,16 +57,49 @@ func (o *FunctionInfo) GetFuncDeps() []FuncDepsInner {
 
 // GetFuncDepsOk returns a tuple with the FuncDeps field value
 // and a boolean to check if the value has been set.
-func (o *FunctionInfo) GetFuncDepsOk() ([]FuncDepsInner, bool) {
-	if o == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FunctionInfo) GetFuncDepsOk() ([]FunctionDependency, bool) {
+	if o == nil || IsNil(o.FuncDeps) {
 		return nil, false
 	}
 	return o.FuncDeps, true
 }
 
 // SetFuncDeps sets field value
-func (o *FunctionInfo) SetFuncDeps(v []FuncDepsInner) {
+func (o *FunctionInfo) SetFuncDeps(v []FunctionDependency) {
 	o.FuncDeps = v
+}
+
+// GetFuncTypes returns the FuncTypes field value if set, zero value otherwise.
+func (o *FunctionInfo) GetFuncTypes() FunctionType {
+	if o == nil || IsNil(o.FuncTypes) {
+		var ret FunctionType
+		return ret
+	}
+	return *o.FuncTypes
+}
+
+// GetFuncTypesOk returns a tuple with the FuncTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionInfo) GetFuncTypesOk() (*FunctionType, bool) {
+	if o == nil || IsNil(o.FuncTypes) {
+		return nil, false
+	}
+	return o.FuncTypes, true
+}
+
+// HasFuncTypes returns a boolean if a field has been set.
+func (o *FunctionInfo) HasFuncTypes() bool {
+	if o != nil && !IsNil(o.FuncTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetFuncTypes gets a reference to the given FunctionType and assigns it to the FuncTypes field.
+func (o *FunctionInfo) SetFuncTypes(v FunctionType) {
+	o.FuncTypes = &v
 }
 
 func (o FunctionInfo) MarshalJSON() ([]byte, error) {
@@ -121,15 +112,12 @@ func (o FunctionInfo) MarshalJSON() ([]byte, error) {
 
 func (o FunctionInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.FuncTypes.IsSet() {
-		toSerialize["func_types"] = o.FuncTypes.Get()
+	if o.FuncDeps != nil {
+		toSerialize["func_deps"] = o.FuncDeps
 	}
-	toSerialize["func_deps"] = o.FuncDeps
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
+	if !IsNil(o.FuncTypes) {
+		toSerialize["func_types"] = o.FuncTypes
 	}
-
 	return toSerialize, nil
 }
 
@@ -157,21 +145,15 @@ func (o *FunctionInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionInfo := _FunctionInfo{}
 
-	err = json.Unmarshal(data, &varFunctionInfo)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFunctionInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionInfo(varFunctionInfo)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "func_types")
-		delete(additionalProperties, "func_deps")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

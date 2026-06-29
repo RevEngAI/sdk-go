@@ -204,12 +204,12 @@ Class | Method | HTTP request | Description
 *FunctionsDataTypesAPI* | [**BatchUpdateFunctionDataTypes**](docs/FunctionsDataTypesAPI.md#batchupdatefunctiondatatypes) | **Put** /v3/analyses/{analysis_id}/functions/data-types | Batch update function data types
 *FunctionsDataTypesAPI* | [**GenerateFunctionDataTypesForAnalysis**](docs/FunctionsDataTypesAPI.md#generatefunctiondatatypesforanalysis) | **Post** /v2/analyses/{analysis_id}/functions/data_types | Generate Function Data Types
 *FunctionsDataTypesAPI* | [**GenerateFunctionDataTypesForFunctions**](docs/FunctionsDataTypesAPI.md#generatefunctiondatatypesforfunctions) | **Post** /v2/functions/data_types | Generate Function Data Types for an arbitrary list of functions
-*FunctionsDataTypesAPI* | [**GetFunctionDataTypes**](docs/FunctionsDataTypesAPI.md#getfunctiondatatypes) | **Get** /v2/analyses/{analysis_id}/functions/{function_id}/data_types | Get Function Data Types
-*FunctionsDataTypesAPI* | [**GetFunctionDataTypes_0**](docs/FunctionsDataTypesAPI.md#getfunctiondatatypes_0) | **Get** /v3/analyses/{analysis_id}/functions/{function_id}/data-types | Get data types for a single function
+*FunctionsDataTypesAPI* | [**GetFunctionDataTypes**](docs/FunctionsDataTypesAPI.md#getfunctiondatatypes) | **Get** /v3/analyses/{analysis_id}/functions/{function_id}/data-types | Get data types for a single function
 *FunctionsDataTypesAPI* | [**ListAnalysisFunctionsDataTypes**](docs/FunctionsDataTypesAPI.md#listanalysisfunctionsdatatypes) | **Get** /v3/analyses/{analysis_id}/functions/data-types | List data types for all functions in an analysis
 *FunctionsDataTypesAPI* | [**ListFunctionDataTypesForAnalysis**](docs/FunctionsDataTypesAPI.md#listfunctiondatatypesforanalysis) | **Get** /v2/analyses/{analysis_id}/functions/data_types | List Function Data Types
 *FunctionsDataTypesAPI* | [**ListFunctionDataTypesForFunctions**](docs/FunctionsDataTypesAPI.md#listfunctiondatatypesforfunctions) | **Get** /v2/functions/data_types | List Function Data Types
 *FunctionsDataTypesAPI* | [**ListFunctionsDataTypes**](docs/FunctionsDataTypesAPI.md#listfunctionsdatatypes) | **Get** /v3/functions/data-types | Get data types for many functions
+*FunctionsDataTypesAPI* | [**UpdateFunctionDataTypes**](docs/FunctionsDataTypesAPI.md#updatefunctiondatatypes) | **Put** /v2/analyses/{analysis_id}/functions/{function_id}/data_types | Update function data types
 *FunctionsRenamingHistoryAPI* | [**BatchRenameFunction**](docs/FunctionsRenamingHistoryAPI.md#batchrenamefunction) | **Post** /v2/functions/rename/batch | Batch Rename Functions
 *FunctionsRenamingHistoryAPI* | [**BatchRenameFunctions**](docs/FunctionsRenamingHistoryAPI.md#batchrenamefunctions) | **Post** /v3/functions/rename | Batch rename functions
 *FunctionsRenamingHistoryAPI* | [**GetFunctionHistory**](docs/FunctionsRenamingHistoryAPI.md#getfunctionhistory) | **Get** /v3/functions/{function_id}/history | Get function name history
@@ -718,6 +718,12 @@ Class | Method | HTTP request | Description
  - [UserCredits](docs/UserCredits.md)
  - [UserIdentity](docs/UserIdentity.md)
  - [UserProfile](docs/UserProfile.md)
+ - [V2FunctionHeader](docs/V2FunctionHeader.md)
+ - [V2FunctionInfo](docs/V2FunctionInfo.md)
+ - [V2FunctionMatch](docs/V2FunctionMatch.md)
+ - [V2FunctionType](docs/V2FunctionType.md)
+ - [V2MatchedFunction](docs/V2MatchedFunction.md)
+ - [V2NameConfidence](docs/V2NameConfidence.md)
  - [Vulnerabilities](docs/Vulnerabilities.md)
  - [Vulnerability](docs/Vulnerability.md)
  - [WarningEvent](docs/WarningEvent.md)

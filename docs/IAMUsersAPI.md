@@ -58,7 +58,7 @@ Other parameters are passed through a pointer to a apiGetMeRequest struct via th
 
 ### Authorization
 
-[APIKey](../README.md#APIKey)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -119,7 +119,7 @@ Other parameters are passed through a pointer to a apiGetMyPermissionsRequest st
 
 ### Authorization
 
-[APIKey](../README.md#APIKey)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

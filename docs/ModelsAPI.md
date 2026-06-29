@@ -57,7 +57,7 @@ Other parameters are passed through a pointer to a apiGetModelsRequest struct vi
 
 ### Authorization
 
-[APIKey](../README.md#APIKey)
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
