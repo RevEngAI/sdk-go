@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FuncTypes** | Pointer to [**NullableFunctionType**](FunctionType.md) |  | [optional] 
-**FuncDeps** | [**[]FuncDepsInner**](FuncDepsInner.md) | List of function dependencies | 
+**FuncDeps** | [**[]FunctionDependency**](FunctionDependency.md) |  | 
+**FuncTypes** | Pointer to [**FunctionType**](FunctionType.md) |  | [optional] 
 
 ## Methods
 
 ### NewFunctionInfo
 
-`func NewFunctionInfo(funcDeps []FuncDepsInner, ) *FunctionInfo`
+`func NewFunctionInfo(funcDeps []FunctionDependency, ) *FunctionInfo`
 
 NewFunctionInfo instantiates a new FunctionInfo object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +26,36 @@ NewFunctionInfoWithDefaults instantiates a new FunctionInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetFuncDeps
+
+`func (o *FunctionInfo) GetFuncDeps() []FunctionDependency`
+
+GetFuncDeps returns the FuncDeps field if non-nil, zero value otherwise.
+
+### GetFuncDepsOk
+
+`func (o *FunctionInfo) GetFuncDepsOk() (*[]FunctionDependency, bool)`
+
+GetFuncDepsOk returns a tuple with the FuncDeps field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFuncDeps
+
+`func (o *FunctionInfo) SetFuncDeps(v []FunctionDependency)`
+
+SetFuncDeps sets FuncDeps field to given value.
+
+
+### SetFuncDepsNil
+
+`func (o *FunctionInfo) SetFuncDepsNil(b bool)`
+
+ SetFuncDepsNil sets the value for FuncDeps to be an explicit nil
+
+### UnsetFuncDeps
+`func (o *FunctionInfo) UnsetFuncDeps()`
+
+UnsetFuncDeps ensures that no value is present for FuncDeps, not even an explicit nil
 ### GetFuncTypes
 
 `func (o *FunctionInfo) GetFuncTypes() FunctionType`
@@ -50,36 +80,6 @@ SetFuncTypes sets FuncTypes field to given value.
 `func (o *FunctionInfo) HasFuncTypes() bool`
 
 HasFuncTypes returns a boolean if a field has been set.
-
-### SetFuncTypesNil
-
-`func (o *FunctionInfo) SetFuncTypesNil(b bool)`
-
- SetFuncTypesNil sets the value for FuncTypes to be an explicit nil
-
-### UnsetFuncTypes
-`func (o *FunctionInfo) UnsetFuncTypes()`
-
-UnsetFuncTypes ensures that no value is present for FuncTypes, not even an explicit nil
-### GetFuncDeps
-
-`func (o *FunctionInfo) GetFuncDeps() []FuncDepsInner`
-
-GetFuncDeps returns the FuncDeps field if non-nil, zero value otherwise.
-
-### GetFuncDepsOk
-
-`func (o *FunctionInfo) GetFuncDepsOk() (*[]FuncDepsInner, bool)`
-
-GetFuncDepsOk returns a tuple with the FuncDeps field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFuncDeps
-
-`func (o *FunctionInfo) SetFuncDeps(v []FuncDepsInner)`
-
-SetFuncDeps sets FuncDeps field to given value.
-
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

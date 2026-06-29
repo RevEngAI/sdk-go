@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -19,13 +20,12 @@ var _ MappedNullable = &FunctionArgument{}
 
 // FunctionArgument struct for FunctionArgument
 type FunctionArgument struct {
-	LastChange NullableString `json:"last_change,omitempty"`
-	Name NullableString `json:"name"`
+	LastChange *string `json:"last_change,omitempty"`
+	Name string `json:"name"`
 	Offset int64 `json:"offset"`
-	Scope NullableString `json:"scope,omitempty"`
+	Scope *string `json:"scope,omitempty"`
 	Size int64 `json:"size"`
-	Type NullableString `json:"type"`
-	AdditionalProperties map[string]interface{}
+	Type string `json:"type"`
 }
 
 type _FunctionArgument FunctionArgument
@@ -34,7 +34,7 @@ type _FunctionArgument FunctionArgument
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionArgument(name NullableString, offset int64, size int64, type_ NullableString) *FunctionArgument {
+func NewFunctionArgument(name string, offset int64, size int64, type_ string) *FunctionArgument {
 	this := FunctionArgument{}
 	this.Name = name
 	this.Offset = offset
@@ -51,72 +51,60 @@ func NewFunctionArgumentWithDefaults() *FunctionArgument {
 	return &this
 }
 
-// GetLastChange returns the LastChange field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastChange returns the LastChange field value if set, zero value otherwise.
 func (o *FunctionArgument) GetLastChange() string {
-	if o == nil || IsNil(o.LastChange.Get()) {
+	if o == nil || IsNil(o.LastChange) {
 		var ret string
 		return ret
 	}
-	return *o.LastChange.Get()
+	return *o.LastChange
 }
 
 // GetLastChangeOk returns a tuple with the LastChange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FunctionArgument) GetLastChangeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LastChange) {
 		return nil, false
 	}
-	return o.LastChange.Get(), o.LastChange.IsSet()
+	return o.LastChange, true
 }
 
 // HasLastChange returns a boolean if a field has been set.
 func (o *FunctionArgument) HasLastChange() bool {
-	if o != nil && o.LastChange.IsSet() {
+	if o != nil && !IsNil(o.LastChange) {
 		return true
 	}
 
 	return false
 }
 
-// SetLastChange gets a reference to the given NullableString and assigns it to the LastChange field.
+// SetLastChange gets a reference to the given string and assigns it to the LastChange field.
 func (o *FunctionArgument) SetLastChange(v string) {
-	o.LastChange.Set(&v)
-}
-// SetLastChangeNil sets the value for LastChange to be an explicit nil
-func (o *FunctionArgument) SetLastChangeNil() {
-	o.LastChange.Set(nil)
-}
-
-// UnsetLastChange ensures that no value is present for LastChange, not even an explicit nil
-func (o *FunctionArgument) UnsetLastChange() {
-	o.LastChange.Unset()
+	o.LastChange = &v
 }
 
 // GetName returns the Name field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *FunctionArgument) GetName() string {
-	if o == nil || o.Name.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Name.Get()
+	return o.Name
 }
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FunctionArgument) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
 // SetName sets field value
 func (o *FunctionArgument) SetName(v string) {
-	o.Name.Set(&v)
+	o.Name = v
 }
 
 // GetOffset returns the Offset field value
@@ -143,46 +131,36 @@ func (o *FunctionArgument) SetOffset(v int64) {
 	o.Offset = v
 }
 
-// GetScope returns the Scope field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetScope returns the Scope field value if set, zero value otherwise.
 func (o *FunctionArgument) GetScope() string {
-	if o == nil || IsNil(o.Scope.Get()) {
+	if o == nil || IsNil(o.Scope) {
 		var ret string
 		return ret
 	}
-	return *o.Scope.Get()
+	return *o.Scope
 }
 
 // GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FunctionArgument) GetScopeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Scope) {
 		return nil, false
 	}
-	return o.Scope.Get(), o.Scope.IsSet()
+	return o.Scope, true
 }
 
 // HasScope returns a boolean if a field has been set.
 func (o *FunctionArgument) HasScope() bool {
-	if o != nil && o.Scope.IsSet() {
+	if o != nil && !IsNil(o.Scope) {
 		return true
 	}
 
 	return false
 }
 
-// SetScope gets a reference to the given NullableString and assigns it to the Scope field.
+// SetScope gets a reference to the given string and assigns it to the Scope field.
 func (o *FunctionArgument) SetScope(v string) {
-	o.Scope.Set(&v)
-}
-// SetScopeNil sets the value for Scope to be an explicit nil
-func (o *FunctionArgument) SetScopeNil() {
-	o.Scope.Set(nil)
-}
-
-// UnsetScope ensures that no value is present for Scope, not even an explicit nil
-func (o *FunctionArgument) UnsetScope() {
-	o.Scope.Unset()
+	o.Scope = &v
 }
 
 // GetSize returns the Size field value
@@ -210,29 +188,27 @@ func (o *FunctionArgument) SetSize(v int64) {
 }
 
 // GetType returns the Type field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *FunctionArgument) GetType() string {
-	if o == nil || o.Type.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Type.Get()
+	return o.Type
 }
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FunctionArgument) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Type.Get(), o.Type.IsSet()
+	return &o.Type, true
 }
 
 // SetType sets field value
 func (o *FunctionArgument) SetType(v string) {
-	o.Type.Set(&v)
+	o.Type = v
 }
 
 func (o FunctionArgument) MarshalJSON() ([]byte, error) {
@@ -245,21 +221,16 @@ func (o FunctionArgument) MarshalJSON() ([]byte, error) {
 
 func (o FunctionArgument) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.LastChange.IsSet() {
-		toSerialize["last_change"] = o.LastChange.Get()
+	if !IsNil(o.LastChange) {
+		toSerialize["last_change"] = o.LastChange
 	}
-	toSerialize["name"] = o.Name.Get()
+	toSerialize["name"] = o.Name
 	toSerialize["offset"] = o.Offset
-	if o.Scope.IsSet() {
-		toSerialize["scope"] = o.Scope.Get()
+	if !IsNil(o.Scope) {
+		toSerialize["scope"] = o.Scope
 	}
 	toSerialize["size"] = o.Size
-	toSerialize["type"] = o.Type.Get()
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
+	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
 
@@ -290,25 +261,15 @@ func (o *FunctionArgument) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionArgument := _FunctionArgument{}
 
-	err = json.Unmarshal(data, &varFunctionArgument)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFunctionArgument)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionArgument(varFunctionArgument)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "last_change")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "offset")
-		delete(additionalProperties, "scope")
-		delete(additionalProperties, "size")
-		delete(additionalProperties, "type")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Addr** | Pointer to **int64** | Memory address (GlobalVariable). | [optional] 
 **ArtifactType** | Pointer to **string** |  | [optional] 
-**LastChange** | Pointer to **NullableString** |  | [optional] 
+**LastChange** | Pointer to **string** |  | [optional] 
 **Members** | Pointer to **interface{}** |  | [optional] 
-**Name** | **NullableString** |  | 
-**Scope** | Pointer to **NullableString** |  | [optional] 
+**Name** | **string** |  | 
+**Scope** | Pointer to **string** |  | [optional] 
 **Size** | Pointer to **int64** | Total byte size (Struct, GlobalVariable). | [optional] 
 **Type** | Pointer to **string** | Underlying type (TypeDefinition, GlobalVariable). | [optional] 
 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewFunctionDependency
 
-`func NewFunctionDependency(name NullableString, ) *FunctionDependency`
+`func NewFunctionDependency(name string, ) *FunctionDependency`
 
 NewFunctionDependency instantiates a new FunctionDependency object
 This constructor will assign default values to properties that have it defined,
@@ -107,16 +107,6 @@ SetLastChange sets LastChange field to given value.
 
 HasLastChange returns a boolean if a field has been set.
 
-### SetLastChangeNil
-
-`func (o *FunctionDependency) SetLastChangeNil(b bool)`
-
- SetLastChangeNil sets the value for LastChange to be an explicit nil
-
-### UnsetLastChange
-`func (o *FunctionDependency) UnsetLastChange()`
-
-UnsetLastChange ensures that no value is present for LastChange, not even an explicit nil
 ### GetMembers
 
 `func (o *FunctionDependency) GetMembers() interface{}`
@@ -172,16 +162,6 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
-### SetNameNil
-
-`func (o *FunctionDependency) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *FunctionDependency) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetScope
 
 `func (o *FunctionDependency) GetScope() string`
@@ -207,16 +187,6 @@ SetScope sets Scope field to given value.
 
 HasScope returns a boolean if a field has been set.
 
-### SetScopeNil
-
-`func (o *FunctionDependency) SetScopeNil(b bool)`
-
- SetScopeNil sets the value for Scope to be an explicit nil
-
-### UnsetScope
-`func (o *FunctionDependency) UnsetScope()`
-
-UnsetScope ensures that no value is present for Scope, not even an explicit nil
 ### GetSize
 
 `func (o *FunctionDependency) GetSize() int64`

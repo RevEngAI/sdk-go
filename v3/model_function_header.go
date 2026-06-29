@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -19,16 +20,13 @@ var _ MappedNullable = &FunctionHeader{}
 
 // FunctionHeader struct for FunctionHeader
 type FunctionHeader struct {
-	LastChange NullableString `json:"last_change,omitempty"`
-	// Name of the function
+	Addr int64 `json:"addr"`
+	// Argument map keyed by ordinal hex (e.g. \"0x0\", \"0x1\").
+	Args map[string]FunctionArgument `json:"args"`
+	LastChange *string `json:"last_change,omitempty"`
 	Name string `json:"name"`
-	// Memory address of the function
-	Addr int32 `json:"addr"`
-	// Return type of the function
+	Scope *string `json:"scope,omitempty"`
 	Type string `json:"type"`
-	// Dictionary of function arguments
-	Args map[string]Argument `json:"args"`
-	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionHeader FunctionHeader
@@ -37,12 +35,12 @@ type _FunctionHeader FunctionHeader
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionHeader(name string, addr int32, type_ string, args map[string]Argument) *FunctionHeader {
+func NewFunctionHeader(addr int64, args map[string]FunctionArgument, name string, type_ string) *FunctionHeader {
 	this := FunctionHeader{}
-	this.Name = name
 	this.Addr = addr
-	this.Type = type_
 	this.Args = args
+	this.Name = name
+	this.Type = type_
 	return &this
 }
 
@@ -54,46 +52,84 @@ func NewFunctionHeaderWithDefaults() *FunctionHeader {
 	return &this
 }
 
-// GetLastChange returns the LastChange field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetAddr returns the Addr field value
+func (o *FunctionHeader) GetAddr() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.Addr
+}
+
+// GetAddrOk returns a tuple with the Addr field value
+// and a boolean to check if the value has been set.
+func (o *FunctionHeader) GetAddrOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Addr, true
+}
+
+// SetAddr sets field value
+func (o *FunctionHeader) SetAddr(v int64) {
+	o.Addr = v
+}
+
+// GetArgs returns the Args field value
+func (o *FunctionHeader) GetArgs() map[string]FunctionArgument {
+	if o == nil {
+		var ret map[string]FunctionArgument
+		return ret
+	}
+
+	return o.Args
+}
+
+// GetArgsOk returns a tuple with the Args field value
+// and a boolean to check if the value has been set.
+func (o *FunctionHeader) GetArgsOk() (map[string]FunctionArgument, bool) {
+	if o == nil {
+		return map[string]FunctionArgument{}, false
+	}
+	return o.Args, true
+}
+
+// SetArgs sets field value
+func (o *FunctionHeader) SetArgs(v map[string]FunctionArgument) {
+	o.Args = v
+}
+
+// GetLastChange returns the LastChange field value if set, zero value otherwise.
 func (o *FunctionHeader) GetLastChange() string {
-	if o == nil || IsNil(o.LastChange.Get()) {
+	if o == nil || IsNil(o.LastChange) {
 		var ret string
 		return ret
 	}
-	return *o.LastChange.Get()
+	return *o.LastChange
 }
 
 // GetLastChangeOk returns a tuple with the LastChange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FunctionHeader) GetLastChangeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LastChange) {
 		return nil, false
 	}
-	return o.LastChange.Get(), o.LastChange.IsSet()
+	return o.LastChange, true
 }
 
 // HasLastChange returns a boolean if a field has been set.
 func (o *FunctionHeader) HasLastChange() bool {
-	if o != nil && o.LastChange.IsSet() {
+	if o != nil && !IsNil(o.LastChange) {
 		return true
 	}
 
 	return false
 }
 
-// SetLastChange gets a reference to the given NullableString and assigns it to the LastChange field.
+// SetLastChange gets a reference to the given string and assigns it to the LastChange field.
 func (o *FunctionHeader) SetLastChange(v string) {
-	o.LastChange.Set(&v)
-}
-// SetLastChangeNil sets the value for LastChange to be an explicit nil
-func (o *FunctionHeader) SetLastChangeNil() {
-	o.LastChange.Set(nil)
-}
-
-// UnsetLastChange ensures that no value is present for LastChange, not even an explicit nil
-func (o *FunctionHeader) UnsetLastChange() {
-	o.LastChange.Unset()
+	o.LastChange = &v
 }
 
 // GetName returns the Name field value
@@ -120,28 +156,36 @@ func (o *FunctionHeader) SetName(v string) {
 	o.Name = v
 }
 
-// GetAddr returns the Addr field value
-func (o *FunctionHeader) GetAddr() int32 {
-	if o == nil {
-		var ret int32
+// GetScope returns the Scope field value if set, zero value otherwise.
+func (o *FunctionHeader) GetScope() string {
+	if o == nil || IsNil(o.Scope) {
+		var ret string
 		return ret
 	}
-
-	return o.Addr
+	return *o.Scope
 }
 
-// GetAddrOk returns a tuple with the Addr field value
+// GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FunctionHeader) GetAddrOk() (*int32, bool) {
-	if o == nil {
+func (o *FunctionHeader) GetScopeOk() (*string, bool) {
+	if o == nil || IsNil(o.Scope) {
 		return nil, false
 	}
-	return &o.Addr, true
+	return o.Scope, true
 }
 
-// SetAddr sets field value
-func (o *FunctionHeader) SetAddr(v int32) {
-	o.Addr = v
+// HasScope returns a boolean if a field has been set.
+func (o *FunctionHeader) HasScope() bool {
+	if o != nil && !IsNil(o.Scope) {
+		return true
+	}
+
+	return false
+}
+
+// SetScope gets a reference to the given string and assigns it to the Scope field.
+func (o *FunctionHeader) SetScope(v string) {
+	o.Scope = &v
 }
 
 // GetType returns the Type field value
@@ -168,30 +212,6 @@ func (o *FunctionHeader) SetType(v string) {
 	o.Type = v
 }
 
-// GetArgs returns the Args field value
-func (o *FunctionHeader) GetArgs() map[string]Argument {
-	if o == nil {
-		var ret map[string]Argument
-		return ret
-	}
-
-	return o.Args
-}
-
-// GetArgsOk returns a tuple with the Args field value
-// and a boolean to check if the value has been set.
-func (o *FunctionHeader) GetArgsOk() (map[string]Argument, bool) {
-	if o == nil {
-		return map[string]Argument{}, false
-	}
-	return o.Args, true
-}
-
-// SetArgs sets field value
-func (o *FunctionHeader) SetArgs(v map[string]Argument) {
-	o.Args = v
-}
-
 func (o FunctionHeader) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -202,18 +222,16 @@ func (o FunctionHeader) MarshalJSON() ([]byte, error) {
 
 func (o FunctionHeader) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.LastChange.IsSet() {
-		toSerialize["last_change"] = o.LastChange.Get()
+	toSerialize["addr"] = o.Addr
+	toSerialize["args"] = o.Args
+	if !IsNil(o.LastChange) {
+		toSerialize["last_change"] = o.LastChange
 	}
 	toSerialize["name"] = o.Name
-	toSerialize["addr"] = o.Addr
-	toSerialize["type"] = o.Type
-	toSerialize["args"] = o.Args
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
+	if !IsNil(o.Scope) {
+		toSerialize["scope"] = o.Scope
 	}
-
+	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
 
@@ -222,10 +240,10 @@ func (o *FunctionHeader) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"name",
 		"addr",
-		"type",
 		"args",
+		"name",
+		"type",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -244,24 +262,15 @@ func (o *FunctionHeader) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionHeader := _FunctionHeader{}
 
-	err = json.Unmarshal(data, &varFunctionHeader)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFunctionHeader)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionHeader(varFunctionHeader)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "last_change")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "addr")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "args")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

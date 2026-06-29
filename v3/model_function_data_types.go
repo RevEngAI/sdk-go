@@ -23,7 +23,7 @@ type FunctionDataTypes struct {
 	Completed bool `json:"completed"`
 	// The current status of the data types service
 	Status string `json:"status"`
-	DataTypes NullableFunctionInfo `json:"data_types,omitempty"`
+	DataTypes NullableV2FunctionInfo `json:"data_types,omitempty"`
 	DataTypesVersion NullableInt32 `json:"data_types_version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -98,9 +98,9 @@ func (o *FunctionDataTypes) SetStatus(v string) {
 }
 
 // GetDataTypes returns the DataTypes field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionDataTypes) GetDataTypes() FunctionInfo {
+func (o *FunctionDataTypes) GetDataTypes() V2FunctionInfo {
 	if o == nil || IsNil(o.DataTypes.Get()) {
-		var ret FunctionInfo
+		var ret V2FunctionInfo
 		return ret
 	}
 	return *o.DataTypes.Get()
@@ -109,7 +109,7 @@ func (o *FunctionDataTypes) GetDataTypes() FunctionInfo {
 // GetDataTypesOk returns a tuple with the DataTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionDataTypes) GetDataTypesOk() (*FunctionInfo, bool) {
+func (o *FunctionDataTypes) GetDataTypesOk() (*V2FunctionInfo, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -125,8 +125,8 @@ func (o *FunctionDataTypes) HasDataTypes() bool {
 	return false
 }
 
-// SetDataTypes gets a reference to the given NullableFunctionInfo and assigns it to the DataTypes field.
-func (o *FunctionDataTypes) SetDataTypes(v FunctionInfo) {
+// SetDataTypes gets a reference to the given NullableV2FunctionInfo and assigns it to the DataTypes field.
+func (o *FunctionDataTypes) SetDataTypes(v V2FunctionInfo) {
 	o.DataTypes.Set(&v)
 }
 // SetDataTypesNil sets the value for DataTypes to be an explicit nil

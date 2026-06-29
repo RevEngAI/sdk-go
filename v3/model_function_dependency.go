@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -22,15 +23,14 @@ type FunctionDependency struct {
 	// Memory address (GlobalVariable).
 	Addr *int64 `json:"addr,omitempty"`
 	ArtifactType *string `json:"artifact_type,omitempty"`
-	LastChange NullableString `json:"last_change,omitempty"`
+	LastChange *string `json:"last_change,omitempty"`
 	Members interface{} `json:"members,omitempty"`
-	Name NullableString `json:"name"`
-	Scope NullableString `json:"scope,omitempty"`
+	Name string `json:"name"`
+	Scope *string `json:"scope,omitempty"`
 	// Total byte size (Struct, GlobalVariable).
 	Size *int64 `json:"size,omitempty"`
 	// Underlying type (TypeDefinition, GlobalVariable).
 	Type *string `json:"type,omitempty"`
-	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionDependency FunctionDependency
@@ -39,7 +39,7 @@ type _FunctionDependency FunctionDependency
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionDependency(name NullableString) *FunctionDependency {
+func NewFunctionDependency(name string) *FunctionDependency {
 	this := FunctionDependency{}
 	this.Name = name
 	return &this
@@ -117,46 +117,36 @@ func (o *FunctionDependency) SetArtifactType(v string) {
 	o.ArtifactType = &v
 }
 
-// GetLastChange returns the LastChange field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastChange returns the LastChange field value if set, zero value otherwise.
 func (o *FunctionDependency) GetLastChange() string {
-	if o == nil || IsNil(o.LastChange.Get()) {
+	if o == nil || IsNil(o.LastChange) {
 		var ret string
 		return ret
 	}
-	return *o.LastChange.Get()
+	return *o.LastChange
 }
 
 // GetLastChangeOk returns a tuple with the LastChange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FunctionDependency) GetLastChangeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LastChange) {
 		return nil, false
 	}
-	return o.LastChange.Get(), o.LastChange.IsSet()
+	return o.LastChange, true
 }
 
 // HasLastChange returns a boolean if a field has been set.
 func (o *FunctionDependency) HasLastChange() bool {
-	if o != nil && o.LastChange.IsSet() {
+	if o != nil && !IsNil(o.LastChange) {
 		return true
 	}
 
 	return false
 }
 
-// SetLastChange gets a reference to the given NullableString and assigns it to the LastChange field.
+// SetLastChange gets a reference to the given string and assigns it to the LastChange field.
 func (o *FunctionDependency) SetLastChange(v string) {
-	o.LastChange.Set(&v)
-}
-// SetLastChangeNil sets the value for LastChange to be an explicit nil
-func (o *FunctionDependency) SetLastChangeNil() {
-	o.LastChange.Set(nil)
-}
-
-// UnsetLastChange ensures that no value is present for LastChange, not even an explicit nil
-func (o *FunctionDependency) UnsetLastChange() {
-	o.LastChange.Unset()
+	o.LastChange = &v
 }
 
 // GetMembers returns the Members field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -193,71 +183,59 @@ func (o *FunctionDependency) SetMembers(v interface{}) {
 }
 
 // GetName returns the Name field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *FunctionDependency) GetName() string {
-	if o == nil || o.Name.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Name.Get()
+	return o.Name
 }
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FunctionDependency) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
 // SetName sets field value
 func (o *FunctionDependency) SetName(v string) {
-	o.Name.Set(&v)
+	o.Name = v
 }
 
-// GetScope returns the Scope field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetScope returns the Scope field value if set, zero value otherwise.
 func (o *FunctionDependency) GetScope() string {
-	if o == nil || IsNil(o.Scope.Get()) {
+	if o == nil || IsNil(o.Scope) {
 		var ret string
 		return ret
 	}
-	return *o.Scope.Get()
+	return *o.Scope
 }
 
 // GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FunctionDependency) GetScopeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Scope) {
 		return nil, false
 	}
-	return o.Scope.Get(), o.Scope.IsSet()
+	return o.Scope, true
 }
 
 // HasScope returns a boolean if a field has been set.
 func (o *FunctionDependency) HasScope() bool {
-	if o != nil && o.Scope.IsSet() {
+	if o != nil && !IsNil(o.Scope) {
 		return true
 	}
 
 	return false
 }
 
-// SetScope gets a reference to the given NullableString and assigns it to the Scope field.
+// SetScope gets a reference to the given string and assigns it to the Scope field.
 func (o *FunctionDependency) SetScope(v string) {
-	o.Scope.Set(&v)
-}
-// SetScopeNil sets the value for Scope to be an explicit nil
-func (o *FunctionDependency) SetScopeNil() {
-	o.Scope.Set(nil)
-}
-
-// UnsetScope ensures that no value is present for Scope, not even an explicit nil
-func (o *FunctionDependency) UnsetScope() {
-	o.Scope.Unset()
+	o.Scope = &v
 }
 
 // GetSize returns the Size field value if set, zero value otherwise.
@@ -340,15 +318,15 @@ func (o FunctionDependency) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ArtifactType) {
 		toSerialize["artifact_type"] = o.ArtifactType
 	}
-	if o.LastChange.IsSet() {
-		toSerialize["last_change"] = o.LastChange.Get()
+	if !IsNil(o.LastChange) {
+		toSerialize["last_change"] = o.LastChange
 	}
 	if o.Members != nil {
 		toSerialize["members"] = o.Members
 	}
-	toSerialize["name"] = o.Name.Get()
-	if o.Scope.IsSet() {
-		toSerialize["scope"] = o.Scope.Get()
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Scope) {
+		toSerialize["scope"] = o.Scope
 	}
 	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
@@ -356,11 +334,6 @@ func (o FunctionDependency) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -388,27 +361,15 @@ func (o *FunctionDependency) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionDependency := _FunctionDependency{}
 
-	err = json.Unmarshal(data, &varFunctionDependency)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFunctionDependency)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionDependency(varFunctionDependency)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "addr")
-		delete(additionalProperties, "artifact_type")
-		delete(additionalProperties, "last_change")
-		delete(additionalProperties, "members")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "scope")
-		delete(additionalProperties, "size")
-		delete(additionalProperties, "type")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

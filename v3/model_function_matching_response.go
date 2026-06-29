@@ -25,7 +25,7 @@ type FunctionMatchingResponse struct {
 	ErrorMessage NullableString `json:"error_message,omitempty"`
 	CurrentPage NullableInt32 `json:"current_page,omitempty"`
 	TotalPages NullableInt32 `json:"total_pages,omitempty"`
-	Matches []FunctionMatch `json:"matches,omitempty"`
+	Matches []V2FunctionMatch `json:"matches,omitempty"`
 	NumMatches NullableInt32 `json:"num_matches,omitempty"`
 	NumDebugMatches NullableInt32 `json:"num_debug_matches,omitempty"`
 	UpdatedAt NullableString `json:"updated_at,omitempty"`
@@ -298,9 +298,9 @@ func (o *FunctionMatchingResponse) UnsetTotalPages() {
 }
 
 // GetMatches returns the Matches field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionMatchingResponse) GetMatches() []FunctionMatch {
+func (o *FunctionMatchingResponse) GetMatches() []V2FunctionMatch {
 	if o == nil {
-		var ret []FunctionMatch
+		var ret []V2FunctionMatch
 		return ret
 	}
 	return o.Matches
@@ -309,7 +309,7 @@ func (o *FunctionMatchingResponse) GetMatches() []FunctionMatch {
 // GetMatchesOk returns a tuple with the Matches field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionMatchingResponse) GetMatchesOk() ([]FunctionMatch, bool) {
+func (o *FunctionMatchingResponse) GetMatchesOk() ([]V2FunctionMatch, bool) {
 	if o == nil || IsNil(o.Matches) {
 		return nil, false
 	}
@@ -325,8 +325,8 @@ func (o *FunctionMatchingResponse) HasMatches() bool {
 	return false
 }
 
-// SetMatches gets a reference to the given []FunctionMatch and assigns it to the Matches field.
-func (o *FunctionMatchingResponse) SetMatches(v []FunctionMatch) {
+// SetMatches gets a reference to the given []V2FunctionMatch and assigns it to the Matches field.
+func (o *FunctionMatchingResponse) SetMatches(v []V2FunctionMatch) {
 	o.Matches = v
 }
 

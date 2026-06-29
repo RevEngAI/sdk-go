@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **ErrorMessage** | Pointer to **NullableString** |  | [optional] 
 **CurrentPage** | Pointer to **NullableInt32** |  | [optional] 
 **TotalPages** | Pointer to **NullableInt32** |  | [optional] 
-**Matches** | Pointer to [**[]FunctionMatch**](FunctionMatch.md) |  | [optional] 
+**Matches** | Pointer to [**[]V2FunctionMatch**](V2FunctionMatch.md) |  | [optional] 
 **NumMatches** | Pointer to **NullableInt32** |  | [optional] 
 **NumDebugMatches** | Pointer to **NullableInt32** |  | [optional] 
 **UpdatedAt** | Pointer to **NullableString** |  | [optional] 
@@ -236,20 +236,20 @@ HasTotalPages returns a boolean if a field has been set.
 UnsetTotalPages ensures that no value is present for TotalPages, not even an explicit nil
 ### GetMatches
 
-`func (o *FunctionMatchingResponse) GetMatches() []FunctionMatch`
+`func (o *FunctionMatchingResponse) GetMatches() []V2FunctionMatch`
 
 GetMatches returns the Matches field if non-nil, zero value otherwise.
 
 ### GetMatchesOk
 
-`func (o *FunctionMatchingResponse) GetMatchesOk() (*[]FunctionMatch, bool)`
+`func (o *FunctionMatchingResponse) GetMatchesOk() (*[]V2FunctionMatch, bool)`
 
 GetMatchesOk returns a tuple with the Matches field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMatches
 
-`func (o *FunctionMatchingResponse) SetMatches(v []FunctionMatch)`
+`func (o *FunctionMatchingResponse) SetMatches(v []V2FunctionMatch)`
 
 SetMatches sets Matches field to given value.
 

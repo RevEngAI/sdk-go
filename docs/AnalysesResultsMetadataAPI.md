@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKey](../README.md#APIKey)
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKey](../README.md#APIKey)
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKey](../README.md#APIKey)
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -293,7 +293,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKey](../README.md#APIKey)
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -361,7 +361,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKey](../README.md#APIKey)
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -429,7 +429,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKey](../README.md#APIKey)
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
