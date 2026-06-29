@@ -20,12 +20,13 @@ Name | Type | Description | Notes
 **Sbom** | Pointer to **map[string]interface{}** |  | [optional] 
 **Sha256Hash** | **string** |  | 
 **AutoRunAgents** | [**AutoRunAgents**](AutoRunAgents.md) |  | 
+**RequestedConfig** | [**AnalysisConfigSnapshot**](AnalysisConfigSnapshot.md) | Snapshot of the configuration the analysis was submitted with. | 
 
 ## Methods
 
 ### NewAnalysisDetailResponse
 
-`func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, analysisScope string, architecture string, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int32, binaryType string, creation string, dashboardUrl string, debug bool, modelName string, sha256Hash string, autoRunAgents AutoRunAgents, ) *AnalysisDetailResponse`
+`func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, analysisScope string, architecture string, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int32, binaryType string, creation string, dashboardUrl string, debug bool, modelName string, sha256Hash string, autoRunAgents AutoRunAgents, requestedConfig AnalysisConfigSnapshot, ) *AnalysisDetailResponse`
 
 NewAnalysisDetailResponse instantiates a new AnalysisDetailResponse object
 This constructor will assign default values to properties that have it defined,
@@ -373,6 +374,26 @@ and a boolean to check if the value has been set.
 `func (o *AnalysisDetailResponse) SetAutoRunAgents(v AutoRunAgents)`
 
 SetAutoRunAgents sets AutoRunAgents field to given value.
+
+
+### GetRequestedConfig
+
+`func (o *AnalysisDetailResponse) GetRequestedConfig() AnalysisConfigSnapshot`
+
+GetRequestedConfig returns the RequestedConfig field if non-nil, zero value otherwise.
+
+### GetRequestedConfigOk
+
+`func (o *AnalysisDetailResponse) GetRequestedConfigOk() (*AnalysisConfigSnapshot, bool)`
+
+GetRequestedConfigOk returns a tuple with the RequestedConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestedConfig
+
+`func (o *AnalysisDetailResponse) SetRequestedConfig(v AnalysisConfigSnapshot)`
+
+SetRequestedConfig sets RequestedConfig field to given value.
 
 
 
