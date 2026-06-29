@@ -4,20 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LastChange** | Pointer to **NullableString** |  | [optional] 
-**Addr** | **int32** | Memory address of the function | 
-**Size** | **int32** | Size of the function in bytes | 
-**Header** | [**FunctionHeader**](FunctionHeader.md) | Function header information | 
-**StackVars** | Pointer to [**map[string]StackVariable**](StackVariable.md) |  | [optional] 
-**Name** | **string** | Name of the function | 
-**Type** | **string** | Return type of the function | 
-**ArtifactType** | Pointer to **string** | Type of artifact that the structure is associated with | [optional] [default to "Function"]
+**Addr** | **int64** |  | 
+**ArtifactType** | Pointer to **string** |  | [optional] 
+**Header** | [**FunctionHeader**](FunctionHeader.md) |  | 
+**LastChange** | Pointer to **string** |  | [optional] 
+**Name** | **string** |  | 
+**Scope** | Pointer to **string** |  | [optional] 
+**Size** | **int64** |  | 
+**StackVars** | Pointer to [**map[string]FunctionStackVariable**](FunctionStackVariable.md) | Stack variables keyed by offset hex. | [optional] 
+**Type** | **string** |  | 
 
 ## Methods
 
 ### NewFunctionType
 
-`func NewFunctionType(addr int32, size int32, header FunctionHeader, name string, type_ string, ) *FunctionType`
+`func NewFunctionType(addr int64, header FunctionHeader, name string, size int64, type_ string, ) *FunctionType`
 
 NewFunctionType instantiates a new FunctionType object
 This constructor will assign default values to properties that have it defined,
@@ -32,174 +33,24 @@ NewFunctionTypeWithDefaults instantiates a new FunctionType object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetLastChange
-
-`func (o *FunctionType) GetLastChange() string`
-
-GetLastChange returns the LastChange field if non-nil, zero value otherwise.
-
-### GetLastChangeOk
-
-`func (o *FunctionType) GetLastChangeOk() (*string, bool)`
-
-GetLastChangeOk returns a tuple with the LastChange field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLastChange
-
-`func (o *FunctionType) SetLastChange(v string)`
-
-SetLastChange sets LastChange field to given value.
-
-### HasLastChange
-
-`func (o *FunctionType) HasLastChange() bool`
-
-HasLastChange returns a boolean if a field has been set.
-
-### SetLastChangeNil
-
-`func (o *FunctionType) SetLastChangeNil(b bool)`
-
- SetLastChangeNil sets the value for LastChange to be an explicit nil
-
-### UnsetLastChange
-`func (o *FunctionType) UnsetLastChange()`
-
-UnsetLastChange ensures that no value is present for LastChange, not even an explicit nil
 ### GetAddr
 
-`func (o *FunctionType) GetAddr() int32`
+`func (o *FunctionType) GetAddr() int64`
 
 GetAddr returns the Addr field if non-nil, zero value otherwise.
 
 ### GetAddrOk
 
-`func (o *FunctionType) GetAddrOk() (*int32, bool)`
+`func (o *FunctionType) GetAddrOk() (*int64, bool)`
 
 GetAddrOk returns a tuple with the Addr field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAddr
 
-`func (o *FunctionType) SetAddr(v int32)`
+`func (o *FunctionType) SetAddr(v int64)`
 
 SetAddr sets Addr field to given value.
-
-
-### GetSize
-
-`func (o *FunctionType) GetSize() int32`
-
-GetSize returns the Size field if non-nil, zero value otherwise.
-
-### GetSizeOk
-
-`func (o *FunctionType) GetSizeOk() (*int32, bool)`
-
-GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSize
-
-`func (o *FunctionType) SetSize(v int32)`
-
-SetSize sets Size field to given value.
-
-
-### GetHeader
-
-`func (o *FunctionType) GetHeader() FunctionHeader`
-
-GetHeader returns the Header field if non-nil, zero value otherwise.
-
-### GetHeaderOk
-
-`func (o *FunctionType) GetHeaderOk() (*FunctionHeader, bool)`
-
-GetHeaderOk returns a tuple with the Header field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHeader
-
-`func (o *FunctionType) SetHeader(v FunctionHeader)`
-
-SetHeader sets Header field to given value.
-
-
-### GetStackVars
-
-`func (o *FunctionType) GetStackVars() map[string]StackVariable`
-
-GetStackVars returns the StackVars field if non-nil, zero value otherwise.
-
-### GetStackVarsOk
-
-`func (o *FunctionType) GetStackVarsOk() (*map[string]StackVariable, bool)`
-
-GetStackVarsOk returns a tuple with the StackVars field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStackVars
-
-`func (o *FunctionType) SetStackVars(v map[string]StackVariable)`
-
-SetStackVars sets StackVars field to given value.
-
-### HasStackVars
-
-`func (o *FunctionType) HasStackVars() bool`
-
-HasStackVars returns a boolean if a field has been set.
-
-### SetStackVarsNil
-
-`func (o *FunctionType) SetStackVarsNil(b bool)`
-
- SetStackVarsNil sets the value for StackVars to be an explicit nil
-
-### UnsetStackVars
-`func (o *FunctionType) UnsetStackVars()`
-
-UnsetStackVars ensures that no value is present for StackVars, not even an explicit nil
-### GetName
-
-`func (o *FunctionType) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *FunctionType) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *FunctionType) SetName(v string)`
-
-SetName sets Name field to given value.
-
-
-### GetType
-
-`func (o *FunctionType) GetType() string`
-
-GetType returns the Type field if non-nil, zero value otherwise.
-
-### GetTypeOk
-
-`func (o *FunctionType) GetTypeOk() (*string, bool)`
-
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetType
-
-`func (o *FunctionType) SetType(v string)`
-
-SetType sets Type field to given value.
 
 
 ### GetArtifactType
@@ -226,6 +77,161 @@ SetArtifactType sets ArtifactType field to given value.
 `func (o *FunctionType) HasArtifactType() bool`
 
 HasArtifactType returns a boolean if a field has been set.
+
+### GetHeader
+
+`func (o *FunctionType) GetHeader() FunctionHeader`
+
+GetHeader returns the Header field if non-nil, zero value otherwise.
+
+### GetHeaderOk
+
+`func (o *FunctionType) GetHeaderOk() (*FunctionHeader, bool)`
+
+GetHeaderOk returns a tuple with the Header field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHeader
+
+`func (o *FunctionType) SetHeader(v FunctionHeader)`
+
+SetHeader sets Header field to given value.
+
+
+### GetLastChange
+
+`func (o *FunctionType) GetLastChange() string`
+
+GetLastChange returns the LastChange field if non-nil, zero value otherwise.
+
+### GetLastChangeOk
+
+`func (o *FunctionType) GetLastChangeOk() (*string, bool)`
+
+GetLastChangeOk returns a tuple with the LastChange field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastChange
+
+`func (o *FunctionType) SetLastChange(v string)`
+
+SetLastChange sets LastChange field to given value.
+
+### HasLastChange
+
+`func (o *FunctionType) HasLastChange() bool`
+
+HasLastChange returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *FunctionType) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *FunctionType) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *FunctionType) SetName(v string)`
+
+SetName sets Name field to given value.
+
+
+### GetScope
+
+`func (o *FunctionType) GetScope() string`
+
+GetScope returns the Scope field if non-nil, zero value otherwise.
+
+### GetScopeOk
+
+`func (o *FunctionType) GetScopeOk() (*string, bool)`
+
+GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScope
+
+`func (o *FunctionType) SetScope(v string)`
+
+SetScope sets Scope field to given value.
+
+### HasScope
+
+`func (o *FunctionType) HasScope() bool`
+
+HasScope returns a boolean if a field has been set.
+
+### GetSize
+
+`func (o *FunctionType) GetSize() int64`
+
+GetSize returns the Size field if non-nil, zero value otherwise.
+
+### GetSizeOk
+
+`func (o *FunctionType) GetSizeOk() (*int64, bool)`
+
+GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSize
+
+`func (o *FunctionType) SetSize(v int64)`
+
+SetSize sets Size field to given value.
+
+
+### GetStackVars
+
+`func (o *FunctionType) GetStackVars() map[string]FunctionStackVariable`
+
+GetStackVars returns the StackVars field if non-nil, zero value otherwise.
+
+### GetStackVarsOk
+
+`func (o *FunctionType) GetStackVarsOk() (*map[string]FunctionStackVariable, bool)`
+
+GetStackVarsOk returns a tuple with the StackVars field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStackVars
+
+`func (o *FunctionType) SetStackVars(v map[string]FunctionStackVariable)`
+
+SetStackVars sets StackVars field to given value.
+
+### HasStackVars
+
+`func (o *FunctionType) HasStackVars() bool`
+
+HasStackVars returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *FunctionType) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *FunctionType) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *FunctionType) SetType(v string)`
+
+SetType sets Type field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

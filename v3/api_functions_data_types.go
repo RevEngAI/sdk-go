@@ -488,150 +488,16 @@ func (a *FunctionsDataTypesAPIService) GenerateFunctionDataTypesForFunctionsExec
 type ApiGetFunctionDataTypesRequest struct {
 	ctx context.Context
 	ApiService *FunctionsDataTypesAPIService
-	analysisId int32
-	functionId int32
-}
-
-func (r ApiGetFunctionDataTypesRequest) Execute() (*BaseResponseFunctionDataTypes, *http.Response, error) {
-	return r.ApiService.GetFunctionDataTypesExecute(r)
-}
-
-/*
-GetFunctionDataTypes Get Function Data Types
-
-Polling endpoint which returns the current status of function generation and once completed the data type information
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param analysisId
- @param functionId
- @return ApiGetFunctionDataTypesRequest
-
-Deprecated
-*/
-func (a *FunctionsDataTypesAPIService) GetFunctionDataTypes(ctx context.Context, analysisId int32, functionId int32) ApiGetFunctionDataTypesRequest {
-	return ApiGetFunctionDataTypesRequest{
-		ApiService: a,
-		ctx: ctx,
-		analysisId: analysisId,
-		functionId: functionId,
-	}
-}
-
-// Execute executes the request
-//  @return BaseResponseFunctionDataTypes
-// Deprecated
-func (a *FunctionsDataTypesAPIService) GetFunctionDataTypesExecute(r ApiGetFunctionDataTypesRequest) (*BaseResponseFunctionDataTypes, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BaseResponseFunctionDataTypes
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionsDataTypesAPIService.GetFunctionDataTypes")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/analyses/{analysis_id}/functions/{function_id}/data_types"
-	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"function_id"+"}", url.PathEscape(parameterValueToString(r.functionId, "functionId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APIKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v BaseResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetFunctionDataTypes_0Request struct {
-	ctx context.Context
-	ApiService *FunctionsDataTypesAPIService
 	analysisId int64
 	functionId int64
 }
 
-func (r ApiGetFunctionDataTypes_0Request) Execute() (*DataTypesEntry, *http.Response, error) {
-	return r.ApiService.GetFunctionDataTypes_1Execute(r)
+func (r ApiGetFunctionDataTypesRequest) Execute() (*DataTypesEntry, *http.Response, error) {
+	return r.ApiService.GetFunctionDataTypesExecute(r)
 }
 
 /*
-GetFunctionDataTypes_0 Get data types for a single function
+GetFunctionDataTypes Get data types for a single function
 
 Returns the stored data-types blob for one function. The function must belong to the supplied analysis.
 
@@ -642,10 +508,10 @@ Returns the stored data-types blob for one function. The function must belong to
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
  @param functionId Function ID
- @return ApiGetFunctionDataTypes_0Request
+ @return ApiGetFunctionDataTypesRequest
 */
-func (a *FunctionsDataTypesAPIService) GetFunctionDataTypes_1(ctx context.Context, analysisId int64, functionId int64) ApiGetFunctionDataTypes_0Request {
-	return ApiGetFunctionDataTypes_0Request{
+func (a *FunctionsDataTypesAPIService) GetFunctionDataTypes(ctx context.Context, analysisId int64, functionId int64) ApiGetFunctionDataTypesRequest {
+	return ApiGetFunctionDataTypesRequest{
 		ApiService: a,
 		ctx: ctx,
 		analysisId: analysisId,
@@ -655,7 +521,7 @@ func (a *FunctionsDataTypesAPIService) GetFunctionDataTypes_1(ctx context.Contex
 
 // Execute executes the request
 //  @return DataTypesEntry
-func (a *FunctionsDataTypesAPIService) GetFunctionDataTypes_1Execute(r ApiGetFunctionDataTypes_0Request) (*DataTypesEntry, *http.Response, error) {
+func (a *FunctionsDataTypesAPIService) GetFunctionDataTypesExecute(r ApiGetFunctionDataTypesRequest) (*DataTypesEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -663,7 +529,7 @@ func (a *FunctionsDataTypesAPIService) GetFunctionDataTypes_1Execute(r ApiGetFun
 		localVarReturnValue  *DataTypesEntry
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionsDataTypesAPIService.GetFunctionDataTypes_1")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionsDataTypesAPIService.GetFunctionDataTypes")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1413,6 +1279,215 @@ func (a *FunctionsDataTypesAPIService) ListFunctionsDataTypesExecute(r ApiListFu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateFunctionDataTypesRequest struct {
+	ctx context.Context
+	ApiService *FunctionsDataTypesAPIService
+	analysisId int64
+	functionId int64
+	updateDataTypesInputBody *UpdateDataTypesInputBody
+}
+
+func (r ApiUpdateFunctionDataTypesRequest) UpdateDataTypesInputBody(updateDataTypesInputBody UpdateDataTypesInputBody) ApiUpdateFunctionDataTypesRequest {
+	r.updateDataTypesInputBody = &updateDataTypesInputBody
+	return r
+}
+
+func (r ApiUpdateFunctionDataTypesRequest) Execute() (*UpdateDataTypesOutputBody, *http.Response, error) {
+	return r.ApiService.UpdateFunctionDataTypesExecute(r)
+}
+
+/*
+UpdateFunctionDataTypes Update function data types
+
+Stores user-specific overrides for a function's data types. Uses optimistic concurrency: if the stored version doesn't match `data_types_version`, the update is rejected with 409.
+
+**Error codes:**
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `400` [`BAD_REQUEST`](/errors/BAD_REQUEST) — Bad Request
+- `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param analysisId Analysis ID
+ @param functionId Function ID
+ @return ApiUpdateFunctionDataTypesRequest
+*/
+func (a *FunctionsDataTypesAPIService) UpdateFunctionDataTypes(ctx context.Context, analysisId int64, functionId int64) ApiUpdateFunctionDataTypesRequest {
+	return ApiUpdateFunctionDataTypesRequest{
+		ApiService: a,
+		ctx: ctx,
+		analysisId: analysisId,
+		functionId: functionId,
+	}
+}
+
+// Execute executes the request
+//  @return UpdateDataTypesOutputBody
+func (a *FunctionsDataTypesAPIService) UpdateFunctionDataTypesExecute(r ApiUpdateFunctionDataTypesRequest) (*UpdateDataTypesOutputBody, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateDataTypesOutputBody
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionsDataTypesAPIService.UpdateFunctionDataTypes")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/analyses/{analysis_id}/functions/{function_id}/data_types"
+	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"function_id"+"}", url.PathEscape(parameterValueToString(r.functionId, "functionId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.analysisId < 1 {
+		return localVarReturnValue, nil, reportError("analysisId must be greater than 1")
+	}
+	if r.functionId < 1 {
+		return localVarReturnValue, nil, reportError("functionId must be greater than 1")
+	}
+	if r.updateDataTypesInputBody == nil {
+		return localVarReturnValue, nil, reportError("updateDataTypesInputBody is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateDataTypesInputBody
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v APIError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

@@ -19,18 +19,28 @@ var _ MappedNullable = &MatchedFunction{}
 
 // MatchedFunction struct for MatchedFunction
 type MatchedFunction struct {
-	// Unique identifier of the matched function
-	FunctionId int64 `json:"function_id"`
-	BinaryId int32 `json:"binary_id"`
-	FunctionName string `json:"function_name"`
-	FunctionVaddr int64 `json:"function_vaddr"`
-	MangledName string `json:"mangled_name"`
-	Debug bool `json:"debug"`
+	// Analysis the candidate's binary belongs to
+	AnalysisId int64 `json:"analysis_id"`
+	// Binary the candidate belongs to
+	BinaryId int64 `json:"binary_id"`
+	// Binary name
 	BinaryName string `json:"binary_name"`
+	// Softmax-normalised confidence over the candidate pool
+	Confidence float64 `json:"confidence"`
+	// Whether the candidate's name came from debug info
+	Debug bool `json:"debug"`
+	// Candidate function ID
+	FunctionId int64 `json:"function_id"`
+	// Candidate function name
+	FunctionName string `json:"function_name"`
+	// Candidate's virtual address inside its binary
+	FunctionVaddr int64 `json:"function_vaddr"`
+	// Mangled name when available
+	MangledName string `json:"mangled_name"`
+	// SHA-256 of the candidate's binary
 	Sha256Hash string `json:"sha_256_hash"`
-	AnalysisId int32 `json:"analysis_id"`
-	Similarity NullableFloat32 `json:"similarity,omitempty"`
-	Confidence NullableFloat32 `json:"confidence,omitempty"`
+	// Cosine similarity scaled to a percentage
+	Similarity float64 `json:"similarity"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -40,17 +50,19 @@ type _MatchedFunction MatchedFunction
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMatchedFunction(functionId int64, binaryId int32, functionName string, functionVaddr int64, mangledName string, debug bool, binaryName string, sha256Hash string, analysisId int32) *MatchedFunction {
+func NewMatchedFunction(analysisId int64, binaryId int64, binaryName string, confidence float64, debug bool, functionId int64, functionName string, functionVaddr int64, mangledName string, sha256Hash string, similarity float64) *MatchedFunction {
 	this := MatchedFunction{}
-	this.FunctionId = functionId
+	this.AnalysisId = analysisId
 	this.BinaryId = binaryId
+	this.BinaryName = binaryName
+	this.Confidence = confidence
+	this.Debug = debug
+	this.FunctionId = functionId
 	this.FunctionName = functionName
 	this.FunctionVaddr = functionVaddr
 	this.MangledName = mangledName
-	this.Debug = debug
-	this.BinaryName = binaryName
 	this.Sha256Hash = sha256Hash
-	this.AnalysisId = analysisId
+	this.Similarity = similarity
 	return &this
 }
 
@@ -60,6 +72,126 @@ func NewMatchedFunction(functionId int64, binaryId int32, functionName string, f
 func NewMatchedFunctionWithDefaults() *MatchedFunction {
 	this := MatchedFunction{}
 	return &this
+}
+
+// GetAnalysisId returns the AnalysisId field value
+func (o *MatchedFunction) GetAnalysisId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.AnalysisId
+}
+
+// GetAnalysisIdOk returns a tuple with the AnalysisId field value
+// and a boolean to check if the value has been set.
+func (o *MatchedFunction) GetAnalysisIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AnalysisId, true
+}
+
+// SetAnalysisId sets field value
+func (o *MatchedFunction) SetAnalysisId(v int64) {
+	o.AnalysisId = v
+}
+
+// GetBinaryId returns the BinaryId field value
+func (o *MatchedFunction) GetBinaryId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.BinaryId
+}
+
+// GetBinaryIdOk returns a tuple with the BinaryId field value
+// and a boolean to check if the value has been set.
+func (o *MatchedFunction) GetBinaryIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.BinaryId, true
+}
+
+// SetBinaryId sets field value
+func (o *MatchedFunction) SetBinaryId(v int64) {
+	o.BinaryId = v
+}
+
+// GetBinaryName returns the BinaryName field value
+func (o *MatchedFunction) GetBinaryName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.BinaryName
+}
+
+// GetBinaryNameOk returns a tuple with the BinaryName field value
+// and a boolean to check if the value has been set.
+func (o *MatchedFunction) GetBinaryNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.BinaryName, true
+}
+
+// SetBinaryName sets field value
+func (o *MatchedFunction) SetBinaryName(v string) {
+	o.BinaryName = v
+}
+
+// GetConfidence returns the Confidence field value
+func (o *MatchedFunction) GetConfidence() float64 {
+	if o == nil {
+		var ret float64
+		return ret
+	}
+
+	return o.Confidence
+}
+
+// GetConfidenceOk returns a tuple with the Confidence field value
+// and a boolean to check if the value has been set.
+func (o *MatchedFunction) GetConfidenceOk() (*float64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Confidence, true
+}
+
+// SetConfidence sets field value
+func (o *MatchedFunction) SetConfidence(v float64) {
+	o.Confidence = v
+}
+
+// GetDebug returns the Debug field value
+func (o *MatchedFunction) GetDebug() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Debug
+}
+
+// GetDebugOk returns a tuple with the Debug field value
+// and a boolean to check if the value has been set.
+func (o *MatchedFunction) GetDebugOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Debug, true
+}
+
+// SetDebug sets field value
+func (o *MatchedFunction) SetDebug(v bool) {
+	o.Debug = v
 }
 
 // GetFunctionId returns the FunctionId field value
@@ -84,30 +216,6 @@ func (o *MatchedFunction) GetFunctionIdOk() (*int64, bool) {
 // SetFunctionId sets field value
 func (o *MatchedFunction) SetFunctionId(v int64) {
 	o.FunctionId = v
-}
-
-// GetBinaryId returns the BinaryId field value
-func (o *MatchedFunction) GetBinaryId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.BinaryId
-}
-
-// GetBinaryIdOk returns a tuple with the BinaryId field value
-// and a boolean to check if the value has been set.
-func (o *MatchedFunction) GetBinaryIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.BinaryId, true
-}
-
-// SetBinaryId sets field value
-func (o *MatchedFunction) SetBinaryId(v int32) {
-	o.BinaryId = v
 }
 
 // GetFunctionName returns the FunctionName field value
@@ -182,54 +290,6 @@ func (o *MatchedFunction) SetMangledName(v string) {
 	o.MangledName = v
 }
 
-// GetDebug returns the Debug field value
-func (o *MatchedFunction) GetDebug() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Debug
-}
-
-// GetDebugOk returns a tuple with the Debug field value
-// and a boolean to check if the value has been set.
-func (o *MatchedFunction) GetDebugOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Debug, true
-}
-
-// SetDebug sets field value
-func (o *MatchedFunction) SetDebug(v bool) {
-	o.Debug = v
-}
-
-// GetBinaryName returns the BinaryName field value
-func (o *MatchedFunction) GetBinaryName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.BinaryName
-}
-
-// GetBinaryNameOk returns a tuple with the BinaryName field value
-// and a boolean to check if the value has been set.
-func (o *MatchedFunction) GetBinaryNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.BinaryName, true
-}
-
-// SetBinaryName sets field value
-func (o *MatchedFunction) SetBinaryName(v string) {
-	o.BinaryName = v
-}
-
 // GetSha256Hash returns the Sha256Hash field value
 func (o *MatchedFunction) GetSha256Hash() string {
 	if o == nil {
@@ -254,112 +314,28 @@ func (o *MatchedFunction) SetSha256Hash(v string) {
 	o.Sha256Hash = v
 }
 
-// GetAnalysisId returns the AnalysisId field value
-func (o *MatchedFunction) GetAnalysisId() int32 {
+// GetSimilarity returns the Similarity field value
+func (o *MatchedFunction) GetSimilarity() float64 {
 	if o == nil {
-		var ret int32
+		var ret float64
 		return ret
 	}
 
-	return o.AnalysisId
+	return o.Similarity
 }
 
-// GetAnalysisIdOk returns a tuple with the AnalysisId field value
+// GetSimilarityOk returns a tuple with the Similarity field value
 // and a boolean to check if the value has been set.
-func (o *MatchedFunction) GetAnalysisIdOk() (*int32, bool) {
+func (o *MatchedFunction) GetSimilarityOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.AnalysisId, true
+	return &o.Similarity, true
 }
 
-// SetAnalysisId sets field value
-func (o *MatchedFunction) SetAnalysisId(v int32) {
-	o.AnalysisId = v
-}
-
-// GetSimilarity returns the Similarity field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MatchedFunction) GetSimilarity() float32 {
-	if o == nil || IsNil(o.Similarity.Get()) {
-		var ret float32
-		return ret
-	}
-	return *o.Similarity.Get()
-}
-
-// GetSimilarityOk returns a tuple with the Similarity field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MatchedFunction) GetSimilarityOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Similarity.Get(), o.Similarity.IsSet()
-}
-
-// HasSimilarity returns a boolean if a field has been set.
-func (o *MatchedFunction) HasSimilarity() bool {
-	if o != nil && o.Similarity.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSimilarity gets a reference to the given NullableFloat32 and assigns it to the Similarity field.
-func (o *MatchedFunction) SetSimilarity(v float32) {
-	o.Similarity.Set(&v)
-}
-// SetSimilarityNil sets the value for Similarity to be an explicit nil
-func (o *MatchedFunction) SetSimilarityNil() {
-	o.Similarity.Set(nil)
-}
-
-// UnsetSimilarity ensures that no value is present for Similarity, not even an explicit nil
-func (o *MatchedFunction) UnsetSimilarity() {
-	o.Similarity.Unset()
-}
-
-// GetConfidence returns the Confidence field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MatchedFunction) GetConfidence() float32 {
-	if o == nil || IsNil(o.Confidence.Get()) {
-		var ret float32
-		return ret
-	}
-	return *o.Confidence.Get()
-}
-
-// GetConfidenceOk returns a tuple with the Confidence field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MatchedFunction) GetConfidenceOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Confidence.Get(), o.Confidence.IsSet()
-}
-
-// HasConfidence returns a boolean if a field has been set.
-func (o *MatchedFunction) HasConfidence() bool {
-	if o != nil && o.Confidence.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetConfidence gets a reference to the given NullableFloat32 and assigns it to the Confidence field.
-func (o *MatchedFunction) SetConfidence(v float32) {
-	o.Confidence.Set(&v)
-}
-// SetConfidenceNil sets the value for Confidence to be an explicit nil
-func (o *MatchedFunction) SetConfidenceNil() {
-	o.Confidence.Set(nil)
-}
-
-// UnsetConfidence ensures that no value is present for Confidence, not even an explicit nil
-func (o *MatchedFunction) UnsetConfidence() {
-	o.Confidence.Unset()
+// SetSimilarity sets field value
+func (o *MatchedFunction) SetSimilarity(v float64) {
+	o.Similarity = v
 }
 
 func (o MatchedFunction) MarshalJSON() ([]byte, error) {
@@ -372,21 +348,17 @@ func (o MatchedFunction) MarshalJSON() ([]byte, error) {
 
 func (o MatchedFunction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["function_id"] = o.FunctionId
+	toSerialize["analysis_id"] = o.AnalysisId
 	toSerialize["binary_id"] = o.BinaryId
+	toSerialize["binary_name"] = o.BinaryName
+	toSerialize["confidence"] = o.Confidence
+	toSerialize["debug"] = o.Debug
+	toSerialize["function_id"] = o.FunctionId
 	toSerialize["function_name"] = o.FunctionName
 	toSerialize["function_vaddr"] = o.FunctionVaddr
 	toSerialize["mangled_name"] = o.MangledName
-	toSerialize["debug"] = o.Debug
-	toSerialize["binary_name"] = o.BinaryName
 	toSerialize["sha_256_hash"] = o.Sha256Hash
-	toSerialize["analysis_id"] = o.AnalysisId
-	if o.Similarity.IsSet() {
-		toSerialize["similarity"] = o.Similarity.Get()
-	}
-	if o.Confidence.IsSet() {
-		toSerialize["confidence"] = o.Confidence.Get()
-	}
+	toSerialize["similarity"] = o.Similarity
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -400,15 +372,17 @@ func (o *MatchedFunction) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"function_id",
+		"analysis_id",
 		"binary_id",
+		"binary_name",
+		"confidence",
+		"debug",
+		"function_id",
 		"function_name",
 		"function_vaddr",
 		"mangled_name",
-		"debug",
-		"binary_name",
 		"sha_256_hash",
-		"analysis_id",
+		"similarity",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -438,17 +412,17 @@ func (o *MatchedFunction) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "analysis_id")
 		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "binary_name")
+		delete(additionalProperties, "confidence")
+		delete(additionalProperties, "debug")
+		delete(additionalProperties, "function_id")
 		delete(additionalProperties, "function_name")
 		delete(additionalProperties, "function_vaddr")
 		delete(additionalProperties, "mangled_name")
-		delete(additionalProperties, "debug")
-		delete(additionalProperties, "binary_name")
 		delete(additionalProperties, "sha_256_hash")
-		delete(additionalProperties, "analysis_id")
 		delete(additionalProperties, "similarity")
-		delete(additionalProperties, "confidence")
 		o.AdditionalProperties = additionalProperties
 	}
 
