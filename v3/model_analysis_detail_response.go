@@ -36,6 +36,8 @@ type AnalysisDetailResponse struct {
 	Sbom map[string]interface{} `json:"sbom,omitempty"`
 	Sha256Hash string `json:"sha_256_hash"`
 	AutoRunAgents AutoRunAgents `json:"auto_run_agents"`
+	// Snapshot of the configuration the analysis was submitted with.
+	RequestedConfig AnalysisConfigSnapshot `json:"requested_config"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,7 +47,7 @@ type _AnalysisDetailResponse AnalysisDetailResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, analysisScope string, architecture string, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int32, binaryType string, creation string, dashboardUrl string, debug bool, modelName string, sha256Hash string, autoRunAgents AutoRunAgents) *AnalysisDetailResponse {
+func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, analysisScope string, architecture string, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int32, binaryType string, creation string, dashboardUrl string, debug bool, modelName string, sha256Hash string, autoRunAgents AutoRunAgents, requestedConfig AnalysisConfigSnapshot) *AnalysisDetailResponse {
 	this := AnalysisDetailResponse{}
 	this.Access = access
 	this.AnalysisId = analysisId
@@ -62,6 +64,7 @@ func NewAnalysisDetailResponse(access AnalysisAccessInfo, analysisId int32, anal
 	this.ModelName = modelName
 	this.Sha256Hash = sha256Hash
 	this.AutoRunAgents = autoRunAgents
+	this.RequestedConfig = requestedConfig
 	return &this
 }
 
@@ -466,6 +469,30 @@ func (o *AnalysisDetailResponse) SetAutoRunAgents(v AutoRunAgents) {
 	o.AutoRunAgents = v
 }
 
+// GetRequestedConfig returns the RequestedConfig field value
+func (o *AnalysisDetailResponse) GetRequestedConfig() AnalysisConfigSnapshot {
+	if o == nil {
+		var ret AnalysisConfigSnapshot
+		return ret
+	}
+
+	return o.RequestedConfig
+}
+
+// GetRequestedConfigOk returns a tuple with the RequestedConfig field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisDetailResponse) GetRequestedConfigOk() (*AnalysisConfigSnapshot, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RequestedConfig, true
+}
+
+// SetRequestedConfig sets field value
+func (o *AnalysisDetailResponse) SetRequestedConfig(v AnalysisConfigSnapshot) {
+	o.RequestedConfig = v
+}
+
 func (o AnalysisDetailResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -494,6 +521,7 @@ func (o AnalysisDetailResponse) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["sha_256_hash"] = o.Sha256Hash
 	toSerialize["auto_run_agents"] = o.AutoRunAgents
+	toSerialize["requested_config"] = o.RequestedConfig
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -522,6 +550,7 @@ func (o *AnalysisDetailResponse) UnmarshalJSON(data []byte) (err error) {
 		"model_name",
 		"sha_256_hash",
 		"auto_run_agents",
+		"requested_config",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -567,6 +596,7 @@ func (o *AnalysisDetailResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "sbom")
 		delete(additionalProperties, "sha_256_hash")
 		delete(additionalProperties, "auto_run_agents")
+		delete(additionalProperties, "requested_config")
 		o.AdditionalProperties = additionalProperties
 	}
 
