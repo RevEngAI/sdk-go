@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DefaultTeamId** | Pointer to **int64** |  | [optional] 
 **FirstName** | **string** |  | 
+**HideExampleBinaries** | **bool** |  | 
 **LastName** | **string** |  | 
 **TimeZone** | **string** |  | 
 **Username** | **string** |  | 
@@ -14,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewUserProfile
 
-`func NewUserProfile(firstName string, lastName string, timeZone string, username string, ) *UserProfile`
+`func NewUserProfile(firstName string, hideExampleBinaries bool, lastName string, timeZone string, username string, ) *UserProfile`
 
 NewUserProfile instantiates a new UserProfile object
 This constructor will assign default values to properties that have it defined,
@@ -72,6 +73,26 @@ and a boolean to check if the value has been set.
 `func (o *UserProfile) SetFirstName(v string)`
 
 SetFirstName sets FirstName field to given value.
+
+
+### GetHideExampleBinaries
+
+`func (o *UserProfile) GetHideExampleBinaries() bool`
+
+GetHideExampleBinaries returns the HideExampleBinaries field if non-nil, zero value otherwise.
+
+### GetHideExampleBinariesOk
+
+`func (o *UserProfile) GetHideExampleBinariesOk() (*bool, bool)`
+
+GetHideExampleBinariesOk returns a tuple with the HideExampleBinaries field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHideExampleBinaries
+
+`func (o *UserProfile) SetHideExampleBinaries(v bool)`
+
+SetHideExampleBinaries sets HideExampleBinaries field to given value.
 
 
 ### GetLastName

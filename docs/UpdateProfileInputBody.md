@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DefaultTeamId** | Pointer to **int64** | Default team ID | [optional] 
 **FirstName** | Pointer to **string** | First name | [optional] 
+**HideExampleBinaries** | Pointer to **bool** | Hide the Examples tab in the analyses listing | [optional] 
 **LastName** | Pointer to **string** | Last name | [optional] 
 **TimeZone** | Pointer to **string** | IANA time zone | [optional] 
 **Username** | Pointer to **string** | Username | [optional] 
@@ -78,6 +79,31 @@ SetFirstName sets FirstName field to given value.
 `func (o *UpdateProfileInputBody) HasFirstName() bool`
 
 HasFirstName returns a boolean if a field has been set.
+
+### GetHideExampleBinaries
+
+`func (o *UpdateProfileInputBody) GetHideExampleBinaries() bool`
+
+GetHideExampleBinaries returns the HideExampleBinaries field if non-nil, zero value otherwise.
+
+### GetHideExampleBinariesOk
+
+`func (o *UpdateProfileInputBody) GetHideExampleBinariesOk() (*bool, bool)`
+
+GetHideExampleBinariesOk returns a tuple with the HideExampleBinaries field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHideExampleBinaries
+
+`func (o *UpdateProfileInputBody) SetHideExampleBinaries(v bool)`
+
+SetHideExampleBinaries sets HideExampleBinaries field to given value.
+
+### HasHideExampleBinaries
+
+`func (o *UpdateProfileInputBody) HasHideExampleBinaries() bool`
+
+HasHideExampleBinaries returns a boolean if a field has been set.
 
 ### GetLastName
 
