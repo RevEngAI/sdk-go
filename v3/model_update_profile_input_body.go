@@ -22,6 +22,8 @@ type UpdateProfileInputBody struct {
 	DefaultTeamId *int64 `json:"default_team_id,omitempty"`
 	// First name
 	FirstName *string `json:"first_name,omitempty"`
+	// Hide the Examples tab in the analyses listing
+	HideExampleBinaries *bool `json:"hide_example_binaries,omitempty"`
 	// Last name
 	LastName *string `json:"last_name,omitempty"`
 	// IANA time zone
@@ -112,6 +114,38 @@ func (o *UpdateProfileInputBody) HasFirstName() bool {
 // SetFirstName gets a reference to the given string and assigns it to the FirstName field.
 func (o *UpdateProfileInputBody) SetFirstName(v string) {
 	o.FirstName = &v
+}
+
+// GetHideExampleBinaries returns the HideExampleBinaries field value if set, zero value otherwise.
+func (o *UpdateProfileInputBody) GetHideExampleBinaries() bool {
+	if o == nil || IsNil(o.HideExampleBinaries) {
+		var ret bool
+		return ret
+	}
+	return *o.HideExampleBinaries
+}
+
+// GetHideExampleBinariesOk returns a tuple with the HideExampleBinaries field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileInputBody) GetHideExampleBinariesOk() (*bool, bool) {
+	if o == nil || IsNil(o.HideExampleBinaries) {
+		return nil, false
+	}
+	return o.HideExampleBinaries, true
+}
+
+// HasHideExampleBinaries returns a boolean if a field has been set.
+func (o *UpdateProfileInputBody) HasHideExampleBinaries() bool {
+	if o != nil && !IsNil(o.HideExampleBinaries) {
+		return true
+	}
+
+	return false
+}
+
+// SetHideExampleBinaries gets a reference to the given bool and assigns it to the HideExampleBinaries field.
+func (o *UpdateProfileInputBody) SetHideExampleBinaries(v bool) {
+	o.HideExampleBinaries = &v
 }
 
 // GetLastName returns the LastName field value if set, zero value otherwise.
@@ -226,6 +260,9 @@ func (o UpdateProfileInputBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FirstName) {
 		toSerialize["first_name"] = o.FirstName
 	}
+	if !IsNil(o.HideExampleBinaries) {
+		toSerialize["hide_example_binaries"] = o.HideExampleBinaries
+	}
 	if !IsNil(o.LastName) {
 		toSerialize["last_name"] = o.LastName
 	}
@@ -259,6 +296,7 @@ func (o *UpdateProfileInputBody) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "default_team_id")
 		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "hide_example_binaries")
 		delete(additionalProperties, "last_name")
 		delete(additionalProperties, "time_zone")
 		delete(additionalProperties, "username")
