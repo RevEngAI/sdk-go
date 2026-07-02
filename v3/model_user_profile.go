@@ -22,6 +22,7 @@ var _ MappedNullable = &UserProfile{}
 type UserProfile struct {
 	DefaultTeamId *int64 `json:"default_team_id,omitempty"`
 	FirstName string `json:"first_name"`
+	HideExampleBinaries bool `json:"hide_example_binaries"`
 	LastName string `json:"last_name"`
 	TimeZone string `json:"time_zone"`
 	Username string `json:"username"`
@@ -33,9 +34,10 @@ type _UserProfile UserProfile
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserProfile(firstName string, lastName string, timeZone string, username string) *UserProfile {
+func NewUserProfile(firstName string, hideExampleBinaries bool, lastName string, timeZone string, username string) *UserProfile {
 	this := UserProfile{}
 	this.FirstName = firstName
+	this.HideExampleBinaries = hideExampleBinaries
 	this.LastName = lastName
 	this.TimeZone = timeZone
 	this.Username = username
@@ -104,6 +106,30 @@ func (o *UserProfile) GetFirstNameOk() (*string, bool) {
 // SetFirstName sets field value
 func (o *UserProfile) SetFirstName(v string) {
 	o.FirstName = v
+}
+
+// GetHideExampleBinaries returns the HideExampleBinaries field value
+func (o *UserProfile) GetHideExampleBinaries() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.HideExampleBinaries
+}
+
+// GetHideExampleBinariesOk returns a tuple with the HideExampleBinaries field value
+// and a boolean to check if the value has been set.
+func (o *UserProfile) GetHideExampleBinariesOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.HideExampleBinaries, true
+}
+
+// SetHideExampleBinaries sets field value
+func (o *UserProfile) SetHideExampleBinaries(v bool) {
+	o.HideExampleBinaries = v
 }
 
 // GetLastName returns the LastName field value
@@ -192,6 +218,7 @@ func (o UserProfile) ToMap() (map[string]interface{}, error) {
 		toSerialize["default_team_id"] = o.DefaultTeamId
 	}
 	toSerialize["first_name"] = o.FirstName
+	toSerialize["hide_example_binaries"] = o.HideExampleBinaries
 	toSerialize["last_name"] = o.LastName
 	toSerialize["time_zone"] = o.TimeZone
 	toSerialize["username"] = o.Username
@@ -204,6 +231,7 @@ func (o *UserProfile) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"first_name",
+		"hide_example_binaries",
 		"last_name",
 		"time_zone",
 		"username",
