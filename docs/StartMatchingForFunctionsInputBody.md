@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **FunctionIds** | **[]int64** | Source function IDs to match against the rest of the corpus. | 
 **MinSimilarity** | Pointer to **float64** | Similarity floor as a percentage. Defaults to 90. | [optional] 
 **ResultsPerFunction** | Pointer to **int64** | Max matches returned per source function. Defaults to 1. | [optional] 
+**UseCanonicalNames** | Pointer to **bool** | Collapse near-duplicate candidate names into canonical buckets and return per-name confidences (the response &#39;confidences&#39; array). Adds a canonicalisation step; defaults to false. | [optional] 
 
 ## Methods
 
@@ -132,6 +133,31 @@ SetResultsPerFunction sets ResultsPerFunction field to given value.
 `func (o *StartMatchingForFunctionsInputBody) HasResultsPerFunction() bool`
 
 HasResultsPerFunction returns a boolean if a field has been set.
+
+### GetUseCanonicalNames
+
+`func (o *StartMatchingForFunctionsInputBody) GetUseCanonicalNames() bool`
+
+GetUseCanonicalNames returns the UseCanonicalNames field if non-nil, zero value otherwise.
+
+### GetUseCanonicalNamesOk
+
+`func (o *StartMatchingForFunctionsInputBody) GetUseCanonicalNamesOk() (*bool, bool)`
+
+GetUseCanonicalNamesOk returns a tuple with the UseCanonicalNames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseCanonicalNames
+
+`func (o *StartMatchingForFunctionsInputBody) SetUseCanonicalNames(v bool)`
+
+SetUseCanonicalNames sets UseCanonicalNames field to given value.
+
+### HasUseCanonicalNames
+
+`func (o *StartMatchingForFunctionsInputBody) HasUseCanonicalNames() bool`
+
+HasUseCanonicalNames returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

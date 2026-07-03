@@ -21,6 +21,8 @@ var _ MappedNullable = &DataTypesEntry{}
 // DataTypesEntry struct for DataTypesEntry
 type DataTypesEntry struct {
 	DataTypes *FunctionInfo `json:"data_types,omitempty"`
+	// Current version of the function data types. Pass this back on the next write to satisfy the CAS check.
+	DataTypesVersion int64 `json:"data_types_version"`
 	FunctionId int64 `json:"function_id"`
 }
 
@@ -30,8 +32,9 @@ type _DataTypesEntry DataTypesEntry
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDataTypesEntry(functionId int64) *DataTypesEntry {
+func NewDataTypesEntry(dataTypesVersion int64, functionId int64) *DataTypesEntry {
 	this := DataTypesEntry{}
+	this.DataTypesVersion = dataTypesVersion
 	this.FunctionId = functionId
 	return &this
 }
@@ -76,6 +79,30 @@ func (o *DataTypesEntry) SetDataTypes(v FunctionInfo) {
 	o.DataTypes = &v
 }
 
+// GetDataTypesVersion returns the DataTypesVersion field value
+func (o *DataTypesEntry) GetDataTypesVersion() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.DataTypesVersion
+}
+
+// GetDataTypesVersionOk returns a tuple with the DataTypesVersion field value
+// and a boolean to check if the value has been set.
+func (o *DataTypesEntry) GetDataTypesVersionOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DataTypesVersion, true
+}
+
+// SetDataTypesVersion sets field value
+func (o *DataTypesEntry) SetDataTypesVersion(v int64) {
+	o.DataTypesVersion = v
+}
+
 // GetFunctionId returns the FunctionId field value
 func (o *DataTypesEntry) GetFunctionId() int64 {
 	if o == nil {
@@ -113,6 +140,7 @@ func (o DataTypesEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DataTypes) {
 		toSerialize["data_types"] = o.DataTypes
 	}
+	toSerialize["data_types_version"] = o.DataTypesVersion
 	toSerialize["function_id"] = o.FunctionId
 	return toSerialize, nil
 }
@@ -122,6 +150,7 @@ func (o *DataTypesEntry) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"data_types_version",
 		"function_id",
 	}
 

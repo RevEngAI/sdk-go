@@ -21,6 +21,7 @@ var _ MappedNullable = &FunctionDetailsOutputBody{}
 
 // FunctionDetailsOutputBody struct for FunctionDetailsOutputBody
 type FunctionDetailsOutputBody struct {
+	AnalysisId int64 `json:"analysis_id"`
 	BinaryId int64 `json:"binary_id"`
 	Creation time.Time `json:"creation"`
 	Debug bool `json:"debug"`
@@ -38,8 +39,9 @@ type _FunctionDetailsOutputBody FunctionDetailsOutputBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionDetailsOutputBody(binaryId int64, creation time.Time, debug bool, functionId int64, functionName string, functionSize int64, functionVaddr int64) *FunctionDetailsOutputBody {
+func NewFunctionDetailsOutputBody(analysisId int64, binaryId int64, creation time.Time, debug bool, functionId int64, functionName string, functionSize int64, functionVaddr int64) *FunctionDetailsOutputBody {
 	this := FunctionDetailsOutputBody{}
+	this.AnalysisId = analysisId
 	this.BinaryId = binaryId
 	this.Creation = creation
 	this.Debug = debug
@@ -56,6 +58,30 @@ func NewFunctionDetailsOutputBody(binaryId int64, creation time.Time, debug bool
 func NewFunctionDetailsOutputBodyWithDefaults() *FunctionDetailsOutputBody {
 	this := FunctionDetailsOutputBody{}
 	return &this
+}
+
+// GetAnalysisId returns the AnalysisId field value
+func (o *FunctionDetailsOutputBody) GetAnalysisId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.AnalysisId
+}
+
+// GetAnalysisIdOk returns a tuple with the AnalysisId field value
+// and a boolean to check if the value has been set.
+func (o *FunctionDetailsOutputBody) GetAnalysisIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AnalysisId, true
+}
+
+// SetAnalysisId sets field value
+func (o *FunctionDetailsOutputBody) SetAnalysisId(v int64) {
+	o.AnalysisId = v
 }
 
 // GetBinaryId returns the BinaryId field value
@@ -300,6 +326,7 @@ func (o FunctionDetailsOutputBody) MarshalJSON() ([]byte, error) {
 
 func (o FunctionDetailsOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["analysis_id"] = o.AnalysisId
 	toSerialize["binary_id"] = o.BinaryId
 	toSerialize["creation"] = o.Creation
 	toSerialize["debug"] = o.Debug
@@ -321,6 +348,7 @@ func (o *FunctionDetailsOutputBody) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"analysis_id",
 		"binary_id",
 		"creation",
 		"debug",

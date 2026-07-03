@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,9 @@ type StartMatchingForFunctionsInputBody struct {
 	MinSimilarity *float64 `json:"min_similarity,omitempty"`
 	// Max matches returned per source function. Defaults to 1.
 	ResultsPerFunction *int64 `json:"results_per_function,omitempty"`
+	// Collapse near-duplicate candidate names into canonical buckets and return per-name confidences (the response 'confidences' array). Adds a canonicalisation step; defaults to false.
+	UseCanonicalNames *bool `json:"use_canonical_names,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StartMatchingForFunctionsInputBody StartMatchingForFunctionsInputBody
@@ -172,6 +174,38 @@ func (o *StartMatchingForFunctionsInputBody) SetResultsPerFunction(v int64) {
 	o.ResultsPerFunction = &v
 }
 
+// GetUseCanonicalNames returns the UseCanonicalNames field value if set, zero value otherwise.
+func (o *StartMatchingForFunctionsInputBody) GetUseCanonicalNames() bool {
+	if o == nil || IsNil(o.UseCanonicalNames) {
+		var ret bool
+		return ret
+	}
+	return *o.UseCanonicalNames
+}
+
+// GetUseCanonicalNamesOk returns a tuple with the UseCanonicalNames field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartMatchingForFunctionsInputBody) GetUseCanonicalNamesOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseCanonicalNames) {
+		return nil, false
+	}
+	return o.UseCanonicalNames, true
+}
+
+// HasUseCanonicalNames returns a boolean if a field has been set.
+func (o *StartMatchingForFunctionsInputBody) HasUseCanonicalNames() bool {
+	if o != nil && !IsNil(o.UseCanonicalNames) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseCanonicalNames gets a reference to the given bool and assigns it to the UseCanonicalNames field.
+func (o *StartMatchingForFunctionsInputBody) SetUseCanonicalNames(v bool) {
+	o.UseCanonicalNames = &v
+}
+
 func (o StartMatchingForFunctionsInputBody) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -194,6 +228,14 @@ func (o StartMatchingForFunctionsInputBody) ToMap() (map[string]interface{}, err
 	if !IsNil(o.ResultsPerFunction) {
 		toSerialize["results_per_function"] = o.ResultsPerFunction
 	}
+	if !IsNil(o.UseCanonicalNames) {
+		toSerialize["use_canonical_names"] = o.UseCanonicalNames
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -221,15 +263,24 @@ func (o *StartMatchingForFunctionsInputBody) UnmarshalJSON(data []byte) (err err
 
 	varStartMatchingForFunctionsInputBody := _StartMatchingForFunctionsInputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStartMatchingForFunctionsInputBody)
+	err = json.Unmarshal(data, &varStartMatchingForFunctionsInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StartMatchingForFunctionsInputBody(varStartMatchingForFunctionsInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "function_ids")
+		delete(additionalProperties, "min_similarity")
+		delete(additionalProperties, "results_per_function")
+		delete(additionalProperties, "use_canonical_names")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
