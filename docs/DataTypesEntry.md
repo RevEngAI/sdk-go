@@ -5,13 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DataTypes** | Pointer to [**FunctionInfo**](FunctionInfo.md) |  | [optional] 
+**DataTypesVersion** | **int64** | Current version of the function data types. Pass this back on the next write to satisfy the CAS check. | 
 **FunctionId** | **int64** |  | 
 
 ## Methods
 
 ### NewDataTypesEntry
 
-`func NewDataTypesEntry(functionId int64, ) *DataTypesEntry`
+`func NewDataTypesEntry(dataTypesVersion int64, functionId int64, ) *DataTypesEntry`
 
 NewDataTypesEntry instantiates a new DataTypesEntry object
 This constructor will assign default values to properties that have it defined,
@@ -50,6 +51,26 @@ SetDataTypes sets DataTypes field to given value.
 `func (o *DataTypesEntry) HasDataTypes() bool`
 
 HasDataTypes returns a boolean if a field has been set.
+
+### GetDataTypesVersion
+
+`func (o *DataTypesEntry) GetDataTypesVersion() int64`
+
+GetDataTypesVersion returns the DataTypesVersion field if non-nil, zero value otherwise.
+
+### GetDataTypesVersionOk
+
+`func (o *DataTypesEntry) GetDataTypesVersionOk() (*int64, bool)`
+
+GetDataTypesVersionOk returns a tuple with the DataTypesVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDataTypesVersion
+
+`func (o *DataTypesEntry) SetDataTypesVersion(v int64)`
+
+SetDataTypesVersion sets DataTypesVersion field to given value.
+
 
 ### GetFunctionId
 

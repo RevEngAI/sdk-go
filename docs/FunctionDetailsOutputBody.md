@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AnalysisId** | **int64** |  | 
 **BinaryId** | **int64** |  | 
 **Creation** | **time.Time** |  | 
 **Debug** | **bool** |  | 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewFunctionDetailsOutputBody
 
-`func NewFunctionDetailsOutputBody(binaryId int64, creation time.Time, debug bool, functionId int64, functionName string, functionSize int64, functionVaddr int64, ) *FunctionDetailsOutputBody`
+`func NewFunctionDetailsOutputBody(analysisId int64, binaryId int64, creation time.Time, debug bool, functionId int64, functionName string, functionSize int64, functionVaddr int64, ) *FunctionDetailsOutputBody`
 
 NewFunctionDetailsOutputBody instantiates a new FunctionDetailsOutputBody object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +33,26 @@ will change when the set of required properties is changed
 NewFunctionDetailsOutputBodyWithDefaults instantiates a new FunctionDetailsOutputBody object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAnalysisId
+
+`func (o *FunctionDetailsOutputBody) GetAnalysisId() int64`
+
+GetAnalysisId returns the AnalysisId field if non-nil, zero value otherwise.
+
+### GetAnalysisIdOk
+
+`func (o *FunctionDetailsOutputBody) GetAnalysisIdOk() (*int64, bool)`
+
+GetAnalysisIdOk returns a tuple with the AnalysisId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAnalysisId
+
+`func (o *FunctionDetailsOutputBody) SetAnalysisId(v int64)`
+
+SetAnalysisId sets AnalysisId field to given value.
+
 
 ### GetBinaryId
 

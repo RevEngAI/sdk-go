@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **BinaryId** | **int64** | Binary ID | 
 **BinaryName** | **string** | Binary filename | 
 **BinarySize** | **int64** | Binary size in bytes | 
-**BinaryUuid** | Pointer to **string** | UUID of the binary, omitted when not set | [optional] 
+**BinaryUuid** | **string** | UUID of the binary, omitted when not set | 
 **Creation** | **time.Time** | When the binary was uploaded | 
 **Debug** | **bool** | True when the binary was analysed with debug symbols | 
 **FunctionCount** | **int64** | Number of functions in the binary | 
@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewAnalysisBasicInfoOutputBody
 
-`func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, creation time.Time, debug bool, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, ownerUsername string, sha256Hash string, teamId int64, ) *AnalysisBasicInfoOutputBody`
+`func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, binaryUuid string, creation time.Time, debug bool, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, ownerUsername string, sha256Hash string, teamId int64, ) *AnalysisBasicInfoOutputBody`
 
 NewAnalysisBasicInfoOutputBody instantiates a new AnalysisBasicInfoOutputBody object
 This constructor will assign default values to properties that have it defined,
@@ -171,11 +171,6 @@ and a boolean to check if the value has been set.
 
 SetBinaryUuid sets BinaryUuid field to given value.
 
-### HasBinaryUuid
-
-`func (o *AnalysisBasicInfoOutputBody) HasBinaryUuid() bool`
-
-HasBinaryUuid returns a boolean if a field has been set.
 
 ### GetCreation
 

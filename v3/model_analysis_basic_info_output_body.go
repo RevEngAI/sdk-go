@@ -32,7 +32,7 @@ type AnalysisBasicInfoOutputBody struct {
 	// Binary size in bytes
 	BinarySize int64 `json:"binary_size"`
 	// UUID of the binary, omitted when not set
-	BinaryUuid *string `json:"binary_uuid,omitempty"`
+	BinaryUuid string `json:"binary_uuid"`
 	// When the binary was uploaded
 	Creation time.Time `json:"creation"`
 	// True when the binary was analysed with debug symbols
@@ -65,13 +65,14 @@ type _AnalysisBasicInfoOutputBody AnalysisBasicInfoOutputBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, creation time.Time, debug bool, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, ownerUsername string, sha256Hash string, teamId int64) *AnalysisBasicInfoOutputBody {
+func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, binaryUuid string, creation time.Time, debug bool, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, ownerUsername string, sha256Hash string, teamId int64) *AnalysisBasicInfoOutputBody {
 	this := AnalysisBasicInfoOutputBody{}
 	this.AnalysisScope = analysisScope
 	this.BaseAddress = baseAddress
 	this.BinaryId = binaryId
 	this.BinaryName = binaryName
 	this.BinarySize = binarySize
+	this.BinaryUuid = binaryUuid
 	this.Creation = creation
 	this.Debug = debug
 	this.FunctionCount = functionCount
@@ -216,36 +217,28 @@ func (o *AnalysisBasicInfoOutputBody) SetBinarySize(v int64) {
 	o.BinarySize = v
 }
 
-// GetBinaryUuid returns the BinaryUuid field value if set, zero value otherwise.
+// GetBinaryUuid returns the BinaryUuid field value
 func (o *AnalysisBasicInfoOutputBody) GetBinaryUuid() string {
-	if o == nil || IsNil(o.BinaryUuid) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.BinaryUuid
+
+	return o.BinaryUuid
 }
 
-// GetBinaryUuidOk returns a tuple with the BinaryUuid field value if set, nil otherwise
+// GetBinaryUuidOk returns a tuple with the BinaryUuid field value
 // and a boolean to check if the value has been set.
 func (o *AnalysisBasicInfoOutputBody) GetBinaryUuidOk() (*string, bool) {
-	if o == nil || IsNil(o.BinaryUuid) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BinaryUuid, true
+	return &o.BinaryUuid, true
 }
 
-// HasBinaryUuid returns a boolean if a field has been set.
-func (o *AnalysisBasicInfoOutputBody) HasBinaryUuid() bool {
-	if o != nil && !IsNil(o.BinaryUuid) {
-		return true
-	}
-
-	return false
-}
-
-// SetBinaryUuid gets a reference to the given string and assigns it to the BinaryUuid field.
+// SetBinaryUuid sets field value
 func (o *AnalysisBasicInfoOutputBody) SetBinaryUuid(v string) {
-	o.BinaryUuid = &v
+	o.BinaryUuid = v
 }
 
 // GetCreation returns the Creation field value
@@ -559,9 +552,7 @@ func (o AnalysisBasicInfoOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize["binary_id"] = o.BinaryId
 	toSerialize["binary_name"] = o.BinaryName
 	toSerialize["binary_size"] = o.BinarySize
-	if !IsNil(o.BinaryUuid) {
-		toSerialize["binary_uuid"] = o.BinaryUuid
-	}
+	toSerialize["binary_uuid"] = o.BinaryUuid
 	toSerialize["creation"] = o.Creation
 	toSerialize["debug"] = o.Debug
 	toSerialize["function_count"] = o.FunctionCount
@@ -589,6 +580,7 @@ func (o *AnalysisBasicInfoOutputBody) UnmarshalJSON(data []byte) (err error) {
 		"binary_id",
 		"binary_name",
 		"binary_size",
+		"binary_uuid",
 		"creation",
 		"debug",
 		"function_count",
