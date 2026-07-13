@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Filters** | Pointer to [**MatchFilters**](MatchFilters.md) | Narrow the candidate pool. | [optional] 
 **FunctionIds** | **[]int64** | Source function IDs to match against the rest of the corpus. | 
 **MinSimilarity** | Pointer to **float64** | Similarity floor as a percentage. Defaults to 90. | [optional] 
+**NoCache** | Pointer to **bool** | By default a completed matching run for the same request is reused (response status&#x3D;COMPLETED, no new run). Set true to force a fresh run. | [optional] 
 **ResultsPerFunction** | Pointer to **int64** | Max matches returned per source function. Defaults to 1. | [optional] 
 **UseCanonicalNames** | Pointer to **bool** | Collapse near-duplicate candidate names into canonical buckets and return per-name confidences (the response &#39;confidences&#39; array). Adds a canonicalisation step; defaults to false. | [optional] 
 
@@ -108,6 +109,31 @@ SetMinSimilarity sets MinSimilarity field to given value.
 `func (o *StartMatchingForFunctionsInputBody) HasMinSimilarity() bool`
 
 HasMinSimilarity returns a boolean if a field has been set.
+
+### GetNoCache
+
+`func (o *StartMatchingForFunctionsInputBody) GetNoCache() bool`
+
+GetNoCache returns the NoCache field if non-nil, zero value otherwise.
+
+### GetNoCacheOk
+
+`func (o *StartMatchingForFunctionsInputBody) GetNoCacheOk() (*bool, bool)`
+
+GetNoCacheOk returns a tuple with the NoCache field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNoCache
+
+`func (o *StartMatchingForFunctionsInputBody) SetNoCache(v bool)`
+
+SetNoCache sets NoCache field to given value.
+
+### HasNoCache
+
+`func (o *StartMatchingForFunctionsInputBody) HasNoCache() bool`
+
+HasNoCache returns a boolean if a field has been set.
 
 ### GetResultsPerFunction
 

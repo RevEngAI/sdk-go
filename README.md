@@ -109,8 +109,10 @@ Class | Method | HTTP request | Description
 *AnalysesCoreAPI* | [**UpdateAnalysis**](docs/AnalysesCoreAPI.md#updateanalysis) | **Patch** /v2/analyses/{analysis_id} | Update Analysis
 *AnalysesCoreAPI* | [**UpdateAnalysisTags**](docs/AnalysesCoreAPI.md#updateanalysistags) | **Patch** /v2/analyses/{analysis_id}/tags | Update Analysis Tags
 *AnalysesCoreAPI* | [**UploadFile**](docs/AnalysesCoreAPI.md#uploadfile) | **Post** /v2/upload | Upload File
+*AnalysesCoreAPI* | [**V3GetAnalysisAutoUnstripStatus**](docs/AnalysesCoreAPI.md#v3getanalysisautounstripstatus) | **Get** /v3/analyses/{analysis_id}/auto-unstrip/status | Get the auto-unstrip status for an analysis.
 *AnalysesCoreAPI* | [**V3GetAnalysisStrings**](docs/AnalysesCoreAPI.md#v3getanalysisstrings) | **Get** /v3/analyses/{analysis_id}/functions/strings | List strings for an analysis.
 *AnalysesCoreAPI* | [**V3GetAnalysisStringsStatus**](docs/AnalysesCoreAPI.md#v3getanalysisstringsstatus) | **Get** /v3/analyses/{analysis_id}/functions/strings/status | Get the string-extraction status for an analysis.
+*AnalysesCoreAPI* | [**V3ListAnalyses**](docs/AnalysesCoreAPI.md#v3listanalyses) | **Get** /v3/analyses | List analyses
 *AnalysesCoreAPI* | [**V3ListExampleAnalyses**](docs/AnalysesCoreAPI.md#v3listexampleanalyses) | **Get** /v3/analyses/examples | List example analyses
 *AnalysesResultsMetadataAPI* | [**GetAnalysisFunctionsPaginated**](docs/AnalysesResultsMetadataAPI.md#getanalysisfunctionspaginated) | **Get** /v2/analyses/{analysis_id}/functions | Get functions from analysis
 *AnalysesResultsMetadataAPI* | [**GetCapabilities**](docs/AnalysesResultsMetadataAPI.md#getcapabilities) | **Get** /v2/analyses/{analysis_id}/capabilities | Gets the capabilities from the analysis
@@ -194,13 +196,17 @@ Class | Method | HTTP request | Description
 *FunctionsCoreAPI* | [**GetFunctionCapabilities_0**](docs/FunctionsCoreAPI.md#getfunctioncapabilities_0) | **Get** /v3/functions/{function_id}/capabilities | Get capabilities for a function
 *FunctionsCoreAPI* | [**GetFunctionDetails**](docs/FunctionsCoreAPI.md#getfunctiondetails) | **Get** /v2/functions/{function_id} | Get function details
 *FunctionsCoreAPI* | [**GetFunctionDetails_0**](docs/FunctionsCoreAPI.md#getfunctiondetails_0) | **Get** /v3/functions/{function_id} | Get function details
+*FunctionsCoreAPI* | [**GetFunctionIndirectCallSites**](docs/FunctionsCoreAPI.md#getfunctionindirectcallsites) | **Get** /v3/functions/{function_id}/indirect-call-sites | Get indirect call sites for a function
 *FunctionsCoreAPI* | [**GetFunctionStrings**](docs/FunctionsCoreAPI.md#getfunctionstrings) | **Get** /v2/functions/{function_id}/strings | Get string information found in the function
 *FunctionsCoreAPI* | [**GetFunctionStrings_0**](docs/FunctionsCoreAPI.md#getfunctionstrings_0) | **Get** /v3/functions/{function_id}/strings | List strings for a function.
 *FunctionsCoreAPI* | [**GetFunctionsCalleesCallers**](docs/FunctionsCoreAPI.md#getfunctionscalleescallers) | **Get** /v3/functions/callees-callers | Get callees and callers for many functions
 *FunctionsCoreAPI* | [**GetFunctionsMatches**](docs/FunctionsCoreAPI.md#getfunctionsmatches) | **Get** /v3/functions/matches | Get function-matching results for an explicit set of functions
 *FunctionsCoreAPI* | [**GetFunctionsMatchingStatus**](docs/FunctionsCoreAPI.md#getfunctionsmatchingstatus) | **Get** /v3/functions/matches/status | Get function-matching status for an explicit set of functions
+*FunctionsCoreAPI* | [**GetImportedFunction**](docs/FunctionsCoreAPI.md#getimportedfunction) | **Get** /v3/analyses/{analysis_id}/imported-functions/{imported_function_id} | Get an imported function with its callers
 *FunctionsCoreAPI* | [**ListAnalysisFunctions**](docs/FunctionsCoreAPI.md#listanalysisfunctions) | **Get** /v3/analyses/{analysis_id}/functions | List functions in an analysis
+*FunctionsCoreAPI* | [**ListImportedFunctions**](docs/FunctionsCoreAPI.md#listimportedfunctions) | **Get** /v3/analyses/{analysis_id}/imported-functions | List imported functions in an analysis
 *FunctionsCoreAPI* | [**StartFunctionsMatching**](docs/FunctionsCoreAPI.md#startfunctionsmatching) | **Post** /v3/functions/matches | Start function matching for an explicit set of functions
+*FunctionsCoreAPI* | [**V3CanonicalizeFunctionNames**](docs/FunctionsCoreAPI.md#v3canonicalizefunctionnames) | **Post** /v3/functions/canonical-names | Canonicalize a batch of function names
 *FunctionsDataTypesAPI* | [**BatchUpdateFunctionDataTypes**](docs/FunctionsDataTypesAPI.md#batchupdatefunctiondatatypes) | **Put** /v3/analyses/{analysis_id}/functions/data-types | Batch update function data types
 *FunctionsDataTypesAPI* | [**GenerateFunctionDataTypesForAnalysis**](docs/FunctionsDataTypesAPI.md#generatefunctiondatatypesforanalysis) | **Post** /v2/analyses/{analysis_id}/functions/data_types | Generate Function Data Types
 *FunctionsDataTypesAPI* | [**GenerateFunctionDataTypesForFunctions**](docs/FunctionsDataTypesAPI.md#generatefunctiondatatypesforfunctions) | **Post** /v2/functions/data_types | Generate Function Data Types for an arbitrary list of functions
@@ -263,6 +269,7 @@ Class | Method | HTTP request | Description
  - [AnalysisLogMessage](docs/AnalysisLogMessage.md)
  - [AnalysisLogs](docs/AnalysisLogs.md)
  - [AnalysisRecord](docs/AnalysisRecord.md)
+ - [AnalysisRecordBody](docs/AnalysisRecordBody.md)
  - [AnalysisReport](docs/AnalysisReport.md)
  - [AnalysisScope](docs/AnalysisScope.md)
  - [AnalysisStringFunction](docs/AnalysisStringFunction.md)
@@ -270,6 +277,7 @@ Class | Method | HTTP request | Description
  - [AnalysisStringItem](docs/AnalysisStringItem.md)
  - [AnalysisStringsResponse](docs/AnalysisStringsResponse.md)
  - [AnalysisStringsStatusResponse](docs/AnalysisStringsStatusResponse.md)
+ - [AnalysisTagBody](docs/AnalysisTagBody.md)
  - [AnalysisTags](docs/AnalysisTags.md)
  - [AnalysisUpdateRequest](docs/AnalysisUpdateRequest.md)
  - [AnalysisUpdateTagsRequest](docs/AnalysisUpdateTagsRequest.md)
@@ -281,6 +289,7 @@ Class | Method | HTTP request | Description
  - [AppApiRestV2FunctionsResponsesFunction](docs/AppApiRestV2FunctionsResponsesFunction.md)
  - [AppApiRestV2FunctionsTypesFunction](docs/AppApiRestV2FunctionsTypesFunction.md)
  - [AppApiRestV2InfoTypesCapability](docs/AppApiRestV2InfoTypesCapability.md)
+ - [ArchiveContentEntry](docs/ArchiveContentEntry.md)
  - [Argument](docs/Argument.md)
  - [Artifact](docs/Artifact.md)
  - [AttemptFailedEvent](docs/AttemptFailedEvent.md)
@@ -288,6 +297,7 @@ Class | Method | HTTP request | Description
  - [AutoRunAgents](docs/AutoRunAgents.md)
  - [AutoUnstripRequest](docs/AutoUnstripRequest.md)
  - [AutoUnstripResponse](docs/AutoUnstripResponse.md)
+ - [AutoUnstripStatusOutputBody](docs/AutoUnstripStatusOutputBody.md)
  - [BaseResponse](docs/BaseResponse.md)
  - [BaseResponseAdditionalDetailsStatusResponse](docs/BaseResponseAdditionalDetailsStatusResponse.md)
  - [BaseResponseAnalysisBulkAddTagsResponse](docs/BaseResponseAnalysisBulkAddTagsResponse.md)
@@ -382,6 +392,9 @@ Class | Method | HTTP request | Description
  - [CalleeFunctionInfo](docs/CalleeFunctionInfo.md)
  - [CalleesCallerFunctionsResponse](docs/CalleesCallerFunctionsResponse.md)
  - [CallerFunctionInfo](docs/CallerFunctionInfo.md)
+ - [CanonicalName](docs/CanonicalName.md)
+ - [CanonicalizeNamesInputBody](docs/CanonicalizeNamesInputBody.md)
+ - [CanonicalizeNamesOutputBody](docs/CanonicalizeNamesOutputBody.md)
  - [Capabilities](docs/Capabilities.md)
  - [CapabilitiesAgentResponse](docs/CapabilitiesAgentResponse.md)
  - [CapabilitiesOutputBody](docs/CapabilitiesOutputBody.md)
@@ -472,6 +485,7 @@ Class | Method | HTTP request | Description
  - [EventTITLEUPDATED](docs/EventTITLEUPDATED.md)
  - [EventTOOLCALLARGSDELTA](docs/EventTOOLCALLARGSDELTA.md)
  - [EventTOOLCALLEND](docs/EventTOOLCALLEND.md)
+ - [EventTOOLCALLPROGRESS](docs/EventTOOLCALLPROGRESS.md)
  - [EventTOOLCALLRESULT](docs/EventTOOLCALLRESULT.md)
  - [EventTOOLCALLSTART](docs/EventTOOLCALLSTART.md)
  - [EventTOOLCONFIRMATIONREQUIRED](docs/EventTOOLCONFIRMATIONREQUIRED.md)
@@ -544,18 +558,26 @@ Class | Method | HTTP request | Description
  - [ISA](docs/ISA.md)
  - [IconModel](docs/IconModel.md)
  - [ImportModel](docs/ImportModel.md)
+ - [ImportedFunctionCallerEntry](docs/ImportedFunctionCallerEntry.md)
+ - [ImportedFunctionDetailOutputBody](docs/ImportedFunctionDetailOutputBody.md)
+ - [ImportedFunctionEntry](docs/ImportedFunctionEntry.md)
+ - [IndirectCallSite](docs/IndirectCallSite.md)
+ - [IndirectCallSitesOutputBody](docs/IndirectCallSitesOutputBody.md)
  - [InlineComment](docs/InlineComment.md)
  - [InsertAnalysisLogRequest](docs/InsertAnalysisLogRequest.md)
  - [InviteUserInputBody](docs/InviteUserInputBody.md)
  - [IssuerAllowedDomain](docs/IssuerAllowedDomain.md)
+ - [ListAnalysesOutputBody](docs/ListAnalysesOutputBody.md)
  - [ListAnalysisFunctionsDataTypesOutputBody](docs/ListAnalysisFunctionsDataTypesOutputBody.md)
  - [ListAnalysisFunctionsOutputBody](docs/ListAnalysisFunctionsOutputBody.md)
  - [ListAnalysisStringsOutputBody](docs/ListAnalysisStringsOutputBody.md)
+ - [ListArchiveContentsOutputBody](docs/ListArchiveContentsOutputBody.md)
  - [ListCollectionResults](docs/ListCollectionResults.md)
  - [ListCollectionsOutputBody](docs/ListCollectionsOutputBody.md)
  - [ListExampleAnalysesOutputBody](docs/ListExampleAnalysesOutputBody.md)
  - [ListFunctionStringsOutputBody](docs/ListFunctionStringsOutputBody.md)
  - [ListFunctionsDataTypesOutputBody](docs/ListFunctionsDataTypesOutputBody.md)
+ - [ListImportedFunctionsOutputBody](docs/ListImportedFunctionsOutputBody.md)
  - [ListTeamsOutputBody](docs/ListTeamsOutputBody.md)
  - [ListUsersOutputBody](docs/ListUsersOutputBody.md)
  - [LocationOutputBody](docs/LocationOutputBody.md)
@@ -659,6 +681,7 @@ Class | Method | HTTP request | Description
  - [SseEventTitleUpdatedData](docs/SseEventTitleUpdatedData.md)
  - [SseEventToolCallArgsDeltaData](docs/SseEventToolCallArgsDeltaData.md)
  - [SseEventToolCallEndData](docs/SseEventToolCallEndData.md)
+ - [SseEventToolCallProgressData](docs/SseEventToolCallProgressData.md)
  - [SseEventToolCallResultData](docs/SseEventToolCallResultData.md)
  - [SseEventToolCallStartData](docs/SseEventToolCallStartData.md)
  - [SseEventToolConfirmationRequiredData](docs/SseEventToolConfirmationRequiredData.md)

@@ -22,9 +22,14 @@ type StartMatchingForAnalysisInputBody struct {
 	Filters *MatchFilters `json:"filters,omitempty"`
 	// Similarity floor as a percentage. Defaults to 90.
 	MinSimilarity *float64 `json:"min_similarity,omitempty"`
+	// By default a completed matching run for the same request is reused (response status=COMPLETED, no new run). Set true to force a fresh run.
+	NoCache *bool `json:"no_cache,omitempty"`
 	// Max matches returned per source function. Defaults to 1.
 	ResultsPerFunction *int64 `json:"results_per_function,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StartMatchingForAnalysisInputBody StartMatchingForAnalysisInputBody
 
 // NewStartMatchingForAnalysisInputBody instantiates a new StartMatchingForAnalysisInputBody object
 // This constructor will assign default values to properties that have it defined,
@@ -107,6 +112,38 @@ func (o *StartMatchingForAnalysisInputBody) SetMinSimilarity(v float64) {
 	o.MinSimilarity = &v
 }
 
+// GetNoCache returns the NoCache field value if set, zero value otherwise.
+func (o *StartMatchingForAnalysisInputBody) GetNoCache() bool {
+	if o == nil || IsNil(o.NoCache) {
+		var ret bool
+		return ret
+	}
+	return *o.NoCache
+}
+
+// GetNoCacheOk returns a tuple with the NoCache field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartMatchingForAnalysisInputBody) GetNoCacheOk() (*bool, bool) {
+	if o == nil || IsNil(o.NoCache) {
+		return nil, false
+	}
+	return o.NoCache, true
+}
+
+// HasNoCache returns a boolean if a field has been set.
+func (o *StartMatchingForAnalysisInputBody) HasNoCache() bool {
+	if o != nil && !IsNil(o.NoCache) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoCache gets a reference to the given bool and assigns it to the NoCache field.
+func (o *StartMatchingForAnalysisInputBody) SetNoCache(v bool) {
+	o.NoCache = &v
+}
+
 // GetResultsPerFunction returns the ResultsPerFunction field value if set, zero value otherwise.
 func (o *StartMatchingForAnalysisInputBody) GetResultsPerFunction() int64 {
 	if o == nil || IsNil(o.ResultsPerFunction) {
@@ -155,10 +192,42 @@ func (o StartMatchingForAnalysisInputBody) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.MinSimilarity) {
 		toSerialize["min_similarity"] = o.MinSimilarity
 	}
+	if !IsNil(o.NoCache) {
+		toSerialize["no_cache"] = o.NoCache
+	}
 	if !IsNil(o.ResultsPerFunction) {
 		toSerialize["results_per_function"] = o.ResultsPerFunction
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StartMatchingForAnalysisInputBody) UnmarshalJSON(data []byte) (err error) {
+	varStartMatchingForAnalysisInputBody := _StartMatchingForAnalysisInputBody{}
+
+	err = json.Unmarshal(data, &varStartMatchingForAnalysisInputBody)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StartMatchingForAnalysisInputBody(varStartMatchingForAnalysisInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "min_similarity")
+		delete(additionalProperties, "no_cache")
+		delete(additionalProperties, "results_per_function")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStartMatchingForAnalysisInputBody struct {

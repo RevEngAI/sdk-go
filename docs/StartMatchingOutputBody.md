@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**MatchId** | **string** | Opaque token for this matching run. Pass it to the GET/status endpoints&#39; match_id query parameter to fetch this exact run. | 
 **Messages** | [**[]ProgressMessage**](ProgressMessage.md) | Log messages emitted during execution | 
 **Status** | **string** | Current workflow status | 
 **Step** | **string** | Name of the current step | 
@@ -14,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewStartMatchingOutputBody
 
-`func NewStartMatchingOutputBody(messages []ProgressMessage, status string, step string, stepIndex int64, stepsTotal int64, ) *StartMatchingOutputBody`
+`func NewStartMatchingOutputBody(matchId string, messages []ProgressMessage, status string, step string, stepIndex int64, stepsTotal int64, ) *StartMatchingOutputBody`
 
 NewStartMatchingOutputBody instantiates a new StartMatchingOutputBody object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +29,26 @@ will change when the set of required properties is changed
 NewStartMatchingOutputBodyWithDefaults instantiates a new StartMatchingOutputBody object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetMatchId
+
+`func (o *StartMatchingOutputBody) GetMatchId() string`
+
+GetMatchId returns the MatchId field if non-nil, zero value otherwise.
+
+### GetMatchIdOk
+
+`func (o *StartMatchingOutputBody) GetMatchIdOk() (*string, bool)`
+
+GetMatchIdOk returns a tuple with the MatchId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchId
+
+`func (o *StartMatchingOutputBody) SetMatchId(v string)`
+
+SetMatchId sets MatchId field to given value.
+
 
 ### GetMessages
 

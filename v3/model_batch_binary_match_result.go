@@ -23,6 +23,8 @@ type BatchBinaryMatchResult struct {
 	BinaryId int64 `json:"binary_id"`
 	// Error description when status=FAILED.
 	ErrorMessage *string `json:"error_message,omitempty"`
+	// Opaque token for this binary's matching run. Present on dispatch and when statuses were fetched by token.
+	MatchId *string `json:"match_id,omitempty"`
 	// Number of source functions that received at least one candidate match. Only meaningful when status=COMPLETED.
 	MatchedFunctionCount int64 `json:"matched_function_count"`
 	// Per-binary workflow status
@@ -108,6 +110,38 @@ func (o *BatchBinaryMatchResult) SetErrorMessage(v string) {
 	o.ErrorMessage = &v
 }
 
+// GetMatchId returns the MatchId field value if set, zero value otherwise.
+func (o *BatchBinaryMatchResult) GetMatchId() string {
+	if o == nil || IsNil(o.MatchId) {
+		var ret string
+		return ret
+	}
+	return *o.MatchId
+}
+
+// GetMatchIdOk returns a tuple with the MatchId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BatchBinaryMatchResult) GetMatchIdOk() (*string, bool) {
+	if o == nil || IsNil(o.MatchId) {
+		return nil, false
+	}
+	return o.MatchId, true
+}
+
+// HasMatchId returns a boolean if a field has been set.
+func (o *BatchBinaryMatchResult) HasMatchId() bool {
+	if o != nil && !IsNil(o.MatchId) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchId gets a reference to the given string and assigns it to the MatchId field.
+func (o *BatchBinaryMatchResult) SetMatchId(v string) {
+	o.MatchId = &v
+}
+
 // GetMatchedFunctionCount returns the MatchedFunctionCount field value
 func (o *BatchBinaryMatchResult) GetMatchedFunctionCount() int64 {
 	if o == nil {
@@ -170,6 +204,9 @@ func (o BatchBinaryMatchResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ErrorMessage) {
 		toSerialize["error_message"] = o.ErrorMessage
 	}
+	if !IsNil(o.MatchId) {
+		toSerialize["match_id"] = o.MatchId
+	}
 	toSerialize["matched_function_count"] = o.MatchedFunctionCount
 	toSerialize["status"] = o.Status
 
@@ -219,6 +256,7 @@ func (o *BatchBinaryMatchResult) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "binary_id")
 		delete(additionalProperties, "error_message")
+		delete(additionalProperties, "match_id")
 		delete(additionalProperties, "matched_function_count")
 		delete(additionalProperties, "status")
 		o.AdditionalProperties = additionalProperties

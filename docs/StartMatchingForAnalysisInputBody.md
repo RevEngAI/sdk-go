@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Filters** | Pointer to [**MatchFilters**](MatchFilters.md) | Narrow the candidate pool. | [optional] 
 **MinSimilarity** | Pointer to **float64** | Similarity floor as a percentage. Defaults to 90. | [optional] 
+**NoCache** | Pointer to **bool** | By default a completed matching run for the same request is reused (response status&#x3D;COMPLETED, no new run). Set true to force a fresh run. | [optional] 
 **ResultsPerFunction** | Pointer to **int64** | Max matches returned per source function. Defaults to 1. | [optional] 
 
 ## Methods
@@ -76,6 +77,31 @@ SetMinSimilarity sets MinSimilarity field to given value.
 `func (o *StartMatchingForAnalysisInputBody) HasMinSimilarity() bool`
 
 HasMinSimilarity returns a boolean if a field has been set.
+
+### GetNoCache
+
+`func (o *StartMatchingForAnalysisInputBody) GetNoCache() bool`
+
+GetNoCache returns the NoCache field if non-nil, zero value otherwise.
+
+### GetNoCacheOk
+
+`func (o *StartMatchingForAnalysisInputBody) GetNoCacheOk() (*bool, bool)`
+
+GetNoCacheOk returns a tuple with the NoCache field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNoCache
+
+`func (o *StartMatchingForAnalysisInputBody) SetNoCache(v bool)`
+
+SetNoCache sets NoCache field to given value.
+
+### HasNoCache
+
+`func (o *StartMatchingForAnalysisInputBody) HasNoCache() bool`
+
+HasNoCache returns a boolean if a field has been set.
 
 ### GetResultsPerFunction
 

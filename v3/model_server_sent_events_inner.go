@@ -30,6 +30,7 @@ type ServerSentEventsInner struct {
 	EventTITLEUPDATED *EventTITLEUPDATED
 	EventTOOLCALLARGSDELTA *EventTOOLCALLARGSDELTA
 	EventTOOLCALLEND *EventTOOLCALLEND
+	EventTOOLCALLPROGRESS *EventTOOLCALLPROGRESS
 	EventTOOLCALLRESULT *EventTOOLCALLRESULT
 	EventTOOLCALLSTART *EventTOOLCALLSTART
 	EventTOOLCONFIRMATIONREQUIRED *EventTOOLCONFIRMATIONREQUIRED
@@ -123,6 +124,13 @@ func EventTOOLCALLARGSDELTAAsServerSentEventsInner(v *EventTOOLCALLARGSDELTA) Se
 func EventTOOLCALLENDAsServerSentEventsInner(v *EventTOOLCALLEND) ServerSentEventsInner {
 	return ServerSentEventsInner{
 		EventTOOLCALLEND: v,
+	}
+}
+
+// EventTOOLCALLPROGRESSAsServerSentEventsInner is a convenience function that returns EventTOOLCALLPROGRESS wrapped in ServerSentEventsInner
+func EventTOOLCALLPROGRESSAsServerSentEventsInner(v *EventTOOLCALLPROGRESS) ServerSentEventsInner {
+	return ServerSentEventsInner{
+		EventTOOLCALLPROGRESS: v,
 	}
 }
 
@@ -373,6 +381,23 @@ func (dst *ServerSentEventsInner) UnmarshalJSON(data []byte) error {
 		dst.EventTOOLCALLEND = nil
 	}
 
+	// try to unmarshal data into EventTOOLCALLPROGRESS
+	err = newStrictDecoder(data).Decode(&dst.EventTOOLCALLPROGRESS)
+	if err == nil {
+		jsonEventTOOLCALLPROGRESS, _ := json.Marshal(dst.EventTOOLCALLPROGRESS)
+		if string(jsonEventTOOLCALLPROGRESS) == "{}" { // empty struct
+			dst.EventTOOLCALLPROGRESS = nil
+		} else {
+			if err = validator.Validate(dst.EventTOOLCALLPROGRESS); err != nil {
+				dst.EventTOOLCALLPROGRESS = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.EventTOOLCALLPROGRESS = nil
+	}
+
 	// try to unmarshal data into EventTOOLCALLRESULT
 	err = newStrictDecoder(data).Decode(&dst.EventTOOLCALLRESULT)
 	if err == nil {
@@ -439,6 +464,7 @@ func (dst *ServerSentEventsInner) UnmarshalJSON(data []byte) error {
 		dst.EventTITLEUPDATED = nil
 		dst.EventTOOLCALLARGSDELTA = nil
 		dst.EventTOOLCALLEND = nil
+		dst.EventTOOLCALLPROGRESS = nil
 		dst.EventTOOLCALLRESULT = nil
 		dst.EventTOOLCALLSTART = nil
 		dst.EventTOOLCONFIRMATIONREQUIRED = nil
@@ -503,6 +529,10 @@ func (src ServerSentEventsInner) MarshalJSON() ([]byte, error) {
 
 	if src.EventTOOLCALLEND != nil {
 		return json.Marshal(&src.EventTOOLCALLEND)
+	}
+
+	if src.EventTOOLCALLPROGRESS != nil {
+		return json.Marshal(&src.EventTOOLCALLPROGRESS)
 	}
 
 	if src.EventTOOLCALLRESULT != nil {
@@ -577,6 +607,10 @@ func (obj *ServerSentEventsInner) GetActualInstance() (interface{}) {
 		return obj.EventTOOLCALLEND
 	}
 
+	if obj.EventTOOLCALLPROGRESS != nil {
+		return obj.EventTOOLCALLPROGRESS
+	}
+
 	if obj.EventTOOLCALLRESULT != nil {
 		return obj.EventTOOLCALLRESULT
 	}
@@ -645,6 +679,10 @@ func (obj ServerSentEventsInner) GetActualInstanceValue() (interface{}) {
 
 	if obj.EventTOOLCALLEND != nil {
 		return *obj.EventTOOLCALLEND
+	}
+
+	if obj.EventTOOLCALLPROGRESS != nil {
+		return *obj.EventTOOLCALLPROGRESS
 	}
 
 	if obj.EventTOOLCALLRESULT != nil {
