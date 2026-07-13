@@ -22,6 +22,10 @@ type UploadResponse struct {
 	Sha256Hash string `json:"sha_256_hash"`
 	FileType UploadFileType `json:"file_type"`
 	Filename string `json:"filename"`
+	Mime string `json:"mime"`
+	IsArchive bool `json:"is_archive"`
+	CanSandbox bool `json:"can_sandbox"`
+	CanExtract bool `json:"can_extract"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,11 +35,15 @@ type _UploadResponse UploadResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUploadResponse(sha256Hash string, fileType UploadFileType, filename string) *UploadResponse {
+func NewUploadResponse(sha256Hash string, fileType UploadFileType, filename string, mime string, isArchive bool, canSandbox bool, canExtract bool) *UploadResponse {
 	this := UploadResponse{}
 	this.Sha256Hash = sha256Hash
 	this.FileType = fileType
 	this.Filename = filename
+	this.Mime = mime
+	this.IsArchive = isArchive
+	this.CanSandbox = canSandbox
+	this.CanExtract = canExtract
 	return &this
 }
 
@@ -119,6 +127,102 @@ func (o *UploadResponse) SetFilename(v string) {
 	o.Filename = v
 }
 
+// GetMime returns the Mime field value
+func (o *UploadResponse) GetMime() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Mime
+}
+
+// GetMimeOk returns a tuple with the Mime field value
+// and a boolean to check if the value has been set.
+func (o *UploadResponse) GetMimeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Mime, true
+}
+
+// SetMime sets field value
+func (o *UploadResponse) SetMime(v string) {
+	o.Mime = v
+}
+
+// GetIsArchive returns the IsArchive field value
+func (o *UploadResponse) GetIsArchive() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsArchive
+}
+
+// GetIsArchiveOk returns a tuple with the IsArchive field value
+// and a boolean to check if the value has been set.
+func (o *UploadResponse) GetIsArchiveOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsArchive, true
+}
+
+// SetIsArchive sets field value
+func (o *UploadResponse) SetIsArchive(v bool) {
+	o.IsArchive = v
+}
+
+// GetCanSandbox returns the CanSandbox field value
+func (o *UploadResponse) GetCanSandbox() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.CanSandbox
+}
+
+// GetCanSandboxOk returns a tuple with the CanSandbox field value
+// and a boolean to check if the value has been set.
+func (o *UploadResponse) GetCanSandboxOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CanSandbox, true
+}
+
+// SetCanSandbox sets field value
+func (o *UploadResponse) SetCanSandbox(v bool) {
+	o.CanSandbox = v
+}
+
+// GetCanExtract returns the CanExtract field value
+func (o *UploadResponse) GetCanExtract() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.CanExtract
+}
+
+// GetCanExtractOk returns a tuple with the CanExtract field value
+// and a boolean to check if the value has been set.
+func (o *UploadResponse) GetCanExtractOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CanExtract, true
+}
+
+// SetCanExtract sets field value
+func (o *UploadResponse) SetCanExtract(v bool) {
+	o.CanExtract = v
+}
+
 func (o UploadResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -132,6 +236,10 @@ func (o UploadResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["sha_256_hash"] = o.Sha256Hash
 	toSerialize["file_type"] = o.FileType
 	toSerialize["filename"] = o.Filename
+	toSerialize["mime"] = o.Mime
+	toSerialize["is_archive"] = o.IsArchive
+	toSerialize["can_sandbox"] = o.CanSandbox
+	toSerialize["can_extract"] = o.CanExtract
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -148,6 +256,10 @@ func (o *UploadResponse) UnmarshalJSON(data []byte) (err error) {
 		"sha_256_hash",
 		"file_type",
 		"filename",
+		"mime",
+		"is_archive",
+		"can_sandbox",
+		"can_extract",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -180,6 +292,10 @@ func (o *UploadResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "sha_256_hash")
 		delete(additionalProperties, "file_type")
 		delete(additionalProperties, "filename")
+		delete(additionalProperties, "mime")
+		delete(additionalProperties, "is_archive")
+		delete(additionalProperties, "can_sandbox")
+		delete(additionalProperties, "can_extract")
 		o.AdditionalProperties = additionalProperties
 	}
 

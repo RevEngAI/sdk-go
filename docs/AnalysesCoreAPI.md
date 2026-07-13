@@ -27,8 +27,10 @@ Method | HTTP request | Description
 [**UpdateAnalysis**](AnalysesCoreAPI.md#UpdateAnalysis) | **Patch** /v2/analyses/{analysis_id} | Update Analysis
 [**UpdateAnalysisTags**](AnalysesCoreAPI.md#UpdateAnalysisTags) | **Patch** /v2/analyses/{analysis_id}/tags | Update Analysis Tags
 [**UploadFile**](AnalysesCoreAPI.md#UploadFile) | **Post** /v2/upload | Upload File
+[**V3GetAnalysisAutoUnstripStatus**](AnalysesCoreAPI.md#V3GetAnalysisAutoUnstripStatus) | **Get** /v3/analyses/{analysis_id}/auto-unstrip/status | Get the auto-unstrip status for an analysis.
 [**V3GetAnalysisStrings**](AnalysesCoreAPI.md#V3GetAnalysisStrings) | **Get** /v3/analyses/{analysis_id}/functions/strings | List strings for an analysis.
 [**V3GetAnalysisStringsStatus**](AnalysesCoreAPI.md#V3GetAnalysisStringsStatus) | **Get** /v3/analyses/{analysis_id}/functions/strings/status | Get the string-extraction status for an analysis.
+[**V3ListAnalyses**](AnalysesCoreAPI.md#V3ListAnalyses) | **Get** /v3/analyses | List analyses
 [**V3ListExampleAnalyses**](AnalysesCoreAPI.md#V3ListExampleAnalyses) | **Get** /v3/analyses/examples | List example analyses
 
 
@@ -525,7 +527,7 @@ Name | Type | Description  | Notes
 
 ## GetAnalysisFunctionMatches
 
-> GetMatchesOutputBody GetAnalysisFunctionMatches(ctx, analysisId).Execute()
+> GetMatchesOutputBody GetAnalysisFunctionMatches(ctx, analysisId).MatchId(matchId).Execute()
 
 Get function-matching results for an analysis
 
@@ -545,10 +547,11 @@ import (
 
 func main() {
 	analysisId := int64(789) // int64 | Analysis ID
+	matchId := "matchId_example" // string | Opaque token from a start-matching response. When supplied, returns that specific run instead of the latest. (optional)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.GetAnalysisFunctionMatches(context.Background(), analysisId).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.GetAnalysisFunctionMatches(context.Background(), analysisId).MatchId(matchId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.GetAnalysisFunctionMatches``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -574,6 +577,7 @@ Other parameters are passed through a pointer to a apiGetAnalysisFunctionMatches
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **matchId** | **string** | Opaque token from a start-matching response. When supplied, returns that specific run instead of the latest. | 
 
 ### Return type
 
@@ -595,7 +599,7 @@ Name | Type | Description  | Notes
 
 ## GetAnalysisFunctionMatchingStatus
 
-> GetMatchesStatusOutputBody GetAnalysisFunctionMatchingStatus(ctx, analysisId).Execute()
+> GetMatchesStatusOutputBody GetAnalysisFunctionMatchingStatus(ctx, analysisId).MatchId(matchId).Execute()
 
 Get function-matching status for an analysis
 
@@ -615,10 +619,11 @@ import (
 
 func main() {
 	analysisId := int64(789) // int64 | Analysis ID
+	matchId := "matchId_example" // string | Opaque token from a start-matching response. When supplied, returns that specific run instead of the latest. (optional)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.GetAnalysisFunctionMatchingStatus(context.Background(), analysisId).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.GetAnalysisFunctionMatchingStatus(context.Background(), analysisId).MatchId(matchId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.GetAnalysisFunctionMatchingStatus``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -644,6 +649,7 @@ Other parameters are passed through a pointer to a apiGetAnalysisFunctionMatchin
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **matchId** | **string** | Opaque token from a start-matching response. When supplied, returns that specific run instead of the latest. | 
 
 ### Return type
 
@@ -1673,6 +1679,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V3GetAnalysisAutoUnstripStatus
+
+> AutoUnstripStatusOutputBody V3GetAnalysisAutoUnstripStatus(ctx, analysisId).Execute()
+
+Get the auto-unstrip status for an analysis.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3GetAnalysisAutoUnstripStatus(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetAnalysisAutoUnstripStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetAnalysisAutoUnstripStatus`: AutoUnstripStatusOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3GetAnalysisAutoUnstripStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetAnalysisAutoUnstripStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AutoUnstripStatusOutputBody**](AutoUnstripStatusOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V3GetAnalysisStrings
 
 > ListAnalysisStringsOutputBody V3GetAnalysisStrings(ctx, analysisId).Page(page).PageSize(pageSize).Search(search).FunctionSearch(functionSearch).OrderBy(orderBy).SortOrder(sortOrder).Execute()
@@ -1810,6 +1886,90 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetAnalysisStringsStatusOutputBody**](GetAnalysisStringsStatusOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3ListAnalyses
+
+> ListAnalysesOutputBody V3ListAnalyses(ctx).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
+
+List analyses
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	searchTerm := "searchTerm_example" // string |  (optional)
+	analysisScope := []string{"AnalysisScope_example"} // []string | Leave empty for no filter (optional) (default to {"PRIVATE"})
+	status := []string{"Status_example"} // []string |  (optional)
+	modelName := []*string{"Inner_example"} // []*string |  (optional)
+	usernames := []*string{"Inner_example"} // []*string |  (optional)
+	sha256Hash := "sha256Hash_example" // string |  (optional)
+	pageSize := int64(789) // int64 |  (optional) (default to 20)
+	nextPageToken := "nextPageToken_example" // string | Forward-pagination cursor from a prior response. When set, order_by/order are taken from the token (the sort cannot change mid-pagination). (optional)
+	orderBy := "orderBy_example" // string |  (optional) (default to "created")
+	order := "order_example" // string |  (optional) (default to "DESC")
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3ListAnalyses(context.Background()).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3ListAnalyses``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3ListAnalyses`: ListAnalysesOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3ListAnalyses`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3ListAnalysesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **searchTerm** | **string** |  | 
+ **analysisScope** | **[]string** | Leave empty for no filter | [default to {&quot;PRIVATE&quot;}]
+ **status** | **[]string** |  | 
+ **modelName** | **[]string** |  | 
+ **usernames** | **[]string** |  | 
+ **sha256Hash** | **string** |  | 
+ **pageSize** | **int64** |  | [default to 20]
+ **nextPageToken** | **string** | Forward-pagination cursor from a prior response. When set, order_by/order are taken from the token (the sort cannot change mid-pagination). | 
+ **orderBy** | **string** |  | [default to &quot;created&quot;]
+ **order** | **string** |  | [default to &quot;DESC&quot;]
+
+### Return type
+
+[**ListAnalysesOutputBody**](ListAnalysesOutputBody.md)
 
 ### Authorization
 

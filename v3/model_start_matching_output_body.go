@@ -20,6 +20,8 @@ var _ MappedNullable = &StartMatchingOutputBody{}
 
 // StartMatchingOutputBody struct for StartMatchingOutputBody
 type StartMatchingOutputBody struct {
+	// Opaque token for this matching run. Pass it to the GET/status endpoints' match_id query parameter to fetch this exact run.
+	MatchId string `json:"match_id"`
 	// Log messages emitted during execution
 	Messages []ProgressMessage `json:"messages"`
 	// Current workflow status
@@ -38,8 +40,9 @@ type _StartMatchingOutputBody StartMatchingOutputBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStartMatchingOutputBody(messages []ProgressMessage, status string, step string, stepIndex int64, stepsTotal int64) *StartMatchingOutputBody {
+func NewStartMatchingOutputBody(matchId string, messages []ProgressMessage, status string, step string, stepIndex int64, stepsTotal int64) *StartMatchingOutputBody {
 	this := StartMatchingOutputBody{}
+	this.MatchId = matchId
 	this.Messages = messages
 	this.Status = status
 	this.Step = step
@@ -54,6 +57,30 @@ func NewStartMatchingOutputBody(messages []ProgressMessage, status string, step 
 func NewStartMatchingOutputBodyWithDefaults() *StartMatchingOutputBody {
 	this := StartMatchingOutputBody{}
 	return &this
+}
+
+// GetMatchId returns the MatchId field value
+func (o *StartMatchingOutputBody) GetMatchId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.MatchId
+}
+
+// GetMatchIdOk returns a tuple with the MatchId field value
+// and a boolean to check if the value has been set.
+func (o *StartMatchingOutputBody) GetMatchIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MatchId, true
+}
+
+// SetMatchId sets field value
+func (o *StartMatchingOutputBody) SetMatchId(v string) {
+	o.MatchId = v
 }
 
 // GetMessages returns the Messages field value
@@ -188,6 +215,7 @@ func (o StartMatchingOutputBody) MarshalJSON() ([]byte, error) {
 
 func (o StartMatchingOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["match_id"] = o.MatchId
 	if o.Messages != nil {
 		toSerialize["messages"] = o.Messages
 	}
@@ -203,6 +231,7 @@ func (o *StartMatchingOutputBody) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"match_id",
 		"messages",
 		"status",
 		"step",

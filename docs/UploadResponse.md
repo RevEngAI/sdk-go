@@ -7,12 +7,16 @@ Name | Type | Description | Notes
 **Sha256Hash** | **string** |  | 
 **FileType** | [**UploadFileType**](UploadFileType.md) |  | 
 **Filename** | **string** |  | 
+**Mime** | **string** |  | 
+**IsArchive** | **bool** |  | 
+**CanSandbox** | **bool** |  | 
+**CanExtract** | **bool** |  | 
 
 ## Methods
 
 ### NewUploadResponse
 
-`func NewUploadResponse(sha256Hash string, fileType UploadFileType, filename string, ) *UploadResponse`
+`func NewUploadResponse(sha256Hash string, fileType UploadFileType, filename string, mime string, isArchive bool, canSandbox bool, canExtract bool, ) *UploadResponse`
 
 NewUploadResponse instantiates a new UploadResponse object
 This constructor will assign default values to properties that have it defined,
@@ -85,6 +89,86 @@ and a boolean to check if the value has been set.
 `func (o *UploadResponse) SetFilename(v string)`
 
 SetFilename sets Filename field to given value.
+
+
+### GetMime
+
+`func (o *UploadResponse) GetMime() string`
+
+GetMime returns the Mime field if non-nil, zero value otherwise.
+
+### GetMimeOk
+
+`func (o *UploadResponse) GetMimeOk() (*string, bool)`
+
+GetMimeOk returns a tuple with the Mime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMime
+
+`func (o *UploadResponse) SetMime(v string)`
+
+SetMime sets Mime field to given value.
+
+
+### GetIsArchive
+
+`func (o *UploadResponse) GetIsArchive() bool`
+
+GetIsArchive returns the IsArchive field if non-nil, zero value otherwise.
+
+### GetIsArchiveOk
+
+`func (o *UploadResponse) GetIsArchiveOk() (*bool, bool)`
+
+GetIsArchiveOk returns a tuple with the IsArchive field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsArchive
+
+`func (o *UploadResponse) SetIsArchive(v bool)`
+
+SetIsArchive sets IsArchive field to given value.
+
+
+### GetCanSandbox
+
+`func (o *UploadResponse) GetCanSandbox() bool`
+
+GetCanSandbox returns the CanSandbox field if non-nil, zero value otherwise.
+
+### GetCanSandboxOk
+
+`func (o *UploadResponse) GetCanSandboxOk() (*bool, bool)`
+
+GetCanSandboxOk returns a tuple with the CanSandbox field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanSandbox
+
+`func (o *UploadResponse) SetCanSandbox(v bool)`
+
+SetCanSandbox sets CanSandbox field to given value.
+
+
+### GetCanExtract
+
+`func (o *UploadResponse) GetCanExtract() bool`
+
+GetCanExtract returns the CanExtract field if non-nil, zero value otherwise.
+
+### GetCanExtractOk
+
+`func (o *UploadResponse) GetCanExtractOk() (*bool, bool)`
+
+GetCanExtractOk returns a tuple with the CanExtract field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanExtract
+
+`func (o *UploadResponse) SetCanExtract(v bool)`
+
+SetCanExtract sets CanExtract field to given value.
 
 
 

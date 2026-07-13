@@ -25,6 +25,8 @@ type StartMatchingForFunctionsInputBody struct {
 	FunctionIds []int64 `json:"function_ids"`
 	// Similarity floor as a percentage. Defaults to 90.
 	MinSimilarity *float64 `json:"min_similarity,omitempty"`
+	// By default a completed matching run for the same request is reused (response status=COMPLETED, no new run). Set true to force a fresh run.
+	NoCache *bool `json:"no_cache,omitempty"`
 	// Max matches returned per source function. Defaults to 1.
 	ResultsPerFunction *int64 `json:"results_per_function,omitempty"`
 	// Collapse near-duplicate candidate names into canonical buckets and return per-name confidences (the response 'confidences' array). Adds a canonicalisation step; defaults to false.
@@ -142,6 +144,38 @@ func (o *StartMatchingForFunctionsInputBody) SetMinSimilarity(v float64) {
 	o.MinSimilarity = &v
 }
 
+// GetNoCache returns the NoCache field value if set, zero value otherwise.
+func (o *StartMatchingForFunctionsInputBody) GetNoCache() bool {
+	if o == nil || IsNil(o.NoCache) {
+		var ret bool
+		return ret
+	}
+	return *o.NoCache
+}
+
+// GetNoCacheOk returns a tuple with the NoCache field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartMatchingForFunctionsInputBody) GetNoCacheOk() (*bool, bool) {
+	if o == nil || IsNil(o.NoCache) {
+		return nil, false
+	}
+	return o.NoCache, true
+}
+
+// HasNoCache returns a boolean if a field has been set.
+func (o *StartMatchingForFunctionsInputBody) HasNoCache() bool {
+	if o != nil && !IsNil(o.NoCache) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoCache gets a reference to the given bool and assigns it to the NoCache field.
+func (o *StartMatchingForFunctionsInputBody) SetNoCache(v bool) {
+	o.NoCache = &v
+}
+
 // GetResultsPerFunction returns the ResultsPerFunction field value if set, zero value otherwise.
 func (o *StartMatchingForFunctionsInputBody) GetResultsPerFunction() int64 {
 	if o == nil || IsNil(o.ResultsPerFunction) {
@@ -225,6 +259,9 @@ func (o StartMatchingForFunctionsInputBody) ToMap() (map[string]interface{}, err
 	if !IsNil(o.MinSimilarity) {
 		toSerialize["min_similarity"] = o.MinSimilarity
 	}
+	if !IsNil(o.NoCache) {
+		toSerialize["no_cache"] = o.NoCache
+	}
 	if !IsNil(o.ResultsPerFunction) {
 		toSerialize["results_per_function"] = o.ResultsPerFunction
 	}
@@ -277,6 +314,7 @@ func (o *StartMatchingForFunctionsInputBody) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "filters")
 		delete(additionalProperties, "function_ids")
 		delete(additionalProperties, "min_similarity")
+		delete(additionalProperties, "no_cache")
 		delete(additionalProperties, "results_per_function")
 		delete(additionalProperties, "use_canonical_names")
 		o.AdditionalProperties = additionalProperties

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
+**CreatedAt** | **time.Time** |  | 
 **Email** | **string** |  | 
 **Profile** | [**UserProfile**](UserProfile.md) |  | 
 **Role** | **string** |  | 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewUser
 
-`func NewUser(email string, profile UserProfile, role string, userId int64, ) *User`
+`func NewUser(createdAt time.Time, email string, profile UserProfile, role string, userId int64, ) *User`
 
 NewUser instantiates a new User object
 This constructor will assign default values to properties that have it defined,
@@ -49,11 +49,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *User) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetEmail
 

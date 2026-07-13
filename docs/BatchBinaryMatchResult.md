@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BinaryId** | **int64** | Target binary | 
 **ErrorMessage** | Pointer to **string** | Error description when status&#x3D;FAILED. | [optional] 
+**MatchId** | Pointer to **string** | Opaque token for this binary&#39;s matching run. Present on dispatch and when statuses were fetched by token. | [optional] 
 **MatchedFunctionCount** | **int64** | Number of source functions that received at least one candidate match. Only meaningful when status&#x3D;COMPLETED. | 
 **Status** | **string** | Per-binary workflow status | 
 
@@ -72,6 +73,31 @@ SetErrorMessage sets ErrorMessage field to given value.
 `func (o *BatchBinaryMatchResult) HasErrorMessage() bool`
 
 HasErrorMessage returns a boolean if a field has been set.
+
+### GetMatchId
+
+`func (o *BatchBinaryMatchResult) GetMatchId() string`
+
+GetMatchId returns the MatchId field if non-nil, zero value otherwise.
+
+### GetMatchIdOk
+
+`func (o *BatchBinaryMatchResult) GetMatchIdOk() (*string, bool)`
+
+GetMatchIdOk returns a tuple with the MatchId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchId
+
+`func (o *BatchBinaryMatchResult) SetMatchId(v string)`
+
+SetMatchId sets MatchId field to given value.
+
+### HasMatchId
+
+`func (o *BatchBinaryMatchResult) HasMatchId() bool`
+
+HasMatchId returns a boolean if a field has been set.
 
 ### GetMatchedFunctionCount
 

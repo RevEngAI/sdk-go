@@ -23,13 +23,17 @@ Method | HTTP request | Description
 [**GetFunctionCapabilities_0**](FunctionsCoreAPI.md#GetFunctionCapabilities_0) | **Get** /v3/functions/{function_id}/capabilities | Get capabilities for a function
 [**GetFunctionDetails**](FunctionsCoreAPI.md#GetFunctionDetails) | **Get** /v2/functions/{function_id} | Get function details
 [**GetFunctionDetails_0**](FunctionsCoreAPI.md#GetFunctionDetails_0) | **Get** /v3/functions/{function_id} | Get function details
+[**GetFunctionIndirectCallSites**](FunctionsCoreAPI.md#GetFunctionIndirectCallSites) | **Get** /v3/functions/{function_id}/indirect-call-sites | Get indirect call sites for a function
 [**GetFunctionStrings**](FunctionsCoreAPI.md#GetFunctionStrings) | **Get** /v2/functions/{function_id}/strings | Get string information found in the function
 [**GetFunctionStrings_0**](FunctionsCoreAPI.md#GetFunctionStrings_0) | **Get** /v3/functions/{function_id}/strings | List strings for a function.
 [**GetFunctionsCalleesCallers**](FunctionsCoreAPI.md#GetFunctionsCalleesCallers) | **Get** /v3/functions/callees-callers | Get callees and callers for many functions
 [**GetFunctionsMatches**](FunctionsCoreAPI.md#GetFunctionsMatches) | **Get** /v3/functions/matches | Get function-matching results for an explicit set of functions
 [**GetFunctionsMatchingStatus**](FunctionsCoreAPI.md#GetFunctionsMatchingStatus) | **Get** /v3/functions/matches/status | Get function-matching status for an explicit set of functions
+[**GetImportedFunction**](FunctionsCoreAPI.md#GetImportedFunction) | **Get** /v3/analyses/{analysis_id}/imported-functions/{imported_function_id} | Get an imported function with its callers
 [**ListAnalysisFunctions**](FunctionsCoreAPI.md#ListAnalysisFunctions) | **Get** /v3/analyses/{analysis_id}/functions | List functions in an analysis
+[**ListImportedFunctions**](FunctionsCoreAPI.md#ListImportedFunctions) | **Get** /v3/analyses/{analysis_id}/imported-functions | List imported functions in an analysis
 [**StartFunctionsMatching**](FunctionsCoreAPI.md#StartFunctionsMatching) | **Post** /v3/functions/matches | Start function matching for an explicit set of functions
+[**V3CanonicalizeFunctionNames**](FunctionsCoreAPI.md#V3CanonicalizeFunctionNames) | **Post** /v3/functions/canonical-names | Canonicalize a batch of function names
 
 
 
@@ -1369,6 +1373,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetFunctionIndirectCallSites
+
+> IndirectCallSitesOutputBody GetFunctionIndirectCallSites(ctx, functionId).Execute()
+
+Get indirect call sites for a function
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsCoreAPI.GetFunctionIndirectCallSites(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.GetFunctionIndirectCallSites``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetFunctionIndirectCallSites`: IndirectCallSitesOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.GetFunctionIndirectCallSites`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetFunctionIndirectCallSitesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**IndirectCallSitesOutputBody**](IndirectCallSitesOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetFunctionStrings
 
 > BaseResponseFunctionStringsResponse GetFunctionStrings(ctx, functionId).Page(page).PageSize(pageSize).Search(search).Execute()
@@ -1589,7 +1663,7 @@ Name | Type | Description  | Notes
 
 ## GetFunctionsMatches
 
-> GetMatchesOutputBody GetFunctionsMatches(ctx).FunctionIds(functionIds).Execute()
+> GetMatchesOutputBody GetFunctionsMatches(ctx).MatchId(matchId).FunctionIds(functionIds).Execute()
 
 Get function-matching results for an explicit set of functions
 
@@ -1608,11 +1682,12 @@ import (
 )
 
 func main() {
-	functionIds := []int64{int64(123)} // []int64 | Source function IDs whose matches to fetch.
+	matchId := "matchId_example" // string | Opaque token from a start-matching response. When supplied, returns that specific run instead of the latest. (optional)
+	functionIds := []int64{int64(123)} // []int64 | Source function IDs whose matches to fetch. Required unless match_id is supplied. (optional)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsCoreAPI.GetFunctionsMatches(context.Background()).FunctionIds(functionIds).Execute()
+	resp, r, err := apiClient.FunctionsCoreAPI.GetFunctionsMatches(context.Background()).MatchId(matchId).FunctionIds(functionIds).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.GetFunctionsMatches``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1633,7 +1708,8 @@ Other parameters are passed through a pointer to a apiGetFunctionsMatchesRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **functionIds** | **[]int64** | Source function IDs whose matches to fetch. | 
+ **matchId** | **string** | Opaque token from a start-matching response. When supplied, returns that specific run instead of the latest. | 
+ **functionIds** | **[]int64** | Source function IDs whose matches to fetch. Required unless match_id is supplied. | 
 
 ### Return type
 
@@ -1655,7 +1731,7 @@ Name | Type | Description  | Notes
 
 ## GetFunctionsMatchingStatus
 
-> GetMatchesStatusOutputBody GetFunctionsMatchingStatus(ctx).FunctionIds(functionIds).Execute()
+> GetMatchesStatusOutputBody GetFunctionsMatchingStatus(ctx).MatchId(matchId).FunctionIds(functionIds).Execute()
 
 Get function-matching status for an explicit set of functions
 
@@ -1674,11 +1750,12 @@ import (
 )
 
 func main() {
-	functionIds := []int64{int64(123)} // []int64 | Source function IDs whose matches to fetch.
+	matchId := "matchId_example" // string | Opaque token from a start-matching response. When supplied, returns that specific run instead of the latest. (optional)
+	functionIds := []int64{int64(123)} // []int64 | Source function IDs whose matches to fetch. Required unless match_id is supplied. (optional)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsCoreAPI.GetFunctionsMatchingStatus(context.Background()).FunctionIds(functionIds).Execute()
+	resp, r, err := apiClient.FunctionsCoreAPI.GetFunctionsMatchingStatus(context.Background()).MatchId(matchId).FunctionIds(functionIds).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.GetFunctionsMatchingStatus``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1699,11 +1776,85 @@ Other parameters are passed through a pointer to a apiGetFunctionsMatchingStatus
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **functionIds** | **[]int64** | Source function IDs whose matches to fetch. | 
+ **matchId** | **string** | Opaque token from a start-matching response. When supplied, returns that specific run instead of the latest. | 
+ **functionIds** | **[]int64** | Source function IDs whose matches to fetch. Required unless match_id is supplied. | 
 
 ### Return type
 
 [**GetMatchesStatusOutputBody**](GetMatchesStatusOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetImportedFunction
+
+> ImportedFunctionDetailOutputBody GetImportedFunction(ctx, analysisId, importedFunctionId).Execute()
+
+Get an imported function with its callers
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	importedFunctionId := int64(789) // int64 | Imported function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsCoreAPI.GetImportedFunction(context.Background(), analysisId, importedFunctionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.GetImportedFunction``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetImportedFunction`: ImportedFunctionDetailOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.GetImportedFunction`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+**importedFunctionId** | **int64** | Imported function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetImportedFunctionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**ImportedFunctionDetailOutputBody**](ImportedFunctionDetailOutputBody.md)
 
 ### Authorization
 
@@ -1793,6 +1944,80 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ListImportedFunctions
+
+> ListImportedFunctionsOutputBody ListImportedFunctions(ctx, analysisId).Offset(offset).Limit(limit).Execute()
+
+List imported functions in an analysis
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	offset := int64(789) // int64 | Pagination offset. Defaults to 0. (optional)
+	limit := int64(789) // int64 | Page size. Defaults to 100. (optional)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsCoreAPI.ListImportedFunctions(context.Background(), analysisId).Offset(offset).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.ListImportedFunctions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListImportedFunctions`: ListImportedFunctionsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.ListImportedFunctions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListImportedFunctionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **offset** | **int64** | Pagination offset. Defaults to 0. | 
+ **limit** | **int64** | Page size. Defaults to 100. | 
+
+### Return type
+
+[**ListImportedFunctionsOutputBody**](ListImportedFunctionsOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## StartFunctionsMatching
 
 > StartMatchingOutputBody StartFunctionsMatching(ctx).StartMatchingForFunctionsInputBody(startMatchingForFunctionsInputBody).Execute()
@@ -1844,6 +2069,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**StartMatchingOutputBody**](StartMatchingOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3CanonicalizeFunctionNames
+
+> CanonicalizeNamesOutputBody V3CanonicalizeFunctionNames(ctx).CanonicalizeNamesInputBody(canonicalizeNamesInputBody).Execute()
+
+Canonicalize a batch of function names
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	canonicalizeNamesInputBody := *revengai.NewCanonicalizeNamesInputBody([]string{"Names_example"}) // CanonicalizeNamesInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsCoreAPI.V3CanonicalizeFunctionNames(context.Background()).CanonicalizeNamesInputBody(canonicalizeNamesInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.V3CanonicalizeFunctionNames``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3CanonicalizeFunctionNames`: CanonicalizeNamesOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.V3CanonicalizeFunctionNames`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3CanonicalizeFunctionNamesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **canonicalizeNamesInputBody** | [**CanonicalizeNamesInputBody**](CanonicalizeNamesInputBody.md) |  | 
+
+### Return type
+
+[**CanonicalizeNamesOutputBody**](CanonicalizeNamesOutputBody.md)
 
 ### Authorization
 

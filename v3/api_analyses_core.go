@@ -1122,6 +1122,13 @@ type ApiGetAnalysisFunctionMatchesRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
 	analysisId int64
+	matchId *string
+}
+
+// Opaque token from a start-matching response. When supplied, returns that specific run instead of the latest.
+func (r ApiGetAnalysisFunctionMatchesRequest) MatchId(matchId string) ApiGetAnalysisFunctionMatchesRequest {
+	r.matchId = &matchId
+	return r
 }
 
 func (r ApiGetAnalysisFunctionMatchesRequest) Execute() (*GetMatchesOutputBody, *http.Response, error) {
@@ -1136,6 +1143,7 @@ Returns the matches blob when the matching workflow has completed. While the wor
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+- `400` [`BAD_REQUEST`](/errors/BAD_REQUEST) — Bad Request
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -1174,6 +1182,9 @@ func (a *AnalysesCoreAPIService) GetAnalysisFunctionMatchesExecute(r ApiGetAnaly
 		return localVarReturnValue, nil, reportError("analysisId must be greater than 1")
 	}
 
+	if r.matchId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "match_id", r.matchId, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1226,6 +1237,17 @@ func (a *AnalysesCoreAPIService) GetAnalysisFunctionMatchesExecute(r ApiGetAnaly
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v APIError
@@ -1289,6 +1311,13 @@ type ApiGetAnalysisFunctionMatchingStatusRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
 	analysisId int64
+	matchId *string
+}
+
+// Opaque token from a start-matching response. When supplied, returns that specific run instead of the latest.
+func (r ApiGetAnalysisFunctionMatchingStatusRequest) MatchId(matchId string) ApiGetAnalysisFunctionMatchingStatusRequest {
+	r.matchId = &matchId
+	return r
 }
 
 func (r ApiGetAnalysisFunctionMatchingStatusRequest) Execute() (*GetMatchesStatusOutputBody, *http.Response, error) {
@@ -1303,6 +1332,7 @@ Returns the matching workflow's current status. Does not include the matches blo
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+- `400` [`BAD_REQUEST`](/errors/BAD_REQUEST) — Bad Request
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -1341,6 +1371,9 @@ func (a *AnalysesCoreAPIService) GetAnalysisFunctionMatchingStatusExecute(r ApiG
 		return localVarReturnValue, nil, reportError("analysisId must be greater than 1")
 	}
 
+	if r.matchId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "match_id", r.matchId, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1393,6 +1426,17 @@ func (a *AnalysesCoreAPIService) GetAnalysisFunctionMatchingStatusExecute(r ApiG
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v APIError
@@ -3657,6 +3701,173 @@ func (a *AnalysesCoreAPIService) UploadFileExecute(r ApiUploadFileRequest) (*Bas
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiV3GetAnalysisAutoUnstripStatusRequest struct {
+	ctx context.Context
+	ApiService *AnalysesCoreAPIService
+	analysisId int64
+}
+
+func (r ApiV3GetAnalysisAutoUnstripStatusRequest) Execute() (*AutoUnstripStatusOutputBody, *http.Response, error) {
+	return r.ApiService.V3GetAnalysisAutoUnstripStatusExecute(r)
+}
+
+/*
+V3GetAnalysisAutoUnstripStatus Get the auto-unstrip status for an analysis.
+
+Returns the status of the auto-unstrip task for the binary backing the analysis. One of `UNINITIALISED`, `PENDING`, `RUNNING`, `COMPLETED`, `FAILED`.
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param analysisId Analysis ID
+ @return ApiV3GetAnalysisAutoUnstripStatusRequest
+*/
+func (a *AnalysesCoreAPIService) V3GetAnalysisAutoUnstripStatus(ctx context.Context, analysisId int64) ApiV3GetAnalysisAutoUnstripStatusRequest {
+	return ApiV3GetAnalysisAutoUnstripStatusRequest{
+		ApiService: a,
+		ctx: ctx,
+		analysisId: analysisId,
+	}
+}
+
+// Execute executes the request
+//  @return AutoUnstripStatusOutputBody
+func (a *AnalysesCoreAPIService) V3GetAnalysisAutoUnstripStatusExecute(r ApiV3GetAnalysisAutoUnstripStatusRequest) (*AutoUnstripStatusOutputBody, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AutoUnstripStatusOutputBody
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetAnalysisAutoUnstripStatus")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/auto-unstrip/status"
+	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.analysisId < 1 {
+		return localVarReturnValue, nil, reportError("analysisId must be greater than 1")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiV3GetAnalysisStringsRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
@@ -4021,6 +4232,278 @@ func (a *AnalysesCoreAPIService) V3GetAnalysisStringsStatusExecute(r ApiV3GetAna
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV3ListAnalysesRequest struct {
+	ctx context.Context
+	ApiService *AnalysesCoreAPIService
+	searchTerm *string
+	analysisScope *[]string
+	status *[]string
+	modelName *[]*string
+	usernames *[]*string
+	sha256Hash *string
+	pageSize *int64
+	nextPageToken *string
+	orderBy *string
+	order *string
+}
+
+func (r ApiV3ListAnalysesRequest) SearchTerm(searchTerm string) ApiV3ListAnalysesRequest {
+	r.searchTerm = &searchTerm
+	return r
+}
+
+// Leave empty for no filter
+func (r ApiV3ListAnalysesRequest) AnalysisScope(analysisScope []string) ApiV3ListAnalysesRequest {
+	r.analysisScope = &analysisScope
+	return r
+}
+
+func (r ApiV3ListAnalysesRequest) Status(status []string) ApiV3ListAnalysesRequest {
+	r.status = &status
+	return r
+}
+
+func (r ApiV3ListAnalysesRequest) ModelName(modelName []*string) ApiV3ListAnalysesRequest {
+	r.modelName = &modelName
+	return r
+}
+
+func (r ApiV3ListAnalysesRequest) Usernames(usernames []*string) ApiV3ListAnalysesRequest {
+	r.usernames = &usernames
+	return r
+}
+
+func (r ApiV3ListAnalysesRequest) Sha256Hash(sha256Hash string) ApiV3ListAnalysesRequest {
+	r.sha256Hash = &sha256Hash
+	return r
+}
+
+func (r ApiV3ListAnalysesRequest) PageSize(pageSize int64) ApiV3ListAnalysesRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+// Forward-pagination cursor from a prior response. When set, order_by/order are taken from the token (the sort cannot change mid-pagination).
+func (r ApiV3ListAnalysesRequest) NextPageToken(nextPageToken string) ApiV3ListAnalysesRequest {
+	r.nextPageToken = &nextPageToken
+	return r
+}
+
+func (r ApiV3ListAnalysesRequest) OrderBy(orderBy string) ApiV3ListAnalysesRequest {
+	r.orderBy = &orderBy
+	return r
+}
+
+func (r ApiV3ListAnalysesRequest) Order(order string) ApiV3ListAnalysesRequest {
+	r.order = &order
+	return r
+}
+
+func (r ApiV3ListAnalysesRequest) Execute() (*ListAnalysesOutputBody, *http.Response, error) {
+	return r.ApiService.V3ListAnalysesExecute(r)
+}
+
+/*
+V3ListAnalyses List analyses
+
+Returns a page of analyses visible to the caller, filtered and ordered by the query parameters.
+
+**Error codes:**
+- `400` [`BAD_REQUEST`](/errors/BAD_REQUEST) — Bad Request
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiV3ListAnalysesRequest
+*/
+func (a *AnalysesCoreAPIService) V3ListAnalyses(ctx context.Context) ApiV3ListAnalysesRequest {
+	return ApiV3ListAnalysesRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ListAnalysesOutputBody
+func (a *AnalysesCoreAPIService) V3ListAnalysesExecute(r ApiV3ListAnalysesRequest) (*ListAnalysesOutputBody, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListAnalysesOutputBody
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3ListAnalyses")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/analyses"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.searchTerm != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search_term", r.searchTerm, "form", "")
+	}
+	if r.analysisScope != nil {
+		t := *r.analysisScope
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "analysis_scope", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "analysis_scope", t, "form", "multi")
+		}
+	} else {
+		var defaultValue []string = []string{"PRIVATE"}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "analysis_scope", defaultValue, "form", "multi")
+		r.analysisScope = &defaultValue
+	}
+	if r.status != nil {
+		t := *r.status
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "status", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
+		}
+	}
+	if r.modelName != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "model_name", r.modelName, "form", "csv")
+	}
+	if r.usernames != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "usernames", r.usernames, "form", "csv")
+	}
+	if r.sha256Hash != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sha256_hash", r.sha256Hash, "form", "")
+	}
+	if r.pageSize != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
+	} else {
+		var defaultValue int64 = 20
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", defaultValue, "form", "")
+		r.pageSize = &defaultValue
+	}
+	if r.nextPageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page_token", r.nextPageToken, "form", "")
+	}
+	if r.orderBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "order_by", r.orderBy, "form", "")
+	} else {
+		var defaultValue string = "created"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "order_by", defaultValue, "form", "")
+		r.orderBy = &defaultValue
+	}
+	if r.order != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "order", r.order, "form", "")
+	} else {
+		var defaultValue string = "DESC"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "order", defaultValue, "form", "")
+		r.order = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
 			var v APIError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

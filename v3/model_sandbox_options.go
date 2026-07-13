@@ -24,6 +24,9 @@ type SandboxOptions struct {
 	StartMethod NullableSandboxStartMethod `json:"start_method,omitempty"`
 	// Maximum execution time for the sandbox run, in seconds. Allowed values: 120 (2m), 180 (3m), 300 (5m), 600 (10m).
 	Timeout *SandboxTimeout `json:"timeout,omitempty"`
+	ArchiveSha256Hash NullableString `json:"archive_sha_256_hash,omitempty"`
+	ArchiveEntryPath NullableString `json:"archive_entry_path,omitempty"`
+	ArchivePassword NullableString `json:"archive_password,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -196,6 +199,132 @@ func (o *SandboxOptions) SetTimeout(v SandboxTimeout) {
 	o.Timeout = &v
 }
 
+// GetArchiveSha256Hash returns the ArchiveSha256Hash field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SandboxOptions) GetArchiveSha256Hash() string {
+	if o == nil || IsNil(o.ArchiveSha256Hash.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ArchiveSha256Hash.Get()
+}
+
+// GetArchiveSha256HashOk returns a tuple with the ArchiveSha256Hash field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SandboxOptions) GetArchiveSha256HashOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ArchiveSha256Hash.Get(), o.ArchiveSha256Hash.IsSet()
+}
+
+// HasArchiveSha256Hash returns a boolean if a field has been set.
+func (o *SandboxOptions) HasArchiveSha256Hash() bool {
+	if o != nil && o.ArchiveSha256Hash.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetArchiveSha256Hash gets a reference to the given NullableString and assigns it to the ArchiveSha256Hash field.
+func (o *SandboxOptions) SetArchiveSha256Hash(v string) {
+	o.ArchiveSha256Hash.Set(&v)
+}
+// SetArchiveSha256HashNil sets the value for ArchiveSha256Hash to be an explicit nil
+func (o *SandboxOptions) SetArchiveSha256HashNil() {
+	o.ArchiveSha256Hash.Set(nil)
+}
+
+// UnsetArchiveSha256Hash ensures that no value is present for ArchiveSha256Hash, not even an explicit nil
+func (o *SandboxOptions) UnsetArchiveSha256Hash() {
+	o.ArchiveSha256Hash.Unset()
+}
+
+// GetArchiveEntryPath returns the ArchiveEntryPath field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SandboxOptions) GetArchiveEntryPath() string {
+	if o == nil || IsNil(o.ArchiveEntryPath.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ArchiveEntryPath.Get()
+}
+
+// GetArchiveEntryPathOk returns a tuple with the ArchiveEntryPath field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SandboxOptions) GetArchiveEntryPathOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ArchiveEntryPath.Get(), o.ArchiveEntryPath.IsSet()
+}
+
+// HasArchiveEntryPath returns a boolean if a field has been set.
+func (o *SandboxOptions) HasArchiveEntryPath() bool {
+	if o != nil && o.ArchiveEntryPath.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetArchiveEntryPath gets a reference to the given NullableString and assigns it to the ArchiveEntryPath field.
+func (o *SandboxOptions) SetArchiveEntryPath(v string) {
+	o.ArchiveEntryPath.Set(&v)
+}
+// SetArchiveEntryPathNil sets the value for ArchiveEntryPath to be an explicit nil
+func (o *SandboxOptions) SetArchiveEntryPathNil() {
+	o.ArchiveEntryPath.Set(nil)
+}
+
+// UnsetArchiveEntryPath ensures that no value is present for ArchiveEntryPath, not even an explicit nil
+func (o *SandboxOptions) UnsetArchiveEntryPath() {
+	o.ArchiveEntryPath.Unset()
+}
+
+// GetArchivePassword returns the ArchivePassword field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SandboxOptions) GetArchivePassword() string {
+	if o == nil || IsNil(o.ArchivePassword.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ArchivePassword.Get()
+}
+
+// GetArchivePasswordOk returns a tuple with the ArchivePassword field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SandboxOptions) GetArchivePasswordOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ArchivePassword.Get(), o.ArchivePassword.IsSet()
+}
+
+// HasArchivePassword returns a boolean if a field has been set.
+func (o *SandboxOptions) HasArchivePassword() bool {
+	if o != nil && o.ArchivePassword.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetArchivePassword gets a reference to the given NullableString and assigns it to the ArchivePassword field.
+func (o *SandboxOptions) SetArchivePassword(v string) {
+	o.ArchivePassword.Set(&v)
+}
+// SetArchivePasswordNil sets the value for ArchivePassword to be an explicit nil
+func (o *SandboxOptions) SetArchivePasswordNil() {
+	o.ArchivePassword.Set(nil)
+}
+
+// UnsetArchivePassword ensures that no value is present for ArchivePassword, not even an explicit nil
+func (o *SandboxOptions) UnsetArchivePassword() {
+	o.ArchivePassword.Unset()
+}
+
 func (o SandboxOptions) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -217,6 +346,15 @@ func (o SandboxOptions) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Timeout) {
 		toSerialize["timeout"] = o.Timeout
+	}
+	if o.ArchiveSha256Hash.IsSet() {
+		toSerialize["archive_sha_256_hash"] = o.ArchiveSha256Hash.Get()
+	}
+	if o.ArchiveEntryPath.IsSet() {
+		toSerialize["archive_entry_path"] = o.ArchiveEntryPath.Get()
+	}
+	if o.ArchivePassword.IsSet() {
+		toSerialize["archive_password"] = o.ArchivePassword.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -244,6 +382,9 @@ func (o *SandboxOptions) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "command_line_args")
 		delete(additionalProperties, "start_method")
 		delete(additionalProperties, "timeout")
+		delete(additionalProperties, "archive_sha_256_hash")
+		delete(additionalProperties, "archive_entry_path")
+		delete(additionalProperties, "archive_password")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -18,6 +18,12 @@ var _ MappedNullable = &TriggerDynamicExecutionInputBody{}
 
 // TriggerDynamicExecutionInputBody struct for TriggerDynamicExecutionInputBody
 type TriggerDynamicExecutionInputBody struct {
+	// Relative path of the entry inside the archive to execute
+	ArchiveEntryPath *string `json:"archive_entry_path,omitempty"`
+	// Password for an encrypted archive
+	ArchivePassword *string `json:"archive_password,omitempty"`
+	// SHA-256 of the archive object to send to the sandbox instead of the analysed binary
+	ArchiveSha256Hash *string `json:"archive_sha_256_hash,omitempty" validate:"regexp=^[a-fA-F0-9]{64}$"`
 	// Command-line arguments passed to the sample when the sandbox launches it
 	CommandLineArgs *string `json:"command_line_args,omitempty"`
 	// How the sandbox launches the sample. Defaults to the sandbox's standard behaviour when omitted.
@@ -48,6 +54,102 @@ func NewTriggerDynamicExecutionInputBodyWithDefaults() *TriggerDynamicExecutionI
 	var timeout int64 = 120
 	this.Timeout = &timeout
 	return &this
+}
+
+// GetArchiveEntryPath returns the ArchiveEntryPath field value if set, zero value otherwise.
+func (o *TriggerDynamicExecutionInputBody) GetArchiveEntryPath() string {
+	if o == nil || IsNil(o.ArchiveEntryPath) {
+		var ret string
+		return ret
+	}
+	return *o.ArchiveEntryPath
+}
+
+// GetArchiveEntryPathOk returns a tuple with the ArchiveEntryPath field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TriggerDynamicExecutionInputBody) GetArchiveEntryPathOk() (*string, bool) {
+	if o == nil || IsNil(o.ArchiveEntryPath) {
+		return nil, false
+	}
+	return o.ArchiveEntryPath, true
+}
+
+// HasArchiveEntryPath returns a boolean if a field has been set.
+func (o *TriggerDynamicExecutionInputBody) HasArchiveEntryPath() bool {
+	if o != nil && !IsNil(o.ArchiveEntryPath) {
+		return true
+	}
+
+	return false
+}
+
+// SetArchiveEntryPath gets a reference to the given string and assigns it to the ArchiveEntryPath field.
+func (o *TriggerDynamicExecutionInputBody) SetArchiveEntryPath(v string) {
+	o.ArchiveEntryPath = &v
+}
+
+// GetArchivePassword returns the ArchivePassword field value if set, zero value otherwise.
+func (o *TriggerDynamicExecutionInputBody) GetArchivePassword() string {
+	if o == nil || IsNil(o.ArchivePassword) {
+		var ret string
+		return ret
+	}
+	return *o.ArchivePassword
+}
+
+// GetArchivePasswordOk returns a tuple with the ArchivePassword field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TriggerDynamicExecutionInputBody) GetArchivePasswordOk() (*string, bool) {
+	if o == nil || IsNil(o.ArchivePassword) {
+		return nil, false
+	}
+	return o.ArchivePassword, true
+}
+
+// HasArchivePassword returns a boolean if a field has been set.
+func (o *TriggerDynamicExecutionInputBody) HasArchivePassword() bool {
+	if o != nil && !IsNil(o.ArchivePassword) {
+		return true
+	}
+
+	return false
+}
+
+// SetArchivePassword gets a reference to the given string and assigns it to the ArchivePassword field.
+func (o *TriggerDynamicExecutionInputBody) SetArchivePassword(v string) {
+	o.ArchivePassword = &v
+}
+
+// GetArchiveSha256Hash returns the ArchiveSha256Hash field value if set, zero value otherwise.
+func (o *TriggerDynamicExecutionInputBody) GetArchiveSha256Hash() string {
+	if o == nil || IsNil(o.ArchiveSha256Hash) {
+		var ret string
+		return ret
+	}
+	return *o.ArchiveSha256Hash
+}
+
+// GetArchiveSha256HashOk returns a tuple with the ArchiveSha256Hash field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TriggerDynamicExecutionInputBody) GetArchiveSha256HashOk() (*string, bool) {
+	if o == nil || IsNil(o.ArchiveSha256Hash) {
+		return nil, false
+	}
+	return o.ArchiveSha256Hash, true
+}
+
+// HasArchiveSha256Hash returns a boolean if a field has been set.
+func (o *TriggerDynamicExecutionInputBody) HasArchiveSha256Hash() bool {
+	if o != nil && !IsNil(o.ArchiveSha256Hash) {
+		return true
+	}
+
+	return false
+}
+
+// SetArchiveSha256Hash gets a reference to the given string and assigns it to the ArchiveSha256Hash field.
+func (o *TriggerDynamicExecutionInputBody) SetArchiveSha256Hash(v string) {
+	o.ArchiveSha256Hash = &v
 }
 
 // GetCommandLineArgs returns the CommandLineArgs field value if set, zero value otherwise.
@@ -156,6 +258,15 @@ func (o TriggerDynamicExecutionInputBody) MarshalJSON() ([]byte, error) {
 
 func (o TriggerDynamicExecutionInputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ArchiveEntryPath) {
+		toSerialize["archive_entry_path"] = o.ArchiveEntryPath
+	}
+	if !IsNil(o.ArchivePassword) {
+		toSerialize["archive_password"] = o.ArchivePassword
+	}
+	if !IsNil(o.ArchiveSha256Hash) {
+		toSerialize["archive_sha_256_hash"] = o.ArchiveSha256Hash
+	}
 	if !IsNil(o.CommandLineArgs) {
 		toSerialize["command_line_args"] = o.CommandLineArgs
 	}
@@ -187,6 +298,9 @@ func (o *TriggerDynamicExecutionInputBody) UnmarshalJSON(data []byte) (err error
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "archive_entry_path")
+		delete(additionalProperties, "archive_password")
+		delete(additionalProperties, "archive_sha_256_hash")
 		delete(additionalProperties, "command_line_args")
 		delete(additionalProperties, "start_method")
 		delete(additionalProperties, "timeout")
