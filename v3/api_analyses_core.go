@@ -3875,6 +3875,7 @@ type ApiV3GetAnalysisStringsRequest struct {
 	page *int64
 	pageSize *int64
 	search *string
+	searchOperator *string
 	functionSearch *string
 	orderBy *string
 	sortOrder *string
@@ -3895,6 +3896,12 @@ func (r ApiV3GetAnalysisStringsRequest) PageSize(pageSize int64) ApiV3GetAnalysi
 // Filter by string value (case-insensitive substring match).
 func (r ApiV3GetAnalysisStringsRequest) Search(search string) ApiV3GetAnalysisStringsRequest {
 	r.search = &search
+	return r
+}
+
+// How the search term matches string values.
+func (r ApiV3GetAnalysisStringsRequest) SearchOperator(searchOperator string) ApiV3GetAnalysisStringsRequest {
+	r.searchOperator = &searchOperator
 	return r
 }
 
@@ -3982,6 +3989,13 @@ func (a *AnalysesCoreAPIService) V3GetAnalysisStringsExecute(r ApiV3GetAnalysisS
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
+	}
+	if r.searchOperator != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search_operator", r.searchOperator, "form", "")
+	} else {
+		var defaultValue string = "CONTAINS"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search_operator", defaultValue, "form", "")
+		r.searchOperator = &defaultValue
 	}
 	if r.functionSearch != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "function_search", r.functionSearch, "form", "")
