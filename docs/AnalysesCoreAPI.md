@@ -1751,7 +1751,7 @@ Name | Type | Description  | Notes
 
 ## V3GetAnalysisStrings
 
-> ListAnalysisStringsOutputBody V3GetAnalysisStrings(ctx, analysisId).Page(page).PageSize(pageSize).Search(search).FunctionSearch(functionSearch).OrderBy(orderBy).SortOrder(sortOrder).Execute()
+> ListAnalysisStringsOutputBody V3GetAnalysisStrings(ctx, analysisId).Page(page).PageSize(pageSize).Search(search).SearchOperator(searchOperator).FunctionSearch(functionSearch).OrderBy(orderBy).SortOrder(sortOrder).Execute()
 
 List strings for an analysis.
 
@@ -1774,13 +1774,14 @@ func main() {
 	page := int64(789) // int64 | Page number (1-indexed). (optional) (default to 1)
 	pageSize := int64(789) // int64 | Number of results per page. (optional) (default to 100)
 	search := "search_example" // string | Filter by string value (case-insensitive substring match). (optional)
+	searchOperator := "searchOperator_example" // string | How the search term matches string values. (optional) (default to "CONTAINS")
 	functionSearch := "functionSearch_example" // string | Filter by function name (case-insensitive substring match). (optional)
 	orderBy := "orderBy_example" // string | Field to order results by. (optional) (default to "value")
 	sortOrder := "sortOrder_example" // string | Sort direction. (optional) (default to "ASC")
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.V3GetAnalysisStrings(context.Background(), analysisId).Page(page).PageSize(pageSize).Search(search).FunctionSearch(functionSearch).OrderBy(orderBy).SortOrder(sortOrder).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.V3GetAnalysisStrings(context.Background(), analysisId).Page(page).PageSize(pageSize).Search(search).SearchOperator(searchOperator).FunctionSearch(functionSearch).OrderBy(orderBy).SortOrder(sortOrder).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetAnalysisStrings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1809,6 +1810,7 @@ Name | Type | Description  | Notes
  **page** | **int64** | Page number (1-indexed). | [default to 1]
  **pageSize** | **int64** | Number of results per page. | [default to 100]
  **search** | **string** | Filter by string value (case-insensitive substring match). | 
+ **searchOperator** | **string** | How the search term matches string values. | [default to &quot;CONTAINS&quot;]
  **functionSearch** | **string** | Filter by function name (case-insensitive substring match). | 
  **orderBy** | **string** | Field to order results by. | [default to &quot;value&quot;]
  **sortOrder** | **string** | Sort direction. | [default to &quot;ASC&quot;]

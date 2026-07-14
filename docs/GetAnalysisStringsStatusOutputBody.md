@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | **string** |  | 
+**Status** | **string** | String-extraction task status | 
 
 ## Methods
 

@@ -20,6 +20,7 @@ var _ MappedNullable = &GetAnalysisStringsStatusOutputBody{}
 
 // GetAnalysisStringsStatusOutputBody struct for GetAnalysisStringsStatusOutputBody
 type GetAnalysisStringsStatusOutputBody struct {
+	// String-extraction task status
 	Status string `json:"status"`
 }
 

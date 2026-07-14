@@ -24,7 +24,7 @@ type DynamicExecutionStatusResponse struct {
 	ErrorMessage *string `json:"error_message,omitempty"`
 	// Sandbox status log messages captured during the run. Contains a single \"No logs available\" message when none have been captured yet.
 	Logs AnalysisLogs `json:"logs"`
-	// Task status: UNINITIALISED, PENDING, RUNNING, COMPLETED, or FAILED
+	// Task status
 	Status string `json:"status"`
 }
 
