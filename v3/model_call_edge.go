@@ -27,6 +27,8 @@ type CallEdge struct {
 	CallerName *string `json:"caller_name,omitempty"`
 	// Entry vaddr of the caller function (joined from function_t).
 	CallerVaddr int64 `json:"caller_vaddr"`
+	// Imported function ID for an external callee, resolved via the thunk/stub address.
+	ImportedFunctionId *int64 `json:"imported_function_id,omitempty"`
 	IsExternal bool `json:"is_external"`
 	ThunkedVaddr *int64 `json:"thunked_vaddr,omitempty"`
 }
@@ -222,6 +224,38 @@ func (o *CallEdge) SetCallerVaddr(v int64) {
 	o.CallerVaddr = v
 }
 
+// GetImportedFunctionId returns the ImportedFunctionId field value if set, zero value otherwise.
+func (o *CallEdge) GetImportedFunctionId() int64 {
+	if o == nil || IsNil(o.ImportedFunctionId) {
+		var ret int64
+		return ret
+	}
+	return *o.ImportedFunctionId
+}
+
+// GetImportedFunctionIdOk returns a tuple with the ImportedFunctionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CallEdge) GetImportedFunctionIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.ImportedFunctionId) {
+		return nil, false
+	}
+	return o.ImportedFunctionId, true
+}
+
+// HasImportedFunctionId returns a boolean if a field has been set.
+func (o *CallEdge) HasImportedFunctionId() bool {
+	if o != nil && !IsNil(o.ImportedFunctionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetImportedFunctionId gets a reference to the given int64 and assigns it to the ImportedFunctionId field.
+func (o *CallEdge) SetImportedFunctionId(v int64) {
+	o.ImportedFunctionId = &v
+}
+
 // GetIsExternal returns the IsExternal field value
 func (o *CallEdge) GetIsExternal() bool {
 	if o == nil {
@@ -300,6 +334,9 @@ func (o CallEdge) ToMap() (map[string]interface{}, error) {
 		toSerialize["caller_name"] = o.CallerName
 	}
 	toSerialize["caller_vaddr"] = o.CallerVaddr
+	if !IsNil(o.ImportedFunctionId) {
+		toSerialize["imported_function_id"] = o.ImportedFunctionId
+	}
 	toSerialize["is_external"] = o.IsExternal
 	if !IsNil(o.ThunkedVaddr) {
 		toSerialize["thunked_vaddr"] = o.ThunkedVaddr

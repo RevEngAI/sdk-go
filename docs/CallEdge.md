@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **CallerFunctionId** | **int64** |  | 
 **CallerName** | Pointer to **string** |  | [optional] 
 **CallerVaddr** | **int64** | Entry vaddr of the caller function (joined from function_t). | 
+**ImportedFunctionId** | Pointer to **int64** | Imported function ID for an external callee, resolved via the thunk/stub address. | [optional] 
 **IsExternal** | **bool** |  | 
 **ThunkedVaddr** | Pointer to **int64** |  | [optional] 
 
@@ -166,6 +167,31 @@ and a boolean to check if the value has been set.
 
 SetCallerVaddr sets CallerVaddr field to given value.
 
+
+### GetImportedFunctionId
+
+`func (o *CallEdge) GetImportedFunctionId() int64`
+
+GetImportedFunctionId returns the ImportedFunctionId field if non-nil, zero value otherwise.
+
+### GetImportedFunctionIdOk
+
+`func (o *CallEdge) GetImportedFunctionIdOk() (*int64, bool)`
+
+GetImportedFunctionIdOk returns a tuple with the ImportedFunctionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImportedFunctionId
+
+`func (o *CallEdge) SetImportedFunctionId(v int64)`
+
+SetImportedFunctionId sets ImportedFunctionId field to given value.
+
+### HasImportedFunctionId
+
+`func (o *CallEdge) HasImportedFunctionId() bool`
+
+HasImportedFunctionId returns a boolean if a field has been set.
 
 ### GetIsExternal
 
