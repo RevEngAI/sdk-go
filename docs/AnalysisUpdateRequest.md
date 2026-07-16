@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BinaryName** | Pointer to **NullableString** |  | [optional] 
-**AnalysisScope** | Pointer to **NullableString** |  | [optional] 
+**AnalysisScope** | Pointer to [**NullableAnalysisScope**](AnalysisScope.md) |  | [optional] 
 
 ## Methods
 
@@ -63,20 +63,20 @@ HasBinaryName returns a boolean if a field has been set.
 UnsetBinaryName ensures that no value is present for BinaryName, not even an explicit nil
 ### GetAnalysisScope
 
-`func (o *AnalysisUpdateRequest) GetAnalysisScope() string`
+`func (o *AnalysisUpdateRequest) GetAnalysisScope() AnalysisScope`
 
 GetAnalysisScope returns the AnalysisScope field if non-nil, zero value otherwise.
 
 ### GetAnalysisScopeOk
 
-`func (o *AnalysisUpdateRequest) GetAnalysisScopeOk() (*string, bool)`
+`func (o *AnalysisUpdateRequest) GetAnalysisScopeOk() (*AnalysisScope, bool)`
 
 GetAnalysisScopeOk returns a tuple with the AnalysisScope field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAnalysisScope
 
-`func (o *AnalysisUpdateRequest) SetAnalysisScope(v string)`
+`func (o *AnalysisUpdateRequest) SetAnalysisScope(v AnalysisScope)`
 
 SetAnalysisScope sets AnalysisScope field to given value.
 

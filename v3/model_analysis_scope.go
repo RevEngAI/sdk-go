@@ -21,6 +21,7 @@ type AnalysisScope string
 const (
 	ANALYSISSCOPE_PRIVATE AnalysisScope = "PRIVATE"
 	ANALYSISSCOPE_PUBLIC AnalysisScope = "PUBLIC"
+	ANALYSISSCOPE_TEAM AnalysisScope = "TEAM"
 	ANALYSISSCOPE_UNKNOWN_DEFAULT_OPEN_API AnalysisScope = "11184809"
 )
 
@@ -28,6 +29,7 @@ const (
 var AllowedAnalysisScopeEnumValues = []AnalysisScope{
 	"PRIVATE",
 	"PUBLIC",
+	"TEAM",
 	"11184809",
 }
 
