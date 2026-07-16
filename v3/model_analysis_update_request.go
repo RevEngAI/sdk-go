@@ -19,7 +19,7 @@ var _ MappedNullable = &AnalysisUpdateRequest{}
 // AnalysisUpdateRequest struct for AnalysisUpdateRequest
 type AnalysisUpdateRequest struct {
 	BinaryName NullableString `json:"binary_name,omitempty"`
-	AnalysisScope NullableString `json:"analysis_scope,omitempty"`
+	AnalysisScope NullableAnalysisScope `json:"analysis_scope,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -85,9 +85,9 @@ func (o *AnalysisUpdateRequest) UnsetBinaryName() {
 }
 
 // GetAnalysisScope returns the AnalysisScope field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AnalysisUpdateRequest) GetAnalysisScope() string {
+func (o *AnalysisUpdateRequest) GetAnalysisScope() AnalysisScope {
 	if o == nil || IsNil(o.AnalysisScope.Get()) {
-		var ret string
+		var ret AnalysisScope
 		return ret
 	}
 	return *o.AnalysisScope.Get()
@@ -96,7 +96,7 @@ func (o *AnalysisUpdateRequest) GetAnalysisScope() string {
 // GetAnalysisScopeOk returns a tuple with the AnalysisScope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AnalysisUpdateRequest) GetAnalysisScopeOk() (*string, bool) {
+func (o *AnalysisUpdateRequest) GetAnalysisScopeOk() (*AnalysisScope, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -112,8 +112,8 @@ func (o *AnalysisUpdateRequest) HasAnalysisScope() bool {
 	return false
 }
 
-// SetAnalysisScope gets a reference to the given NullableString and assigns it to the AnalysisScope field.
-func (o *AnalysisUpdateRequest) SetAnalysisScope(v string) {
+// SetAnalysisScope gets a reference to the given NullableAnalysisScope and assigns it to the AnalysisScope field.
+func (o *AnalysisUpdateRequest) SetAnalysisScope(v AnalysisScope) {
 	o.AnalysisScope.Set(&v)
 }
 // SetAnalysisScopeNil sets the value for AnalysisScope to be an explicit nil
