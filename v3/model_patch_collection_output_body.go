@@ -27,7 +27,6 @@ type PatchCollectionOutputBody struct {
 	CollectionScope string `json:"collection_scope"`
 	CreatedAt time.Time `json:"created_at"`
 	Description string `json:"description"`
-	ModelId int64 `json:"model_id"`
 	TeamId int64 `json:"team_id"`
 	UpdatedAt time.Time `json:"updated_at"`
 	UserId int64 `json:"user_id"`
@@ -39,7 +38,7 @@ type _PatchCollectionOutputBody PatchCollectionOutputBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPatchCollectionOutputBody(binaryCount int64, collectionId int64, collectionName string, collectionScope string, createdAt time.Time, description string, modelId int64, teamId int64, updatedAt time.Time, userId int64) *PatchCollectionOutputBody {
+func NewPatchCollectionOutputBody(binaryCount int64, collectionId int64, collectionName string, collectionScope string, createdAt time.Time, description string, teamId int64, updatedAt time.Time, userId int64) *PatchCollectionOutputBody {
 	this := PatchCollectionOutputBody{}
 	this.BinaryCount = binaryCount
 	this.CollectionId = collectionId
@@ -47,7 +46,6 @@ func NewPatchCollectionOutputBody(binaryCount int64, collectionId int64, collect
 	this.CollectionScope = collectionScope
 	this.CreatedAt = createdAt
 	this.Description = description
-	this.ModelId = modelId
 	this.TeamId = teamId
 	this.UpdatedAt = updatedAt
 	this.UserId = userId
@@ -206,30 +204,6 @@ func (o *PatchCollectionOutputBody) SetDescription(v string) {
 	o.Description = v
 }
 
-// GetModelId returns the ModelId field value
-func (o *PatchCollectionOutputBody) GetModelId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.ModelId
-}
-
-// GetModelIdOk returns a tuple with the ModelId field value
-// and a boolean to check if the value has been set.
-func (o *PatchCollectionOutputBody) GetModelIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelId, true
-}
-
-// SetModelId sets field value
-func (o *PatchCollectionOutputBody) SetModelId(v int64) {
-	o.ModelId = v
-}
-
 // GetTeamId returns the TeamId field value
 func (o *PatchCollectionOutputBody) GetTeamId() int64 {
 	if o == nil {
@@ -318,7 +292,6 @@ func (o PatchCollectionOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize["collection_scope"] = o.CollectionScope
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["description"] = o.Description
-	toSerialize["model_id"] = o.ModelId
 	toSerialize["team_id"] = o.TeamId
 	toSerialize["updated_at"] = o.UpdatedAt
 	toSerialize["user_id"] = o.UserId
@@ -336,7 +309,6 @@ func (o *PatchCollectionOutputBody) UnmarshalJSON(data []byte) (err error) {
 		"collection_scope",
 		"created_at",
 		"description",
-		"model_id",
 		"team_id",
 		"updated_at",
 		"user_id",

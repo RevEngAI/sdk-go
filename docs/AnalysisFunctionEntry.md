@@ -11,7 +11,9 @@ Name | Type | Description | Notes
 **FunctionSize** | **int64** |  | 
 **FunctionVaddr** | **int64** |  | 
 **MangledName** | Pointer to **NullableString** |  | [optional] 
+**SourceAnalysisId** | Pointer to **int64** | ID of the analysis the source function belongs to, if any | [optional] 
 **SourceBinaryId** | Pointer to **int64** |  | [optional] 
+**SourceFunctionId** | Pointer to **int64** | ID of the source function this name was transferred from, if any | [optional] 
 **SourceType** | **string** |  | 
 
 ## Methods
@@ -188,6 +190,31 @@ HasMangledName returns a boolean if a field has been set.
 `func (o *AnalysisFunctionEntry) UnsetMangledName()`
 
 UnsetMangledName ensures that no value is present for MangledName, not even an explicit nil
+### GetSourceAnalysisId
+
+`func (o *AnalysisFunctionEntry) GetSourceAnalysisId() int64`
+
+GetSourceAnalysisId returns the SourceAnalysisId field if non-nil, zero value otherwise.
+
+### GetSourceAnalysisIdOk
+
+`func (o *AnalysisFunctionEntry) GetSourceAnalysisIdOk() (*int64, bool)`
+
+GetSourceAnalysisIdOk returns a tuple with the SourceAnalysisId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceAnalysisId
+
+`func (o *AnalysisFunctionEntry) SetSourceAnalysisId(v int64)`
+
+SetSourceAnalysisId sets SourceAnalysisId field to given value.
+
+### HasSourceAnalysisId
+
+`func (o *AnalysisFunctionEntry) HasSourceAnalysisId() bool`
+
+HasSourceAnalysisId returns a boolean if a field has been set.
+
 ### GetSourceBinaryId
 
 `func (o *AnalysisFunctionEntry) GetSourceBinaryId() int64`
@@ -212,6 +239,31 @@ SetSourceBinaryId sets SourceBinaryId field to given value.
 `func (o *AnalysisFunctionEntry) HasSourceBinaryId() bool`
 
 HasSourceBinaryId returns a boolean if a field has been set.
+
+### GetSourceFunctionId
+
+`func (o *AnalysisFunctionEntry) GetSourceFunctionId() int64`
+
+GetSourceFunctionId returns the SourceFunctionId field if non-nil, zero value otherwise.
+
+### GetSourceFunctionIdOk
+
+`func (o *AnalysisFunctionEntry) GetSourceFunctionIdOk() (*int64, bool)`
+
+GetSourceFunctionIdOk returns a tuple with the SourceFunctionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceFunctionId
+
+`func (o *AnalysisFunctionEntry) SetSourceFunctionId(v int64)`
+
+SetSourceFunctionId sets SourceFunctionId field to given value.
+
+### HasSourceFunctionId
+
+`func (o *AnalysisFunctionEntry) HasSourceFunctionId() bool`
+
+HasSourceFunctionId returns a boolean if a field has been set.
 
 ### GetSourceType
 

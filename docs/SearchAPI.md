@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## SearchBinaries
 
-> BaseResponseBinarySearchResponse SearchBinaries(ctx).Page(page).PageSize(pageSize).PartialName(partialName).PartialSha256(partialSha256).Tags(tags).ModelName(modelName).UserFilesOnly(userFilesOnly).ExcludeBinaryId(excludeBinaryId).Execute()
+> BaseResponseBinarySearchResponse SearchBinaries(ctx).Page(page).PageSize(pageSize).PartialName(partialName).PartialSha256(partialSha256).Tags(tags).ModelName(modelName).UserFilesOnly(userFilesOnly).ExcludeBinaryId(excludeBinaryId).UserIds(userIds).Execute()
 
 Binaries search
 
@@ -40,10 +40,11 @@ func main() {
 	modelName := "modelName_example" // string | The name of the model used to analyze the binary the function belongs to (optional)
 	userFilesOnly := true // bool | Whether to only search user's uploaded files (optional) (default to false)
 	excludeBinaryId := int32(56) // int32 | A binary ID to exclude from the results (optional)
+	userIds := []int32{int32(123)} // []int32 | Restrict the search to binaries owned by these user IDs (optional)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.SearchAPI.SearchBinaries(context.Background()).Page(page).PageSize(pageSize).PartialName(partialName).PartialSha256(partialSha256).Tags(tags).ModelName(modelName).UserFilesOnly(userFilesOnly).ExcludeBinaryId(excludeBinaryId).Execute()
+	resp, r, err := apiClient.SearchAPI.SearchBinaries(context.Background()).Page(page).PageSize(pageSize).PartialName(partialName).PartialSha256(partialSha256).Tags(tags).ModelName(modelName).UserFilesOnly(userFilesOnly).ExcludeBinaryId(excludeBinaryId).UserIds(userIds).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.SearchBinaries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -72,6 +73,7 @@ Name | Type | Description  | Notes
  **modelName** | **string** | The name of the model used to analyze the binary the function belongs to | 
  **userFilesOnly** | **bool** | Whether to only search user&#39;s uploaded files | [default to false]
  **excludeBinaryId** | **int32** | A binary ID to exclude from the results | 
+ **userIds** | **[]int32** | Restrict the search to binaries owned by these user IDs | 
 
 ### Return type
 
@@ -93,7 +95,7 @@ Name | Type | Description  | Notes
 
 ## SearchCollections
 
-> BaseResponseCollectionSearchResponse SearchCollections(ctx).Page(page).PageSize(pageSize).PartialCollectionName(partialCollectionName).PartialBinaryName(partialBinaryName).PartialBinarySha256(partialBinarySha256).Tags(tags).ModelName(modelName).Filters(filters).OrderBy(orderBy).OrderByDirection(orderByDirection).Execute()
+> BaseResponseCollectionSearchResponse SearchCollections(ctx).Page(page).PageSize(pageSize).PartialCollectionName(partialCollectionName).PartialBinaryName(partialBinaryName).PartialBinarySha256(partialBinarySha256).Tags(tags).Filters(filters).OrderBy(orderBy).OrderByDirection(orderByDirection).UserIds(userIds).Execute()
 
 Collections search
 
@@ -118,14 +120,14 @@ func main() {
 	partialBinaryName := "partialBinaryName_example" // string | The partial or full name of the binary belonging to the collection (optional)
 	partialBinarySha256 := "partialBinarySha256_example" // string | The partial or full sha256 of the binary belonging to the collection (optional)
 	tags := []string{"Inner_example"} // []string | The tags to be searched for (optional)
-	modelName := "modelName_example" // string | The name of the model used to analyze the binary the function belongs to (optional)
 	filters := []revengai.Filters{revengai.Filters("official_only")} // []Filters | The filters to be used for the search (optional)
 	orderBy := revengai.app__api__rest__v2__collections__enums__OrderBy("created") // AppApiRestV2CollectionsEnumsOrderBy | The field to sort the order by in the results (optional) (default to "created")
 	orderByDirection := revengai.Order("ASC") // Order | The order direction in which to return results (optional) (default to "DESC")
+	userIds := []int32{int32(123)} // []int32 | Restrict the search to collections owned by these user IDs (optional)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.SearchAPI.SearchCollections(context.Background()).Page(page).PageSize(pageSize).PartialCollectionName(partialCollectionName).PartialBinaryName(partialBinaryName).PartialBinarySha256(partialBinarySha256).Tags(tags).ModelName(modelName).Filters(filters).OrderBy(orderBy).OrderByDirection(orderByDirection).Execute()
+	resp, r, err := apiClient.SearchAPI.SearchCollections(context.Background()).Page(page).PageSize(pageSize).PartialCollectionName(partialCollectionName).PartialBinaryName(partialBinaryName).PartialBinarySha256(partialBinarySha256).Tags(tags).Filters(filters).OrderBy(orderBy).OrderByDirection(orderByDirection).UserIds(userIds).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.SearchCollections``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -152,10 +154,10 @@ Name | Type | Description  | Notes
  **partialBinaryName** | **string** | The partial or full name of the binary belonging to the collection | 
  **partialBinarySha256** | **string** | The partial or full sha256 of the binary belonging to the collection | 
  **tags** | **[]string** | The tags to be searched for | 
- **modelName** | **string** | The name of the model used to analyze the binary the function belongs to | 
  **filters** | [**[]Filters**](Filters.md) | The filters to be used for the search | 
  **orderBy** | [**AppApiRestV2CollectionsEnumsOrderBy**](AppApiRestV2CollectionsEnumsOrderBy.md) | The field to sort the order by in the results | [default to &quot;created&quot;]
  **orderByDirection** | [**Order**](Order.md) | The order direction in which to return results | [default to &quot;DESC&quot;]
+ **userIds** | **[]int32** | Restrict the search to collections owned by these user IDs | 
 
 ### Return type
 

@@ -8,14 +8,13 @@ Name | Type | Description | Notes
 **CollectionName** | **string** | Collection name. | 
 **CollectionScope** | **string** | Visibility scope. | [default to "PRIVATE"]
 **Description** | **string** | Collection description. | 
-**ModelId** | **int64** | Model ID the collection is associated with. | 
 **Tags** | Pointer to **[]string** | Optional tags to attach to the collection. | [optional] 
 
 ## Methods
 
 ### NewCreateCollectionInputBody
 
-`func NewCreateCollectionInputBody(collectionName string, collectionScope string, description string, modelId int64, ) *CreateCollectionInputBody`
+`func NewCreateCollectionInputBody(collectionName string, collectionScope string, description string, ) *CreateCollectionInputBody`
 
 NewCreateCollectionInputBody instantiates a new CreateCollectionInputBody object
 This constructor will assign default values to properties that have it defined,
@@ -123,26 +122,6 @@ and a boolean to check if the value has been set.
 `func (o *CreateCollectionInputBody) SetDescription(v string)`
 
 SetDescription sets Description field to given value.
-
-
-### GetModelId
-
-`func (o *CreateCollectionInputBody) GetModelId() int64`
-
-GetModelId returns the ModelId field if non-nil, zero value otherwise.
-
-### GetModelIdOk
-
-`func (o *CreateCollectionInputBody) GetModelIdOk() (*int64, bool)`
-
-GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelId
-
-`func (o *CreateCollectionInputBody) SetModelId(v int64)`
-
-SetModelId sets ModelId field to given value.
 
 
 ### GetTags

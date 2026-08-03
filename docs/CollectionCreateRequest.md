@@ -9,13 +9,12 @@ Name | Type | Description | Notes
 **CollectionScope** | Pointer to [**CollectionScope**](CollectionScope.md) |  | [optional] [default to COLLECTIONSCOPE_PRIVATE]
 **Tags** | Pointer to **[]string** |  | [optional] 
 **Binaries** | Pointer to **[]int32** |  | [optional] 
-**ModelId** | **int32** |  | 
 
 ## Methods
 
 ### NewCollectionCreateRequest
 
-`func NewCollectionCreateRequest(collectionName string, description string, modelId int32, ) *CollectionCreateRequest`
+`func NewCollectionCreateRequest(collectionName string, description string, ) *CollectionCreateRequest`
 
 NewCollectionCreateRequest instantiates a new CollectionCreateRequest object
 This constructor will assign default values to properties that have it defined,
@@ -165,26 +164,6 @@ HasBinaries returns a boolean if a field has been set.
 `func (o *CollectionCreateRequest) UnsetBinaries()`
 
 UnsetBinaries ensures that no value is present for Binaries, not even an explicit nil
-### GetModelId
-
-`func (o *CollectionCreateRequest) GetModelId() int32`
-
-GetModelId returns the ModelId field if non-nil, zero value otherwise.
-
-### GetModelIdOk
-
-`func (o *CollectionCreateRequest) GetModelIdOk() (*int32, bool)`
-
-GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelId
-
-`func (o *CollectionCreateRequest) SetModelId(v int32)`
-
-SetModelId sets ModelId field to given value.
-
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

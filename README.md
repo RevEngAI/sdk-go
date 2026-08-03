@@ -72,12 +72,15 @@ All URIs are relative to *https://api.reveng.ai*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AgentAPI* | [**CheckCapabilitiesTaskStatusV2AnalysesAnalysisIdAgentCapabilitiesStatusGet**](docs/AgentAPI.md#checkcapabilitiestaskstatusv2analysesanalysisidagentcapabilitiesstatusget) | **Get** /v2/analyses/{analysis_id}/agent/capabilities/status | Check the status of a capabilities analysis workflow
+*AgentAPI* | [**CheckRemediationTaskStatusV2AnalysesAnalysisIdAgentRemediationStatusGet**](docs/AgentAPI.md#checkremediationtaskstatusv2analysesanalysisidagentremediationstatusget) | **Get** /v2/analyses/{analysis_id}/agent/remediation/status | Check the status of a remediation analysis workflow
 *AgentAPI* | [**CheckReportAnalysisTaskStatusV2AnalysesAnalysisIdAgentReportAnalysisStatusGet**](docs/AgentAPI.md#checkreportanalysistaskstatusv2analysesanalysisidagentreportanalysisstatusget) | **Get** /v2/analyses/{analysis_id}/agent/report-analysis/status | Check the status of a report analysis workflow
 *AgentAPI* | [**CheckTriageTaskStatusV2AnalysesAnalysisIdAgentTriageStatusGet**](docs/AgentAPI.md#checktriagetaskstatusv2analysesanalysisidagenttriagestatusget) | **Get** /v2/analyses/{analysis_id}/agent/triage/status | Check the status of a triage analysis workflow
 *AgentAPI* | [**CreateCapabilitiesTaskV2AnalysesAnalysisIdAgentCapabilitiesPost**](docs/AgentAPI.md#createcapabilitiestaskv2analysesanalysisidagentcapabilitiespost) | **Post** /v2/analyses/{analysis_id}/agent/capabilities | Queues a capabilities analysis workflow process
+*AgentAPI* | [**CreateRemediationTaskV2AnalysesAnalysisIdAgentRemediationPost**](docs/AgentAPI.md#createremediationtaskv2analysesanalysisidagentremediationpost) | **Post** /v2/analyses/{analysis_id}/agent/remediation | Queues a remediation analysis workflow process
 *AgentAPI* | [**CreateReportAnalysisTaskV2AnalysesAnalysisIdAgentReportAnalysisPost**](docs/AgentAPI.md#createreportanalysistaskv2analysesanalysisidagentreportanalysispost) | **Post** /v2/analyses/{analysis_id}/agent/report-analysis | Queues a combined report analysis workflow process
 *AgentAPI* | [**CreateTriageTaskV2AnalysesAnalysisIdAgentTriagePost**](docs/AgentAPI.md#createtriagetaskv2analysesanalysisidagenttriagepost) | **Post** /v2/analyses/{analysis_id}/agent/triage | Queues a triage analysis workflow process
 *AgentAPI* | [**GetCapabilitiesResultV2AnalysesAnalysisIdAgentCapabilitiesGet**](docs/AgentAPI.md#getcapabilitiesresultv2analysesanalysisidagentcapabilitiesget) | **Get** /v2/analyses/{analysis_id}/agent/capabilities | Get Capabilities Result
+*AgentAPI* | [**GetRemediationResultV2AnalysesAnalysisIdAgentRemediationGet**](docs/AgentAPI.md#getremediationresultv2analysesanalysisidagentremediationget) | **Get** /v2/analyses/{analysis_id}/agent/remediation | Get Remediation Result
 *AgentAPI* | [**GetReportAnalysisResultV2AnalysesAnalysisIdAgentReportAnalysisGet**](docs/AgentAPI.md#getreportanalysisresultv2analysesanalysisidagentreportanalysisget) | **Get** /v2/analyses/{analysis_id}/agent/report-analysis | Get Report Analysis Result
 *AgentAPI* | [**GetTriageResultV2AnalysesAnalysisIdAgentTriageGet**](docs/AgentAPI.md#gettriageresultv2analysesanalysisidagenttriageget) | **Get** /v2/analyses/{analysis_id}/agent/triage | Get Triage Result
 *AnalysesBulkActionsAPI* | [**BulkAddAnalysisTags**](docs/AnalysesBulkActionsAPI.md#bulkaddanalysistags) | **Patch** /v2/analyses/tags/add | Bulk Add Analysis Tags
@@ -141,6 +144,7 @@ Class | Method | HTTP request | Description
 *CollectionsAPI* | [**UpdateCollection**](docs/CollectionsAPI.md#updatecollection) | **Patch** /v2/collections/{collection_id} | Updates a collection
 *CollectionsAPI* | [**UpdateCollectionBinaries**](docs/CollectionsAPI.md#updatecollectionbinaries) | **Patch** /v2/collections/{collection_id}/binaries | Updates a collection binaries
 *CollectionsAPI* | [**UpdateCollectionTags**](docs/CollectionsAPI.md#updatecollectiontags) | **Patch** /v2/collections/{collection_id}/tags | Updates a collection tags
+*CollectionsAPI* | [**V3AddCollectionBinaries**](docs/CollectionsAPI.md#v3addcollectionbinaries) | **Post** /v3/collections/{collection_id}/binaries | Add binaries to a collection.
 *CollectionsAPI* | [**V3CreateCollection**](docs/CollectionsAPI.md#v3createcollection) | **Post** /v3/collections | Create a collection.
 *CollectionsAPI* | [**V3DeleteCollection**](docs/CollectionsAPI.md#v3deletecollection) | **Delete** /v3/collections/{collection_id} | Delete a collection.
 *CollectionsAPI* | [**V3GetCollection**](docs/CollectionsAPI.md#v3getcollection) | **Get** /v3/collections/{collection_id} | Get a collection.
@@ -148,6 +152,7 @@ Class | Method | HTTP request | Description
 *CollectionsAPI* | [**V3PatchCollection**](docs/CollectionsAPI.md#v3patchcollection) | **Patch** /v3/collections/{collection_id} | Update a collection.
 *CollectionsAPI* | [**V3PatchCollectionBinaries**](docs/CollectionsAPI.md#v3patchcollectionbinaries) | **Patch** /v3/collections/{collection_id}/binaries | Replace the binaries in a collection.
 *CollectionsAPI* | [**V3PatchCollectionTags**](docs/CollectionsAPI.md#v3patchcollectiontags) | **Patch** /v3/collections/{collection_id}/tags | Replace the tags on a collection.
+*CollectionsAPI* | [**V3RemoveCollectionBinaries**](docs/CollectionsAPI.md#v3removecollectionbinaries) | **Delete** /v3/collections/{collection_id}/binaries | Remove binaries from a collection.
 *ConfigAPI* | [**GetConfig**](docs/ConfigAPI.md#getconfig) | **Get** /v2/config | Get Config
 *ConversationsAPI* | [**CancelRun**](docs/ConversationsAPI.md#cancelrun) | **Post** /v2/conversations/{id}/cancel | Cancel an active run
 *ConversationsAPI* | [**ConfirmTool**](docs/ConversationsAPI.md#confirmtool) | **Post** /v2/conversations/{id}/confirm | Approve or reject a pending tool confirmation
@@ -237,6 +242,7 @@ Class | Method | HTTP request | Description
  - [AIDecompInverseStringMapItem](docs/AIDecompInverseStringMapItem.md)
  - [APIError](docs/APIError.md)
  - [AddCalleeInputBody](docs/AddCalleeInputBody.md)
+ - [AddCollectionBinariesInputBody](docs/AddCollectionBinariesInputBody.md)
  - [AddIssuerDomainInputBody](docs/AddIssuerDomainInputBody.md)
  - [AddOwnerInputBody](docs/AddOwnerInputBody.md)
  - [AddTeamMemberInputBody](docs/AddTeamMemberInputBody.md)
@@ -342,6 +348,7 @@ Class | Method | HTTP request | Description
  - [BaseResponseParams](docs/BaseResponseParams.md)
  - [BaseResponseQueuedWorkflowTaskResponse](docs/BaseResponseQueuedWorkflowTaskResponse.md)
  - [BaseResponseRecent](docs/BaseResponseRecent.md)
+ - [BaseResponseRemediationAgentResponse](docs/BaseResponseRemediationAgentResponse.md)
  - [BaseResponseReportAnalysisResponse](docs/BaseResponseReportAnalysisResponse.md)
  - [BaseResponseStatus](docs/BaseResponseStatus.md)
  - [BaseResponseStr](docs/BaseResponseStr.md)
@@ -622,6 +629,8 @@ Class | Method | HTTP request | Description
  - [RegisterUserInputBody](docs/RegisterUserInputBody.md)
  - [RegistryOperation](docs/RegistryOperation.md)
  - [RelativeBinaryResponse](docs/RelativeBinaryResponse.md)
+ - [RemediationAgentResponse](docs/RemediationAgentResponse.md)
+ - [RemoveCollectionBinariesInputBody](docs/RemoveCollectionBinariesInputBody.md)
  - [RenameAppliedEvent](docs/RenameAppliedEvent.md)
  - [RenameInputBody](docs/RenameInputBody.md)
  - [RenameOutputBody](docs/RenameOutputBody.md)

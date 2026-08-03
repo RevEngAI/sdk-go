@@ -28,8 +28,6 @@ type CreateCollectionInputBody struct {
 	CollectionScope string `json:"collection_scope"`
 	// Collection description.
 	Description string `json:"description"`
-	// Model ID the collection is associated with.
-	ModelId int64 `json:"model_id"`
 	// Optional tags to attach to the collection.
 	Tags []string `json:"tags,omitempty"`
 }
@@ -40,12 +38,11 @@ type _CreateCollectionInputBody CreateCollectionInputBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateCollectionInputBody(collectionName string, collectionScope string, description string, modelId int64) *CreateCollectionInputBody {
+func NewCreateCollectionInputBody(collectionName string, collectionScope string, description string) *CreateCollectionInputBody {
 	this := CreateCollectionInputBody{}
 	this.CollectionName = collectionName
 	this.CollectionScope = collectionScope
 	this.Description = description
-	this.ModelId = modelId
 	return &this
 }
 
@@ -164,30 +161,6 @@ func (o *CreateCollectionInputBody) SetDescription(v string) {
 	o.Description = v
 }
 
-// GetModelId returns the ModelId field value
-func (o *CreateCollectionInputBody) GetModelId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.ModelId
-}
-
-// GetModelIdOk returns a tuple with the ModelId field value
-// and a boolean to check if the value has been set.
-func (o *CreateCollectionInputBody) GetModelIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelId, true
-}
-
-// SetModelId sets field value
-func (o *CreateCollectionInputBody) SetModelId(v int64) {
-	o.ModelId = v
-}
-
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCollectionInputBody) GetTags() []string {
 	if o == nil {
@@ -237,7 +210,6 @@ func (o CreateCollectionInputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize["collection_name"] = o.CollectionName
 	toSerialize["collection_scope"] = o.CollectionScope
 	toSerialize["description"] = o.Description
-	toSerialize["model_id"] = o.ModelId
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
 	}
@@ -252,7 +224,6 @@ func (o *CreateCollectionInputBody) UnmarshalJSON(data []byte) (err error) {
 		"collection_name",
 		"collection_scope",
 		"description",
-		"model_id",
 	}
 
 	allProperties := make(map[string]interface{})

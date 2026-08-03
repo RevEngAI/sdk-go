@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**UpdateCollection**](CollectionsAPI.md#UpdateCollection) | **Patch** /v2/collections/{collection_id} | Updates a collection
 [**UpdateCollectionBinaries**](CollectionsAPI.md#UpdateCollectionBinaries) | **Patch** /v2/collections/{collection_id}/binaries | Updates a collection binaries
 [**UpdateCollectionTags**](CollectionsAPI.md#UpdateCollectionTags) | **Patch** /v2/collections/{collection_id}/tags | Updates a collection tags
+[**V3AddCollectionBinaries**](CollectionsAPI.md#V3AddCollectionBinaries) | **Post** /v3/collections/{collection_id}/binaries | Add binaries to a collection.
 [**V3CreateCollection**](CollectionsAPI.md#V3CreateCollection) | **Post** /v3/collections | Create a collection.
 [**V3DeleteCollection**](CollectionsAPI.md#V3DeleteCollection) | **Delete** /v3/collections/{collection_id} | Delete a collection.
 [**V3GetCollection**](CollectionsAPI.md#V3GetCollection) | **Get** /v3/collections/{collection_id} | Get a collection.
@@ -18,6 +19,7 @@ Method | HTTP request | Description
 [**V3PatchCollection**](CollectionsAPI.md#V3PatchCollection) | **Patch** /v3/collections/{collection_id} | Update a collection.
 [**V3PatchCollectionBinaries**](CollectionsAPI.md#V3PatchCollectionBinaries) | **Patch** /v3/collections/{collection_id}/binaries | Replace the binaries in a collection.
 [**V3PatchCollectionTags**](CollectionsAPI.md#V3PatchCollectionTags) | **Patch** /v3/collections/{collection_id}/tags | Replace the tags on a collection.
+[**V3RemoveCollectionBinaries**](CollectionsAPI.md#V3RemoveCollectionBinaries) | **Delete** /v3/collections/{collection_id}/binaries | Remove binaries from a collection.
 
 
 
@@ -42,7 +44,7 @@ import (
 )
 
 func main() {
-	collectionCreateRequest := *revengai.NewCollectionCreateRequest("CollectionName_example", "Description_example", int32(123)) // CollectionCreateRequest | 
+	collectionCreateRequest := *revengai.NewCollectionCreateRequest("CollectionName_example", "Description_example") // CollectionCreateRequest | 
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
@@ -529,6 +531,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V3AddCollectionBinaries
+
+> V3AddCollectionBinaries(ctx, collectionId).AddCollectionBinariesInputBody(addCollectionBinariesInputBody).Execute()
+
+Add binaries to a collection.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	collectionId := int64(789) // int64 | 
+	addCollectionBinariesInputBody := *revengai.NewAddCollectionBinariesInputBody([]int64{int64(123)}) // AddCollectionBinariesInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.CollectionsAPI.V3AddCollectionBinaries(context.Background(), collectionId).AddCollectionBinariesInputBody(addCollectionBinariesInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.V3AddCollectionBinaries``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**collectionId** | **int64** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3AddCollectionBinariesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **addCollectionBinariesInputBody** | [**AddCollectionBinariesInputBody**](AddCollectionBinariesInputBody.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V3CreateCollection
 
 > CreateCollectionOutputBody V3CreateCollection(ctx).CreateCollectionInputBody(createCollectionInputBody).Execute()
@@ -550,7 +622,7 @@ import (
 )
 
 func main() {
-	createCollectionInputBody := *revengai.NewCreateCollectionInputBody("CollectionName_example", "CollectionScope_example", "Description_example", int64(123)) // CreateCollectionInputBody | 
+	createCollectionInputBody := *revengai.NewCreateCollectionInputBody("CollectionName_example", "CollectionScope_example", "Description_example") // CreateCollectionInputBody | 
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
@@ -1020,6 +1092,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PatchCollectionTagsOutputBody**](PatchCollectionTagsOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3RemoveCollectionBinaries
+
+> V3RemoveCollectionBinaries(ctx, collectionId).RemoveCollectionBinariesInputBody(removeCollectionBinariesInputBody).Execute()
+
+Remove binaries from a collection.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	collectionId := int64(789) // int64 | 
+	removeCollectionBinariesInputBody := *revengai.NewRemoveCollectionBinariesInputBody([]int64{int64(123)}) // RemoveCollectionBinariesInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.CollectionsAPI.V3RemoveCollectionBinaries(context.Background(), collectionId).RemoveCollectionBinariesInputBody(removeCollectionBinariesInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.V3RemoveCollectionBinaries``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**collectionId** | **int64** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3RemoveCollectionBinariesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **removeCollectionBinariesInputBody** | [**RemoveCollectionBinariesInputBody**](RemoveCollectionBinariesInputBody.md) |  | 
+
+### Return type
+
+ (empty response body)
 
 ### Authorization
 

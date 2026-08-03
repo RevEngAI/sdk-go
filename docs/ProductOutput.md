@@ -10,13 +10,14 @@ Name | Type | Description | Notes
 **Id** | **string** | Product ID. | 
 **Name** | **string** | Human-readable product name. | 
 **Prices** | [**[]PriceOutput**](PriceOutput.md) | All active recurring prices for this product. | 
+**SalesOnly** | **bool** | When true, this product is not self-serve purchasable and must be bought via direct sales. | 
 **Tier** | Pointer to **string** | User tier associated with this product, if any. | [optional] 
 
 ## Methods
 
 ### NewProductOutput
 
-`func NewProductOutput(description string, features []string, id string, name string, prices []PriceOutput, ) *ProductOutput`
+`func NewProductOutput(description string, features []string, id string, name string, prices []PriceOutput, salesOnly bool, ) *ProductOutput`
 
 NewProductOutput instantiates a new ProductOutput object
 This constructor will assign default values to properties that have it defined,
@@ -176,6 +177,26 @@ SetPrices sets Prices field to given value.
 `func (o *ProductOutput) UnsetPrices()`
 
 UnsetPrices ensures that no value is present for Prices, not even an explicit nil
+### GetSalesOnly
+
+`func (o *ProductOutput) GetSalesOnly() bool`
+
+GetSalesOnly returns the SalesOnly field if non-nil, zero value otherwise.
+
+### GetSalesOnlyOk
+
+`func (o *ProductOutput) GetSalesOnlyOk() (*bool, bool)`
+
+GetSalesOnlyOk returns a tuple with the SalesOnly field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSalesOnly
+
+`func (o *ProductOutput) SetSalesOnly(v bool)`
+
+SetSalesOnly sets SalesOnly field to given value.
+
+
 ### GetTier
 
 `func (o *ProductOutput) GetTier() string`

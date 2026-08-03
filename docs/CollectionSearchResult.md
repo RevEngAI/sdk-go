@@ -9,8 +9,6 @@ Name | Type | Description | Notes
 **Scope** | **string** | The scope of the collection | 
 **LastUpdatedAt** | **time.Time** | The last update date of the collection | 
 **CreatedAt** | **time.Time** | The creation date of the collection | 
-**ModelId** | **int32** | The model ID of the binary | 
-**ModelName** | **string** | The name of the model | 
 **OwnedBy** | **string** | The owner of the collection | 
 **Tags** | Pointer to **[]string** |  | [optional] 
 **Size** | Pointer to **NullableInt32** |  | [optional] 
@@ -21,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewCollectionSearchResult
 
-`func NewCollectionSearchResult(collectionId int32, collectionName string, scope string, lastUpdatedAt time.Time, createdAt time.Time, modelId int32, modelName string, ownedBy string, description string, ) *CollectionSearchResult`
+`func NewCollectionSearchResult(collectionId int32, collectionName string, scope string, lastUpdatedAt time.Time, createdAt time.Time, ownedBy string, description string, ) *CollectionSearchResult`
 
 NewCollectionSearchResult instantiates a new CollectionSearchResult object
 This constructor will assign default values to properties that have it defined,
@@ -134,46 +132,6 @@ and a boolean to check if the value has been set.
 `func (o *CollectionSearchResult) SetCreatedAt(v time.Time)`
 
 SetCreatedAt sets CreatedAt field to given value.
-
-
-### GetModelId
-
-`func (o *CollectionSearchResult) GetModelId() int32`
-
-GetModelId returns the ModelId field if non-nil, zero value otherwise.
-
-### GetModelIdOk
-
-`func (o *CollectionSearchResult) GetModelIdOk() (*int32, bool)`
-
-GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelId
-
-`func (o *CollectionSearchResult) SetModelId(v int32)`
-
-SetModelId sets ModelId field to given value.
-
-
-### GetModelName
-
-`func (o *CollectionSearchResult) GetModelName() string`
-
-GetModelName returns the ModelName field if non-nil, zero value otherwise.
-
-### GetModelNameOk
-
-`func (o *CollectionSearchResult) GetModelNameOk() (*string, bool)`
-
-GetModelNameOk returns a tuple with the ModelName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelName
-
-`func (o *CollectionSearchResult) SetModelName(v string)`
-
-SetModelName sets ModelName field to given value.
 
 
 ### GetOwnedBy

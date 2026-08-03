@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **CollectionId** | **int32** | Collection ID | 
 **CollectionName** | **string** | Collection name | 
 **Description** | **string** | Collection description | 
-**ModelId** | **int32** | Collection model ID | 
 **UserId** | **int32** | Collection user ID | 
 **TeamId** | Pointer to **NullableInt32** |  | [optional] 
 **CollectionScope** | [**CollectionScope**](CollectionScope.md) | Collection public status | 
@@ -20,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewCollectionResponse
 
-`func NewCollectionResponse(collectionId int32, collectionName string, description string, modelId int32, userId int32, collectionScope CollectionScope, createdAt time.Time, updatedAt time.Time, ) *CollectionResponse`
+`func NewCollectionResponse(collectionId int32, collectionName string, description string, userId int32, collectionScope CollectionScope, createdAt time.Time, updatedAt time.Time, ) *CollectionResponse`
 
 NewCollectionResponse instantiates a new CollectionResponse object
 This constructor will assign default values to properties that have it defined,
@@ -93,26 +92,6 @@ and a boolean to check if the value has been set.
 `func (o *CollectionResponse) SetDescription(v string)`
 
 SetDescription sets Description field to given value.
-
-
-### GetModelId
-
-`func (o *CollectionResponse) GetModelId() int32`
-
-GetModelId returns the ModelId field if non-nil, zero value otherwise.
-
-### GetModelIdOk
-
-`func (o *CollectionResponse) GetModelIdOk() (*int32, bool)`
-
-GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelId
-
-`func (o *CollectionResponse) SetModelId(v int32)`
-
-SetModelId sets ModelId field to given value.
 
 
 ### GetUserId

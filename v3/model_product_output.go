@@ -32,6 +32,8 @@ type ProductOutput struct {
 	Name string `json:"name"`
 	// All active recurring prices for this product.
 	Prices []PriceOutput `json:"prices"`
+	// When true, this product is not self-serve purchasable and must be bought via direct sales.
+	SalesOnly bool `json:"sales_only"`
 	// User tier associated with this product, if any.
 	Tier *string `json:"tier,omitempty"`
 }
@@ -42,13 +44,14 @@ type _ProductOutput ProductOutput
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProductOutput(description string, features []string, id string, name string, prices []PriceOutput) *ProductOutput {
+func NewProductOutput(description string, features []string, id string, name string, prices []PriceOutput, salesOnly bool) *ProductOutput {
 	this := ProductOutput{}
 	this.Description = description
 	this.Features = features
 	this.Id = id
 	this.Name = name
 	this.Prices = prices
+	this.SalesOnly = salesOnly
 	return &this
 }
 
@@ -216,6 +219,30 @@ func (o *ProductOutput) SetPrices(v []PriceOutput) {
 	o.Prices = v
 }
 
+// GetSalesOnly returns the SalesOnly field value
+func (o *ProductOutput) GetSalesOnly() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.SalesOnly
+}
+
+// GetSalesOnlyOk returns a tuple with the SalesOnly field value
+// and a boolean to check if the value has been set.
+func (o *ProductOutput) GetSalesOnlyOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SalesOnly, true
+}
+
+// SetSalesOnly sets field value
+func (o *ProductOutput) SetSalesOnly(v bool) {
+	o.SalesOnly = v
+}
+
 // GetTier returns the Tier field value if set, zero value otherwise.
 func (o *ProductOutput) GetTier() string {
 	if o == nil || IsNil(o.Tier) {
@@ -270,6 +297,7 @@ func (o ProductOutput) ToMap() (map[string]interface{}, error) {
 	if o.Prices != nil {
 		toSerialize["prices"] = o.Prices
 	}
+	toSerialize["sales_only"] = o.SalesOnly
 	if !IsNil(o.Tier) {
 		toSerialize["tier"] = o.Tier
 	}
@@ -286,6 +314,7 @@ func (o *ProductOutput) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"name",
 		"prices",
+		"sales_only",
 	}
 
 	allProperties := make(map[string]interface{})

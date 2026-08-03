@@ -29,9 +29,9 @@ type CollectionListItemBody struct {
 	CollectionTags []string `json:"collection_tags"`
 	Creation time.Time `json:"creation"`
 	Description string `json:"description"`
-	ModelName string `json:"model_name"`
 	OfficialCollection bool `json:"official_collection"`
 	TeamId int64 `json:"team_id"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 type _CollectionListItemBody CollectionListItemBody
@@ -40,7 +40,7 @@ type _CollectionListItemBody CollectionListItemBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCollectionListItemBody(collectionId int64, collectionName string, collectionOwner string, collectionScope string, collectionSize int64, collectionTags []string, creation time.Time, description string, modelName string, officialCollection bool, teamId int64) *CollectionListItemBody {
+func NewCollectionListItemBody(collectionId int64, collectionName string, collectionOwner string, collectionScope string, collectionSize int64, collectionTags []string, creation time.Time, description string, officialCollection bool, teamId int64, updatedAt time.Time) *CollectionListItemBody {
 	this := CollectionListItemBody{}
 	this.CollectionId = collectionId
 	this.CollectionName = collectionName
@@ -50,9 +50,9 @@ func NewCollectionListItemBody(collectionId int64, collectionName string, collec
 	this.CollectionTags = collectionTags
 	this.Creation = creation
 	this.Description = description
-	this.ModelName = modelName
 	this.OfficialCollection = officialCollection
 	this.TeamId = teamId
+	this.UpdatedAt = updatedAt
 	return &this
 }
 
@@ -258,30 +258,6 @@ func (o *CollectionListItemBody) SetDescription(v string) {
 	o.Description = v
 }
 
-// GetModelName returns the ModelName field value
-func (o *CollectionListItemBody) GetModelName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ModelName
-}
-
-// GetModelNameOk returns a tuple with the ModelName field value
-// and a boolean to check if the value has been set.
-func (o *CollectionListItemBody) GetModelNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelName, true
-}
-
-// SetModelName sets field value
-func (o *CollectionListItemBody) SetModelName(v string) {
-	o.ModelName = v
-}
-
 // GetOfficialCollection returns the OfficialCollection field value
 func (o *CollectionListItemBody) GetOfficialCollection() bool {
 	if o == nil {
@@ -330,6 +306,30 @@ func (o *CollectionListItemBody) SetTeamId(v int64) {
 	o.TeamId = v
 }
 
+// GetUpdatedAt returns the UpdatedAt field value
+func (o *CollectionListItemBody) GetUpdatedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
+// and a boolean to check if the value has been set.
+func (o *CollectionListItemBody) GetUpdatedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UpdatedAt, true
+}
+
+// SetUpdatedAt sets field value
+func (o *CollectionListItemBody) SetUpdatedAt(v time.Time) {
+	o.UpdatedAt = v
+}
+
 func (o CollectionListItemBody) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -350,9 +350,9 @@ func (o CollectionListItemBody) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["creation"] = o.Creation
 	toSerialize["description"] = o.Description
-	toSerialize["model_name"] = o.ModelName
 	toSerialize["official_collection"] = o.OfficialCollection
 	toSerialize["team_id"] = o.TeamId
+	toSerialize["updated_at"] = o.UpdatedAt
 	return toSerialize, nil
 }
 
@@ -369,9 +369,9 @@ func (o *CollectionListItemBody) UnmarshalJSON(data []byte) (err error) {
 		"collection_tags",
 		"creation",
 		"description",
-		"model_name",
 		"official_collection",
 		"team_id",
+		"updated_at",
 	}
 
 	allProperties := make(map[string]interface{})

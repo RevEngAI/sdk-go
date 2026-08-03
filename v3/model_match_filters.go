@@ -18,14 +18,20 @@ var _ MappedNullable = &MatchFilters{}
 
 // MatchFilters struct for MatchFilters
 type MatchFilters struct {
+	// Restrict matches to this architecture (multi-platform models only; matches all architectures if omitted). Rejected for single-architecture models.
+	Arch *string `json:"arch,omitempty"`
 	// Restrict the candidate pool to these binary IDs.
 	BinaryIds []int64 `json:"binary_ids,omitempty"`
+	// Restrict matches to this word size (multi-platform models only). Rejected for single-architecture models.
+	Bits *int64 `json:"bits,omitempty"`
 	// Restrict the candidate pool to binaries in these collection IDs.
 	CollectionIds []int64 `json:"collection_ids,omitempty"`
 	// Restrict matches to candidates with these debug source types. Accepted: SYSTEM, USER.
 	DebugTypes []string `json:"debug_types,omitempty"`
 	// Restrict the candidate pool to these function IDs.
 	FunctionIds []int64 `json:"function_ids,omitempty"`
+	// Restrict matches to this platform (multi-platform models only; matches all platforms if omitted). Rejected for single-architecture models.
+	Platform *string `json:"platform,omitempty"`
 	// Restrict the candidate pool to functions owned by these user IDs.
 	UserIds []int64 `json:"user_ids,omitempty"`
 }
@@ -45,6 +51,38 @@ func NewMatchFilters() *MatchFilters {
 func NewMatchFiltersWithDefaults() *MatchFilters {
 	this := MatchFilters{}
 	return &this
+}
+
+// GetArch returns the Arch field value if set, zero value otherwise.
+func (o *MatchFilters) GetArch() string {
+	if o == nil || IsNil(o.Arch) {
+		var ret string
+		return ret
+	}
+	return *o.Arch
+}
+
+// GetArchOk returns a tuple with the Arch field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MatchFilters) GetArchOk() (*string, bool) {
+	if o == nil || IsNil(o.Arch) {
+		return nil, false
+	}
+	return o.Arch, true
+}
+
+// HasArch returns a boolean if a field has been set.
+func (o *MatchFilters) HasArch() bool {
+	if o != nil && !IsNil(o.Arch) {
+		return true
+	}
+
+	return false
+}
+
+// SetArch gets a reference to the given string and assigns it to the Arch field.
+func (o *MatchFilters) SetArch(v string) {
+	o.Arch = &v
 }
 
 // GetBinaryIds returns the BinaryIds field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -78,6 +116,38 @@ func (o *MatchFilters) HasBinaryIds() bool {
 // SetBinaryIds gets a reference to the given []int64 and assigns it to the BinaryIds field.
 func (o *MatchFilters) SetBinaryIds(v []int64) {
 	o.BinaryIds = v
+}
+
+// GetBits returns the Bits field value if set, zero value otherwise.
+func (o *MatchFilters) GetBits() int64 {
+	if o == nil || IsNil(o.Bits) {
+		var ret int64
+		return ret
+	}
+	return *o.Bits
+}
+
+// GetBitsOk returns a tuple with the Bits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MatchFilters) GetBitsOk() (*int64, bool) {
+	if o == nil || IsNil(o.Bits) {
+		return nil, false
+	}
+	return o.Bits, true
+}
+
+// HasBits returns a boolean if a field has been set.
+func (o *MatchFilters) HasBits() bool {
+	if o != nil && !IsNil(o.Bits) {
+		return true
+	}
+
+	return false
+}
+
+// SetBits gets a reference to the given int64 and assigns it to the Bits field.
+func (o *MatchFilters) SetBits(v int64) {
+	o.Bits = &v
 }
 
 // GetCollectionIds returns the CollectionIds field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -179,6 +249,38 @@ func (o *MatchFilters) SetFunctionIds(v []int64) {
 	o.FunctionIds = v
 }
 
+// GetPlatform returns the Platform field value if set, zero value otherwise.
+func (o *MatchFilters) GetPlatform() string {
+	if o == nil || IsNil(o.Platform) {
+		var ret string
+		return ret
+	}
+	return *o.Platform
+}
+
+// GetPlatformOk returns a tuple with the Platform field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MatchFilters) GetPlatformOk() (*string, bool) {
+	if o == nil || IsNil(o.Platform) {
+		return nil, false
+	}
+	return o.Platform, true
+}
+
+// HasPlatform returns a boolean if a field has been set.
+func (o *MatchFilters) HasPlatform() bool {
+	if o != nil && !IsNil(o.Platform) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatform gets a reference to the given string and assigns it to the Platform field.
+func (o *MatchFilters) SetPlatform(v string) {
+	o.Platform = &v
+}
+
 // GetUserIds returns the UserIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MatchFilters) GetUserIds() []int64 {
 	if o == nil {
@@ -222,8 +324,14 @@ func (o MatchFilters) MarshalJSON() ([]byte, error) {
 
 func (o MatchFilters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Arch) {
+		toSerialize["arch"] = o.Arch
+	}
 	if o.BinaryIds != nil {
 		toSerialize["binary_ids"] = o.BinaryIds
+	}
+	if !IsNil(o.Bits) {
+		toSerialize["bits"] = o.Bits
 	}
 	if o.CollectionIds != nil {
 		toSerialize["collection_ids"] = o.CollectionIds
@@ -233,6 +341,9 @@ func (o MatchFilters) ToMap() (map[string]interface{}, error) {
 	}
 	if o.FunctionIds != nil {
 		toSerialize["function_ids"] = o.FunctionIds
+	}
+	if !IsNil(o.Platform) {
+		toSerialize["platform"] = o.Platform
 	}
 	if o.UserIds != nil {
 		toSerialize["user_ids"] = o.UserIds

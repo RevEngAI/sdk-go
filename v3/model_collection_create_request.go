@@ -24,7 +24,6 @@ type CollectionCreateRequest struct {
 	CollectionScope *CollectionScope `json:"collection_scope,omitempty"`
 	Tags []string `json:"tags,omitempty"`
 	Binaries []int32 `json:"binaries,omitempty"`
-	ModelId int32 `json:"model_id"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,13 +33,12 @@ type _CollectionCreateRequest CollectionCreateRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCollectionCreateRequest(collectionName string, description string, modelId int32) *CollectionCreateRequest {
+func NewCollectionCreateRequest(collectionName string, description string) *CollectionCreateRequest {
 	this := CollectionCreateRequest{}
 	this.CollectionName = collectionName
 	this.Description = description
 	var collectionScope CollectionScope = COLLECTIONSCOPE_PRIVATE
 	this.CollectionScope = &collectionScope
-	this.ModelId = modelId
 	return &this
 }
 
@@ -200,30 +198,6 @@ func (o *CollectionCreateRequest) SetBinaries(v []int32) {
 	o.Binaries = v
 }
 
-// GetModelId returns the ModelId field value
-func (o *CollectionCreateRequest) GetModelId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.ModelId
-}
-
-// GetModelIdOk returns a tuple with the ModelId field value
-// and a boolean to check if the value has been set.
-func (o *CollectionCreateRequest) GetModelIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelId, true
-}
-
-// SetModelId sets field value
-func (o *CollectionCreateRequest) SetModelId(v int32) {
-	o.ModelId = v
-}
-
 func (o CollectionCreateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -245,7 +219,6 @@ func (o CollectionCreateRequest) ToMap() (map[string]interface{}, error) {
 	if o.Binaries != nil {
 		toSerialize["binaries"] = o.Binaries
 	}
-	toSerialize["model_id"] = o.ModelId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -261,7 +234,6 @@ func (o *CollectionCreateRequest) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"collection_name",
 		"description",
-		"model_id",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -296,7 +268,6 @@ func (o *CollectionCreateRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "collection_scope")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "binaries")
-		delete(additionalProperties, "model_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **CreatedAt** | **time.Time** |  | 
 **Description** | **string** |  | 
 **HasNextPage** | Pointer to **bool** |  | [optional] 
-**ModelId** | **int64** |  | 
 **PageNumber** | Pointer to **int64** |  | [optional] 
 **PageSize** | Pointer to **int64** |  | [optional] 
 **Tags** | Pointer to **[]string** |  | [optional] 
@@ -23,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewGetCollectionOutputBody
 
-`func NewGetCollectionOutputBody(collectionId int64, collectionName string, collectionScope string, createdAt time.Time, description string, modelId int64, teamId int64, updatedAt time.Time, userId int64, ) *GetCollectionOutputBody`
+`func NewGetCollectionOutputBody(collectionId int64, collectionName string, collectionScope string, createdAt time.Time, description string, teamId int64, updatedAt time.Time, userId int64, ) *GetCollectionOutputBody`
 
 NewGetCollectionOutputBody instantiates a new GetCollectionOutputBody object
 This constructor will assign default values to properties that have it defined,
@@ -197,26 +196,6 @@ SetHasNextPage sets HasNextPage field to given value.
 `func (o *GetCollectionOutputBody) HasHasNextPage() bool`
 
 HasHasNextPage returns a boolean if a field has been set.
-
-### GetModelId
-
-`func (o *GetCollectionOutputBody) GetModelId() int64`
-
-GetModelId returns the ModelId field if non-nil, zero value otherwise.
-
-### GetModelIdOk
-
-`func (o *GetCollectionOutputBody) GetModelIdOk() (*int64, bool)`
-
-GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelId
-
-`func (o *GetCollectionOutputBody) SetModelId(v int64)`
-
-SetModelId sets ModelId field to given value.
-
 
 ### GetPageNumber
 

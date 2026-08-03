@@ -26,7 +26,11 @@ type AnalysisFunctionEntry struct {
 	FunctionSize int64 `json:"function_size"`
 	FunctionVaddr int64 `json:"function_vaddr"`
 	MangledName NullableString `json:"mangled_name,omitempty"`
+	// ID of the analysis the source function belongs to, if any
+	SourceAnalysisId *int64 `json:"source_analysis_id,omitempty"`
 	SourceBinaryId *int64 `json:"source_binary_id,omitempty"`
+	// ID of the source function this name was transferred from, if any
+	SourceFunctionId *int64 `json:"source_function_id,omitempty"`
 	SourceType string `json:"source_type"`
 	AdditionalProperties map[string]interface{}
 }
@@ -243,6 +247,38 @@ func (o *AnalysisFunctionEntry) UnsetMangledName() {
 	o.MangledName.Unset()
 }
 
+// GetSourceAnalysisId returns the SourceAnalysisId field value if set, zero value otherwise.
+func (o *AnalysisFunctionEntry) GetSourceAnalysisId() int64 {
+	if o == nil || IsNil(o.SourceAnalysisId) {
+		var ret int64
+		return ret
+	}
+	return *o.SourceAnalysisId
+}
+
+// GetSourceAnalysisIdOk returns a tuple with the SourceAnalysisId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalysisFunctionEntry) GetSourceAnalysisIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.SourceAnalysisId) {
+		return nil, false
+	}
+	return o.SourceAnalysisId, true
+}
+
+// HasSourceAnalysisId returns a boolean if a field has been set.
+func (o *AnalysisFunctionEntry) HasSourceAnalysisId() bool {
+	if o != nil && !IsNil(o.SourceAnalysisId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceAnalysisId gets a reference to the given int64 and assigns it to the SourceAnalysisId field.
+func (o *AnalysisFunctionEntry) SetSourceAnalysisId(v int64) {
+	o.SourceAnalysisId = &v
+}
+
 // GetSourceBinaryId returns the SourceBinaryId field value if set, zero value otherwise.
 func (o *AnalysisFunctionEntry) GetSourceBinaryId() int64 {
 	if o == nil || IsNil(o.SourceBinaryId) {
@@ -273,6 +309,38 @@ func (o *AnalysisFunctionEntry) HasSourceBinaryId() bool {
 // SetSourceBinaryId gets a reference to the given int64 and assigns it to the SourceBinaryId field.
 func (o *AnalysisFunctionEntry) SetSourceBinaryId(v int64) {
 	o.SourceBinaryId = &v
+}
+
+// GetSourceFunctionId returns the SourceFunctionId field value if set, zero value otherwise.
+func (o *AnalysisFunctionEntry) GetSourceFunctionId() int64 {
+	if o == nil || IsNil(o.SourceFunctionId) {
+		var ret int64
+		return ret
+	}
+	return *o.SourceFunctionId
+}
+
+// GetSourceFunctionIdOk returns a tuple with the SourceFunctionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalysisFunctionEntry) GetSourceFunctionIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.SourceFunctionId) {
+		return nil, false
+	}
+	return o.SourceFunctionId, true
+}
+
+// HasSourceFunctionId returns a boolean if a field has been set.
+func (o *AnalysisFunctionEntry) HasSourceFunctionId() bool {
+	if o != nil && !IsNil(o.SourceFunctionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceFunctionId gets a reference to the given int64 and assigns it to the SourceFunctionId field.
+func (o *AnalysisFunctionEntry) SetSourceFunctionId(v int64) {
+	o.SourceFunctionId = &v
 }
 
 // GetSourceType returns the SourceType field value
@@ -318,8 +386,14 @@ func (o AnalysisFunctionEntry) ToMap() (map[string]interface{}, error) {
 	if o.MangledName.IsSet() {
 		toSerialize["mangled_name"] = o.MangledName.Get()
 	}
+	if !IsNil(o.SourceAnalysisId) {
+		toSerialize["source_analysis_id"] = o.SourceAnalysisId
+	}
 	if !IsNil(o.SourceBinaryId) {
 		toSerialize["source_binary_id"] = o.SourceBinaryId
+	}
+	if !IsNil(o.SourceFunctionId) {
+		toSerialize["source_function_id"] = o.SourceFunctionId
 	}
 	toSerialize["source_type"] = o.SourceType
 
@@ -378,7 +452,9 @@ func (o *AnalysisFunctionEntry) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "function_size")
 		delete(additionalProperties, "function_vaddr")
 		delete(additionalProperties, "mangled_name")
+		delete(additionalProperties, "source_analysis_id")
 		delete(additionalProperties, "source_binary_id")
+		delete(additionalProperties, "source_function_id")
 		delete(additionalProperties, "source_type")
 		o.AdditionalProperties = additionalProperties
 	}
