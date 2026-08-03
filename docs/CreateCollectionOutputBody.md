@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **CollectionScope** | **string** |  | 
 **CreatedAt** | **time.Time** |  | 
 **Description** | **string** |  | 
-**ModelId** | **int64** |  | 
 **Tags** | Pointer to **[]string** |  | [optional] 
 **TeamId** | **int64** |  | 
 **UpdatedAt** | **time.Time** |  | 
@@ -20,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewCreateCollectionOutputBody
 
-`func NewCreateCollectionOutputBody(collectionId int64, collectionName string, collectionScope string, createdAt time.Time, description string, modelId int64, teamId int64, updatedAt time.Time, userId int64, ) *CreateCollectionOutputBody`
+`func NewCreateCollectionOutputBody(collectionId int64, collectionName string, collectionScope string, createdAt time.Time, description string, teamId int64, updatedAt time.Time, userId int64, ) *CreateCollectionOutputBody`
 
 NewCreateCollectionOutputBody instantiates a new CreateCollectionOutputBody object
 This constructor will assign default values to properties that have it defined,
@@ -168,26 +167,6 @@ and a boolean to check if the value has been set.
 `func (o *CreateCollectionOutputBody) SetDescription(v string)`
 
 SetDescription sets Description field to given value.
-
-
-### GetModelId
-
-`func (o *CreateCollectionOutputBody) GetModelId() int64`
-
-GetModelId returns the ModelId field if non-nil, zero value otherwise.
-
-### GetModelIdOk
-
-`func (o *CreateCollectionOutputBody) GetModelIdOk() (*int64, bool)`
-
-GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelId
-
-`func (o *CreateCollectionOutputBody) SetModelId(v int64)`
-
-SetModelId sets ModelId field to given value.
 
 
 ### GetTags

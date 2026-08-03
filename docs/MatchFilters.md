@@ -4,10 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Arch** | Pointer to **string** | Restrict matches to this architecture (multi-platform models only; matches all architectures if omitted). Rejected for single-architecture models. | [optional] 
 **BinaryIds** | Pointer to **[]int64** | Restrict the candidate pool to these binary IDs. | [optional] 
+**Bits** | Pointer to **int64** | Restrict matches to this word size (multi-platform models only). Rejected for single-architecture models. | [optional] 
 **CollectionIds** | Pointer to **[]int64** | Restrict the candidate pool to binaries in these collection IDs. | [optional] 
 **DebugTypes** | Pointer to **[]string** | Restrict matches to candidates with these debug source types. Accepted: SYSTEM, USER. | [optional] 
 **FunctionIds** | Pointer to **[]int64** | Restrict the candidate pool to these function IDs. | [optional] 
+**Platform** | Pointer to **string** | Restrict matches to this platform (multi-platform models only; matches all platforms if omitted). Rejected for single-architecture models. | [optional] 
 **UserIds** | Pointer to **[]int64** | Restrict the candidate pool to functions owned by these user IDs. | [optional] 
 
 ## Methods
@@ -28,6 +31,31 @@ will change when the set of required properties is changed
 NewMatchFiltersWithDefaults instantiates a new MatchFilters object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetArch
+
+`func (o *MatchFilters) GetArch() string`
+
+GetArch returns the Arch field if non-nil, zero value otherwise.
+
+### GetArchOk
+
+`func (o *MatchFilters) GetArchOk() (*string, bool)`
+
+GetArchOk returns a tuple with the Arch field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArch
+
+`func (o *MatchFilters) SetArch(v string)`
+
+SetArch sets Arch field to given value.
+
+### HasArch
+
+`func (o *MatchFilters) HasArch() bool`
+
+HasArch returns a boolean if a field has been set.
 
 ### GetBinaryIds
 
@@ -64,6 +92,31 @@ HasBinaryIds returns a boolean if a field has been set.
 `func (o *MatchFilters) UnsetBinaryIds()`
 
 UnsetBinaryIds ensures that no value is present for BinaryIds, not even an explicit nil
+### GetBits
+
+`func (o *MatchFilters) GetBits() int64`
+
+GetBits returns the Bits field if non-nil, zero value otherwise.
+
+### GetBitsOk
+
+`func (o *MatchFilters) GetBitsOk() (*int64, bool)`
+
+GetBitsOk returns a tuple with the Bits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBits
+
+`func (o *MatchFilters) SetBits(v int64)`
+
+SetBits sets Bits field to given value.
+
+### HasBits
+
+`func (o *MatchFilters) HasBits() bool`
+
+HasBits returns a boolean if a field has been set.
+
 ### GetCollectionIds
 
 `func (o *MatchFilters) GetCollectionIds() []int64`
@@ -169,6 +222,31 @@ HasFunctionIds returns a boolean if a field has been set.
 `func (o *MatchFilters) UnsetFunctionIds()`
 
 UnsetFunctionIds ensures that no value is present for FunctionIds, not even an explicit nil
+### GetPlatform
+
+`func (o *MatchFilters) GetPlatform() string`
+
+GetPlatform returns the Platform field if non-nil, zero value otherwise.
+
+### GetPlatformOk
+
+`func (o *MatchFilters) GetPlatformOk() (*string, bool)`
+
+GetPlatformOk returns a tuple with the Platform field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatform
+
+`func (o *MatchFilters) SetPlatform(v string)`
+
+SetPlatform sets Platform field to given value.
+
+### HasPlatform
+
+`func (o *MatchFilters) HasPlatform() bool`
+
+HasPlatform returns a boolean if a field has been set.
+
 ### GetUserIds
 
 `func (o *MatchFilters) GetUserIds() []int64`

@@ -21,7 +21,6 @@ type AppApiRestV2CollectionsEnumsOrderBy string
 const (
 	APPAPIRESTV2COLLECTIONSENUMSORDERBY_CREATED AppApiRestV2CollectionsEnumsOrderBy = "created"
 	APPAPIRESTV2COLLECTIONSENUMSORDERBY_COLLECTION AppApiRestV2CollectionsEnumsOrderBy = "collection"
-	APPAPIRESTV2COLLECTIONSENUMSORDERBY_MODEL AppApiRestV2CollectionsEnumsOrderBy = "model"
 	APPAPIRESTV2COLLECTIONSENUMSORDERBY_OWNER AppApiRestV2CollectionsEnumsOrderBy = "owner"
 	APPAPIRESTV2COLLECTIONSENUMSORDERBY_COLLECTION_SIZE AppApiRestV2CollectionsEnumsOrderBy = "collection_size"
 	APPAPIRESTV2COLLECTIONSENUMSORDERBY_UPDATED AppApiRestV2CollectionsEnumsOrderBy = "updated"
@@ -32,7 +31,6 @@ const (
 var AllowedAppApiRestV2CollectionsEnumsOrderByEnumValues = []AppApiRestV2CollectionsEnumsOrderBy{
 	"created",
 	"collection",
-	"model",
 	"owner",
 	"collection_size",
 	"updated",

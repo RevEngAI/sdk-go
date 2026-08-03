@@ -23,6 +23,7 @@ type Permissions struct {
 	CanExportSymbols bool `json:"can_export_symbols"`
 	CanGeneratePdfReports bool `json:"can_generate_pdf_reports"`
 	CanUseAiMalwareAnalysis bool `json:"can_use_ai_malware_analysis"`
+	CanUseCompositionAnalysis bool `json:"can_use_composition_analysis"`
 	CanUseMalwareSandbox bool `json:"can_use_malware_sandbox"`
 	CanUsePrivateAnalyses bool `json:"can_use_private_analyses"`
 }
@@ -33,11 +34,12 @@ type _Permissions Permissions
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPermissions(canExportSymbols bool, canGeneratePdfReports bool, canUseAiMalwareAnalysis bool, canUseMalwareSandbox bool, canUsePrivateAnalyses bool) *Permissions {
+func NewPermissions(canExportSymbols bool, canGeneratePdfReports bool, canUseAiMalwareAnalysis bool, canUseCompositionAnalysis bool, canUseMalwareSandbox bool, canUsePrivateAnalyses bool) *Permissions {
 	this := Permissions{}
 	this.CanExportSymbols = canExportSymbols
 	this.CanGeneratePdfReports = canGeneratePdfReports
 	this.CanUseAiMalwareAnalysis = canUseAiMalwareAnalysis
+	this.CanUseCompositionAnalysis = canUseCompositionAnalysis
 	this.CanUseMalwareSandbox = canUseMalwareSandbox
 	this.CanUsePrivateAnalyses = canUsePrivateAnalyses
 	return &this
@@ -123,6 +125,30 @@ func (o *Permissions) SetCanUseAiMalwareAnalysis(v bool) {
 	o.CanUseAiMalwareAnalysis = v
 }
 
+// GetCanUseCompositionAnalysis returns the CanUseCompositionAnalysis field value
+func (o *Permissions) GetCanUseCompositionAnalysis() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.CanUseCompositionAnalysis
+}
+
+// GetCanUseCompositionAnalysisOk returns a tuple with the CanUseCompositionAnalysis field value
+// and a boolean to check if the value has been set.
+func (o *Permissions) GetCanUseCompositionAnalysisOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CanUseCompositionAnalysis, true
+}
+
+// SetCanUseCompositionAnalysis sets field value
+func (o *Permissions) SetCanUseCompositionAnalysis(v bool) {
+	o.CanUseCompositionAnalysis = v
+}
+
 // GetCanUseMalwareSandbox returns the CanUseMalwareSandbox field value
 func (o *Permissions) GetCanUseMalwareSandbox() bool {
 	if o == nil {
@@ -184,6 +210,7 @@ func (o Permissions) ToMap() (map[string]interface{}, error) {
 	toSerialize["can_export_symbols"] = o.CanExportSymbols
 	toSerialize["can_generate_pdf_reports"] = o.CanGeneratePdfReports
 	toSerialize["can_use_ai_malware_analysis"] = o.CanUseAiMalwareAnalysis
+	toSerialize["can_use_composition_analysis"] = o.CanUseCompositionAnalysis
 	toSerialize["can_use_malware_sandbox"] = o.CanUseMalwareSandbox
 	toSerialize["can_use_private_analyses"] = o.CanUsePrivateAnalyses
 	return toSerialize, nil
@@ -197,6 +224,7 @@ func (o *Permissions) UnmarshalJSON(data []byte) (err error) {
 		"can_export_symbols",
 		"can_generate_pdf_reports",
 		"can_use_ai_malware_analysis",
+		"can_use_composition_analysis",
 		"can_use_malware_sandbox",
 		"can_use_private_analyses",
 	}

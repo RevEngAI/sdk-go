@@ -12,15 +12,15 @@ Name | Type | Description | Notes
 **CollectionTags** | **[]string** |  | 
 **Creation** | **time.Time** |  | 
 **Description** | **string** |  | 
-**ModelName** | **string** |  | 
 **OfficialCollection** | **bool** |  | 
 **TeamId** | **int64** |  | 
+**UpdatedAt** | **time.Time** |  | 
 
 ## Methods
 
 ### NewCollectionListItemBody
 
-`func NewCollectionListItemBody(collectionId int64, collectionName string, collectionOwner string, collectionScope string, collectionSize int64, collectionTags []string, creation time.Time, description string, modelName string, officialCollection bool, teamId int64, ) *CollectionListItemBody`
+`func NewCollectionListItemBody(collectionId int64, collectionName string, collectionOwner string, collectionScope string, collectionSize int64, collectionTags []string, creation time.Time, description string, officialCollection bool, teamId int64, updatedAt time.Time, ) *CollectionListItemBody`
 
 NewCollectionListItemBody instantiates a new CollectionListItemBody object
 This constructor will assign default values to properties that have it defined,
@@ -205,26 +205,6 @@ and a boolean to check if the value has been set.
 SetDescription sets Description field to given value.
 
 
-### GetModelName
-
-`func (o *CollectionListItemBody) GetModelName() string`
-
-GetModelName returns the ModelName field if non-nil, zero value otherwise.
-
-### GetModelNameOk
-
-`func (o *CollectionListItemBody) GetModelNameOk() (*string, bool)`
-
-GetModelNameOk returns a tuple with the ModelName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelName
-
-`func (o *CollectionListItemBody) SetModelName(v string)`
-
-SetModelName sets ModelName field to given value.
-
-
 ### GetOfficialCollection
 
 `func (o *CollectionListItemBody) GetOfficialCollection() bool`
@@ -263,6 +243,26 @@ and a boolean to check if the value has been set.
 `func (o *CollectionListItemBody) SetTeamId(v int64)`
 
 SetTeamId sets TeamId field to given value.
+
+
+### GetUpdatedAt
+
+`func (o *CollectionListItemBody) GetUpdatedAt() time.Time`
+
+GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
+
+### GetUpdatedAtOk
+
+`func (o *CollectionListItemBody) GetUpdatedAtOk() (*time.Time, bool)`
+
+GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdatedAt
+
+`func (o *CollectionListItemBody) SetUpdatedAt(v time.Time)`
+
+SetUpdatedAt sets UpdatedAt field to given value.
 
 
 

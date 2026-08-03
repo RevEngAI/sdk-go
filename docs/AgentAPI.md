@@ -5,12 +5,15 @@ All URIs are relative to *https://api.reveng.ai*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CheckCapabilitiesTaskStatusV2AnalysesAnalysisIdAgentCapabilitiesStatusGet**](AgentAPI.md#CheckCapabilitiesTaskStatusV2AnalysesAnalysisIdAgentCapabilitiesStatusGet) | **Get** /v2/analyses/{analysis_id}/agent/capabilities/status | Check the status of a capabilities analysis workflow
+[**CheckRemediationTaskStatusV2AnalysesAnalysisIdAgentRemediationStatusGet**](AgentAPI.md#CheckRemediationTaskStatusV2AnalysesAnalysisIdAgentRemediationStatusGet) | **Get** /v2/analyses/{analysis_id}/agent/remediation/status | Check the status of a remediation analysis workflow
 [**CheckReportAnalysisTaskStatusV2AnalysesAnalysisIdAgentReportAnalysisStatusGet**](AgentAPI.md#CheckReportAnalysisTaskStatusV2AnalysesAnalysisIdAgentReportAnalysisStatusGet) | **Get** /v2/analyses/{analysis_id}/agent/report-analysis/status | Check the status of a report analysis workflow
 [**CheckTriageTaskStatusV2AnalysesAnalysisIdAgentTriageStatusGet**](AgentAPI.md#CheckTriageTaskStatusV2AnalysesAnalysisIdAgentTriageStatusGet) | **Get** /v2/analyses/{analysis_id}/agent/triage/status | Check the status of a triage analysis workflow
 [**CreateCapabilitiesTaskV2AnalysesAnalysisIdAgentCapabilitiesPost**](AgentAPI.md#CreateCapabilitiesTaskV2AnalysesAnalysisIdAgentCapabilitiesPost) | **Post** /v2/analyses/{analysis_id}/agent/capabilities | Queues a capabilities analysis workflow process
+[**CreateRemediationTaskV2AnalysesAnalysisIdAgentRemediationPost**](AgentAPI.md#CreateRemediationTaskV2AnalysesAnalysisIdAgentRemediationPost) | **Post** /v2/analyses/{analysis_id}/agent/remediation | Queues a remediation analysis workflow process
 [**CreateReportAnalysisTaskV2AnalysesAnalysisIdAgentReportAnalysisPost**](AgentAPI.md#CreateReportAnalysisTaskV2AnalysesAnalysisIdAgentReportAnalysisPost) | **Post** /v2/analyses/{analysis_id}/agent/report-analysis | Queues a combined report analysis workflow process
 [**CreateTriageTaskV2AnalysesAnalysisIdAgentTriagePost**](AgentAPI.md#CreateTriageTaskV2AnalysesAnalysisIdAgentTriagePost) | **Post** /v2/analyses/{analysis_id}/agent/triage | Queues a triage analysis workflow process
 [**GetCapabilitiesResultV2AnalysesAnalysisIdAgentCapabilitiesGet**](AgentAPI.md#GetCapabilitiesResultV2AnalysesAnalysisIdAgentCapabilitiesGet) | **Get** /v2/analyses/{analysis_id}/agent/capabilities | Get Capabilities Result
+[**GetRemediationResultV2AnalysesAnalysisIdAgentRemediationGet**](AgentAPI.md#GetRemediationResultV2AnalysesAnalysisIdAgentRemediationGet) | **Get** /v2/analyses/{analysis_id}/agent/remediation | Get Remediation Result
 [**GetReportAnalysisResultV2AnalysesAnalysisIdAgentReportAnalysisGet**](AgentAPI.md#GetReportAnalysisResultV2AnalysesAnalysisIdAgentReportAnalysisGet) | **Get** /v2/analyses/{analysis_id}/agent/report-analysis | Get Report Analysis Result
 [**GetTriageResultV2AnalysesAnalysisIdAgentTriageGet**](AgentAPI.md#GetTriageResultV2AnalysesAnalysisIdAgentTriageGet) | **Get** /v2/analyses/{analysis_id}/agent/triage | Get Triage Result
 
@@ -60,6 +63,74 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCheckCapabilitiesTaskStatusV2AnalysesAnalysisIdAgentCapabilitiesStatusGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**TaskStatusResponse**](TaskStatusResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CheckRemediationTaskStatusV2AnalysesAnalysisIdAgentRemediationStatusGet
+
+> TaskStatusResponse CheckRemediationTaskStatusV2AnalysesAnalysisIdAgentRemediationStatusGet(ctx, analysisId).Execute()
+
+Check the status of a remediation analysis workflow
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	analysisId := int32(56) // int32 | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AgentAPI.CheckRemediationTaskStatusV2AnalysesAnalysisIdAgentRemediationStatusGet(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.CheckRemediationTaskStatusV2AnalysesAnalysisIdAgentRemediationStatusGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CheckRemediationTaskStatusV2AnalysesAnalysisIdAgentRemediationStatusGet`: TaskStatusResponse
+	fmt.Fprintf(os.Stdout, "Response from `AgentAPI.CheckRemediationTaskStatusV2AnalysesAnalysisIdAgentRemediationStatusGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCheckRemediationTaskStatusV2AnalysesAnalysisIdAgentRemediationStatusGetRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -288,6 +359,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateRemediationTaskV2AnalysesAnalysisIdAgentRemediationPost
+
+> BaseResponseQueuedWorkflowTaskResponse CreateRemediationTaskV2AnalysesAnalysisIdAgentRemediationPost(ctx, analysisId).Execute()
+
+Queues a remediation analysis workflow process
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	analysisId := int32(56) // int32 | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AgentAPI.CreateRemediationTaskV2AnalysesAnalysisIdAgentRemediationPost(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.CreateRemediationTaskV2AnalysesAnalysisIdAgentRemediationPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateRemediationTaskV2AnalysesAnalysisIdAgentRemediationPost`: BaseResponseQueuedWorkflowTaskResponse
+	fmt.Fprintf(os.Stdout, "Response from `AgentAPI.CreateRemediationTaskV2AnalysesAnalysisIdAgentRemediationPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateRemediationTaskV2AnalysesAnalysisIdAgentRemediationPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BaseResponseQueuedWorkflowTaskResponse**](BaseResponseQueuedWorkflowTaskResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateReportAnalysisTaskV2AnalysesAnalysisIdAgentReportAnalysisPost
 
 > QueuedWorkflowTaskResponse CreateReportAnalysisTaskV2AnalysesAnalysisIdAgentReportAnalysisPost(ctx, analysisId).Execute()
@@ -477,6 +616,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseCapabilitiesAgentResponse**](BaseResponseCapabilitiesAgentResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRemediationResultV2AnalysesAnalysisIdAgentRemediationGet
+
+> BaseResponseRemediationAgentResponse GetRemediationResultV2AnalysesAnalysisIdAgentRemediationGet(ctx, analysisId).Execute()
+
+Get Remediation Result
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	analysisId := int32(56) // int32 | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AgentAPI.GetRemediationResultV2AnalysesAnalysisIdAgentRemediationGet(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.GetRemediationResultV2AnalysesAnalysisIdAgentRemediationGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRemediationResultV2AnalysesAnalysisIdAgentRemediationGet`: BaseResponseRemediationAgentResponse
+	fmt.Fprintf(os.Stdout, "Response from `AgentAPI.GetRemediationResultV2AnalysesAnalysisIdAgentRemediationGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRemediationResultV2AnalysesAnalysisIdAgentRemediationGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BaseResponseRemediationAgentResponse**](BaseResponseRemediationAgentResponse.md)
 
 ### Authorization
 

@@ -26,8 +26,6 @@ type CollectionResponse struct {
 	CollectionName string `json:"collection_name"`
 	// Collection description
 	Description string `json:"description"`
-	// Collection model ID
-	ModelId int32 `json:"model_id"`
 	// Collection user ID
 	UserId int32 `json:"user_id"`
 	TeamId NullableInt32 `json:"team_id,omitempty"`
@@ -48,12 +46,11 @@ type _CollectionResponse CollectionResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCollectionResponse(collectionId int32, collectionName string, description string, modelId int32, userId int32, collectionScope CollectionScope, createdAt time.Time, updatedAt time.Time) *CollectionResponse {
+func NewCollectionResponse(collectionId int32, collectionName string, description string, userId int32, collectionScope CollectionScope, createdAt time.Time, updatedAt time.Time) *CollectionResponse {
 	this := CollectionResponse{}
 	this.CollectionId = collectionId
 	this.CollectionName = collectionName
 	this.Description = description
-	this.ModelId = modelId
 	this.UserId = userId
 	this.CollectionScope = collectionScope
 	this.CreatedAt = createdAt
@@ -139,30 +136,6 @@ func (o *CollectionResponse) GetDescriptionOk() (*string, bool) {
 // SetDescription sets field value
 func (o *CollectionResponse) SetDescription(v string) {
 	o.Description = v
-}
-
-// GetModelId returns the ModelId field value
-func (o *CollectionResponse) GetModelId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.ModelId
-}
-
-// GetModelIdOk returns a tuple with the ModelId field value
-// and a boolean to check if the value has been set.
-func (o *CollectionResponse) GetModelIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelId, true
-}
-
-// SetModelId sets field value
-func (o *CollectionResponse) SetModelId(v int32) {
-	o.ModelId = v
 }
 
 // GetUserId returns the UserId field value
@@ -382,7 +355,6 @@ func (o CollectionResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["collection_id"] = o.CollectionId
 	toSerialize["collection_name"] = o.CollectionName
 	toSerialize["description"] = o.Description
-	toSerialize["model_id"] = o.ModelId
 	toSerialize["user_id"] = o.UserId
 	if o.TeamId.IsSet() {
 		toSerialize["team_id"] = o.TeamId.Get()
@@ -412,7 +384,6 @@ func (o *CollectionResponse) UnmarshalJSON(data []byte) (err error) {
 		"collection_id",
 		"collection_name",
 		"description",
-		"model_id",
 		"user_id",
 		"collection_scope",
 		"created_at",
@@ -449,7 +420,6 @@ func (o *CollectionResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "collection_id")
 		delete(additionalProperties, "collection_name")
 		delete(additionalProperties, "description")
-		delete(additionalProperties, "model_id")
 		delete(additionalProperties, "user_id")
 		delete(additionalProperties, "team_id")
 		delete(additionalProperties, "collection_scope")

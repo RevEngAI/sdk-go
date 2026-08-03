@@ -27,7 +27,6 @@ type CreateCollectionOutputBody struct {
 	CollectionScope string `json:"collection_scope"`
 	CreatedAt time.Time `json:"created_at"`
 	Description string `json:"description"`
-	ModelId int64 `json:"model_id"`
 	Tags []string `json:"tags,omitempty"`
 	TeamId int64 `json:"team_id"`
 	UpdatedAt time.Time `json:"updated_at"`
@@ -40,14 +39,13 @@ type _CreateCollectionOutputBody CreateCollectionOutputBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateCollectionOutputBody(collectionId int64, collectionName string, collectionScope string, createdAt time.Time, description string, modelId int64, teamId int64, updatedAt time.Time, userId int64) *CreateCollectionOutputBody {
+func NewCreateCollectionOutputBody(collectionId int64, collectionName string, collectionScope string, createdAt time.Time, description string, teamId int64, updatedAt time.Time, userId int64) *CreateCollectionOutputBody {
 	this := CreateCollectionOutputBody{}
 	this.CollectionId = collectionId
 	this.CollectionName = collectionName
 	this.CollectionScope = collectionScope
 	this.CreatedAt = createdAt
 	this.Description = description
-	this.ModelId = modelId
 	this.TeamId = teamId
 	this.UpdatedAt = updatedAt
 	this.UserId = userId
@@ -215,30 +213,6 @@ func (o *CreateCollectionOutputBody) SetDescription(v string) {
 	o.Description = v
 }
 
-// GetModelId returns the ModelId field value
-func (o *CreateCollectionOutputBody) GetModelId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.ModelId
-}
-
-// GetModelIdOk returns a tuple with the ModelId field value
-// and a boolean to check if the value has been set.
-func (o *CreateCollectionOutputBody) GetModelIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelId, true
-}
-
-// SetModelId sets field value
-func (o *CreateCollectionOutputBody) SetModelId(v int64) {
-	o.ModelId = v
-}
-
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCollectionOutputBody) GetTags() []string {
 	if o == nil {
@@ -362,7 +336,6 @@ func (o CreateCollectionOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize["collection_scope"] = o.CollectionScope
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["description"] = o.Description
-	toSerialize["model_id"] = o.ModelId
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
 	}
@@ -382,7 +355,6 @@ func (o *CreateCollectionOutputBody) UnmarshalJSON(data []byte) (err error) {
 		"collection_scope",
 		"created_at",
 		"description",
-		"model_id",
 		"team_id",
 		"updated_at",
 		"user_id",

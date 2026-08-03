@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **CanExportSymbols** | **bool** |  | 
 **CanGeneratePdfReports** | **bool** |  | 
 **CanUseAiMalwareAnalysis** | **bool** |  | 
+**CanUseCompositionAnalysis** | **bool** |  | 
 **CanUseMalwareSandbox** | **bool** |  | 
 **CanUsePrivateAnalyses** | **bool** |  | 
 
@@ -14,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewPermissions
 
-`func NewPermissions(canExportSymbols bool, canGeneratePdfReports bool, canUseAiMalwareAnalysis bool, canUseMalwareSandbox bool, canUsePrivateAnalyses bool, ) *Permissions`
+`func NewPermissions(canExportSymbols bool, canGeneratePdfReports bool, canUseAiMalwareAnalysis bool, canUseCompositionAnalysis bool, canUseMalwareSandbox bool, canUsePrivateAnalyses bool, ) *Permissions`
 
 NewPermissions instantiates a new Permissions object
 This constructor will assign default values to properties that have it defined,
@@ -87,6 +88,26 @@ and a boolean to check if the value has been set.
 `func (o *Permissions) SetCanUseAiMalwareAnalysis(v bool)`
 
 SetCanUseAiMalwareAnalysis sets CanUseAiMalwareAnalysis field to given value.
+
+
+### GetCanUseCompositionAnalysis
+
+`func (o *Permissions) GetCanUseCompositionAnalysis() bool`
+
+GetCanUseCompositionAnalysis returns the CanUseCompositionAnalysis field if non-nil, zero value otherwise.
+
+### GetCanUseCompositionAnalysisOk
+
+`func (o *Permissions) GetCanUseCompositionAnalysisOk() (*bool, bool)`
+
+GetCanUseCompositionAnalysisOk returns a tuple with the CanUseCompositionAnalysis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanUseCompositionAnalysis
+
+`func (o *Permissions) SetCanUseCompositionAnalysis(v bool)`
+
+SetCanUseCompositionAnalysis sets CanUseCompositionAnalysis field to given value.
 
 
 ### GetCanUseMalwareSandbox

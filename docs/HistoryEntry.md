@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **HistoryId** | **int64** | History record ID | 
 **IsDebug** | **bool** | Whether the function had debug info | 
 **MangledName** | Pointer to **string** | Mangled function name | [optional] 
+**SourceAnalysisId** | Pointer to **int64** | ID of the analysis the source function belongs to, if any | [optional] 
+**SourceFunctionId** | Pointer to **int64** | ID of the source function this name was transferred from, if any | [optional] 
 **SourceType** | **string** | Source of the rename (USER, SYSTEM, AI_UNSTRIP, etc.) | 
 
 ## Methods
@@ -155,6 +157,56 @@ SetMangledName sets MangledName field to given value.
 `func (o *HistoryEntry) HasMangledName() bool`
 
 HasMangledName returns a boolean if a field has been set.
+
+### GetSourceAnalysisId
+
+`func (o *HistoryEntry) GetSourceAnalysisId() int64`
+
+GetSourceAnalysisId returns the SourceAnalysisId field if non-nil, zero value otherwise.
+
+### GetSourceAnalysisIdOk
+
+`func (o *HistoryEntry) GetSourceAnalysisIdOk() (*int64, bool)`
+
+GetSourceAnalysisIdOk returns a tuple with the SourceAnalysisId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceAnalysisId
+
+`func (o *HistoryEntry) SetSourceAnalysisId(v int64)`
+
+SetSourceAnalysisId sets SourceAnalysisId field to given value.
+
+### HasSourceAnalysisId
+
+`func (o *HistoryEntry) HasSourceAnalysisId() bool`
+
+HasSourceAnalysisId returns a boolean if a field has been set.
+
+### GetSourceFunctionId
+
+`func (o *HistoryEntry) GetSourceFunctionId() int64`
+
+GetSourceFunctionId returns the SourceFunctionId field if non-nil, zero value otherwise.
+
+### GetSourceFunctionIdOk
+
+`func (o *HistoryEntry) GetSourceFunctionIdOk() (*int64, bool)`
+
+GetSourceFunctionIdOk returns a tuple with the SourceFunctionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceFunctionId
+
+`func (o *HistoryEntry) SetSourceFunctionId(v int64)`
+
+SetSourceFunctionId sets SourceFunctionId field to given value.
+
+### HasSourceFunctionId
+
+`func (o *HistoryEntry) HasSourceFunctionId() bool`
+
+HasSourceFunctionId returns a boolean if a field has been set.
 
 ### GetSourceType
 

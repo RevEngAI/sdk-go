@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **CollectionScope** | **string** |  | 
 **CreatedAt** | **time.Time** |  | 
 **Description** | **string** |  | 
-**ModelId** | **int64** |  | 
 **TeamId** | **int64** |  | 
 **UpdatedAt** | **time.Time** |  | 
 **UserId** | **int64** |  | 
@@ -19,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewPatchCollectionOutputBody
 
-`func NewPatchCollectionOutputBody(binaryCount int64, collectionId int64, collectionName string, collectionScope string, createdAt time.Time, description string, modelId int64, teamId int64, updatedAt time.Time, userId int64, ) *PatchCollectionOutputBody`
+`func NewPatchCollectionOutputBody(binaryCount int64, collectionId int64, collectionName string, collectionScope string, createdAt time.Time, description string, teamId int64, updatedAt time.Time, userId int64, ) *PatchCollectionOutputBody`
 
 NewPatchCollectionOutputBody instantiates a new PatchCollectionOutputBody object
 This constructor will assign default values to properties that have it defined,
@@ -152,26 +151,6 @@ and a boolean to check if the value has been set.
 `func (o *PatchCollectionOutputBody) SetDescription(v string)`
 
 SetDescription sets Description field to given value.
-
-
-### GetModelId
-
-`func (o *PatchCollectionOutputBody) GetModelId() int64`
-
-GetModelId returns the ModelId field if non-nil, zero value otherwise.
-
-### GetModelIdOk
-
-`func (o *PatchCollectionOutputBody) GetModelIdOk() (*int64, bool)`
-
-GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelId
-
-`func (o *PatchCollectionOutputBody) SetModelId(v int64)`
-
-SetModelId sets ModelId field to given value.
 
 
 ### GetTeamId

@@ -33,6 +33,7 @@ type ApiSearchBinariesRequest struct {
 	modelName *string
 	userFilesOnly *bool
 	excludeBinaryId *int32
+	userIds *[]int32
 }
 
 // The page number to retrieve.
@@ -80,6 +81,12 @@ func (r ApiSearchBinariesRequest) UserFilesOnly(userFilesOnly bool) ApiSearchBin
 // A binary ID to exclude from the results
 func (r ApiSearchBinariesRequest) ExcludeBinaryId(excludeBinaryId int32) ApiSearchBinariesRequest {
 	r.excludeBinaryId = &excludeBinaryId
+	return r
+}
+
+// Restrict the search to binaries owned by these user IDs
+func (r ApiSearchBinariesRequest) UserIds(userIds []int32) ApiSearchBinariesRequest {
+	r.userIds = &userIds
 	return r
 }
 
@@ -166,6 +173,17 @@ func (a *SearchAPIService) SearchBinariesExecute(r ApiSearchBinariesRequest) (*B
 	}
 	if r.excludeBinaryId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "exclude_binary_id", r.excludeBinaryId, "form", "")
+	}
+	if r.userIds != nil {
+		t := *r.userIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "user_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "user_ids", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -254,10 +272,10 @@ type ApiSearchCollectionsRequest struct {
 	partialBinaryName *string
 	partialBinarySha256 *string
 	tags *[]string
-	modelName *string
 	filters *[]Filters
 	orderBy *AppApiRestV2CollectionsEnumsOrderBy
 	orderByDirection *Order
+	userIds *[]int32
 }
 
 // The page number to retrieve.
@@ -296,12 +314,6 @@ func (r ApiSearchCollectionsRequest) Tags(tags []string) ApiSearchCollectionsReq
 	return r
 }
 
-// The name of the model used to analyze the binary the function belongs to
-func (r ApiSearchCollectionsRequest) ModelName(modelName string) ApiSearchCollectionsRequest {
-	r.modelName = &modelName
-	return r
-}
-
 // The filters to be used for the search
 func (r ApiSearchCollectionsRequest) Filters(filters []Filters) ApiSearchCollectionsRequest {
 	r.filters = &filters
@@ -317,6 +329,12 @@ func (r ApiSearchCollectionsRequest) OrderBy(orderBy AppApiRestV2CollectionsEnum
 // The order direction in which to return results
 func (r ApiSearchCollectionsRequest) OrderByDirection(orderByDirection Order) ApiSearchCollectionsRequest {
 	r.orderByDirection = &orderByDirection
+	return r
+}
+
+// Restrict the search to collections owned by these user IDs
+func (r ApiSearchCollectionsRequest) UserIds(userIds []int32) ApiSearchCollectionsRequest {
+	r.userIds = &userIds
 	return r
 }
 
@@ -394,9 +412,6 @@ func (a *SearchAPIService) SearchCollectionsExecute(r ApiSearchCollectionsReques
 			parameterAddToHeaderOrQuery(localVarQueryParams, "tags", t, "form", "multi")
 		}
 	}
-	if r.modelName != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "model_name", r.modelName, "form", "")
-	}
 	if r.filters != nil {
 		t := *r.filters
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -421,6 +436,17 @@ func (a *SearchAPIService) SearchCollectionsExecute(r ApiSearchCollectionsReques
 		var defaultValue Order = "DESC"
 		parameterAddToHeaderOrQuery(localVarQueryParams, "order_by_direction", defaultValue, "form", "")
 		r.orderByDirection = &defaultValue
+	}
+	if r.userIds != nil {
+		t := *r.userIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "user_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "user_ids", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -476,17 +502,6 @@ func (a *SearchAPIService) SearchCollectionsExecute(r ApiSearchCollectionsReques
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v BaseResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
 			var v BaseResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

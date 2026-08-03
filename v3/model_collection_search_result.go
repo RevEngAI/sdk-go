@@ -30,10 +30,6 @@ type CollectionSearchResult struct {
 	LastUpdatedAt time.Time `json:"last_updated_at"`
 	// The creation date of the collection
 	CreatedAt time.Time `json:"created_at"`
-	// The model ID of the binary
-	ModelId int32 `json:"model_id"`
-	// The name of the model
-	ModelName string `json:"model_name"`
 	// The owner of the collection
 	OwnedBy string `json:"owned_by"`
 	Tags []string `json:"tags,omitempty"`
@@ -50,15 +46,13 @@ type _CollectionSearchResult CollectionSearchResult
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCollectionSearchResult(collectionId int32, collectionName string, scope string, lastUpdatedAt time.Time, createdAt time.Time, modelId int32, modelName string, ownedBy string, description string) *CollectionSearchResult {
+func NewCollectionSearchResult(collectionId int32, collectionName string, scope string, lastUpdatedAt time.Time, createdAt time.Time, ownedBy string, description string) *CollectionSearchResult {
 	this := CollectionSearchResult{}
 	this.CollectionId = collectionId
 	this.CollectionName = collectionName
 	this.Scope = scope
 	this.LastUpdatedAt = lastUpdatedAt
 	this.CreatedAt = createdAt
-	this.ModelId = modelId
-	this.ModelName = modelName
 	this.OwnedBy = ownedBy
 	this.Description = description
 	return &this
@@ -190,54 +184,6 @@ func (o *CollectionSearchResult) GetCreatedAtOk() (*time.Time, bool) {
 // SetCreatedAt sets field value
 func (o *CollectionSearchResult) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
-}
-
-// GetModelId returns the ModelId field value
-func (o *CollectionSearchResult) GetModelId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.ModelId
-}
-
-// GetModelIdOk returns a tuple with the ModelId field value
-// and a boolean to check if the value has been set.
-func (o *CollectionSearchResult) GetModelIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelId, true
-}
-
-// SetModelId sets field value
-func (o *CollectionSearchResult) SetModelId(v int32) {
-	o.ModelId = v
-}
-
-// GetModelName returns the ModelName field value
-func (o *CollectionSearchResult) GetModelName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ModelName
-}
-
-// GetModelNameOk returns a tuple with the ModelName field value
-// and a boolean to check if the value has been set.
-func (o *CollectionSearchResult) GetModelNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelName, true
-}
-
-// SetModelName sets field value
-func (o *CollectionSearchResult) SetModelName(v string) {
-	o.ModelName = v
 }
 
 // GetOwnedBy returns the OwnedBy field value
@@ -420,8 +366,6 @@ func (o CollectionSearchResult) ToMap() (map[string]interface{}, error) {
 	toSerialize["scope"] = o.Scope
 	toSerialize["last_updated_at"] = o.LastUpdatedAt
 	toSerialize["created_at"] = o.CreatedAt
-	toSerialize["model_id"] = o.ModelId
-	toSerialize["model_name"] = o.ModelName
 	toSerialize["owned_by"] = o.OwnedBy
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
@@ -451,8 +395,6 @@ func (o *CollectionSearchResult) UnmarshalJSON(data []byte) (err error) {
 		"scope",
 		"last_updated_at",
 		"created_at",
-		"model_id",
-		"model_name",
 		"owned_by",
 		"description",
 	}
@@ -489,8 +431,6 @@ func (o *CollectionSearchResult) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "last_updated_at")
 		delete(additionalProperties, "created_at")
-		delete(additionalProperties, "model_id")
-		delete(additionalProperties, "model_name")
 		delete(additionalProperties, "owned_by")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "size")

@@ -28,7 +28,6 @@ type GetCollectionOutputBody struct {
 	CreatedAt time.Time `json:"created_at"`
 	Description string `json:"description"`
 	HasNextPage *bool `json:"has_next_page,omitempty"`
-	ModelId int64 `json:"model_id"`
 	PageNumber *int64 `json:"page_number,omitempty"`
 	PageSize *int64 `json:"page_size,omitempty"`
 	Tags []string `json:"tags,omitempty"`
@@ -43,14 +42,13 @@ type _GetCollectionOutputBody GetCollectionOutputBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetCollectionOutputBody(collectionId int64, collectionName string, collectionScope string, createdAt time.Time, description string, modelId int64, teamId int64, updatedAt time.Time, userId int64) *GetCollectionOutputBody {
+func NewGetCollectionOutputBody(collectionId int64, collectionName string, collectionScope string, createdAt time.Time, description string, teamId int64, updatedAt time.Time, userId int64) *GetCollectionOutputBody {
 	this := GetCollectionOutputBody{}
 	this.CollectionId = collectionId
 	this.CollectionName = collectionName
 	this.CollectionScope = collectionScope
 	this.CreatedAt = createdAt
 	this.Description = description
-	this.ModelId = modelId
 	this.TeamId = teamId
 	this.UpdatedAt = updatedAt
 	this.UserId = userId
@@ -250,30 +248,6 @@ func (o *GetCollectionOutputBody) SetHasNextPage(v bool) {
 	o.HasNextPage = &v
 }
 
-// GetModelId returns the ModelId field value
-func (o *GetCollectionOutputBody) GetModelId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.ModelId
-}
-
-// GetModelIdOk returns a tuple with the ModelId field value
-// and a boolean to check if the value has been set.
-func (o *GetCollectionOutputBody) GetModelIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelId, true
-}
-
-// SetModelId sets field value
-func (o *GetCollectionOutputBody) SetModelId(v int64) {
-	o.ModelId = v
-}
-
 // GetPageNumber returns the PageNumber field value if set, zero value otherwise.
 func (o *GetCollectionOutputBody) GetPageNumber() int64 {
 	if o == nil || IsNil(o.PageNumber) {
@@ -464,7 +438,6 @@ func (o GetCollectionOutputBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HasNextPage) {
 		toSerialize["has_next_page"] = o.HasNextPage
 	}
-	toSerialize["model_id"] = o.ModelId
 	if !IsNil(o.PageNumber) {
 		toSerialize["page_number"] = o.PageNumber
 	}
@@ -490,7 +463,6 @@ func (o *GetCollectionOutputBody) UnmarshalJSON(data []byte) (err error) {
 		"collection_scope",
 		"created_at",
 		"description",
-		"model_id",
 		"team_id",
 		"updated_at",
 		"user_id",

@@ -38,8 +38,6 @@ type CollectionListItem struct {
 	CollectionId int32 `json:"collection_id"`
 	// The datetime of when the collection was created
 	Creation time.Time `json:"creation"`
-	// The model being used for the collection
-	ModelName string `json:"model_name"`
 	TeamId NullableInt32 `json:"team_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -50,7 +48,7 @@ type _CollectionListItem CollectionListItem
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCollectionListItem(collectionName string, description string, collectionScope string, collectionOwner string, officialCollection bool, collectionSize int32, collectionId int32, creation time.Time, modelName string) *CollectionListItem {
+func NewCollectionListItem(collectionName string, description string, collectionScope string, collectionOwner string, officialCollection bool, collectionSize int32, collectionId int32, creation time.Time) *CollectionListItem {
 	this := CollectionListItem{}
 	this.CollectionName = collectionName
 	this.Description = description
@@ -60,7 +58,6 @@ func NewCollectionListItem(collectionName string, description string, collection
 	this.CollectionSize = collectionSize
 	this.CollectionId = collectionId
 	this.Creation = creation
-	this.ModelName = modelName
 	return &this
 }
 
@@ -296,30 +293,6 @@ func (o *CollectionListItem) SetCreation(v time.Time) {
 	o.Creation = v
 }
 
-// GetModelName returns the ModelName field value
-func (o *CollectionListItem) GetModelName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ModelName
-}
-
-// GetModelNameOk returns a tuple with the ModelName field value
-// and a boolean to check if the value has been set.
-func (o *CollectionListItem) GetModelNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelName, true
-}
-
-// SetModelName sets field value
-func (o *CollectionListItem) SetModelName(v string) {
-	o.ModelName = v
-}
-
 // GetTeamId returns the TeamId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CollectionListItem) GetTeamId() int32 {
 	if o == nil || IsNil(o.TeamId.Get()) {
@@ -383,7 +356,6 @@ func (o CollectionListItem) ToMap() (map[string]interface{}, error) {
 	toSerialize["collection_size"] = o.CollectionSize
 	toSerialize["collection_id"] = o.CollectionId
 	toSerialize["creation"] = o.Creation
-	toSerialize["model_name"] = o.ModelName
 	if o.TeamId.IsSet() {
 		toSerialize["team_id"] = o.TeamId.Get()
 	}
@@ -408,7 +380,6 @@ func (o *CollectionListItem) UnmarshalJSON(data []byte) (err error) {
 		"collection_size",
 		"collection_id",
 		"creation",
-		"model_name",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -447,7 +418,6 @@ func (o *CollectionListItem) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "collection_size")
 		delete(additionalProperties, "collection_id")
 		delete(additionalProperties, "creation")
-		delete(additionalProperties, "model_name")
 		delete(additionalProperties, "team_id")
 		o.AdditionalProperties = additionalProperties
 	}

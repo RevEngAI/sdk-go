@@ -33,6 +33,10 @@ type HistoryEntry struct {
 	IsDebug bool `json:"is_debug"`
 	// Mangled function name
 	MangledName *string `json:"mangled_name,omitempty"`
+	// ID of the analysis the source function belongs to, if any
+	SourceAnalysisId *int64 `json:"source_analysis_id,omitempty"`
+	// ID of the source function this name was transferred from, if any
+	SourceFunctionId *int64 `json:"source_function_id,omitempty"`
 	// Source of the rename (USER, SYSTEM, AI_UNSTRIP, etc.)
 	SourceType string `json:"source_type"`
 }
@@ -214,6 +218,70 @@ func (o *HistoryEntry) SetMangledName(v string) {
 	o.MangledName = &v
 }
 
+// GetSourceAnalysisId returns the SourceAnalysisId field value if set, zero value otherwise.
+func (o *HistoryEntry) GetSourceAnalysisId() int64 {
+	if o == nil || IsNil(o.SourceAnalysisId) {
+		var ret int64
+		return ret
+	}
+	return *o.SourceAnalysisId
+}
+
+// GetSourceAnalysisIdOk returns a tuple with the SourceAnalysisId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HistoryEntry) GetSourceAnalysisIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.SourceAnalysisId) {
+		return nil, false
+	}
+	return o.SourceAnalysisId, true
+}
+
+// HasSourceAnalysisId returns a boolean if a field has been set.
+func (o *HistoryEntry) HasSourceAnalysisId() bool {
+	if o != nil && !IsNil(o.SourceAnalysisId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceAnalysisId gets a reference to the given int64 and assigns it to the SourceAnalysisId field.
+func (o *HistoryEntry) SetSourceAnalysisId(v int64) {
+	o.SourceAnalysisId = &v
+}
+
+// GetSourceFunctionId returns the SourceFunctionId field value if set, zero value otherwise.
+func (o *HistoryEntry) GetSourceFunctionId() int64 {
+	if o == nil || IsNil(o.SourceFunctionId) {
+		var ret int64
+		return ret
+	}
+	return *o.SourceFunctionId
+}
+
+// GetSourceFunctionIdOk returns a tuple with the SourceFunctionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HistoryEntry) GetSourceFunctionIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.SourceFunctionId) {
+		return nil, false
+	}
+	return o.SourceFunctionId, true
+}
+
+// HasSourceFunctionId returns a boolean if a field has been set.
+func (o *HistoryEntry) HasSourceFunctionId() bool {
+	if o != nil && !IsNil(o.SourceFunctionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceFunctionId gets a reference to the given int64 and assigns it to the SourceFunctionId field.
+func (o *HistoryEntry) SetSourceFunctionId(v int64) {
+	o.SourceFunctionId = &v
+}
+
 // GetSourceType returns the SourceType field value
 func (o *HistoryEntry) GetSourceType() string {
 	if o == nil {
@@ -255,6 +323,12 @@ func (o HistoryEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize["is_debug"] = o.IsDebug
 	if !IsNil(o.MangledName) {
 		toSerialize["mangled_name"] = o.MangledName
+	}
+	if !IsNil(o.SourceAnalysisId) {
+		toSerialize["source_analysis_id"] = o.SourceAnalysisId
+	}
+	if !IsNil(o.SourceFunctionId) {
+		toSerialize["source_function_id"] = o.SourceFunctionId
 	}
 	toSerialize["source_type"] = o.SourceType
 	return toSerialize, nil
