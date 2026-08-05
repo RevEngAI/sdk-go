@@ -20,10 +20,6 @@ var _ MappedNullable = &AnalysisConfig{}
 type AnalysisConfig struct {
 	// Settings to scrape third party sources
 	ScrapeThirdPartyConfig *ScrapeThirdPartyConfig `json:"scrape_third_party_config,omitempty"`
-	// A configuration option for fetching CVEs data.
-	GenerateCves *bool `json:"generate_cves,omitempty"`
-	// A configuration option for generating software bill of materials data.
-	GenerateSbom *bool `json:"generate_sbom,omitempty"`
 	// A configuration option for generating capabilities of a binary
 	GenerateCapabilities *bool `json:"generate_capabilities,omitempty"`
 	// When enabled, skips using cached data within the processing.
@@ -43,10 +39,6 @@ type _AnalysisConfig AnalysisConfig
 // will change when the set of required properties is changed
 func NewAnalysisConfig() *AnalysisConfig {
 	this := AnalysisConfig{}
-	var generateCves bool = false
-	this.GenerateCves = &generateCves
-	var generateSbom bool = false
-	this.GenerateSbom = &generateSbom
 	var generateCapabilities bool = false
 	this.GenerateCapabilities = &generateCapabilities
 	var noCache bool = false
@@ -61,10 +53,6 @@ func NewAnalysisConfig() *AnalysisConfig {
 // but it doesn't guarantee that properties required by API are set
 func NewAnalysisConfigWithDefaults() *AnalysisConfig {
 	this := AnalysisConfig{}
-	var generateCves bool = false
-	this.GenerateCves = &generateCves
-	var generateSbom bool = false
-	this.GenerateSbom = &generateSbom
 	var generateCapabilities bool = false
 	this.GenerateCapabilities = &generateCapabilities
 	var noCache bool = false
@@ -104,70 +92,6 @@ func (o *AnalysisConfig) HasScrapeThirdPartyConfig() bool {
 // SetScrapeThirdPartyConfig gets a reference to the given ScrapeThirdPartyConfig and assigns it to the ScrapeThirdPartyConfig field.
 func (o *AnalysisConfig) SetScrapeThirdPartyConfig(v ScrapeThirdPartyConfig) {
 	o.ScrapeThirdPartyConfig = &v
-}
-
-// GetGenerateCves returns the GenerateCves field value if set, zero value otherwise.
-func (o *AnalysisConfig) GetGenerateCves() bool {
-	if o == nil || IsNil(o.GenerateCves) {
-		var ret bool
-		return ret
-	}
-	return *o.GenerateCves
-}
-
-// GetGenerateCvesOk returns a tuple with the GenerateCves field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AnalysisConfig) GetGenerateCvesOk() (*bool, bool) {
-	if o == nil || IsNil(o.GenerateCves) {
-		return nil, false
-	}
-	return o.GenerateCves, true
-}
-
-// HasGenerateCves returns a boolean if a field has been set.
-func (o *AnalysisConfig) HasGenerateCves() bool {
-	if o != nil && !IsNil(o.GenerateCves) {
-		return true
-	}
-
-	return false
-}
-
-// SetGenerateCves gets a reference to the given bool and assigns it to the GenerateCves field.
-func (o *AnalysisConfig) SetGenerateCves(v bool) {
-	o.GenerateCves = &v
-}
-
-// GetGenerateSbom returns the GenerateSbom field value if set, zero value otherwise.
-func (o *AnalysisConfig) GetGenerateSbom() bool {
-	if o == nil || IsNil(o.GenerateSbom) {
-		var ret bool
-		return ret
-	}
-	return *o.GenerateSbom
-}
-
-// GetGenerateSbomOk returns a tuple with the GenerateSbom field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AnalysisConfig) GetGenerateSbomOk() (*bool, bool) {
-	if o == nil || IsNil(o.GenerateSbom) {
-		return nil, false
-	}
-	return o.GenerateSbom, true
-}
-
-// HasGenerateSbom returns a boolean if a field has been set.
-func (o *AnalysisConfig) HasGenerateSbom() bool {
-	if o != nil && !IsNil(o.GenerateSbom) {
-		return true
-	}
-
-	return false
-}
-
-// SetGenerateSbom gets a reference to the given bool and assigns it to the GenerateSbom field.
-func (o *AnalysisConfig) SetGenerateSbom(v bool) {
-	o.GenerateSbom = &v
 }
 
 // GetGenerateCapabilities returns the GenerateCapabilities field value if set, zero value otherwise.
@@ -311,12 +235,6 @@ func (o AnalysisConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ScrapeThirdPartyConfig) {
 		toSerialize["scrape_third_party_config"] = o.ScrapeThirdPartyConfig
 	}
-	if !IsNil(o.GenerateCves) {
-		toSerialize["generate_cves"] = o.GenerateCves
-	}
-	if !IsNil(o.GenerateSbom) {
-		toSerialize["generate_sbom"] = o.GenerateSbom
-	}
 	if !IsNil(o.GenerateCapabilities) {
 		toSerialize["generate_capabilities"] = o.GenerateCapabilities
 	}
@@ -352,8 +270,6 @@ func (o *AnalysisConfig) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "scrape_third_party_config")
-		delete(additionalProperties, "generate_cves")
-		delete(additionalProperties, "generate_sbom")
 		delete(additionalProperties, "generate_capabilities")
 		delete(additionalProperties, "no_cache")
 		delete(additionalProperties, "advanced_analysis")

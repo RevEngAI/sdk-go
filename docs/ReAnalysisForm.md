@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Tags** | Pointer to **[]string** | Tags associated with the analysis | [optional] [default to {}]
 **CommandLineArgs** | Pointer to **string** | Command line arguments for dynamic execution | [optional] [default to ""]
 **Priority** | Pointer to **int32** | Priority of the analysis | [optional] [default to 0]
-**Essential** | Pointer to **bool** | Only runs essential parts of the analysis, skips tags/sbom/cves etc. | [optional] [default to true]
+**Essential** | Pointer to **bool** | Only runs essential parts of the analysis, skips tags etc. | [optional] [default to true]
 **ModelName** | Pointer to **NullableString** |  | [optional] 
 **NoCache** | Pointer to **bool** | When enabled, skips using cached data within the processing. | [optional] [default to false]
 

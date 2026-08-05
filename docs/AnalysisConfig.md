@@ -5,8 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ScrapeThirdPartyConfig** | Pointer to [**ScrapeThirdPartyConfig**](ScrapeThirdPartyConfig.md) | Settings to scrape third party sources | [optional] 
-**GenerateCves** | Pointer to **bool** | A configuration option for fetching CVEs data. | [optional] [default to false]
-**GenerateSbom** | Pointer to **bool** | A configuration option for generating software bill of materials data. | [optional] [default to false]
 **GenerateCapabilities** | Pointer to **bool** | A configuration option for generating capabilities of a binary | [optional] [default to false]
 **NoCache** | Pointer to **bool** | When enabled, skips using cached data within the processing. | [optional] [default to false]
 **AdvancedAnalysis** | Pointer to **bool** | Enables an advanced security analysis. | [optional] [default to false]
@@ -55,56 +53,6 @@ SetScrapeThirdPartyConfig sets ScrapeThirdPartyConfig field to given value.
 `func (o *AnalysisConfig) HasScrapeThirdPartyConfig() bool`
 
 HasScrapeThirdPartyConfig returns a boolean if a field has been set.
-
-### GetGenerateCves
-
-`func (o *AnalysisConfig) GetGenerateCves() bool`
-
-GetGenerateCves returns the GenerateCves field if non-nil, zero value otherwise.
-
-### GetGenerateCvesOk
-
-`func (o *AnalysisConfig) GetGenerateCvesOk() (*bool, bool)`
-
-GetGenerateCvesOk returns a tuple with the GenerateCves field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetGenerateCves
-
-`func (o *AnalysisConfig) SetGenerateCves(v bool)`
-
-SetGenerateCves sets GenerateCves field to given value.
-
-### HasGenerateCves
-
-`func (o *AnalysisConfig) HasGenerateCves() bool`
-
-HasGenerateCves returns a boolean if a field has been set.
-
-### GetGenerateSbom
-
-`func (o *AnalysisConfig) GetGenerateSbom() bool`
-
-GetGenerateSbom returns the GenerateSbom field if non-nil, zero value otherwise.
-
-### GetGenerateSbomOk
-
-`func (o *AnalysisConfig) GetGenerateSbomOk() (*bool, bool)`
-
-GetGenerateSbomOk returns a tuple with the GenerateSbom field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetGenerateSbom
-
-`func (o *AnalysisConfig) SetGenerateSbom(v bool)`
-
-SetGenerateSbom sets GenerateSbom field to given value.
-
-### HasGenerateSbom
-
-`func (o *AnalysisConfig) HasGenerateSbom() bool`
-
-HasGenerateSbom returns a boolean if a field has been set.
 
 ### GetGenerateCapabilities
 
