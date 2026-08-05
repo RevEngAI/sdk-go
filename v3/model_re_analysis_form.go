@@ -25,7 +25,7 @@ type ReAnalysisForm struct {
 	// Priority of the analysis
 	// Deprecated
 	Priority *int32 `json:"priority,omitempty"`
-	// Only runs essential parts of the analysis, skips tags/sbom/cves etc.
+	// Only runs essential parts of the analysis, skips tags etc.
 	Essential *bool `json:"essential,omitempty"`
 	ModelName NullableString `json:"model_name,omitempty"`
 	// When enabled, skips using cached data within the processing.

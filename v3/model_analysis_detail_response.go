@@ -33,7 +33,6 @@ type AnalysisDetailResponse struct {
 	DashboardUrl string `json:"dashboard_url"`
 	Debug bool `json:"debug"`
 	ModelName string `json:"model_name"`
-	Sbom map[string]interface{} `json:"sbom,omitempty"`
 	Sha256Hash string `json:"sha_256_hash"`
 	AutoRunAgents AutoRunAgents `json:"auto_run_agents"`
 	// Snapshot of the configuration the analysis was submitted with.
@@ -388,39 +387,6 @@ func (o *AnalysisDetailResponse) SetModelName(v string) {
 	o.ModelName = v
 }
 
-// GetSbom returns the Sbom field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AnalysisDetailResponse) GetSbom() map[string]interface{} {
-	if o == nil {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.Sbom
-}
-
-// GetSbomOk returns a tuple with the Sbom field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AnalysisDetailResponse) GetSbomOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Sbom) {
-		return map[string]interface{}{}, false
-	}
-	return o.Sbom, true
-}
-
-// HasSbom returns a boolean if a field has been set.
-func (o *AnalysisDetailResponse) HasSbom() bool {
-	if o != nil && !IsNil(o.Sbom) {
-		return true
-	}
-
-	return false
-}
-
-// SetSbom gets a reference to the given map[string]interface{} and assigns it to the Sbom field.
-func (o *AnalysisDetailResponse) SetSbom(v map[string]interface{}) {
-	o.Sbom = v
-}
-
 // GetSha256Hash returns the Sha256Hash field value
 func (o *AnalysisDetailResponse) GetSha256Hash() string {
 	if o == nil {
@@ -516,9 +482,6 @@ func (o AnalysisDetailResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["dashboard_url"] = o.DashboardUrl
 	toSerialize["debug"] = o.Debug
 	toSerialize["model_name"] = o.ModelName
-	if o.Sbom != nil {
-		toSerialize["sbom"] = o.Sbom
-	}
 	toSerialize["sha_256_hash"] = o.Sha256Hash
 	toSerialize["auto_run_agents"] = o.AutoRunAgents
 	toSerialize["requested_config"] = o.RequestedConfig
@@ -593,7 +556,6 @@ func (o *AnalysisDetailResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "dashboard_url")
 		delete(additionalProperties, "debug")
 		delete(additionalProperties, "model_name")
-		delete(additionalProperties, "sbom")
 		delete(additionalProperties, "sha_256_hash")
 		delete(additionalProperties, "auto_run_agents")
 		delete(additionalProperties, "requested_config")

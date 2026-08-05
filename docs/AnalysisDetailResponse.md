@@ -17,7 +17,6 @@ Name | Type | Description | Notes
 **DashboardUrl** | **string** | URL to view this analysis in the dashboard | 
 **Debug** | **bool** |  | 
 **ModelName** | **string** |  | 
-**Sbom** | Pointer to **map[string]interface{}** |  | [optional] 
 **Sha256Hash** | **string** |  | 
 **AutoRunAgents** | [**AutoRunAgents**](AutoRunAgents.md) |  | 
 **RequestedConfig** | [**AnalysisConfigSnapshot**](AnalysisConfigSnapshot.md) | Snapshot of the configuration the analysis was submitted with. | 
@@ -301,41 +300,6 @@ and a boolean to check if the value has been set.
 SetModelName sets ModelName field to given value.
 
 
-### GetSbom
-
-`func (o *AnalysisDetailResponse) GetSbom() map[string]interface{}`
-
-GetSbom returns the Sbom field if non-nil, zero value otherwise.
-
-### GetSbomOk
-
-`func (o *AnalysisDetailResponse) GetSbomOk() (*map[string]interface{}, bool)`
-
-GetSbomOk returns a tuple with the Sbom field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSbom
-
-`func (o *AnalysisDetailResponse) SetSbom(v map[string]interface{})`
-
-SetSbom sets Sbom field to given value.
-
-### HasSbom
-
-`func (o *AnalysisDetailResponse) HasSbom() bool`
-
-HasSbom returns a boolean if a field has been set.
-
-### SetSbomNil
-
-`func (o *AnalysisDetailResponse) SetSbomNil(b bool)`
-
- SetSbomNil sets the value for Sbom to be an explicit nil
-
-### UnsetSbom
-`func (o *AnalysisDetailResponse) UnsetSbom()`
-
-UnsetSbom ensures that no value is present for Sbom, not even an explicit nil
 ### GetSha256Hash
 
 `func (o *AnalysisDetailResponse) GetSha256Hash() string`
