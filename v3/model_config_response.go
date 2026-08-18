@@ -22,7 +22,7 @@ type ConfigResponse struct {
 	// The domain of the RevEng.AI platform you are connected to
 	DashboardUrl *string `json:"dashboard_url,omitempty"`
 	// Maximum file size (in bytes) that can be uploaded for analysis
-	MaxFileSizeBytes int32 `json:"max_file_size_bytes"`
+	MaxFileSizeBytes int64 `json:"max_file_size_bytes"`
 	// List of programming languages that are not supported for AI decompilation
 	AiDecompilerUnsupportedLanguages []string `json:"ai_decompiler_unsupported_languages"`
 	// List of models that support AI decompilation
@@ -36,7 +36,7 @@ type _ConfigResponse ConfigResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigResponse(maxFileSizeBytes int32, aiDecompilerUnsupportedLanguages []string, aiDecompilerSupportedModels []string) *ConfigResponse {
+func NewConfigResponse(maxFileSizeBytes int64, aiDecompilerUnsupportedLanguages []string, aiDecompilerSupportedModels []string) *ConfigResponse {
 	this := ConfigResponse{}
 	var dashboardUrl string = ""
 	this.DashboardUrl = &dashboardUrl
@@ -89,9 +89,9 @@ func (o *ConfigResponse) SetDashboardUrl(v string) {
 }
 
 // GetMaxFileSizeBytes returns the MaxFileSizeBytes field value
-func (o *ConfigResponse) GetMaxFileSizeBytes() int32 {
+func (o *ConfigResponse) GetMaxFileSizeBytes() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -100,7 +100,7 @@ func (o *ConfigResponse) GetMaxFileSizeBytes() int32 {
 
 // GetMaxFileSizeBytesOk returns a tuple with the MaxFileSizeBytes field value
 // and a boolean to check if the value has been set.
-func (o *ConfigResponse) GetMaxFileSizeBytesOk() (*int32, bool) {
+func (o *ConfigResponse) GetMaxFileSizeBytesOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -108,7 +108,7 @@ func (o *ConfigResponse) GetMaxFileSizeBytesOk() (*int32, bool) {
 }
 
 // SetMaxFileSizeBytes sets field value
-func (o *ConfigResponse) SetMaxFileSizeBytes(v int32) {
+func (o *ConfigResponse) SetMaxFileSizeBytes(v int64) {
 	o.MaxFileSizeBytes = v
 }
 
