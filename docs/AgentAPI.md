@@ -16,6 +16,10 @@ Method | HTTP request | Description
 [**GetRemediationResultV2AnalysesAnalysisIdAgentRemediationGet**](AgentAPI.md#GetRemediationResultV2AnalysesAnalysisIdAgentRemediationGet) | **Get** /v2/analyses/{analysis_id}/agent/remediation | Get Remediation Result
 [**GetReportAnalysisResultV2AnalysesAnalysisIdAgentReportAnalysisGet**](AgentAPI.md#GetReportAnalysisResultV2AnalysesAnalysisIdAgentReportAnalysisGet) | **Get** /v2/analyses/{analysis_id}/agent/report-analysis | Get Report Analysis Result
 [**GetTriageResultV2AnalysesAnalysisIdAgentTriageGet**](AgentAPI.md#GetTriageResultV2AnalysesAnalysisIdAgentTriageGet) | **Get** /v2/analyses/{analysis_id}/agent/triage | Get Triage Result
+[**V3CancelRenameUnnamedFunctions**](AgentAPI.md#V3CancelRenameUnnamedFunctions) | **Post** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions/cancel | Cancel the rename-unnamed-functions agent.
+[**V3GetRenameUnnamedFunctionsResult**](AgentAPI.md#V3GetRenameUnnamedFunctionsResult) | **Get** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions | Get rename-unnamed-functions agent result.
+[**V3GetRenameUnnamedFunctionsStatus**](AgentAPI.md#V3GetRenameUnnamedFunctionsStatus) | **Get** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions/status | Get rename-unnamed-functions agent status.
+[**V3TriggerRenameUnnamedFunctions**](AgentAPI.md#V3TriggerRenameUnnamedFunctions) | **Post** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions | Run the rename-unnamed-functions agent.
 
 
 
@@ -34,7 +38,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -102,7 +106,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -170,7 +174,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -238,7 +242,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -306,7 +310,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -374,7 +378,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -442,7 +446,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -510,7 +514,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -578,7 +582,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -648,7 +652,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -718,7 +722,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -786,7 +790,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -832,6 +836,286 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3CancelRenameUnnamedFunctions
+
+> V3CancelRenameUnnamedFunctions(ctx, analysisId).Execute()
+
+Cancel the rename-unnamed-functions agent.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.AgentAPI.V3CancelRenameUnnamedFunctions(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.V3CancelRenameUnnamedFunctions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3CancelRenameUnnamedFunctionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetRenameUnnamedFunctionsResult
+
+> RenameUnnamedFunctionsResult V3GetRenameUnnamedFunctionsResult(ctx, analysisId).Execute()
+
+Get rename-unnamed-functions agent result.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AgentAPI.V3GetRenameUnnamedFunctionsResult(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.V3GetRenameUnnamedFunctionsResult``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetRenameUnnamedFunctionsResult`: RenameUnnamedFunctionsResult
+	fmt.Fprintf(os.Stdout, "Response from `AgentAPI.V3GetRenameUnnamedFunctionsResult`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetRenameUnnamedFunctionsResultRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**RenameUnnamedFunctionsResult**](RenameUnnamedFunctionsResult.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetRenameUnnamedFunctionsStatus
+
+> StatusBody V3GetRenameUnnamedFunctionsStatus(ctx, analysisId).Execute()
+
+Get rename-unnamed-functions agent status.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AgentAPI.V3GetRenameUnnamedFunctionsStatus(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.V3GetRenameUnnamedFunctionsStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetRenameUnnamedFunctionsStatus`: StatusBody
+	fmt.Fprintf(os.Stdout, "Response from `AgentAPI.V3GetRenameUnnamedFunctionsStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetRenameUnnamedFunctionsStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StatusBody**](StatusBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3TriggerRenameUnnamedFunctions
+
+> StatusBody V3TriggerRenameUnnamedFunctions(ctx, analysisId).TriggerRenameUnnamedFunctionsInputBody(triggerRenameUnnamedFunctionsInputBody).Execute()
+
+Run the rename-unnamed-functions agent.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	triggerRenameUnnamedFunctionsInputBody := *revengai.NewTriggerRenameUnnamedFunctionsInputBody() // TriggerRenameUnnamedFunctionsInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AgentAPI.V3TriggerRenameUnnamedFunctions(context.Background(), analysisId).TriggerRenameUnnamedFunctionsInputBody(triggerRenameUnnamedFunctionsInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.V3TriggerRenameUnnamedFunctions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3TriggerRenameUnnamedFunctions`: StatusBody
+	fmt.Fprintf(os.Stdout, "Response from `AgentAPI.V3TriggerRenameUnnamedFunctions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3TriggerRenameUnnamedFunctionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **triggerRenameUnnamedFunctionsInputBody** | [**TriggerRenameUnnamedFunctionsInputBody**](TriggerRenameUnnamedFunctionsInputBody.md) |  | 
+
+### Return type
+
+[**StatusBody**](StatusBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

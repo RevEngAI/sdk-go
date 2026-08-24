@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Overrides** | **map[string]string** | Token to name mappings. Empty string removes the override. | 
+**Overrides** | [**map[string]Token**](Token.md) | Overrides keyed by placeholder token. An entry whose value is an empty string removes that override. | 
 
 ## Methods
 
 ### NewUpsertOverridesInputBody
 
-`func NewUpsertOverridesInputBody(overrides map[string]string, ) *UpsertOverridesInputBody`
+`func NewUpsertOverridesInputBody(overrides map[string]Token, ) *UpsertOverridesInputBody`
 
 NewUpsertOverridesInputBody instantiates a new UpsertOverridesInputBody object
 This constructor will assign default values to properties that have it defined,
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOverrides
 
-`func (o *UpsertOverridesInputBody) GetOverrides() map[string]string`
+`func (o *UpsertOverridesInputBody) GetOverrides() map[string]Token`
 
 GetOverrides returns the Overrides field if non-nil, zero value otherwise.
 
 ### GetOverridesOk
 
-`func (o *UpsertOverridesInputBody) GetOverridesOk() (*map[string]string, bool)`
+`func (o *UpsertOverridesInputBody) GetOverridesOk() (*map[string]Token, bool)`
 
 GetOverridesOk returns a tuple with the Overrides field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOverrides
 
-`func (o *UpsertOverridesInputBody) SetOverrides(v map[string]string)`
+`func (o *UpsertOverridesInputBody) SetOverrides(v map[string]Token)`
 
 SetOverrides sets Overrides field to given value.
 

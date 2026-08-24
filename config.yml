@@ -1,7 +1,7 @@
 packageName: sdk
 gitUserId: RevEngAI
 # Rewritten by .github/workflows/check.yaml to match the spec's major version
-gitRepoId: sdk-go/v3
+gitRepoId: sdk-go/v4
 enumClassPrefix: true
 withGoMod: false
 additionalProperties:
@@ -10,6 +10,10 @@ additionalProperties:
 disallowAdditionalPropertiesIfNotPresent: false
 # When an unknown enum value is found map to unknown_default_open_api
 enumUnknownDefaultCase: true
+# `has_definition` would otherwise collide with the generated presence helper
+# for the optional `definition` property on the same schemas
+nameMappings:
+  has_definition: DefinitionPresent
 globalProperties:
   apiTests: "false"
   modelTests: "false"

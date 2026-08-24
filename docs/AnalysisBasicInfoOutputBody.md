@@ -12,6 +12,9 @@ Name | Type | Description | Notes
 **BinaryUuid** | **string** | UUID of the binary, omitted when not set | 
 **Creation** | **time.Time** | When the binary was uploaded | 
 **Debug** | **bool** | True when the binary was analysed with debug symbols | 
+**DetectedArchitecture** | **string** | Detected instruction-set architecture; empty when unavailable | 
+**DetectedBinaryFormat** | **string** | Detected binary container format; empty when unavailable | 
+**DetectedBinaryType** | **string** | Detected operating-system platform; empty when unavailable | 
 **FunctionCount** | **int64** | Number of functions in the binary | 
 **IsAdvanced** | **bool** | True when the analysis was run in advanced mode | 
 **IsOwner** | **bool** | True when the caller is the analysis owner | 
@@ -21,13 +24,16 @@ Name | Type | Description | Notes
 **OwnerUsername** | **string** | Username of the analysis owner | 
 **SequencerVersion** | Pointer to **string** | Sequencer version, omitted when not set | [optional] 
 **Sha256Hash** | **string** | SHA-256 hash of the binary | 
+**SuppliedArchitecture** | **string** | User-supplied instruction-set architecture; \&quot;AUTO\&quot; when not overridden | 
+**SuppliedBinaryFormat** | **string** | User-supplied binary container format; \&quot;AUTO\&quot; when not overridden | 
+**SuppliedBinaryType** | **string** | User-supplied operating-system platform; \&quot;AUTO\&quot; when not overridden | 
 **TeamId** | **int64** | Team ID of the analysis | 
 
 ## Methods
 
 ### NewAnalysisBasicInfoOutputBody
 
-`func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, binaryUuid string, creation time.Time, debug bool, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, ownerUsername string, sha256Hash string, teamId int64, ) *AnalysisBasicInfoOutputBody`
+`func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, binaryUuid string, creation time.Time, debug bool, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, ownerUsername string, sha256Hash string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, teamId int64, ) *AnalysisBasicInfoOutputBody`
 
 NewAnalysisBasicInfoOutputBody instantiates a new AnalysisBasicInfoOutputBody object
 This constructor will assign default values to properties that have it defined,
@@ -210,6 +216,66 @@ and a boolean to check if the value has been set.
 `func (o *AnalysisBasicInfoOutputBody) SetDebug(v bool)`
 
 SetDebug sets Debug field to given value.
+
+
+### GetDetectedArchitecture
+
+`func (o *AnalysisBasicInfoOutputBody) GetDetectedArchitecture() string`
+
+GetDetectedArchitecture returns the DetectedArchitecture field if non-nil, zero value otherwise.
+
+### GetDetectedArchitectureOk
+
+`func (o *AnalysisBasicInfoOutputBody) GetDetectedArchitectureOk() (*string, bool)`
+
+GetDetectedArchitectureOk returns a tuple with the DetectedArchitecture field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetectedArchitecture
+
+`func (o *AnalysisBasicInfoOutputBody) SetDetectedArchitecture(v string)`
+
+SetDetectedArchitecture sets DetectedArchitecture field to given value.
+
+
+### GetDetectedBinaryFormat
+
+`func (o *AnalysisBasicInfoOutputBody) GetDetectedBinaryFormat() string`
+
+GetDetectedBinaryFormat returns the DetectedBinaryFormat field if non-nil, zero value otherwise.
+
+### GetDetectedBinaryFormatOk
+
+`func (o *AnalysisBasicInfoOutputBody) GetDetectedBinaryFormatOk() (*string, bool)`
+
+GetDetectedBinaryFormatOk returns a tuple with the DetectedBinaryFormat field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetectedBinaryFormat
+
+`func (o *AnalysisBasicInfoOutputBody) SetDetectedBinaryFormat(v string)`
+
+SetDetectedBinaryFormat sets DetectedBinaryFormat field to given value.
+
+
+### GetDetectedBinaryType
+
+`func (o *AnalysisBasicInfoOutputBody) GetDetectedBinaryType() string`
+
+GetDetectedBinaryType returns the DetectedBinaryType field if non-nil, zero value otherwise.
+
+### GetDetectedBinaryTypeOk
+
+`func (o *AnalysisBasicInfoOutputBody) GetDetectedBinaryTypeOk() (*string, bool)`
+
+GetDetectedBinaryTypeOk returns a tuple with the DetectedBinaryType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetectedBinaryType
+
+`func (o *AnalysisBasicInfoOutputBody) SetDetectedBinaryType(v string)`
+
+SetDetectedBinaryType sets DetectedBinaryType field to given value.
 
 
 ### GetFunctionCount
@@ -395,6 +461,66 @@ and a boolean to check if the value has been set.
 `func (o *AnalysisBasicInfoOutputBody) SetSha256Hash(v string)`
 
 SetSha256Hash sets Sha256Hash field to given value.
+
+
+### GetSuppliedArchitecture
+
+`func (o *AnalysisBasicInfoOutputBody) GetSuppliedArchitecture() string`
+
+GetSuppliedArchitecture returns the SuppliedArchitecture field if non-nil, zero value otherwise.
+
+### GetSuppliedArchitectureOk
+
+`func (o *AnalysisBasicInfoOutputBody) GetSuppliedArchitectureOk() (*string, bool)`
+
+GetSuppliedArchitectureOk returns a tuple with the SuppliedArchitecture field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppliedArchitecture
+
+`func (o *AnalysisBasicInfoOutputBody) SetSuppliedArchitecture(v string)`
+
+SetSuppliedArchitecture sets SuppliedArchitecture field to given value.
+
+
+### GetSuppliedBinaryFormat
+
+`func (o *AnalysisBasicInfoOutputBody) GetSuppliedBinaryFormat() string`
+
+GetSuppliedBinaryFormat returns the SuppliedBinaryFormat field if non-nil, zero value otherwise.
+
+### GetSuppliedBinaryFormatOk
+
+`func (o *AnalysisBasicInfoOutputBody) GetSuppliedBinaryFormatOk() (*string, bool)`
+
+GetSuppliedBinaryFormatOk returns a tuple with the SuppliedBinaryFormat field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppliedBinaryFormat
+
+`func (o *AnalysisBasicInfoOutputBody) SetSuppliedBinaryFormat(v string)`
+
+SetSuppliedBinaryFormat sets SuppliedBinaryFormat field to given value.
+
+
+### GetSuppliedBinaryType
+
+`func (o *AnalysisBasicInfoOutputBody) GetSuppliedBinaryType() string`
+
+GetSuppliedBinaryType returns the SuppliedBinaryType field if non-nil, zero value otherwise.
+
+### GetSuppliedBinaryTypeOk
+
+`func (o *AnalysisBasicInfoOutputBody) GetSuppliedBinaryTypeOk() (*string, bool)`
+
+GetSuppliedBinaryTypeOk returns a tuple with the SuppliedBinaryType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppliedBinaryType
+
+`func (o *AnalysisBasicInfoOutputBody) SetSuppliedBinaryType(v string)`
+
+SetSuppliedBinaryType sets SuppliedBinaryType field to given value.
 
 
 ### GetTeamId

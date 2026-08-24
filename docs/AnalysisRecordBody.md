@@ -11,12 +11,18 @@ Name | Type | Description | Notes
 **BinaryName** | **string** | Binary filename | 
 **BinarySize** | **int64** | Binary size in bytes | 
 **Creation** | **time.Time** | When the analysis was created | 
+**DetectedArchitecture** | **string** | Detected instruction-set architecture; empty when unavailable | 
+**DetectedBinaryFormat** | **string** | Detected binary container format; empty when unavailable | 
+**DetectedBinaryType** | **string** | Detected operating-system platform; empty when unavailable | 
 **FunctionBoundariesHash** | **string** | Hash of the binary&#39;s provided function boundaries | 
 **IsOwner** | **bool** | True when the caller owns the analysis | 
 **ModelId** | **int64** | Model ID | 
 **ModelName** | **string** | Model name | 
 **Sha256Hash** | **string** | SHA-256 hash of the binary | 
 **Status** | **string** | Analysis status | 
+**SuppliedArchitecture** | **string** | User-supplied instruction-set architecture; \&quot;AUTO\&quot; when not overridden | 
+**SuppliedBinaryFormat** | **string** | User-supplied binary container format; \&quot;AUTO\&quot; when not overridden | 
+**SuppliedBinaryType** | **string** | User-supplied operating-system platform; \&quot;AUTO\&quot; when not overridden | 
 **Tags** | [**[]AnalysisTagBody**](AnalysisTagBody.md) | Tags associated with the binary | 
 **Username** | **string** | Username of the analysis owner | 
 
@@ -24,7 +30,7 @@ Name | Type | Description | Notes
 
 ### NewAnalysisRecordBody
 
-`func NewAnalysisRecordBody(analysisId int64, analysisScope string, baseAddress int64, binaryId int64, binaryName string, binarySize int64, creation time.Time, functionBoundariesHash string, isOwner bool, modelId int64, modelName string, sha256Hash string, status string, tags []AnalysisTagBody, username string, ) *AnalysisRecordBody`
+`func NewAnalysisRecordBody(analysisId int64, analysisScope string, baseAddress int64, binaryId int64, binaryName string, binarySize int64, creation time.Time, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionBoundariesHash string, isOwner bool, modelId int64, modelName string, sha256Hash string, status string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, tags []AnalysisTagBody, username string, ) *AnalysisRecordBody`
 
 NewAnalysisRecordBody instantiates a new AnalysisRecordBody object
 This constructor will assign default values to properties that have it defined,
@@ -179,6 +185,66 @@ and a boolean to check if the value has been set.
 SetCreation sets Creation field to given value.
 
 
+### GetDetectedArchitecture
+
+`func (o *AnalysisRecordBody) GetDetectedArchitecture() string`
+
+GetDetectedArchitecture returns the DetectedArchitecture field if non-nil, zero value otherwise.
+
+### GetDetectedArchitectureOk
+
+`func (o *AnalysisRecordBody) GetDetectedArchitectureOk() (*string, bool)`
+
+GetDetectedArchitectureOk returns a tuple with the DetectedArchitecture field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetectedArchitecture
+
+`func (o *AnalysisRecordBody) SetDetectedArchitecture(v string)`
+
+SetDetectedArchitecture sets DetectedArchitecture field to given value.
+
+
+### GetDetectedBinaryFormat
+
+`func (o *AnalysisRecordBody) GetDetectedBinaryFormat() string`
+
+GetDetectedBinaryFormat returns the DetectedBinaryFormat field if non-nil, zero value otherwise.
+
+### GetDetectedBinaryFormatOk
+
+`func (o *AnalysisRecordBody) GetDetectedBinaryFormatOk() (*string, bool)`
+
+GetDetectedBinaryFormatOk returns a tuple with the DetectedBinaryFormat field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetectedBinaryFormat
+
+`func (o *AnalysisRecordBody) SetDetectedBinaryFormat(v string)`
+
+SetDetectedBinaryFormat sets DetectedBinaryFormat field to given value.
+
+
+### GetDetectedBinaryType
+
+`func (o *AnalysisRecordBody) GetDetectedBinaryType() string`
+
+GetDetectedBinaryType returns the DetectedBinaryType field if non-nil, zero value otherwise.
+
+### GetDetectedBinaryTypeOk
+
+`func (o *AnalysisRecordBody) GetDetectedBinaryTypeOk() (*string, bool)`
+
+GetDetectedBinaryTypeOk returns a tuple with the DetectedBinaryType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetectedBinaryType
+
+`func (o *AnalysisRecordBody) SetDetectedBinaryType(v string)`
+
+SetDetectedBinaryType sets DetectedBinaryType field to given value.
+
+
 ### GetFunctionBoundariesHash
 
 `func (o *AnalysisRecordBody) GetFunctionBoundariesHash() string`
@@ -297,6 +363,66 @@ and a boolean to check if the value has been set.
 `func (o *AnalysisRecordBody) SetStatus(v string)`
 
 SetStatus sets Status field to given value.
+
+
+### GetSuppliedArchitecture
+
+`func (o *AnalysisRecordBody) GetSuppliedArchitecture() string`
+
+GetSuppliedArchitecture returns the SuppliedArchitecture field if non-nil, zero value otherwise.
+
+### GetSuppliedArchitectureOk
+
+`func (o *AnalysisRecordBody) GetSuppliedArchitectureOk() (*string, bool)`
+
+GetSuppliedArchitectureOk returns a tuple with the SuppliedArchitecture field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppliedArchitecture
+
+`func (o *AnalysisRecordBody) SetSuppliedArchitecture(v string)`
+
+SetSuppliedArchitecture sets SuppliedArchitecture field to given value.
+
+
+### GetSuppliedBinaryFormat
+
+`func (o *AnalysisRecordBody) GetSuppliedBinaryFormat() string`
+
+GetSuppliedBinaryFormat returns the SuppliedBinaryFormat field if non-nil, zero value otherwise.
+
+### GetSuppliedBinaryFormatOk
+
+`func (o *AnalysisRecordBody) GetSuppliedBinaryFormatOk() (*string, bool)`
+
+GetSuppliedBinaryFormatOk returns a tuple with the SuppliedBinaryFormat field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppliedBinaryFormat
+
+`func (o *AnalysisRecordBody) SetSuppliedBinaryFormat(v string)`
+
+SetSuppliedBinaryFormat sets SuppliedBinaryFormat field to given value.
+
+
+### GetSuppliedBinaryType
+
+`func (o *AnalysisRecordBody) GetSuppliedBinaryType() string`
+
+GetSuppliedBinaryType returns the SuppliedBinaryType field if non-nil, zero value otherwise.
+
+### GetSuppliedBinaryTypeOk
+
+`func (o *AnalysisRecordBody) GetSuppliedBinaryTypeOk() (*string, bool)`
+
+GetSuppliedBinaryTypeOk returns a tuple with the SuppliedBinaryType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppliedBinaryType
+
+`func (o *AnalysisRecordBody) SetSuppliedBinaryType(v string)`
+
+SetSuppliedBinaryType sets SuppliedBinaryType field to given value.
 
 
 ### GetTags

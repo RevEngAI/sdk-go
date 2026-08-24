@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FunctionMapping** | Pointer to [**AIDecompFunctionMapping**](AIDecompFunctionMapping.md) | Complete mapping data for token resolution | [optional] 
+**Entities** | Pointer to [**[]ResolvedEntity**](ResolvedEntity.md) | One entry per token in the tokenised source, with the name it resolves to and its hover metadata. | [optional] 
+**LineAttribution** | Pointer to **interface{}** |  | [optional] 
 **PredictedFunctionName** | Pointer to **string** | Predicted function name from the AI model | [optional] 
 **Status** | **string** | Task status | 
 **TokenisedDecompilation** | Pointer to **string** | Source code with placeholder tokens | [optional] 
@@ -28,31 +29,76 @@ NewTokenisedDataWithDefaults instantiates a new TokenisedData object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetFunctionMapping
+### GetEntities
 
-`func (o *TokenisedData) GetFunctionMapping() AIDecompFunctionMapping`
+`func (o *TokenisedData) GetEntities() []ResolvedEntity`
 
-GetFunctionMapping returns the FunctionMapping field if non-nil, zero value otherwise.
+GetEntities returns the Entities field if non-nil, zero value otherwise.
 
-### GetFunctionMappingOk
+### GetEntitiesOk
 
-`func (o *TokenisedData) GetFunctionMappingOk() (*AIDecompFunctionMapping, bool)`
+`func (o *TokenisedData) GetEntitiesOk() (*[]ResolvedEntity, bool)`
 
-GetFunctionMappingOk returns a tuple with the FunctionMapping field if it's non-nil, zero value otherwise
+GetEntitiesOk returns a tuple with the Entities field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFunctionMapping
+### SetEntities
 
-`func (o *TokenisedData) SetFunctionMapping(v AIDecompFunctionMapping)`
+`func (o *TokenisedData) SetEntities(v []ResolvedEntity)`
 
-SetFunctionMapping sets FunctionMapping field to given value.
+SetEntities sets Entities field to given value.
 
-### HasFunctionMapping
+### HasEntities
 
-`func (o *TokenisedData) HasFunctionMapping() bool`
+`func (o *TokenisedData) HasEntities() bool`
 
-HasFunctionMapping returns a boolean if a field has been set.
+HasEntities returns a boolean if a field has been set.
 
+### SetEntitiesNil
+
+`func (o *TokenisedData) SetEntitiesNil(b bool)`
+
+ SetEntitiesNil sets the value for Entities to be an explicit nil
+
+### UnsetEntities
+`func (o *TokenisedData) UnsetEntities()`
+
+UnsetEntities ensures that no value is present for Entities, not even an explicit nil
+### GetLineAttribution
+
+`func (o *TokenisedData) GetLineAttribution() interface{}`
+
+GetLineAttribution returns the LineAttribution field if non-nil, zero value otherwise.
+
+### GetLineAttributionOk
+
+`func (o *TokenisedData) GetLineAttributionOk() (*interface{}, bool)`
+
+GetLineAttributionOk returns a tuple with the LineAttribution field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLineAttribution
+
+`func (o *TokenisedData) SetLineAttribution(v interface{})`
+
+SetLineAttribution sets LineAttribution field to given value.
+
+### HasLineAttribution
+
+`func (o *TokenisedData) HasLineAttribution() bool`
+
+HasLineAttribution returns a boolean if a field has been set.
+
+### SetLineAttributionNil
+
+`func (o *TokenisedData) SetLineAttributionNil(b bool)`
+
+ SetLineAttributionNil sets the value for LineAttribution to be an explicit nil
+
+### UnsetLineAttribution
+`func (o *TokenisedData) UnsetLineAttribution()`
+
+UnsetLineAttribution ensures that no value is present for LineAttribution, not even an explicit nil
 ### GetPredictedFunctionName
 
 `func (o *TokenisedData) GetPredictedFunctionName() string`

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BasicBlocks** | Pointer to **interface{}** |  | [optional] 
 **FunctionId** | **int64** |  | 
+**GlobalVariables** | Pointer to **interface{}** |  | [optional] 
 **LocalVariables** | Pointer to **interface{}** |  | [optional] 
 **Params** | Pointer to **interface{}** |  | [optional] 
 **ReturnType** | Pointer to **NullableString** |  | [optional] 
@@ -85,6 +86,41 @@ and a boolean to check if the value has been set.
 SetFunctionId sets FunctionId field to given value.
 
 
+### GetGlobalVariables
+
+`func (o *DisassemblyOutputBody) GetGlobalVariables() interface{}`
+
+GetGlobalVariables returns the GlobalVariables field if non-nil, zero value otherwise.
+
+### GetGlobalVariablesOk
+
+`func (o *DisassemblyOutputBody) GetGlobalVariablesOk() (*interface{}, bool)`
+
+GetGlobalVariablesOk returns a tuple with the GlobalVariables field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGlobalVariables
+
+`func (o *DisassemblyOutputBody) SetGlobalVariables(v interface{})`
+
+SetGlobalVariables sets GlobalVariables field to given value.
+
+### HasGlobalVariables
+
+`func (o *DisassemblyOutputBody) HasGlobalVariables() bool`
+
+HasGlobalVariables returns a boolean if a field has been set.
+
+### SetGlobalVariablesNil
+
+`func (o *DisassemblyOutputBody) SetGlobalVariablesNil(b bool)`
+
+ SetGlobalVariablesNil sets the value for GlobalVariables to be an explicit nil
+
+### UnsetGlobalVariables
+`func (o *DisassemblyOutputBody) UnsetGlobalVariables()`
+
+UnsetGlobalVariables ensures that no value is present for GlobalVariables, not even an explicit nil
 ### GetLocalVariables
 
 `func (o *DisassemblyOutputBody) GetLocalVariables() interface{}`

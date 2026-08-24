@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DashboardUrl** | Pointer to **string** | The domain of the RevEng.AI platform you are connected to | [optional] [default to ""]
-**MaxFileSizeBytes** | **int32** | Maximum file size (in bytes) that can be uploaded for analysis | 
+**MaxFileSizeBytes** | **int64** | Maximum file size (in bytes) that can be uploaded for analysis | 
 **AiDecompilerUnsupportedLanguages** | **[]string** | List of programming languages that are not supported for AI decompilation | 
 **AiDecompilerSupportedModels** | **[]string** | List of models that support AI decompilation | 
 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewConfigResponse
 
-`func NewConfigResponse(maxFileSizeBytes int32, aiDecompilerUnsupportedLanguages []string, aiDecompilerSupportedModels []string, ) *ConfigResponse`
+`func NewConfigResponse(maxFileSizeBytes int64, aiDecompilerUnsupportedLanguages []string, aiDecompilerSupportedModels []string, ) *ConfigResponse`
 
 NewConfigResponse instantiates a new ConfigResponse object
 This constructor will assign default values to properties that have it defined,
@@ -55,20 +55,20 @@ HasDashboardUrl returns a boolean if a field has been set.
 
 ### GetMaxFileSizeBytes
 
-`func (o *ConfigResponse) GetMaxFileSizeBytes() int32`
+`func (o *ConfigResponse) GetMaxFileSizeBytes() int64`
 
 GetMaxFileSizeBytes returns the MaxFileSizeBytes field if non-nil, zero value otherwise.
 
 ### GetMaxFileSizeBytesOk
 
-`func (o *ConfigResponse) GetMaxFileSizeBytesOk() (*int32, bool)`
+`func (o *ConfigResponse) GetMaxFileSizeBytesOk() (*int64, bool)`
 
 GetMaxFileSizeBytesOk returns a tuple with the MaxFileSizeBytes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMaxFileSizeBytes
 
-`func (o *ConfigResponse) SetMaxFileSizeBytes(v int32)`
+`func (o *ConfigResponse) SetMaxFileSizeBytes(v int64)`
 
 SetMaxFileSizeBytes sets MaxFileSizeBytes field to given value.
 
