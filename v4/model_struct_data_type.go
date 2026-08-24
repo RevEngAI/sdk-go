@@ -27,7 +27,7 @@ type StructDataType struct {
 	// Absent only for a type referenced but never defined.
 	Definition *StructDefinition `json:"definition,omitempty"`
 	// Whether this type carries a definition. False for the kinds that never have one and for a type referenced but never defined.
-	HasDefinition bool `json:"has_definition"`
+	DefinitionPresent bool `json:"has_definition"`
 	Kind string `json:"kind"`
 	// Type name.
 	Name string `json:"name"`
@@ -48,11 +48,11 @@ type _StructDataType StructDataType
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStructDataType(createdAt time.Time, dataTypeId int64, hasDefinition bool, kind string, name string, namespace string, sourceType string) *StructDataType {
+func NewStructDataType(createdAt time.Time, dataTypeId int64, definitionPresent bool, kind string, name string, namespace string, sourceType string) *StructDataType {
 	this := StructDataType{}
 	this.CreatedAt = createdAt
 	this.DataTypeId = dataTypeId
-	this.HasDefinition = hasDefinition
+	this.DefinitionPresent = definitionPresent
 	this.Kind = kind
 	this.Name = name
 	this.Namespace = namespace
@@ -148,28 +148,28 @@ func (o *StructDataType) SetDefinition(v StructDefinition) {
 	o.Definition = &v
 }
 
-// GetHasDefinition returns the HasDefinition field value
-func (o *StructDataType) GetHasDefinition() bool {
+// GetDefinitionPresent returns the DefinitionPresent field value
+func (o *StructDataType) GetDefinitionPresent() bool {
 	if o == nil {
 		var ret bool
 		return ret
 	}
 
-	return o.HasDefinition
+	return o.DefinitionPresent
 }
 
-// GetHasDefinitionOk returns a tuple with the HasDefinition field value
+// GetDefinitionPresentOk returns a tuple with the DefinitionPresent field value
 // and a boolean to check if the value has been set.
-func (o *StructDataType) GetHasDefinitionOk() (*bool, bool) {
+func (o *StructDataType) GetDefinitionPresentOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.HasDefinition, true
+	return &o.DefinitionPresent, true
 }
 
-// SetHasDefinition sets field value
-func (o *StructDataType) SetHasDefinition(v bool) {
-	o.HasDefinition = v
+// SetDefinitionPresent sets field value
+func (o *StructDataType) SetDefinitionPresent(v bool) {
+	o.DefinitionPresent = v
 }
 
 // GetKind returns the Kind field value
@@ -347,7 +347,7 @@ func (o StructDataType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Definition) {
 		toSerialize["definition"] = o.Definition
 	}
-	toSerialize["has_definition"] = o.HasDefinition
+	toSerialize["has_definition"] = o.DefinitionPresent
 	toSerialize["kind"] = o.Kind
 	toSerialize["name"] = o.Name
 	toSerialize["namespace"] = o.Namespace

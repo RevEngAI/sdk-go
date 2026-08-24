@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **CreatedAt** | **time.Time** | When this type was extracted. | 
 **DataTypeId** | **int64** | Identifies the type within its analysis. 0 is a valid id. | 
 **Definition** | Pointer to [**StructDefinition**](StructDefinition.md) | Absent only for a type referenced but never defined. | [optional] 
-**HasDefinition** | **bool** | Whether this type carries a definition. False for the kinds that never have one and for a type referenced but never defined. | 
+**DefinitionPresent** | **bool** | Whether this type carries a definition. False for the kinds that never have one and for a type referenced but never defined. | 
 **Kind** | **string** |  | 
 **Name** | **string** | Type name. | 
 **Namespace** | **string** | The scope qualifying the type name. Empty for a program-defined type. | 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewStructDataType
 
-`func NewStructDataType(createdAt time.Time, dataTypeId int64, hasDefinition bool, kind string, name string, namespace string, sourceType string, ) *StructDataType`
+`func NewStructDataType(createdAt time.Time, dataTypeId int64, definitionPresent bool, kind string, name string, namespace string, sourceType string, ) *StructDataType`
 
 NewStructDataType instantiates a new StructDataType object
 This constructor will assign default values to properties that have it defined,
@@ -99,24 +99,24 @@ SetDefinition sets Definition field to given value.
 
 HasDefinition returns a boolean if a field has been set.
 
-### GetHasDefinition
+### GetDefinitionPresent
 
-`func (o *StructDataType) GetHasDefinition() bool`
+`func (o *StructDataType) GetDefinitionPresent() bool`
 
-GetHasDefinition returns the HasDefinition field if non-nil, zero value otherwise.
+GetDefinitionPresent returns the DefinitionPresent field if non-nil, zero value otherwise.
 
-### GetHasDefinitionOk
+### GetDefinitionPresentOk
 
-`func (o *StructDataType) GetHasDefinitionOk() (*bool, bool)`
+`func (o *StructDataType) GetDefinitionPresentOk() (*bool, bool)`
 
-GetHasDefinitionOk returns a tuple with the HasDefinition field if it's non-nil, zero value otherwise
+GetDefinitionPresentOk returns a tuple with the DefinitionPresent field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHasDefinition
+### SetDefinitionPresent
 
-`func (o *StructDataType) SetHasDefinition(v bool)`
+`func (o *StructDataType) SetDefinitionPresent(v bool)`
 
-SetHasDefinition sets HasDefinition field to given value.
+SetDefinitionPresent sets DefinitionPresent field to given value.
 
 
 ### GetKind

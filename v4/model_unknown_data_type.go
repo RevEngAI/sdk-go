@@ -26,7 +26,7 @@ type UnknownDataType struct {
 	// Identifies the type within its analysis. 0 is a valid id.
 	DataTypeId int64 `json:"data_type_id"`
 	// Whether this type carries a definition. False for the kinds that never have one and for a type referenced but never defined.
-	HasDefinition bool `json:"has_definition"`
+	DefinitionPresent bool `json:"has_definition"`
 	Kind string `json:"kind"`
 	// Type name.
 	Name string `json:"name"`
@@ -46,11 +46,11 @@ type _UnknownDataType UnknownDataType
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUnknownDataType(createdAt time.Time, dataTypeId int64, hasDefinition bool, kind string, name string, namespace string, sourceType string) *UnknownDataType {
+func NewUnknownDataType(createdAt time.Time, dataTypeId int64, definitionPresent bool, kind string, name string, namespace string, sourceType string) *UnknownDataType {
 	this := UnknownDataType{}
 	this.CreatedAt = createdAt
 	this.DataTypeId = dataTypeId
-	this.HasDefinition = hasDefinition
+	this.DefinitionPresent = definitionPresent
 	this.Kind = kind
 	this.Name = name
 	this.Namespace = namespace
@@ -114,28 +114,28 @@ func (o *UnknownDataType) SetDataTypeId(v int64) {
 	o.DataTypeId = v
 }
 
-// GetHasDefinition returns the HasDefinition field value
-func (o *UnknownDataType) GetHasDefinition() bool {
+// GetDefinitionPresent returns the DefinitionPresent field value
+func (o *UnknownDataType) GetDefinitionPresent() bool {
 	if o == nil {
 		var ret bool
 		return ret
 	}
 
-	return o.HasDefinition
+	return o.DefinitionPresent
 }
 
-// GetHasDefinitionOk returns a tuple with the HasDefinition field value
+// GetDefinitionPresentOk returns a tuple with the DefinitionPresent field value
 // and a boolean to check if the value has been set.
-func (o *UnknownDataType) GetHasDefinitionOk() (*bool, bool) {
+func (o *UnknownDataType) GetDefinitionPresentOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.HasDefinition, true
+	return &o.DefinitionPresent, true
 }
 
-// SetHasDefinition sets field value
-func (o *UnknownDataType) SetHasDefinition(v bool) {
-	o.HasDefinition = v
+// SetDefinitionPresent sets field value
+func (o *UnknownDataType) SetDefinitionPresent(v bool) {
+	o.DefinitionPresent = v
 }
 
 // GetKind returns the Kind field value
@@ -310,7 +310,7 @@ func (o UnknownDataType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["data_type_id"] = o.DataTypeId
-	toSerialize["has_definition"] = o.HasDefinition
+	toSerialize["has_definition"] = o.DefinitionPresent
 	toSerialize["kind"] = o.Kind
 	toSerialize["name"] = o.Name
 	toSerialize["namespace"] = o.Namespace
