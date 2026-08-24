@@ -1,0 +1,4 @@
+{
+  "status": "success",
+  "decompilation": "void\npre_cpp_init(\n   void\n)\n{\n   // Assign the value of global_var_1 to global_var_0.\n   global_var_0 = global_var_1;\n   // Assign the value of global_var_3 to global_var_2.\n   global_var_2 = global_var_3;\n   // Call an unknown function, passing a global variable and pointers to three other global variables.\n   unknown_func_1(global_var_4, &global_var_5_ptr, &global_var_6_ptr, &global_var_7_ptr);\n}\n"
+}
