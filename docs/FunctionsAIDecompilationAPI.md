@@ -13,19 +13,20 @@ Method | HTTP request | Description
 [**GetAiDecompilationStatus**](FunctionsAIDecompilationAPI.md#GetAiDecompilationStatus) | **Get** /v3/functions/{function_id}/ai-decompilation/status | Get AI decompilation workflow status
 [**GetAiDecompilationSummary**](FunctionsAIDecompilationAPI.md#GetAiDecompilationSummary) | **Get** /v3/functions/{function_id}/ai-decompilation/summary | Get AI decompilation summary
 [**GetAiDecompilationSummaryStatus**](FunctionsAIDecompilationAPI.md#GetAiDecompilationSummaryStatus) | **Get** /v3/functions/{function_id}/ai-decompilation/summary/status | Get summary generation workflow status
-[**GetAiDecompilationTokenised**](FunctionsAIDecompilationAPI.md#GetAiDecompilationTokenised) | **Get** /v3/functions/{function_id}/ai-decompilation/tokenised | Get tokenised AI decompilation with function mapping
 [**PatchAiDecompilationInlineComment**](FunctionsAIDecompilationAPI.md#PatchAiDecompilationInlineComment) | **Patch** /v3/functions/{function_id}/ai-decompilation/inline-comments | Update a single inline comment
 [**RegenerateAiDecompilationInlineComments**](FunctionsAIDecompilationAPI.md#RegenerateAiDecompilationInlineComments) | **Post** /v3/functions/{function_id}/ai-decompilation/inline-comments | Regenerate AI decompilation inline comments
 [**RegenerateAiDecompilationSummary**](FunctionsAIDecompilationAPI.md#RegenerateAiDecompilationSummary) | **Post** /v3/functions/{function_id}/ai-decompilation/summary | Regenerate AI decompilation summary
 [**StreamAiDecompilation**](FunctionsAIDecompilationAPI.md#StreamAiDecompilation) | **Get** /v3/functions/{function_id}/ai-decompilation/events | Stream live AI decompilation output (SSE)
-[**UpsertAiDecompilationOverrides**](FunctionsAIDecompilationAPI.md#UpsertAiDecompilationOverrides) | **Patch** /v3/functions/{function_id}/ai-decompilation/overrides | Upsert variable/function name overrides
 [**UpsertAiDecompilationRating**](FunctionsAIDecompilationAPI.md#UpsertAiDecompilationRating) | **Patch** /v2/functions/{function_id}/ai-decompilation/rating | Upsert rating for AI decompilation
+[**V3GetAiDecompilationLineAttributions**](FunctionsAIDecompilationAPI.md#V3GetAiDecompilationLineAttributions) | **Get** /v3/functions/{function_id}/ai-decompilation/line-attributions | Get AI decompilation line attributions
+[**V3GetAiDecompilationTokens**](FunctionsAIDecompilationAPI.md#V3GetAiDecompilationTokens) | **Get** /v3/functions/{function_id}/ai-decompilation/tokens | Get AI decompilation tokens and user overrides
+[**V3UpsertAiDecompilationOverrides**](FunctionsAIDecompilationAPI.md#V3UpsertAiDecompilationOverrides) | **Patch** /v3/functions/{function_id}/ai-decompilation/overrides | Upsert variable/function name overrides
 
 
 
 ## CreateAiDecompilation
 
-> CreateAIDecompOutputBody CreateAiDecompilation(ctx, functionId).ContextAware(contextAware).Temperature(temperature).Execute()
+> CreateAIDecompOutputBody CreateAiDecompilation(ctx, functionId).Temperature(temperature).Execute()
 
 Start AI decompilation
 
@@ -45,12 +46,11 @@ import (
 
 func main() {
 	functionId := int64(789) // int64 | Function ID
-	contextAware := true // bool | Use context-aware decompilation (optional) (default to false)
 	temperature := float64(1.2) // float64 | LLM temperature (0.0-1.0). Overrides the server default when set. Omit or set to -1 to use the server default. (optional) (default to -1)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsAIDecompilationAPI.CreateAiDecompilation(context.Background(), functionId).ContextAware(contextAware).Temperature(temperature).Execute()
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.CreateAiDecompilation(context.Background(), functionId).Temperature(temperature).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.CreateAiDecompilation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -76,7 +76,6 @@ Other parameters are passed through a pointer to a apiCreateAiDecompilationReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **contextAware** | **bool** | Use context-aware decompilation | [default to false]
  **temperature** | **float64** | LLM temperature (0.0-1.0). Overrides the server default when set. Omit or set to -1 to use the server default. | [default to -1]
 
 ### Return type
@@ -658,76 +657,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetAiDecompilationTokenised
-
-> TokenisedData GetAiDecompilationTokenised(ctx, functionId).Execute()
-
-Get tokenised AI decompilation with function mapping
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
-)
-
-func main() {
-	functionId := int64(789) // int64 | Function ID
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsAIDecompilationAPI.GetAiDecompilationTokenised(context.Background(), functionId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.GetAiDecompilationTokenised``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetAiDecompilationTokenised`: TokenisedData
-	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.GetAiDecompilationTokenised`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**functionId** | **int64** | Function ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetAiDecompilationTokenisedRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**TokenisedData**](TokenisedData.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## PatchAiDecompilationInlineComment
 
 > CommentsData PatchAiDecompilationInlineComment(ctx, functionId).PatchCommentBody(patchCommentBody).Execute()
@@ -1010,78 +939,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpsertAiDecompilationOverrides
-
-> UpsertOverridesData UpsertAiDecompilationOverrides(ctx, functionId).UpsertOverridesInputBody(upsertOverridesInputBody).Execute()
-
-Upsert variable/function name overrides
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
-)
-
-func main() {
-	functionId := int64(789) // int64 | Function ID
-	upsertOverridesInputBody := *revengai.NewUpsertOverridesInputBody(map[string]string{"key": "Inner_example"}) // UpsertOverridesInputBody | 
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsAIDecompilationAPI.UpsertAiDecompilationOverrides(context.Background(), functionId).UpsertOverridesInputBody(upsertOverridesInputBody).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.UpsertAiDecompilationOverrides``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpsertAiDecompilationOverrides`: UpsertOverridesData
-	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.UpsertAiDecompilationOverrides`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**functionId** | **int64** | Function ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpsertAiDecompilationOverridesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **upsertOverridesInputBody** | [**UpsertOverridesInputBody**](UpsertOverridesInputBody.md) |  | 
-
-### Return type
-
-[**UpsertOverridesData**](UpsertOverridesData.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UpsertAiDecompilationRating
 
 > BaseResponse UpsertAiDecompilationRating(ctx, functionId).UpsertAiDecomplationRatingRequest(upsertAiDecomplationRatingRequest).Execute()
@@ -1137,6 +994,218 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponse**](BaseResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetAiDecompilationLineAttributions
+
+> LineAttributionsData V3GetAiDecompilationLineAttributions(ctx, functionId).Execute()
+
+Get AI decompilation line attributions
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.V3GetAiDecompilationLineAttributions(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.V3GetAiDecompilationLineAttributions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetAiDecompilationLineAttributions`: LineAttributionsData
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.V3GetAiDecompilationLineAttributions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetAiDecompilationLineAttributionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**LineAttributionsData**](LineAttributionsData.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetAiDecompilationTokens
+
+> GetTokensResponse V3GetAiDecompilationTokens(ctx, functionId).Execute()
+
+Get AI decompilation tokens and user overrides
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.V3GetAiDecompilationTokens(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.V3GetAiDecompilationTokens``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetAiDecompilationTokens`: GetTokensResponse
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.V3GetAiDecompilationTokens`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetAiDecompilationTokensRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetTokensResponse**](GetTokensResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3UpsertAiDecompilationOverrides
+
+> UpsertOverridesData V3UpsertAiDecompilationOverrides(ctx, functionId).UpsertOverridesInputBody(upsertOverridesInputBody).Execute()
+
+Upsert variable/function name overrides
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v3"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+	upsertOverridesInputBody := *revengai.NewUpsertOverridesInputBody(map[string]Token{"key": *revengai.NewToken("Value_example")}) // UpsertOverridesInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.V3UpsertAiDecompilationOverrides(context.Background(), functionId).UpsertOverridesInputBody(upsertOverridesInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.V3UpsertAiDecompilationOverrides``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3UpsertAiDecompilationOverrides`: UpsertOverridesData
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.V3UpsertAiDecompilationOverrides`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3UpsertAiDecompilationOverridesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **upsertOverridesInputBody** | [**UpsertOverridesInputBody**](UpsertOverridesInputBody.md) |  | 
+
+### Return type
+
+[**UpsertOverridesData**](UpsertOverridesData.md)
 
 ### Authorization
 
