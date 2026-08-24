@@ -1,5 +1,6 @@
 packageName: sdk
 gitUserId: RevEngAI
+# Rewritten by .github/workflows/check.yaml to match the spec's major version
 gitRepoId: sdk-go/v3
 enumClassPrefix: true
 withGoMod: false
