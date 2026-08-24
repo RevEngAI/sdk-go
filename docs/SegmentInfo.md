@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **X** | Pointer to **NullableBool** |  | [optional] 
 **Start** | Pointer to **int32** |  | [optional] [default to 0]
 **End** | Pointer to **int32** |  | [optional] [default to 0]
+**Kind** | Pointer to **string** |  | [optional] [default to "other"]
 
 ## Methods
 
@@ -209,6 +210,31 @@ SetEnd sets End field to given value.
 `func (o *SegmentInfo) HasEnd() bool`
 
 HasEnd returns a boolean if a field has been set.
+
+### GetKind
+
+`func (o *SegmentInfo) GetKind() string`
+
+GetKind returns the Kind field if non-nil, zero value otherwise.
+
+### GetKindOk
+
+`func (o *SegmentInfo) GetKindOk() (*string, bool)`
+
+GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKind
+
+`func (o *SegmentInfo) SetKind(v string)`
+
+SetKind sets Kind field to given value.
+
+### HasKind
+
+`func (o *SegmentInfo) HasKind() bool`
+
+HasKind returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

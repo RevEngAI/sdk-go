@@ -4,13 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Arch** | Pointer to **string** | Restrict matches to this architecture (multi-platform models only; matches all architectures if omitted). Rejected for single-architecture models. | [optional] 
+**Architectures** | Pointer to **[]string** | Restrict matches to candidates whose binary was detected as one of these architectures. Word size is part of the value, so there is no separate bits filter. Matches all architectures if omitted. | [optional] 
 **BinaryIds** | Pointer to **[]int64** | Restrict the candidate pool to these binary IDs. | [optional] 
-**Bits** | Pointer to **int64** | Restrict matches to this word size (multi-platform models only). Rejected for single-architecture models. | [optional] 
 **CollectionIds** | Pointer to **[]int64** | Restrict the candidate pool to binaries in these collection IDs. | [optional] 
+**Debug** | Pointer to **bool** | Restrict matches to candidates with auto/system debug symbols. Multi-platform models only; rejected for single-architecture models. | [optional] 
 **DebugTypes** | Pointer to **[]string** | Restrict matches to candidates with these debug source types. Accepted: SYSTEM, USER. | [optional] 
 **FunctionIds** | Pointer to **[]int64** | Restrict the candidate pool to these function IDs. | [optional] 
-**Platform** | Pointer to **string** | Restrict matches to this platform (multi-platform models only; matches all platforms if omitted). Rejected for single-architecture models. | [optional] 
+**IncludeUserDebug** | Pointer to **bool** | When debug is set, also match user-named functions (not only auto/system debug). No effect unless debug is true. | [optional] 
+**Platforms** | Pointer to **[]string** | Restrict matches to candidates whose binary was detected as one of these platforms. Matches all platforms if omitted; a binary whose detection has not run is never matched by a non-empty filter. | [optional] 
 **UserIds** | Pointer to **[]int64** | Restrict the candidate pool to functions owned by these user IDs. | [optional] 
 
 ## Methods
@@ -32,31 +33,41 @@ NewMatchFiltersWithDefaults instantiates a new MatchFilters object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetArch
+### GetArchitectures
 
-`func (o *MatchFilters) GetArch() string`
+`func (o *MatchFilters) GetArchitectures() []string`
 
-GetArch returns the Arch field if non-nil, zero value otherwise.
+GetArchitectures returns the Architectures field if non-nil, zero value otherwise.
 
-### GetArchOk
+### GetArchitecturesOk
 
-`func (o *MatchFilters) GetArchOk() (*string, bool)`
+`func (o *MatchFilters) GetArchitecturesOk() (*[]string, bool)`
 
-GetArchOk returns a tuple with the Arch field if it's non-nil, zero value otherwise
+GetArchitecturesOk returns a tuple with the Architectures field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetArch
+### SetArchitectures
 
-`func (o *MatchFilters) SetArch(v string)`
+`func (o *MatchFilters) SetArchitectures(v []string)`
 
-SetArch sets Arch field to given value.
+SetArchitectures sets Architectures field to given value.
 
-### HasArch
+### HasArchitectures
 
-`func (o *MatchFilters) HasArch() bool`
+`func (o *MatchFilters) HasArchitectures() bool`
 
-HasArch returns a boolean if a field has been set.
+HasArchitectures returns a boolean if a field has been set.
 
+### SetArchitecturesNil
+
+`func (o *MatchFilters) SetArchitecturesNil(b bool)`
+
+ SetArchitecturesNil sets the value for Architectures to be an explicit nil
+
+### UnsetArchitectures
+`func (o *MatchFilters) UnsetArchitectures()`
+
+UnsetArchitectures ensures that no value is present for Architectures, not even an explicit nil
 ### GetBinaryIds
 
 `func (o *MatchFilters) GetBinaryIds() []int64`
@@ -92,31 +103,6 @@ HasBinaryIds returns a boolean if a field has been set.
 `func (o *MatchFilters) UnsetBinaryIds()`
 
 UnsetBinaryIds ensures that no value is present for BinaryIds, not even an explicit nil
-### GetBits
-
-`func (o *MatchFilters) GetBits() int64`
-
-GetBits returns the Bits field if non-nil, zero value otherwise.
-
-### GetBitsOk
-
-`func (o *MatchFilters) GetBitsOk() (*int64, bool)`
-
-GetBitsOk returns a tuple with the Bits field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBits
-
-`func (o *MatchFilters) SetBits(v int64)`
-
-SetBits sets Bits field to given value.
-
-### HasBits
-
-`func (o *MatchFilters) HasBits() bool`
-
-HasBits returns a boolean if a field has been set.
-
 ### GetCollectionIds
 
 `func (o *MatchFilters) GetCollectionIds() []int64`
@@ -152,22 +138,47 @@ HasCollectionIds returns a boolean if a field has been set.
 `func (o *MatchFilters) UnsetCollectionIds()`
 
 UnsetCollectionIds ensures that no value is present for CollectionIds, not even an explicit nil
+### GetDebug
+
+`func (o *MatchFilters) GetDebug() bool`
+
+GetDebug returns the Debug field if non-nil, zero value otherwise.
+
+### GetDebugOk
+
+`func (o *MatchFilters) GetDebugOk() (*bool, bool)`
+
+GetDebugOk returns a tuple with the Debug field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDebug
+
+`func (o *MatchFilters) SetDebug(v bool)`
+
+SetDebug sets Debug field to given value.
+
+### HasDebug
+
+`func (o *MatchFilters) HasDebug() bool`
+
+HasDebug returns a boolean if a field has been set.
+
 ### GetDebugTypes
 
-`func (o *MatchFilters) GetDebugTypes() []string`
+`func (o *MatchFilters) GetDebugTypes() []*string`
 
 GetDebugTypes returns the DebugTypes field if non-nil, zero value otherwise.
 
 ### GetDebugTypesOk
 
-`func (o *MatchFilters) GetDebugTypesOk() (*[]string, bool)`
+`func (o *MatchFilters) GetDebugTypesOk() (*[]*string, bool)`
 
 GetDebugTypesOk returns a tuple with the DebugTypes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDebugTypes
 
-`func (o *MatchFilters) SetDebugTypes(v []string)`
+`func (o *MatchFilters) SetDebugTypes(v []*string)`
 
 SetDebugTypes sets DebugTypes field to given value.
 
@@ -222,31 +233,66 @@ HasFunctionIds returns a boolean if a field has been set.
 `func (o *MatchFilters) UnsetFunctionIds()`
 
 UnsetFunctionIds ensures that no value is present for FunctionIds, not even an explicit nil
-### GetPlatform
+### GetIncludeUserDebug
 
-`func (o *MatchFilters) GetPlatform() string`
+`func (o *MatchFilters) GetIncludeUserDebug() bool`
 
-GetPlatform returns the Platform field if non-nil, zero value otherwise.
+GetIncludeUserDebug returns the IncludeUserDebug field if non-nil, zero value otherwise.
 
-### GetPlatformOk
+### GetIncludeUserDebugOk
 
-`func (o *MatchFilters) GetPlatformOk() (*string, bool)`
+`func (o *MatchFilters) GetIncludeUserDebugOk() (*bool, bool)`
 
-GetPlatformOk returns a tuple with the Platform field if it's non-nil, zero value otherwise
+GetIncludeUserDebugOk returns a tuple with the IncludeUserDebug field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPlatform
+### SetIncludeUserDebug
 
-`func (o *MatchFilters) SetPlatform(v string)`
+`func (o *MatchFilters) SetIncludeUserDebug(v bool)`
 
-SetPlatform sets Platform field to given value.
+SetIncludeUserDebug sets IncludeUserDebug field to given value.
 
-### HasPlatform
+### HasIncludeUserDebug
 
-`func (o *MatchFilters) HasPlatform() bool`
+`func (o *MatchFilters) HasIncludeUserDebug() bool`
 
-HasPlatform returns a boolean if a field has been set.
+HasIncludeUserDebug returns a boolean if a field has been set.
 
+### GetPlatforms
+
+`func (o *MatchFilters) GetPlatforms() []string`
+
+GetPlatforms returns the Platforms field if non-nil, zero value otherwise.
+
+### GetPlatformsOk
+
+`func (o *MatchFilters) GetPlatformsOk() (*[]string, bool)`
+
+GetPlatformsOk returns a tuple with the Platforms field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatforms
+
+`func (o *MatchFilters) SetPlatforms(v []string)`
+
+SetPlatforms sets Platforms field to given value.
+
+### HasPlatforms
+
+`func (o *MatchFilters) HasPlatforms() bool`
+
+HasPlatforms returns a boolean if a field has been set.
+
+### SetPlatformsNil
+
+`func (o *MatchFilters) SetPlatformsNil(b bool)`
+
+ SetPlatformsNil sets the value for Platforms to be an explicit nil
+
+### UnsetPlatforms
+`func (o *MatchFilters) UnsetPlatforms()`
+
+UnsetPlatforms ensures that no value is present for Platforms, not even an explicit nil
 ### GetUserIds
 
 `func (o *MatchFilters) GetUserIds() []int64`

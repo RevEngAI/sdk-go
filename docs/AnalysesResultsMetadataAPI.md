@@ -28,7 +28,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -100,7 +100,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -170,7 +170,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
@@ -250,7 +250,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	revengai "github.com/RevEngAI/sdk-go/v3"
+	revengai "github.com/RevEngAI/sdk-go/v4"
 )
 
 func main() {
