@@ -105,6 +105,15 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Point generator config at the current major version
+      if: steps.version_check.outputs.should_generate == 'true'
+      env:
+        MAJOR_VERSION: ${{ steps.version_check.outputs.major_version }}
+      run: |
+        # gitRepoId drives the import paths in the generated docs
+        sed -i "s|^gitRepoId: .*|gitRepoId: sdk-go/${MAJOR_VERSION}|" config.yml
+        echo "gitRepoId set to sdk-go/${MAJOR_VERSION}"
+
     - name: Generate Go SDK
       if: steps.version_check.outputs.should_generate == 'true'
       uses: openapi-generators/openapitools-generator-action@b729d184e6b3459572c37c0e37f88a832e69b552 # v1.5.0
