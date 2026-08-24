@@ -135,10 +135,19 @@ jobs:
         # Move generated files to the correct locations and clean up
         MAJOR_VERSION="${{ steps.version_check.outputs.major_version }}"
 
-        # Remove old major version directories (vN) that differ from the current one
+        # Carry the hand-written files forward from the previous major version
+        # directory, then remove it. Only top-level *.go is regenerated.
         for dir in v[0-9]*; do
           if [ -d "$dir" ] && [ "$dir" != "$MAJOR_VERSION" ]; then
-            echo "Removing old version directory: $dir"
+            echo "Migrating $dir to $MAJOR_VERSION"
+            mkdir -p "$MAJOR_VERSION"
+            for keep in test example go.mod go.sum; do
+              if [ -e "$dir/$keep" ] && [ ! -e "$MAJOR_VERSION/$keep" ]; then
+                mv "$dir/$keep" "$MAJOR_VERSION/"
+              fi
+            done
+            grep -rl "sdk-go/$dir" "$MAJOR_VERSION" 2>/dev/null \
+              | xargs -r sed -i "s|sdk-go/$dir|sdk-go/$MAJOR_VERSION|g"
             rm -Rf "$dir"
           fi
         done
