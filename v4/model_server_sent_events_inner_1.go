@@ -21,6 +21,7 @@ type ServerSentEventsInner1 struct {
 	EventAttemptStarted *EventAttemptStarted
 	EventDecompFailed *EventDecompFailed
 	EventDecompFinished *EventDecompFinished
+	EventNamesFinished *EventNamesFinished
 	EventProse *EventProse
 	EventRenameApplied *EventRenameApplied
 	EventSourceDelta *EventSourceDelta
@@ -53,6 +54,13 @@ func EventDecompFailedAsServerSentEventsInner1(v *EventDecompFailed) ServerSentE
 func EventDecompFinishedAsServerSentEventsInner1(v *EventDecompFinished) ServerSentEventsInner1 {
 	return ServerSentEventsInner1{
 		EventDecompFinished: v,
+	}
+}
+
+// EventNamesFinishedAsServerSentEventsInner1 is a convenience function that returns EventNamesFinished wrapped in ServerSentEventsInner1
+func EventNamesFinishedAsServerSentEventsInner1(v *EventNamesFinished) ServerSentEventsInner1 {
+	return ServerSentEventsInner1{
+		EventNamesFinished: v,
 	}
 }
 
@@ -164,6 +172,23 @@ func (dst *ServerSentEventsInner1) UnmarshalJSON(data []byte) error {
 		dst.EventDecompFinished = nil
 	}
 
+	// try to unmarshal data into EventNamesFinished
+	err = newStrictDecoder(data).Decode(&dst.EventNamesFinished)
+	if err == nil {
+		jsonEventNamesFinished, _ := json.Marshal(dst.EventNamesFinished)
+		if string(jsonEventNamesFinished) == "{}" { // empty struct
+			dst.EventNamesFinished = nil
+		} else {
+			if err = validator.Validate(dst.EventNamesFinished); err != nil {
+				dst.EventNamesFinished = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.EventNamesFinished = nil
+	}
+
 	// try to unmarshal data into EventProse
 	err = newStrictDecoder(data).Decode(&dst.EventProse)
 	if err == nil {
@@ -255,6 +280,7 @@ func (dst *ServerSentEventsInner1) UnmarshalJSON(data []byte) error {
 		dst.EventAttemptStarted = nil
 		dst.EventDecompFailed = nil
 		dst.EventDecompFinished = nil
+		dst.EventNamesFinished = nil
 		dst.EventProse = nil
 		dst.EventRenameApplied = nil
 		dst.EventSourceDelta = nil
@@ -285,6 +311,10 @@ func (src ServerSentEventsInner1) MarshalJSON() ([]byte, error) {
 
 	if src.EventDecompFinished != nil {
 		return json.Marshal(&src.EventDecompFinished)
+	}
+
+	if src.EventNamesFinished != nil {
+		return json.Marshal(&src.EventNamesFinished)
 	}
 
 	if src.EventProse != nil {
@@ -331,6 +361,10 @@ func (obj *ServerSentEventsInner1) GetActualInstance() (interface{}) {
 		return obj.EventDecompFinished
 	}
 
+	if obj.EventNamesFinished != nil {
+		return obj.EventNamesFinished
+	}
+
 	if obj.EventProse != nil {
 		return obj.EventProse
 	}
@@ -371,6 +405,10 @@ func (obj ServerSentEventsInner1) GetActualInstanceValue() (interface{}) {
 
 	if obj.EventDecompFinished != nil {
 		return *obj.EventDecompFinished
+	}
+
+	if obj.EventNamesFinished != nil {
+		return *obj.EventNamesFinished
 	}
 
 	if obj.EventProse != nil {
