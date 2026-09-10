@@ -26,6 +26,7 @@ type UploadResponse struct {
 	IsArchive bool `json:"is_archive"`
 	CanSandbox bool `json:"can_sandbox"`
 	CanExtract bool `json:"can_extract"`
+	AnalysisRequirements []AnalysisRequirement `json:"analysis_requirements,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -223,6 +224,38 @@ func (o *UploadResponse) SetCanExtract(v bool) {
 	o.CanExtract = v
 }
 
+// GetAnalysisRequirements returns the AnalysisRequirements field value if set, zero value otherwise.
+func (o *UploadResponse) GetAnalysisRequirements() []AnalysisRequirement {
+	if o == nil || IsNil(o.AnalysisRequirements) {
+		var ret []AnalysisRequirement
+		return ret
+	}
+	return o.AnalysisRequirements
+}
+
+// GetAnalysisRequirementsOk returns a tuple with the AnalysisRequirements field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UploadResponse) GetAnalysisRequirementsOk() ([]AnalysisRequirement, bool) {
+	if o == nil || IsNil(o.AnalysisRequirements) {
+		return nil, false
+	}
+	return o.AnalysisRequirements, true
+}
+
+// HasAnalysisRequirements returns a boolean if a field has been set.
+func (o *UploadResponse) HasAnalysisRequirements() bool {
+	if o != nil && !IsNil(o.AnalysisRequirements) {
+		return true
+	}
+
+	return false
+}
+
+// SetAnalysisRequirements gets a reference to the given []AnalysisRequirement and assigns it to the AnalysisRequirements field.
+func (o *UploadResponse) SetAnalysisRequirements(v []AnalysisRequirement) {
+	o.AnalysisRequirements = v
+}
+
 func (o UploadResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -240,6 +273,9 @@ func (o UploadResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["is_archive"] = o.IsArchive
 	toSerialize["can_sandbox"] = o.CanSandbox
 	toSerialize["can_extract"] = o.CanExtract
+	if !IsNil(o.AnalysisRequirements) {
+		toSerialize["analysis_requirements"] = o.AnalysisRequirements
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -296,6 +332,7 @@ func (o *UploadResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "is_archive")
 		delete(additionalProperties, "can_sandbox")
 		delete(additionalProperties, "can_extract")
+		delete(additionalProperties, "analysis_requirements")
 		o.AdditionalProperties = additionalProperties
 	}
 

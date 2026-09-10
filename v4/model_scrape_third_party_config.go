@@ -19,10 +19,7 @@ var _ MappedNullable = &ScrapeThirdPartyConfig{}
 // ScrapeThirdPartyConfig struct for ScrapeThirdPartyConfig
 type ScrapeThirdPartyConfig struct {
 	Enabled *bool `json:"enabled,omitempty"`
-	AdditionalProperties map[string]interface{}
 }
-
-type _ScrapeThirdPartyConfig ScrapeThirdPartyConfig
 
 // NewScrapeThirdPartyConfig instantiates a new ScrapeThirdPartyConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -30,8 +27,6 @@ type _ScrapeThirdPartyConfig ScrapeThirdPartyConfig
 // will change when the set of required properties is changed
 func NewScrapeThirdPartyConfig() *ScrapeThirdPartyConfig {
 	this := ScrapeThirdPartyConfig{}
-	var enabled bool = false
-	this.Enabled = &enabled
 	return &this
 }
 
@@ -40,8 +35,6 @@ func NewScrapeThirdPartyConfig() *ScrapeThirdPartyConfig {
 // but it doesn't guarantee that properties required by API are set
 func NewScrapeThirdPartyConfigWithDefaults() *ScrapeThirdPartyConfig {
 	this := ScrapeThirdPartyConfig{}
-	var enabled bool = false
-	this.Enabled = &enabled
 	return &this
 }
 
@@ -90,33 +83,7 @@ func (o ScrapeThirdPartyConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *ScrapeThirdPartyConfig) UnmarshalJSON(data []byte) (err error) {
-	varScrapeThirdPartyConfig := _ScrapeThirdPartyConfig{}
-
-	err = json.Unmarshal(data, &varScrapeThirdPartyConfig)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ScrapeThirdPartyConfig(varScrapeThirdPartyConfig)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "enabled")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableScrapeThirdPartyConfig struct {

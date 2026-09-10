@@ -24,8 +24,8 @@ type RenameInputBody struct {
 	NewMangledName *string `json:"new_mangled_name,omitempty"`
 	// New function name
 	NewName string `json:"new_name"`
-	// Keep the cached AI decompilation, summary and inline comments. Set when the new name comes from the model's own prediction (e.g. Transfer Name) so existing AI output is not discarded and regenerated.
-	PreserveAiDecompilation *bool `json:"preserve_ai_decompilation,omitempty"`
+	// Source that triggered the rename
+	SourceType *string `json:"source_type,omitempty"`
 }
 
 type _RenameInputBody RenameInputBody
@@ -104,36 +104,36 @@ func (o *RenameInputBody) SetNewName(v string) {
 	o.NewName = v
 }
 
-// GetPreserveAiDecompilation returns the PreserveAiDecompilation field value if set, zero value otherwise.
-func (o *RenameInputBody) GetPreserveAiDecompilation() bool {
-	if o == nil || IsNil(o.PreserveAiDecompilation) {
-		var ret bool
+// GetSourceType returns the SourceType field value if set, zero value otherwise.
+func (o *RenameInputBody) GetSourceType() string {
+	if o == nil || IsNil(o.SourceType) {
+		var ret string
 		return ret
 	}
-	return *o.PreserveAiDecompilation
+	return *o.SourceType
 }
 
-// GetPreserveAiDecompilationOk returns a tuple with the PreserveAiDecompilation field value if set, nil otherwise
+// GetSourceTypeOk returns a tuple with the SourceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RenameInputBody) GetPreserveAiDecompilationOk() (*bool, bool) {
-	if o == nil || IsNil(o.PreserveAiDecompilation) {
+func (o *RenameInputBody) GetSourceTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.SourceType) {
 		return nil, false
 	}
-	return o.PreserveAiDecompilation, true
+	return o.SourceType, true
 }
 
-// HasPreserveAiDecompilation returns a boolean if a field has been set.
-func (o *RenameInputBody) HasPreserveAiDecompilation() bool {
-	if o != nil && !IsNil(o.PreserveAiDecompilation) {
+// HasSourceType returns a boolean if a field has been set.
+func (o *RenameInputBody) HasSourceType() bool {
+	if o != nil && !IsNil(o.SourceType) {
 		return true
 	}
 
 	return false
 }
 
-// SetPreserveAiDecompilation gets a reference to the given bool and assigns it to the PreserveAiDecompilation field.
-func (o *RenameInputBody) SetPreserveAiDecompilation(v bool) {
-	o.PreserveAiDecompilation = &v
+// SetSourceType gets a reference to the given string and assigns it to the SourceType field.
+func (o *RenameInputBody) SetSourceType(v string) {
+	o.SourceType = &v
 }
 
 func (o RenameInputBody) MarshalJSON() ([]byte, error) {
@@ -150,8 +150,8 @@ func (o RenameInputBody) ToMap() (map[string]interface{}, error) {
 		toSerialize["new_mangled_name"] = o.NewMangledName
 	}
 	toSerialize["new_name"] = o.NewName
-	if !IsNil(o.PreserveAiDecompilation) {
-		toSerialize["preserve_ai_decompilation"] = o.PreserveAiDecompilation
+	if !IsNil(o.SourceType) {
+		toSerialize["source_type"] = o.SourceType
 	}
 	return toSerialize, nil
 }

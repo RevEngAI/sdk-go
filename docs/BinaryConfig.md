@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Isa** | Pointer to [**NullableISA**](ISA.md) |  | [optional] 
-**Platform** | Pointer to [**NullablePlatform**](Platform.md) |  | [optional] 
-**FileFormat** | Pointer to [**NullableFileFormat**](FileFormat.md) |  | [optional] 
+**FileFormat** | Pointer to **string** |  | [optional] 
+**Isa** | Pointer to **string** |  | [optional] 
+**Platform** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -27,92 +27,22 @@ NewBinaryConfigWithDefaults instantiates a new BinaryConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetIsa
-
-`func (o *BinaryConfig) GetIsa() ISA`
-
-GetIsa returns the Isa field if non-nil, zero value otherwise.
-
-### GetIsaOk
-
-`func (o *BinaryConfig) GetIsaOk() (*ISA, bool)`
-
-GetIsaOk returns a tuple with the Isa field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsa
-
-`func (o *BinaryConfig) SetIsa(v ISA)`
-
-SetIsa sets Isa field to given value.
-
-### HasIsa
-
-`func (o *BinaryConfig) HasIsa() bool`
-
-HasIsa returns a boolean if a field has been set.
-
-### SetIsaNil
-
-`func (o *BinaryConfig) SetIsaNil(b bool)`
-
- SetIsaNil sets the value for Isa to be an explicit nil
-
-### UnsetIsa
-`func (o *BinaryConfig) UnsetIsa()`
-
-UnsetIsa ensures that no value is present for Isa, not even an explicit nil
-### GetPlatform
-
-`func (o *BinaryConfig) GetPlatform() Platform`
-
-GetPlatform returns the Platform field if non-nil, zero value otherwise.
-
-### GetPlatformOk
-
-`func (o *BinaryConfig) GetPlatformOk() (*Platform, bool)`
-
-GetPlatformOk returns a tuple with the Platform field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatform
-
-`func (o *BinaryConfig) SetPlatform(v Platform)`
-
-SetPlatform sets Platform field to given value.
-
-### HasPlatform
-
-`func (o *BinaryConfig) HasPlatform() bool`
-
-HasPlatform returns a boolean if a field has been set.
-
-### SetPlatformNil
-
-`func (o *BinaryConfig) SetPlatformNil(b bool)`
-
- SetPlatformNil sets the value for Platform to be an explicit nil
-
-### UnsetPlatform
-`func (o *BinaryConfig) UnsetPlatform()`
-
-UnsetPlatform ensures that no value is present for Platform, not even an explicit nil
 ### GetFileFormat
 
-`func (o *BinaryConfig) GetFileFormat() FileFormat`
+`func (o *BinaryConfig) GetFileFormat() string`
 
 GetFileFormat returns the FileFormat field if non-nil, zero value otherwise.
 
 ### GetFileFormatOk
 
-`func (o *BinaryConfig) GetFileFormatOk() (*FileFormat, bool)`
+`func (o *BinaryConfig) GetFileFormatOk() (*string, bool)`
 
 GetFileFormatOk returns a tuple with the FileFormat field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFileFormat
 
-`func (o *BinaryConfig) SetFileFormat(v FileFormat)`
+`func (o *BinaryConfig) SetFileFormat(v string)`
 
 SetFileFormat sets FileFormat field to given value.
 
@@ -122,16 +52,56 @@ SetFileFormat sets FileFormat field to given value.
 
 HasFileFormat returns a boolean if a field has been set.
 
-### SetFileFormatNil
+### GetIsa
 
-`func (o *BinaryConfig) SetFileFormatNil(b bool)`
+`func (o *BinaryConfig) GetIsa() string`
 
- SetFileFormatNil sets the value for FileFormat to be an explicit nil
+GetIsa returns the Isa field if non-nil, zero value otherwise.
 
-### UnsetFileFormat
-`func (o *BinaryConfig) UnsetFileFormat()`
+### GetIsaOk
 
-UnsetFileFormat ensures that no value is present for FileFormat, not even an explicit nil
+`func (o *BinaryConfig) GetIsaOk() (*string, bool)`
+
+GetIsaOk returns a tuple with the Isa field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsa
+
+`func (o *BinaryConfig) SetIsa(v string)`
+
+SetIsa sets Isa field to given value.
+
+### HasIsa
+
+`func (o *BinaryConfig) HasIsa() bool`
+
+HasIsa returns a boolean if a field has been set.
+
+### GetPlatform
+
+`func (o *BinaryConfig) GetPlatform() string`
+
+GetPlatform returns the Platform field if non-nil, zero value otherwise.
+
+### GetPlatformOk
+
+`func (o *BinaryConfig) GetPlatformOk() (*string, bool)`
+
+GetPlatformOk returns a tuple with the Platform field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatform
+
+`func (o *BinaryConfig) SetPlatform(v string)`
+
+SetPlatform sets Platform field to given value.
+
+### HasPlatform
+
+`func (o *BinaryConfig) HasPlatform() bool`
+
+HasPlatform returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

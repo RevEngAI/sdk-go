@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **FunctionName** | **string** |  | 
 **FunctionSize** | **int64** |  | 
 **FunctionVaddr** | **int64** |  | 
-**MangledName** | Pointer to **NullableString** |  | [optional] 
+**MangledName** | Pointer to **string** |  | [optional] 
 **SourceAnalysisId** | Pointer to **int64** | ID of the analysis the source function belongs to, if any | [optional] 
 **SourceBinaryId** | Pointer to **int64** |  | [optional] 
 **SourceFunctionId** | Pointer to **int64** | ID of the source function this name was transferred from, if any | [optional] 
@@ -180,16 +180,6 @@ SetMangledName sets MangledName field to given value.
 
 HasMangledName returns a boolean if a field has been set.
 
-### SetMangledNameNil
-
-`func (o *AnalysisFunctionEntry) SetMangledNameNil(b bool)`
-
- SetMangledNameNil sets the value for MangledName to be an explicit nil
-
-### UnsetMangledName
-`func (o *AnalysisFunctionEntry) UnsetMangledName()`
-
-UnsetMangledName ensures that no value is present for MangledName, not even an explicit nil
 ### GetSourceAnalysisId
 
 `func (o *AnalysisFunctionEntry) GetSourceAnalysisId() int64`

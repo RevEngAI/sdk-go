@@ -22,6 +22,8 @@ var _ MappedNullable = &SummaryData{}
 type SummaryData struct {
 	// Summary with code tags removed
 	AiSummary string `json:"ai_summary"`
+	// Name the model proposes for this function, produced alongside the summary.
+	PredictedFunctionName *string `json:"predicted_function_name,omitempty"`
 	// Raw summary from the model
 	Summary string `json:"summary"`
 	// Task status
@@ -72,6 +74,38 @@ func (o *SummaryData) GetAiSummaryOk() (*string, bool) {
 // SetAiSummary sets field value
 func (o *SummaryData) SetAiSummary(v string) {
 	o.AiSummary = v
+}
+
+// GetPredictedFunctionName returns the PredictedFunctionName field value if set, zero value otherwise.
+func (o *SummaryData) GetPredictedFunctionName() string {
+	if o == nil || IsNil(o.PredictedFunctionName) {
+		var ret string
+		return ret
+	}
+	return *o.PredictedFunctionName
+}
+
+// GetPredictedFunctionNameOk returns a tuple with the PredictedFunctionName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SummaryData) GetPredictedFunctionNameOk() (*string, bool) {
+	if o == nil || IsNil(o.PredictedFunctionName) {
+		return nil, false
+	}
+	return o.PredictedFunctionName, true
+}
+
+// HasPredictedFunctionName returns a boolean if a field has been set.
+func (o *SummaryData) HasPredictedFunctionName() bool {
+	if o != nil && !IsNil(o.PredictedFunctionName) {
+		return true
+	}
+
+	return false
+}
+
+// SetPredictedFunctionName gets a reference to the given string and assigns it to the PredictedFunctionName field.
+func (o *SummaryData) SetPredictedFunctionName(v string) {
+	o.PredictedFunctionName = &v
 }
 
 // GetSummary returns the Summary field value
@@ -133,6 +167,9 @@ func (o SummaryData) MarshalJSON() ([]byte, error) {
 func (o SummaryData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ai_summary"] = o.AiSummary
+	if !IsNil(o.PredictedFunctionName) {
+		toSerialize["predicted_function_name"] = o.PredictedFunctionName
+	}
 	toSerialize["summary"] = o.Summary
 	toSerialize["task_status"] = o.TaskStatus
 	return toSerialize, nil

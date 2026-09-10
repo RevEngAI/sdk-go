@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -25,14 +26,13 @@ type AnalysisFunctionEntry struct {
 	FunctionName string `json:"function_name"`
 	FunctionSize int64 `json:"function_size"`
 	FunctionVaddr int64 `json:"function_vaddr"`
-	MangledName NullableString `json:"mangled_name,omitempty"`
+	MangledName *string `json:"mangled_name,omitempty"`
 	// ID of the analysis the source function belongs to, if any
 	SourceAnalysisId *int64 `json:"source_analysis_id,omitempty"`
 	SourceBinaryId *int64 `json:"source_binary_id,omitempty"`
 	// ID of the source function this name was transferred from, if any
 	SourceFunctionId *int64 `json:"source_function_id,omitempty"`
 	SourceType string `json:"source_type"`
-	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisFunctionEntry AnalysisFunctionEntry
@@ -205,46 +205,36 @@ func (o *AnalysisFunctionEntry) SetFunctionVaddr(v int64) {
 	o.FunctionVaddr = v
 }
 
-// GetMangledName returns the MangledName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetMangledName returns the MangledName field value if set, zero value otherwise.
 func (o *AnalysisFunctionEntry) GetMangledName() string {
-	if o == nil || IsNil(o.MangledName.Get()) {
+	if o == nil || IsNil(o.MangledName) {
 		var ret string
 		return ret
 	}
-	return *o.MangledName.Get()
+	return *o.MangledName
 }
 
 // GetMangledNameOk returns a tuple with the MangledName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AnalysisFunctionEntry) GetMangledNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MangledName) {
 		return nil, false
 	}
-	return o.MangledName.Get(), o.MangledName.IsSet()
+	return o.MangledName, true
 }
 
 // HasMangledName returns a boolean if a field has been set.
 func (o *AnalysisFunctionEntry) HasMangledName() bool {
-	if o != nil && o.MangledName.IsSet() {
+	if o != nil && !IsNil(o.MangledName) {
 		return true
 	}
 
 	return false
 }
 
-// SetMangledName gets a reference to the given NullableString and assigns it to the MangledName field.
+// SetMangledName gets a reference to the given string and assigns it to the MangledName field.
 func (o *AnalysisFunctionEntry) SetMangledName(v string) {
-	o.MangledName.Set(&v)
-}
-// SetMangledNameNil sets the value for MangledName to be an explicit nil
-func (o *AnalysisFunctionEntry) SetMangledNameNil() {
-	o.MangledName.Set(nil)
-}
-
-// UnsetMangledName ensures that no value is present for MangledName, not even an explicit nil
-func (o *AnalysisFunctionEntry) UnsetMangledName() {
-	o.MangledName.Unset()
+	o.MangledName = &v
 }
 
 // GetSourceAnalysisId returns the SourceAnalysisId field value if set, zero value otherwise.
@@ -383,8 +373,8 @@ func (o AnalysisFunctionEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize["function_name"] = o.FunctionName
 	toSerialize["function_size"] = o.FunctionSize
 	toSerialize["function_vaddr"] = o.FunctionVaddr
-	if o.MangledName.IsSet() {
-		toSerialize["mangled_name"] = o.MangledName.Get()
+	if !IsNil(o.MangledName) {
+		toSerialize["mangled_name"] = o.MangledName
 	}
 	if !IsNil(o.SourceAnalysisId) {
 		toSerialize["source_analysis_id"] = o.SourceAnalysisId
@@ -396,11 +386,6 @@ func (o AnalysisFunctionEntry) ToMap() (map[string]interface{}, error) {
 		toSerialize["source_function_id"] = o.SourceFunctionId
 	}
 	toSerialize["source_type"] = o.SourceType
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -434,30 +419,15 @@ func (o *AnalysisFunctionEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisFunctionEntry := _AnalysisFunctionEntry{}
 
-	err = json.Unmarshal(data, &varAnalysisFunctionEntry)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAnalysisFunctionEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisFunctionEntry(varAnalysisFunctionEntry)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "binary_id")
-		delete(additionalProperties, "debug")
-		delete(additionalProperties, "function_id")
-		delete(additionalProperties, "function_name")
-		delete(additionalProperties, "function_size")
-		delete(additionalProperties, "function_vaddr")
-		delete(additionalProperties, "mangled_name")
-		delete(additionalProperties, "source_analysis_id")
-		delete(additionalProperties, "source_binary_id")
-		delete(additionalProperties, "source_function_id")
-		delete(additionalProperties, "source_type")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

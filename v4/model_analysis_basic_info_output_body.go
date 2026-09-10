@@ -55,6 +55,8 @@ type AnalysisBasicInfoOutputBody struct {
 	ModelId int64 `json:"model_id"`
 	// Model used for analysis
 	ModelName string `json:"model_name"`
+	// True when the analysis ran on a model older than the current one, so its owner can re-analyse it on the latest. Describes the analysis, not the caller's rights — only the owner may act on it
+	ModelUpgradeAvailable bool `json:"model_upgrade_available"`
 	// Username of the analysis owner
 	OwnerUsername string `json:"owner_username"`
 	// Sequencer version, omitted when not set
@@ -77,7 +79,7 @@ type _AnalysisBasicInfoOutputBody AnalysisBasicInfoOutputBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, binaryUuid string, creation time.Time, debug bool, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, ownerUsername string, sha256Hash string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, teamId int64) *AnalysisBasicInfoOutputBody {
+func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, binaryUuid string, creation time.Time, debug bool, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, modelUpgradeAvailable bool, ownerUsername string, sha256Hash string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, teamId int64) *AnalysisBasicInfoOutputBody {
 	this := AnalysisBasicInfoOutputBody{}
 	this.AnalysisScope = analysisScope
 	this.BaseAddress = baseAddress
@@ -96,6 +98,7 @@ func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableIn
 	this.IsSystem = isSystem
 	this.ModelId = modelId
 	this.ModelName = modelName
+	this.ModelUpgradeAvailable = modelUpgradeAvailable
 	this.OwnerUsername = ownerUsername
 	this.Sha256Hash = sha256Hash
 	this.SuppliedArchitecture = suppliedArchitecture
@@ -523,6 +526,30 @@ func (o *AnalysisBasicInfoOutputBody) SetModelName(v string) {
 	o.ModelName = v
 }
 
+// GetModelUpgradeAvailable returns the ModelUpgradeAvailable field value
+func (o *AnalysisBasicInfoOutputBody) GetModelUpgradeAvailable() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ModelUpgradeAvailable
+}
+
+// GetModelUpgradeAvailableOk returns a tuple with the ModelUpgradeAvailable field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisBasicInfoOutputBody) GetModelUpgradeAvailableOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ModelUpgradeAvailable, true
+}
+
+// SetModelUpgradeAvailable sets field value
+func (o *AnalysisBasicInfoOutputBody) SetModelUpgradeAvailable(v bool) {
+	o.ModelUpgradeAvailable = v
+}
+
 // GetOwnerUsername returns the OwnerUsername field value
 func (o *AnalysisBasicInfoOutputBody) GetOwnerUsername() string {
 	if o == nil {
@@ -726,6 +753,7 @@ func (o AnalysisBasicInfoOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize["is_system"] = o.IsSystem
 	toSerialize["model_id"] = o.ModelId
 	toSerialize["model_name"] = o.ModelName
+	toSerialize["model_upgrade_available"] = o.ModelUpgradeAvailable
 	toSerialize["owner_username"] = o.OwnerUsername
 	if !IsNil(o.SequencerVersion) {
 		toSerialize["sequencer_version"] = o.SequencerVersion
@@ -760,6 +788,7 @@ func (o *AnalysisBasicInfoOutputBody) UnmarshalJSON(data []byte) (err error) {
 		"is_system",
 		"model_id",
 		"model_name",
+		"model_upgrade_available",
 		"owner_username",
 		"sha_256_hash",
 		"supplied_architecture",

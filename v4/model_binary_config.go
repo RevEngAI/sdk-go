@@ -18,13 +18,10 @@ var _ MappedNullable = &BinaryConfig{}
 
 // BinaryConfig struct for BinaryConfig
 type BinaryConfig struct {
-	Isa NullableISA `json:"isa,omitempty"`
-	Platform NullablePlatform `json:"platform,omitempty"`
-	FileFormat NullableFileFormat `json:"file_format,omitempty"`
-	AdditionalProperties map[string]interface{}
+	FileFormat *string `json:"file_format,omitempty"`
+	Isa *string `json:"isa,omitempty"`
+	Platform *string `json:"platform,omitempty"`
 }
-
-type _BinaryConfig BinaryConfig
 
 // NewBinaryConfig instantiates a new BinaryConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -43,130 +40,100 @@ func NewBinaryConfigWithDefaults() *BinaryConfig {
 	return &this
 }
 
-// GetIsa returns the Isa field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BinaryConfig) GetIsa() ISA {
-	if o == nil || IsNil(o.Isa.Get()) {
-		var ret ISA
+// GetFileFormat returns the FileFormat field value if set, zero value otherwise.
+func (o *BinaryConfig) GetFileFormat() string {
+	if o == nil || IsNil(o.FileFormat) {
+		var ret string
 		return ret
 	}
-	return *o.Isa.Get()
-}
-
-// GetIsaOk returns a tuple with the Isa field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BinaryConfig) GetIsaOk() (*ISA, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Isa.Get(), o.Isa.IsSet()
-}
-
-// HasIsa returns a boolean if a field has been set.
-func (o *BinaryConfig) HasIsa() bool {
-	if o != nil && o.Isa.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetIsa gets a reference to the given NullableISA and assigns it to the Isa field.
-func (o *BinaryConfig) SetIsa(v ISA) {
-	o.Isa.Set(&v)
-}
-// SetIsaNil sets the value for Isa to be an explicit nil
-func (o *BinaryConfig) SetIsaNil() {
-	o.Isa.Set(nil)
-}
-
-// UnsetIsa ensures that no value is present for Isa, not even an explicit nil
-func (o *BinaryConfig) UnsetIsa() {
-	o.Isa.Unset()
-}
-
-// GetPlatform returns the Platform field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BinaryConfig) GetPlatform() Platform {
-	if o == nil || IsNil(o.Platform.Get()) {
-		var ret Platform
-		return ret
-	}
-	return *o.Platform.Get()
-}
-
-// GetPlatformOk returns a tuple with the Platform field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BinaryConfig) GetPlatformOk() (*Platform, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Platform.Get(), o.Platform.IsSet()
-}
-
-// HasPlatform returns a boolean if a field has been set.
-func (o *BinaryConfig) HasPlatform() bool {
-	if o != nil && o.Platform.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPlatform gets a reference to the given NullablePlatform and assigns it to the Platform field.
-func (o *BinaryConfig) SetPlatform(v Platform) {
-	o.Platform.Set(&v)
-}
-// SetPlatformNil sets the value for Platform to be an explicit nil
-func (o *BinaryConfig) SetPlatformNil() {
-	o.Platform.Set(nil)
-}
-
-// UnsetPlatform ensures that no value is present for Platform, not even an explicit nil
-func (o *BinaryConfig) UnsetPlatform() {
-	o.Platform.Unset()
-}
-
-// GetFileFormat returns the FileFormat field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BinaryConfig) GetFileFormat() FileFormat {
-	if o == nil || IsNil(o.FileFormat.Get()) {
-		var ret FileFormat
-		return ret
-	}
-	return *o.FileFormat.Get()
+	return *o.FileFormat
 }
 
 // GetFileFormatOk returns a tuple with the FileFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BinaryConfig) GetFileFormatOk() (*FileFormat, bool) {
-	if o == nil {
+func (o *BinaryConfig) GetFileFormatOk() (*string, bool) {
+	if o == nil || IsNil(o.FileFormat) {
 		return nil, false
 	}
-	return o.FileFormat.Get(), o.FileFormat.IsSet()
+	return o.FileFormat, true
 }
 
 // HasFileFormat returns a boolean if a field has been set.
 func (o *BinaryConfig) HasFileFormat() bool {
-	if o != nil && o.FileFormat.IsSet() {
+	if o != nil && !IsNil(o.FileFormat) {
 		return true
 	}
 
 	return false
 }
 
-// SetFileFormat gets a reference to the given NullableFileFormat and assigns it to the FileFormat field.
-func (o *BinaryConfig) SetFileFormat(v FileFormat) {
-	o.FileFormat.Set(&v)
-}
-// SetFileFormatNil sets the value for FileFormat to be an explicit nil
-func (o *BinaryConfig) SetFileFormatNil() {
-	o.FileFormat.Set(nil)
+// SetFileFormat gets a reference to the given string and assigns it to the FileFormat field.
+func (o *BinaryConfig) SetFileFormat(v string) {
+	o.FileFormat = &v
 }
 
-// UnsetFileFormat ensures that no value is present for FileFormat, not even an explicit nil
-func (o *BinaryConfig) UnsetFileFormat() {
-	o.FileFormat.Unset()
+// GetIsa returns the Isa field value if set, zero value otherwise.
+func (o *BinaryConfig) GetIsa() string {
+	if o == nil || IsNil(o.Isa) {
+		var ret string
+		return ret
+	}
+	return *o.Isa
+}
+
+// GetIsaOk returns a tuple with the Isa field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BinaryConfig) GetIsaOk() (*string, bool) {
+	if o == nil || IsNil(o.Isa) {
+		return nil, false
+	}
+	return o.Isa, true
+}
+
+// HasIsa returns a boolean if a field has been set.
+func (o *BinaryConfig) HasIsa() bool {
+	if o != nil && !IsNil(o.Isa) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsa gets a reference to the given string and assigns it to the Isa field.
+func (o *BinaryConfig) SetIsa(v string) {
+	o.Isa = &v
+}
+
+// GetPlatform returns the Platform field value if set, zero value otherwise.
+func (o *BinaryConfig) GetPlatform() string {
+	if o == nil || IsNil(o.Platform) {
+		var ret string
+		return ret
+	}
+	return *o.Platform
+}
+
+// GetPlatformOk returns a tuple with the Platform field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BinaryConfig) GetPlatformOk() (*string, bool) {
+	if o == nil || IsNil(o.Platform) {
+		return nil, false
+	}
+	return o.Platform, true
+}
+
+// HasPlatform returns a boolean if a field has been set.
+func (o *BinaryConfig) HasPlatform() bool {
+	if o != nil && !IsNil(o.Platform) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatform gets a reference to the given string and assigns it to the Platform field.
+func (o *BinaryConfig) SetPlatform(v string) {
+	o.Platform = &v
 }
 
 func (o BinaryConfig) MarshalJSON() ([]byte, error) {
@@ -179,44 +146,16 @@ func (o BinaryConfig) MarshalJSON() ([]byte, error) {
 
 func (o BinaryConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Isa.IsSet() {
-		toSerialize["isa"] = o.Isa.Get()
+	if !IsNil(o.FileFormat) {
+		toSerialize["file_format"] = o.FileFormat
 	}
-	if o.Platform.IsSet() {
-		toSerialize["platform"] = o.Platform.Get()
+	if !IsNil(o.Isa) {
+		toSerialize["isa"] = o.Isa
 	}
-	if o.FileFormat.IsSet() {
-		toSerialize["file_format"] = o.FileFormat.Get()
+	if !IsNil(o.Platform) {
+		toSerialize["platform"] = o.Platform
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *BinaryConfig) UnmarshalJSON(data []byte) (err error) {
-	varBinaryConfig := _BinaryConfig{}
-
-	err = json.Unmarshal(data, &varBinaryConfig)
-
-	if err != nil {
-		return err
-	}
-
-	*o = BinaryConfig(varBinaryConfig)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "isa")
-		delete(additionalProperties, "platform")
-		delete(additionalProperties, "file_format")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableBinaryConfig struct {

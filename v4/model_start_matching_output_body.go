@@ -24,14 +24,24 @@ type StartMatchingOutputBody struct {
 	MatchId string `json:"match_id"`
 	// Log messages emitted during execution
 	Messages []ProgressMessage `json:"messages"`
+	// Overall completion as a percentage, weighted by step duration
+	Percent int64 `json:"percent"`
 	// Current workflow status
 	Status string `json:"status"`
 	// Name of the current step
 	Step string `json:"step"`
 	// Zero-based index of the current step
 	StepIndex int64 `json:"step_index"`
+	// Percentage points the current step contributes when it completes
+	StepShare int64 `json:"step_share"`
 	// Total number of steps in the workflow
 	StepsTotal int64 `json:"steps_total"`
+	// Phase within the current step, when the step reports one
+	SubStep *string `json:"sub_step,omitempty"`
+	// Items completed in the current phase
+	SubStepDone *int64 `json:"sub_step_done,omitempty"`
+	// Items the current phase will process, 0 when unknown
+	SubStepTotal *int64 `json:"sub_step_total,omitempty"`
 }
 
 type _StartMatchingOutputBody StartMatchingOutputBody
@@ -40,13 +50,15 @@ type _StartMatchingOutputBody StartMatchingOutputBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStartMatchingOutputBody(matchId string, messages []ProgressMessage, status string, step string, stepIndex int64, stepsTotal int64) *StartMatchingOutputBody {
+func NewStartMatchingOutputBody(matchId string, messages []ProgressMessage, percent int64, status string, step string, stepIndex int64, stepShare int64, stepsTotal int64) *StartMatchingOutputBody {
 	this := StartMatchingOutputBody{}
 	this.MatchId = matchId
 	this.Messages = messages
+	this.Percent = percent
 	this.Status = status
 	this.Step = step
 	this.StepIndex = stepIndex
+	this.StepShare = stepShare
 	this.StepsTotal = stepsTotal
 	return &this
 }
@@ -107,6 +119,30 @@ func (o *StartMatchingOutputBody) GetMessagesOk() ([]ProgressMessage, bool) {
 // SetMessages sets field value
 func (o *StartMatchingOutputBody) SetMessages(v []ProgressMessage) {
 	o.Messages = v
+}
+
+// GetPercent returns the Percent field value
+func (o *StartMatchingOutputBody) GetPercent() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.Percent
+}
+
+// GetPercentOk returns a tuple with the Percent field value
+// and a boolean to check if the value has been set.
+func (o *StartMatchingOutputBody) GetPercentOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Percent, true
+}
+
+// SetPercent sets field value
+func (o *StartMatchingOutputBody) SetPercent(v int64) {
+	o.Percent = v
 }
 
 // GetStatus returns the Status field value
@@ -181,6 +217,30 @@ func (o *StartMatchingOutputBody) SetStepIndex(v int64) {
 	o.StepIndex = v
 }
 
+// GetStepShare returns the StepShare field value
+func (o *StartMatchingOutputBody) GetStepShare() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.StepShare
+}
+
+// GetStepShareOk returns a tuple with the StepShare field value
+// and a boolean to check if the value has been set.
+func (o *StartMatchingOutputBody) GetStepShareOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.StepShare, true
+}
+
+// SetStepShare sets field value
+func (o *StartMatchingOutputBody) SetStepShare(v int64) {
+	o.StepShare = v
+}
+
 // GetStepsTotal returns the StepsTotal field value
 func (o *StartMatchingOutputBody) GetStepsTotal() int64 {
 	if o == nil {
@@ -205,6 +265,102 @@ func (o *StartMatchingOutputBody) SetStepsTotal(v int64) {
 	o.StepsTotal = v
 }
 
+// GetSubStep returns the SubStep field value if set, zero value otherwise.
+func (o *StartMatchingOutputBody) GetSubStep() string {
+	if o == nil || IsNil(o.SubStep) {
+		var ret string
+		return ret
+	}
+	return *o.SubStep
+}
+
+// GetSubStepOk returns a tuple with the SubStep field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartMatchingOutputBody) GetSubStepOk() (*string, bool) {
+	if o == nil || IsNil(o.SubStep) {
+		return nil, false
+	}
+	return o.SubStep, true
+}
+
+// HasSubStep returns a boolean if a field has been set.
+func (o *StartMatchingOutputBody) HasSubStep() bool {
+	if o != nil && !IsNil(o.SubStep) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubStep gets a reference to the given string and assigns it to the SubStep field.
+func (o *StartMatchingOutputBody) SetSubStep(v string) {
+	o.SubStep = &v
+}
+
+// GetSubStepDone returns the SubStepDone field value if set, zero value otherwise.
+func (o *StartMatchingOutputBody) GetSubStepDone() int64 {
+	if o == nil || IsNil(o.SubStepDone) {
+		var ret int64
+		return ret
+	}
+	return *o.SubStepDone
+}
+
+// GetSubStepDoneOk returns a tuple with the SubStepDone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartMatchingOutputBody) GetSubStepDoneOk() (*int64, bool) {
+	if o == nil || IsNil(o.SubStepDone) {
+		return nil, false
+	}
+	return o.SubStepDone, true
+}
+
+// HasSubStepDone returns a boolean if a field has been set.
+func (o *StartMatchingOutputBody) HasSubStepDone() bool {
+	if o != nil && !IsNil(o.SubStepDone) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubStepDone gets a reference to the given int64 and assigns it to the SubStepDone field.
+func (o *StartMatchingOutputBody) SetSubStepDone(v int64) {
+	o.SubStepDone = &v
+}
+
+// GetSubStepTotal returns the SubStepTotal field value if set, zero value otherwise.
+func (o *StartMatchingOutputBody) GetSubStepTotal() int64 {
+	if o == nil || IsNil(o.SubStepTotal) {
+		var ret int64
+		return ret
+	}
+	return *o.SubStepTotal
+}
+
+// GetSubStepTotalOk returns a tuple with the SubStepTotal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartMatchingOutputBody) GetSubStepTotalOk() (*int64, bool) {
+	if o == nil || IsNil(o.SubStepTotal) {
+		return nil, false
+	}
+	return o.SubStepTotal, true
+}
+
+// HasSubStepTotal returns a boolean if a field has been set.
+func (o *StartMatchingOutputBody) HasSubStepTotal() bool {
+	if o != nil && !IsNil(o.SubStepTotal) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubStepTotal gets a reference to the given int64 and assigns it to the SubStepTotal field.
+func (o *StartMatchingOutputBody) SetSubStepTotal(v int64) {
+	o.SubStepTotal = &v
+}
+
 func (o StartMatchingOutputBody) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -219,10 +375,21 @@ func (o StartMatchingOutputBody) ToMap() (map[string]interface{}, error) {
 	if o.Messages != nil {
 		toSerialize["messages"] = o.Messages
 	}
+	toSerialize["percent"] = o.Percent
 	toSerialize["status"] = o.Status
 	toSerialize["step"] = o.Step
 	toSerialize["step_index"] = o.StepIndex
+	toSerialize["step_share"] = o.StepShare
 	toSerialize["steps_total"] = o.StepsTotal
+	if !IsNil(o.SubStep) {
+		toSerialize["sub_step"] = o.SubStep
+	}
+	if !IsNil(o.SubStepDone) {
+		toSerialize["sub_step_done"] = o.SubStepDone
+	}
+	if !IsNil(o.SubStepTotal) {
+		toSerialize["sub_step_total"] = o.SubStepTotal
+	}
 	return toSerialize, nil
 }
 
@@ -233,9 +400,11 @@ func (o *StartMatchingOutputBody) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"match_id",
 		"messages",
+		"percent",
 		"status",
 		"step",
 		"step_index",
+		"step_share",
 		"steps_total",
 	}
 

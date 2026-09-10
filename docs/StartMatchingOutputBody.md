@@ -6,16 +6,21 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MatchId** | **string** | Opaque token for this matching run. Pass it to the GET/status endpoints&#39; match_id query parameter to fetch this exact run. | 
 **Messages** | [**[]ProgressMessage**](ProgressMessage.md) | Log messages emitted during execution | 
+**Percent** | **int64** | Overall completion as a percentage, weighted by step duration | 
 **Status** | **string** | Current workflow status | 
 **Step** | **string** | Name of the current step | 
 **StepIndex** | **int64** | Zero-based index of the current step | 
+**StepShare** | **int64** | Percentage points the current step contributes when it completes | 
 **StepsTotal** | **int64** | Total number of steps in the workflow | 
+**SubStep** | Pointer to **string** | Phase within the current step, when the step reports one | [optional] 
+**SubStepDone** | Pointer to **int64** | Items completed in the current phase | [optional] 
+**SubStepTotal** | Pointer to **int64** | Items the current phase will process, 0 when unknown | [optional] 
 
 ## Methods
 
 ### NewStartMatchingOutputBody
 
-`func NewStartMatchingOutputBody(matchId string, messages []ProgressMessage, status string, step string, stepIndex int64, stepsTotal int64, ) *StartMatchingOutputBody`
+`func NewStartMatchingOutputBody(matchId string, messages []ProgressMessage, percent int64, status string, step string, stepIndex int64, stepShare int64, stepsTotal int64, ) *StartMatchingOutputBody`
 
 NewStartMatchingOutputBody instantiates a new StartMatchingOutputBody object
 This constructor will assign default values to properties that have it defined,
@@ -80,6 +85,26 @@ SetMessages sets Messages field to given value.
 `func (o *StartMatchingOutputBody) UnsetMessages()`
 
 UnsetMessages ensures that no value is present for Messages, not even an explicit nil
+### GetPercent
+
+`func (o *StartMatchingOutputBody) GetPercent() int64`
+
+GetPercent returns the Percent field if non-nil, zero value otherwise.
+
+### GetPercentOk
+
+`func (o *StartMatchingOutputBody) GetPercentOk() (*int64, bool)`
+
+GetPercentOk returns a tuple with the Percent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPercent
+
+`func (o *StartMatchingOutputBody) SetPercent(v int64)`
+
+SetPercent sets Percent field to given value.
+
+
 ### GetStatus
 
 `func (o *StartMatchingOutputBody) GetStatus() string`
@@ -140,6 +165,26 @@ and a boolean to check if the value has been set.
 SetStepIndex sets StepIndex field to given value.
 
 
+### GetStepShare
+
+`func (o *StartMatchingOutputBody) GetStepShare() int64`
+
+GetStepShare returns the StepShare field if non-nil, zero value otherwise.
+
+### GetStepShareOk
+
+`func (o *StartMatchingOutputBody) GetStepShareOk() (*int64, bool)`
+
+GetStepShareOk returns a tuple with the StepShare field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStepShare
+
+`func (o *StartMatchingOutputBody) SetStepShare(v int64)`
+
+SetStepShare sets StepShare field to given value.
+
+
 ### GetStepsTotal
 
 `func (o *StartMatchingOutputBody) GetStepsTotal() int64`
@@ -159,6 +204,81 @@ and a boolean to check if the value has been set.
 
 SetStepsTotal sets StepsTotal field to given value.
 
+
+### GetSubStep
+
+`func (o *StartMatchingOutputBody) GetSubStep() string`
+
+GetSubStep returns the SubStep field if non-nil, zero value otherwise.
+
+### GetSubStepOk
+
+`func (o *StartMatchingOutputBody) GetSubStepOk() (*string, bool)`
+
+GetSubStepOk returns a tuple with the SubStep field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubStep
+
+`func (o *StartMatchingOutputBody) SetSubStep(v string)`
+
+SetSubStep sets SubStep field to given value.
+
+### HasSubStep
+
+`func (o *StartMatchingOutputBody) HasSubStep() bool`
+
+HasSubStep returns a boolean if a field has been set.
+
+### GetSubStepDone
+
+`func (o *StartMatchingOutputBody) GetSubStepDone() int64`
+
+GetSubStepDone returns the SubStepDone field if non-nil, zero value otherwise.
+
+### GetSubStepDoneOk
+
+`func (o *StartMatchingOutputBody) GetSubStepDoneOk() (*int64, bool)`
+
+GetSubStepDoneOk returns a tuple with the SubStepDone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubStepDone
+
+`func (o *StartMatchingOutputBody) SetSubStepDone(v int64)`
+
+SetSubStepDone sets SubStepDone field to given value.
+
+### HasSubStepDone
+
+`func (o *StartMatchingOutputBody) HasSubStepDone() bool`
+
+HasSubStepDone returns a boolean if a field has been set.
+
+### GetSubStepTotal
+
+`func (o *StartMatchingOutputBody) GetSubStepTotal() int64`
+
+GetSubStepTotal returns the SubStepTotal field if non-nil, zero value otherwise.
+
+### GetSubStepTotalOk
+
+`func (o *StartMatchingOutputBody) GetSubStepTotalOk() (*int64, bool)`
+
+GetSubStepTotalOk returns a tuple with the SubStepTotal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubStepTotal
+
+`func (o *StartMatchingOutputBody) SetSubStepTotal(v int64)`
+
+SetSubStepTotal sets SubStepTotal field to given value.
+
+### HasSubStepTotal
+
+`func (o *StartMatchingOutputBody) HasSubStepTotal() bool`
+
+HasSubStepTotal returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

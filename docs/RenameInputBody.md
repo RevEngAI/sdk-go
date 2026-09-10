@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **NewMangledName** | Pointer to **string** | New mangled function name | [optional] 
 **NewName** | **string** | New function name | 
-**PreserveAiDecompilation** | Pointer to **bool** | Keep the cached AI decompilation, summary and inline comments. Set when the new name comes from the model&#39;s own prediction (e.g. Transfer Name) so existing AI output is not discarded and regenerated. | [optional] 
+**SourceType** | Pointer to **string** | Source that triggered the rename | [optional] 
 
 ## Methods
 
@@ -72,30 +72,30 @@ and a boolean to check if the value has been set.
 SetNewName sets NewName field to given value.
 
 
-### GetPreserveAiDecompilation
+### GetSourceType
 
-`func (o *RenameInputBody) GetPreserveAiDecompilation() bool`
+`func (o *RenameInputBody) GetSourceType() string`
 
-GetPreserveAiDecompilation returns the PreserveAiDecompilation field if non-nil, zero value otherwise.
+GetSourceType returns the SourceType field if non-nil, zero value otherwise.
 
-### GetPreserveAiDecompilationOk
+### GetSourceTypeOk
 
-`func (o *RenameInputBody) GetPreserveAiDecompilationOk() (*bool, bool)`
+`func (o *RenameInputBody) GetSourceTypeOk() (*string, bool)`
 
-GetPreserveAiDecompilationOk returns a tuple with the PreserveAiDecompilation field if it's non-nil, zero value otherwise
+GetSourceTypeOk returns a tuple with the SourceType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPreserveAiDecompilation
+### SetSourceType
 
-`func (o *RenameInputBody) SetPreserveAiDecompilation(v bool)`
+`func (o *RenameInputBody) SetSourceType(v string)`
 
-SetPreserveAiDecompilation sets PreserveAiDecompilation field to given value.
+SetSourceType sets SourceType field to given value.
 
-### HasPreserveAiDecompilation
+### HasSourceType
 
-`func (o *RenameInputBody) HasPreserveAiDecompilation() bool`
+`func (o *RenameInputBody) HasSourceType() bool`
 
-HasPreserveAiDecompilation returns a boolean if a field has been set.
+HasSourceType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -25,6 +25,8 @@ type StartBatchMatchingInputBody struct {
 	DebugTypes []*string `json:"debug_types,omitempty"`
 	// Similarity floor as a percentage. Defaults to 90.
 	MinSimilarity *float64 `json:"min_similarity,omitempty"`
+	// By default a completed matching run is reused per binary (that binary reports status=COMPLETED, no new run). Set true to force fresh runs for every binary.
+	NoCache *bool `json:"no_cache,omitempty"`
 	// Max matches returned per source function. Defaults to 1.
 	ResultsPerFunction *int64 `json:"results_per_function,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -141,6 +143,38 @@ func (o *StartBatchMatchingInputBody) SetMinSimilarity(v float64) {
 	o.MinSimilarity = &v
 }
 
+// GetNoCache returns the NoCache field value if set, zero value otherwise.
+func (o *StartBatchMatchingInputBody) GetNoCache() bool {
+	if o == nil || IsNil(o.NoCache) {
+		var ret bool
+		return ret
+	}
+	return *o.NoCache
+}
+
+// GetNoCacheOk returns a tuple with the NoCache field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartBatchMatchingInputBody) GetNoCacheOk() (*bool, bool) {
+	if o == nil || IsNil(o.NoCache) {
+		return nil, false
+	}
+	return o.NoCache, true
+}
+
+// HasNoCache returns a boolean if a field has been set.
+func (o *StartBatchMatchingInputBody) HasNoCache() bool {
+	if o != nil && !IsNil(o.NoCache) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoCache gets a reference to the given bool and assigns it to the NoCache field.
+func (o *StartBatchMatchingInputBody) SetNoCache(v bool) {
+	o.NoCache = &v
+}
+
 // GetResultsPerFunction returns the ResultsPerFunction field value if set, zero value otherwise.
 func (o *StartBatchMatchingInputBody) GetResultsPerFunction() int64 {
 	if o == nil || IsNil(o.ResultsPerFunction) {
@@ -192,6 +226,9 @@ func (o StartBatchMatchingInputBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MinSimilarity) {
 		toSerialize["min_similarity"] = o.MinSimilarity
 	}
+	if !IsNil(o.NoCache) {
+		toSerialize["no_cache"] = o.NoCache
+	}
 	if !IsNil(o.ResultsPerFunction) {
 		toSerialize["results_per_function"] = o.ResultsPerFunction
 	}
@@ -241,6 +278,7 @@ func (o *StartBatchMatchingInputBody) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "binary_ids")
 		delete(additionalProperties, "debug_types")
 		delete(additionalProperties, "min_similarity")
+		delete(additionalProperties, "no_cache")
 		delete(additionalProperties, "results_per_function")
 		o.AdditionalProperties = additionalProperties
 	}

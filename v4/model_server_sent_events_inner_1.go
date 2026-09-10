@@ -21,10 +21,12 @@ type ServerSentEventsInner1 struct {
 	EventAttemptStarted *EventAttemptStarted
 	EventDecompFailed *EventDecompFailed
 	EventDecompFinished *EventDecompFinished
+	EventNamesFinished *EventNamesFinished
 	EventProse *EventProse
 	EventRenameApplied *EventRenameApplied
 	EventSourceDelta *EventSourceDelta
 	EventSourceReset *EventSourceReset
+	EventTypesSuggested *EventTypesSuggested
 	EventWarning *EventWarning
 }
 
@@ -56,6 +58,13 @@ func EventDecompFinishedAsServerSentEventsInner1(v *EventDecompFinished) ServerS
 	}
 }
 
+// EventNamesFinishedAsServerSentEventsInner1 is a convenience function that returns EventNamesFinished wrapped in ServerSentEventsInner1
+func EventNamesFinishedAsServerSentEventsInner1(v *EventNamesFinished) ServerSentEventsInner1 {
+	return ServerSentEventsInner1{
+		EventNamesFinished: v,
+	}
+}
+
 // EventProseAsServerSentEventsInner1 is a convenience function that returns EventProse wrapped in ServerSentEventsInner1
 func EventProseAsServerSentEventsInner1(v *EventProse) ServerSentEventsInner1 {
 	return ServerSentEventsInner1{
@@ -81,6 +90,13 @@ func EventSourceDeltaAsServerSentEventsInner1(v *EventSourceDelta) ServerSentEve
 func EventSourceResetAsServerSentEventsInner1(v *EventSourceReset) ServerSentEventsInner1 {
 	return ServerSentEventsInner1{
 		EventSourceReset: v,
+	}
+}
+
+// EventTypesSuggestedAsServerSentEventsInner1 is a convenience function that returns EventTypesSuggested wrapped in ServerSentEventsInner1
+func EventTypesSuggestedAsServerSentEventsInner1(v *EventTypesSuggested) ServerSentEventsInner1 {
+	return ServerSentEventsInner1{
+		EventTypesSuggested: v,
 	}
 }
 
@@ -164,6 +180,23 @@ func (dst *ServerSentEventsInner1) UnmarshalJSON(data []byte) error {
 		dst.EventDecompFinished = nil
 	}
 
+	// try to unmarshal data into EventNamesFinished
+	err = newStrictDecoder(data).Decode(&dst.EventNamesFinished)
+	if err == nil {
+		jsonEventNamesFinished, _ := json.Marshal(dst.EventNamesFinished)
+		if string(jsonEventNamesFinished) == "{}" { // empty struct
+			dst.EventNamesFinished = nil
+		} else {
+			if err = validator.Validate(dst.EventNamesFinished); err != nil {
+				dst.EventNamesFinished = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.EventNamesFinished = nil
+	}
+
 	// try to unmarshal data into EventProse
 	err = newStrictDecoder(data).Decode(&dst.EventProse)
 	if err == nil {
@@ -232,6 +265,23 @@ func (dst *ServerSentEventsInner1) UnmarshalJSON(data []byte) error {
 		dst.EventSourceReset = nil
 	}
 
+	// try to unmarshal data into EventTypesSuggested
+	err = newStrictDecoder(data).Decode(&dst.EventTypesSuggested)
+	if err == nil {
+		jsonEventTypesSuggested, _ := json.Marshal(dst.EventTypesSuggested)
+		if string(jsonEventTypesSuggested) == "{}" { // empty struct
+			dst.EventTypesSuggested = nil
+		} else {
+			if err = validator.Validate(dst.EventTypesSuggested); err != nil {
+				dst.EventTypesSuggested = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.EventTypesSuggested = nil
+	}
+
 	// try to unmarshal data into EventWarning
 	err = newStrictDecoder(data).Decode(&dst.EventWarning)
 	if err == nil {
@@ -255,10 +305,12 @@ func (dst *ServerSentEventsInner1) UnmarshalJSON(data []byte) error {
 		dst.EventAttemptStarted = nil
 		dst.EventDecompFailed = nil
 		dst.EventDecompFinished = nil
+		dst.EventNamesFinished = nil
 		dst.EventProse = nil
 		dst.EventRenameApplied = nil
 		dst.EventSourceDelta = nil
 		dst.EventSourceReset = nil
+		dst.EventTypesSuggested = nil
 		dst.EventWarning = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(ServerSentEventsInner1)")
@@ -287,6 +339,10 @@ func (src ServerSentEventsInner1) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.EventDecompFinished)
 	}
 
+	if src.EventNamesFinished != nil {
+		return json.Marshal(&src.EventNamesFinished)
+	}
+
 	if src.EventProse != nil {
 		return json.Marshal(&src.EventProse)
 	}
@@ -301,6 +357,10 @@ func (src ServerSentEventsInner1) MarshalJSON() ([]byte, error) {
 
 	if src.EventSourceReset != nil {
 		return json.Marshal(&src.EventSourceReset)
+	}
+
+	if src.EventTypesSuggested != nil {
+		return json.Marshal(&src.EventTypesSuggested)
 	}
 
 	if src.EventWarning != nil {
@@ -331,6 +391,10 @@ func (obj *ServerSentEventsInner1) GetActualInstance() (interface{}) {
 		return obj.EventDecompFinished
 	}
 
+	if obj.EventNamesFinished != nil {
+		return obj.EventNamesFinished
+	}
+
 	if obj.EventProse != nil {
 		return obj.EventProse
 	}
@@ -345,6 +409,10 @@ func (obj *ServerSentEventsInner1) GetActualInstance() (interface{}) {
 
 	if obj.EventSourceReset != nil {
 		return obj.EventSourceReset
+	}
+
+	if obj.EventTypesSuggested != nil {
+		return obj.EventTypesSuggested
 	}
 
 	if obj.EventWarning != nil {
@@ -373,6 +441,10 @@ func (obj ServerSentEventsInner1) GetActualInstanceValue() (interface{}) {
 		return *obj.EventDecompFinished
 	}
 
+	if obj.EventNamesFinished != nil {
+		return *obj.EventNamesFinished
+	}
+
 	if obj.EventProse != nil {
 		return *obj.EventProse
 	}
@@ -387,6 +459,10 @@ func (obj ServerSentEventsInner1) GetActualInstanceValue() (interface{}) {
 
 	if obj.EventSourceReset != nil {
 		return *obj.EventSourceReset
+	}
+
+	if obj.EventTypesSuggested != nil {
+		return *obj.EventTypesSuggested
 	}
 
 	if obj.EventWarning != nil {

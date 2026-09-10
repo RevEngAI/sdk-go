@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -19,11 +20,10 @@ var _ MappedNullable = &FunctionBoundary{}
 
 // FunctionBoundary struct for FunctionBoundary
 type FunctionBoundary struct {
+	EndAddress int64 `json:"end_address"`
+	IncludeInAnalysis *bool `json:"include_in_analysis,omitempty"`
 	MangledName string `json:"mangled_name"`
 	StartAddress int64 `json:"start_address"`
-	EndAddress int64 `json:"end_address"`
-	IncludeInAnalysis NullableBool `json:"include_in_analysis,omitempty"`
-	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionBoundary FunctionBoundary
@@ -32,11 +32,11 @@ type _FunctionBoundary FunctionBoundary
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionBoundary(mangledName string, startAddress int64, endAddress int64) *FunctionBoundary {
+func NewFunctionBoundary(endAddress int64, mangledName string, startAddress int64) *FunctionBoundary {
 	this := FunctionBoundary{}
+	this.EndAddress = endAddress
 	this.MangledName = mangledName
 	this.StartAddress = startAddress
-	this.EndAddress = endAddress
 	return &this
 }
 
@@ -46,6 +46,62 @@ func NewFunctionBoundary(mangledName string, startAddress int64, endAddress int6
 func NewFunctionBoundaryWithDefaults() *FunctionBoundary {
 	this := FunctionBoundary{}
 	return &this
+}
+
+// GetEndAddress returns the EndAddress field value
+func (o *FunctionBoundary) GetEndAddress() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.EndAddress
+}
+
+// GetEndAddressOk returns a tuple with the EndAddress field value
+// and a boolean to check if the value has been set.
+func (o *FunctionBoundary) GetEndAddressOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.EndAddress, true
+}
+
+// SetEndAddress sets field value
+func (o *FunctionBoundary) SetEndAddress(v int64) {
+	o.EndAddress = v
+}
+
+// GetIncludeInAnalysis returns the IncludeInAnalysis field value if set, zero value otherwise.
+func (o *FunctionBoundary) GetIncludeInAnalysis() bool {
+	if o == nil || IsNil(o.IncludeInAnalysis) {
+		var ret bool
+		return ret
+	}
+	return *o.IncludeInAnalysis
+}
+
+// GetIncludeInAnalysisOk returns a tuple with the IncludeInAnalysis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionBoundary) GetIncludeInAnalysisOk() (*bool, bool) {
+	if o == nil || IsNil(o.IncludeInAnalysis) {
+		return nil, false
+	}
+	return o.IncludeInAnalysis, true
+}
+
+// HasIncludeInAnalysis returns a boolean if a field has been set.
+func (o *FunctionBoundary) HasIncludeInAnalysis() bool {
+	if o != nil && !IsNil(o.IncludeInAnalysis) {
+		return true
+	}
+
+	return false
+}
+
+// SetIncludeInAnalysis gets a reference to the given bool and assigns it to the IncludeInAnalysis field.
+func (o *FunctionBoundary) SetIncludeInAnalysis(v bool) {
+	o.IncludeInAnalysis = &v
 }
 
 // GetMangledName returns the MangledName field value
@@ -96,72 +152,6 @@ func (o *FunctionBoundary) SetStartAddress(v int64) {
 	o.StartAddress = v
 }
 
-// GetEndAddress returns the EndAddress field value
-func (o *FunctionBoundary) GetEndAddress() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.EndAddress
-}
-
-// GetEndAddressOk returns a tuple with the EndAddress field value
-// and a boolean to check if the value has been set.
-func (o *FunctionBoundary) GetEndAddressOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.EndAddress, true
-}
-
-// SetEndAddress sets field value
-func (o *FunctionBoundary) SetEndAddress(v int64) {
-	o.EndAddress = v
-}
-
-// GetIncludeInAnalysis returns the IncludeInAnalysis field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionBoundary) GetIncludeInAnalysis() bool {
-	if o == nil || IsNil(o.IncludeInAnalysis.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.IncludeInAnalysis.Get()
-}
-
-// GetIncludeInAnalysisOk returns a tuple with the IncludeInAnalysis field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionBoundary) GetIncludeInAnalysisOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.IncludeInAnalysis.Get(), o.IncludeInAnalysis.IsSet()
-}
-
-// HasIncludeInAnalysis returns a boolean if a field has been set.
-func (o *FunctionBoundary) HasIncludeInAnalysis() bool {
-	if o != nil && o.IncludeInAnalysis.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetIncludeInAnalysis gets a reference to the given NullableBool and assigns it to the IncludeInAnalysis field.
-func (o *FunctionBoundary) SetIncludeInAnalysis(v bool) {
-	o.IncludeInAnalysis.Set(&v)
-}
-// SetIncludeInAnalysisNil sets the value for IncludeInAnalysis to be an explicit nil
-func (o *FunctionBoundary) SetIncludeInAnalysisNil() {
-	o.IncludeInAnalysis.Set(nil)
-}
-
-// UnsetIncludeInAnalysis ensures that no value is present for IncludeInAnalysis, not even an explicit nil
-func (o *FunctionBoundary) UnsetIncludeInAnalysis() {
-	o.IncludeInAnalysis.Unset()
-}
-
 func (o FunctionBoundary) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -172,17 +162,12 @@ func (o FunctionBoundary) MarshalJSON() ([]byte, error) {
 
 func (o FunctionBoundary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["end_address"] = o.EndAddress
+	if !IsNil(o.IncludeInAnalysis) {
+		toSerialize["include_in_analysis"] = o.IncludeInAnalysis
+	}
 	toSerialize["mangled_name"] = o.MangledName
 	toSerialize["start_address"] = o.StartAddress
-	toSerialize["end_address"] = o.EndAddress
-	if o.IncludeInAnalysis.IsSet() {
-		toSerialize["include_in_analysis"] = o.IncludeInAnalysis.Get()
-	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -191,9 +176,9 @@ func (o *FunctionBoundary) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"end_address",
 		"mangled_name",
 		"start_address",
-		"end_address",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -212,23 +197,15 @@ func (o *FunctionBoundary) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionBoundary := _FunctionBoundary{}
 
-	err = json.Unmarshal(data, &varFunctionBoundary)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFunctionBoundary)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionBoundary(varFunctionBoundary)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "mangled_name")
-		delete(additionalProperties, "start_address")
-		delete(additionalProperties, "end_address")
-		delete(additionalProperties, "include_in_analysis")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

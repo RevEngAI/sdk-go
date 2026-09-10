@@ -35,6 +35,7 @@ type ResolvedEntity struct {
 	NeedsNaming bool `json:"needs_naming"`
 	Provenance NullableString `json:"provenance"`
 	ResolvedName NullableString `json:"resolved_name"`
+	SuggestedName NullableString `json:"suggested_name,omitempty"`
 	SuggestedType NullableString `json:"suggested_type"`
 	SuggestionConfidence NullableString `json:"suggestion_confidence"`
 	Token NullableString `json:"token"`
@@ -514,6 +515,48 @@ func (o *ResolvedEntity) SetResolvedName(v string) {
 	o.ResolvedName.Set(&v)
 }
 
+// GetSuggestedName returns the SuggestedName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ResolvedEntity) GetSuggestedName() string {
+	if o == nil || IsNil(o.SuggestedName.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SuggestedName.Get()
+}
+
+// GetSuggestedNameOk returns a tuple with the SuggestedName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResolvedEntity) GetSuggestedNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SuggestedName.Get(), o.SuggestedName.IsSet()
+}
+
+// HasSuggestedName returns a boolean if a field has been set.
+func (o *ResolvedEntity) HasSuggestedName() bool {
+	if o != nil && o.SuggestedName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSuggestedName gets a reference to the given NullableString and assigns it to the SuggestedName field.
+func (o *ResolvedEntity) SetSuggestedName(v string) {
+	o.SuggestedName.Set(&v)
+}
+// SetSuggestedNameNil sets the value for SuggestedName to be an explicit nil
+func (o *ResolvedEntity) SetSuggestedNameNil() {
+	o.SuggestedName.Set(nil)
+}
+
+// UnsetSuggestedName ensures that no value is present for SuggestedName, not even an explicit nil
+func (o *ResolvedEntity) UnsetSuggestedName() {
+	o.SuggestedName.Unset()
+}
+
 // GetSuggestedType returns the SuggestedType field value
 // If the value is explicit nil, the zero value for string will be returned
 func (o *ResolvedEntity) GetSuggestedType() string {
@@ -756,6 +799,9 @@ func (o ResolvedEntity) ToMap() (map[string]interface{}, error) {
 	toSerialize["needs_naming"] = o.NeedsNaming
 	toSerialize["provenance"] = o.Provenance.Get()
 	toSerialize["resolved_name"] = o.ResolvedName.Get()
+	if o.SuggestedName.IsSet() {
+		toSerialize["suggested_name"] = o.SuggestedName.Get()
+	}
 	toSerialize["suggested_type"] = o.SuggestedType.Get()
 	toSerialize["suggestion_confidence"] = o.SuggestionConfidence.Get()
 	toSerialize["token"] = o.Token.Get()
@@ -843,6 +889,7 @@ func (o *ResolvedEntity) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "needs_naming")
 		delete(additionalProperties, "provenance")
 		delete(additionalProperties, "resolved_name")
+		delete(additionalProperties, "suggested_name")
 		delete(additionalProperties, "suggested_type")
 		delete(additionalProperties, "suggestion_confidence")
 		delete(additionalProperties, "token")

@@ -48,6 +48,8 @@ type AnalysisRecordBody struct {
 	ModelId int64 `json:"model_id"`
 	// Model name
 	ModelName string `json:"model_name"`
+	// True when the analysis ran on a model older than the current one, so its owner can re-analyse it on the latest. Describes the analysis, not the caller's rights — only the owner may act on it
+	ModelUpgradeAvailable bool `json:"model_upgrade_available"`
 	// SHA-256 hash of the binary
 	Sha256Hash string `json:"sha_256_hash"`
 	// Analysis status
@@ -71,7 +73,7 @@ type _AnalysisRecordBody AnalysisRecordBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisRecordBody(analysisId int64, analysisScope string, baseAddress int64, binaryId int64, binaryName string, binarySize int64, creation time.Time, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionBoundariesHash string, isOwner bool, modelId int64, modelName string, sha256Hash string, status string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, tags []AnalysisTagBody, username string) *AnalysisRecordBody {
+func NewAnalysisRecordBody(analysisId int64, analysisScope string, baseAddress int64, binaryId int64, binaryName string, binarySize int64, creation time.Time, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionBoundariesHash string, isOwner bool, modelId int64, modelName string, modelUpgradeAvailable bool, sha256Hash string, status string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, tags []AnalysisTagBody, username string) *AnalysisRecordBody {
 	this := AnalysisRecordBody{}
 	this.AnalysisId = analysisId
 	this.AnalysisScope = analysisScope
@@ -87,6 +89,7 @@ func NewAnalysisRecordBody(analysisId int64, analysisScope string, baseAddress i
 	this.IsOwner = isOwner
 	this.ModelId = modelId
 	this.ModelName = modelName
+	this.ModelUpgradeAvailable = modelUpgradeAvailable
 	this.Sha256Hash = sha256Hash
 	this.Status = status
 	this.SuppliedArchitecture = suppliedArchitecture
@@ -441,6 +444,30 @@ func (o *AnalysisRecordBody) SetModelName(v string) {
 	o.ModelName = v
 }
 
+// GetModelUpgradeAvailable returns the ModelUpgradeAvailable field value
+func (o *AnalysisRecordBody) GetModelUpgradeAvailable() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ModelUpgradeAvailable
+}
+
+// GetModelUpgradeAvailableOk returns a tuple with the ModelUpgradeAvailable field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisRecordBody) GetModelUpgradeAvailableOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ModelUpgradeAvailable, true
+}
+
+// SetModelUpgradeAvailable sets field value
+func (o *AnalysisRecordBody) SetModelUpgradeAvailable(v bool) {
+	o.ModelUpgradeAvailable = v
+}
+
 // GetSha256Hash returns the Sha256Hash field value
 func (o *AnalysisRecordBody) GetSha256Hash() string {
 	if o == nil {
@@ -635,6 +662,7 @@ func (o AnalysisRecordBody) ToMap() (map[string]interface{}, error) {
 	toSerialize["is_owner"] = o.IsOwner
 	toSerialize["model_id"] = o.ModelId
 	toSerialize["model_name"] = o.ModelName
+	toSerialize["model_upgrade_available"] = o.ModelUpgradeAvailable
 	toSerialize["sha_256_hash"] = o.Sha256Hash
 	toSerialize["status"] = o.Status
 	toSerialize["supplied_architecture"] = o.SuppliedArchitecture
@@ -671,6 +699,7 @@ func (o *AnalysisRecordBody) UnmarshalJSON(data []byte) (err error) {
 		"is_owner",
 		"model_id",
 		"model_name",
+		"model_upgrade_available",
 		"sha_256_hash",
 		"status",
 		"supplied_architecture",
@@ -721,6 +750,7 @@ func (o *AnalysisRecordBody) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "is_owner")
 		delete(additionalProperties, "model_id")
 		delete(additionalProperties, "model_name")
+		delete(additionalProperties, "model_upgrade_available")
 		delete(additionalProperties, "sha_256_hash")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "supplied_architecture")
