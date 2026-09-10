@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -19,11 +20,8 @@ var _ MappedNullable = &Symbols{}
 
 // Symbols struct for Symbols
 type Symbols struct {
-	// The starting address of the execution
-	BaseAddress int32 `json:"base_address"`
-	// List of user defined function boundaries
+	BaseAddress int64 `json:"base_address"`
 	FunctionBoundaries []FunctionBoundary `json:"function_boundaries,omitempty"`
-	AdditionalProperties map[string]interface{}
 }
 
 type _Symbols Symbols
@@ -32,7 +30,7 @@ type _Symbols Symbols
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSymbols(baseAddress int32) *Symbols {
+func NewSymbols(baseAddress int64) *Symbols {
 	this := Symbols{}
 	this.BaseAddress = baseAddress
 	return &this
@@ -47,9 +45,9 @@ func NewSymbolsWithDefaults() *Symbols {
 }
 
 // GetBaseAddress returns the BaseAddress field value
-func (o *Symbols) GetBaseAddress() int32 {
+func (o *Symbols) GetBaseAddress() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -58,7 +56,7 @@ func (o *Symbols) GetBaseAddress() int32 {
 
 // GetBaseAddressOk returns a tuple with the BaseAddress field value
 // and a boolean to check if the value has been set.
-func (o *Symbols) GetBaseAddressOk() (*int32, bool) {
+func (o *Symbols) GetBaseAddressOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,13 +64,13 @@ func (o *Symbols) GetBaseAddressOk() (*int32, bool) {
 }
 
 // SetBaseAddress sets field value
-func (o *Symbols) SetBaseAddress(v int32) {
+func (o *Symbols) SetBaseAddress(v int64) {
 	o.BaseAddress = v
 }
 
-// GetFunctionBoundaries returns the FunctionBoundaries field value if set, zero value otherwise.
+// GetFunctionBoundaries returns the FunctionBoundaries field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Symbols) GetFunctionBoundaries() []FunctionBoundary {
-	if o == nil || IsNil(o.FunctionBoundaries) {
+	if o == nil {
 		var ret []FunctionBoundary
 		return ret
 	}
@@ -81,6 +79,7 @@ func (o *Symbols) GetFunctionBoundaries() []FunctionBoundary {
 
 // GetFunctionBoundariesOk returns a tuple with the FunctionBoundaries field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Symbols) GetFunctionBoundariesOk() ([]FunctionBoundary, bool) {
 	if o == nil || IsNil(o.FunctionBoundaries) {
 		return nil, false
@@ -113,14 +112,9 @@ func (o Symbols) MarshalJSON() ([]byte, error) {
 func (o Symbols) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["base_address"] = o.BaseAddress
-	if !IsNil(o.FunctionBoundaries) {
+	if o.FunctionBoundaries != nil {
 		toSerialize["function_boundaries"] = o.FunctionBoundaries
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -148,21 +142,15 @@ func (o *Symbols) UnmarshalJSON(data []byte) (err error) {
 
 	varSymbols := _Symbols{}
 
-	err = json.Unmarshal(data, &varSymbols)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSymbols)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Symbols(varSymbols)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "base_address")
-		delete(additionalProperties, "function_boundaries")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

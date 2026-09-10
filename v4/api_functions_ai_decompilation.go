@@ -1720,11 +1720,13 @@ func (r ApiRegenerateAiDecompilationInlineCommentsRequest) Execute() (*Regenerat
 /*
 RegenerateAiDecompilationInlineComments Regenerate AI decompilation inline comments
 
-Starts a new inline comments generation workflow for the function. Requires an existing decompilation with a summary.
+Starts a new inline comments generation workflow for the function. Requires an existing decompilation with a summary. Rejected while a decompilation is running: its naming and type-suggestion passes are still changing the identifiers the comments would reference. Poll the inline comments status endpoint, which reports PENDING until then.
 
 **Error codes:**
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `400` [`BAD_REQUEST`](/errors/BAD_REQUEST) — Bad Request
+- `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param functionId Function ID
@@ -1816,6 +1818,17 @@ func (a *FunctionsAIDecompilationAPIService) RegenerateAiDecompilationInlineComm
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v APIError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1828,6 +1841,17 @@ func (a *FunctionsAIDecompilationAPIService) RegenerateAiDecompilationInlineComm
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v APIError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1887,11 +1911,12 @@ func (r ApiRegenerateAiDecompilationSummaryRequest) Execute() (*RegenerateOutput
 /*
 RegenerateAiDecompilationSummary Regenerate AI decompilation summary
 
-Starts a new summary generation workflow for the function. Requires an existing decompilation.
+Starts a new summary generation workflow for the function. Requires an existing decompilation. Rejected while a decompilation is running: its naming and type-suggestion passes are still changing the identifiers a summary would describe. Poll the summary status endpoint, which reports PENDING until then.
 
 **Error codes:**
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param functionId Function ID
@@ -2005,6 +2030,17 @@ func (a *FunctionsAIDecompilationAPIService) RegenerateAiDecompilationSummaryExe
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v APIError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -2054,7 +2090,13 @@ func (r ApiStreamAiDecompilationRequest) Execute() ([]ServerSentEventsInner1, *h
 /*
 StreamAiDecompilation Stream live AI decompilation output (SSE)
 
-Opens a Server-Sent Events stream of incremental decompilation events for the given function. Each event has a `type` discriminator (also used as the SSE `event:` line) and a per-attempt monotonic `seq`. Terminal events: `decomp_finished` (success) or `decomp_failed` (all retries exhausted). `attempt_failed` is per-attempt and non-terminal — Temporal may retry the activity. Clients should treat `attempt` changes as a reset signal. `last_event_id` is not supported — clients fall back to polling the standard GET endpoint after the stream ends.
+Opens a Server-Sent Events stream of incremental decompilation events for the given function. Each event has a `type` discriminator (also used as the SSE `event:` line) and a per-attempt monotonic `seq`.
+
+**Terminal events — the stream closes on these:** `names_finished` (success) and `decomp_failed` (all retries exhausted). `names_finished` is published on every success path, including when the naming pass is disabled, produces nothing, or fails, so a successful run always closes.
+
+**`decomp_finished` is NOT terminal.** It marks the end of the model call, not the end of the run: entity restore, the result write, the placeholder-naming pass and the type-suggestion pass all follow it, and the last two rewrite the identifiers the source renders with. Reading the decompilation at `decomp_finished` therefore returns names that are about to change — wait for `names_finished`. `attempt_failed` is per-attempt and non-terminal too: Temporal may retry, and clients disambiguate on `attempt`, which they should treat as a reset signal.
+
+`last_event_id` is not supported — clients fall back to polling the standard GET endpoint after the stream ends.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param functionId Function ID
@@ -2521,6 +2563,174 @@ func (a *FunctionsAIDecompilationAPIService) V3GetAiDecompilationTokensExecute(r
 	}
 
 	localVarPath := localBasePath + "/v3/functions/{function_id}/ai-decompilation/tokens"
+	localVarPath = strings.Replace(localVarPath, "{"+"function_id"+"}", url.PathEscape(parameterValueToString(r.functionId, "functionId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.functionId < 1 {
+		return localVarReturnValue, nil, reportError("functionId must be greater than 1")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV3GetAiDecompilationTypeSuggestionsRequest struct {
+	ctx context.Context
+	ApiService *FunctionsAIDecompilationAPIService
+	functionId int64
+}
+
+func (r ApiV3GetAiDecompilationTypeSuggestionsRequest) Execute() (*TypeSuggestionsData, *http.Response, error) {
+	return r.ApiService.V3GetAiDecompilationTypeSuggestionsExecute(r)
+}
+
+/*
+V3GetAiDecompilationTypeSuggestions Get AI decompilation type suggestions
+
+Returns the aggregate types the AI decompilation inferred for this function: a suggested name for each type and each of its members, the members' offsets and widths, and the gaps between them. Members revealed only by a caller or callee are included and marked by origin, as are members the model placed rather than observed. Nothing here is a data type row — these are proposals, and creating a row from one is the client's call. The list is empty until a run has produced suggestions, which is ordinary and not an error.
+
+**Error codes:**
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `500` [`INTERNAL_ERROR`](/errors/INTERNAL_ERROR) — Internal Server Error
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param functionId Function ID
+ @return ApiV3GetAiDecompilationTypeSuggestionsRequest
+*/
+func (a *FunctionsAIDecompilationAPIService) V3GetAiDecompilationTypeSuggestions(ctx context.Context, functionId int64) ApiV3GetAiDecompilationTypeSuggestionsRequest {
+	return ApiV3GetAiDecompilationTypeSuggestionsRequest{
+		ApiService: a,
+		ctx: ctx,
+		functionId: functionId,
+	}
+}
+
+// Execute executes the request
+//  @return TypeSuggestionsData
+func (a *FunctionsAIDecompilationAPIService) V3GetAiDecompilationTypeSuggestionsExecute(r ApiV3GetAiDecompilationTypeSuggestionsRequest) (*TypeSuggestionsData, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TypeSuggestionsData
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionsAIDecompilationAPIService.V3GetAiDecompilationTypeSuggestions")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/functions/{function_id}/ai-decompilation/type-suggestions"
 	localVarPath = strings.Replace(localVarPath, "{"+"function_id"+"}", url.PathEscape(parameterValueToString(r.functionId, "functionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

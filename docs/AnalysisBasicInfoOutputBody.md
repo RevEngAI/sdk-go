@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **IsSystem** | **bool** | True when the analysis is owned by a system user | 
 **ModelId** | **int64** | Model ID | 
 **ModelName** | **string** | Model used for analysis | 
+**ModelUpgradeAvailable** | **bool** | True when the analysis ran on a model older than the current one, so its owner can re-analyse it on the latest. Describes the analysis, not the caller&#39;s rights — only the owner may act on it | 
 **OwnerUsername** | **string** | Username of the analysis owner | 
 **SequencerVersion** | Pointer to **string** | Sequencer version, omitted when not set | [optional] 
 **Sha256Hash** | **string** | SHA-256 hash of the binary | 
@@ -33,7 +34,7 @@ Name | Type | Description | Notes
 
 ### NewAnalysisBasicInfoOutputBody
 
-`func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, binaryUuid string, creation time.Time, debug bool, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, ownerUsername string, sha256Hash string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, teamId int64, ) *AnalysisBasicInfoOutputBody`
+`func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, binaryUuid string, creation time.Time, debug bool, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, modelUpgradeAvailable bool, ownerUsername string, sha256Hash string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, teamId int64, ) *AnalysisBasicInfoOutputBody`
 
 NewAnalysisBasicInfoOutputBody instantiates a new AnalysisBasicInfoOutputBody object
 This constructor will assign default values to properties that have it defined,
@@ -396,6 +397,26 @@ and a boolean to check if the value has been set.
 `func (o *AnalysisBasicInfoOutputBody) SetModelName(v string)`
 
 SetModelName sets ModelName field to given value.
+
+
+### GetModelUpgradeAvailable
+
+`func (o *AnalysisBasicInfoOutputBody) GetModelUpgradeAvailable() bool`
+
+GetModelUpgradeAvailable returns the ModelUpgradeAvailable field if non-nil, zero value otherwise.
+
+### GetModelUpgradeAvailableOk
+
+`func (o *AnalysisBasicInfoOutputBody) GetModelUpgradeAvailableOk() (*bool, bool)`
+
+GetModelUpgradeAvailableOk returns a tuple with the ModelUpgradeAvailable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelUpgradeAvailable
+
+`func (o *AnalysisBasicInfoOutputBody) SetModelUpgradeAvailable(v bool)`
+
+SetModelUpgradeAvailable sets ModelUpgradeAvailable field to given value.
 
 
 ### GetOwnerUsername

@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **IsOwner** | **bool** | True when the caller owns the analysis | 
 **ModelId** | **int64** | Model ID | 
 **ModelName** | **string** | Model name | 
+**ModelUpgradeAvailable** | **bool** | True when the analysis ran on a model older than the current one, so its owner can re-analyse it on the latest. Describes the analysis, not the caller&#39;s rights — only the owner may act on it | 
 **Sha256Hash** | **string** | SHA-256 hash of the binary | 
 **Status** | **string** | Analysis status | 
 **SuppliedArchitecture** | **string** | User-supplied instruction-set architecture; \&quot;AUTO\&quot; when not overridden | 
@@ -30,7 +31,7 @@ Name | Type | Description | Notes
 
 ### NewAnalysisRecordBody
 
-`func NewAnalysisRecordBody(analysisId int64, analysisScope string, baseAddress int64, binaryId int64, binaryName string, binarySize int64, creation time.Time, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionBoundariesHash string, isOwner bool, modelId int64, modelName string, sha256Hash string, status string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, tags []AnalysisTagBody, username string, ) *AnalysisRecordBody`
+`func NewAnalysisRecordBody(analysisId int64, analysisScope string, baseAddress int64, binaryId int64, binaryName string, binarySize int64, creation time.Time, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionBoundariesHash string, isOwner bool, modelId int64, modelName string, modelUpgradeAvailable bool, sha256Hash string, status string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, tags []AnalysisTagBody, username string, ) *AnalysisRecordBody`
 
 NewAnalysisRecordBody instantiates a new AnalysisRecordBody object
 This constructor will assign default values to properties that have it defined,
@@ -323,6 +324,26 @@ and a boolean to check if the value has been set.
 `func (o *AnalysisRecordBody) SetModelName(v string)`
 
 SetModelName sets ModelName field to given value.
+
+
+### GetModelUpgradeAvailable
+
+`func (o *AnalysisRecordBody) GetModelUpgradeAvailable() bool`
+
+GetModelUpgradeAvailable returns the ModelUpgradeAvailable field if non-nil, zero value otherwise.
+
+### GetModelUpgradeAvailableOk
+
+`func (o *AnalysisRecordBody) GetModelUpgradeAvailableOk() (*bool, bool)`
+
+GetModelUpgradeAvailableOk returns a tuple with the ModelUpgradeAvailable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelUpgradeAvailable
+
+`func (o *AnalysisRecordBody) SetModelUpgradeAvailable(v bool)`
+
+SetModelUpgradeAvailable sets ModelUpgradeAvailable field to given value.
 
 
 ### GetSha256Hash

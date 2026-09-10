@@ -84,8 +84,15 @@ Class | Method | HTTP request | Description
 *AgentAPI* | [**GetReportAnalysisResultV2AnalysesAnalysisIdAgentReportAnalysisGet**](docs/AgentAPI.md#getreportanalysisresultv2analysesanalysisidagentreportanalysisget) | **Get** /v2/analyses/{analysis_id}/agent/report-analysis | Get Report Analysis Result
 *AgentAPI* | [**GetTriageResultV2AnalysesAnalysisIdAgentTriageGet**](docs/AgentAPI.md#gettriageresultv2analysesanalysisidagenttriageget) | **Get** /v2/analyses/{analysis_id}/agent/triage | Get Triage Result
 *AgentAPI* | [**V3CancelRenameUnnamedFunctions**](docs/AgentAPI.md#v3cancelrenameunnamedfunctions) | **Post** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions/cancel | Cancel the rename-unnamed-functions agent.
+*AgentAPI* | [**V3CancelSecurityScanOperation**](docs/AgentAPI.md#v3cancelsecurityscanoperation) | **Post** /v3/operations/security-scan/{analysis_id}:cancel | Cancel a security-scan operation.
+*AgentAPI* | [**V3GetCryptoExplainOperation**](docs/AgentAPI.md#v3getcryptoexplainoperation) | **Get** /v3/operations/crypto-explain/{function_id} | Get a crypto-explain operation.
+*AgentAPI* | [**V3GetCryptoScanOperation**](docs/AgentAPI.md#v3getcryptoscanoperation) | **Get** /v3/operations/crypto-scan/{analysis_id} | Get a crypto-scan operation.
 *AgentAPI* | [**V3GetRenameUnnamedFunctionsResult**](docs/AgentAPI.md#v3getrenameunnamedfunctionsresult) | **Get** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions | Get rename-unnamed-functions agent result.
 *AgentAPI* | [**V3GetRenameUnnamedFunctionsStatus**](docs/AgentAPI.md#v3getrenameunnamedfunctionsstatus) | **Get** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions/status | Get rename-unnamed-functions agent status.
+*AgentAPI* | [**V3GetSecurityScanOperation**](docs/AgentAPI.md#v3getsecurityscanoperation) | **Get** /v3/operations/security-scan/{analysis_id} | Get a security-scan operation.
+*AgentAPI* | [**V3RunCryptoExplain**](docs/AgentAPI.md#v3runcryptoexplain) | **Post** /v3/functions/{function_id}/crypto-explain:run | Run the crypto-explain agent.
+*AgentAPI* | [**V3RunCryptoScan**](docs/AgentAPI.md#v3runcryptoscan) | **Post** /v3/analyses/{analysis_id}/crypto-scan:run | Run the crypto-scan agent.
+*AgentAPI* | [**V3RunSecurityScan**](docs/AgentAPI.md#v3runsecurityscan) | **Post** /v3/analyses/{analysis_id}/security-scan:run | Run the security-scan agent.
 *AgentAPI* | [**V3TriggerRenameUnnamedFunctions**](docs/AgentAPI.md#v3triggerrenameunnamedfunctions) | **Post** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions | Run the rename-unnamed-functions agent.
 *AnalysesBulkActionsAPI* | [**BulkAddAnalysisTags**](docs/AnalysesBulkActionsAPI.md#bulkaddanalysistags) | **Patch** /v2/analyses/tags/add | Bulk Add Analysis Tags
 *AnalysesBulkActionsAPI* | [**BulkDeleteAnalyses**](docs/AnalysesBulkActionsAPI.md#bulkdeleteanalyses) | **Patch** /v2/analyses/delete | Bulk Delete Analyses
@@ -116,12 +123,15 @@ Class | Method | HTTP request | Description
 *AnalysesCoreAPI* | [**UpdateAnalysis**](docs/AnalysesCoreAPI.md#updateanalysis) | **Patch** /v2/analyses/{analysis_id} | Update Analysis
 *AnalysesCoreAPI* | [**UpdateAnalysisTags**](docs/AnalysesCoreAPI.md#updateanalysistags) | **Patch** /v2/analyses/{analysis_id}/tags | Update Analysis Tags
 *AnalysesCoreAPI* | [**UploadFile**](docs/AnalysesCoreAPI.md#uploadfile) | **Post** /v2/upload | Upload File
+*AnalysesCoreAPI* | [**V3CreateAnalysis**](docs/AnalysesCoreAPI.md#v3createanalysis) | **Post** /v3/analyses | Create an analysis
 *AnalysesCoreAPI* | [**V3GetAnalysisAutoUnstripStatus**](docs/AnalysesCoreAPI.md#v3getanalysisautounstripstatus) | **Get** /v3/analyses/{analysis_id}/auto-unstrip/status | Get the auto-unstrip status for an analysis.
 *AnalysesCoreAPI* | [**V3GetAnalysisLogs**](docs/AnalysesCoreAPI.md#v3getanalysislogs) | **Get** /v3/analyses/{analysis_id}/logs | Get the Analysis log
+*AnalysesCoreAPI* | [**V3GetAnalysisOperation**](docs/AnalysesCoreAPI.md#v3getanalysisoperation) | **Get** /v3/operations/analyses/{analysis_id} | Get an Analysis-creation operation
 *AnalysesCoreAPI* | [**V3GetAnalysisStrings**](docs/AnalysesCoreAPI.md#v3getanalysisstrings) | **Get** /v3/analyses/{analysis_id}/functions/strings | List strings for an analysis.
 *AnalysesCoreAPI* | [**V3GetAnalysisStringsStatus**](docs/AnalysesCoreAPI.md#v3getanalysisstringsstatus) | **Get** /v3/analyses/{analysis_id}/functions/strings/status | Get the string-extraction status for an analysis.
 *AnalysesCoreAPI* | [**V3ListAnalyses**](docs/AnalysesCoreAPI.md#v3listanalyses) | **Get** /v3/analyses | List analyses
 *AnalysesCoreAPI* | [**V3ListExampleAnalyses**](docs/AnalysesCoreAPI.md#v3listexampleanalyses) | **Get** /v3/analyses/examples | List example analyses
+*AnalysesCoreAPI* | [**V3UpgradeAnalysisModel**](docs/AnalysesCoreAPI.md#v3upgradeanalysismodel) | **Post** /v3/analyses/{analysis_id}/upgrade-model | Re-analyse on the latest model
 *AnalysesResultsMetadataAPI* | [**GetAnalysisFunctionsPaginated**](docs/AnalysesResultsMetadataAPI.md#getanalysisfunctionspaginated) | **Get** /v2/analyses/{analysis_id}/functions | Get functions from analysis
 *AnalysesResultsMetadataAPI* | [**GetCapabilities**](docs/AnalysesResultsMetadataAPI.md#getcapabilities) | **Get** /v2/analyses/{analysis_id}/capabilities | Gets the capabilities from the analysis
 *AnalysesResultsMetadataAPI* | [**GetFunctionsList**](docs/AnalysesResultsMetadataAPI.md#getfunctionslist) | **Get** /v2/analyses/{analysis_id}/functions/list | Gets functions from analysis
@@ -178,8 +188,6 @@ Class | Method | HTTP request | Description
 *ExternalSourcesAPI* | [**CreateExternalTaskVt**](docs/ExternalSourcesAPI.md#createexternaltaskvt) | **Post** /v2/analysis/{analysis_id}/external/vt | Pulls data from VirusTotal
 *ExternalSourcesAPI* | [**GetVtData**](docs/ExternalSourcesAPI.md#getvtdata) | **Get** /v2/analysis/{analysis_id}/external/vt | Get VirusTotal data
 *ExternalSourcesAPI* | [**GetVtTaskStatus**](docs/ExternalSourcesAPI.md#getvttaskstatus) | **Get** /v2/analysis/{analysis_id}/external/vt/status | Check the status of VirusTotal data retrieval
-*FirmwareAPI* | [**GetBinariesForFirmwareTask**](docs/FirmwareAPI.md#getbinariesforfirmwaretask) | **Get** /v2/firmware/get-binaries/{task_id} | Upload firmware for unpacking
-*FirmwareAPI* | [**UploadFirmware**](docs/FirmwareAPI.md#uploadfirmware) | **Post** /v2/firmware | Upload firmware for unpacking
 *FunctionsAIDecompilationAPI* | [**CreateAiDecompilation**](docs/FunctionsAIDecompilationAPI.md#createaidecompilation) | **Post** /v3/functions/{function_id}/ai-decompilation | Start AI decompilation
 *FunctionsAIDecompilationAPI* | [**DeleteAiDecompilationInlineComment**](docs/FunctionsAIDecompilationAPI.md#deleteaidecompilationinlinecomment) | **Delete** /v3/functions/{function_id}/ai-decompilation/inline-comments/{line} | Delete a single inline comment
 *FunctionsAIDecompilationAPI* | [**GetAiDecompilation**](docs/FunctionsAIDecompilationAPI.md#getaidecompilation) | **Get** /v3/functions/{function_id}/ai-decompilation | Get AI decompilation result
@@ -196,6 +204,7 @@ Class | Method | HTTP request | Description
 *FunctionsAIDecompilationAPI* | [**UpsertAiDecompilationRating**](docs/FunctionsAIDecompilationAPI.md#upsertaidecompilationrating) | **Patch** /v2/functions/{function_id}/ai-decompilation/rating | Upsert rating for AI decompilation
 *FunctionsAIDecompilationAPI* | [**V3GetAiDecompilationLineAttributions**](docs/FunctionsAIDecompilationAPI.md#v3getaidecompilationlineattributions) | **Get** /v3/functions/{function_id}/ai-decompilation/line-attributions | Get AI decompilation line attributions
 *FunctionsAIDecompilationAPI* | [**V3GetAiDecompilationTokens**](docs/FunctionsAIDecompilationAPI.md#v3getaidecompilationtokens) | **Get** /v3/functions/{function_id}/ai-decompilation/tokens | Get AI decompilation tokens and user overrides
+*FunctionsAIDecompilationAPI* | [**V3GetAiDecompilationTypeSuggestions**](docs/FunctionsAIDecompilationAPI.md#v3getaidecompilationtypesuggestions) | **Get** /v3/functions/{function_id}/ai-decompilation/type-suggestions | Get AI decompilation type suggestions
 *FunctionsAIDecompilationAPI* | [**V3UpsertAiDecompilationOverrides**](docs/FunctionsAIDecompilationAPI.md#v3upsertaidecompilationoverrides) | **Patch** /v3/functions/{function_id}/ai-decompilation/overrides | Upsert variable/function name overrides
 *FunctionsCoreAPI* | [**AddFunctionCallee**](docs/FunctionsCoreAPI.md#addfunctioncallee) | **Post** /v3/functions/{function_id}/callees | Add a callee to a function
 *FunctionsCoreAPI* | [**AddUserStringToFunction**](docs/FunctionsCoreAPI.md#adduserstringtofunction) | **Post** /v3/functions/{function_id}/user-provided-strings | Add a user-provided string to a function.
@@ -275,6 +284,7 @@ Class | Method | HTTP request | Description
  - [AnalysisRecord](docs/AnalysisRecord.md)
  - [AnalysisRecordBody](docs/AnalysisRecordBody.md)
  - [AnalysisReport](docs/AnalysisReport.md)
+ - [AnalysisRequirement](docs/AnalysisRequirement.md)
  - [AnalysisScope](docs/AnalysisScope.md)
  - [AnalysisStringFunction](docs/AnalysisStringFunction.md)
  - [AnalysisStringInput](docs/AnalysisStringInput.md)
@@ -416,6 +426,7 @@ Class | Method | HTTP request | Description
  - [CommentResponse](docs/CommentResponse.md)
  - [CommentUpdateRequest](docs/CommentUpdateRequest.md)
  - [CommentsData](docs/CommentsData.md)
+ - [Config](docs/Config.md)
  - [ConfigResponse](docs/ConfigResponse.md)
  - [ConfirmToolInputBody](docs/ConfirmToolInputBody.md)
  - [Connection](docs/Connection.md)
@@ -442,9 +453,12 @@ Class | Method | HTTP request | Description
  - [CreateGroupInputBody](docs/CreateGroupInputBody.md)
  - [CreateIdentityInputBody](docs/CreateIdentityInputBody.md)
  - [CreateIssuerInputBody](docs/CreateIssuerInputBody.md)
+ - [CreateMetadata](docs/CreateMetadata.md)
  - [CreateOrganisationInputBody](docs/CreateOrganisationInputBody.md)
  - [CreatePointerDataType](docs/CreatePointerDataType.md)
  - [CreatePortalSessionInputBody](docs/CreatePortalSessionInputBody.md)
+ - [CreateRequest](docs/CreateRequest.md)
+ - [CreateResult](docs/CreateResult.md)
  - [CreateStructDataType](docs/CreateStructDataType.md)
  - [CreateTeamInputBody](docs/CreateTeamInputBody.md)
  - [CreateTypedefDataType](docs/CreateTypedefDataType.md)
@@ -452,6 +466,14 @@ Class | Method | HTTP request | Description
  - [CreateUnknownDataType](docs/CreateUnknownDataType.md)
  - [CreateUserInputBody](docs/CreateUserInputBody.md)
  - [Created](docs/Created.md)
+ - [CryptoCall](docs/CryptoCall.md)
+ - [CryptoDirectMatch](docs/CryptoDirectMatch.md)
+ - [CryptoExplainMetadata](docs/CryptoExplainMetadata.md)
+ - [CryptoExplainResult](docs/CryptoExplainResult.md)
+ - [CryptoExplainedFunction](docs/CryptoExplainedFunction.md)
+ - [CryptoFinding](docs/CryptoFinding.md)
+ - [CryptoScanMetadata](docs/CryptoScanMetadata.md)
+ - [CryptoScanResult](docs/CryptoScanResult.md)
  - [DataTypeEntry](docs/DataTypeEntry.md)
  - [DataTypeEnumValueEntry](docs/DataTypeEnumValueEntry.md)
  - [DataTypeFunctionEntry](docs/DataTypeFunctionEntry.md)
@@ -487,6 +509,7 @@ Class | Method | HTTP request | Description
  - [EventCONTEXTCOMPACTED](docs/EventCONTEXTCOMPACTED.md)
  - [EventDecompFailed](docs/EventDecompFailed.md)
  - [EventDecompFinished](docs/EventDecompFinished.md)
+ - [EventNamesFinished](docs/EventNamesFinished.md)
  - [EventProse](docs/EventProse.md)
  - [EventRUNCANCELLED](docs/EventRUNCANCELLED.md)
  - [EventRUNERROR](docs/EventRUNERROR.md)
@@ -507,11 +530,14 @@ Class | Method | HTTP request | Description
  - [EventTOOLCALLRESULT](docs/EventTOOLCALLRESULT.md)
  - [EventTOOLCALLSTART](docs/EventTOOLCALLSTART.md)
  - [EventTOOLCONFIRMATIONREQUIRED](docs/EventTOOLCONFIRMATIONREQUIRED.md)
+ - [EventTypesSuggested](docs/EventTypesSuggested.md)
  - [EventWarning](docs/EventWarning.md)
  - [Example](docs/Example.md)
  - [ExportModel](docs/ExportModel.md)
  - [ExternalResponse](docs/ExternalResponse.md)
+ - [ExtractedBinary](docs/ExtractedBinary.md)
  - [ExtractedURL](docs/ExtractedURL.md)
+ - [ExtractionFailure](docs/ExtractionFailure.md)
  - [FileActivityEntry](docs/FileActivityEntry.md)
  - [FileFormat](docs/FileFormat.md)
  - [FileHashes](docs/FileHashes.md)
@@ -574,6 +600,7 @@ Class | Method | HTTP request | Description
  - [IndirectCallSite](docs/IndirectCallSite.md)
  - [IndirectCallSitesOutputBody](docs/IndirectCallSitesOutputBody.md)
  - [InlineComment](docs/InlineComment.md)
+ - [InputBody](docs/InputBody.md)
  - [InsertAnalysisLogRequest](docs/InsertAnalysisLogRequest.md)
  - [InviteUserInputBody](docs/InviteUserInputBody.md)
  - [IssuerAllowedDomain](docs/IssuerAllowedDomain.md)
@@ -606,8 +633,14 @@ Class | Method | HTTP request | Description
  - [MutexEntry](docs/MutexEntry.md)
  - [NameConfidence](docs/NameConfidence.md)
  - [NameSourceType](docs/NameSourceType.md)
+ - [NamesFinishedEvent](docs/NamesFinishedEvent.md)
  - [NetworkActivity](docs/NetworkActivity.md)
  - [OIDCCallbackInputBody](docs/OIDCCallbackInputBody.md)
+ - [OperationCreateMetadataCreateResult](docs/OperationCreateMetadataCreateResult.md)
+ - [OperationCryptoExplainMetadataCryptoExplainResult](docs/OperationCryptoExplainMetadataCryptoExplainResult.md)
+ - [OperationCryptoScanMetadataCryptoScanResult](docs/OperationCryptoScanMetadataCryptoScanResult.md)
+ - [OperationSecurityScanMetadataSecurityScanResult](docs/OperationSecurityScanMetadataSecurityScanResult.md)
+ - [OperationWorkflowProgressResultBody](docs/OperationWorkflowProgressResultBody.md)
  - [Order](docs/Order.md)
  - [Organisation](docs/Organisation.md)
  - [OrganisationGroup](docs/OrganisationGroup.md)
@@ -661,16 +694,21 @@ Class | Method | HTTP request | Description
  - [ReportInfo](docs/ReportInfo.md)
  - [ReportOptions](docs/ReportOptions.md)
  - [ResolvedEntity](docs/ResolvedEntity.md)
+ - [ResultBody](docs/ResultBody.md)
  - [RevokeBody](docs/RevokeBody.md)
  - [SSOProvider](docs/SSOProvider.md)
  - [SSOProvidersOutputBody](docs/SSOProvidersOutputBody.md)
+ - [SandboxConfig](docs/SandboxConfig.md)
  - [SandboxOptions](docs/SandboxOptions.md)
  - [SandboxStartMethod](docs/SandboxStartMethod.md)
  - [SandboxTimeout](docs/SandboxTimeout.md)
  - [ScheduledTaskEntry](docs/ScheduledTaskEntry.md)
  - [ScrapeThirdPartyConfig](docs/ScrapeThirdPartyConfig.md)
  - [SectionModel](docs/SectionModel.md)
+ - [SecurityFinding](docs/SecurityFinding.md)
  - [SecurityModel](docs/SecurityModel.md)
+ - [SecurityScanMetadata](docs/SecurityScanMetadata.md)
+ - [SecurityScanResult](docs/SecurityScanResult.md)
  - [SegmentInfo](docs/SegmentInfo.md)
  - [SendMessageRequest](docs/SendMessageRequest.md)
  - [ServerSentEventsInner](docs/ServerSentEventsInner.md)
@@ -709,6 +747,7 @@ Class | Method | HTTP request | Description
  - [StartMatchingForFunctionsInputBody](docs/StartMatchingForFunctionsInputBody.md)
  - [StartMatchingOutputBody](docs/StartMatchingOutputBody.md)
  - [StartupInfo](docs/StartupInfo.md)
+ - [Status](docs/Status.md)
  - [StatusBody](docs/StatusBody.md)
  - [StatusInput](docs/StatusInput.md)
  - [StatusOutput](docs/StatusOutput.md)
@@ -718,6 +757,9 @@ Class | Method | HTTP request | Description
  - [StructDataType](docs/StructDataType.md)
  - [StructDefinition](docs/StructDefinition.md)
  - [SubmitUserFeedbackRequest](docs/SubmitUserFeedbackRequest.md)
+ - [SuggestedHole](docs/SuggestedHole.md)
+ - [SuggestedMemberView](docs/SuggestedMemberView.md)
+ - [SuggestedTypeView](docs/SuggestedTypeView.md)
  - [SummaryData](docs/SummaryData.md)
  - [Symbols](docs/Symbols.md)
  - [Tag](docs/Tag.md)
@@ -738,11 +780,15 @@ Class | Method | HTTP request | Description
  - [TokenisedData](docs/TokenisedData.md)
  - [TriageFunctionResponse](docs/TriageFunctionResponse.md)
  - [TriageReportResponse](docs/TriageReportResponse.md)
+ - [TriggerCryptoScanInputBody](docs/TriggerCryptoScanInputBody.md)
  - [TriggerDynamicExecutionInputBody](docs/TriggerDynamicExecutionInputBody.md)
  - [TriggerRenameUnnamedFunctionsInputBody](docs/TriggerRenameUnnamedFunctionsInputBody.md)
+ - [TriggerSecurityScanInputBody](docs/TriggerSecurityScanInputBody.md)
  - [Ttp](docs/Ttp.md)
+ - [TypeSuggestionsData](docs/TypeSuggestionsData.md)
  - [TypedefDataType](docs/TypedefDataType.md)
  - [TypedefDefinition](docs/TypedefDefinition.md)
+ - [TypesSuggestedEvent](docs/TypesSuggestedEvent.md)
  - [UnionDataType](docs/UnionDataType.md)
  - [UnionDefinition](docs/UnionDefinition.md)
  - [UnknownDataType](docs/UnknownDataType.md)
@@ -767,6 +813,7 @@ Class | Method | HTTP request | Description
  - [UpdateUserCreditsInputBody](docs/UpdateUserCreditsInputBody.md)
  - [UpdateUserInputBody](docs/UpdateUserInputBody.md)
  - [UpdateUserPasswordInputBody](docs/UpdateUserPasswordInputBody.md)
+ - [UpgradeAnalysisModelOutputBody](docs/UpgradeAnalysisModelOutputBody.md)
  - [UploadFileType](docs/UploadFileType.md)
  - [UploadResponse](docs/UploadResponse.md)
  - [UpsertAiDecomplationRatingRequest](docs/UpsertAiDecomplationRatingRequest.md)

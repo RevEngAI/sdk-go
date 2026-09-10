@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **IsArchive** | **bool** |  | 
 **CanSandbox** | **bool** |  | 
 **CanExtract** | **bool** |  | 
+**AnalysisRequirements** | Pointer to [**[]AnalysisRequirement**](AnalysisRequirement.md) |  | [optional] [default to {}]
 
 ## Methods
 
@@ -170,6 +171,31 @@ and a boolean to check if the value has been set.
 
 SetCanExtract sets CanExtract field to given value.
 
+
+### GetAnalysisRequirements
+
+`func (o *UploadResponse) GetAnalysisRequirements() []AnalysisRequirement`
+
+GetAnalysisRequirements returns the AnalysisRequirements field if non-nil, zero value otherwise.
+
+### GetAnalysisRequirementsOk
+
+`func (o *UploadResponse) GetAnalysisRequirementsOk() (*[]AnalysisRequirement, bool)`
+
+GetAnalysisRequirementsOk returns a tuple with the AnalysisRequirements field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAnalysisRequirements
+
+`func (o *UploadResponse) SetAnalysisRequirements(v []AnalysisRequirement)`
+
+SetAnalysisRequirements sets AnalysisRequirements field to given value.
+
+### HasAnalysisRequirements
+
+`func (o *UploadResponse) HasAnalysisRequirements() bool`
+
+HasAnalysisRequirements returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

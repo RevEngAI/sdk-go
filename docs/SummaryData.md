@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AiSummary** | **string** | Summary with code tags removed | 
+**PredictedFunctionName** | Pointer to **string** | Name the model proposes for this function, produced alongside the summary. | [optional] 
 **Summary** | **string** | Raw summary from the model | 
 **TaskStatus** | **string** | Task status | 
 
@@ -46,6 +47,31 @@ and a boolean to check if the value has been set.
 
 SetAiSummary sets AiSummary field to given value.
 
+
+### GetPredictedFunctionName
+
+`func (o *SummaryData) GetPredictedFunctionName() string`
+
+GetPredictedFunctionName returns the PredictedFunctionName field if non-nil, zero value otherwise.
+
+### GetPredictedFunctionNameOk
+
+`func (o *SummaryData) GetPredictedFunctionNameOk() (*string, bool)`
+
+GetPredictedFunctionNameOk returns a tuple with the PredictedFunctionName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPredictedFunctionName
+
+`func (o *SummaryData) SetPredictedFunctionName(v string)`
+
+SetPredictedFunctionName sets PredictedFunctionName field to given value.
+
+### HasPredictedFunctionName
+
+`func (o *SummaryData) HasPredictedFunctionName() bool`
+
+HasPredictedFunctionName returns a boolean if a field has been set.
 
 ### GetSummary
 

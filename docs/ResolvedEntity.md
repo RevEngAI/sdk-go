@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **NeedsNaming** | **bool** |  | 
 **Provenance** | **NullableString** |  | 
 **ResolvedName** | **NullableString** |  | 
+**SuggestedName** | Pointer to **NullableString** |  | [optional] 
 **SuggestedType** | **NullableString** |  | 
 **SuggestionConfidence** | **NullableString** |  | 
 **Token** | **NullableString** |  | 
@@ -483,6 +484,41 @@ SetResolvedName sets ResolvedName field to given value.
 `func (o *ResolvedEntity) UnsetResolvedName()`
 
 UnsetResolvedName ensures that no value is present for ResolvedName, not even an explicit nil
+### GetSuggestedName
+
+`func (o *ResolvedEntity) GetSuggestedName() string`
+
+GetSuggestedName returns the SuggestedName field if non-nil, zero value otherwise.
+
+### GetSuggestedNameOk
+
+`func (o *ResolvedEntity) GetSuggestedNameOk() (*string, bool)`
+
+GetSuggestedNameOk returns a tuple with the SuggestedName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuggestedName
+
+`func (o *ResolvedEntity) SetSuggestedName(v string)`
+
+SetSuggestedName sets SuggestedName field to given value.
+
+### HasSuggestedName
+
+`func (o *ResolvedEntity) HasSuggestedName() bool`
+
+HasSuggestedName returns a boolean if a field has been set.
+
+### SetSuggestedNameNil
+
+`func (o *ResolvedEntity) SetSuggestedNameNil(b bool)`
+
+ SetSuggestedNameNil sets the value for SuggestedName to be an explicit nil
+
+### UnsetSuggestedName
+`func (o *ResolvedEntity) UnsetSuggestedName()`
+
+UnsetSuggestedName ensures that no value is present for SuggestedName, not even an explicit nil
 ### GetSuggestedType
 
 `func (o *ResolvedEntity) GetSuggestedType() string`

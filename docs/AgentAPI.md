@@ -17,8 +17,15 @@ Method | HTTP request | Description
 [**GetReportAnalysisResultV2AnalysesAnalysisIdAgentReportAnalysisGet**](AgentAPI.md#GetReportAnalysisResultV2AnalysesAnalysisIdAgentReportAnalysisGet) | **Get** /v2/analyses/{analysis_id}/agent/report-analysis | Get Report Analysis Result
 [**GetTriageResultV2AnalysesAnalysisIdAgentTriageGet**](AgentAPI.md#GetTriageResultV2AnalysesAnalysisIdAgentTriageGet) | **Get** /v2/analyses/{analysis_id}/agent/triage | Get Triage Result
 [**V3CancelRenameUnnamedFunctions**](AgentAPI.md#V3CancelRenameUnnamedFunctions) | **Post** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions/cancel | Cancel the rename-unnamed-functions agent.
+[**V3CancelSecurityScanOperation**](AgentAPI.md#V3CancelSecurityScanOperation) | **Post** /v3/operations/security-scan/{analysis_id}:cancel | Cancel a security-scan operation.
+[**V3GetCryptoExplainOperation**](AgentAPI.md#V3GetCryptoExplainOperation) | **Get** /v3/operations/crypto-explain/{function_id} | Get a crypto-explain operation.
+[**V3GetCryptoScanOperation**](AgentAPI.md#V3GetCryptoScanOperation) | **Get** /v3/operations/crypto-scan/{analysis_id} | Get a crypto-scan operation.
 [**V3GetRenameUnnamedFunctionsResult**](AgentAPI.md#V3GetRenameUnnamedFunctionsResult) | **Get** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions | Get rename-unnamed-functions agent result.
 [**V3GetRenameUnnamedFunctionsStatus**](AgentAPI.md#V3GetRenameUnnamedFunctionsStatus) | **Get** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions/status | Get rename-unnamed-functions agent status.
+[**V3GetSecurityScanOperation**](AgentAPI.md#V3GetSecurityScanOperation) | **Get** /v3/operations/security-scan/{analysis_id} | Get a security-scan operation.
+[**V3RunCryptoExplain**](AgentAPI.md#V3RunCryptoExplain) | **Post** /v3/functions/{function_id}/crypto-explain:run | Run the crypto-explain agent.
+[**V3RunCryptoScan**](AgentAPI.md#V3RunCryptoScan) | **Post** /v3/analyses/{analysis_id}/crypto-scan:run | Run the crypto-scan agent.
+[**V3RunSecurityScan**](AgentAPI.md#V3RunSecurityScan) | **Post** /v3/analyses/{analysis_id}/security-scan:run | Run the security-scan agent.
 [**V3TriggerRenameUnnamedFunctions**](AgentAPI.md#V3TriggerRenameUnnamedFunctions) | **Post** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions | Run the rename-unnamed-functions agent.
 
 
@@ -911,6 +918,214 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V3CancelSecurityScanOperation
+
+> V3CancelSecurityScanOperation(ctx, analysisId).Execute()
+
+Cancel a security-scan operation.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.AgentAPI.V3CancelSecurityScanOperation(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.V3CancelSecurityScanOperation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3CancelSecurityScanOperationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetCryptoExplainOperation
+
+> OperationCryptoExplainMetadataCryptoExplainResult V3GetCryptoExplainOperation(ctx, functionId).Execute()
+
+Get a crypto-explain operation.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AgentAPI.V3GetCryptoExplainOperation(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.V3GetCryptoExplainOperation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetCryptoExplainOperation`: OperationCryptoExplainMetadataCryptoExplainResult
+	fmt.Fprintf(os.Stdout, "Response from `AgentAPI.V3GetCryptoExplainOperation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetCryptoExplainOperationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OperationCryptoExplainMetadataCryptoExplainResult**](OperationCryptoExplainMetadataCryptoExplainResult.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetCryptoScanOperation
+
+> OperationCryptoScanMetadataCryptoScanResult V3GetCryptoScanOperation(ctx, analysisId).Execute()
+
+Get a crypto-scan operation.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AgentAPI.V3GetCryptoScanOperation(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.V3GetCryptoScanOperation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetCryptoScanOperation`: OperationCryptoScanMetadataCryptoScanResult
+	fmt.Fprintf(os.Stdout, "Response from `AgentAPI.V3GetCryptoScanOperation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetCryptoScanOperationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OperationCryptoScanMetadataCryptoScanResult**](OperationCryptoScanMetadataCryptoScanResult.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V3GetRenameUnnamedFunctionsResult
 
 > RenameUnnamedFunctionsResult V3GetRenameUnnamedFunctionsResult(ctx, analysisId).Execute()
@@ -1044,6 +1259,290 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetSecurityScanOperation
+
+> OperationSecurityScanMetadataSecurityScanResult V3GetSecurityScanOperation(ctx, analysisId).Execute()
+
+Get a security-scan operation.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AgentAPI.V3GetSecurityScanOperation(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.V3GetSecurityScanOperation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetSecurityScanOperation`: OperationSecurityScanMetadataSecurityScanResult
+	fmt.Fprintf(os.Stdout, "Response from `AgentAPI.V3GetSecurityScanOperation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetSecurityScanOperationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OperationSecurityScanMetadataSecurityScanResult**](OperationSecurityScanMetadataSecurityScanResult.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3RunCryptoExplain
+
+> OperationCryptoExplainMetadataCryptoExplainResult V3RunCryptoExplain(ctx, functionId).Execute()
+
+Run the crypto-explain agent.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AgentAPI.V3RunCryptoExplain(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.V3RunCryptoExplain``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3RunCryptoExplain`: OperationCryptoExplainMetadataCryptoExplainResult
+	fmt.Fprintf(os.Stdout, "Response from `AgentAPI.V3RunCryptoExplain`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3RunCryptoExplainRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OperationCryptoExplainMetadataCryptoExplainResult**](OperationCryptoExplainMetadataCryptoExplainResult.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3RunCryptoScan
+
+> OperationCryptoScanMetadataCryptoScanResult V3RunCryptoScan(ctx, analysisId).TriggerCryptoScanInputBody(triggerCryptoScanInputBody).Execute()
+
+Run the crypto-scan agent.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	triggerCryptoScanInputBody := *revengai.NewTriggerCryptoScanInputBody() // TriggerCryptoScanInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AgentAPI.V3RunCryptoScan(context.Background(), analysisId).TriggerCryptoScanInputBody(triggerCryptoScanInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.V3RunCryptoScan``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3RunCryptoScan`: OperationCryptoScanMetadataCryptoScanResult
+	fmt.Fprintf(os.Stdout, "Response from `AgentAPI.V3RunCryptoScan`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3RunCryptoScanRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **triggerCryptoScanInputBody** | [**TriggerCryptoScanInputBody**](TriggerCryptoScanInputBody.md) |  | 
+
+### Return type
+
+[**OperationCryptoScanMetadataCryptoScanResult**](OperationCryptoScanMetadataCryptoScanResult.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3RunSecurityScan
+
+> OperationSecurityScanMetadataSecurityScanResult V3RunSecurityScan(ctx, analysisId).TriggerSecurityScanInputBody(triggerSecurityScanInputBody).Execute()
+
+Run the security-scan agent.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	triggerSecurityScanInputBody := *revengai.NewTriggerSecurityScanInputBody() // TriggerSecurityScanInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AgentAPI.V3RunSecurityScan(context.Background(), analysisId).TriggerSecurityScanInputBody(triggerSecurityScanInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentAPI.V3RunSecurityScan``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3RunSecurityScan`: OperationSecurityScanMetadataSecurityScanResult
+	fmt.Fprintf(os.Stdout, "Response from `AgentAPI.V3RunSecurityScan`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3RunSecurityScanRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **triggerSecurityScanInputBody** | [**TriggerSecurityScanInputBody**](TriggerSecurityScanInputBody.md) |  | 
+
+### Return type
+
+[**OperationSecurityScanMetadataSecurityScanResult**](OperationSecurityScanMetadataSecurityScanResult.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

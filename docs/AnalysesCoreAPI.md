@@ -27,12 +27,15 @@ Method | HTTP request | Description
 [**UpdateAnalysis**](AnalysesCoreAPI.md#UpdateAnalysis) | **Patch** /v2/analyses/{analysis_id} | Update Analysis
 [**UpdateAnalysisTags**](AnalysesCoreAPI.md#UpdateAnalysisTags) | **Patch** /v2/analyses/{analysis_id}/tags | Update Analysis Tags
 [**UploadFile**](AnalysesCoreAPI.md#UploadFile) | **Post** /v2/upload | Upload File
+[**V3CreateAnalysis**](AnalysesCoreAPI.md#V3CreateAnalysis) | **Post** /v3/analyses | Create an analysis
 [**V3GetAnalysisAutoUnstripStatus**](AnalysesCoreAPI.md#V3GetAnalysisAutoUnstripStatus) | **Get** /v3/analyses/{analysis_id}/auto-unstrip/status | Get the auto-unstrip status for an analysis.
 [**V3GetAnalysisLogs**](AnalysesCoreAPI.md#V3GetAnalysisLogs) | **Get** /v3/analyses/{analysis_id}/logs | Get the Analysis log
+[**V3GetAnalysisOperation**](AnalysesCoreAPI.md#V3GetAnalysisOperation) | **Get** /v3/operations/analyses/{analysis_id} | Get an Analysis-creation operation
 [**V3GetAnalysisStrings**](AnalysesCoreAPI.md#V3GetAnalysisStrings) | **Get** /v3/analyses/{analysis_id}/functions/strings | List strings for an analysis.
 [**V3GetAnalysisStringsStatus**](AnalysesCoreAPI.md#V3GetAnalysisStringsStatus) | **Get** /v3/analyses/{analysis_id}/functions/strings/status | Get the string-extraction status for an analysis.
 [**V3ListAnalyses**](AnalysesCoreAPI.md#V3ListAnalyses) | **Get** /v3/analyses | List analyses
 [**V3ListExampleAnalyses**](AnalysesCoreAPI.md#V3ListExampleAnalyses) | **Get** /v3/analyses/examples | List example analyses
+[**V3UpgradeAnalysisModel**](AnalysesCoreAPI.md#V3UpgradeAnalysisModel) | **Post** /v3/analyses/{analysis_id}/upgrade-model | Re-analyse on the latest model
 
 
 
@@ -1680,6 +1683,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V3CreateAnalysis
+
+> OperationCreateMetadataCreateResult V3CreateAnalysis(ctx).CreateRequest(createRequest).XRevEngApplication(xRevEngApplication).Execute()
+
+Create an analysis
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	createRequest := *revengai.NewCreateRequest("Filename_example", "Sha256Hash_example") // CreateRequest | 
+	xRevEngApplication := "xRevEngApplication_example" // string | Identifies the calling RevEng application. Recorded on the Analysis log. (optional)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3CreateAnalysis(context.Background()).CreateRequest(createRequest).XRevEngApplication(xRevEngApplication).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3CreateAnalysis``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3CreateAnalysis`: OperationCreateMetadataCreateResult
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3CreateAnalysis`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3CreateAnalysisRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createRequest** | [**CreateRequest**](CreateRequest.md) |  | 
+ **xRevEngApplication** | **string** | Identifies the calling RevEng application. Recorded on the Analysis log. | 
+
+### Return type
+
+[**OperationCreateMetadataCreateResult**](OperationCreateMetadataCreateResult.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V3GetAnalysisAutoUnstripStatus
 
 > AutoUnstripStatusOutputBody V3GetAnalysisAutoUnstripStatus(ctx, analysisId).Execute()
@@ -1805,6 +1876,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetAnalysisLogsOutputBody**](GetAnalysisLogsOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetAnalysisOperation
+
+> OperationCreateMetadataCreateResult V3GetAnalysisOperation(ctx, analysisId).Execute()
+
+Get an Analysis-creation operation
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3GetAnalysisOperation(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetAnalysisOperation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetAnalysisOperation`: OperationCreateMetadataCreateResult
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3GetAnalysisOperation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetAnalysisOperationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OperationCreateMetadataCreateResult**](OperationCreateMetadataCreateResult.md)
 
 ### Authorization
 
@@ -2104,6 +2245,76 @@ Other parameters are passed through a pointer to a apiV3ListExampleAnalysesReque
 ### Return type
 
 [**ListExampleAnalysesOutputBody**](ListExampleAnalysesOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3UpgradeAnalysisModel
+
+> UpgradeAnalysisModelOutputBody V3UpgradeAnalysisModel(ctx, analysisId).Execute()
+
+Re-analyse on the latest model
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3UpgradeAnalysisModel(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3UpgradeAnalysisModel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3UpgradeAnalysisModel`: UpgradeAnalysisModelOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3UpgradeAnalysisModel`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3UpgradeAnalysisModelRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**UpgradeAnalysisModelOutputBody**](UpgradeAnalysisModelOutputBody.md)
 
 ### Authorization
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Enabled** | Pointer to **bool** |  | [optional] [default to false]
+**Enabled** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
