@@ -4867,6 +4867,8 @@ type ApiV3ListAnalysesRequest struct {
 	modelName *[]*string
 	usernames *[]*string
 	sha256Hash *string
+	platform *[]string
+	architecture *[]string
 	pageSize *int64
 	nextPageToken *string
 	orderBy *string
@@ -4901,6 +4903,18 @@ func (r ApiV3ListAnalysesRequest) Usernames(usernames []*string) ApiV3ListAnalys
 
 func (r ApiV3ListAnalysesRequest) Sha256Hash(sha256Hash string) ApiV3ListAnalysesRequest {
 	r.sha256Hash = &sha256Hash
+	return r
+}
+
+// Restrict to binaries running on one of these operating-system platforms. Matches the uploader&#39;s override when they set one, the detected platform otherwise; a binary with neither is never matched. Leave empty for no filter
+func (r ApiV3ListAnalysesRequest) Platform(platform []string) ApiV3ListAnalysesRequest {
+	r.platform = &platform
+	return r
+}
+
+// Restrict to binaries built for one of these instruction-set architectures. Resolved the same way as platform. Leave empty for no filter
+func (r ApiV3ListAnalysesRequest) Architecture(architecture []string) ApiV3ListAnalysesRequest {
+	r.architecture = &architecture
 	return r
 }
 
@@ -5005,6 +5019,12 @@ func (a *AnalysesCoreAPIService) V3ListAnalysesExecute(r ApiV3ListAnalysesReques
 	}
 	if r.sha256Hash != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sha256_hash", r.sha256Hash, "form", "")
+	}
+	if r.platform != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "platform", r.platform, "form", "csv")
+	}
+	if r.architecture != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "architecture", r.architecture, "form", "csv")
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")

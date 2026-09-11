@@ -2117,7 +2117,7 @@ Name | Type | Description  | Notes
 
 ## V3ListAnalyses
 
-> ListAnalysesOutputBody V3ListAnalyses(ctx).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
+> ListAnalysesOutputBody V3ListAnalyses(ctx).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).Platform(platform).Architecture(architecture).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
 
 List analyses
 
@@ -2142,6 +2142,8 @@ func main() {
 	modelName := []*string{"Inner_example"} // []*string |  (optional)
 	usernames := []*string{"Inner_example"} // []*string |  (optional)
 	sha256Hash := "sha256Hash_example" // string |  (optional)
+	platform := []string{"Platform_example"} // []string | Restrict to binaries running on one of these operating-system platforms. Matches the uploader's override when they set one, the detected platform otherwise; a binary with neither is never matched. Leave empty for no filter (optional)
+	architecture := []string{"Architecture_example"} // []string | Restrict to binaries built for one of these instruction-set architectures. Resolved the same way as platform. Leave empty for no filter (optional)
 	pageSize := int64(789) // int64 |  (optional) (default to 20)
 	nextPageToken := "nextPageToken_example" // string | Forward-pagination cursor from a prior response. When set, order_by/order are taken from the token (the sort cannot change mid-pagination). (optional)
 	orderBy := "orderBy_example" // string |  (optional) (default to "created")
@@ -2149,7 +2151,7 @@ func main() {
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.V3ListAnalyses(context.Background()).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.V3ListAnalyses(context.Background()).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).Platform(platform).Architecture(architecture).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3ListAnalyses``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2176,6 +2178,8 @@ Name | Type | Description  | Notes
  **modelName** | **[]string** |  | 
  **usernames** | **[]string** |  | 
  **sha256Hash** | **string** |  | 
+ **platform** | **[]string** | Restrict to binaries running on one of these operating-system platforms. Matches the uploader&#39;s override when they set one, the detected platform otherwise; a binary with neither is never matched. Leave empty for no filter | 
+ **architecture** | **[]string** | Restrict to binaries built for one of these instruction-set architectures. Resolved the same way as platform. Leave empty for no filter | 
  **pageSize** | **int64** |  | [default to 20]
  **nextPageToken** | **string** | Forward-pagination cursor from a prior response. When set, order_by/order are taken from the token (the sort cannot change mid-pagination). | 
  **orderBy** | **string** |  | [default to &quot;created&quot;]
