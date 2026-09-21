@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type OperationCryptoScanMetadataCryptoScanResult struct {
 	Name string `json:"name"`
 	// Result, set only when done is true and the operation succeeded.
 	Response *CryptoScanResult `json:"response,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OperationCryptoScanMetadataCryptoScanResult OperationCryptoScanMetadataCryptoScanResult
@@ -218,6 +218,11 @@ func (o OperationCryptoScanMetadataCryptoScanResult) ToMap() (map[string]interfa
 	if !IsNil(o.Response) {
 		toSerialize["response"] = o.Response
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -246,15 +251,24 @@ func (o *OperationCryptoScanMetadataCryptoScanResult) UnmarshalJSON(data []byte)
 
 	varOperationCryptoScanMetadataCryptoScanResult := _OperationCryptoScanMetadataCryptoScanResult{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOperationCryptoScanMetadataCryptoScanResult)
+	err = json.Unmarshal(data, &varOperationCryptoScanMetadataCryptoScanResult)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OperationCryptoScanMetadataCryptoScanResult(varOperationCryptoScanMetadataCryptoScanResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "done")
+		delete(additionalProperties, "error")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "response")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

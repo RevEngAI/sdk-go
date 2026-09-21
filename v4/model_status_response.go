@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type StatusResponse struct {
 	Status string `json:"status"`
 	// OpenTelemetry trace ID for this run. Use this to look up tool call spans in your trace backend.
 	TraceId *string `json:"trace_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StatusResponse StatusResponse
@@ -142,6 +142,11 @@ func (o StatusResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TraceId) {
 		toSerialize["trace_id"] = o.TraceId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -170,15 +175,22 @@ func (o *StatusResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varStatusResponse := _StatusResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStatusResponse)
+	err = json.Unmarshal(data, &varStatusResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StatusResponse(varStatusResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conversation_uuid")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "trace_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CryptoExplainedFunction struct {
 	FunctionId int64 `json:"function_id"`
 	// Name of the function
 	FunctionName string `json:"function_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CryptoExplainedFunction CryptoExplainedFunction
@@ -135,6 +135,11 @@ func (o CryptoExplainedFunction) ToMap() (map[string]interface{}, error) {
 	toSerialize["description"] = o.Description
 	toSerialize["function_id"] = o.FunctionId
 	toSerialize["function_name"] = o.FunctionName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -164,15 +169,22 @@ func (o *CryptoExplainedFunction) UnmarshalJSON(data []byte) (err error) {
 
 	varCryptoExplainedFunction := _CryptoExplainedFunction{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCryptoExplainedFunction)
+	err = json.Unmarshal(data, &varCryptoExplainedFunction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CryptoExplainedFunction(varCryptoExplainedFunction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

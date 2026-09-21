@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &IndirectCallSitesOutputBody{}
 type IndirectCallSitesOutputBody struct {
 	FunctionId int64 `json:"function_id"`
 	Sites []IndirectCallSite `json:"sites"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IndirectCallSitesOutputBody IndirectCallSitesOutputBody
@@ -109,6 +109,11 @@ func (o IndirectCallSitesOutputBody) ToMap() (map[string]interface{}, error) {
 	if o.Sites != nil {
 		toSerialize["sites"] = o.Sites
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +142,21 @@ func (o *IndirectCallSitesOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varIndirectCallSitesOutputBody := _IndirectCallSitesOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIndirectCallSitesOutputBody)
+	err = json.Unmarshal(data, &varIndirectCallSitesOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = IndirectCallSitesOutputBody(varIndirectCallSitesOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "sites")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

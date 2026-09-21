@@ -27,11 +27,18 @@ type ApiCreateAiDecompilationRequest struct {
 	ApiService *FunctionsAIDecompilationAPIService
 	functionId int64
 	temperature *float64
+	typeSuggestions *bool
 }
 
 // LLM temperature (0.0-1.0). Overrides the server default when set. Omit or set to -1 to use the server default.
 func (r ApiCreateAiDecompilationRequest) Temperature(temperature float64) ApiCreateAiDecompilationRequest {
 	r.temperature = &temperature
+	return r
+}
+
+// Ask the language model to name the suggested types and their members. Set to false to skip the model call; the statically derived layouts are still computed and stored. Cannot re-enable the pass when the server has it off.
+func (r ApiCreateAiDecompilationRequest) TypeSuggestions(typeSuggestions bool) ApiCreateAiDecompilationRequest {
+	r.typeSuggestions = &typeSuggestions
 	return r
 }
 
@@ -93,6 +100,13 @@ func (a *FunctionsAIDecompilationAPIService) CreateAiDecompilationExecute(r ApiC
 		var defaultValue float64 = -1
 		parameterAddToHeaderOrQuery(localVarQueryParams, "temperature", defaultValue, "form", "")
 		r.temperature = &defaultValue
+	}
+	if r.typeSuggestions != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type_suggestions", r.typeSuggestions, "form", "")
+	} else {
+		var defaultValue bool = true
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type_suggestions", defaultValue, "form", "")
+		r.typeSuggestions = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

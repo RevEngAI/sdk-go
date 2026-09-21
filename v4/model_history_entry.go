@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type HistoryEntry struct {
 	SourceFunctionId *int64 `json:"source_function_id,omitempty"`
 	// Source of the rename (USER, SYSTEM, AI_UNSTRIP, etc.)
 	SourceType string `json:"source_type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _HistoryEntry HistoryEntry
@@ -331,6 +331,11 @@ func (o HistoryEntry) ToMap() (map[string]interface{}, error) {
 		toSerialize["source_function_id"] = o.SourceFunctionId
 	}
 	toSerialize["source_type"] = o.SourceType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -363,15 +368,28 @@ func (o *HistoryEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varHistoryEntry := _HistoryEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHistoryEntry)
+	err = json.Unmarshal(data, &varHistoryEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = HistoryEntry(varHistoryEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "change_made_by")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "history_id")
+		delete(additionalProperties, "is_debug")
+		delete(additionalProperties, "mangled_name")
+		delete(additionalProperties, "source_analysis_id")
+		delete(additionalProperties, "source_function_id")
+		delete(additionalProperties, "source_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type BatchFunctionSignatureEntry struct {
 	SourceFunctionId *int64 `json:"source_function_id,omitempty"`
 	// Where this signature came from.
 	SourceType *string `json:"source_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BatchFunctionSignatureEntry BatchFunctionSignatureEntry
@@ -380,6 +380,11 @@ func (o BatchFunctionSignatureEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SourceType) {
 		toSerialize["source_type"] = o.SourceType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -411,15 +416,29 @@ func (o *BatchFunctionSignatureEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varBatchFunctionSignatureEntry := _BatchFunctionSignatureEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBatchFunctionSignatureEntry)
+	err = json.Unmarshal(data, &varBatchFunctionSignatureEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BatchFunctionSignatureEntry(varBatchFunctionSignatureEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "calling_convention")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "has_signature")
+		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "return_data_type_id")
+		delete(additionalProperties, "source_function_id")
+		delete(additionalProperties, "source_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

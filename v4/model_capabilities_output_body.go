@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &CapabilitiesOutputBody{}
 // CapabilitiesOutputBody struct for CapabilitiesOutputBody
 type CapabilitiesOutputBody struct {
 	Capabilities []CapabilityEntry `json:"capabilities"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CapabilitiesOutputBody CapabilitiesOutputBody
@@ -82,6 +82,11 @@ func (o CapabilitiesOutputBody) ToMap() (map[string]interface{}, error) {
 	if o.Capabilities != nil {
 		toSerialize["capabilities"] = o.Capabilities
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -109,15 +114,20 @@ func (o *CapabilitiesOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varCapabilitiesOutputBody := _CapabilitiesOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCapabilitiesOutputBody)
+	err = json.Unmarshal(data, &varCapabilitiesOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CapabilitiesOutputBody(varCapabilitiesOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "capabilities")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type StatusBody struct {
 	LogHistory [][]interface{} `json:"log_history,omitempty"`
 	// Run status. UNINITIALISED means the agent has never been triggered for this analysis.
 	Status string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StatusBody StatusBody
@@ -154,6 +154,11 @@ func (o StatusBody) ToMap() (map[string]interface{}, error) {
 		toSerialize["log_history"] = o.LogHistory
 	}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *StatusBody) UnmarshalJSON(data []byte) (err error) {
 
 	varStatusBody := _StatusBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStatusBody)
+	err = json.Unmarshal(data, &varStatusBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StatusBody(varStatusBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "error_message")
+		delete(additionalProperties, "log_history")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

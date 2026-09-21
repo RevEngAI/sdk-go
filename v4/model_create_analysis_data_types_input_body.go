@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &CreateAnalysisDataTypesInputBody{}
 type CreateAnalysisDataTypesInputBody struct {
 	// The types to create. Each namespace, name and kind must be new to the analysis.
 	DataTypes []CreateDataTypeEntry `json:"data_types"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateAnalysisDataTypesInputBody CreateAnalysisDataTypesInputBody
@@ -83,6 +83,11 @@ func (o CreateAnalysisDataTypesInputBody) ToMap() (map[string]interface{}, error
 	if o.DataTypes != nil {
 		toSerialize["data_types"] = o.DataTypes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -110,15 +115,20 @@ func (o *CreateAnalysisDataTypesInputBody) UnmarshalJSON(data []byte) (err error
 
 	varCreateAnalysisDataTypesInputBody := _CreateAnalysisDataTypesInputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateAnalysisDataTypesInputBody)
+	err = json.Unmarshal(data, &varCreateAnalysisDataTypesInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateAnalysisDataTypesInputBody(varCreateAnalysisDataTypesInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data_types")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

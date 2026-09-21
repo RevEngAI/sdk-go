@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type PatchCommentBody struct {
 	Comment string `json:"comment"`
 	// Line number to set the comment on
 	Line int64 `json:"line"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PatchCommentBody PatchCommentBody
@@ -107,6 +107,11 @@ func (o PatchCommentBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["comment"] = o.Comment
 	toSerialize["line"] = o.Line
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *PatchCommentBody) UnmarshalJSON(data []byte) (err error) {
 
 	varPatchCommentBody := _PatchCommentBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPatchCommentBody)
+	err = json.Unmarshal(data, &varPatchCommentBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PatchCommentBody(varPatchCommentBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "comment")
+		delete(additionalProperties, "line")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

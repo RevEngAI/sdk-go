@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type PriceOutput struct {
 	Interval string `json:"interval"`
 	// Price per billing interval, expressed in the smallest unit of the currency (e.g. cents for USD, pence for GBP).
 	UnitAmount int64 `json:"unit_amount"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PriceOutput PriceOutput
@@ -163,6 +163,11 @@ func (o PriceOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["interval"] = o.Interval
 	toSerialize["unit_amount"] = o.UnitAmount
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -193,15 +198,23 @@ func (o *PriceOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varPriceOutput := _PriceOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPriceOutput)
+	err = json.Unmarshal(data, &varPriceOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PriceOutput(varPriceOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "interval")
+		delete(additionalProperties, "unit_amount")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

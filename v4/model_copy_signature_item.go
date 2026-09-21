@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CopySignatureItem struct {
 	SourceFunctionId int64 `json:"source_function_id"`
 	// Function to copy the signature to. Must belong to the analysis in the URL.
 	TargetFunctionId int64 `json:"target_function_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CopySignatureItem CopySignatureItem
@@ -107,6 +107,11 @@ func (o CopySignatureItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["source_function_id"] = o.SourceFunctionId
 	toSerialize["target_function_id"] = o.TargetFunctionId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *CopySignatureItem) UnmarshalJSON(data []byte) (err error) {
 
 	varCopySignatureItem := _CopySignatureItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCopySignatureItem)
+	err = json.Unmarshal(data, &varCopySignatureItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CopySignatureItem(varCopySignatureItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "source_function_id")
+		delete(additionalProperties, "target_function_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

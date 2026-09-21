@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,9 @@ type Status struct {
 	DocUrl string `json:"doc_url"`
 	// Brief description of the failure.
 	Message string `json:"message"`
+	// Whether retrying the operation might succeed.
+	Retryable bool `json:"retryable"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Status Status
@@ -36,11 +38,12 @@ type _Status Status
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStatus(code string, docUrl string, message string) *Status {
+func NewStatus(code string, docUrl string, message string, retryable bool) *Status {
 	this := Status{}
 	this.Code = code
 	this.DocUrl = docUrl
 	this.Message = message
+	this.Retryable = retryable
 	return &this
 }
 
@@ -156,6 +159,30 @@ func (o *Status) SetMessage(v string) {
 	o.Message = v
 }
 
+// GetRetryable returns the Retryable field value
+func (o *Status) GetRetryable() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Retryable
+}
+
+// GetRetryableOk returns a tuple with the Retryable field value
+// and a boolean to check if the value has been set.
+func (o *Status) GetRetryableOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Retryable, true
+}
+
+// SetRetryable sets field value
+func (o *Status) SetRetryable(v bool) {
+	o.Retryable = v
+}
+
 func (o Status) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -172,6 +199,12 @@ func (o Status) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["doc_url"] = o.DocUrl
 	toSerialize["message"] = o.Message
+	toSerialize["retryable"] = o.Retryable
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -183,6 +216,7 @@ func (o *Status) UnmarshalJSON(data []byte) (err error) {
 		"code",
 		"doc_url",
 		"message",
+		"retryable",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -201,15 +235,24 @@ func (o *Status) UnmarshalJSON(data []byte) (err error) {
 
 	varStatus := _Status{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStatus)
+	err = json.Unmarshal(data, &varStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Status(varStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "detail")
+		delete(additionalProperties, "doc_url")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "retryable")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

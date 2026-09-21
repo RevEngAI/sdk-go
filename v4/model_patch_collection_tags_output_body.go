@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &PatchCollectionTagsOutputBody{}
 // PatchCollectionTagsOutputBody struct for PatchCollectionTagsOutputBody
 type PatchCollectionTagsOutputBody struct {
 	Tags []string `json:"tags"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PatchCollectionTagsOutputBody PatchCollectionTagsOutputBody
@@ -82,6 +82,11 @@ func (o PatchCollectionTagsOutputBody) ToMap() (map[string]interface{}, error) {
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -109,15 +114,20 @@ func (o *PatchCollectionTagsOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varPatchCollectionTagsOutputBody := _PatchCollectionTagsOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPatchCollectionTagsOutputBody)
+	err = json.Unmarshal(data, &varPatchCollectionTagsOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PatchCollectionTagsOutputBody(varPatchCollectionTagsOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tags")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

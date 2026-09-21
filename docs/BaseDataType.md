@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Name** | **string** | Type name. | 
 **Namespace** | **string** | The scope qualifying the type name. Empty for a program-defined type. | 
 **Size** | Pointer to **int64** | Size in bytes, absent when it could not be determined. | [optional] 
+**SourceAnalysisId** | Pointer to **int64** | ID of the analysis the source function belongs to, when it could be resolved. | [optional] 
 **SourceFunctionId** | Pointer to **int64** | The function this type was copied from, when transferred rather than extracted. | [optional] 
 **SourceType** | **string** | Where this type came from. | 
 
@@ -177,6 +178,31 @@ SetSize sets Size field to given value.
 `func (o *BaseDataType) HasSize() bool`
 
 HasSize returns a boolean if a field has been set.
+
+### GetSourceAnalysisId
+
+`func (o *BaseDataType) GetSourceAnalysisId() int64`
+
+GetSourceAnalysisId returns the SourceAnalysisId field if non-nil, zero value otherwise.
+
+### GetSourceAnalysisIdOk
+
+`func (o *BaseDataType) GetSourceAnalysisIdOk() (*int64, bool)`
+
+GetSourceAnalysisIdOk returns a tuple with the SourceAnalysisId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceAnalysisId
+
+`func (o *BaseDataType) SetSourceAnalysisId(v int64)`
+
+SetSourceAnalysisId sets SourceAnalysisId field to given value.
+
+### HasSourceAnalysisId
+
+`func (o *BaseDataType) HasSourceAnalysisId() bool`
+
+HasSourceAnalysisId returns a boolean if a field has been set.
 
 ### GetSourceFunctionId
 

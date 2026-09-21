@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type Artifact struct {
 	Uri *string `json:"uri,omitempty"`
 	WasMapped *bool `json:"was_mapped,omitempty"`
 	YaraHits []string `json:"yara_hits,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Artifact Artifact
@@ -718,6 +718,11 @@ func (o Artifact) ToMap() (map[string]interface{}, error) {
 	if o.YaraHits != nil {
 		toSerialize["yara_hits"] = o.YaraHits
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -750,15 +755,39 @@ func (o *Artifact) UnmarshalJSON(data []byte) (err error) {
 
 	varArtifact := _Artifact{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varArtifact)
+	err = json.Unmarshal(data, &varArtifact)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Artifact(varArtifact)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "direction")
+		delete(additionalProperties, "dump_addr")
+		delete(additionalProperties, "dump_pid")
+		delete(additionalProperties, "file_type")
+		delete(additionalProperties, "host")
+		delete(additionalProperties, "is_pe")
+		delete(additionalProperties, "mime_type")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "network_source")
+		delete(additionalProperties, "original_filename")
+		delete(additionalProperties, "path")
+		delete(additionalProperties, "process_seqid")
+		delete(additionalProperties, "reason")
+		delete(additionalProperties, "response_status")
+		delete(additionalProperties, "sha256")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "was_mapped")
+		delete(additionalProperties, "yara_hits")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

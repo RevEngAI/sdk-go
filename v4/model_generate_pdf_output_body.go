@@ -20,7 +20,10 @@ var _ MappedNullable = &GeneratePDFOutputBody{}
 type GeneratePDFOutputBody struct {
 	// True when an existing PDF generation is in progress for this analysis and user
 	AlreadyRunning *bool `json:"already_running,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GeneratePDFOutputBody GeneratePDFOutputBody
 
 // NewGeneratePDFOutputBody instantiates a new GeneratePDFOutputBody object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o GeneratePDFOutputBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AlreadyRunning) {
 		toSerialize["already_running"] = o.AlreadyRunning
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GeneratePDFOutputBody) UnmarshalJSON(data []byte) (err error) {
+	varGeneratePDFOutputBody := _GeneratePDFOutputBody{}
+
+	err = json.Unmarshal(data, &varGeneratePDFOutputBody)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeneratePDFOutputBody(varGeneratePDFOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "already_running")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeneratePDFOutputBody struct {

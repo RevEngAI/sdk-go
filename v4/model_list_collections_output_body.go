@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type ListCollectionsOutputBody struct {
 	PageNumber int64 `json:"page_number"`
 	PageSize int64 `json:"page_size"`
 	Results []CollectionListItemBody `json:"results"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListCollectionsOutputBody ListCollectionsOutputBody
@@ -163,6 +163,11 @@ func (o ListCollectionsOutputBody) ToMap() (map[string]interface{}, error) {
 	if o.Results != nil {
 		toSerialize["results"] = o.Results
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -193,15 +198,23 @@ func (o *ListCollectionsOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varListCollectionsOutputBody := _ListCollectionsOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListCollectionsOutputBody)
+	err = json.Unmarshal(data, &varListCollectionsOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListCollectionsOutputBody(varListCollectionsOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "has_next_page")
+		delete(additionalProperties, "page_number")
+		delete(additionalProperties, "page_size")
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

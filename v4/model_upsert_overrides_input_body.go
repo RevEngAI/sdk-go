@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &UpsertOverridesInputBody{}
 type UpsertOverridesInputBody struct {
 	// Overrides keyed by placeholder token. An entry whose value is an empty string removes that override.
 	Overrides map[string]Token `json:"overrides"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpsertOverridesInputBody UpsertOverridesInputBody
@@ -79,6 +79,11 @@ func (o UpsertOverridesInputBody) MarshalJSON() ([]byte, error) {
 func (o UpsertOverridesInputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["overrides"] = o.Overrides
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *UpsertOverridesInputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varUpsertOverridesInputBody := _UpsertOverridesInputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpsertOverridesInputBody)
+	err = json.Unmarshal(data, &varUpsertOverridesInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpsertOverridesInputBody(varUpsertOverridesInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "overrides")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

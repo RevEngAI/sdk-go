@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type AnalysisStringItem struct {
 	Functions []AnalysisStringFunction `json:"functions"`
 	Source string `json:"source"`
 	Value string `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisStringItem AnalysisStringItem
@@ -136,6 +136,11 @@ func (o AnalysisStringItem) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["source"] = o.Source
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *AnalysisStringItem) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisStringItem := _AnalysisStringItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisStringItem)
+	err = json.Unmarshal(data, &varAnalysisStringItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisStringItem(varAnalysisStringItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "functions")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

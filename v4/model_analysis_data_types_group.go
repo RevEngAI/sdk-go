@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type AnalysisDataTypesGroup struct {
 	AnalysisId int64 `json:"analysis_id"`
 	// The analysis's types the returned signatures name, ordered by data_type_id.
 	Items []DataTypeEntry `json:"items"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisDataTypesGroup AnalysisDataTypesGroup
@@ -110,6 +110,11 @@ func (o AnalysisDataTypesGroup) ToMap() (map[string]interface{}, error) {
 	if o.Items != nil {
 		toSerialize["items"] = o.Items
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -138,15 +143,21 @@ func (o *AnalysisDataTypesGroup) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisDataTypesGroup := _AnalysisDataTypesGroup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisDataTypesGroup)
+	err = json.Unmarshal(data, &varAnalysisDataTypesGroup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisDataTypesGroup(varAnalysisDataTypesGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "items")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type User struct {
 	Role string `json:"role"`
 	Tier *string `json:"tier,omitempty"`
 	UserId int64 `json:"user_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _User User
@@ -223,6 +223,11 @@ func (o User) ToMap() (map[string]interface{}, error) {
 		toSerialize["tier"] = o.Tier
 	}
 	toSerialize["user_id"] = o.UserId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -254,15 +259,25 @@ func (o *User) UnmarshalJSON(data []byte) (err error) {
 
 	varUser := _User{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUser)
+	err = json.Unmarshal(data, &varUser)
 
 	if err != nil {
 		return err
 	}
 
 	*o = User(varUser)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "profile")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "tier")
+		delete(additionalProperties, "user_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

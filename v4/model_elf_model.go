@@ -36,7 +36,7 @@ type ELFModel struct {
 	Imports ELFImportModel `json:"imports"`
 	ExportedFunctions []string `json:"exported_functions"`
 	DynamicEntries []ElfDynamicEntry `json:"dynamic_entries"`
-	Notes []map[string]interface{} `json:"notes"`
+	Notes []*map[string]interface{} `json:"notes"`
 	DebugInfo map[string]interface{} `json:"debug_info"`
 	VersionInfo map[string]interface{} `json:"version_info"`
 	AdditionalProperties map[string]interface{}
@@ -48,7 +48,7 @@ type _ELFModel ELFModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewELFModel(fileType string, architecture string, endianness string, entryPoint int32, entryPointBytes string, importHash string, exportHash string, buildId string, security ELFSecurity, sections []ELFSection, segments []ELFSegment, symbols []ELFSymbol, dynamicSymbols []ELFSymbol, relocations []ELFRelocation, imports ELFImportModel, exportedFunctions []string, dynamicEntries []ElfDynamicEntry, notes []map[string]interface{}, debugInfo map[string]interface{}, versionInfo map[string]interface{}) *ELFModel {
+func NewELFModel(fileType string, architecture string, endianness string, entryPoint int32, entryPointBytes string, importHash string, exportHash string, buildId string, security ELFSecurity, sections []ELFSection, segments []ELFSegment, symbols []ELFSymbol, dynamicSymbols []ELFSymbol, relocations []ELFRelocation, imports ELFImportModel, exportedFunctions []string, dynamicEntries []ElfDynamicEntry, notes []*map[string]interface{}, debugInfo map[string]interface{}, versionInfo map[string]interface{}) *ELFModel {
 	this := ELFModel{}
 	this.FileType = fileType
 	this.Architecture = architecture
@@ -490,9 +490,9 @@ func (o *ELFModel) SetDynamicEntries(v []ElfDynamicEntry) {
 }
 
 // GetNotes returns the Notes field value
-func (o *ELFModel) GetNotes() []map[string]interface{} {
+func (o *ELFModel) GetNotes() []*map[string]interface{} {
 	if o == nil {
-		var ret []map[string]interface{}
+		var ret []*map[string]interface{}
 		return ret
 	}
 
@@ -501,7 +501,7 @@ func (o *ELFModel) GetNotes() []map[string]interface{} {
 
 // GetNotesOk returns a tuple with the Notes field value
 // and a boolean to check if the value has been set.
-func (o *ELFModel) GetNotesOk() ([]map[string]interface{}, bool) {
+func (o *ELFModel) GetNotesOk() ([]*map[string]interface{}, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -509,7 +509,7 @@ func (o *ELFModel) GetNotesOk() ([]map[string]interface{}, bool) {
 }
 
 // SetNotes sets field value
-func (o *ELFModel) SetNotes(v []map[string]interface{}) {
+func (o *ELFModel) SetNotes(v []*map[string]interface{}) {
 	o.Notes = v
 }
 

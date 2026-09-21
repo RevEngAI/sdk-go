@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CanonicalName struct {
 	CanonicalName string `json:"canonical_name"`
 	// The input function name.
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CanonicalName CanonicalName
@@ -107,6 +107,11 @@ func (o CanonicalName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["canonical_name"] = o.CanonicalName
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *CanonicalName) UnmarshalJSON(data []byte) (err error) {
 
 	varCanonicalName := _CanonicalName{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCanonicalName)
+	err = json.Unmarshal(data, &varCanonicalName)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CanonicalName(varCanonicalName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "canonical_name")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

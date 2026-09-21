@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewELFModel
 
-`func NewELFModel(fileType string, architecture string, endianness string, entryPoint int32, entryPointBytes string, importHash string, exportHash string, buildId string, security ELFSecurity, sections []ELFSection, segments []ELFSegment, symbols []ELFSymbol, dynamicSymbols []ELFSymbol, relocations []ELFRelocation, imports ELFImportModel, exportedFunctions []string, dynamicEntries []ElfDynamicEntry, notes []map[string]interface{}, debugInfo map[string]interface{}, versionInfo map[string]interface{}, ) *ELFModel`
+`func NewELFModel(fileType string, architecture string, endianness string, entryPoint int32, entryPointBytes string, importHash string, exportHash string, buildId string, security ELFSecurity, sections []ELFSection, segments []ELFSegment, symbols []ELFSymbol, dynamicSymbols []ELFSymbol, relocations []ELFRelocation, imports ELFImportModel, exportedFunctions []string, dynamicEntries []ElfDynamicEntry, notes []*map[string]interface{}, debugInfo map[string]interface{}, versionInfo map[string]interface{}, ) *ELFModel`
 
 NewELFModel instantiates a new ELFModel object
 This constructor will assign default values to properties that have it defined,
@@ -386,20 +386,20 @@ SetDynamicEntries sets DynamicEntries field to given value.
 
 ### GetNotes
 
-`func (o *ELFModel) GetNotes() []map[string]interface{}`
+`func (o *ELFModel) GetNotes() []*map[string]interface{}`
 
 GetNotes returns the Notes field if non-nil, zero value otherwise.
 
 ### GetNotesOk
 
-`func (o *ELFModel) GetNotesOk() (*[]map[string]interface{}, bool)`
+`func (o *ELFModel) GetNotesOk() (*[]*map[string]interface{}, bool)`
 
 GetNotesOk returns a tuple with the Notes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotes
 
-`func (o *ELFModel) SetNotes(v []map[string]interface{})`
+`func (o *ELFModel) SetNotes(v []*map[string]interface{})`
 
 SetNotes sets Notes field to given value.
 

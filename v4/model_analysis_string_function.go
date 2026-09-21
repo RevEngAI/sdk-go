@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &AnalysisStringFunction{}
 type AnalysisStringFunction struct {
 	FunctionId NullableInt64 `json:"function_id"`
 	FunctionVaddr int64 `json:"function_vaddr"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisStringFunction AnalysisStringFunction
@@ -107,6 +107,11 @@ func (o AnalysisStringFunction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["function_id"] = o.FunctionId.Get()
 	toSerialize["function_vaddr"] = o.FunctionVaddr
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *AnalysisStringFunction) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisStringFunction := _AnalysisStringFunction{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisStringFunction)
+	err = json.Unmarshal(data, &varAnalysisStringFunction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisStringFunction(varAnalysisStringFunction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_vaddr")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

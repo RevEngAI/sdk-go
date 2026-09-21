@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &GetAnalysisLogsOutputBody{}
 type GetAnalysisLogsOutputBody struct {
 	// Analysis log lines, oldest first
 	Entries []AnalysisLogEntry `json:"entries"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetAnalysisLogsOutputBody GetAnalysisLogsOutputBody
@@ -83,6 +83,11 @@ func (o GetAnalysisLogsOutputBody) ToMap() (map[string]interface{}, error) {
 	if o.Entries != nil {
 		toSerialize["entries"] = o.Entries
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -110,15 +115,20 @@ func (o *GetAnalysisLogsOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varGetAnalysisLogsOutputBody := _GetAnalysisLogsOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetAnalysisLogsOutputBody)
+	err = json.Unmarshal(data, &varGetAnalysisLogsOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetAnalysisLogsOutputBody(varGetAnalysisLogsOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "entries")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

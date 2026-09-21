@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &MutexEntry{}
 type MutexEntry struct {
 	Events []ReportEvent `json:"events,omitempty"`
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MutexEntry MutexEntry
@@ -115,6 +115,11 @@ func (o MutexEntry) ToMap() (map[string]interface{}, error) {
 		toSerialize["events"] = o.Events
 	}
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,15 +147,21 @@ func (o *MutexEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varMutexEntry := _MutexEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMutexEntry)
+	err = json.Unmarshal(data, &varMutexEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MutexEntry(varMutexEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

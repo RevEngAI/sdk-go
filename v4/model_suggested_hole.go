@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &SuggestedHole{}
 type SuggestedHole struct {
 	ByteOffset int64 `json:"byte_offset"`
 	ByteSize int64 `json:"byte_size"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SuggestedHole SuggestedHole
@@ -105,6 +105,11 @@ func (o SuggestedHole) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["byte_offset"] = o.ByteOffset
 	toSerialize["byte_size"] = o.ByteSize
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *SuggestedHole) UnmarshalJSON(data []byte) (err error) {
 
 	varSuggestedHole := _SuggestedHole{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSuggestedHole)
+	err = json.Unmarshal(data, &varSuggestedHole)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SuggestedHole(varSuggestedHole)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "byte_offset")
+		delete(additionalProperties, "byte_size")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

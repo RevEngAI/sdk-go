@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type SecurityScanMetadata struct {
 	LogHistory [][]interface{} `json:"log_history,omitempty"`
 	// Run status. UNINITIALISED means the agent has never been triggered for this analysis.
 	Status string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SecurityScanMetadata SecurityScanMetadata
@@ -117,6 +117,11 @@ func (o SecurityScanMetadata) ToMap() (map[string]interface{}, error) {
 		toSerialize["log_history"] = o.LogHistory
 	}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *SecurityScanMetadata) UnmarshalJSON(data []byte) (err error) {
 
 	varSecurityScanMetadata := _SecurityScanMetadata{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSecurityScanMetadata)
+	err = json.Unmarshal(data, &varSecurityScanMetadata)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SecurityScanMetadata(varSecurityScanMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "log_history")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

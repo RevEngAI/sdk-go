@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type CryptoDirectMatch struct {
 	Library string `json:"library"`
 	// Name or token that matched
 	MatchedName string `json:"matched_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CryptoDirectMatch CryptoDirectMatch
@@ -163,6 +163,11 @@ func (o CryptoDirectMatch) ToMap() (map[string]interface{}, error) {
 	toSerialize["how"] = o.How
 	toSerialize["library"] = o.Library
 	toSerialize["matched_name"] = o.MatchedName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -193,15 +198,23 @@ func (o *CryptoDirectMatch) UnmarshalJSON(data []byte) (err error) {
 
 	varCryptoDirectMatch := _CryptoDirectMatch{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCryptoDirectMatch)
+	err = json.Unmarshal(data, &varCryptoDirectMatch)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CryptoDirectMatch(varCryptoDirectMatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "how")
+		delete(additionalProperties, "library")
+		delete(additionalProperties, "matched_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

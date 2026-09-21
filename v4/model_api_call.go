@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type ApiCall struct {
 	CalledFromRva *string `json:"called_from_rva,omitempty"`
 	FromModule *string `json:"from_module,omitempty"`
 	Method string `json:"method"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ApiCall ApiCall
@@ -186,6 +186,11 @@ func (o ApiCall) ToMap() (map[string]interface{}, error) {
 		toSerialize["from_module"] = o.FromModule
 	}
 	toSerialize["method"] = o.Method
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -213,15 +218,23 @@ func (o *ApiCall) UnmarshalJSON(data []byte) (err error) {
 
 	varApiCall := _ApiCall{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varApiCall)
+	err = json.Unmarshal(data, &varApiCall)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ApiCall(varApiCall)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "called_from")
+		delete(additionalProperties, "called_from_rva")
+		delete(additionalProperties, "from_module")
+		delete(additionalProperties, "method")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

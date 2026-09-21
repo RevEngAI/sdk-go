@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CommentsData struct {
 	InlineComments []InlineComment `json:"inline_comments"`
 	// Task status
 	TaskStatus string `json:"task_status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CommentsData CommentsData
@@ -111,6 +111,11 @@ func (o CommentsData) ToMap() (map[string]interface{}, error) {
 		toSerialize["inline_comments"] = o.InlineComments
 	}
 	toSerialize["task_status"] = o.TaskStatus
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -139,15 +144,21 @@ func (o *CommentsData) UnmarshalJSON(data []byte) (err error) {
 
 	varCommentsData := _CommentsData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCommentsData)
+	err = json.Unmarshal(data, &varCommentsData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CommentsData(varCommentsData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inline_comments")
+		delete(additionalProperties, "task_status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type SuggestedMemberView struct {
 	SuggestedType NullableString `json:"suggested_type"`
 	// Placeholder this member renders as in the tokenised source. Absent for a member no access in this function revealed.
 	Token *string `json:"token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SuggestedMemberView SuggestedMemberView
@@ -350,6 +350,11 @@ func (o SuggestedMemberView) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Token) {
 		toSerialize["token"] = o.Token
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -385,15 +390,29 @@ func (o *SuggestedMemberView) UnmarshalJSON(data []byte) (err error) {
 
 	varSuggestedMemberView := _SuggestedMemberView{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSuggestedMemberView)
+	err = json.Unmarshal(data, &varSuggestedMemberView)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SuggestedMemberView(varSuggestedMemberView)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bit_offset")
+		delete(additionalProperties, "byte_offset")
+		delete(additionalProperties, "byte_size")
+		delete(additionalProperties, "confidence")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "origin")
+		delete(additionalProperties, "packed")
+		delete(additionalProperties, "placement")
+		delete(additionalProperties, "suggested_type")
+		delete(additionalProperties, "token")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

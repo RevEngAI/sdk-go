@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type WorkflowProgress struct {
 	SubStepDone *int64 `json:"sub_step_done,omitempty"`
 	// Items the current phase will process, 0 when unknown
 	SubStepTotal *int64 `json:"sub_step_total,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WorkflowProgress WorkflowProgress
@@ -362,6 +362,11 @@ func (o WorkflowProgress) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SubStepTotal) {
 		toSerialize["sub_step_total"] = o.SubStepTotal
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -395,15 +400,29 @@ func (o *WorkflowProgress) UnmarshalJSON(data []byte) (err error) {
 
 	varWorkflowProgress := _WorkflowProgress{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWorkflowProgress)
+	err = json.Unmarshal(data, &varWorkflowProgress)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WorkflowProgress(varWorkflowProgress)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "messages")
+		delete(additionalProperties, "percent")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "step")
+		delete(additionalProperties, "step_index")
+		delete(additionalProperties, "step_share")
+		delete(additionalProperties, "steps_total")
+		delete(additionalProperties, "sub_step")
+		delete(additionalProperties, "sub_step_done")
+		delete(additionalProperties, "sub_step_total")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

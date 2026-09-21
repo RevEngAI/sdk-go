@@ -72,28 +72,60 @@ All URIs are relative to *https://api.reveng.ai*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AgentAPI* | [**CheckCapabilitiesTaskStatusV2AnalysesAnalysisIdAgentCapabilitiesStatusGet**](docs/AgentAPI.md#checkcapabilitiestaskstatusv2analysesanalysisidagentcapabilitiesstatusget) | **Get** /v2/analyses/{analysis_id}/agent/capabilities/status | Check the status of a capabilities analysis workflow
+*AgentAPI* | [**CheckProtocolsTaskStatusV2AnalysesAnalysisIdAgentProtocolsStatusGet**](docs/AgentAPI.md#checkprotocolstaskstatusv2analysesanalysisidagentprotocolsstatusget) | **Get** /v2/analyses/{analysis_id}/agent/protocols/status | Check the status of a protocols discovery workflow
 *AgentAPI* | [**CheckRemediationTaskStatusV2AnalysesAnalysisIdAgentRemediationStatusGet**](docs/AgentAPI.md#checkremediationtaskstatusv2analysesanalysisidagentremediationstatusget) | **Get** /v2/analyses/{analysis_id}/agent/remediation/status | Check the status of a remediation analysis workflow
 *AgentAPI* | [**CheckReportAnalysisTaskStatusV2AnalysesAnalysisIdAgentReportAnalysisStatusGet**](docs/AgentAPI.md#checkreportanalysistaskstatusv2analysesanalysisidagentreportanalysisstatusget) | **Get** /v2/analyses/{analysis_id}/agent/report-analysis/status | Check the status of a report analysis workflow
+*AgentAPI* | [**CheckSecretsTaskStatusV2AnalysesAnalysisIdAgentSecretsStatusGet**](docs/AgentAPI.md#checksecretstaskstatusv2analysesanalysisidagentsecretsstatusget) | **Get** /v2/analyses/{analysis_id}/agent/secrets/status | Check the status of a secrets discovery workflow
 *AgentAPI* | [**CheckTriageTaskStatusV2AnalysesAnalysisIdAgentTriageStatusGet**](docs/AgentAPI.md#checktriagetaskstatusv2analysesanalysisidagenttriagestatusget) | **Get** /v2/analyses/{analysis_id}/agent/triage/status | Check the status of a triage analysis workflow
 *AgentAPI* | [**CreateCapabilitiesTaskV2AnalysesAnalysisIdAgentCapabilitiesPost**](docs/AgentAPI.md#createcapabilitiestaskv2analysesanalysisidagentcapabilitiespost) | **Post** /v2/analyses/{analysis_id}/agent/capabilities | Queues a capabilities analysis workflow process
+*AgentAPI* | [**CreateProtocolsTaskV2AnalysesAnalysisIdAgentProtocolsPost**](docs/AgentAPI.md#createprotocolstaskv2analysesanalysisidagentprotocolspost) | **Post** /v2/analyses/{analysis_id}/agent/protocols | Queues a protocols discovery workflow process
 *AgentAPI* | [**CreateRemediationTaskV2AnalysesAnalysisIdAgentRemediationPost**](docs/AgentAPI.md#createremediationtaskv2analysesanalysisidagentremediationpost) | **Post** /v2/analyses/{analysis_id}/agent/remediation | Queues a remediation analysis workflow process
 *AgentAPI* | [**CreateReportAnalysisTaskV2AnalysesAnalysisIdAgentReportAnalysisPost**](docs/AgentAPI.md#createreportanalysistaskv2analysesanalysisidagentreportanalysispost) | **Post** /v2/analyses/{analysis_id}/agent/report-analysis | Queues a combined report analysis workflow process
+*AgentAPI* | [**CreateSecretsTaskV2AnalysesAnalysisIdAgentSecretsPost**](docs/AgentAPI.md#createsecretstaskv2analysesanalysisidagentsecretspost) | **Post** /v2/analyses/{analysis_id}/agent/secrets | Queues a secrets discovery workflow process
 *AgentAPI* | [**CreateTriageTaskV2AnalysesAnalysisIdAgentTriagePost**](docs/AgentAPI.md#createtriagetaskv2analysesanalysisidagenttriagepost) | **Post** /v2/analyses/{analysis_id}/agent/triage | Queues a triage analysis workflow process
 *AgentAPI* | [**GetCapabilitiesResultV2AnalysesAnalysisIdAgentCapabilitiesGet**](docs/AgentAPI.md#getcapabilitiesresultv2analysesanalysisidagentcapabilitiesget) | **Get** /v2/analyses/{analysis_id}/agent/capabilities | Get Capabilities Result
+*AgentAPI* | [**GetProtocolsResultV2AnalysesAnalysisIdAgentProtocolsGet**](docs/AgentAPI.md#getprotocolsresultv2analysesanalysisidagentprotocolsget) | **Get** /v2/analyses/{analysis_id}/agent/protocols | Get Protocols Result
 *AgentAPI* | [**GetRemediationResultV2AnalysesAnalysisIdAgentRemediationGet**](docs/AgentAPI.md#getremediationresultv2analysesanalysisidagentremediationget) | **Get** /v2/analyses/{analysis_id}/agent/remediation | Get Remediation Result
 *AgentAPI* | [**GetReportAnalysisResultV2AnalysesAnalysisIdAgentReportAnalysisGet**](docs/AgentAPI.md#getreportanalysisresultv2analysesanalysisidagentreportanalysisget) | **Get** /v2/analyses/{analysis_id}/agent/report-analysis | Get Report Analysis Result
+*AgentAPI* | [**GetSecretsResultV2AnalysesAnalysisIdAgentSecretsGet**](docs/AgentAPI.md#getsecretsresultv2analysesanalysisidagentsecretsget) | **Get** /v2/analyses/{analysis_id}/agent/secrets | Get Secrets Result
 *AgentAPI* | [**GetTriageResultV2AnalysesAnalysisIdAgentTriageGet**](docs/AgentAPI.md#gettriageresultv2analysesanalysisidagenttriageget) | **Get** /v2/analyses/{analysis_id}/agent/triage | Get Triage Result
 *AgentAPI* | [**V3CancelRenameUnnamedFunctions**](docs/AgentAPI.md#v3cancelrenameunnamedfunctions) | **Post** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions/cancel | Cancel the rename-unnamed-functions agent.
 *AgentAPI* | [**V3CancelSecurityScanOperation**](docs/AgentAPI.md#v3cancelsecurityscanoperation) | **Post** /v3/operations/security-scan/{analysis_id}:cancel | Cancel a security-scan operation.
+*AgentAPI* | [**V3GetBinaryAgentFeedback**](docs/AgentAPI.md#v3getbinaryagentfeedback) | **Get** /v3/analyses/{analysis_id}/agents/{agent}/feedback | Get the caller&#39;s feedback on an agent&#39;s output.
+*AgentAPI* | [**V3GetCapabilitiesOperation**](docs/AgentAPI.md#v3getcapabilitiesoperation) | **Get** /v3/operations/capabilities/{analysis_id} | Get a capabilities operation.
 *AgentAPI* | [**V3GetCryptoExplainOperation**](docs/AgentAPI.md#v3getcryptoexplainoperation) | **Get** /v3/operations/crypto-explain/{function_id} | Get a crypto-explain operation.
 *AgentAPI* | [**V3GetCryptoScanOperation**](docs/AgentAPI.md#v3getcryptoscanoperation) | **Get** /v3/operations/crypto-scan/{analysis_id} | Get a crypto-scan operation.
+*AgentAPI* | [**V3GetExecutionExplainOperation**](docs/AgentAPI.md#v3getexecutionexplainoperation) | **Get** /v3/operations/execution-explain/{function_id} | Get an execution-explain operation.
+*AgentAPI* | [**V3GetExecutionScanOperation**](docs/AgentAPI.md#v3getexecutionscanoperation) | **Get** /v3/operations/execution-scan/{analysis_id} | Get an execution-scan operation.
+*AgentAPI* | [**V3GetFilesystemAnalyseOperation**](docs/AgentAPI.md#v3getfilesystemanalyseoperation) | **Get** /v3/operations/filesystem-analyse/{function_id} | Get a filesystem-analyse operation.
+*AgentAPI* | [**V3GetFilesystemScanOperation**](docs/AgentAPI.md#v3getfilesystemscanoperation) | **Get** /v3/operations/filesystem-scan/{analysis_id} | Get a filesystem-scan operation.
+*AgentAPI* | [**V3GetNetworkingExplainOperation**](docs/AgentAPI.md#v3getnetworkingexplainoperation) | **Get** /v3/operations/networking-explain/{function_id} | Get a networking-explain operation.
+*AgentAPI* | [**V3GetNetworkingScanOperation**](docs/AgentAPI.md#v3getnetworkingscanoperation) | **Get** /v3/operations/networking-scan/{analysis_id} | Get a networking-scan operation.
+*AgentAPI* | [**V3GetProtocolsOperation**](docs/AgentAPI.md#v3getprotocolsoperation) | **Get** /v3/operations/protocols/{analysis_id} | Get a protocols operation.
+*AgentAPI* | [**V3GetRemediationOperation**](docs/AgentAPI.md#v3getremediationoperation) | **Get** /v3/operations/remediation/{analysis_id} | Get a remediation operation.
 *AgentAPI* | [**V3GetRenameUnnamedFunctionsResult**](docs/AgentAPI.md#v3getrenameunnamedfunctionsresult) | **Get** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions | Get rename-unnamed-functions agent result.
 *AgentAPI* | [**V3GetRenameUnnamedFunctionsStatus**](docs/AgentAPI.md#v3getrenameunnamedfunctionsstatus) | **Get** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions/status | Get rename-unnamed-functions agent status.
+*AgentAPI* | [**V3GetReportAnalysisOperation**](docs/AgentAPI.md#v3getreportanalysisoperation) | **Get** /v3/operations/report-analysis/{analysis_id} | Get a report-analysis operation.
+*AgentAPI* | [**V3GetSecretsOperation**](docs/AgentAPI.md#v3getsecretsoperation) | **Get** /v3/operations/secrets/{analysis_id} | Get a secrets operation.
 *AgentAPI* | [**V3GetSecurityScanOperation**](docs/AgentAPI.md#v3getsecurityscanoperation) | **Get** /v3/operations/security-scan/{analysis_id} | Get a security-scan operation.
+*AgentAPI* | [**V3GetTriageOperation**](docs/AgentAPI.md#v3gettriageoperation) | **Get** /v3/operations/triage/{analysis_id} | Get a triage operation.
+*AgentAPI* | [**V3RunCapabilities**](docs/AgentAPI.md#v3runcapabilities) | **Post** /v3/analyses/{analysis_id}/capabilities:run | Run the capabilities agent.
 *AgentAPI* | [**V3RunCryptoExplain**](docs/AgentAPI.md#v3runcryptoexplain) | **Post** /v3/functions/{function_id}/crypto-explain:run | Run the crypto-explain agent.
 *AgentAPI* | [**V3RunCryptoScan**](docs/AgentAPI.md#v3runcryptoscan) | **Post** /v3/analyses/{analysis_id}/crypto-scan:run | Run the crypto-scan agent.
+*AgentAPI* | [**V3RunExecutionExplain**](docs/AgentAPI.md#v3runexecutionexplain) | **Post** /v3/functions/{function_id}/execution-explain:run | Run the execution-explain agent.
+*AgentAPI* | [**V3RunExecutionScan**](docs/AgentAPI.md#v3runexecutionscan) | **Post** /v3/analyses/{analysis_id}/execution-scan:run | Run the execution-scan agent.
+*AgentAPI* | [**V3RunFilesystemAnalyse**](docs/AgentAPI.md#v3runfilesystemanalyse) | **Post** /v3/functions/{function_id}/filesystem-analyse:run | Run the filesystem-analyse agent.
+*AgentAPI* | [**V3RunFilesystemScan**](docs/AgentAPI.md#v3runfilesystemscan) | **Post** /v3/analyses/{analysis_id}/filesystem-scan:run | Run the filesystem-scan agent.
+*AgentAPI* | [**V3RunNetworkingExplain**](docs/AgentAPI.md#v3runnetworkingexplain) | **Post** /v3/functions/{function_id}/networking-explain:run | Run the networking-explain agent.
+*AgentAPI* | [**V3RunNetworkingScan**](docs/AgentAPI.md#v3runnetworkingscan) | **Post** /v3/analyses/{analysis_id}/networking-scan:run | Run the networking-scan agent.
+*AgentAPI* | [**V3RunProtocols**](docs/AgentAPI.md#v3runprotocols) | **Post** /v3/analyses/{analysis_id}/protocols:run | Run the protocols agent.
+*AgentAPI* | [**V3RunRemediation**](docs/AgentAPI.md#v3runremediation) | **Post** /v3/analyses/{analysis_id}/remediation:run | Run the remediation agent.
+*AgentAPI* | [**V3RunReportAnalysis**](docs/AgentAPI.md#v3runreportanalysis) | **Post** /v3/analyses/{analysis_id}/report-analysis:run | Run the report-analysis agent.
+*AgentAPI* | [**V3RunSecrets**](docs/AgentAPI.md#v3runsecrets) | **Post** /v3/analyses/{analysis_id}/secrets:run | Run the secrets agent.
 *AgentAPI* | [**V3RunSecurityScan**](docs/AgentAPI.md#v3runsecurityscan) | **Post** /v3/analyses/{analysis_id}/security-scan:run | Run the security-scan agent.
+*AgentAPI* | [**V3RunTriage**](docs/AgentAPI.md#v3runtriage) | **Post** /v3/analyses/{analysis_id}/triage:run | Run the triage agent.
 *AgentAPI* | [**V3TriggerRenameUnnamedFunctions**](docs/AgentAPI.md#v3triggerrenameunnamedfunctions) | **Post** /v3/analyses/{analysis_id}/agents/rename-unnamed-functions | Run the rename-unnamed-functions agent.
+*AgentAPI* | [**V3UpsertBinaryAgentFeedback**](docs/AgentAPI.md#v3upsertbinaryagentfeedback) | **Put** /v3/analyses/{analysis_id}/agents/{agent}/feedback | Record feedback on an agent&#39;s output.
 *AnalysesBulkActionsAPI* | [**BulkAddAnalysisTags**](docs/AnalysesBulkActionsAPI.md#bulkaddanalysistags) | **Patch** /v2/analyses/tags/add | Bulk Add Analysis Tags
 *AnalysesBulkActionsAPI* | [**BulkDeleteAnalyses**](docs/AnalysesBulkActionsAPI.md#bulkdeleteanalyses) | **Patch** /v2/analyses/delete | Bulk Delete Analyses
 *AnalysesCommentsAPI* | [**CreateAnalysisComment**](docs/AnalysesCommentsAPI.md#createanalysiscomment) | **Post** /v2/analyses/{analysis_id}/comments | Create a comment for this analysis
@@ -125,6 +157,7 @@ Class | Method | HTTP request | Description
 *AnalysesCoreAPI* | [**UploadFile**](docs/AnalysesCoreAPI.md#uploadfile) | **Post** /v2/upload | Upload File
 *AnalysesCoreAPI* | [**V3CreateAnalysis**](docs/AnalysesCoreAPI.md#v3createanalysis) | **Post** /v3/analyses | Create an analysis
 *AnalysesCoreAPI* | [**V3GetAnalysisAutoUnstripStatus**](docs/AnalysesCoreAPI.md#v3getanalysisautounstripstatus) | **Get** /v3/analyses/{analysis_id}/auto-unstrip/status | Get the auto-unstrip status for an analysis.
+*AnalysesCoreAPI* | [**V3GetAnalysisFunctionsProgress**](docs/AnalysesCoreAPI.md#v3getanalysisfunctionsprogress) | **Get** /v3/analyses/{analysis_id}/progress/functions | Get function embedding progress for an analysis.
 *AnalysesCoreAPI* | [**V3GetAnalysisLogs**](docs/AnalysesCoreAPI.md#v3getanalysislogs) | **Get** /v3/analyses/{analysis_id}/logs | Get the Analysis log
 *AnalysesCoreAPI* | [**V3GetAnalysisOperation**](docs/AnalysesCoreAPI.md#v3getanalysisoperation) | **Get** /v3/operations/analyses/{analysis_id} | Get an Analysis-creation operation
 *AnalysesCoreAPI* | [**V3GetAnalysisStrings**](docs/AnalysesCoreAPI.md#v3getanalysisstrings) | **Get** /v3/analyses/{analysis_id}/functions/strings | List strings for an analysis.
@@ -150,6 +183,10 @@ Class | Method | HTTP request | Description
 *BinariesAPI* | [**GetBinaryExternals**](docs/BinariesAPI.md#getbinaryexternals) | **Get** /v2/binaries/{binary_id}/externals | Gets the external details of a binary
 *BinariesAPI* | [**GetBinaryRelatedStatus**](docs/BinariesAPI.md#getbinaryrelatedstatus) | **Get** /v2/binaries/{binary_id}/related/status | Gets the status of the unpack binary task for a binary
 *BinariesAPI* | [**GetRelatedBinaries**](docs/BinariesAPI.md#getrelatedbinaries) | **Get** /v2/binaries/{binary_id}/related | Gets the related binaries of a binary.
+*BinariesAPI* | [**V3GetBinaryDieInfo**](docs/BinariesAPI.md#v3getbinarydieinfo) | **Get** /v3/binaries/{binary_id}/die-info | Get Detect It Easy matches for a binary.
+*BinariesAPI* | [**V3GetBinaryRelated**](docs/BinariesAPI.md#v3getbinaryrelated) | **Get** /v3/binaries/{binary_id}/related | Get the binaries related to this one by unpacking.
+*BinariesAPI* | [**V3GetBinaryRelatedStatus**](docs/BinariesAPI.md#v3getbinaryrelatedstatus) | **Get** /v3/binaries/{binary_id}/related/status | Get the archive-unpacking status for a binary.
+*BinariesAPI* | [**V3UploadFile**](docs/BinariesAPI.md#v3uploadfile) | **Post** /v3/upload | Upload a file.
 *CollectionsAPI* | [**CreateCollection**](docs/CollectionsAPI.md#createcollection) | **Post** /v2/collections | Creates new collection information
 *CollectionsAPI* | [**DeleteCollection**](docs/CollectionsAPI.md#deletecollection) | **Delete** /v2/collections/{collection_id} | Deletes a collection
 *CollectionsAPI* | [**GetCollection**](docs/CollectionsAPI.md#getcollection) | **Get** /v2/collections/{collection_id} | Returns a collection
@@ -167,6 +204,8 @@ Class | Method | HTTP request | Description
 *CollectionsAPI* | [**V3PatchCollectionTags**](docs/CollectionsAPI.md#v3patchcollectiontags) | **Patch** /v3/collections/{collection_id}/tags | Replace the tags on a collection.
 *CollectionsAPI* | [**V3RemoveCollectionBinaries**](docs/CollectionsAPI.md#v3removecollectionbinaries) | **Delete** /v3/collections/{collection_id}/binaries | Remove binaries from a collection.
 *ConfigAPI* | [**GetConfig**](docs/ConfigAPI.md#getconfig) | **Get** /v2/config | Get Config
+*ConfigAPI* | [**V3GetConfig**](docs/ConfigAPI.md#v3getconfig) | **Get** /v3/config | Get client configuration.
+*ConfigAPI* | [**V3GetModels**](docs/ConfigAPI.md#v3getmodels) | **Get** /v3/models | Get the models available for analysis.
 *ConversationsAPI* | [**CancelRun**](docs/ConversationsAPI.md#cancelrun) | **Post** /v2/conversations/{id}/cancel | Cancel an active run
 *ConversationsAPI* | [**ConfirmTool**](docs/ConversationsAPI.md#confirmtool) | **Post** /v2/conversations/{id}/confirm | Approve or reject a pending tool confirmation
 *ConversationsAPI* | [**CreateConversation**](docs/ConversationsAPI.md#createconversation) | **Post** /v2/conversations | Create a new conversation
@@ -297,6 +336,7 @@ Class | Method | HTTP request | Description
  - [AnalysisUpdateTagsRequest](docs/AnalysisUpdateTagsRequest.md)
  - [AnalysisUpdateTagsResponse](docs/AnalysisUpdateTagsResponse.md)
  - [ApiCall](docs/ApiCall.md)
+ - [ApiCombinationEvidence](docs/ApiCombinationEvidence.md)
  - [AppApiRestV2AgentSchemaCapability](docs/AppApiRestV2AgentSchemaCapability.md)
  - [AppApiRestV2AnalysesEnumsOrderBy](docs/AppApiRestV2AnalysesEnumsOrderBy.md)
  - [AppApiRestV2CollectionsEnumsOrderBy](docs/AppApiRestV2CollectionsEnumsOrderBy.md)
@@ -359,10 +399,12 @@ Class | Method | HTTP request | Description
  - [BaseResponseLogs](docs/BaseResponseLogs.md)
  - [BaseResponseModelsResponse](docs/BaseResponseModelsResponse.md)
  - [BaseResponseParams](docs/BaseResponseParams.md)
+ - [BaseResponseProtocolsAgentResponse](docs/BaseResponseProtocolsAgentResponse.md)
  - [BaseResponseQueuedWorkflowTaskResponse](docs/BaseResponseQueuedWorkflowTaskResponse.md)
  - [BaseResponseRecent](docs/BaseResponseRecent.md)
  - [BaseResponseRemediationAgentResponse](docs/BaseResponseRemediationAgentResponse.md)
  - [BaseResponseReportAnalysisResponse](docs/BaseResponseReportAnalysisResponse.md)
+ - [BaseResponseSecretsAgentResponse](docs/BaseResponseSecretsAgentResponse.md)
  - [BaseResponseStatus](docs/BaseResponseStatus.md)
  - [BaseResponseStr](docs/BaseResponseStr.md)
  - [BaseResponseTagSearchResponse](docs/BaseResponseTagSearchResponse.md)
@@ -394,6 +436,9 @@ Class | Method | HTTP request | Description
  - [BulkCreateUserResult](docs/BulkCreateUserResult.md)
  - [BulkCreateUsersOutputBody](docs/BulkCreateUsersOutputBody.md)
  - [BulkDeleteAnalysesRequest](docs/BulkDeleteAnalysesRequest.md)
+ - [BytesConstant](docs/BytesConstant.md)
+ - [CallChain](docs/CallChain.md)
+ - [CallChainEvidence](docs/CallChainEvidence.md)
  - [CallEdge](docs/CallEdge.md)
  - [CallEdgesOutputBody](docs/CallEdgesOutputBody.md)
  - [CalleeFunctionInfo](docs/CalleeFunctionInfo.md)
@@ -405,6 +450,8 @@ Class | Method | HTTP request | Description
  - [Capabilities](docs/Capabilities.md)
  - [CapabilitiesAgentResponse](docs/CapabilitiesAgentResponse.md)
  - [CapabilitiesOutputBody](docs/CapabilitiesOutputBody.md)
+ - [CapabilitiesResult](docs/CapabilitiesResult.md)
+ - [Capability](docs/Capability.md)
  - [CapabilityEntry](docs/CapabilityEntry.md)
  - [ChildBinariesResponse](docs/ChildBinariesResponse.md)
  - [CodeSignatureModel](docs/CodeSignatureModel.md)
@@ -484,8 +531,11 @@ Class | Method | HTTP request | Description
  - [DecompFinishedEvent](docs/DecompFinishedEvent.md)
  - [DecompilationCommentContext](docs/DecompilationCommentContext.md)
  - [DecompilationData](docs/DecompilationData.md)
+ - [DecompilerSummary](docs/DecompilerSummary.md)
+ - [DecompilerSummaryEvidence](docs/DecompilerSummaryEvidence.md)
  - [DieMatch](docs/DieMatch.md)
  - [DisassemblyOutputBody](docs/DisassemblyOutputBody.md)
+ - [Display](docs/Display.md)
  - [DnsQuery](docs/DnsQuery.md)
  - [DrakvufFileMetadata](docs/DrakvufFileMetadata.md)
  - [DynamicExecutionStatus](docs/DynamicExecutionStatus.md)
@@ -498,6 +548,7 @@ Class | Method | HTTP request | Description
  - [ELFSegment](docs/ELFSegment.md)
  - [ELFSymbol](docs/ELFSymbol.md)
  - [ElfDynamicEntry](docs/ElfDynamicEntry.md)
+ - [Endianness](docs/Endianness.md)
  - [EntrypointModel](docs/EntrypointModel.md)
  - [EnumDataType](docs/EnumDataType.md)
  - [EnumDefinition](docs/EnumDefinition.md)
@@ -532,17 +583,38 @@ Class | Method | HTTP request | Description
  - [EventTOOLCONFIRMATIONREQUIRED](docs/EventTOOLCONFIRMATIONREQUIRED.md)
  - [EventTypesSuggested](docs/EventTypesSuggested.md)
  - [EventWarning](docs/EventWarning.md)
+ - [EvidenceEffect](docs/EvidenceEffect.md)
+ - [EvidenceInner](docs/EvidenceInner.md)
+ - [EvidenceStrength](docs/EvidenceStrength.md)
  - [Example](docs/Example.md)
+ - [ExecutionCall](docs/ExecutionCall.md)
+ - [ExecutionDirectMatch](docs/ExecutionDirectMatch.md)
+ - [ExecutionExplainMetadata](docs/ExecutionExplainMetadata.md)
+ - [ExecutionExplainResult](docs/ExecutionExplainResult.md)
+ - [ExecutionExplainedFunction](docs/ExecutionExplainedFunction.md)
+ - [ExecutionFinding](docs/ExecutionFinding.md)
+ - [ExecutionScanMetadata](docs/ExecutionScanMetadata.md)
+ - [ExecutionScanResult](docs/ExecutionScanResult.md)
  - [ExportModel](docs/ExportModel.md)
  - [ExternalResponse](docs/ExternalResponse.md)
  - [ExtractedBinary](docs/ExtractedBinary.md)
  - [ExtractedURL](docs/ExtractedURL.md)
  - [ExtractionFailure](docs/ExtractionFailure.md)
+ - [FeedbackOutputBody](docs/FeedbackOutputBody.md)
  - [FileActivityEntry](docs/FileActivityEntry.md)
  - [FileFormat](docs/FileFormat.md)
  - [FileHashes](docs/FileHashes.md)
  - [FileMetadata](docs/FileMetadata.md)
+ - [FilesystemAnalyseMetadata](docs/FilesystemAnalyseMetadata.md)
+ - [FilesystemAnalyseResult](docs/FilesystemAnalyseResult.md)
+ - [FilesystemCall](docs/FilesystemCall.md)
+ - [FilesystemDirectMatch](docs/FilesystemDirectMatch.md)
+ - [FilesystemExplainedFunction](docs/FilesystemExplainedFunction.md)
+ - [FilesystemFinding](docs/FilesystemFinding.md)
+ - [FilesystemScanMetadata](docs/FilesystemScanMetadata.md)
+ - [FilesystemScanResult](docs/FilesystemScanResult.md)
  - [Filters](docs/Filters.md)
+ - [Finding](docs/Finding.md)
  - [FormFile](docs/FormFile.md)
  - [FunctionBlockDestinationResponse](docs/FunctionBlockDestinationResponse.md)
  - [FunctionBlockResponse](docs/FunctionBlockResponse.md)
@@ -565,6 +637,8 @@ Class | Method | HTTP request | Description
  - [FunctionSignatureBody](docs/FunctionSignatureBody.md)
  - [FunctionSignatureEntry](docs/FunctionSignatureEntry.md)
  - [FunctionSignatureVersion](docs/FunctionSignatureVersion.md)
+ - [FunctionSimilarity](docs/FunctionSimilarity.md)
+ - [FunctionSimilarityEvidence](docs/FunctionSimilarityEvidence.md)
  - [FunctionSourceType](docs/FunctionSourceType.md)
  - [FunctionString](docs/FunctionString.md)
  - [FunctionStringItem](docs/FunctionStringItem.md)
@@ -572,6 +646,7 @@ Class | Method | HTTP request | Description
  - [FunctionTypeDefinition](docs/FunctionTypeDefinition.md)
  - [FunctionsDetailResponse](docs/FunctionsDetailResponse.md)
  - [FunctionsListRename](docs/FunctionsListRename.md)
+ - [FunctionsProgressOutputBody](docs/FunctionsProgressOutputBody.md)
  - [GeneratePDFOutputBody](docs/GeneratePDFOutputBody.md)
  - [GetAdditionalDetailsOutputBody](docs/GetAdditionalDetailsOutputBody.md)
  - [GetAdditionalDetailsStatusOutputBody](docs/GetAdditionalDetailsStatusOutputBody.md)
@@ -579,14 +654,20 @@ Class | Method | HTTP request | Description
  - [GetAnalysisLogsOutputBody](docs/GetAnalysisLogsOutputBody.md)
  - [GetAnalysisStringsStatusOutputBody](docs/GetAnalysisStringsStatusOutputBody.md)
  - [GetCollectionOutputBody](docs/GetCollectionOutputBody.md)
+ - [GetConfigOutputBody](docs/GetConfigOutputBody.md)
  - [GetDataTypeHistoryBody](docs/GetDataTypeHistoryBody.md)
+ - [GetDieInfoOutputBody](docs/GetDieInfoOutputBody.md)
  - [GetFunctionSignatureHistoryBody](docs/GetFunctionSignatureHistoryBody.md)
  - [GetMatchesOutputBody](docs/GetMatchesOutputBody.md)
  - [GetMatchesStatusOutputBody](docs/GetMatchesStatusOutputBody.md)
+ - [GetModelsOutputBody](docs/GetModelsOutputBody.md)
  - [GetProductsOutputBody](docs/GetProductsOutputBody.md)
  - [GetPublicUserResponse](docs/GetPublicUserResponse.md)
+ - [GetRelatedBinariesOutputBody](docs/GetRelatedBinariesOutputBody.md)
+ - [GetRelatedStatusOutputBody](docs/GetRelatedStatusOutputBody.md)
  - [GetSubscriptionOutputBody](docs/GetSubscriptionOutputBody.md)
  - [GetTokensResponse](docs/GetTokensResponse.md)
+ - [HardcodedSecretEvidence](docs/HardcodedSecretEvidence.md)
  - [HistoryActor](docs/HistoryActor.md)
  - [HistoryEntry](docs/HistoryEntry.md)
  - [HttpRequest](docs/HttpRequest.md)
@@ -594,6 +675,9 @@ Class | Method | HTTP request | Description
  - [ISA](docs/ISA.md)
  - [IconModel](docs/IconModel.md)
  - [ImportModel](docs/ImportModel.md)
+ - [ImportedApi](docs/ImportedApi.md)
+ - [ImportedApiCall](docs/ImportedApiCall.md)
+ - [ImportedApiCallEvidence](docs/ImportedApiCallEvidence.md)
  - [ImportedFunctionCallerEntry](docs/ImportedFunctionCallerEntry.md)
  - [ImportedFunctionDetailOutputBody](docs/ImportedFunctionDetailOutputBody.md)
  - [ImportedFunctionEntry](docs/ImportedFunctionEntry.md)
@@ -604,6 +688,7 @@ Class | Method | HTTP request | Description
  - [InsertAnalysisLogRequest](docs/InsertAnalysisLogRequest.md)
  - [InviteUserInputBody](docs/InviteUserInputBody.md)
  - [IssuerAllowedDomain](docs/IssuerAllowedDomain.md)
+ - [KnownConstantEvidence](docs/KnownConstantEvidence.md)
  - [LineAttributionsData](docs/LineAttributionsData.md)
  - [ListAnalysesOutputBody](docs/ListAnalysesOutputBody.md)
  - [ListAnalysisDataTypesOutputBody](docs/ListAnalysisDataTypesOutputBody.md)
@@ -626,7 +711,11 @@ Class | Method | HTTP request | Description
  - [MatchedFunction](docs/MatchedFunction.md)
  - [MemdumpEntry](docs/MemdumpEntry.md)
  - [MessageBody](docs/MessageBody.md)
+ - [Meta](docs/Meta.md)
  - [MetaModel](docs/MetaModel.md)
+ - [Metadata](docs/Metadata.md)
+ - [ModelInterpretation](docs/ModelInterpretation.md)
+ - [ModelInterpretationEvidence](docs/ModelInterpretationEvidence.md)
  - [ModelName](docs/ModelName.md)
  - [ModelsResponse](docs/ModelsResponse.md)
  - [ModuleLoadEntry](docs/ModuleLoadEntry.md)
@@ -635,10 +724,29 @@ Class | Method | HTTP request | Description
  - [NameSourceType](docs/NameSourceType.md)
  - [NamesFinishedEvent](docs/NamesFinishedEvent.md)
  - [NetworkActivity](docs/NetworkActivity.md)
+ - [NetworkingCall](docs/NetworkingCall.md)
+ - [NetworkingDirectMatch](docs/NetworkingDirectMatch.md)
+ - [NetworkingExplainMetadata](docs/NetworkingExplainMetadata.md)
+ - [NetworkingExplainResult](docs/NetworkingExplainResult.md)
+ - [NetworkingExplainedFunction](docs/NetworkingExplainedFunction.md)
+ - [NetworkingFinding](docs/NetworkingFinding.md)
+ - [NetworkingScanMetadata](docs/NetworkingScanMetadata.md)
+ - [NetworkingScanResult](docs/NetworkingScanResult.md)
  - [OIDCCallbackInputBody](docs/OIDCCallbackInputBody.md)
  - [OperationCreateMetadataCreateResult](docs/OperationCreateMetadataCreateResult.md)
  - [OperationCryptoExplainMetadataCryptoExplainResult](docs/OperationCryptoExplainMetadataCryptoExplainResult.md)
  - [OperationCryptoScanMetadataCryptoScanResult](docs/OperationCryptoScanMetadataCryptoScanResult.md)
+ - [OperationExecutionExplainMetadataExecutionExplainResult](docs/OperationExecutionExplainMetadataExecutionExplainResult.md)
+ - [OperationExecutionScanMetadataExecutionScanResult](docs/OperationExecutionScanMetadataExecutionScanResult.md)
+ - [OperationFilesystemAnalyseMetadataFilesystemAnalyseResult](docs/OperationFilesystemAnalyseMetadataFilesystemAnalyseResult.md)
+ - [OperationFilesystemScanMetadataFilesystemScanResult](docs/OperationFilesystemScanMetadataFilesystemScanResult.md)
+ - [OperationMetadataCapabilitiesResult](docs/OperationMetadataCapabilitiesResult.md)
+ - [OperationMetadataRemediationResult](docs/OperationMetadataRemediationResult.md)
+ - [OperationMetadataReportResult](docs/OperationMetadataReportResult.md)
+ - [OperationMetadataThreatReportResult](docs/OperationMetadataThreatReportResult.md)
+ - [OperationMetadataTriageResult](docs/OperationMetadataTriageResult.md)
+ - [OperationNetworkingExplainMetadataNetworkingExplainResult](docs/OperationNetworkingExplainMetadataNetworkingExplainResult.md)
+ - [OperationNetworkingScanMetadataNetworkingScanResult](docs/OperationNetworkingScanMetadataNetworkingScanResult.md)
  - [OperationSecurityScanMetadataSecurityScanResult](docs/OperationSecurityScanMetadataSecurityScanResult.md)
  - [OperationWorkflowProgressResultBody](docs/OperationWorkflowProgressResultBody.md)
  - [Order](docs/Order.md)
@@ -673,16 +781,21 @@ Class | Method | HTTP request | Description
  - [ProductSummary](docs/ProductSummary.md)
  - [ProgressMessage](docs/ProgressMessage.md)
  - [ProseEvent](docs/ProseEvent.md)
+ - [ProtocolsAgentResponse](docs/ProtocolsAgentResponse.md)
  - [PutAnalysisStringsRequest](docs/PutAnalysisStringsRequest.md)
  - [QueuedWorkflowTaskResponse](docs/QueuedWorkflowTaskResponse.md)
  - [ReAnalysisForm](docs/ReAnalysisForm.md)
  - [Recent](docs/Recent.md)
+ - [ReferencedConstant](docs/ReferencedConstant.md)
+ - [ReferencedConstantEvidence](docs/ReferencedConstantEvidence.md)
  - [RefreshBody](docs/RefreshBody.md)
  - [RegenerateOutputBody](docs/RegenerateOutputBody.md)
  - [RegisterUserInputBody](docs/RegisterUserInputBody.md)
  - [RegistryOperation](docs/RegistryOperation.md)
+ - [RelatedBinary](docs/RelatedBinary.md)
  - [RelativeBinaryResponse](docs/RelativeBinaryResponse.md)
  - [RemediationAgentResponse](docs/RemediationAgentResponse.md)
+ - [RemediationResult](docs/RemediationResult.md)
  - [RemoveCollectionBinariesInputBody](docs/RemoveCollectionBinariesInputBody.md)
  - [RenameAppliedEvent](docs/RenameAppliedEvent.md)
  - [RenameInputBody](docs/RenameInputBody.md)
@@ -693,9 +806,12 @@ Class | Method | HTTP request | Description
  - [ReportEvent](docs/ReportEvent.md)
  - [ReportInfo](docs/ReportInfo.md)
  - [ReportOptions](docs/ReportOptions.md)
+ - [ReportReachabilityStatus](docs/ReportReachabilityStatus.md)
+ - [ReportResult](docs/ReportResult.md)
  - [ResolvedEntity](docs/ResolvedEntity.md)
  - [ResultBody](docs/ResultBody.md)
  - [RevokeBody](docs/RevokeBody.md)
+ - [RuleKind](docs/RuleKind.md)
  - [SSOProvider](docs/SSOProvider.md)
  - [SSOProvidersOutputBody](docs/SSOProvidersOutputBody.md)
  - [SandboxConfig](docs/SandboxConfig.md)
@@ -704,6 +820,9 @@ Class | Method | HTTP request | Description
  - [SandboxTimeout](docs/SandboxTimeout.md)
  - [ScheduledTaskEntry](docs/ScheduledTaskEntry.md)
  - [ScrapeThirdPartyConfig](docs/ScrapeThirdPartyConfig.md)
+ - [ScreenshotEntry](docs/ScreenshotEntry.md)
+ - [ScreenshotsIndex](docs/ScreenshotsIndex.md)
+ - [SecretsAgentResponse](docs/SecretsAgentResponse.md)
  - [SectionModel](docs/SectionModel.md)
  - [SecurityFinding](docs/SecurityFinding.md)
  - [SecurityModel](docs/SecurityModel.md)
@@ -756,11 +875,19 @@ Class | Method | HTTP request | Description
  - [StringSource](docs/StringSource.md)
  - [StructDataType](docs/StructDataType.md)
  - [StructDefinition](docs/StructDefinition.md)
+ - [Subject](docs/Subject.md)
+ - [SubjectAnyOf](docs/SubjectAnyOf.md)
+ - [SubjectAnyOf1](docs/SubjectAnyOf1.md)
+ - [SubjectAnyOf2](docs/SubjectAnyOf2.md)
+ - [SubjectAnyOf3](docs/SubjectAnyOf3.md)
+ - [SubmitFeedbackInputBody](docs/SubmitFeedbackInputBody.md)
  - [SubmitUserFeedbackRequest](docs/SubmitUserFeedbackRequest.md)
  - [SuggestedHole](docs/SuggestedHole.md)
  - [SuggestedMemberView](docs/SuggestedMemberView.md)
  - [SuggestedTypeView](docs/SuggestedTypeView.md)
  - [SummaryData](docs/SummaryData.md)
+ - [SuspiciousString](docs/SuspiciousString.md)
+ - [SuspiciousStringEvidence](docs/SuspiciousStringEvidence.md)
  - [Symbols](docs/Symbols.md)
  - [Tag](docs/Tag.md)
  - [TagItem](docs/TagItem.md)
@@ -773,15 +900,25 @@ Class | Method | HTTP request | Description
  - [TcpCarvedFile](docs/TcpCarvedFile.md)
  - [Team](docs/Team.md)
  - [TeamMember](docs/TeamMember.md)
+ - [Technique](docs/Technique.md)
+ - [ThreatReportResult](docs/ThreatReportResult.md)
  - [TimestampModel](docs/TimestampModel.md)
  - [Token](docs/Token.md)
  - [TokenInputBody](docs/TokenInputBody.md)
  - [TokenResponse](docs/TokenResponse.md)
  - [TokenisedData](docs/TokenisedData.md)
+ - [TriageFunction](docs/TriageFunction.md)
  - [TriageFunctionResponse](docs/TriageFunctionResponse.md)
  - [TriageReportResponse](docs/TriageReportResponse.md)
+ - [TriageResult](docs/TriageResult.md)
  - [TriggerCryptoScanInputBody](docs/TriggerCryptoScanInputBody.md)
  - [TriggerDynamicExecutionInputBody](docs/TriggerDynamicExecutionInputBody.md)
+ - [TriggerExecutionExplainInputBody](docs/TriggerExecutionExplainInputBody.md)
+ - [TriggerExecutionScanInputBody](docs/TriggerExecutionScanInputBody.md)
+ - [TriggerFilesystemAnalyseInputBody](docs/TriggerFilesystemAnalyseInputBody.md)
+ - [TriggerFilesystemScanInputBody](docs/TriggerFilesystemScanInputBody.md)
+ - [TriggerNetworkingExplainInputBody](docs/TriggerNetworkingExplainInputBody.md)
+ - [TriggerNetworkingScanInputBody](docs/TriggerNetworkingScanInputBody.md)
  - [TriggerRenameUnnamedFunctionsInputBody](docs/TriggerRenameUnnamedFunctionsInputBody.md)
  - [TriggerSecurityScanInputBody](docs/TriggerSecurityScanInputBody.md)
  - [Ttp](docs/Ttp.md)
@@ -815,6 +952,7 @@ Class | Method | HTTP request | Description
  - [UpdateUserPasswordInputBody](docs/UpdateUserPasswordInputBody.md)
  - [UpgradeAnalysisModelOutputBody](docs/UpgradeAnalysisModelOutputBody.md)
  - [UploadFileType](docs/UploadFileType.md)
+ - [UploadOutputBody](docs/UploadOutputBody.md)
  - [UploadResponse](docs/UploadResponse.md)
  - [UpsertAiDecomplationRatingRequest](docs/UpsertAiDecomplationRatingRequest.md)
  - [UpsertOverridesData](docs/UpsertOverridesData.md)

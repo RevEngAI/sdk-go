@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &RemoveCollectionBinariesInputBody{}
 type RemoveCollectionBinariesInputBody struct {
 	// Binary IDs to remove from the collection. Binary IDs not linked to the collection are ignored.
 	Binaries []int64 `json:"binaries"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RemoveCollectionBinariesInputBody RemoveCollectionBinariesInputBody
@@ -83,6 +83,11 @@ func (o RemoveCollectionBinariesInputBody) ToMap() (map[string]interface{}, erro
 	if o.Binaries != nil {
 		toSerialize["binaries"] = o.Binaries
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -110,15 +115,20 @@ func (o *RemoveCollectionBinariesInputBody) UnmarshalJSON(data []byte) (err erro
 
 	varRemoveCollectionBinariesInputBody := _RemoveCollectionBinariesInputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRemoveCollectionBinariesInputBody)
+	err = json.Unmarshal(data, &varRemoveCollectionBinariesInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RemoveCollectionBinariesInputBody(varRemoveCollectionBinariesInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binaries")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

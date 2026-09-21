@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &PatchCollectionBinariesInputBody{}
 type PatchCollectionBinariesInputBody struct {
 	// Binary IDs to set on the collection. The collection's binaries are fully replaced with this list.
 	Binaries []int64 `json:"binaries"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PatchCollectionBinariesInputBody PatchCollectionBinariesInputBody
@@ -83,6 +83,11 @@ func (o PatchCollectionBinariesInputBody) ToMap() (map[string]interface{}, error
 	if o.Binaries != nil {
 		toSerialize["binaries"] = o.Binaries
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -110,15 +115,20 @@ func (o *PatchCollectionBinariesInputBody) UnmarshalJSON(data []byte) (err error
 
 	varPatchCollectionBinariesInputBody := _PatchCollectionBinariesInputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPatchCollectionBinariesInputBody)
+	err = json.Unmarshal(data, &varPatchCollectionBinariesInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PatchCollectionBinariesInputBody(varPatchCollectionBinariesInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binaries")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

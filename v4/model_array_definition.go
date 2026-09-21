@@ -22,7 +22,10 @@ type ArrayDefinition struct {
 	Count *int64 `json:"count,omitempty"`
 	// The element type.
 	ElementDataTypeId *int64 `json:"element_data_type_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ArrayDefinition ArrayDefinition
 
 // NewArrayDefinition instantiates a new ArrayDefinition object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o ArrayDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ElementDataTypeId) {
 		toSerialize["element_data_type_id"] = o.ElementDataTypeId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ArrayDefinition) UnmarshalJSON(data []byte) (err error) {
+	varArrayDefinition := _ArrayDefinition{}
+
+	err = json.Unmarshal(data, &varArrayDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ArrayDefinition(varArrayDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "element_data_type_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableArrayDefinition struct {

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &GetFunctionSignatureHistoryBody{}
 type GetFunctionSignatureHistoryBody struct {
 	// Every version of the signature, newest first. The first element is the current value, so the list is never empty; a signature that has never been edited has that one element only.
 	Versions []FunctionSignatureVersion `json:"versions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetFunctionSignatureHistoryBody GetFunctionSignatureHistoryBody
@@ -79,6 +79,11 @@ func (o GetFunctionSignatureHistoryBody) MarshalJSON() ([]byte, error) {
 func (o GetFunctionSignatureHistoryBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["versions"] = o.Versions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *GetFunctionSignatureHistoryBody) UnmarshalJSON(data []byte) (err error)
 
 	varGetFunctionSignatureHistoryBody := _GetFunctionSignatureHistoryBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetFunctionSignatureHistoryBody)
+	err = json.Unmarshal(data, &varGetFunctionSignatureHistoryBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetFunctionSignatureHistoryBody(varGetFunctionSignatureHistoryBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "versions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

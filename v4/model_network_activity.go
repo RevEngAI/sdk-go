@@ -22,7 +22,10 @@ type NetworkActivity struct {
 	DnsQueries []DnsQuery `json:"dns_queries,omitempty"`
 	ExtractedUrls []ExtractedURL `json:"extracted_urls,omitempty"`
 	HttpRequests []HttpRequest `json:"http_requests,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NetworkActivity NetworkActivity
 
 // NewNetworkActivity instantiates a new NetworkActivity object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o NetworkActivity) ToMap() (map[string]interface{}, error) {
 	if o.HttpRequests != nil {
 		toSerialize["http_requests"] = o.HttpRequests
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NetworkActivity) UnmarshalJSON(data []byte) (err error) {
+	varNetworkActivity := _NetworkActivity{}
+
+	err = json.Unmarshal(data, &varNetworkActivity)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NetworkActivity(varNetworkActivity)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connections")
+		delete(additionalProperties, "dns_queries")
+		delete(additionalProperties, "extracted_urls")
+		delete(additionalProperties, "http_requests")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNetworkActivity struct {

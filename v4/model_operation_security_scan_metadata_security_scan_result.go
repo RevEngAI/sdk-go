@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type OperationSecurityScanMetadataSecurityScanResult struct {
 	Name string `json:"name"`
 	// Result, set only when done is true and the operation succeeded.
 	Response *SecurityScanResult `json:"response,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OperationSecurityScanMetadataSecurityScanResult OperationSecurityScanMetadataSecurityScanResult
@@ -218,6 +218,11 @@ func (o OperationSecurityScanMetadataSecurityScanResult) ToMap() (map[string]int
 	if !IsNil(o.Response) {
 		toSerialize["response"] = o.Response
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -246,15 +251,24 @@ func (o *OperationSecurityScanMetadataSecurityScanResult) UnmarshalJSON(data []b
 
 	varOperationSecurityScanMetadataSecurityScanResult := _OperationSecurityScanMetadataSecurityScanResult{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOperationSecurityScanMetadataSecurityScanResult)
+	err = json.Unmarshal(data, &varOperationSecurityScanMetadataSecurityScanResult)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OperationSecurityScanMetadataSecurityScanResult(varOperationSecurityScanMetadataSecurityScanResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "done")
+		delete(additionalProperties, "error")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "response")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

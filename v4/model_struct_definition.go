@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &StructDefinition{}
 type StructDefinition struct {
 	// The type's fields, in offset order.
 	Members []DataTypeMemberEntry `json:"members"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StructDefinition StructDefinition
@@ -83,6 +83,11 @@ func (o StructDefinition) ToMap() (map[string]interface{}, error) {
 	if o.Members != nil {
 		toSerialize["members"] = o.Members
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -110,15 +115,20 @@ func (o *StructDefinition) UnmarshalJSON(data []byte) (err error) {
 
 	varStructDefinition := _StructDefinition{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStructDefinition)
+	err = json.Unmarshal(data, &varStructDefinition)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StructDefinition(varStructDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "members")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

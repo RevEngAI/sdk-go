@@ -17,11 +17,14 @@ import (
 // checks if the AnalysisRequirement type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnalysisRequirement{}
 
-// AnalysisRequirement One way to make a subsequent POST /v2/analyses succeed for this upload.  Satisfying any single requirement is enough. fields are CreateAnalysis field paths that must be provided or enabled; values names the ones that must carry a specific value.
+// AnalysisRequirement struct for AnalysisRequirement
 type AnalysisRequirement struct {
+	// CreateAnalysis field paths that must be provided or enabled to satisfy this requirement.
 	Fields []string `json:"fields"`
-	Values map[string]string `json:"values,omitempty"`
+	// Why this requirement unblocks analysis.
 	Reason string `json:"reason"`
+	// Field paths that must carry a specific value, keyed the same way as fields.
+	Values map[string]string `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -47,6 +50,7 @@ func NewAnalysisRequirementWithDefaults() *AnalysisRequirement {
 }
 
 // GetFields returns the Fields field value
+// If the value is explicit nil, the zero value for []string will be returned
 func (o *AnalysisRequirement) GetFields() []string {
 	if o == nil {
 		var ret []string
@@ -58,8 +62,9 @@ func (o *AnalysisRequirement) GetFields() []string {
 
 // GetFieldsOk returns a tuple with the Fields field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AnalysisRequirement) GetFieldsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Fields) {
 		return nil, false
 	}
 	return o.Fields, true
@@ -68,6 +73,30 @@ func (o *AnalysisRequirement) GetFieldsOk() ([]string, bool) {
 // SetFields sets field value
 func (o *AnalysisRequirement) SetFields(v []string) {
 	o.Fields = v
+}
+
+// GetReason returns the Reason field value
+func (o *AnalysisRequirement) GetReason() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Reason
+}
+
+// GetReasonOk returns a tuple with the Reason field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisRequirement) GetReasonOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Reason, true
+}
+
+// SetReason sets field value
+func (o *AnalysisRequirement) SetReason(v string) {
+	o.Reason = v
 }
 
 // GetValues returns the Values field value if set, zero value otherwise.
@@ -102,30 +131,6 @@ func (o *AnalysisRequirement) SetValues(v map[string]string) {
 	o.Values = v
 }
 
-// GetReason returns the Reason field value
-func (o *AnalysisRequirement) GetReason() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Reason
-}
-
-// GetReasonOk returns a tuple with the Reason field value
-// and a boolean to check if the value has been set.
-func (o *AnalysisRequirement) GetReasonOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Reason, true
-}
-
-// SetReason sets field value
-func (o *AnalysisRequirement) SetReason(v string) {
-	o.Reason = v
-}
-
 func (o AnalysisRequirement) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -136,11 +141,13 @@ func (o AnalysisRequirement) MarshalJSON() ([]byte, error) {
 
 func (o AnalysisRequirement) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["fields"] = o.Fields
+	if o.Fields != nil {
+		toSerialize["fields"] = o.Fields
+	}
+	toSerialize["reason"] = o.Reason
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
-	toSerialize["reason"] = o.Reason
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -186,8 +193,8 @@ func (o *AnalysisRequirement) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "fields")
-		delete(additionalProperties, "values")
 		delete(additionalProperties, "reason")
+		delete(additionalProperties, "values")
 		o.AdditionalProperties = additionalProperties
 	}
 

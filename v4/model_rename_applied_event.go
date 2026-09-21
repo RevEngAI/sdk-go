@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type RenameAppliedEvent struct {
 	OldName string `json:"old_name"`
 	Seq int32 `json:"seq"`
 	Type string `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RenameAppliedEvent RenameAppliedEvent
@@ -222,6 +222,11 @@ func (o RenameAppliedEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize["old_name"] = o.OldName
 	toSerialize["seq"] = o.Seq
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -253,15 +258,25 @@ func (o *RenameAppliedEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varRenameAppliedEvent := _RenameAppliedEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRenameAppliedEvent)
+	err = json.Unmarshal(data, &varRenameAppliedEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RenameAppliedEvent(varRenameAppliedEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "addr_hex")
+		delete(additionalProperties, "attempt")
+		delete(additionalProperties, "new_name")
+		delete(additionalProperties, "old_name")
+		delete(additionalProperties, "seq")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

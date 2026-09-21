@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -36,6 +35,7 @@ type ImportedFunctionDetailOutputBody struct {
 	StubVaddrs []int64 `json:"stub_vaddrs"`
 	// Virtual address of the import, when known.
 	Vaddr *int64 `json:"vaddr,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ImportedFunctionDetailOutputBody ImportedFunctionDetailOutputBody
@@ -336,6 +336,11 @@ func (o ImportedFunctionDetailOutputBody) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Vaddr) {
 		toSerialize["vaddr"] = o.Vaddr
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -368,15 +373,28 @@ func (o *ImportedFunctionDetailOutputBody) UnmarshalJSON(data []byte) (err error
 
 	varImportedFunctionDetailOutputBody := _ImportedFunctionDetailOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varImportedFunctionDetailOutputBody)
+	err = json.Unmarshal(data, &varImportedFunctionDetailOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ImportedFunctionDetailOutputBody(varImportedFunctionDetailOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "callers")
+		delete(additionalProperties, "imported_function_id")
+		delete(additionalProperties, "is_function")
+		delete(additionalProperties, "library_name")
+		delete(additionalProperties, "library_version")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "original_name")
+		delete(additionalProperties, "stub_vaddrs")
+		delete(additionalProperties, "vaddr")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

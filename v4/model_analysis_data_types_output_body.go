@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &AnalysisDataTypesOutputBody{}
 type AnalysisDataTypesOutputBody struct {
 	// The stored types, ordered by data_type_id.
 	DataTypes []DataTypeEntry `json:"data_types"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisDataTypesOutputBody AnalysisDataTypesOutputBody
@@ -83,6 +83,11 @@ func (o AnalysisDataTypesOutputBody) ToMap() (map[string]interface{}, error) {
 	if o.DataTypes != nil {
 		toSerialize["data_types"] = o.DataTypes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -110,15 +115,20 @@ func (o *AnalysisDataTypesOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisDataTypesOutputBody := _AnalysisDataTypesOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisDataTypesOutputBody)
+	err = json.Unmarshal(data, &varAnalysisDataTypesOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisDataTypesOutputBody(varAnalysisDataTypesOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data_types")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

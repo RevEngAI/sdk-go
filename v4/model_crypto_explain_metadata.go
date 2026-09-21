@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CryptoExplainMetadata struct {
 	LogHistory [][]interface{} `json:"log_history,omitempty"`
 	// Run status. UNINITIALISED means the agent has never been triggered for this function.
 	Status string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CryptoExplainMetadata CryptoExplainMetadata
@@ -117,6 +117,11 @@ func (o CryptoExplainMetadata) ToMap() (map[string]interface{}, error) {
 		toSerialize["log_history"] = o.LogHistory
 	}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *CryptoExplainMetadata) UnmarshalJSON(data []byte) (err error) {
 
 	varCryptoExplainMetadata := _CryptoExplainMetadata{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCryptoExplainMetadata)
+	err = json.Unmarshal(data, &varCryptoExplainMetadata)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CryptoExplainMetadata(varCryptoExplainMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "log_history")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

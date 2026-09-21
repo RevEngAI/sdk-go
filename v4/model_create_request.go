@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type CreateRequest struct {
 	Sha256Hash string `json:"sha_256_hash" validate:"regexp=^[a-fA-F0-9]{64}$"`
 	Symbols *Symbols `json:"symbols,omitempty"`
 	Tags []string `json:"tags,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateRequest CreateRequest
@@ -362,6 +362,11 @@ func (o CreateRequest) ToMap() (map[string]interface{}, error) {
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -390,15 +395,28 @@ func (o *CreateRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateRequest := _CreateRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateRequest)
+	err = json.Unmarshal(data, &varCreateRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateRequest(varCreateRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_config")
+		delete(additionalProperties, "analysis_scope")
+		delete(additionalProperties, "auto_run_agents")
+		delete(additionalProperties, "binary_config")
+		delete(additionalProperties, "debug_hash")
+		delete(additionalProperties, "filename")
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "symbols")
+		delete(additionalProperties, "tags")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

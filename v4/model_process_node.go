@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type ProcessNode struct {
 	Pid int64 `json:"pid"`
 	Seqid int64 `json:"seqid"`
 	StartedAt *float64 `json:"started_at,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProcessNode ProcessNode
@@ -413,6 +413,11 @@ func (o ProcessNode) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StartedAt) {
 		toSerialize["started_at"] = o.StartedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -443,15 +448,30 @@ func (o *ProcessNode) UnmarshalJSON(data []byte) (err error) {
 
 	varProcessNode := _ProcessNode{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProcessNode)
+	err = json.Unmarshal(data, &varProcessNode)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProcessNode(varProcessNode)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "args")
+		delete(additionalProperties, "attributed")
+		delete(additionalProperties, "children")
+		delete(additionalProperties, "exit_code")
+		delete(additionalProperties, "exit_code_str")
+		delete(additionalProperties, "exited_at")
+		delete(additionalProperties, "killed_by")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "pid")
+		delete(additionalProperties, "seqid")
+		delete(additionalProperties, "started_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ListExampleAnalysesOutputBody{}
 type ListExampleAnalysesOutputBody struct {
 	// List of example analyses
 	Analyses []Example `json:"analyses"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListExampleAnalysesOutputBody ListExampleAnalysesOutputBody
@@ -83,6 +83,11 @@ func (o ListExampleAnalysesOutputBody) ToMap() (map[string]interface{}, error) {
 	if o.Analyses != nil {
 		toSerialize["analyses"] = o.Analyses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -110,15 +115,20 @@ func (o *ListExampleAnalysesOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varListExampleAnalysesOutputBody := _ListExampleAnalysesOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListExampleAnalysesOutputBody)
+	err = json.Unmarshal(data, &varListExampleAnalysesOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListExampleAnalysesOutputBody(varListExampleAnalysesOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analyses")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

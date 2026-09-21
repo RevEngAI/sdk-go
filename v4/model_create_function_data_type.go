@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type CreateFunctionDataType struct {
 	Namespace *string `json:"namespace,omitempty"`
 	// Size in bytes. Omit when it is not known.
 	Size *int64 `json:"size,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateFunctionDataType CreateFunctionDataType
@@ -207,6 +207,11 @@ func (o CreateFunctionDataType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -236,15 +241,24 @@ func (o *CreateFunctionDataType) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateFunctionDataType := _CreateFunctionDataType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateFunctionDataType)
+	err = json.Unmarshal(data, &varCreateFunctionDataType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateFunctionDataType(varCreateFunctionDataType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "definition")
+		delete(additionalProperties, "kind")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "namespace")
+		delete(additionalProperties, "size")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

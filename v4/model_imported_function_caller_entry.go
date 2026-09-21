@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ImportedFunctionCallerEntry struct {
 	FunctionVaddr int64 `json:"function_vaddr"`
 	// The PLT/stub address this caller targets.
 	StubVaddr int64 `json:"stub_vaddr"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ImportedFunctionCallerEntry ImportedFunctionCallerEntry
@@ -160,6 +160,11 @@ func (o ImportedFunctionCallerEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize["function_name"] = o.FunctionName
 	toSerialize["function_vaddr"] = o.FunctionVaddr
 	toSerialize["stub_vaddr"] = o.StubVaddr
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -190,15 +195,23 @@ func (o *ImportedFunctionCallerEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varImportedFunctionCallerEntry := _ImportedFunctionCallerEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varImportedFunctionCallerEntry)
+	err = json.Unmarshal(data, &varImportedFunctionCallerEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ImportedFunctionCallerEntry(varImportedFunctionCallerEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "function_vaddr")
+		delete(additionalProperties, "stub_vaddr")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

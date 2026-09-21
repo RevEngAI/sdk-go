@@ -30,7 +30,10 @@ type ReportOptions struct {
 	StartCommand *string `json:"start_command,omitempty"`
 	StartMethod *string `json:"start_method,omitempty"`
 	Timeout *int64 `json:"timeout,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReportOptions ReportOptions
 
 // NewReportOptions instantiates a new ReportOptions object
 // This constructor will assign default values to properties that have it defined,
@@ -480,7 +483,44 @@ func (o ReportOptions) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timeout) {
 		toSerialize["timeout"] = o.Timeout
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReportOptions) UnmarshalJSON(data []byte) (err error) {
+	varReportOptions := _ReportOptions{}
+
+	err = json.Unmarshal(data, &varReportOptions)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReportOptions(varReportOptions)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "archive_entry_path")
+		delete(additionalProperties, "extract_archive")
+		delete(additionalProperties, "guest_target_directory")
+		delete(additionalProperties, "guest_working_directory")
+		delete(additionalProperties, "net_enable")
+		delete(additionalProperties, "os_profile")
+		delete(additionalProperties, "plugins")
+		delete(additionalProperties, "preset")
+		delete(additionalProperties, "sample_filename")
+		delete(additionalProperties, "start_command")
+		delete(additionalProperties, "start_method")
+		delete(additionalProperties, "timeout")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReportOptions struct {

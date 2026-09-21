@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -36,6 +35,7 @@ type ProductOutput struct {
 	SalesOnly bool `json:"sales_only"`
 	// User tier associated with this product, if any.
 	Tier *string `json:"tier,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProductOutput ProductOutput
@@ -301,6 +301,11 @@ func (o ProductOutput) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tier) {
 		toSerialize["tier"] = o.Tier
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -333,15 +338,27 @@ func (o *ProductOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varProductOutput := _ProductOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProductOutput)
+	err = json.Unmarshal(data, &varProductOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProductOutput(varProductOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "credits_per_month")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "features")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "prices")
+		delete(additionalProperties, "sales_only")
+		delete(additionalProperties, "tier")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

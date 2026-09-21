@@ -20,7 +20,10 @@ var _ MappedNullable = &ConversationContext{}
 type ConversationContext struct {
 	AnalysisId *int64 `json:"analysis_id,omitempty"`
 	FunctionId *int64 `json:"function_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConversationContext ConversationContext
 
 // NewConversationContext instantiates a new ConversationContext object
 // This constructor will assign default values to properties that have it defined,
@@ -119,7 +122,34 @@ func (o ConversationContext) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FunctionId) {
 		toSerialize["function_id"] = o.FunctionId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConversationContext) UnmarshalJSON(data []byte) (err error) {
+	varConversationContext := _ConversationContext{}
+
+	err = json.Unmarshal(data, &varConversationContext)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConversationContext(varConversationContext)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "function_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConversationContext struct {

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type DynamicExecutionStatusResponse struct {
 	Logs AnalysisLogs `json:"logs"`
 	// Task status
 	Status string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DynamicExecutionStatusResponse DynamicExecutionStatusResponse
@@ -144,6 +144,11 @@ func (o DynamicExecutionStatusResponse) ToMap() (map[string]interface{}, error) 
 	}
 	toSerialize["logs"] = o.Logs
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -172,15 +177,22 @@ func (o *DynamicExecutionStatusResponse) UnmarshalJSON(data []byte) (err error) 
 
 	varDynamicExecutionStatusResponse := _DynamicExecutionStatusResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDynamicExecutionStatusResponse)
+	err = json.Unmarshal(data, &varDynamicExecutionStatusResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DynamicExecutionStatusResponse(varDynamicExecutionStatusResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "error_message")
+		delete(additionalProperties, "logs")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

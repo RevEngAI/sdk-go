@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -71,6 +70,7 @@ type AnalysisBasicInfoOutputBody struct {
 	SuppliedBinaryType string `json:"supplied_binary_type"`
 	// Team ID of the analysis
 	TeamId int64 `json:"team_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisBasicInfoOutputBody AnalysisBasicInfoOutputBody
@@ -763,6 +763,11 @@ func (o AnalysisBasicInfoOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize["supplied_binary_format"] = o.SuppliedBinaryFormat
 	toSerialize["supplied_binary_type"] = o.SuppliedBinaryType
 	toSerialize["team_id"] = o.TeamId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -813,15 +818,44 @@ func (o *AnalysisBasicInfoOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisBasicInfoOutputBody := _AnalysisBasicInfoOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisBasicInfoOutputBody)
+	err = json.Unmarshal(data, &varAnalysisBasicInfoOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisBasicInfoOutputBody(varAnalysisBasicInfoOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_scope")
+		delete(additionalProperties, "base_address")
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "binary_name")
+		delete(additionalProperties, "binary_size")
+		delete(additionalProperties, "binary_uuid")
+		delete(additionalProperties, "creation")
+		delete(additionalProperties, "debug")
+		delete(additionalProperties, "detected_architecture")
+		delete(additionalProperties, "detected_binary_format")
+		delete(additionalProperties, "detected_binary_type")
+		delete(additionalProperties, "function_count")
+		delete(additionalProperties, "is_advanced")
+		delete(additionalProperties, "is_owner")
+		delete(additionalProperties, "is_system")
+		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "model_name")
+		delete(additionalProperties, "model_upgrade_available")
+		delete(additionalProperties, "owner_username")
+		delete(additionalProperties, "sequencer_version")
+		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "supplied_architecture")
+		delete(additionalProperties, "supplied_binary_format")
+		delete(additionalProperties, "supplied_binary_type")
+		delete(additionalProperties, "team_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

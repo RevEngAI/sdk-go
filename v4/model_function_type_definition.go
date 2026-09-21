@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type FunctionTypeDefinition struct {
 	Parameters []DataTypeFunctionParameterEntry `json:"parameters"`
 	// The return type.
 	ReturnDataTypeId *int64 `json:"return_data_type_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionTypeDefinition FunctionTypeDefinition
@@ -120,6 +120,11 @@ func (o FunctionTypeDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReturnDataTypeId) {
 		toSerialize["return_data_type_id"] = o.ReturnDataTypeId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -147,15 +152,21 @@ func (o *FunctionTypeDefinition) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionTypeDefinition := _FunctionTypeDefinition{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionTypeDefinition)
+	err = json.Unmarshal(data, &varFunctionTypeDefinition)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionTypeDefinition(varFunctionTypeDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "return_data_type_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

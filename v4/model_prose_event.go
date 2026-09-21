@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type ProseEvent struct {
 	Seq int32 `json:"seq"`
 	Text string `json:"text"`
 	Type string `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProseEvent ProseEvent
@@ -159,6 +159,11 @@ func (o ProseEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize["seq"] = o.Seq
 	toSerialize["text"] = o.Text
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -189,15 +194,23 @@ func (o *ProseEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varProseEvent := _ProseEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProseEvent)
+	err = json.Unmarshal(data, &varProseEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProseEvent(varProseEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "attempt")
+		delete(additionalProperties, "seq")
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

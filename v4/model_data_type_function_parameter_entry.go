@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type DataTypeFunctionParameterEntry struct {
 	Ordinal int64 `json:"ordinal"`
 	// Parameter size in bytes.
 	Size int64 `json:"size"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DataTypeFunctionParameterEntry DataTypeFunctionParameterEntry
@@ -181,6 +181,11 @@ func (o DataTypeFunctionParameterEntry) ToMap() (map[string]interface{}, error) 
 	}
 	toSerialize["ordinal"] = o.Ordinal
 	toSerialize["size"] = o.Size
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -209,15 +214,23 @@ func (o *DataTypeFunctionParameterEntry) UnmarshalJSON(data []byte) (err error) 
 
 	varDataTypeFunctionParameterEntry := _DataTypeFunctionParameterEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDataTypeFunctionParameterEntry)
+	err = json.Unmarshal(data, &varDataTypeFunctionParameterEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DataTypeFunctionParameterEntry(varDataTypeFunctionParameterEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data_type_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "ordinal")
+		delete(additionalProperties, "size")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

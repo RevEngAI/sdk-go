@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &UpsertOverridesData{}
 type UpsertOverridesData struct {
 	// Every override on the function after applying this request, keyed by placeholder token.
 	PlaceholderToUserOverride map[string]Token `json:"placeholder_to_user_override"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpsertOverridesData UpsertOverridesData
@@ -79,6 +79,11 @@ func (o UpsertOverridesData) MarshalJSON() ([]byte, error) {
 func (o UpsertOverridesData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["placeholder_to_user_override"] = o.PlaceholderToUserOverride
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *UpsertOverridesData) UnmarshalJSON(data []byte) (err error) {
 
 	varUpsertOverridesData := _UpsertOverridesData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpsertOverridesData)
+	err = json.Unmarshal(data, &varUpsertOverridesData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpsertOverridesData(varUpsertOverridesData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "placeholder_to_user_override")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

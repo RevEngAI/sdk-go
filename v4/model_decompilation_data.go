@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type DecompilationData struct {
 	Decompilation *string `json:"decompilation,omitempty"`
 	// Task status
 	Status string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DecompilationData DecompilationData
@@ -116,6 +116,11 @@ func (o DecompilationData) ToMap() (map[string]interface{}, error) {
 		toSerialize["decompilation"] = o.Decompilation
 	}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,15 +148,21 @@ func (o *DecompilationData) UnmarshalJSON(data []byte) (err error) {
 
 	varDecompilationData := _DecompilationData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDecompilationData)
+	err = json.Unmarshal(data, &varDecompilationData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DecompilationData(varDecompilationData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "decompilation")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

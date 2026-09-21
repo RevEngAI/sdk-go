@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type TypeSuggestionsData struct {
 	Status string `json:"status"`
 	// One entry per suggested type. Empty for a run that produced none, and for a run that predates type suggestion — the two are not distinguished.
 	Types []SuggestedTypeView `json:"types"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TypeSuggestionsData TypeSuggestionsData
@@ -148,6 +148,11 @@ func (o TypeSuggestionsData) ToMap() (map[string]interface{}, error) {
 	if o.Types != nil {
 		toSerialize["types"] = o.Types
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -176,15 +181,22 @@ func (o *TypeSuggestionsData) UnmarshalJSON(data []byte) (err error) {
 
 	varTypeSuggestionsData := _TypeSuggestionsData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTypeSuggestionsData)
+	err = json.Unmarshal(data, &varTypeSuggestionsData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TypeSuggestionsData(varTypeSuggestionsData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "model")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "types")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

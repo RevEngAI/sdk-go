@@ -20,7 +20,10 @@ var _ MappedNullable = &TriggerRenameUnnamedFunctionsInputBody{}
 type TriggerRenameUnnamedFunctionsInputBody struct {
 	// Stop after this many functions. Omit to process every unnamed function in the analysis.
 	Limit *int64 `json:"limit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TriggerRenameUnnamedFunctionsInputBody TriggerRenameUnnamedFunctionsInputBody
 
 // NewTriggerRenameUnnamedFunctionsInputBody instantiates a new TriggerRenameUnnamedFunctionsInputBody object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o TriggerRenameUnnamedFunctionsInputBody) ToMap() (map[string]interface{},
 	if !IsNil(o.Limit) {
 		toSerialize["limit"] = o.Limit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TriggerRenameUnnamedFunctionsInputBody) UnmarshalJSON(data []byte) (err error) {
+	varTriggerRenameUnnamedFunctionsInputBody := _TriggerRenameUnnamedFunctionsInputBody{}
+
+	err = json.Unmarshal(data, &varTriggerRenameUnnamedFunctionsInputBody)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TriggerRenameUnnamedFunctionsInputBody(varTriggerRenameUnnamedFunctionsInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "limit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTriggerRenameUnnamedFunctionsInputBody struct {

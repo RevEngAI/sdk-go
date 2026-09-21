@@ -41,7 +41,10 @@ type HttpRequest struct {
 	Username *string `json:"username,omitempty"`
 	Verb *string `json:"verb,omitempty"`
 	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HttpRequest HttpRequest
 
 // NewHttpRequest instantiates a new HttpRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -877,7 +880,55 @@ func (o HttpRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HttpRequest) UnmarshalJSON(data []byte) (err error) {
+	varHttpRequest := _HttpRequest{}
+
+	err = json.Unmarshal(data, &varHttpRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HttpRequest(varHttpRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bytes_received")
+		delete(additionalProperties, "bytes_sent")
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "extra_headers")
+		delete(additionalProperties, "flags")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "path")
+		delete(additionalProperties, "pcap_stream_id")
+		delete(additionalProperties, "post_data")
+		delete(additionalProperties, "proxy")
+		delete(additionalProperties, "proxy_bypass")
+		delete(additionalProperties, "referer")
+		delete(additionalProperties, "request_body")
+		delete(additionalProperties, "response_body")
+		delete(additionalProperties, "response_status")
+		delete(additionalProperties, "server_ip")
+		delete(additionalProperties, "server_name")
+		delete(additionalProperties, "server_port")
+		delete(additionalProperties, "service")
+		delete(additionalProperties, "user_agent")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "verb")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHttpRequest struct {

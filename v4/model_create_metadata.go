@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CreateMetadata struct {
 	BinaryId int64 `json:"binary_id"`
 	// Analysis status
 	Status string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateMetadata CreateMetadata
@@ -135,6 +135,11 @@ func (o CreateMetadata) ToMap() (map[string]interface{}, error) {
 	toSerialize["analysis_id"] = o.AnalysisId
 	toSerialize["binary_id"] = o.BinaryId
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -164,15 +169,22 @@ func (o *CreateMetadata) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateMetadata := _CreateMetadata{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateMetadata)
+	err = json.Unmarshal(data, &varCreateMetadata)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateMetadata(varCreateMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

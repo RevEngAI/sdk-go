@@ -42,7 +42,10 @@ type SecurityFinding struct {
 	SnippetStartLine *int64 `json:"snippet_start_line,omitempty"`
 	// Line the finding starts on
 	StartLine *int64 `json:"start_line,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SecurityFinding SecurityFinding
 
 // NewSecurityFinding instantiates a new SecurityFinding object
 // This constructor will assign default values to properties that have it defined,
@@ -493,7 +496,44 @@ func (o SecurityFinding) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StartLine) {
 		toSerialize["start_line"] = o.StartLine
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SecurityFinding) UnmarshalJSON(data []byte) (err error) {
+	varSecurityFinding := _SecurityFinding{}
+
+	err = json.Unmarshal(data, &varSecurityFinding)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SecurityFinding(varSecurityFinding)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "check_id")
+		delete(additionalProperties, "confidence")
+		delete(additionalProperties, "cwe")
+		delete(additionalProperties, "end_line")
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "impact")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "snippet_lines")
+		delete(additionalProperties, "snippet_start_line")
+		delete(additionalProperties, "start_line")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSecurityFinding struct {

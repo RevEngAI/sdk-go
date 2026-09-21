@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &CopyFunctionSignaturesInputBody{}
 type CopyFunctionSignaturesInputBody struct {
 	// Signatures to copy. No target may repeat, and no pair may name the same function twice.
 	Copies []CopySignatureItem `json:"copies"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CopyFunctionSignaturesInputBody CopyFunctionSignaturesInputBody
@@ -83,6 +83,11 @@ func (o CopyFunctionSignaturesInputBody) ToMap() (map[string]interface{}, error)
 	if o.Copies != nil {
 		toSerialize["copies"] = o.Copies
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -110,15 +115,20 @@ func (o *CopyFunctionSignaturesInputBody) UnmarshalJSON(data []byte) (err error)
 
 	varCopyFunctionSignaturesInputBody := _CopyFunctionSignaturesInputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCopyFunctionSignaturesInputBody)
+	err = json.Unmarshal(data, &varCopyFunctionSignaturesInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CopyFunctionSignaturesInputBody(varCopyFunctionSignaturesInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "copies")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

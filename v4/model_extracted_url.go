@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ExtractedURL{}
 type ExtractedURL struct {
 	Events []ReportEvent `json:"events,omitempty"`
 	Url string `json:"url"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExtractedURL ExtractedURL
@@ -115,6 +115,11 @@ func (o ExtractedURL) ToMap() (map[string]interface{}, error) {
 		toSerialize["events"] = o.Events
 	}
 	toSerialize["url"] = o.Url
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,15 +147,21 @@ func (o *ExtractedURL) UnmarshalJSON(data []byte) (err error) {
 
 	varExtractedURL := _ExtractedURL{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExtractedURL)
+	err = json.Unmarshal(data, &varExtractedURL)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExtractedURL(varExtractedURL)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

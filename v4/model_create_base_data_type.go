@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type CreateBaseDataType struct {
 	Namespace *string `json:"namespace,omitempty"`
 	// Size in bytes. Omit when it is not known.
 	Size *int64 `json:"size,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateBaseDataType CreateBaseDataType
@@ -180,6 +180,11 @@ func (o CreateBaseDataType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -208,15 +213,23 @@ func (o *CreateBaseDataType) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateBaseDataType := _CreateBaseDataType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateBaseDataType)
+	err = json.Unmarshal(data, &varCreateBaseDataType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateBaseDataType(varCreateBaseDataType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "kind")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "namespace")
+		delete(additionalProperties, "size")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

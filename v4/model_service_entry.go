@@ -24,7 +24,10 @@ type ServiceEntry struct {
 	Name *string `json:"name,omitempty"`
 	ServiceType *string `json:"service_type,omitempty"`
 	StartType *string `json:"start_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceEntry ServiceEntry
 
 // NewServiceEntry instantiates a new ServiceEntry object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o ServiceEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StartType) {
 		toSerialize["start_type"] = o.StartType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceEntry) UnmarshalJSON(data []byte) (err error) {
+	varServiceEntry := _ServiceEntry{}
+
+	err = json.Unmarshal(data, &varServiceEntry)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceEntry(varServiceEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binary_path")
+		delete(additionalProperties, "display_name")
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "service_type")
+		delete(additionalProperties, "start_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceEntry struct {

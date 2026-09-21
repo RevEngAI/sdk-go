@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &LineAttributionsData{}
 type LineAttributionsData struct {
 	// Each disassembly line number mapped to the AI-decompilation line numbers it fed, e.g. {\"12\": [3, 4, 6], \"17\": [4]}. Both sides 0-based; many-to-many in both directions. Empty when no completed run has produced a correspondence, which is ordinary and not an error.
 	DisassemblyLineNumberToAiDecompilationLineNumbers map[string][]int64 `json:"disassembly_line_number_to_ai_decompilation_line_numbers"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LineAttributionsData LineAttributionsData
@@ -79,6 +79,11 @@ func (o LineAttributionsData) MarshalJSON() ([]byte, error) {
 func (o LineAttributionsData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["disassembly_line_number_to_ai_decompilation_line_numbers"] = o.DisassemblyLineNumberToAiDecompilationLineNumbers
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *LineAttributionsData) UnmarshalJSON(data []byte) (err error) {
 
 	varLineAttributionsData := _LineAttributionsData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLineAttributionsData)
+	err = json.Unmarshal(data, &varLineAttributionsData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = LineAttributionsData(varLineAttributionsData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "disassembly_line_number_to_ai_decompilation_line_numbers")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type UserProfile struct {
 	LastName string `json:"last_name"`
 	TimeZone string `json:"time_zone"`
 	Username string `json:"username"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UserProfile UserProfile
@@ -222,6 +222,11 @@ func (o UserProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize["last_name"] = o.LastName
 	toSerialize["time_zone"] = o.TimeZone
 	toSerialize["username"] = o.Username
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -253,15 +258,25 @@ func (o *UserProfile) UnmarshalJSON(data []byte) (err error) {
 
 	varUserProfile := _UserProfile{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUserProfile)
+	err = json.Unmarshal(data, &varUserProfile)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UserProfile(varUserProfile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "default_team_id")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "hide_example_binaries")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "time_zone")
+		delete(additionalProperties, "username")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

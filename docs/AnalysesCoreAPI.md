@@ -29,6 +29,7 @@ Method | HTTP request | Description
 [**UploadFile**](AnalysesCoreAPI.md#UploadFile) | **Post** /v2/upload | Upload File
 [**V3CreateAnalysis**](AnalysesCoreAPI.md#V3CreateAnalysis) | **Post** /v3/analyses | Create an analysis
 [**V3GetAnalysisAutoUnstripStatus**](AnalysesCoreAPI.md#V3GetAnalysisAutoUnstripStatus) | **Get** /v3/analyses/{analysis_id}/auto-unstrip/status | Get the auto-unstrip status for an analysis.
+[**V3GetAnalysisFunctionsProgress**](AnalysesCoreAPI.md#V3GetAnalysisFunctionsProgress) | **Get** /v3/analyses/{analysis_id}/progress/functions | Get function embedding progress for an analysis.
 [**V3GetAnalysisLogs**](AnalysesCoreAPI.md#V3GetAnalysisLogs) | **Get** /v3/analyses/{analysis_id}/logs | Get the Analysis log
 [**V3GetAnalysisOperation**](AnalysesCoreAPI.md#V3GetAnalysisOperation) | **Get** /v3/operations/analyses/{analysis_id} | Get an Analysis-creation operation
 [**V3GetAnalysisStrings**](AnalysesCoreAPI.md#V3GetAnalysisStrings) | **Get** /v3/analyses/{analysis_id}/functions/strings | List strings for an analysis.
@@ -1821,6 +1822,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V3GetAnalysisFunctionsProgress
+
+> FunctionsProgressOutputBody V3GetAnalysisFunctionsProgress(ctx, analysisId).Execute()
+
+Get function embedding progress for an analysis.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3GetAnalysisFunctionsProgress(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetAnalysisFunctionsProgress``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetAnalysisFunctionsProgress`: FunctionsProgressOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3GetAnalysisFunctionsProgress`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetAnalysisFunctionsProgressRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**FunctionsProgressOutputBody**](FunctionsProgressOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V3GetAnalysisLogs
 
 > GetAnalysisLogsOutputBody V3GetAnalysisLogs(ctx, analysisId).Execute()
@@ -2117,7 +2188,7 @@ Name | Type | Description  | Notes
 
 ## V3ListAnalyses
 
-> ListAnalysesOutputBody V3ListAnalyses(ctx).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
+> ListAnalysesOutputBody V3ListAnalyses(ctx).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).Platform(platform).Architecture(architecture).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
 
 List analyses
 
@@ -2137,11 +2208,13 @@ import (
 
 func main() {
 	searchTerm := "searchTerm_example" // string |  (optional)
-	analysisScope := []string{"AnalysisScope_example"} // []string | Leave empty for no filter (optional) (default to {"PRIVATE"})
+	analysisScope := []string{"AnalysisScope_example"} // []string | Leave empty to search your own, your team's and all public analyses (optional)
 	status := []string{"Status_example"} // []string |  (optional)
 	modelName := []*string{"Inner_example"} // []*string |  (optional)
 	usernames := []*string{"Inner_example"} // []*string |  (optional)
 	sha256Hash := "sha256Hash_example" // string |  (optional)
+	platform := []string{"Platform_example"} // []string | Restrict to binaries running on one of these operating-system platforms. Matches the uploader's override when they set one, the detected platform otherwise; a binary with neither is never matched. Leave empty for no filter (optional)
+	architecture := []string{"Architecture_example"} // []string | Restrict to binaries built for one of these instruction-set architectures. Resolved the same way as platform. Leave empty for no filter (optional)
 	pageSize := int64(789) // int64 |  (optional) (default to 20)
 	nextPageToken := "nextPageToken_example" // string | Forward-pagination cursor from a prior response. When set, order_by/order are taken from the token (the sort cannot change mid-pagination). (optional)
 	orderBy := "orderBy_example" // string |  (optional) (default to "created")
@@ -2149,7 +2222,7 @@ func main() {
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.V3ListAnalyses(context.Background()).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.V3ListAnalyses(context.Background()).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).Platform(platform).Architecture(architecture).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3ListAnalyses``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2171,11 +2244,13 @@ Other parameters are passed through a pointer to a apiV3ListAnalysesRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **searchTerm** | **string** |  | 
- **analysisScope** | **[]string** | Leave empty for no filter | [default to {&quot;PRIVATE&quot;}]
+ **analysisScope** | **[]string** | Leave empty to search your own, your team&#39;s and all public analyses | 
  **status** | **[]string** |  | 
  **modelName** | **[]string** |  | 
  **usernames** | **[]string** |  | 
  **sha256Hash** | **string** |  | 
+ **platform** | **[]string** | Restrict to binaries running on one of these operating-system platforms. Matches the uploader&#39;s override when they set one, the detected platform otherwise; a binary with neither is never matched. Leave empty for no filter | 
+ **architecture** | **[]string** | Restrict to binaries built for one of these instruction-set architectures. Resolved the same way as platform. Leave empty for no filter | 
  **pageSize** | **int64** |  | [default to 20]
  **nextPageToken** | **string** | Forward-pagination cursor from a prior response. When set, order_by/order are taken from the token (the sort cannot change mid-pagination). | 
  **orderBy** | **string** |  | [default to &quot;created&quot;]

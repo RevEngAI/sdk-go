@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ProcessMemdumps{}
 type ProcessMemdumps struct {
 	Dumps []MemdumpEntry `json:"dumps,omitempty"`
 	ProcessSeqid int64 `json:"process_seqid"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProcessMemdumps ProcessMemdumps
@@ -115,6 +115,11 @@ func (o ProcessMemdumps) ToMap() (map[string]interface{}, error) {
 		toSerialize["dumps"] = o.Dumps
 	}
 	toSerialize["process_seqid"] = o.ProcessSeqid
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,15 +147,21 @@ func (o *ProcessMemdumps) UnmarshalJSON(data []byte) (err error) {
 
 	varProcessMemdumps := _ProcessMemdumps{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProcessMemdumps)
+	err = json.Unmarshal(data, &varProcessMemdumps)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProcessMemdumps(varProcessMemdumps)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dumps")
+		delete(additionalProperties, "process_seqid")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type DrakvufFileMetadata struct {
 	Sha256 string `json:"sha256"`
 	Type *string `json:"type,omitempty"`
 	TypeId *string `json:"type_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DrakvufFileMetadata DrakvufFileMetadata
@@ -213,6 +213,11 @@ func (o DrakvufFileMetadata) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TypeId) {
 		toSerialize["type_id"] = o.TypeId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -241,15 +246,24 @@ func (o *DrakvufFileMetadata) UnmarshalJSON(data []byte) (err error) {
 
 	varDrakvufFileMetadata := _DrakvufFileMetadata{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDrakvufFileMetadata)
+	err = json.Unmarshal(data, &varDrakvufFileMetadata)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DrakvufFileMetadata(varDrakvufFileMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "mime_type")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sha256")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "type_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

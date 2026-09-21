@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type ListAnalysisDataTypesOutputBody struct {
 	Items []DataTypeEntry `json:"items"`
 	// Total types matching the filters, ignoring pagination.
 	TotalCount int64 `json:"total_count"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListAnalysisDataTypesOutputBody ListAnalysisDataTypesOutputBody
@@ -110,6 +110,11 @@ func (o ListAnalysisDataTypesOutputBody) ToMap() (map[string]interface{}, error)
 		toSerialize["items"] = o.Items
 	}
 	toSerialize["total_count"] = o.TotalCount
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -138,15 +143,21 @@ func (o *ListAnalysisDataTypesOutputBody) UnmarshalJSON(data []byte) (err error)
 
 	varListAnalysisDataTypesOutputBody := _ListAnalysisDataTypesOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListAnalysisDataTypesOutputBody)
+	err = json.Unmarshal(data, &varListAnalysisDataTypesOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListAnalysisDataTypesOutputBody(varListAnalysisDataTypesOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "items")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

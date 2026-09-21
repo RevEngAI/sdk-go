@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CopyFunctionSignaturesOutputBody struct {
 	DataTypes []DataTypeEntry `json:"data_types"`
 	// The stored signatures of the target functions, in request order.
 	Signatures []FunctionSignatureEntry `json:"signatures"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CopyFunctionSignaturesOutputBody CopyFunctionSignaturesOutputBody
@@ -115,6 +115,11 @@ func (o CopyFunctionSignaturesOutputBody) ToMap() (map[string]interface{}, error
 	if o.Signatures != nil {
 		toSerialize["signatures"] = o.Signatures
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,15 +148,21 @@ func (o *CopyFunctionSignaturesOutputBody) UnmarshalJSON(data []byte) (err error
 
 	varCopyFunctionSignaturesOutputBody := _CopyFunctionSignaturesOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCopyFunctionSignaturesOutputBody)
+	err = json.Unmarshal(data, &varCopyFunctionSignaturesOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CopyFunctionSignaturesOutputBody(varCopyFunctionSignaturesOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data_types")
+		delete(additionalProperties, "signatures")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

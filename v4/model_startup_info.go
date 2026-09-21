@@ -25,7 +25,10 @@ type StartupInfo struct {
 	Process *int64 `json:"process,omitempty"`
 	ProcessName *string `json:"process_name,omitempty"`
 	Status *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StartupInfo StartupInfo
 
 // NewStartupInfo instantiates a new StartupInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -299,7 +302,39 @@ func (o StartupInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StartupInfo) UnmarshalJSON(data []byte) (err error) {
+	varStartupInfo := _StartupInfo{}
+
+	err = json.Unmarshal(data, &varStartupInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StartupInfo(varStartupInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "arguments")
+		delete(additionalProperties, "error")
+		delete(additionalProperties, "error_code")
+		delete(additionalProperties, "pid")
+		delete(additionalProperties, "process")
+		delete(additionalProperties, "process_name")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStartupInfo struct {

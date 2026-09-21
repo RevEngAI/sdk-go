@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type Conversation struct {
 	Title string `json:"title"`
 	UpdatedAt time.Time `json:"updated_at"`
 	UserId int64 `json:"user_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Conversation Conversation
@@ -224,6 +224,11 @@ func (o Conversation) ToMap() (map[string]interface{}, error) {
 	toSerialize["title"] = o.Title
 	toSerialize["updated_at"] = o.UpdatedAt
 	toSerialize["user_id"] = o.UserId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -255,15 +260,25 @@ func (o *Conversation) UnmarshalJSON(data []byte) (err error) {
 
 	varConversation := _Conversation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConversation)
+	err = json.Unmarshal(data, &varConversation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Conversation(varConversation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "context")
+		delete(additionalProperties, "conversation_uuid")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "user_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

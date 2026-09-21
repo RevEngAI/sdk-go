@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &RenameOutputBody{}
 type RenameOutputBody struct {
 	// Number of functions renamed
 	RenamedCount int64 `json:"renamed_count"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RenameOutputBody RenameOutputBody
@@ -79,6 +79,11 @@ func (o RenameOutputBody) MarshalJSON() ([]byte, error) {
 func (o RenameOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["renamed_count"] = o.RenamedCount
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *RenameOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varRenameOutputBody := _RenameOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRenameOutputBody)
+	err = json.Unmarshal(data, &varRenameOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RenameOutputBody(varRenameOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "renamed_count")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

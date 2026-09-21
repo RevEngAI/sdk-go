@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -36,6 +35,7 @@ type SuggestedTypeView struct {
 	TypeToken *string `json:"type_token,omitempty"`
 	// Set only for a type with no observed members, where the suggestion is a name and a scalar type rather than a layout.
 	UnderlyingType *string `json:"underlying_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SuggestedTypeView SuggestedTypeView
@@ -319,6 +319,11 @@ func (o SuggestedTypeView) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UnderlyingType) {
 		toSerialize["underlying_type"] = o.UnderlyingType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -349,15 +354,27 @@ func (o *SuggestedTypeView) UnmarshalJSON(data []byte) (err error) {
 
 	varSuggestedTypeView := _SuggestedTypeView{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSuggestedTypeView)
+	err = json.Unmarshal(data, &varSuggestedTypeView)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SuggestedTypeView(varSuggestedTypeView)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data_type_id")
+		delete(additionalProperties, "holes")
+		delete(additionalProperties, "implied_size")
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "members")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type_token")
+		delete(additionalProperties, "underlying_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

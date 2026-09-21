@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type CryptoCall struct {
 	Library string `json:"library"`
 	// Name or token that matched
 	MatchedName string `json:"matched_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CryptoCall CryptoCall
@@ -191,6 +191,11 @@ func (o CryptoCall) ToMap() (map[string]interface{}, error) {
 	toSerialize["how"] = o.How
 	toSerialize["library"] = o.Library
 	toSerialize["matched_name"] = o.MatchedName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -222,15 +227,24 @@ func (o *CryptoCall) UnmarshalJSON(data []byte) (err error) {
 
 	varCryptoCall := _CryptoCall{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCryptoCall)
+	err = json.Unmarshal(data, &varCryptoCall)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CryptoCall(varCryptoCall)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "callee_name")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "how")
+		delete(additionalProperties, "library")
+		delete(additionalProperties, "matched_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
