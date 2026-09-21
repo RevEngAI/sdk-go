@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ListFunctionStringsOutputBody{}
 type ListFunctionStringsOutputBody struct {
 	Strings []FunctionStringItem `json:"strings"`
 	TotalStrings int64 `json:"total_strings"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListFunctionStringsOutputBody ListFunctionStringsOutputBody
@@ -109,6 +109,11 @@ func (o ListFunctionStringsOutputBody) ToMap() (map[string]interface{}, error) {
 		toSerialize["strings"] = o.Strings
 	}
 	toSerialize["total_strings"] = o.TotalStrings
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +142,21 @@ func (o *ListFunctionStringsOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varListFunctionStringsOutputBody := _ListFunctionStringsOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListFunctionStringsOutputBody)
+	err = json.Unmarshal(data, &varListFunctionStringsOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListFunctionStringsOutputBody(varListFunctionStringsOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "strings")
+		delete(additionalProperties, "total_strings")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

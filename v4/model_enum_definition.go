@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &EnumDefinition{}
 type EnumDefinition struct {
 	// The type's constants.
 	Values []DataTypeEnumValueEntry `json:"values"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EnumDefinition EnumDefinition
@@ -83,6 +83,11 @@ func (o EnumDefinition) ToMap() (map[string]interface{}, error) {
 	if o.Values != nil {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -110,15 +115,20 @@ func (o *EnumDefinition) UnmarshalJSON(data []byte) (err error) {
 
 	varEnumDefinition := _EnumDefinition{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEnumDefinition)
+	err = json.Unmarshal(data, &varEnumDefinition)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EnumDefinition(varEnumDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -34,10 +33,13 @@ type BaseDataType struct {
 	Namespace string `json:"namespace"`
 	// Size in bytes, absent when it could not be determined.
 	Size *int64 `json:"size,omitempty"`
+	// ID of the analysis the source function belongs to, when it could be resolved.
+	SourceAnalysisId *int64 `json:"source_analysis_id,omitempty"`
 	// The function this type was copied from, when transferred rather than extracted.
 	SourceFunctionId *int64 `json:"source_function_id,omitempty"`
 	// Where this type came from.
 	SourceType string `json:"source_type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BaseDataType BaseDataType
@@ -242,6 +244,38 @@ func (o *BaseDataType) SetSize(v int64) {
 	o.Size = &v
 }
 
+// GetSourceAnalysisId returns the SourceAnalysisId field value if set, zero value otherwise.
+func (o *BaseDataType) GetSourceAnalysisId() int64 {
+	if o == nil || IsNil(o.SourceAnalysisId) {
+		var ret int64
+		return ret
+	}
+	return *o.SourceAnalysisId
+}
+
+// GetSourceAnalysisIdOk returns a tuple with the SourceAnalysisId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BaseDataType) GetSourceAnalysisIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.SourceAnalysisId) {
+		return nil, false
+	}
+	return o.SourceAnalysisId, true
+}
+
+// HasSourceAnalysisId returns a boolean if a field has been set.
+func (o *BaseDataType) HasSourceAnalysisId() bool {
+	if o != nil && !IsNil(o.SourceAnalysisId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceAnalysisId gets a reference to the given int64 and assigns it to the SourceAnalysisId field.
+func (o *BaseDataType) SetSourceAnalysisId(v int64) {
+	o.SourceAnalysisId = &v
+}
+
 // GetSourceFunctionId returns the SourceFunctionId field value if set, zero value otherwise.
 func (o *BaseDataType) GetSourceFunctionId() int64 {
 	if o == nil || IsNil(o.SourceFunctionId) {
@@ -317,10 +351,18 @@ func (o BaseDataType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
+	if !IsNil(o.SourceAnalysisId) {
+		toSerialize["source_analysis_id"] = o.SourceAnalysisId
+	}
 	if !IsNil(o.SourceFunctionId) {
 		toSerialize["source_function_id"] = o.SourceFunctionId
 	}
 	toSerialize["source_type"] = o.SourceType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -354,15 +396,29 @@ func (o *BaseDataType) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseDataType := _BaseDataType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBaseDataType)
+	err = json.Unmarshal(data, &varBaseDataType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseDataType(varBaseDataType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "data_type_id")
+		delete(additionalProperties, "has_definition")
+		delete(additionalProperties, "kind")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "namespace")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "source_analysis_id")
+		delete(additionalProperties, "source_function_id")
+		delete(additionalProperties, "source_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

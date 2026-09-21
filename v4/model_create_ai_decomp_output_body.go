@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &CreateAIDecompOutputBody{}
 // CreateAIDecompOutputBody struct for CreateAIDecompOutputBody
 type CreateAIDecompOutputBody struct {
 	Status bool `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateAIDecompOutputBody CreateAIDecompOutputBody
@@ -78,6 +78,11 @@ func (o CreateAIDecompOutputBody) MarshalJSON() ([]byte, error) {
 func (o CreateAIDecompOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -105,15 +110,20 @@ func (o *CreateAIDecompOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateAIDecompOutputBody := _CreateAIDecompOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateAIDecompOutputBody)
+	err = json.Unmarshal(data, &varCreateAIDecompOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateAIDecompOutputBody(varCreateAIDecompOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

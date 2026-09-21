@@ -8,12 +8,13 @@ Name | Type | Description | Notes
 **Detail** | Pointer to **string** | Additional context where helpful (quota numbers, validation specifics, etc.). | [optional] 
 **DocUrl** | **string** | Link to documentation explaining this error and resolution steps. | 
 **Message** | **string** | Brief description of the failure. | 
+**Retryable** | **bool** | Whether retrying the operation might succeed. | 
 
 ## Methods
 
 ### NewStatus
 
-`func NewStatus(code string, docUrl string, message string, ) *Status`
+`func NewStatus(code string, docUrl string, message string, retryable bool, ) *Status`
 
 NewStatus instantiates a new Status object
 This constructor will assign default values to properties that have it defined,
@@ -111,6 +112,26 @@ and a boolean to check if the value has been set.
 `func (o *Status) SetMessage(v string)`
 
 SetMessage sets Message field to given value.
+
+
+### GetRetryable
+
+`func (o *Status) GetRetryable() bool`
+
+GetRetryable returns the Retryable field if non-nil, zero value otherwise.
+
+### GetRetryableOk
+
+`func (o *Status) GetRetryableOk() (*bool, bool)`
+
+GetRetryableOk returns a tuple with the Retryable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetryable
+
+`func (o *Status) SetRetryable(v bool)`
+
+SetRetryable sets Retryable field to given value.
 
 
 

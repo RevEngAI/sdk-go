@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &GetDataTypeHistoryBody{}
 type GetDataTypeHistoryBody struct {
 	// Every version of the type, newest first. The first element is the current value, so the list is never empty; a type that has never been edited has that one element only.
 	Versions []DataTypeVersion `json:"versions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetDataTypeHistoryBody GetDataTypeHistoryBody
@@ -79,6 +79,11 @@ func (o GetDataTypeHistoryBody) MarshalJSON() ([]byte, error) {
 func (o GetDataTypeHistoryBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["versions"] = o.Versions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *GetDataTypeHistoryBody) UnmarshalJSON(data []byte) (err error) {
 
 	varGetDataTypeHistoryBody := _GetDataTypeHistoryBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetDataTypeHistoryBody)
+	err = json.Unmarshal(data, &varGetDataTypeHistoryBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetDataTypeHistoryBody(varGetDataTypeHistoryBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "versions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

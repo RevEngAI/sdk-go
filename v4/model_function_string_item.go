@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type FunctionStringItem struct {
 	Source string `json:"source"`
 	Vaddr int64 `json:"vaddr"`
 	Value string `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionStringItem FunctionStringItem
@@ -132,6 +132,11 @@ func (o FunctionStringItem) ToMap() (map[string]interface{}, error) {
 	toSerialize["source"] = o.Source
 	toSerialize["vaddr"] = o.Vaddr
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -161,15 +166,22 @@ func (o *FunctionStringItem) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionStringItem := _FunctionStringItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionStringItem)
+	err = json.Unmarshal(data, &varFunctionStringItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionStringItem(varFunctionStringItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "vaddr")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

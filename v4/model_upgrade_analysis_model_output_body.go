@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type UpgradeAnalysisModelOutputBody struct {
 	BinaryId int64 `json:"binary_id"`
 	// Model the analysis is now queued against
 	ModelId int64 `json:"model_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpgradeAnalysisModelOutputBody UpgradeAnalysisModelOutputBody
@@ -135,6 +135,11 @@ func (o UpgradeAnalysisModelOutputBody) ToMap() (map[string]interface{}, error) 
 	toSerialize["analysis_id"] = o.AnalysisId
 	toSerialize["binary_id"] = o.BinaryId
 	toSerialize["model_id"] = o.ModelId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -164,15 +169,22 @@ func (o *UpgradeAnalysisModelOutputBody) UnmarshalJSON(data []byte) (err error) 
 
 	varUpgradeAnalysisModelOutputBody := _UpgradeAnalysisModelOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpgradeAnalysisModelOutputBody)
+	err = json.Unmarshal(data, &varUpgradeAnalysisModelOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpgradeAnalysisModelOutputBody(varUpgradeAnalysisModelOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "model_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

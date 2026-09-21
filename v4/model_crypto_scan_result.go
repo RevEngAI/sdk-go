@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CryptoScanResult struct {
 	Findings []CryptoFinding `json:"findings,omitempty"`
 	// Functions the run considered
 	TotalFunctions int64 `json:"total_functions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CryptoScanResult CryptoScanResult
@@ -145,6 +145,11 @@ func (o CryptoScanResult) ToMap() (map[string]interface{}, error) {
 		toSerialize["findings"] = o.Findings
 	}
 	toSerialize["total_functions"] = o.TotalFunctions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -173,15 +178,22 @@ func (o *CryptoScanResult) UnmarshalJSON(data []byte) (err error) {
 
 	varCryptoScanResult := _CryptoScanResult{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCryptoScanResult)
+	err = json.Unmarshal(data, &varCryptoScanResult)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CryptoScanResult(varCryptoScanResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "findings")
+		delete(additionalProperties, "total_functions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ReportInfo struct {
 	TimeAnalysisFinished *string `json:"time_analysis_finished,omitempty"`
 	TimeExecutionStarted *string `json:"time_execution_started,omitempty"`
 	TimeStarted *string `json:"time_started,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReportInfo ReportInfo
@@ -330,6 +330,11 @@ func (o ReportInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeStarted) {
 		toSerialize["time_started"] = o.TimeStarted
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -357,15 +362,27 @@ func (o *ReportInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varReportInfo := _ReportInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReportInfo)
+	err = json.Unmarshal(data, &varReportInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReportInfo(varReportInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "file")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "options")
+		delete(additionalProperties, "os_profile")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "time_analysis_finished")
+		delete(additionalProperties, "time_execution_started")
+		delete(additionalProperties, "time_started")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

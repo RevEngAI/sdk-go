@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type BatchRenameItem struct {
 	NewMangledName *string `json:"new_mangled_name,omitempty"`
 	// New function name
 	NewName string `json:"new_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BatchRenameItem BatchRenameItem
@@ -144,6 +144,11 @@ func (o BatchRenameItem) ToMap() (map[string]interface{}, error) {
 		toSerialize["new_mangled_name"] = o.NewMangledName
 	}
 	toSerialize["new_name"] = o.NewName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -172,15 +177,22 @@ func (o *BatchRenameItem) UnmarshalJSON(data []byte) (err error) {
 
 	varBatchRenameItem := _BatchRenameItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBatchRenameItem)
+	err = json.Unmarshal(data, &varBatchRenameItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BatchRenameItem(varBatchRenameItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "new_mangled_name")
+		delete(additionalProperties, "new_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

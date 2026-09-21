@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type AnalysisTagBody struct {
 	Name string `json:"name"`
 	// Origin of the tag
 	Origin string `json:"origin"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisTagBody AnalysisTagBody
@@ -137,6 +137,11 @@ func (o AnalysisTagBody) ToMap() (map[string]interface{}, error) {
 	toSerialize["collection_id"] = o.CollectionId.Get()
 	toSerialize["name"] = o.Name
 	toSerialize["origin"] = o.Origin
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -166,15 +171,22 @@ func (o *AnalysisTagBody) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisTagBody := _AnalysisTagBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisTagBody)
+	err = json.Unmarshal(data, &varAnalysisTagBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisTagBody(varAnalysisTagBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "collection_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "origin")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type MemdumpEntry struct {
 	Size int64 `json:"size"`
 	TargetAddr *string `json:"target_addr,omitempty"`
 	TargetProcess *int64 `json:"target_process,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MemdumpEntry MemdumpEntry
@@ -429,6 +429,11 @@ func (o MemdumpEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TargetProcess) {
 		toSerialize["target_process"] = o.TargetProcess
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -461,15 +466,31 @@ func (o *MemdumpEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varMemdumpEntry := _MemdumpEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMemdumpEntry)
+	err = json.Unmarshal(data, &varMemdumpEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MemdumpEntry(varMemdumpEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "dump_reason")
+		delete(additionalProperties, "file_type")
+		delete(additionalProperties, "filename")
+		delete(additionalProperties, "index")
+		delete(additionalProperties, "is_pe")
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "mime_type")
+		delete(additionalProperties, "sha256")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "target_addr")
+		delete(additionalProperties, "target_process")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

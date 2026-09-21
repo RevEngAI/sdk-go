@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type DnsQuery struct {
 	Events []ReportEvent `json:"events,omitempty"`
 	MinTtl *int64 `json:"min_ttl,omitempty"`
 	ResolvedIps []string `json:"resolved_ips,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DnsQuery DnsQuery
@@ -225,6 +225,11 @@ func (o DnsQuery) ToMap() (map[string]interface{}, error) {
 	if o.ResolvedIps != nil {
 		toSerialize["resolved_ips"] = o.ResolvedIps
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -252,15 +257,24 @@ func (o *DnsQuery) UnmarshalJSON(data []byte) (err error) {
 
 	varDnsQuery := _DnsQuery{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDnsQuery)
+	err = json.Unmarshal(data, &varDnsQuery)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DnsQuery(varDnsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cname_chain")
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "min_ttl")
+		delete(additionalProperties, "resolved_ips")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

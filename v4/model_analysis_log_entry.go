@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type AnalysisLogEntry struct {
 	Text string `json:"text"`
 	// When the line was emitted (UTC)
 	Timestamp time.Time `json:"timestamp"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AnalysisLogEntry AnalysisLogEntry
@@ -164,6 +164,11 @@ func (o AnalysisLogEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize["source"] = o.Source
 	toSerialize["text"] = o.Text
 	toSerialize["timestamp"] = o.Timestamp
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *AnalysisLogEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varAnalysisLogEntry := _AnalysisLogEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAnalysisLogEntry)
+	err = json.Unmarshal(data, &varAnalysisLogEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AnalysisLogEntry(varAnalysisLogEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "level")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

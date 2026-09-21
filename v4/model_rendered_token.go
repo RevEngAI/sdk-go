@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type RenderedToken struct {
 	Vaddr *int64 `json:"vaddr,omitempty"`
 	// Name the token resolves to.
 	Value string `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RenderedToken RenderedToken
@@ -255,6 +255,11 @@ func (o RenderedToken) ToMap() (map[string]interface{}, error) {
 		toSerialize["vaddr"] = o.Vaddr
 	}
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -283,15 +288,25 @@ func (o *RenderedToken) UnmarshalJSON(data []byte) (err error) {
 
 	varRenderedToken := _RenderedToken{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRenderedToken)
+	err = json.Unmarshal(data, &varRenderedToken)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RenderedToken(varRenderedToken)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data_type_id")
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "imported_function_id")
+		delete(additionalProperties, "kind")
+		delete(additionalProperties, "vaddr")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

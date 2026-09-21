@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type Binary struct {
 	IsSystemAnalysis bool `json:"is_system_analysis"`
 	OwnerId int64 `json:"owner_id"`
 	Sha256Hash string `json:"sha_256_hash"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Binary Binary
@@ -241,6 +241,11 @@ func (o Binary) ToMap() (map[string]interface{}, error) {
 	toSerialize["is_system_analysis"] = o.IsSystemAnalysis
 	toSerialize["owner_id"] = o.OwnerId
 	toSerialize["sha_256_hash"] = o.Sha256Hash
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -274,15 +279,26 @@ func (o *Binary) UnmarshalJSON(data []byte) (err error) {
 
 	varBinary := _Binary{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBinary)
+	err = json.Unmarshal(data, &varBinary)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Binary(varBinary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "binary_name")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "is_system_analysis")
+		delete(additionalProperties, "owner_id")
+		delete(additionalProperties, "sha_256_hash")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

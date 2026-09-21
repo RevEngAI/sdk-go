@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type GetTokensResponse struct {
 	PlaceholderToRenderedToken map[string]RenderedToken `json:"placeholder_to_rendered_token"`
 	// The caller's own overrides, keyed by token. Null until a run has succeeded.
 	PlaceholderToUserOverride map[string]Token `json:"placeholder_to_user_override"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetTokensResponse GetTokensResponse
@@ -163,6 +163,11 @@ func (o GetTokensResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["analysis_id"] = o.AnalysisId
 	toSerialize["placeholder_to_rendered_token"] = o.PlaceholderToRenderedToken
 	toSerialize["placeholder_to_user_override"] = o.PlaceholderToUserOverride
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -193,15 +198,23 @@ func (o *GetTokensResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varGetTokensResponse := _GetTokensResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetTokensResponse)
+	err = json.Unmarshal(data, &varGetTokensResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetTokensResponse(varGetTokensResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ai_decomp")
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "placeholder_to_rendered_token")
+		delete(additionalProperties, "placeholder_to_user_override")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

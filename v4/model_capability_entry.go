@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CapabilityEntry struct {
 	FunctionName string `json:"function_name"`
 	Type string `json:"type"`
 	Vaddr int64 `json:"vaddr"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CapabilityEntry CapabilityEntry
@@ -213,6 +213,11 @@ func (o CapabilityEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize["function_name"] = o.FunctionName
 	toSerialize["type"] = o.Type
 	toSerialize["vaddr"] = o.Vaddr
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -245,15 +250,25 @@ func (o *CapabilityEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varCapabilityEntry := _CapabilityEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCapabilityEntry)
+	err = json.Unmarshal(data, &varCapabilityEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CapabilityEntry(varCapabilityEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "capability")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "vaddr")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

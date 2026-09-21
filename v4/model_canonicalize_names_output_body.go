@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &CanonicalizeNamesOutputBody{}
 type CanonicalizeNamesOutputBody struct {
 	// Canonicalized names in the same order as the input.
 	Results []CanonicalName `json:"results"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CanonicalizeNamesOutputBody CanonicalizeNamesOutputBody
@@ -83,6 +83,11 @@ func (o CanonicalizeNamesOutputBody) ToMap() (map[string]interface{}, error) {
 	if o.Results != nil {
 		toSerialize["results"] = o.Results
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -110,15 +115,20 @@ func (o *CanonicalizeNamesOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varCanonicalizeNamesOutputBody := _CanonicalizeNamesOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCanonicalizeNamesOutputBody)
+	err = json.Unmarshal(data, &varCanonicalizeNamesOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CanonicalizeNamesOutputBody(varCanonicalizeNamesOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

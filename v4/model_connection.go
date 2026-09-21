@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type Connection struct {
 	RemoteIp string `json:"remote_ip"`
 	RemotePort interface{} `json:"remote_port"`
 	TcpCarvedFiles []TcpCarvedFile `json:"tcp_carved_files,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Connection Connection
@@ -412,6 +412,11 @@ func (o Connection) ToMap() (map[string]interface{}, error) {
 	if o.TcpCarvedFiles != nil {
 		toSerialize["tcp_carved_files"] = o.TcpCarvedFiles
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -443,15 +448,30 @@ func (o *Connection) UnmarshalJSON(data []byte) (err error) {
 
 	varConnection := _Connection{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConnection)
+	err = json.Unmarshal(data, &varConnection)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Connection(varConnection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bytes_received")
+		delete(additionalProperties, "bytes_sent")
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "ja3")
+		delete(additionalProperties, "ja3s")
+		delete(additionalProperties, "local_ip")
+		delete(additionalProperties, "local_port")
+		delete(additionalProperties, "protocol")
+		delete(additionalProperties, "remote_ip")
+		delete(additionalProperties, "remote_port")
+		delete(additionalProperties, "tcp_carved_files")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

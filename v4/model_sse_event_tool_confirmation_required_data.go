@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type SseEventToolConfirmationRequiredData struct {
 	EventId int64 `json:"event_id"`
 	SourceRunId *string `json:"source_run_id,omitempty"`
 	Type string `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SseEventToolConfirmationRequiredData SseEventToolConfirmationRequiredData
@@ -172,6 +172,11 @@ func (o SseEventToolConfirmationRequiredData) ToMap() (map[string]interface{}, e
 		toSerialize["source_run_id"] = o.SourceRunId
 	}
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -201,15 +206,23 @@ func (o *SseEventToolConfirmationRequiredData) UnmarshalJSON(data []byte) (err e
 
 	varSseEventToolConfirmationRequiredData := _SseEventToolConfirmationRequiredData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSseEventToolConfirmationRequiredData)
+	err = json.Unmarshal(data, &varSseEventToolConfirmationRequiredData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SseEventToolConfirmationRequiredData(varSseEventToolConfirmationRequiredData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "event_id")
+		delete(additionalProperties, "source_run_id")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

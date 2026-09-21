@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Fields** | **[]string** |  | 
-**Values** | Pointer to **map[string]string** |  | [optional] [default to {}]
-**Reason** | **string** |  | 
+**Fields** | **[]string** | CreateAnalysis field paths that must be provided or enabled to satisfy this requirement. | 
+**Reason** | **string** | Why this requirement unblocks analysis. | 
+**Values** | Pointer to **map[string]string** | Field paths that must carry a specific value, keyed the same way as fields. | [optional] 
 
 ## Methods
 
@@ -47,6 +47,36 @@ and a boolean to check if the value has been set.
 SetFields sets Fields field to given value.
 
 
+### SetFieldsNil
+
+`func (o *AnalysisRequirement) SetFieldsNil(b bool)`
+
+ SetFieldsNil sets the value for Fields to be an explicit nil
+
+### UnsetFields
+`func (o *AnalysisRequirement) UnsetFields()`
+
+UnsetFields ensures that no value is present for Fields, not even an explicit nil
+### GetReason
+
+`func (o *AnalysisRequirement) GetReason() string`
+
+GetReason returns the Reason field if non-nil, zero value otherwise.
+
+### GetReasonOk
+
+`func (o *AnalysisRequirement) GetReasonOk() (*string, bool)`
+
+GetReasonOk returns a tuple with the Reason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReason
+
+`func (o *AnalysisRequirement) SetReason(v string)`
+
+SetReason sets Reason field to given value.
+
+
 ### GetValues
 
 `func (o *AnalysisRequirement) GetValues() map[string]string`
@@ -71,26 +101,6 @@ SetValues sets Values field to given value.
 `func (o *AnalysisRequirement) HasValues() bool`
 
 HasValues returns a boolean if a field has been set.
-
-### GetReason
-
-`func (o *AnalysisRequirement) GetReason() string`
-
-GetReason returns the Reason field if non-nil, zero value otherwise.
-
-### GetReasonOk
-
-`func (o *AnalysisRequirement) GetReasonOk() (*string, bool)`
-
-GetReasonOk returns a tuple with the Reason field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReason
-
-`func (o *AnalysisRequirement) SetReason(v string)`
-
-SetReason sets Reason field to given value.
-
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

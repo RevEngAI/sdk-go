@@ -22,7 +22,10 @@ type SignatureStorageInput struct {
 	Kind *string `json:"kind,omitempty"`
 	// Register name or stack slot.
 	Location *string `json:"location,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SignatureStorageInput SignatureStorageInput
 
 // NewSignatureStorageInput instantiates a new SignatureStorageInput object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o SignatureStorageInput) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Location) {
 		toSerialize["location"] = o.Location
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SignatureStorageInput) UnmarshalJSON(data []byte) (err error) {
+	varSignatureStorageInput := _SignatureStorageInput{}
+
+	err = json.Unmarshal(data, &varSignatureStorageInput)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SignatureStorageInput(varSignatureStorageInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "kind")
+		delete(additionalProperties, "location")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSignatureStorageInput struct {

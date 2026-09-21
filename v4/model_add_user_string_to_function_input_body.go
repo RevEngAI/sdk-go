@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type AddUserStringToFunctionInputBody struct {
 	String string `json:"string"`
 	// Virtual address at which this string is defined.
 	VirtualAddress int64 `json:"virtual_address"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AddUserStringToFunctionInputBody AddUserStringToFunctionInputBody
@@ -107,6 +107,11 @@ func (o AddUserStringToFunctionInputBody) ToMap() (map[string]interface{}, error
 	toSerialize := map[string]interface{}{}
 	toSerialize["string"] = o.String
 	toSerialize["virtual_address"] = o.VirtualAddress
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *AddUserStringToFunctionInputBody) UnmarshalJSON(data []byte) (err error
 
 	varAddUserStringToFunctionInputBody := _AddUserStringToFunctionInputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddUserStringToFunctionInputBody)
+	err = json.Unmarshal(data, &varAddUserStringToFunctionInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddUserStringToFunctionInputBody(varAddUserStringToFunctionInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "string")
+		delete(additionalProperties, "virtual_address")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

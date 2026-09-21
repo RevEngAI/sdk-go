@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type ListAnalysisFunctionsOutputBody struct {
 	Functions []AnalysisFunctionEntry `json:"functions"`
 	// Total functions in the analysis, ignoring pagination.
 	TotalCount int64 `json:"total_count"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListAnalysisFunctionsOutputBody ListAnalysisFunctionsOutputBody
@@ -110,6 +110,11 @@ func (o ListAnalysisFunctionsOutputBody) ToMap() (map[string]interface{}, error)
 		toSerialize["functions"] = o.Functions
 	}
 	toSerialize["total_count"] = o.TotalCount
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -138,15 +143,21 @@ func (o *ListAnalysisFunctionsOutputBody) UnmarshalJSON(data []byte) (err error)
 
 	varListAnalysisFunctionsOutputBody := _ListAnalysisFunctionsOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListAnalysisFunctionsOutputBody)
+	err = json.Unmarshal(data, &varListAnalysisFunctionsOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListAnalysisFunctionsOutputBody(varListAnalysisFunctionsOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "functions")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

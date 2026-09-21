@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type GetMatchesOutputBody struct {
 	Matches []FunctionMatch `json:"matches,omitempty"`
 	// Current workflow status
 	Status string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetMatchesOutputBody GetMatchesOutputBody
@@ -117,6 +117,11 @@ func (o GetMatchesOutputBody) ToMap() (map[string]interface{}, error) {
 		toSerialize["matches"] = o.Matches
 	}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *GetMatchesOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varGetMatchesOutputBody := _GetMatchesOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetMatchesOutputBody)
+	err = json.Unmarshal(data, &varGetMatchesOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetMatchesOutputBody(varGetMatchesOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "matches")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

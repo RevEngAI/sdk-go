@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ProductSummary{}
 type ProductSummary struct {
 	// Product name.
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProductSummary ProductSummary
@@ -79,6 +79,11 @@ func (o ProductSummary) MarshalJSON() ([]byte, error) {
 func (o ProductSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *ProductSummary) UnmarshalJSON(data []byte) (err error) {
 
 	varProductSummary := _ProductSummary{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProductSummary)
+	err = json.Unmarshal(data, &varProductSummary)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProductSummary(varProductSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

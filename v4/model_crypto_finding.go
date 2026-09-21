@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type CryptoFinding struct {
 	FunctionSize int64 `json:"function_size"`
 	// Distinct crypto libraries evidenced by this function
 	Libraries []string `json:"libraries"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CryptoFinding CryptoFinding
@@ -359,6 +359,11 @@ func (o CryptoFinding) ToMap() (map[string]interface{}, error) {
 	if o.Libraries != nil {
 		toSerialize["libraries"] = o.Libraries
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -393,15 +398,29 @@ func (o *CryptoFinding) UnmarshalJSON(data []byte) (err error) {
 
 	varCryptoFinding := _CryptoFinding{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCryptoFinding)
+	err = json.Unmarshal(data, &varCryptoFinding)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CryptoFinding(varCryptoFinding)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "categories")
+		delete(additionalProperties, "confidence")
+		delete(additionalProperties, "crypto_calls")
+		delete(additionalProperties, "direct_matches")
+		delete(additionalProperties, "evidence_count")
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "function_size")
+		delete(additionalProperties, "libraries")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

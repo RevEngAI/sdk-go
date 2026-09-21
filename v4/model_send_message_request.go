@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &SendMessageRequest{}
 type SendMessageRequest struct {
 	Content string `json:"content"`
 	Context *ConversationContext `json:"context,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SendMessageRequest SendMessageRequest
@@ -114,6 +114,11 @@ func (o SendMessageRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Context) {
 		toSerialize["context"] = o.Context
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -141,15 +146,21 @@ func (o *SendMessageRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varSendMessageRequest := _SendMessageRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSendMessageRequest)
+	err = json.Unmarshal(data, &varSendMessageRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SendMessageRequest(varSendMessageRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content")
+		delete(additionalProperties, "context")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

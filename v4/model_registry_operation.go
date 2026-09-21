@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &RegistryOperation{}
 type RegistryOperation struct {
 	Events []ReportEvent `json:"events,omitempty"`
 	Key string `json:"key"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RegistryOperation RegistryOperation
@@ -115,6 +115,11 @@ func (o RegistryOperation) ToMap() (map[string]interface{}, error) {
 		toSerialize["events"] = o.Events
 	}
 	toSerialize["key"] = o.Key
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,15 +147,21 @@ func (o *RegistryOperation) UnmarshalJSON(data []byte) (err error) {
 
 	varRegistryOperation := _RegistryOperation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRegistryOperation)
+	err = json.Unmarshal(data, &varRegistryOperation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RegistryOperation(varRegistryOperation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "key")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

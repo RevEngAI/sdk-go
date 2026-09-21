@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ConsoleOutputEntry{}
 type ConsoleOutputEntry struct {
 	Output string `json:"output"`
 	ProcessSeqid int64 `json:"process_seqid"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConsoleOutputEntry ConsoleOutputEntry
@@ -105,6 +105,11 @@ func (o ConsoleOutputEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["output"] = o.Output
 	toSerialize["process_seqid"] = o.ProcessSeqid
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *ConsoleOutputEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varConsoleOutputEntry := _ConsoleOutputEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConsoleOutputEntry)
+	err = json.Unmarshal(data, &varConsoleOutputEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConsoleOutputEntry(varConsoleOutputEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "output")
+		delete(additionalProperties, "process_seqid")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

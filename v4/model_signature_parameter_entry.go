@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type SignatureParameterEntry struct {
 	Ordinal int64 `json:"ordinal"`
 	// Where the parameter is passed.
 	Storage *SignatureStorageEntry `json:"storage,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SignatureParameterEntry SignatureParameterEntry
@@ -227,6 +227,11 @@ func (o SignatureParameterEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Storage) {
 		toSerialize["storage"] = o.Storage
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -254,15 +259,24 @@ func (o *SignatureParameterEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varSignatureParameterEntry := _SignatureParameterEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSignatureParameterEntry)
+	err = json.Unmarshal(data, &varSignatureParameterEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SignatureParameterEntry(varSignatureParameterEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bit_length")
+		delete(additionalProperties, "data_type_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "ordinal")
+		delete(additionalProperties, "storage")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

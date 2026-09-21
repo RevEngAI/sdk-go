@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type ProgressMessage struct {
 	Text string `json:"text"`
 	// When the message was emitted
 	Timestamp time.Time `json:"timestamp"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProgressMessage ProgressMessage
@@ -164,6 +164,11 @@ func (o ProgressMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize["step"] = o.Step
 	toSerialize["text"] = o.Text
 	toSerialize["timestamp"] = o.Timestamp
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *ProgressMessage) UnmarshalJSON(data []byte) (err error) {
 
 	varProgressMessage := _ProgressMessage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProgressMessage)
+	err = json.Unmarshal(data, &varProgressMessage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProgressMessage(varProgressMessage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "level")
+		delete(additionalProperties, "step")
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

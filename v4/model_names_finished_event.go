@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type NamesFinishedEvent struct {
 	Attempt int32 `json:"attempt"`
 	Seq int32 `json:"seq"`
 	Type string `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _NamesFinishedEvent NamesFinishedEvent
@@ -159,6 +159,11 @@ func (o NamesFinishedEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize["attempt"] = o.Attempt
 	toSerialize["seq"] = o.Seq
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -189,15 +194,23 @@ func (o *NamesFinishedEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varNamesFinishedEvent := _NamesFinishedEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varNamesFinishedEvent)
+	err = json.Unmarshal(data, &varNamesFinishedEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NamesFinishedEvent(varNamesFinishedEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applied")
+		delete(additionalProperties, "attempt")
+		delete(additionalProperties, "seq")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

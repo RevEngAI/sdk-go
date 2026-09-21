@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type FunctionBoundary struct {
 	IncludeInAnalysis *bool `json:"include_in_analysis,omitempty"`
 	MangledName string `json:"mangled_name"`
 	StartAddress int64 `json:"start_address"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionBoundary FunctionBoundary
@@ -168,6 +168,11 @@ func (o FunctionBoundary) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["mangled_name"] = o.MangledName
 	toSerialize["start_address"] = o.StartAddress
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -197,15 +202,23 @@ func (o *FunctionBoundary) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionBoundary := _FunctionBoundary{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionBoundary)
+	err = json.Unmarshal(data, &varFunctionBoundary)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionBoundary(varFunctionBoundary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "end_address")
+		delete(additionalProperties, "include_in_analysis")
+		delete(additionalProperties, "mangled_name")
+		delete(additionalProperties, "start_address")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

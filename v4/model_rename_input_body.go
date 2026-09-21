@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type RenameInputBody struct {
 	NewName string `json:"new_name"`
 	// Source that triggered the rename
 	SourceType *string `json:"source_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RenameInputBody RenameInputBody
@@ -153,6 +153,11 @@ func (o RenameInputBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SourceType) {
 		toSerialize["source_type"] = o.SourceType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -180,15 +185,22 @@ func (o *RenameInputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varRenameInputBody := _RenameInputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRenameInputBody)
+	err = json.Unmarshal(data, &varRenameInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RenameInputBody(varRenameInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "new_mangled_name")
+		delete(additionalProperties, "new_name")
+		delete(additionalProperties, "source_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

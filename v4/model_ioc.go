@@ -19,15 +19,18 @@ var _ MappedNullable = &IOC{}
 
 // IOC struct for IOC
 type IOC struct {
-	// Type of the IOC
-	Type string `json:"type"`
-	// Value of the IOC
-	Value string `json:"value"`
-	// Description of the IOC
+	// What the indicator means
 	Description string `json:"description"`
-	Source NullableString `json:"source,omitempty"`
-	FunctionId NullableInt32 `json:"function_id,omitempty"`
-	FunctionName NullableString `json:"function_name,omitempty"`
+	// ID of the function it was found in. Null when the source does not resolve to one.
+	FunctionId NullableInt64 `json:"function_id"`
+	// Name of the function it was found in. Null when the source does not resolve to one.
+	FunctionName NullableString `json:"function_name"`
+	// Where in the binary it was found, usually a hex address. Null when the agent did not report one.
+	Source NullableString `json:"source"`
+	// Indicator type
+	Type string `json:"type"`
+	// The indicator itself
+	Value string `json:"value"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,11 +40,14 @@ type _IOC IOC
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIOC(type_ string, value string, description string) *IOC {
+func NewIOC(description string, functionId NullableInt64, functionName NullableString, source NullableString, type_ string, value string) *IOC {
 	this := IOC{}
+	this.Description = description
+	this.FunctionId = functionId
+	this.FunctionName = functionName
+	this.Source = source
 	this.Type = type_
 	this.Value = value
-	this.Description = description
 	return &this
 }
 
@@ -51,6 +57,108 @@ func NewIOC(type_ string, value string, description string) *IOC {
 func NewIOCWithDefaults() *IOC {
 	this := IOC{}
 	return &this
+}
+
+// GetDescription returns the Description field value
+func (o *IOC) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *IOC) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *IOC) SetDescription(v string) {
+	o.Description = v
+}
+
+// GetFunctionId returns the FunctionId field value
+// If the value is explicit nil, the zero value for int64 will be returned
+func (o *IOC) GetFunctionId() int64 {
+	if o == nil || o.FunctionId.Get() == nil {
+		var ret int64
+		return ret
+	}
+
+	return *o.FunctionId.Get()
+}
+
+// GetFunctionIdOk returns a tuple with the FunctionId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IOC) GetFunctionIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FunctionId.Get(), o.FunctionId.IsSet()
+}
+
+// SetFunctionId sets field value
+func (o *IOC) SetFunctionId(v int64) {
+	o.FunctionId.Set(&v)
+}
+
+// GetFunctionName returns the FunctionName field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *IOC) GetFunctionName() string {
+	if o == nil || o.FunctionName.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.FunctionName.Get()
+}
+
+// GetFunctionNameOk returns a tuple with the FunctionName field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IOC) GetFunctionNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FunctionName.Get(), o.FunctionName.IsSet()
+}
+
+// SetFunctionName sets field value
+func (o *IOC) SetFunctionName(v string) {
+	o.FunctionName.Set(&v)
+}
+
+// GetSource returns the Source field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *IOC) GetSource() string {
+	if o == nil || o.Source.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.Source.Get()
+}
+
+// GetSourceOk returns a tuple with the Source field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IOC) GetSourceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Source.Get(), o.Source.IsSet()
+}
+
+// SetSource sets field value
+func (o *IOC) SetSource(v string) {
+	o.Source.Set(&v)
 }
 
 // GetType returns the Type field value
@@ -101,156 +209,6 @@ func (o *IOC) SetValue(v string) {
 	o.Value = v
 }
 
-// GetDescription returns the Description field value
-func (o *IOC) GetDescription() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value
-// and a boolean to check if the value has been set.
-func (o *IOC) GetDescriptionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Description, true
-}
-
-// SetDescription sets field value
-func (o *IOC) SetDescription(v string) {
-	o.Description = v
-}
-
-// GetSource returns the Source field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IOC) GetSource() string {
-	if o == nil || IsNil(o.Source.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Source.Get()
-}
-
-// GetSourceOk returns a tuple with the Source field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IOC) GetSourceOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Source.Get(), o.Source.IsSet()
-}
-
-// HasSource returns a boolean if a field has been set.
-func (o *IOC) HasSource() bool {
-	if o != nil && o.Source.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSource gets a reference to the given NullableString and assigns it to the Source field.
-func (o *IOC) SetSource(v string) {
-	o.Source.Set(&v)
-}
-// SetSourceNil sets the value for Source to be an explicit nil
-func (o *IOC) SetSourceNil() {
-	o.Source.Set(nil)
-}
-
-// UnsetSource ensures that no value is present for Source, not even an explicit nil
-func (o *IOC) UnsetSource() {
-	o.Source.Unset()
-}
-
-// GetFunctionId returns the FunctionId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IOC) GetFunctionId() int32 {
-	if o == nil || IsNil(o.FunctionId.Get()) {
-		var ret int32
-		return ret
-	}
-	return *o.FunctionId.Get()
-}
-
-// GetFunctionIdOk returns a tuple with the FunctionId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IOC) GetFunctionIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.FunctionId.Get(), o.FunctionId.IsSet()
-}
-
-// HasFunctionId returns a boolean if a field has been set.
-func (o *IOC) HasFunctionId() bool {
-	if o != nil && o.FunctionId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFunctionId gets a reference to the given NullableInt32 and assigns it to the FunctionId field.
-func (o *IOC) SetFunctionId(v int32) {
-	o.FunctionId.Set(&v)
-}
-// SetFunctionIdNil sets the value for FunctionId to be an explicit nil
-func (o *IOC) SetFunctionIdNil() {
-	o.FunctionId.Set(nil)
-}
-
-// UnsetFunctionId ensures that no value is present for FunctionId, not even an explicit nil
-func (o *IOC) UnsetFunctionId() {
-	o.FunctionId.Unset()
-}
-
-// GetFunctionName returns the FunctionName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IOC) GetFunctionName() string {
-	if o == nil || IsNil(o.FunctionName.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.FunctionName.Get()
-}
-
-// GetFunctionNameOk returns a tuple with the FunctionName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IOC) GetFunctionNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.FunctionName.Get(), o.FunctionName.IsSet()
-}
-
-// HasFunctionName returns a boolean if a field has been set.
-func (o *IOC) HasFunctionName() bool {
-	if o != nil && o.FunctionName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFunctionName gets a reference to the given NullableString and assigns it to the FunctionName field.
-func (o *IOC) SetFunctionName(v string) {
-	o.FunctionName.Set(&v)
-}
-// SetFunctionNameNil sets the value for FunctionName to be an explicit nil
-func (o *IOC) SetFunctionNameNil() {
-	o.FunctionName.Set(nil)
-}
-
-// UnsetFunctionName ensures that no value is present for FunctionName, not even an explicit nil
-func (o *IOC) UnsetFunctionName() {
-	o.FunctionName.Unset()
-}
-
 func (o IOC) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -261,18 +219,12 @@ func (o IOC) MarshalJSON() ([]byte, error) {
 
 func (o IOC) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["description"] = o.Description
+	toSerialize["function_id"] = o.FunctionId.Get()
+	toSerialize["function_name"] = o.FunctionName.Get()
+	toSerialize["source"] = o.Source.Get()
 	toSerialize["type"] = o.Type
 	toSerialize["value"] = o.Value
-	toSerialize["description"] = o.Description
-	if o.Source.IsSet() {
-		toSerialize["source"] = o.Source.Get()
-	}
-	if o.FunctionId.IsSet() {
-		toSerialize["function_id"] = o.FunctionId.Get()
-	}
-	if o.FunctionName.IsSet() {
-		toSerialize["function_name"] = o.FunctionName.Get()
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -286,9 +238,12 @@ func (o *IOC) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"description",
+		"function_id",
+		"function_name",
+		"source",
 		"type",
 		"value",
-		"description",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -318,12 +273,12 @@ func (o *IOC) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "value")
 		delete(additionalProperties, "description")
-		delete(additionalProperties, "source")
 		delete(additionalProperties, "function_id")
 		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -20,7 +20,10 @@ var _ MappedNullable = &ProcessTree{}
 type ProcessTree struct {
 	Nodes []ProcessNode `json:"nodes,omitempty"`
 	SampleSeqid *int64 `json:"sample_seqid,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProcessTree ProcessTree
 
 // NewProcessTree instantiates a new ProcessTree object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o ProcessTree) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SampleSeqid) {
 		toSerialize["sample_seqid"] = o.SampleSeqid
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProcessTree) UnmarshalJSON(data []byte) (err error) {
+	varProcessTree := _ProcessTree{}
+
+	err = json.Unmarshal(data, &varProcessTree)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProcessTree(varProcessTree)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "nodes")
+		delete(additionalProperties, "sample_seqid")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProcessTree struct {

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type ListDataTypeFunctionsBody struct {
 	Items []DataTypeFunctionEntry `json:"items"`
 	// Pass as after_function_id to fetch the next page. Absent on the last page.
 	NextAfterFunctionId *int64 `json:"next_after_function_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListDataTypeFunctionsBody ListDataTypeFunctionsBody
@@ -116,6 +116,11 @@ func (o ListDataTypeFunctionsBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NextAfterFunctionId) {
 		toSerialize["next_after_function_id"] = o.NextAfterFunctionId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,15 +148,21 @@ func (o *ListDataTypeFunctionsBody) UnmarshalJSON(data []byte) (err error) {
 
 	varListDataTypeFunctionsBody := _ListDataTypeFunctionsBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListDataTypeFunctionsBody)
+	err = json.Unmarshal(data, &varListDataTypeFunctionsBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListDataTypeFunctionsBody(varListDataTypeFunctionsBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "items")
+		delete(additionalProperties, "next_after_function_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

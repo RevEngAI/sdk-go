@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type ListFunctionSignaturesOutputBody struct {
 	DataTypes []AnalysisDataTypesGroup `json:"data_types,omitempty"`
 	// One entry per distinct requested function ID, in request order. A repeated ID yields one entry.
 	Items []BatchFunctionSignatureEntry `json:"items"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListFunctionSignaturesOutputBody ListFunctionSignaturesOutputBody
@@ -121,6 +121,11 @@ func (o ListFunctionSignaturesOutputBody) ToMap() (map[string]interface{}, error
 	if o.Items != nil {
 		toSerialize["items"] = o.Items
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -148,15 +153,21 @@ func (o *ListFunctionSignaturesOutputBody) UnmarshalJSON(data []byte) (err error
 
 	varListFunctionSignaturesOutputBody := _ListFunctionSignaturesOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListFunctionSignaturesOutputBody)
+	err = json.Unmarshal(data, &varListFunctionSignaturesOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListFunctionSignaturesOutputBody(varListFunctionSignaturesOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data_types")
+		delete(additionalProperties, "items")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

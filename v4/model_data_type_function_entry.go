@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type DataTypeFunctionEntry struct {
 	FunctionId int64 `json:"function_id"`
 	// Current name of the function.
 	FunctionName string `json:"function_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DataTypeFunctionEntry DataTypeFunctionEntry
@@ -106,6 +106,11 @@ func (o DataTypeFunctionEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["function_id"] = o.FunctionId
 	toSerialize["function_name"] = o.FunctionName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *DataTypeFunctionEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varDataTypeFunctionEntry := _DataTypeFunctionEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDataTypeFunctionEntry)
+	err = json.Unmarshal(data, &varDataTypeFunctionEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DataTypeFunctionEntry(varDataTypeFunctionEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

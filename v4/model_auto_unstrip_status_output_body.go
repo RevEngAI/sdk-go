@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &AutoUnstripStatusOutputBody{}
 type AutoUnstripStatusOutputBody struct {
 	// Auto-unstrip task status
 	Status string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AutoUnstripStatusOutputBody AutoUnstripStatusOutputBody
@@ -79,6 +79,11 @@ func (o AutoUnstripStatusOutputBody) MarshalJSON() ([]byte, error) {
 func (o AutoUnstripStatusOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *AutoUnstripStatusOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varAutoUnstripStatusOutputBody := _AutoUnstripStatusOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAutoUnstripStatusOutputBody)
+	err = json.Unmarshal(data, &varAutoUnstripStatusOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AutoUnstripStatusOutputBody(varAutoUnstripStatusOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type FunctionDetailsOutputBody struct {
 	FunctionVaddr int64 `json:"function_vaddr"`
 	MangledName *string `json:"mangled_name,omitempty"`
 	SourceFunctionId *int64 `json:"source_function_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionDetailsOutputBody FunctionDetailsOutputBody
@@ -340,6 +340,11 @@ func (o FunctionDetailsOutputBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SourceFunctionId) {
 		toSerialize["source_function_id"] = o.SourceFunctionId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -374,15 +379,29 @@ func (o *FunctionDetailsOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionDetailsOutputBody := _FunctionDetailsOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionDetailsOutputBody)
+	err = json.Unmarshal(data, &varFunctionDetailsOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionDetailsOutputBody(varFunctionDetailsOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "creation")
+		delete(additionalProperties, "debug")
+		delete(additionalProperties, "function_id")
+		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "function_size")
+		delete(additionalProperties, "function_vaddr")
+		delete(additionalProperties, "mangled_name")
+		delete(additionalProperties, "source_function_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type AddCalleeInputBody struct {
 	IsExternal bool `json:"is_external"`
 	// Thunked virtual address
 	ThunkedVaddr *int64 `json:"thunked_vaddr,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AddCalleeInputBody AddCalleeInputBody
@@ -218,6 +218,11 @@ func (o AddCalleeInputBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ThunkedVaddr) {
 		toSerialize["thunked_vaddr"] = o.ThunkedVaddr
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -246,15 +251,24 @@ func (o *AddCalleeInputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varAddCalleeInputBody := _AddCalleeInputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddCalleeInputBody)
+	err = json.Unmarshal(data, &varAddCalleeInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddCalleeInputBody(varAddCalleeInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "callee_function_id")
+		delete(additionalProperties, "callee_name")
+		delete(additionalProperties, "callee_vaddr")
+		delete(additionalProperties, "is_external")
+		delete(additionalProperties, "thunked_vaddr")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

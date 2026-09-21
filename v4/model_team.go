@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type Team struct {
 	Plan string `json:"plan"`
 	TeamId int64 `json:"team_id"`
 	TeamName string `json:"team_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Team Team
@@ -169,6 +169,11 @@ func (o Team) ToMap() (map[string]interface{}, error) {
 	toSerialize["plan"] = o.Plan
 	toSerialize["team_id"] = o.TeamId
 	toSerialize["team_name"] = o.TeamName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -198,15 +203,23 @@ func (o *Team) UnmarshalJSON(data []byte) (err error) {
 
 	varTeam := _Team{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTeam)
+	err = json.Unmarshal(data, &varTeam)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Team(varTeam)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "organisation_id")
+		delete(additionalProperties, "plan")
+		delete(additionalProperties, "team_id")
+		delete(additionalProperties, "team_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -22,7 +22,10 @@ type SignatureStorageEntry struct {
 	Kind *string `json:"kind,omitempty"`
 	// Register name or stack slot.
 	Location *string `json:"location,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SignatureStorageEntry SignatureStorageEntry
 
 // NewSignatureStorageEntry instantiates a new SignatureStorageEntry object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o SignatureStorageEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Location) {
 		toSerialize["location"] = o.Location
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SignatureStorageEntry) UnmarshalJSON(data []byte) (err error) {
+	varSignatureStorageEntry := _SignatureStorageEntry{}
+
+	err = json.Unmarshal(data, &varSignatureStorageEntry)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SignatureStorageEntry(varSignatureStorageEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "kind")
+		delete(additionalProperties, "location")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSignatureStorageEntry struct {

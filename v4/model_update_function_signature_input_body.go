@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type UpdateFunctionSignatureInputBody struct {
 	Parameters []SignatureParameterInput `json:"parameters"`
 	// Return type, which must belong to this analysis. Omit for an unresolved return type.
 	ReturnDataTypeId *int64 `json:"return_data_type_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateFunctionSignatureInputBody UpdateFunctionSignatureInputBody
@@ -157,6 +157,11 @@ func (o UpdateFunctionSignatureInputBody) ToMap() (map[string]interface{}, error
 	if !IsNil(o.ReturnDataTypeId) {
 		toSerialize["return_data_type_id"] = o.ReturnDataTypeId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -184,15 +189,22 @@ func (o *UpdateFunctionSignatureInputBody) UnmarshalJSON(data []byte) (err error
 
 	varUpdateFunctionSignatureInputBody := _UpdateFunctionSignatureInputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateFunctionSignatureInputBody)
+	err = json.Unmarshal(data, &varUpdateFunctionSignatureInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateFunctionSignatureInputBody(varUpdateFunctionSignatureInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "calling_convention")
+		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "return_data_type_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

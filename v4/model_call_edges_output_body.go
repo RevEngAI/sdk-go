@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &CallEdgesOutputBody{}
 // CallEdgesOutputBody struct for CallEdgesOutputBody
 type CallEdgesOutputBody struct {
 	Edges []FunctionCallEdges `json:"edges"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CallEdgesOutputBody CallEdgesOutputBody
@@ -82,6 +82,11 @@ func (o CallEdgesOutputBody) ToMap() (map[string]interface{}, error) {
 	if o.Edges != nil {
 		toSerialize["edges"] = o.Edges
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -109,15 +114,20 @@ func (o *CallEdgesOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varCallEdgesOutputBody := _CallEdgesOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCallEdgesOutputBody)
+	err = json.Unmarshal(data, &varCallEdgesOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CallEdgesOutputBody(varCallEdgesOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "edges")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

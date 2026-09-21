@@ -25,7 +25,10 @@ type SandboxConfig struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	StartMethod *string `json:"start_method,omitempty"`
 	Timeout *int64 `json:"timeout,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SandboxConfig SandboxConfig
 
 // NewSandboxConfig instantiates a new SandboxConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -303,7 +306,39 @@ func (o SandboxConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timeout) {
 		toSerialize["timeout"] = o.Timeout
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SandboxConfig) UnmarshalJSON(data []byte) (err error) {
+	varSandboxConfig := _SandboxConfig{}
+
+	err = json.Unmarshal(data, &varSandboxConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SandboxConfig(varSandboxConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "archive_entry_path")
+		delete(additionalProperties, "archive_password")
+		delete(additionalProperties, "archive_sha_256_hash")
+		delete(additionalProperties, "command_line_args")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "start_method")
+		delete(additionalProperties, "timeout")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSandboxConfig struct {

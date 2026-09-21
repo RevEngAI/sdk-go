@@ -20,7 +20,10 @@ var _ MappedNullable = &PointerDefinition{}
 type PointerDefinition struct {
 	// The type pointed at.
 	PointeeDataTypeId *int64 `json:"pointee_data_type_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PointerDefinition PointerDefinition
 
 // NewPointerDefinition instantiates a new PointerDefinition object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o PointerDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PointeeDataTypeId) {
 		toSerialize["pointee_data_type_id"] = o.PointeeDataTypeId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PointerDefinition) UnmarshalJSON(data []byte) (err error) {
+	varPointerDefinition := _PointerDefinition{}
+
+	err = json.Unmarshal(data, &varPointerDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PointerDefinition(varPointerDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pointee_data_type_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePointerDefinition struct {

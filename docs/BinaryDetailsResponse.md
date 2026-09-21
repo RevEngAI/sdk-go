@@ -6,21 +6,21 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Arch** | **string** | The architecture of the binary | 
 **Bits** | **int32** | The size of the binary in bits | 
-**Crc32** | **string** |  | 
+**Crc32** | **NullableString** |  | 
 **Class** | **string** |  | 
-**Entropy** | **float32** |  | 
-**FileSize** | **int32** |  | 
+**Entropy** | **NullableFloat32** |  | 
+**FileSize** | **NullableInt32** |  | 
 **Language** | **string** |  | 
-**Md5** | **string** |  | 
+**Md5** | **NullableString** |  | 
 **Machine** | **string** |  | 
 **Os** | **string** | OS target of the binary | 
-**Sha1** | **string** | SHA1 hash of the binary | 
-**Sha256** | **string** | SHA256 hash of the binary | 
+**Sha1** | **NullableString** |  | 
+**Sha256** | **NullableString** |  | 
 **Ssdeep** | **NullableString** |  | 
 **Static** | **bool** |  | 
 **Stripped** | **bool** |  | 
 **SubSys** | **string** |  | 
-**Tlsh** | **string** |  | 
+**Tlsh** | **NullableString** |  | 
 **Type** | **string** |  | 
 **Debug** | **bool** |  | 
 **FirstSeen** | **time.Time** |  | 
@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewBinaryDetailsResponse
 
-`func NewBinaryDetailsResponse(arch string, bits int32, crc32 string, class string, entropy float32, fileSize int32, language string, md5 string, machine string, os string, sha1 string, sha256 string, ssdeep NullableString, static bool, stripped bool, subSys string, tlsh string, type_ string, debug bool, firstSeen time.Time, ) *BinaryDetailsResponse`
+`func NewBinaryDetailsResponse(arch string, bits int32, crc32 NullableString, class string, entropy NullableFloat32, fileSize NullableInt32, language string, md5 NullableString, machine string, os string, sha1 NullableString, sha256 NullableString, ssdeep NullableString, static bool, stripped bool, subSys string, tlsh NullableString, type_ string, debug bool, firstSeen time.Time, ) *BinaryDetailsResponse`
 
 NewBinaryDetailsResponse instantiates a new BinaryDetailsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -104,6 +104,16 @@ and a boolean to check if the value has been set.
 SetCrc32 sets Crc32 field to given value.
 
 
+### SetCrc32Nil
+
+`func (o *BinaryDetailsResponse) SetCrc32Nil(b bool)`
+
+ SetCrc32Nil sets the value for Crc32 to be an explicit nil
+
+### UnsetCrc32
+`func (o *BinaryDetailsResponse) UnsetCrc32()`
+
+UnsetCrc32 ensures that no value is present for Crc32, not even an explicit nil
 ### GetClass
 
 `func (o *BinaryDetailsResponse) GetClass() string`
@@ -144,6 +154,16 @@ and a boolean to check if the value has been set.
 SetEntropy sets Entropy field to given value.
 
 
+### SetEntropyNil
+
+`func (o *BinaryDetailsResponse) SetEntropyNil(b bool)`
+
+ SetEntropyNil sets the value for Entropy to be an explicit nil
+
+### UnsetEntropy
+`func (o *BinaryDetailsResponse) UnsetEntropy()`
+
+UnsetEntropy ensures that no value is present for Entropy, not even an explicit nil
 ### GetFileSize
 
 `func (o *BinaryDetailsResponse) GetFileSize() int32`
@@ -164,6 +184,16 @@ and a boolean to check if the value has been set.
 SetFileSize sets FileSize field to given value.
 
 
+### SetFileSizeNil
+
+`func (o *BinaryDetailsResponse) SetFileSizeNil(b bool)`
+
+ SetFileSizeNil sets the value for FileSize to be an explicit nil
+
+### UnsetFileSize
+`func (o *BinaryDetailsResponse) UnsetFileSize()`
+
+UnsetFileSize ensures that no value is present for FileSize, not even an explicit nil
 ### GetLanguage
 
 `func (o *BinaryDetailsResponse) GetLanguage() string`
@@ -204,6 +234,16 @@ and a boolean to check if the value has been set.
 SetMd5 sets Md5 field to given value.
 
 
+### SetMd5Nil
+
+`func (o *BinaryDetailsResponse) SetMd5Nil(b bool)`
+
+ SetMd5Nil sets the value for Md5 to be an explicit nil
+
+### UnsetMd5
+`func (o *BinaryDetailsResponse) UnsetMd5()`
+
+UnsetMd5 ensures that no value is present for Md5, not even an explicit nil
 ### GetMachine
 
 `func (o *BinaryDetailsResponse) GetMachine() string`
@@ -264,6 +304,16 @@ and a boolean to check if the value has been set.
 SetSha1 sets Sha1 field to given value.
 
 
+### SetSha1Nil
+
+`func (o *BinaryDetailsResponse) SetSha1Nil(b bool)`
+
+ SetSha1Nil sets the value for Sha1 to be an explicit nil
+
+### UnsetSha1
+`func (o *BinaryDetailsResponse) UnsetSha1()`
+
+UnsetSha1 ensures that no value is present for Sha1, not even an explicit nil
 ### GetSha256
 
 `func (o *BinaryDetailsResponse) GetSha256() string`
@@ -284,6 +334,16 @@ and a boolean to check if the value has been set.
 SetSha256 sets Sha256 field to given value.
 
 
+### SetSha256Nil
+
+`func (o *BinaryDetailsResponse) SetSha256Nil(b bool)`
+
+ SetSha256Nil sets the value for Sha256 to be an explicit nil
+
+### UnsetSha256
+`func (o *BinaryDetailsResponse) UnsetSha256()`
+
+UnsetSha256 ensures that no value is present for Sha256, not even an explicit nil
 ### GetSsdeep
 
 `func (o *BinaryDetailsResponse) GetSsdeep() string`
@@ -394,6 +454,16 @@ and a boolean to check if the value has been set.
 SetTlsh sets Tlsh field to given value.
 
 
+### SetTlshNil
+
+`func (o *BinaryDetailsResponse) SetTlshNil(b bool)`
+
+ SetTlshNil sets the value for Tlsh to be an explicit nil
+
+### UnsetTlsh
+`func (o *BinaryDetailsResponse) UnsetTlsh()`
+
+UnsetTlsh ensures that no value is present for Tlsh, not even an explicit nil
 ### GetType
 
 `func (o *BinaryDetailsResponse) GetType() string`

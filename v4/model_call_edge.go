@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type CallEdge struct {
 	ImportedFunctionId *int64 `json:"imported_function_id,omitempty"`
 	IsExternal bool `json:"is_external"`
 	ThunkedVaddr *int64 `json:"thunked_vaddr,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CallEdge CallEdge
@@ -341,6 +341,11 @@ func (o CallEdge) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ThunkedVaddr) {
 		toSerialize["thunked_vaddr"] = o.ThunkedVaddr
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -371,15 +376,28 @@ func (o *CallEdge) UnmarshalJSON(data []byte) (err error) {
 
 	varCallEdge := _CallEdge{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCallEdge)
+	err = json.Unmarshal(data, &varCallEdge)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CallEdge(varCallEdge)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "callee_function_id")
+		delete(additionalProperties, "callee_name")
+		delete(additionalProperties, "callee_vaddr")
+		delete(additionalProperties, "caller_function_id")
+		delete(additionalProperties, "caller_name")
+		delete(additionalProperties, "caller_vaddr")
+		delete(additionalProperties, "imported_function_id")
+		delete(additionalProperties, "is_external")
+		delete(additionalProperties, "thunked_vaddr")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type CreateCollectionOutputBody struct {
 	TeamId int64 `json:"team_id"`
 	UpdatedAt time.Time `json:"updated_at"`
 	UserId int64 `json:"user_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateCollectionOutputBody CreateCollectionOutputBody
@@ -342,6 +342,11 @@ func (o CreateCollectionOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize["team_id"] = o.TeamId
 	toSerialize["updated_at"] = o.UpdatedAt
 	toSerialize["user_id"] = o.UserId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -376,15 +381,29 @@ func (o *CreateCollectionOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateCollectionOutputBody := _CreateCollectionOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateCollectionOutputBody)
+	err = json.Unmarshal(data, &varCreateCollectionOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateCollectionOutputBody(varCreateCollectionOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binaries")
+		delete(additionalProperties, "collection_id")
+		delete(additionalProperties, "collection_name")
+		delete(additionalProperties, "collection_scope")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "team_id")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "user_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

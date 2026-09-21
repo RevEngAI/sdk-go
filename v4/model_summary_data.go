@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type SummaryData struct {
 	Summary string `json:"summary"`
 	// Task status
 	TaskStatus string `json:"task_status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SummaryData SummaryData
@@ -172,6 +172,11 @@ func (o SummaryData) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["summary"] = o.Summary
 	toSerialize["task_status"] = o.TaskStatus
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -201,15 +206,23 @@ func (o *SummaryData) UnmarshalJSON(data []byte) (err error) {
 
 	varSummaryData := _SummaryData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSummaryData)
+	err = json.Unmarshal(data, &varSummaryData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SummaryData(varSummaryData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ai_summary")
+		delete(additionalProperties, "predicted_function_name")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "task_status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

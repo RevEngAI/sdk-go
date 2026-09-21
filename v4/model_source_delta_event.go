@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type SourceDeltaEvent struct {
 	Content string `json:"content"`
 	Seq int32 `json:"seq"`
 	Type string `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SourceDeltaEvent SourceDeltaEvent
@@ -159,6 +159,11 @@ func (o SourceDeltaEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize["content"] = o.Content
 	toSerialize["seq"] = o.Seq
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -189,15 +194,23 @@ func (o *SourceDeltaEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varSourceDeltaEvent := _SourceDeltaEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSourceDeltaEvent)
+	err = json.Unmarshal(data, &varSourceDeltaEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SourceDeltaEvent(varSourceDeltaEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "attempt")
+		delete(additionalProperties, "content")
+		delete(additionalProperties, "seq")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

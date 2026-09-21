@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &FileActivityEntry{}
 type FileActivityEntry struct {
 	Events []ReportEvent `json:"events,omitempty"`
 	Path string `json:"path"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FileActivityEntry FileActivityEntry
@@ -115,6 +115,11 @@ func (o FileActivityEntry) ToMap() (map[string]interface{}, error) {
 		toSerialize["events"] = o.Events
 	}
 	toSerialize["path"] = o.Path
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,15 +147,21 @@ func (o *FileActivityEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varFileActivityEntry := _FileActivityEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFileActivityEntry)
+	err = json.Unmarshal(data, &varFileActivityEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FileActivityEntry(varFileActivityEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "path")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

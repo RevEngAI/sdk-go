@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type TcpCarvedFile struct {
 	Sha256 string `json:"sha256"`
 	Size int64 `json:"size"`
 	YaraHits []string `json:"yara_hits,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TcpCarvedFile TcpCarvedFile
@@ -295,6 +295,11 @@ func (o TcpCarvedFile) ToMap() (map[string]interface{}, error) {
 	if o.YaraHits != nil {
 		toSerialize["yara_hits"] = o.YaraHits
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -326,15 +331,27 @@ func (o *TcpCarvedFile) UnmarshalJSON(data []byte) (err error) {
 
 	varTcpCarvedFile := _TcpCarvedFile{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTcpCarvedFile)
+	err = json.Unmarshal(data, &varTcpCarvedFile)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TcpCarvedFile(varTcpCarvedFile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "direction")
+		delete(additionalProperties, "filename")
+		delete(additionalProperties, "is_pe")
+		delete(additionalProperties, "mime_type")
+		delete(additionalProperties, "offset")
+		delete(additionalProperties, "sha256")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "yara_hits")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

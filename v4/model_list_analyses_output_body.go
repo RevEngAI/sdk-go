@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type ListAnalysesOutputBody struct {
 	PageSize int64 `json:"page_size"`
 	// The page of matching analyses
 	Results []AnalysisRecordBody `json:"results"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListAnalysesOutputBody ListAnalysesOutputBody
@@ -148,6 +148,11 @@ func (o ListAnalysesOutputBody) ToMap() (map[string]interface{}, error) {
 	if o.Results != nil {
 		toSerialize["results"] = o.Results
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -176,15 +181,22 @@ func (o *ListAnalysesOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varListAnalysesOutputBody := _ListAnalysesOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListAnalysesOutputBody)
+	err = json.Unmarshal(data, &varListAnalysesOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListAnalysesOutputBody(varListAnalysesOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "page_size")
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

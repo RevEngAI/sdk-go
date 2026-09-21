@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &UnionDefinition{}
 type UnionDefinition struct {
 	// The type's fields. Every member starts at offset 0.
 	Members []DataTypeMemberEntry `json:"members"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UnionDefinition UnionDefinition
@@ -83,6 +83,11 @@ func (o UnionDefinition) ToMap() (map[string]interface{}, error) {
 	if o.Members != nil {
 		toSerialize["members"] = o.Members
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -110,15 +115,20 @@ func (o *UnionDefinition) UnmarshalJSON(data []byte) (err error) {
 
 	varUnionDefinition := _UnionDefinition{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUnionDefinition)
+	err = json.Unmarshal(data, &varUnionDefinition)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UnionDefinition(varUnionDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "members")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

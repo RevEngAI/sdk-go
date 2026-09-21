@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &RegenerateOutputBody{}
 // RegenerateOutputBody struct for RegenerateOutputBody
 type RegenerateOutputBody struct {
 	Status bool `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RegenerateOutputBody RegenerateOutputBody
@@ -78,6 +78,11 @@ func (o RegenerateOutputBody) MarshalJSON() ([]byte, error) {
 func (o RegenerateOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -105,15 +110,20 @@ func (o *RegenerateOutputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varRegenerateOutputBody := _RegenerateOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRegenerateOutputBody)
+	err = json.Unmarshal(data, &varRegenerateOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RegenerateOutputBody(varRegenerateOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

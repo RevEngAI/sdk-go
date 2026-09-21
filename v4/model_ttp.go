@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type Ttp struct {
 	Namespace *string `json:"namespace,omitempty"`
 	ProcessSeqids []int64 `json:"process_seqids,omitempty"`
 	Score int64 `json:"score"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Ttp Ttp
@@ -261,6 +261,11 @@ func (o Ttp) ToMap() (map[string]interface{}, error) {
 		toSerialize["process_seqids"] = o.ProcessSeqids
 	}
 	toSerialize["score"] = o.Score
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -288,15 +293,25 @@ func (o *Ttp) UnmarshalJSON(data []byte) (err error) {
 
 	varTtp := _Ttp{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTtp)
+	err = json.Unmarshal(data, &varTtp)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Ttp(varTtp)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "att&ck")
+		delete(additionalProperties, "mbc")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "namespace")
+		delete(additionalProperties, "process_seqids")
+		delete(additionalProperties, "score")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type ErrorBody struct {
 	Message string `json:"message"`
 	// Correlation ID from the request. Quote this in support requests.
 	TraceId string `json:"trace_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ErrorBody ErrorBody
@@ -209,6 +209,11 @@ func (o ErrorBody) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["message"] = o.Message
 	toSerialize["trace_id"] = o.TraceId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -238,15 +243,24 @@ func (o *ErrorBody) UnmarshalJSON(data []byte) (err error) {
 
 	varErrorBody := _ErrorBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varErrorBody)
+	err = json.Unmarshal(data, &varErrorBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ErrorBody(varErrorBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "detail")
+		delete(additionalProperties, "doc_url")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "trace_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

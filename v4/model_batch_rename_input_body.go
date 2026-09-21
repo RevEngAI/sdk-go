@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &BatchRenameInputBody{}
 type BatchRenameInputBody struct {
 	// List of functions to rename
 	Functions []BatchRenameItem `json:"functions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BatchRenameInputBody BatchRenameInputBody
@@ -83,6 +83,11 @@ func (o BatchRenameInputBody) ToMap() (map[string]interface{}, error) {
 	if o.Functions != nil {
 		toSerialize["functions"] = o.Functions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -110,15 +115,20 @@ func (o *BatchRenameInputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varBatchRenameInputBody := _BatchRenameInputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBatchRenameInputBody)
+	err = json.Unmarshal(data, &varBatchRenameInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BatchRenameInputBody(varBatchRenameInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "functions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

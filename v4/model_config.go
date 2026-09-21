@@ -22,7 +22,10 @@ type Config struct {
 	NoCache *bool `json:"no_cache,omitempty"`
 	SandboxConfig *SandboxConfig `json:"sandbox_config,omitempty"`
 	ScrapeThirdPartyConfig *ScrapeThirdPartyConfig `json:"scrape_third_party_config,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Config Config
 
 // NewConfig instantiates a new Config object
 // This constructor will assign default values to properties that have it defined,
@@ -191,7 +194,36 @@ func (o Config) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ScrapeThirdPartyConfig) {
 		toSerialize["scrape_third_party_config"] = o.ScrapeThirdPartyConfig
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Config) UnmarshalJSON(data []byte) (err error) {
+	varConfig := _Config{}
+
+	err = json.Unmarshal(data, &varConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Config(varConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "generate_capabilities")
+		delete(additionalProperties, "no_cache")
+		delete(additionalProperties, "sandbox_config")
+		delete(additionalProperties, "scrape_third_party_config")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfig struct {

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &InlineComment{}
 type InlineComment struct {
 	Comment string `json:"comment"`
 	Line int64 `json:"line"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InlineComment InlineComment
@@ -105,6 +105,11 @@ func (o InlineComment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["comment"] = o.Comment
 	toSerialize["line"] = o.Line
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -133,15 +138,21 @@ func (o *InlineComment) UnmarshalJSON(data []byte) (err error) {
 
 	varInlineComment := _InlineComment{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInlineComment)
+	err = json.Unmarshal(data, &varInlineComment)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InlineComment(varInlineComment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "comment")
+		delete(additionalProperties, "line")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

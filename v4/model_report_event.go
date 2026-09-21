@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ReportEvent struct {
 	Type string `json:"type"`
 	Value *string `json:"value,omitempty"`
 	ValueName *string `json:"value_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReportEvent ReportEvent
@@ -332,6 +332,11 @@ func (o ReportEvent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ValueName) {
 		toSerialize["value_name"] = o.ValueName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -359,15 +364,27 @@ func (o *ReportEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varReportEvent := _ReportEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReportEvent)
+	err = json.Unmarshal(data, &varReportEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReportEvent(varReportEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "api_calls")
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "desired_access")
+		delete(additionalProperties, "process_seqid")
+		delete(additionalProperties, "total_bytes")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "value_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

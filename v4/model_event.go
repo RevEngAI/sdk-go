@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type Event struct {
 	Role int32 `json:"role"`
 	TokensUsed int64 `json:"tokens_used"`
 	Type int32 `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Event Event
@@ -245,6 +245,11 @@ func (o Event) ToMap() (map[string]interface{}, error) {
 	toSerialize["role"] = o.Role
 	toSerialize["tokens_used"] = o.TokensUsed
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -278,15 +283,26 @@ func (o *Event) UnmarshalJSON(data []byte) (err error) {
 
 	varEvent := _Event{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEvent)
+	err = json.Unmarshal(data, &varEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Event(varEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conversation_uuid")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "event_id")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "tokens_used")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

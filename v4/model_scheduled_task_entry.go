@@ -29,7 +29,10 @@ type ScheduledTaskEntry struct {
 	StartDate *string `json:"start_date,omitempty"`
 	StartTime *string `json:"start_time,omitempty"`
 	TaskName *string `json:"task_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ScheduledTaskEntry ScheduledTaskEntry
 
 // NewScheduledTaskEntry instantiates a new ScheduledTaskEntry object
 // This constructor will assign default values to properties that have it defined,
@@ -444,7 +447,43 @@ func (o ScheduledTaskEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TaskName) {
 		toSerialize["task_name"] = o.TaskName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ScheduledTaskEntry) UnmarshalJSON(data []byte) (err error) {
+	varScheduledTaskEntry := _ScheduledTaskEntry{}
+
+	err = json.Unmarshal(data, &varScheduledTaskEntry)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScheduledTaskEntry(varScheduledTaskEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "command")
+		delete(additionalProperties, "day")
+		delete(additionalProperties, "end_date")
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "executable")
+		delete(additionalProperties, "modifier")
+		delete(additionalProperties, "run_as")
+		delete(additionalProperties, "schedule_type")
+		delete(additionalProperties, "start_date")
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "task_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableScheduledTaskEntry struct {

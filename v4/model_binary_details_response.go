@@ -24,25 +24,23 @@ type BinaryDetailsResponse struct {
 	Arch string `json:"arch"`
 	// The size of the binary in bits
 	Bits int32 `json:"bits"`
-	Crc32 string `json:"crc32"`
+	Crc32 NullableString `json:"crc32"`
 	Class string `json:"Class"`
-	Entropy float32 `json:"entropy"`
-	FileSize int32 `json:"file_size"`
+	Entropy NullableFloat32 `json:"entropy"`
+	FileSize NullableInt32 `json:"file_size"`
 	// 
 	Language string `json:"language"`
-	Md5 string `json:"md5"`
+	Md5 NullableString `json:"md5"`
 	Machine string `json:"machine"`
 	// OS target of the binary
 	Os string `json:"os"`
-	// SHA1 hash of the binary
-	Sha1 string `json:"sha1"`
-	// SHA256 hash of the binary
-	Sha256 string `json:"sha256"`
+	Sha1 NullableString `json:"sha1"`
+	Sha256 NullableString `json:"sha256"`
 	Ssdeep NullableString `json:"ssdeep"`
 	Static bool `json:"static"`
 	Stripped bool `json:"stripped"`
 	SubSys string `json:"sub_sys"`
-	Tlsh string `json:"tlsh"`
+	Tlsh NullableString `json:"tlsh"`
 	Type string `json:"type"`
 	Debug bool `json:"debug"`
 	FirstSeen time.Time `json:"first_seen"`
@@ -55,7 +53,7 @@ type _BinaryDetailsResponse BinaryDetailsResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBinaryDetailsResponse(arch string, bits int32, crc32 string, class string, entropy float32, fileSize int32, language string, md5 string, machine string, os string, sha1 string, sha256 string, ssdeep NullableString, static bool, stripped bool, subSys string, tlsh string, type_ string, debug bool, firstSeen time.Time) *BinaryDetailsResponse {
+func NewBinaryDetailsResponse(arch string, bits int32, crc32 NullableString, class string, entropy NullableFloat32, fileSize NullableInt32, language string, md5 NullableString, machine string, os string, sha1 NullableString, sha256 NullableString, ssdeep NullableString, static bool, stripped bool, subSys string, tlsh NullableString, type_ string, debug bool, firstSeen time.Time) *BinaryDetailsResponse {
 	this := BinaryDetailsResponse{}
 	this.Arch = arch
 	this.Bits = bits
@@ -137,27 +135,29 @@ func (o *BinaryDetailsResponse) SetBits(v int32) {
 }
 
 // GetCrc32 returns the Crc32 field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *BinaryDetailsResponse) GetCrc32() string {
-	if o == nil {
+	if o == nil || o.Crc32.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Crc32
+	return *o.Crc32.Get()
 }
 
 // GetCrc32Ok returns a tuple with the Crc32 field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BinaryDetailsResponse) GetCrc32Ok() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Crc32, true
+	return o.Crc32.Get(), o.Crc32.IsSet()
 }
 
 // SetCrc32 sets field value
 func (o *BinaryDetailsResponse) SetCrc32(v string) {
-	o.Crc32 = v
+	o.Crc32.Set(&v)
 }
 
 // GetClass returns the Class field value
@@ -185,51 +185,55 @@ func (o *BinaryDetailsResponse) SetClass(v string) {
 }
 
 // GetEntropy returns the Entropy field value
+// If the value is explicit nil, the zero value for float32 will be returned
 func (o *BinaryDetailsResponse) GetEntropy() float32 {
-	if o == nil {
+	if o == nil || o.Entropy.Get() == nil {
 		var ret float32
 		return ret
 	}
 
-	return o.Entropy
+	return *o.Entropy.Get()
 }
 
 // GetEntropyOk returns a tuple with the Entropy field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BinaryDetailsResponse) GetEntropyOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Entropy, true
+	return o.Entropy.Get(), o.Entropy.IsSet()
 }
 
 // SetEntropy sets field value
 func (o *BinaryDetailsResponse) SetEntropy(v float32) {
-	o.Entropy = v
+	o.Entropy.Set(&v)
 }
 
 // GetFileSize returns the FileSize field value
+// If the value is explicit nil, the zero value for int32 will be returned
 func (o *BinaryDetailsResponse) GetFileSize() int32 {
-	if o == nil {
+	if o == nil || o.FileSize.Get() == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.FileSize
+	return *o.FileSize.Get()
 }
 
 // GetFileSizeOk returns a tuple with the FileSize field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BinaryDetailsResponse) GetFileSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.FileSize, true
+	return o.FileSize.Get(), o.FileSize.IsSet()
 }
 
 // SetFileSize sets field value
 func (o *BinaryDetailsResponse) SetFileSize(v int32) {
-	o.FileSize = v
+	o.FileSize.Set(&v)
 }
 
 // GetLanguage returns the Language field value
@@ -257,27 +261,29 @@ func (o *BinaryDetailsResponse) SetLanguage(v string) {
 }
 
 // GetMd5 returns the Md5 field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *BinaryDetailsResponse) GetMd5() string {
-	if o == nil {
+	if o == nil || o.Md5.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Md5
+	return *o.Md5.Get()
 }
 
 // GetMd5Ok returns a tuple with the Md5 field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BinaryDetailsResponse) GetMd5Ok() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Md5, true
+	return o.Md5.Get(), o.Md5.IsSet()
 }
 
 // SetMd5 sets field value
 func (o *BinaryDetailsResponse) SetMd5(v string) {
-	o.Md5 = v
+	o.Md5.Set(&v)
 }
 
 // GetMachine returns the Machine field value
@@ -329,51 +335,55 @@ func (o *BinaryDetailsResponse) SetOs(v string) {
 }
 
 // GetSha1 returns the Sha1 field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *BinaryDetailsResponse) GetSha1() string {
-	if o == nil {
+	if o == nil || o.Sha1.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Sha1
+	return *o.Sha1.Get()
 }
 
 // GetSha1Ok returns a tuple with the Sha1 field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BinaryDetailsResponse) GetSha1Ok() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Sha1, true
+	return o.Sha1.Get(), o.Sha1.IsSet()
 }
 
 // SetSha1 sets field value
 func (o *BinaryDetailsResponse) SetSha1(v string) {
-	o.Sha1 = v
+	o.Sha1.Set(&v)
 }
 
 // GetSha256 returns the Sha256 field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *BinaryDetailsResponse) GetSha256() string {
-	if o == nil {
+	if o == nil || o.Sha256.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Sha256
+	return *o.Sha256.Get()
 }
 
 // GetSha256Ok returns a tuple with the Sha256 field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BinaryDetailsResponse) GetSha256Ok() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Sha256, true
+	return o.Sha256.Get(), o.Sha256.IsSet()
 }
 
 // SetSha256 sets field value
 func (o *BinaryDetailsResponse) SetSha256(v string) {
-	o.Sha256 = v
+	o.Sha256.Set(&v)
 }
 
 // GetSsdeep returns the Ssdeep field value
@@ -475,27 +485,29 @@ func (o *BinaryDetailsResponse) SetSubSys(v string) {
 }
 
 // GetTlsh returns the Tlsh field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *BinaryDetailsResponse) GetTlsh() string {
-	if o == nil {
+	if o == nil || o.Tlsh.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Tlsh
+	return *o.Tlsh.Get()
 }
 
 // GetTlshOk returns a tuple with the Tlsh field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BinaryDetailsResponse) GetTlshOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Tlsh, true
+	return o.Tlsh.Get(), o.Tlsh.IsSet()
 }
 
 // SetTlsh sets field value
 func (o *BinaryDetailsResponse) SetTlsh(v string) {
-	o.Tlsh = v
+	o.Tlsh.Set(&v)
 }
 
 // GetType returns the Type field value
@@ -582,21 +594,21 @@ func (o BinaryDetailsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["arch"] = o.Arch
 	toSerialize["bits"] = o.Bits
-	toSerialize["crc32"] = o.Crc32
+	toSerialize["crc32"] = o.Crc32.Get()
 	toSerialize["Class"] = o.Class
-	toSerialize["entropy"] = o.Entropy
-	toSerialize["file_size"] = o.FileSize
+	toSerialize["entropy"] = o.Entropy.Get()
+	toSerialize["file_size"] = o.FileSize.Get()
 	toSerialize["language"] = o.Language
-	toSerialize["md5"] = o.Md5
+	toSerialize["md5"] = o.Md5.Get()
 	toSerialize["machine"] = o.Machine
 	toSerialize["os"] = o.Os
-	toSerialize["sha1"] = o.Sha1
-	toSerialize["sha256"] = o.Sha256
+	toSerialize["sha1"] = o.Sha1.Get()
+	toSerialize["sha256"] = o.Sha256.Get()
 	toSerialize["ssdeep"] = o.Ssdeep.Get()
 	toSerialize["static"] = o.Static
 	toSerialize["stripped"] = o.Stripped
 	toSerialize["sub_sys"] = o.SubSys
-	toSerialize["tlsh"] = o.Tlsh
+	toSerialize["tlsh"] = o.Tlsh.Get()
 	toSerialize["type"] = o.Type
 	toSerialize["debug"] = o.Debug
 	toSerialize["first_seen"] = o.FirstSeen

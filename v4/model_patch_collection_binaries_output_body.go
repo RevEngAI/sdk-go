@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -21,6 +20,7 @@ var _ MappedNullable = &PatchCollectionBinariesOutputBody{}
 // PatchCollectionBinariesOutputBody struct for PatchCollectionBinariesOutputBody
 type PatchCollectionBinariesOutputBody struct {
 	Binaries []Binary `json:"binaries"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PatchCollectionBinariesOutputBody PatchCollectionBinariesOutputBody
@@ -82,6 +82,11 @@ func (o PatchCollectionBinariesOutputBody) ToMap() (map[string]interface{}, erro
 	if o.Binaries != nil {
 		toSerialize["binaries"] = o.Binaries
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -109,15 +114,20 @@ func (o *PatchCollectionBinariesOutputBody) UnmarshalJSON(data []byte) (err erro
 
 	varPatchCollectionBinariesOutputBody := _PatchCollectionBinariesOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPatchCollectionBinariesOutputBody)
+	err = json.Unmarshal(data, &varPatchCollectionBinariesOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PatchCollectionBinariesOutputBody(varPatchCollectionBinariesOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binaries")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

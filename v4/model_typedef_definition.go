@@ -20,7 +20,10 @@ var _ MappedNullable = &TypedefDefinition{}
 type TypedefDefinition struct {
 	// The type being aliased.
 	TargetDataTypeId *int64 `json:"target_data_type_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TypedefDefinition TypedefDefinition
 
 // NewTypedefDefinition instantiates a new TypedefDefinition object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o TypedefDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TargetDataTypeId) {
 		toSerialize["target_data_type_id"] = o.TargetDataTypeId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TypedefDefinition) UnmarshalJSON(data []byte) (err error) {
+	varTypedefDefinition := _TypedefDefinition{}
+
+	err = json.Unmarshal(data, &varTypedefDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TypedefDefinition(varTypedefDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "target_data_type_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTypedefDefinition struct {

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type Permissions struct {
 	CanUseCompositionAnalysis bool `json:"can_use_composition_analysis"`
 	CanUseMalwareSandbox bool `json:"can_use_malware_sandbox"`
 	CanUsePrivateAnalyses bool `json:"can_use_private_analyses"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Permissions Permissions
@@ -213,6 +213,11 @@ func (o Permissions) ToMap() (map[string]interface{}, error) {
 	toSerialize["can_use_composition_analysis"] = o.CanUseCompositionAnalysis
 	toSerialize["can_use_malware_sandbox"] = o.CanUseMalwareSandbox
 	toSerialize["can_use_private_analyses"] = o.CanUsePrivateAnalyses
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -245,15 +250,25 @@ func (o *Permissions) UnmarshalJSON(data []byte) (err error) {
 
 	varPermissions := _Permissions{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPermissions)
+	err = json.Unmarshal(data, &varPermissions)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Permissions(varPermissions)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "can_export_symbols")
+		delete(additionalProperties, "can_generate_pdf_reports")
+		delete(additionalProperties, "can_use_ai_malware_analysis")
+		delete(additionalProperties, "can_use_composition_analysis")
+		delete(additionalProperties, "can_use_malware_sandbox")
+		delete(additionalProperties, "can_use_private_analyses")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ConversationWithEvents struct {
 	Title string `json:"title"`
 	UpdatedAt time.Time `json:"updated_at"`
 	UserId int64 `json:"user_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConversationWithEvents ConversationWithEvents
@@ -255,6 +255,11 @@ func (o ConversationWithEvents) ToMap() (map[string]interface{}, error) {
 	toSerialize["title"] = o.Title
 	toSerialize["updated_at"] = o.UpdatedAt
 	toSerialize["user_id"] = o.UserId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -287,15 +292,26 @@ func (o *ConversationWithEvents) UnmarshalJSON(data []byte) (err error) {
 
 	varConversationWithEvents := _ConversationWithEvents{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConversationWithEvents)
+	err = json.Unmarshal(data, &varConversationWithEvents)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConversationWithEvents(varConversationWithEvents)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "context")
+		delete(additionalProperties, "conversation_uuid")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "user_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

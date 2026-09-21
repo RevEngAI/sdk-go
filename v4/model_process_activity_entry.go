@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ProcessActivityEntry struct {
 	ExitCodeStr *string `json:"exit_code_str,omitempty"`
 	Name string `json:"name"`
 	Pid int64 `json:"pid"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProcessActivityEntry ProcessActivityEntry
@@ -278,6 +278,11 @@ func (o ProcessActivityEntry) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["name"] = o.Name
 	toSerialize["pid"] = o.Pid
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -307,15 +312,26 @@ func (o *ProcessActivityEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varProcessActivityEntry := _ProcessActivityEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProcessActivityEntry)
+	err = json.Unmarshal(data, &varProcessActivityEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProcessActivityEntry(varProcessActivityEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "args")
+		delete(additionalProperties, "child_seqid")
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "exit_code")
+		delete(additionalProperties, "exit_code_str")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "pid")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

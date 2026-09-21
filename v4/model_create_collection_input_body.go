@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type CreateCollectionInputBody struct {
 	Description string `json:"description"`
 	// Optional tags to attach to the collection.
 	Tags []string `json:"tags,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateCollectionInputBody CreateCollectionInputBody
@@ -213,6 +213,11 @@ func (o CreateCollectionInputBody) ToMap() (map[string]interface{}, error) {
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -242,15 +247,24 @@ func (o *CreateCollectionInputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateCollectionInputBody := _CreateCollectionInputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateCollectionInputBody)
+	err = json.Unmarshal(data, &varCreateCollectionInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateCollectionInputBody(varCreateCollectionInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binaries")
+		delete(additionalProperties, "collection_name")
+		delete(additionalProperties, "collection_scope")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "tags")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

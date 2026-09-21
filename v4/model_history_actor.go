@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type HistoryActor struct {
 	UserId int64 `json:"user_id"`
 	// Absent when the user no longer exists.
 	Username *string `json:"username,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _HistoryActor HistoryActor
@@ -116,6 +116,11 @@ func (o HistoryActor) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Username) {
 		toSerialize["username"] = o.Username
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,15 +148,21 @@ func (o *HistoryActor) UnmarshalJSON(data []byte) (err error) {
 
 	varHistoryActor := _HistoryActor{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHistoryActor)
+	err = json.Unmarshal(data, &varHistoryActor)
 
 	if err != nil {
 		return err
 	}
 
 	*o = HistoryActor(varHistoryActor)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "username")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

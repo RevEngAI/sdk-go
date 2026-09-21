@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type RenameUnnamedFunctionsResult struct {
 	Skipped int64 `json:"skipped"`
 	// Unnamed functions the run considered
 	Total int64 `json:"total"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RenameUnnamedFunctionsResult RenameUnnamedFunctionsResult
@@ -191,6 +191,11 @@ func (o RenameUnnamedFunctionsResult) ToMap() (map[string]interface{}, error) {
 	toSerialize["renamed"] = o.Renamed
 	toSerialize["skipped"] = o.Skipped
 	toSerialize["total"] = o.Total
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -222,15 +227,24 @@ func (o *RenameUnnamedFunctionsResult) UnmarshalJSON(data []byte) (err error) {
 
 	varRenameUnnamedFunctionsResult := _RenameUnnamedFunctionsResult{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRenameUnnamedFunctionsResult)
+	err = json.Unmarshal(data, &varRenameUnnamedFunctionsResult)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RenameUnnamedFunctionsResult(varRenameUnnamedFunctionsResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "analysis_id")
+		delete(additionalProperties, "failed")
+		delete(additionalProperties, "renamed")
+		delete(additionalProperties, "skipped")
+		delete(additionalProperties, "total")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

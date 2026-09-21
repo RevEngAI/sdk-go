@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &Token{}
 type Token struct {
 	// Name the token resolves to. An empty string in a request removes the override.
 	Value string `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Token Token
@@ -79,6 +79,11 @@ func (o Token) MarshalJSON() ([]byte, error) {
 func (o Token) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *Token) UnmarshalJSON(data []byte) (err error) {
 
 	varToken := _Token{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varToken)
+	err = json.Unmarshal(data, &varToken)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Token(varToken)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type IndirectCallSite struct {
 	TargetName *string `json:"target_name,omitempty"`
 	// Resolved call target vaddr.
 	TargetVaddr int64 `json:"target_vaddr"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IndirectCallSite IndirectCallSite
@@ -206,6 +206,11 @@ func (o IndirectCallSite) ToMap() (map[string]interface{}, error) {
 		toSerialize["target_name"] = o.TargetName
 	}
 	toSerialize["target_vaddr"] = o.TargetVaddr
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -235,15 +240,24 @@ func (o *IndirectCallSite) UnmarshalJSON(data []byte) (err error) {
 
 	varIndirectCallSite := _IndirectCallSite{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIndirectCallSite)
+	err = json.Unmarshal(data, &varIndirectCallSite)
 
 	if err != nil {
 		return err
 	}
 
 	*o = IndirectCallSite(varIndirectCallSite)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "callee_function_id")
+		delete(additionalProperties, "inst_vaddr")
+		delete(additionalProperties, "is_external")
+		delete(additionalProperties, "target_name")
+		delete(additionalProperties, "target_vaddr")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

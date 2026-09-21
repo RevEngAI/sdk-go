@@ -12,7 +12,6 @@ package sdk
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type FunctionSignatureVersion struct {
 	UpdatedBy *HistoryActor `json:"updated_by,omitempty"`
 	// The signature as it stood in this version.
 	Value FunctionSignatureEntry `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionSignatureVersion FunctionSignatureVersion
@@ -154,6 +154,11 @@ func (o FunctionSignatureVersion) ToMap() (map[string]interface{}, error) {
 		toSerialize["updated_by"] = o.UpdatedBy
 	}
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *FunctionSignatureVersion) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionSignatureVersion := _FunctionSignatureVersion{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionSignatureVersion)
+	err = json.Unmarshal(data, &varFunctionSignatureVersion)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionSignatureVersion(varFunctionSignatureVersion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "updated_by")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -230,6 +230,8 @@ Begins an analysis
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateAnalysisRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) CreateAnalysis(ctx context.Context) ApiCreateAnalysisRequest {
 	return ApiCreateAnalysisRequest{
@@ -240,6 +242,7 @@ func (a *AnalysesCoreAPIService) CreateAnalysis(ctx context.Context) ApiCreateAn
 
 // Execute executes the request
 //  @return BaseResponseAnalysisCreateResponse
+// Deprecated
 func (a *AnalysesCoreAPIService) CreateAnalysisExecute(r ApiCreateAnalysisRequest) (*BaseResponseAnalysisCreateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -1644,6 +1647,8 @@ Gets the params that the analysis was run with
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiGetAnalysisParamsRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) GetAnalysisParams(ctx context.Context, analysisId int32) ApiGetAnalysisParamsRequest {
 	return ApiGetAnalysisParamsRequest{
@@ -1655,6 +1660,7 @@ func (a *AnalysesCoreAPIService) GetAnalysisParams(ctx context.Context, analysis
 
 // Execute executes the request
 //  @return BaseResponseParams
+// Deprecated
 func (a *AnalysesCoreAPIService) GetAnalysisParamsExecute(r ApiGetAnalysisParamsRequest) (*BaseResponseParams, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -1771,6 +1777,8 @@ Given an analysis ID gets the current status of the analysis
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiGetAnalysisStatusRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) GetAnalysisStatus(ctx context.Context, analysisId int32) ApiGetAnalysisStatusRequest {
 	return ApiGetAnalysisStatusRequest{
@@ -1782,6 +1790,7 @@ func (a *AnalysesCoreAPIService) GetAnalysisStatus(ctx context.Context, analysis
 
 // Execute executes the request
 //  @return BaseResponseStatus
+// Deprecated
 func (a *AnalysesCoreAPIService) GetAnalysisStatusExecute(r ApiGetAnalysisStatusRequest) (*BaseResponseStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -2427,6 +2436,8 @@ Gets the most recent analyses provided a scope, this is then paginated, if pages
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListAnalysesRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) ListAnalyses(ctx context.Context) ApiListAnalysesRequest {
 	return ApiListAnalysesRequest{
@@ -2437,6 +2448,7 @@ func (a *AnalysesCoreAPIService) ListAnalyses(ctx context.Context) ApiListAnalys
 
 // Execute executes the request
 //  @return BaseResponseRecent
+// Deprecated
 func (a *AnalysesCoreAPIService) ListAnalysesExecute(r ApiListAnalysesRequest) (*BaseResponseRecent, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -2782,6 +2794,8 @@ Add strings to the analysis. Rejects if any string already exists at the given v
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiPutAnalysisStringsRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) PutAnalysisStrings(ctx context.Context, analysisId int32) ApiPutAnalysisStringsRequest {
 	return ApiPutAnalysisStringsRequest{
@@ -2793,6 +2807,7 @@ func (a *AnalysesCoreAPIService) PutAnalysisStrings(ctx context.Context, analysi
 
 // Execute executes the request
 //  @return BaseResponse
+// Deprecated
 func (a *AnalysesCoreAPIService) PutAnalysisStringsExecute(r ApiPutAnalysisStringsRequest) (*BaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
@@ -3569,6 +3584,8 @@ UploadFile Upload File
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiUploadFileRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) UploadFile(ctx context.Context) ApiUploadFileRequest {
 	return ApiUploadFileRequest{
@@ -3579,6 +3596,7 @@ func (a *AnalysesCoreAPIService) UploadFile(ctx context.Context) ApiUploadFileRe
 
 // Execute executes the request
 //  @return BaseResponseUploadResponse
+// Deprecated
 func (a *AnalysesCoreAPIService) UploadFileExecute(r ApiUploadFileRequest) (*BaseResponseUploadResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -3980,6 +3998,173 @@ func (a *AnalysesCoreAPIService) V3GetAnalysisAutoUnstripStatusExecute(r ApiV3Ge
 	}
 
 	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/auto-unstrip/status"
+	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.analysisId < 1 {
+		return localVarReturnValue, nil, reportError("analysisId must be greater than 1")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV3GetAnalysisFunctionsProgressRequest struct {
+	ctx context.Context
+	ApiService *AnalysesCoreAPIService
+	analysisId int64
+}
+
+func (r ApiV3GetAnalysisFunctionsProgressRequest) Execute() (*FunctionsProgressOutputBody, *http.Response, error) {
+	return r.ApiService.V3GetAnalysisFunctionsProgressExecute(r)
+}
+
+/*
+V3GetAnalysisFunctionsProgress Get function embedding progress for an analysis.
+
+Returns how many functions the analysis has and how many carry an embedding, with the percentage complete. Embeddings are counted from the unified store, so an analysis whose model predates the current multi-arch one reports zero.
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param analysisId Analysis ID
+ @return ApiV3GetAnalysisFunctionsProgressRequest
+*/
+func (a *AnalysesCoreAPIService) V3GetAnalysisFunctionsProgress(ctx context.Context, analysisId int64) ApiV3GetAnalysisFunctionsProgressRequest {
+	return ApiV3GetAnalysisFunctionsProgressRequest{
+		ApiService: a,
+		ctx: ctx,
+		analysisId: analysisId,
+	}
+}
+
+// Execute executes the request
+//  @return FunctionsProgressOutputBody
+func (a *AnalysesCoreAPIService) V3GetAnalysisFunctionsProgressExecute(r ApiV3GetAnalysisFunctionsProgressRequest) (*FunctionsProgressOutputBody, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *FunctionsProgressOutputBody
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetAnalysisFunctionsProgress")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/progress/functions"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -4867,6 +5052,8 @@ type ApiV3ListAnalysesRequest struct {
 	modelName *[]*string
 	usernames *[]*string
 	sha256Hash *string
+	platform *[]string
+	architecture *[]string
 	pageSize *int64
 	nextPageToken *string
 	orderBy *string
@@ -4878,7 +5065,7 @@ func (r ApiV3ListAnalysesRequest) SearchTerm(searchTerm string) ApiV3ListAnalyse
 	return r
 }
 
-// Leave empty for no filter
+// Leave empty to search your own, your team&#39;s and all public analyses
 func (r ApiV3ListAnalysesRequest) AnalysisScope(analysisScope []string) ApiV3ListAnalysesRequest {
 	r.analysisScope = &analysisScope
 	return r
@@ -4901,6 +5088,18 @@ func (r ApiV3ListAnalysesRequest) Usernames(usernames []*string) ApiV3ListAnalys
 
 func (r ApiV3ListAnalysesRequest) Sha256Hash(sha256Hash string) ApiV3ListAnalysesRequest {
 	r.sha256Hash = &sha256Hash
+	return r
+}
+
+// Restrict to binaries running on one of these operating-system platforms. Matches the uploader&#39;s override when they set one, the detected platform otherwise; a binary with neither is never matched. Leave empty for no filter
+func (r ApiV3ListAnalysesRequest) Platform(platform []string) ApiV3ListAnalysesRequest {
+	r.platform = &platform
+	return r
+}
+
+// Restrict to binaries built for one of these instruction-set architectures. Resolved the same way as platform. Leave empty for no filter
+func (r ApiV3ListAnalysesRequest) Architecture(architecture []string) ApiV3ListAnalysesRequest {
+	r.architecture = &architecture
 	return r
 }
 
@@ -4981,10 +5180,6 @@ func (a *AnalysesCoreAPIService) V3ListAnalysesExecute(r ApiV3ListAnalysesReques
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "analysis_scope", t, "form", "multi")
 		}
-	} else {
-		var defaultValue []string = []string{"PRIVATE"}
-		parameterAddToHeaderOrQuery(localVarQueryParams, "analysis_scope", defaultValue, "form", "multi")
-		r.analysisScope = &defaultValue
 	}
 	if r.status != nil {
 		t := *r.status
@@ -5005,6 +5200,12 @@ func (a *AnalysesCoreAPIService) V3ListAnalysesExecute(r ApiV3ListAnalysesReques
 	}
 	if r.sha256Hash != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sha256_hash", r.sha256Hash, "form", "")
+	}
+	if r.platform != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "platform", r.platform, "form", "csv")
+	}
+	if r.architecture != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "architecture", r.architecture, "form", "csv")
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")

@@ -20,7 +20,10 @@ var _ MappedNullable = &TriggerSecurityScanInputBody{}
 type TriggerSecurityScanInputBody struct {
 	// Stop after decompiling and scanning this many functions. Omit to process every function in the analysis.
 	MaxFunctionsToScan *int64 `json:"max_functions_to_scan,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TriggerSecurityScanInputBody TriggerSecurityScanInputBody
 
 // NewTriggerSecurityScanInputBody instantiates a new TriggerSecurityScanInputBody object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o TriggerSecurityScanInputBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MaxFunctionsToScan) {
 		toSerialize["max_functions_to_scan"] = o.MaxFunctionsToScan
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TriggerSecurityScanInputBody) UnmarshalJSON(data []byte) (err error) {
+	varTriggerSecurityScanInputBody := _TriggerSecurityScanInputBody{}
+
+	err = json.Unmarshal(data, &varTriggerSecurityScanInputBody)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TriggerSecurityScanInputBody(varTriggerSecurityScanInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "max_functions_to_scan")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTriggerSecurityScanInputBody struct {

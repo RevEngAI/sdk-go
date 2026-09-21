@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ConfirmToolInputBody{}
 type ConfirmToolInputBody struct {
 	// Whether the user approves the pending tool call.
 	Approved bool `json:"approved"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConfirmToolInputBody ConfirmToolInputBody
@@ -79,6 +79,11 @@ func (o ConfirmToolInputBody) MarshalJSON() ([]byte, error) {
 func (o ConfirmToolInputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["approved"] = o.Approved
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *ConfirmToolInputBody) UnmarshalJSON(data []byte) (err error) {
 
 	varConfirmToolInputBody := _ConfirmToolInputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConfirmToolInputBody)
+	err = json.Unmarshal(data, &varConfirmToolInputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConfirmToolInputBody(varConfirmToolInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "approved")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

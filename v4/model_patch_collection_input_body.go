@@ -24,7 +24,10 @@ type PatchCollectionInputBody struct {
 	CollectionScope *string `json:"collection_scope,omitempty"`
 	// New description. Omit, null, or empty string to keep existing.
 	Description *string `json:"description,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PatchCollectionInputBody PatchCollectionInputBody
 
 // NewPatchCollectionInputBody instantiates a new PatchCollectionInputBody object
 // This constructor will assign default values to properties that have it defined,
@@ -158,7 +161,35 @@ func (o PatchCollectionInputBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PatchCollectionInputBody) UnmarshalJSON(data []byte) (err error) {
+	varPatchCollectionInputBody := _PatchCollectionInputBody{}
+
+	err = json.Unmarshal(data, &varPatchCollectionInputBody)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PatchCollectionInputBody(varPatchCollectionInputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "collection_name")
+		delete(additionalProperties, "collection_scope")
+		delete(additionalProperties, "description")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePatchCollectionInputBody struct {

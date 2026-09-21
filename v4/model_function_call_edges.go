@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ type FunctionCallEdges struct {
 	Callees []CallEdge `json:"callees"`
 	Callers []CallEdge `json:"callers"`
 	FunctionId int64 `json:"function_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FunctionCallEdges FunctionCallEdges
@@ -140,6 +140,11 @@ func (o FunctionCallEdges) ToMap() (map[string]interface{}, error) {
 		toSerialize["callers"] = o.Callers
 	}
 	toSerialize["function_id"] = o.FunctionId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -169,15 +174,22 @@ func (o *FunctionCallEdges) UnmarshalJSON(data []byte) (err error) {
 
 	varFunctionCallEdges := _FunctionCallEdges{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFunctionCallEdges)
+	err = json.Unmarshal(data, &varFunctionCallEdges)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FunctionCallEdges(varFunctionCallEdges)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "callees")
+		delete(additionalProperties, "callers")
+		delete(additionalProperties, "function_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

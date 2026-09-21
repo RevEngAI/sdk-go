@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &GetAdditionalDetailsOutputBody{}
 type GetAdditionalDetailsOutputBody struct {
 	BinaryId int64 `json:"binary_id"`
 	Details interface{} `json:"details"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetAdditionalDetailsOutputBody GetAdditionalDetailsOutputBody
@@ -109,6 +109,11 @@ func (o GetAdditionalDetailsOutputBody) ToMap() (map[string]interface{}, error) 
 	if o.Details != nil {
 		toSerialize["details"] = o.Details
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +142,21 @@ func (o *GetAdditionalDetailsOutputBody) UnmarshalJSON(data []byte) (err error) 
 
 	varGetAdditionalDetailsOutputBody := _GetAdditionalDetailsOutputBody{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetAdditionalDetailsOutputBody)
+	err = json.Unmarshal(data, &varGetAdditionalDetailsOutputBody)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetAdditionalDetailsOutputBody(varGetAdditionalDetailsOutputBody)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binary_id")
+		delete(additionalProperties, "details")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

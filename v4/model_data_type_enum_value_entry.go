@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type DataTypeEnumValueEntry struct {
 	Name string `json:"name"`
 	// Constant value, a decimal integer as a string, with no leading zeros. A string because the value may be negative or exceed 64 unsigned bits, which a JSON number cannot carry safely.
 	Value string `json:"value" validate:"regexp=^-?(0|[1-9][0-9]*)$"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DataTypeEnumValueEntry DataTypeEnumValueEntry
@@ -107,6 +107,11 @@ func (o DataTypeEnumValueEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *DataTypeEnumValueEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varDataTypeEnumValueEntry := _DataTypeEnumValueEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDataTypeEnumValueEntry)
+	err = json.Unmarshal(data, &varDataTypeEnumValueEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DataTypeEnumValueEntry(varDataTypeEnumValueEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

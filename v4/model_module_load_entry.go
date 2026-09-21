@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type ModuleLoadEntry struct {
 	Pid int64 `json:"pid"`
 	ProcessName *string `json:"process_name,omitempty"`
 	ProcessSeqid *int64 `json:"process_seqid,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ModuleLoadEntry ModuleLoadEntry
@@ -186,6 +186,11 @@ func (o ModuleLoadEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProcessSeqid) {
 		toSerialize["process_seqid"] = o.ProcessSeqid
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -213,15 +218,23 @@ func (o *ModuleLoadEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varModuleLoadEntry := _ModuleLoadEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varModuleLoadEntry)
+	err = json.Unmarshal(data, &varModuleLoadEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ModuleLoadEntry(varModuleLoadEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "modules")
+		delete(additionalProperties, "pid")
+		delete(additionalProperties, "process_name")
+		delete(additionalProperties, "process_seqid")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

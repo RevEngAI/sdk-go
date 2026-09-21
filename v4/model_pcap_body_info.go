@@ -11,7 +11,6 @@ package sdk
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type PcapBodyInfo struct {
 	Sha256 *string `json:"sha256,omitempty"`
 	Size int64 `json:"size"`
 	YaraHits []string `json:"yara_hits,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PcapBodyInfo PcapBodyInfo
@@ -286,6 +286,11 @@ func (o PcapBodyInfo) ToMap() (map[string]interface{}, error) {
 	if o.YaraHits != nil {
 		toSerialize["yara_hits"] = o.YaraHits
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -314,15 +319,26 @@ func (o *PcapBodyInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varPcapBodyInfo := _PcapBodyInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPcapBodyInfo)
+	err = json.Unmarshal(data, &varPcapBodyInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PcapBodyInfo(varPcapBodyInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filename")
+		delete(additionalProperties, "is_pe")
+		delete(additionalProperties, "mime_type")
+		delete(additionalProperties, "preview")
+		delete(additionalProperties, "sha256")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "yara_hits")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
