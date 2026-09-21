@@ -114,13 +114,40 @@ jobs:
         sed -i "s|^gitRepoId: .*|gitRepoId: sdk-go/${MAJOR_VERSION}|" config.yml
         echo "gitRepoId set to sdk-go/${MAJOR_VERSION}"
 
+    # `disallowAdditionalPropertiesIfNotPresent: false` only covers schemas that
+    # omit additionalProperties. For an explicit `additionalProperties: false` the
+    # generator reads the OpenAPI 3.1 boolean schema inconsistently, so the
+    # additional-properties catch-all silently comes and goes between spec
+    # revisions. `true` has only one reading.
+    - name: Fetch and normalise OpenAPI spec
+      if: steps.version_check.outputs.should_generate == 'true'
+      run: |
+        curl -fsSL https://docs.reveng.ai/openapi.json -o openapi.json
+        python3 - <<'PY'
+        import json
+
+        with open("openapi.json") as f:
+            spec = json.load(f)
+
+        for schema in spec.get("components", {}).get("schemas", {}).values():
+            if not isinstance(schema, dict) or schema.get("additionalProperties") is not False:
+                continue
+            if schema.get("properties"):
+                schema["additionalProperties"] = True
+            else:
+                del schema["additionalProperties"]
+
+        with open("openapi.json", "w") as f:
+            json.dump(spec, f)
+        PY
+
     - name: Generate Go SDK
       if: steps.version_check.outputs.should_generate == 'true'
       uses: openapi-generators/openapitools-generator-action@b729d184e6b3459572c37c0e37f88a832e69b552 # v1.5.0
       with:
         generator: go
         generator-tag: 'v7.19.0'
-        openapi-url: https://docs.reveng.ai/openapi.json
+        openapi-file: openapi.json
         config-file: config.yml
         template-dir: templates
         command-args: |
@@ -158,7 +185,7 @@ jobs:
         rm -Rf docs && mv go-client/docs .
         rm -Rf README.md && mv go-client/README.md .
         rm -Rf "$MAJOR_VERSION"/*.go && mv go-client/*.go "$MAJOR_VERSION"/
-        rm -Rf go-client
+        rm -Rf go-client openapi.json
 
         # Ensure go.mod exists and has the correct module path
         if [ ! -f "$MAJOR_VERSION/go.mod" ]; then
