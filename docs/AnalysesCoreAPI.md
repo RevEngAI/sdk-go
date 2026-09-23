@@ -28,14 +28,21 @@ Method | HTTP request | Description
 [**UpdateAnalysisTags**](AnalysesCoreAPI.md#UpdateAnalysisTags) | **Patch** /v2/analyses/{analysis_id}/tags | Update Analysis Tags
 [**UploadFile**](AnalysesCoreAPI.md#UploadFile) | **Post** /v2/upload | Upload File
 [**V3CreateAnalysis**](AnalysesCoreAPI.md#V3CreateAnalysis) | **Post** /v3/analyses | Create an analysis
+[**V3DeleteAnalysis**](AnalysesCoreAPI.md#V3DeleteAnalysis) | **Delete** /v3/analyses/{analysis_id} | Delete an analysis.
+[**V3DownloadBinaryExport**](AnalysesCoreAPI.md#V3DownloadBinaryExport) | **Get** /v3/analyses/{analysis_id}/binary-export | Download a binary export
+[**V3GetAnalysis**](AnalysesCoreAPI.md#V3GetAnalysis) | **Get** /v3/analyses/{analysis_id} | Get an analysis.
 [**V3GetAnalysisAutoUnstripStatus**](AnalysesCoreAPI.md#V3GetAnalysisAutoUnstripStatus) | **Get** /v3/analyses/{analysis_id}/auto-unstrip/status | Get the auto-unstrip status for an analysis.
 [**V3GetAnalysisFunctionsProgress**](AnalysesCoreAPI.md#V3GetAnalysisFunctionsProgress) | **Get** /v3/analyses/{analysis_id}/progress/functions | Get function embedding progress for an analysis.
 [**V3GetAnalysisLogs**](AnalysesCoreAPI.md#V3GetAnalysisLogs) | **Get** /v3/analyses/{analysis_id}/logs | Get the Analysis log
 [**V3GetAnalysisOperation**](AnalysesCoreAPI.md#V3GetAnalysisOperation) | **Get** /v3/operations/analyses/{analysis_id} | Get an Analysis-creation operation
 [**V3GetAnalysisStrings**](AnalysesCoreAPI.md#V3GetAnalysisStrings) | **Get** /v3/analyses/{analysis_id}/functions/strings | List strings for an analysis.
 [**V3GetAnalysisStringsStatus**](AnalysesCoreAPI.md#V3GetAnalysisStringsStatus) | **Get** /v3/analyses/{analysis_id}/functions/strings/status | Get the string-extraction status for an analysis.
+[**V3GetBinaryExportOperation**](AnalysesCoreAPI.md#V3GetBinaryExportOperation) | **Get** /v3/operations/binary-export/{task_id} | Get a binary export operation
 [**V3ListAnalyses**](AnalysesCoreAPI.md#V3ListAnalyses) | **Get** /v3/analyses | List analyses
 [**V3ListExampleAnalyses**](AnalysesCoreAPI.md#V3ListExampleAnalyses) | **Get** /v3/analyses/examples | List example analyses
+[**V3LookupAnalysisByBinaryId**](AnalysesCoreAPI.md#V3LookupAnalysisByBinaryId) | **Get** /v3/analyses/lookup/{binary_id} | Look up the most recent analysis for a binary.
+[**V3QueueBinaryExport**](AnalysesCoreAPI.md#V3QueueBinaryExport) | **Post** /v3/analyses/{analysis_id}/binary-export | Queue a binary export
+[**V3UpdateAnalysis**](AnalysesCoreAPI.md#V3UpdateAnalysis) | **Patch** /v3/analyses/{analysis_id} | Update an analysis.
 [**V3UpgradeAnalysisModel**](AnalysesCoreAPI.md#V3UpgradeAnalysisModel) | **Post** /v3/analyses/{analysis_id}/upgrade-model | Re-analyse on the latest model
 
 
@@ -1752,6 +1759,214 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V3DeleteAnalysis
+
+> V3DeleteAnalysis(ctx, analysisId).Execute()
+
+Delete an analysis.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.AnalysesCoreAPI.V3DeleteAnalysis(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3DeleteAnalysis``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3DeleteAnalysisRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3DownloadBinaryExport
+
+> V3DownloadBinaryExport(ctx, analysisId).TaskId(taskId).Execute()
+
+Download a binary export
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	taskId := "taskId_example" // string | Task ID returned by queueing the export (optional)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.AnalysesCoreAPI.V3DownloadBinaryExport(context.Background(), analysisId).TaskId(taskId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3DownloadBinaryExport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3DownloadBinaryExportRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **taskId** | **string** | Task ID returned by queueing the export | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetAnalysis
+
+> AnalysisDetailOutputBody V3GetAnalysis(ctx, analysisId).Execute()
+
+Get an analysis.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3GetAnalysis(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetAnalysis``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetAnalysis`: AnalysisDetailOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3GetAnalysis`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetAnalysisRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AnalysisDetailOutputBody**](AnalysisDetailOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V3GetAnalysisAutoUnstripStatus
 
 > AutoUnstripStatusOutputBody V3GetAnalysisAutoUnstripStatus(ctx, analysisId).Execute()
@@ -2186,9 +2401,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V3GetBinaryExportOperation
+
+> OperationBinaryExportMetadataBinaryExportResult V3GetBinaryExportOperation(ctx, taskId).Execute()
+
+Get a binary export operation
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	taskId := "taskId_example" // string | Task ID returned by queueing the export
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3GetBinaryExportOperation(context.Background(), taskId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetBinaryExportOperation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetBinaryExportOperation`: OperationBinaryExportMetadataBinaryExportResult
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3GetBinaryExportOperation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**taskId** | **string** | Task ID returned by queueing the export | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetBinaryExportOperationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OperationBinaryExportMetadataBinaryExportResult**](OperationBinaryExportMetadataBinaryExportResult.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V3ListAnalyses
 
-> ListAnalysesOutputBody V3ListAnalyses(ctx).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).Platform(platform).Architecture(architecture).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
+> ListAnalysesOutputBody V3ListAnalyses(ctx).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).BinaryId(binaryId).Platform(platform).Architecture(architecture).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
 
 List analyses
 
@@ -2213,6 +2498,7 @@ func main() {
 	modelName := []*string{"Inner_example"} // []*string |  (optional)
 	usernames := []*string{"Inner_example"} // []*string |  (optional)
 	sha256Hash := "sha256Hash_example" // string |  (optional)
+	binaryId := int64(789) // int64 | Restrict to analyses of this binary. A binary can carry more than one analysis; they are returned newest first under the default sort (optional)
 	platform := []string{"Platform_example"} // []string | Restrict to binaries running on one of these operating-system platforms. Matches the uploader's override when they set one, the detected platform otherwise; a binary with neither is never matched. Leave empty for no filter (optional)
 	architecture := []string{"Architecture_example"} // []string | Restrict to binaries built for one of these instruction-set architectures. Resolved the same way as platform. Leave empty for no filter (optional)
 	pageSize := int64(789) // int64 |  (optional) (default to 20)
@@ -2222,7 +2508,7 @@ func main() {
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.V3ListAnalyses(context.Background()).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).Platform(platform).Architecture(architecture).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.V3ListAnalyses(context.Background()).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).BinaryId(binaryId).Platform(platform).Architecture(architecture).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3ListAnalyses``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2249,6 +2535,7 @@ Name | Type | Description  | Notes
  **modelName** | **[]string** |  | 
  **usernames** | **[]string** |  | 
  **sha256Hash** | **string** |  | 
+ **binaryId** | **int64** | Restrict to analyses of this binary. A binary can carry more than one analysis; they are returned newest first under the default sort | 
  **platform** | **[]string** | Restrict to binaries running on one of these operating-system platforms. Matches the uploader&#39;s override when they set one, the detected platform otherwise; a binary with neither is never matched. Leave empty for no filter | 
  **architecture** | **[]string** | Restrict to binaries built for one of these instruction-set architectures. Resolved the same way as platform. Leave empty for no filter | 
  **pageSize** | **int64** |  | [default to 20]
@@ -2328,6 +2615,218 @@ Other parameters are passed through a pointer to a apiV3ListExampleAnalysesReque
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3LookupAnalysisByBinaryId
+
+> LookupAnalysisByBinaryIDOutputBody V3LookupAnalysisByBinaryId(ctx, binaryId).Execute()
+
+Look up the most recent analysis for a binary.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	binaryId := int64(789) // int64 | Binary ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3LookupAnalysisByBinaryId(context.Background(), binaryId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3LookupAnalysisByBinaryId``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3LookupAnalysisByBinaryId`: LookupAnalysisByBinaryIDOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3LookupAnalysisByBinaryId`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**binaryId** | **int64** | Binary ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3LookupAnalysisByBinaryIdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**LookupAnalysisByBinaryIDOutputBody**](LookupAnalysisByBinaryIDOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3QueueBinaryExport
+
+> OperationBinaryExportMetadataBinaryExportResult V3QueueBinaryExport(ctx, analysisId).Execute()
+
+Queue a binary export
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3QueueBinaryExport(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3QueueBinaryExport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3QueueBinaryExport`: OperationBinaryExportMetadataBinaryExportResult
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3QueueBinaryExport`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3QueueBinaryExportRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OperationBinaryExportMetadataBinaryExportResult**](OperationBinaryExportMetadataBinaryExportResult.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3UpdateAnalysis
+
+> AnalysisDetailOutputBody V3UpdateAnalysis(ctx, analysisId).UpdateAnalysisInputBody(updateAnalysisInputBody).Execute()
+
+Update an analysis.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	updateAnalysisInputBody := *revengai.NewUpdateAnalysisInputBody() // UpdateAnalysisInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3UpdateAnalysis(context.Background(), analysisId).UpdateAnalysisInputBody(updateAnalysisInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3UpdateAnalysis``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3UpdateAnalysis`: AnalysisDetailOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3UpdateAnalysis`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3UpdateAnalysisRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateAnalysisInputBody** | [**UpdateAnalysisInputBody**](UpdateAnalysisInputBody.md) |  | 
+
+### Return type
+
+[**AnalysisDetailOutputBody**](AnalysisDetailOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

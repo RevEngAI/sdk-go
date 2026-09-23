@@ -24,9 +24,19 @@ type Binary struct {
 	BinaryId int64 `json:"binary_id"`
 	BinaryName string `json:"binary_name"`
 	CreatedAt time.Time `json:"created_at"`
+	// Detected instruction-set architecture; empty when unavailable
+	DetectedArchitecture string `json:"detected_architecture"`
+	// Detected operating-system platform; empty when unavailable
+	DetectedBinaryType string `json:"detected_binary_type"`
 	IsSystemAnalysis bool `json:"is_system_analysis"`
+	// Name of the model the analysis ran on
+	ModelName string `json:"model_name"`
 	OwnerId int64 `json:"owner_id"`
 	Sha256Hash string `json:"sha_256_hash"`
+	// User-supplied instruction-set architecture; \"AUTO\" when not overridden
+	SuppliedArchitecture string `json:"supplied_architecture"`
+	// User-supplied operating-system platform; \"AUTO\" when not overridden
+	SuppliedBinaryType string `json:"supplied_binary_type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,15 +46,20 @@ type _Binary Binary
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBinary(analysisId int64, binaryId int64, binaryName string, createdAt time.Time, isSystemAnalysis bool, ownerId int64, sha256Hash string) *Binary {
+func NewBinary(analysisId int64, binaryId int64, binaryName string, createdAt time.Time, detectedArchitecture string, detectedBinaryType string, isSystemAnalysis bool, modelName string, ownerId int64, sha256Hash string, suppliedArchitecture string, suppliedBinaryType string) *Binary {
 	this := Binary{}
 	this.AnalysisId = analysisId
 	this.BinaryId = binaryId
 	this.BinaryName = binaryName
 	this.CreatedAt = createdAt
+	this.DetectedArchitecture = detectedArchitecture
+	this.DetectedBinaryType = detectedBinaryType
 	this.IsSystemAnalysis = isSystemAnalysis
+	this.ModelName = modelName
 	this.OwnerId = ownerId
 	this.Sha256Hash = sha256Hash
+	this.SuppliedArchitecture = suppliedArchitecture
+	this.SuppliedBinaryType = suppliedBinaryType
 	return &this
 }
 
@@ -152,6 +167,54 @@ func (o *Binary) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
+// GetDetectedArchitecture returns the DetectedArchitecture field value
+func (o *Binary) GetDetectedArchitecture() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.DetectedArchitecture
+}
+
+// GetDetectedArchitectureOk returns a tuple with the DetectedArchitecture field value
+// and a boolean to check if the value has been set.
+func (o *Binary) GetDetectedArchitectureOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DetectedArchitecture, true
+}
+
+// SetDetectedArchitecture sets field value
+func (o *Binary) SetDetectedArchitecture(v string) {
+	o.DetectedArchitecture = v
+}
+
+// GetDetectedBinaryType returns the DetectedBinaryType field value
+func (o *Binary) GetDetectedBinaryType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.DetectedBinaryType
+}
+
+// GetDetectedBinaryTypeOk returns a tuple with the DetectedBinaryType field value
+// and a boolean to check if the value has been set.
+func (o *Binary) GetDetectedBinaryTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DetectedBinaryType, true
+}
+
+// SetDetectedBinaryType sets field value
+func (o *Binary) SetDetectedBinaryType(v string) {
+	o.DetectedBinaryType = v
+}
+
 // GetIsSystemAnalysis returns the IsSystemAnalysis field value
 func (o *Binary) GetIsSystemAnalysis() bool {
 	if o == nil {
@@ -174,6 +237,30 @@ func (o *Binary) GetIsSystemAnalysisOk() (*bool, bool) {
 // SetIsSystemAnalysis sets field value
 func (o *Binary) SetIsSystemAnalysis(v bool) {
 	o.IsSystemAnalysis = v
+}
+
+// GetModelName returns the ModelName field value
+func (o *Binary) GetModelName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ModelName
+}
+
+// GetModelNameOk returns a tuple with the ModelName field value
+// and a boolean to check if the value has been set.
+func (o *Binary) GetModelNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ModelName, true
+}
+
+// SetModelName sets field value
+func (o *Binary) SetModelName(v string) {
+	o.ModelName = v
 }
 
 // GetOwnerId returns the OwnerId field value
@@ -224,6 +311,54 @@ func (o *Binary) SetSha256Hash(v string) {
 	o.Sha256Hash = v
 }
 
+// GetSuppliedArchitecture returns the SuppliedArchitecture field value
+func (o *Binary) GetSuppliedArchitecture() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.SuppliedArchitecture
+}
+
+// GetSuppliedArchitectureOk returns a tuple with the SuppliedArchitecture field value
+// and a boolean to check if the value has been set.
+func (o *Binary) GetSuppliedArchitectureOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SuppliedArchitecture, true
+}
+
+// SetSuppliedArchitecture sets field value
+func (o *Binary) SetSuppliedArchitecture(v string) {
+	o.SuppliedArchitecture = v
+}
+
+// GetSuppliedBinaryType returns the SuppliedBinaryType field value
+func (o *Binary) GetSuppliedBinaryType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.SuppliedBinaryType
+}
+
+// GetSuppliedBinaryTypeOk returns a tuple with the SuppliedBinaryType field value
+// and a boolean to check if the value has been set.
+func (o *Binary) GetSuppliedBinaryTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SuppliedBinaryType, true
+}
+
+// SetSuppliedBinaryType sets field value
+func (o *Binary) SetSuppliedBinaryType(v string) {
+	o.SuppliedBinaryType = v
+}
+
 func (o Binary) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -238,9 +373,14 @@ func (o Binary) ToMap() (map[string]interface{}, error) {
 	toSerialize["binary_id"] = o.BinaryId
 	toSerialize["binary_name"] = o.BinaryName
 	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["detected_architecture"] = o.DetectedArchitecture
+	toSerialize["detected_binary_type"] = o.DetectedBinaryType
 	toSerialize["is_system_analysis"] = o.IsSystemAnalysis
+	toSerialize["model_name"] = o.ModelName
 	toSerialize["owner_id"] = o.OwnerId
 	toSerialize["sha_256_hash"] = o.Sha256Hash
+	toSerialize["supplied_architecture"] = o.SuppliedArchitecture
+	toSerialize["supplied_binary_type"] = o.SuppliedBinaryType
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -258,9 +398,14 @@ func (o *Binary) UnmarshalJSON(data []byte) (err error) {
 		"binary_id",
 		"binary_name",
 		"created_at",
+		"detected_architecture",
+		"detected_binary_type",
 		"is_system_analysis",
+		"model_name",
 		"owner_id",
 		"sha_256_hash",
+		"supplied_architecture",
+		"supplied_binary_type",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -294,9 +439,14 @@ func (o *Binary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "binary_id")
 		delete(additionalProperties, "binary_name")
 		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "detected_architecture")
+		delete(additionalProperties, "detected_binary_type")
 		delete(additionalProperties, "is_system_analysis")
+		delete(additionalProperties, "model_name")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "supplied_architecture")
+		delete(additionalProperties, "supplied_binary_type")
 		o.AdditionalProperties = additionalProperties
 	}
 

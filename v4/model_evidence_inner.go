@@ -26,7 +26,7 @@ type EvidenceInner struct {
 	KnownConstantEvidence *KnownConstantEvidence
 	ModelInterpretationEvidence *ModelInterpretationEvidence
 	ReferencedConstantEvidence *ReferencedConstantEvidence
-	SuspiciousStringEvidence *SuspiciousStringEvidence
+	StringMatchEvidence *StringMatchEvidence
 }
 
 // ApiCombinationEvidenceAsEvidenceInner is a convenience function that returns ApiCombinationEvidence wrapped in EvidenceInner
@@ -92,10 +92,10 @@ func ReferencedConstantEvidenceAsEvidenceInner(v *ReferencedConstantEvidence) Ev
 	}
 }
 
-// SuspiciousStringEvidenceAsEvidenceInner is a convenience function that returns SuspiciousStringEvidence wrapped in EvidenceInner
-func SuspiciousStringEvidenceAsEvidenceInner(v *SuspiciousStringEvidence) EvidenceInner {
+// StringMatchEvidenceAsEvidenceInner is a convenience function that returns StringMatchEvidence wrapped in EvidenceInner
+func StringMatchEvidenceAsEvidenceInner(v *StringMatchEvidence) EvidenceInner {
 	return EvidenceInner{
-		SuspiciousStringEvidence: v,
+		StringMatchEvidence: v,
 	}
 }
 
@@ -257,21 +257,21 @@ func (dst *EvidenceInner) UnmarshalJSON(data []byte) error {
 		dst.ReferencedConstantEvidence = nil
 	}
 
-	// try to unmarshal data into SuspiciousStringEvidence
-	err = newStrictDecoder(data).Decode(&dst.SuspiciousStringEvidence)
+	// try to unmarshal data into StringMatchEvidence
+	err = newStrictDecoder(data).Decode(&dst.StringMatchEvidence)
 	if err == nil {
-		jsonSuspiciousStringEvidence, _ := json.Marshal(dst.SuspiciousStringEvidence)
-		if string(jsonSuspiciousStringEvidence) == "{}" { // empty struct
-			dst.SuspiciousStringEvidence = nil
+		jsonStringMatchEvidence, _ := json.Marshal(dst.StringMatchEvidence)
+		if string(jsonStringMatchEvidence) == "{}" { // empty struct
+			dst.StringMatchEvidence = nil
 		} else {
-			if err = validator.Validate(dst.SuspiciousStringEvidence); err != nil {
-				dst.SuspiciousStringEvidence = nil
+			if err = validator.Validate(dst.StringMatchEvidence); err != nil {
+				dst.StringMatchEvidence = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SuspiciousStringEvidence = nil
+		dst.StringMatchEvidence = nil
 	}
 
 	if match > 1 { // more than 1 match
@@ -285,7 +285,7 @@ func (dst *EvidenceInner) UnmarshalJSON(data []byte) error {
 		dst.KnownConstantEvidence = nil
 		dst.ModelInterpretationEvidence = nil
 		dst.ReferencedConstantEvidence = nil
-		dst.SuspiciousStringEvidence = nil
+		dst.StringMatchEvidence = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(EvidenceInner)")
 	} else if match == 1 {
@@ -333,8 +333,8 @@ func (src EvidenceInner) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.ReferencedConstantEvidence)
 	}
 
-	if src.SuspiciousStringEvidence != nil {
-		return json.Marshal(&src.SuspiciousStringEvidence)
+	if src.StringMatchEvidence != nil {
+		return json.Marshal(&src.StringMatchEvidence)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -381,8 +381,8 @@ func (obj *EvidenceInner) GetActualInstance() (interface{}) {
 		return obj.ReferencedConstantEvidence
 	}
 
-	if obj.SuspiciousStringEvidence != nil {
-		return obj.SuspiciousStringEvidence
+	if obj.StringMatchEvidence != nil {
+		return obj.StringMatchEvidence
 	}
 
 	// all schemas are nil
@@ -427,8 +427,8 @@ func (obj EvidenceInner) GetActualInstanceValue() (interface{}) {
 		return *obj.ReferencedConstantEvidence
 	}
 
-	if obj.SuspiciousStringEvidence != nil {
-		return *obj.SuspiciousStringEvidence
+	if obj.StringMatchEvidence != nil {
+		return *obj.StringMatchEvidence
 	}
 
 	// all schemas are nil

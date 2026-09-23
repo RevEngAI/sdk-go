@@ -14,38 +14,38 @@ import (
 	"fmt"
 )
 
-// checks if the SuspiciousString type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SuspiciousString{}
+// checks if the StringMatch type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StringMatch{}
 
-// SuspiciousString struct for SuspiciousString
-type SuspiciousString struct {
+// StringMatch struct for StringMatch
+type StringMatch struct {
 	Value string `json:"value"`
 	Subject NullableSubject `json:"subject,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _SuspiciousString SuspiciousString
+type _StringMatch StringMatch
 
-// NewSuspiciousString instantiates a new SuspiciousString object
+// NewStringMatch instantiates a new StringMatch object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSuspiciousString(value string) *SuspiciousString {
-	this := SuspiciousString{}
+func NewStringMatch(value string) *StringMatch {
+	this := StringMatch{}
 	this.Value = value
 	return &this
 }
 
-// NewSuspiciousStringWithDefaults instantiates a new SuspiciousString object
+// NewStringMatchWithDefaults instantiates a new StringMatch object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSuspiciousStringWithDefaults() *SuspiciousString {
-	this := SuspiciousString{}
+func NewStringMatchWithDefaults() *StringMatch {
+	this := StringMatch{}
 	return &this
 }
 
 // GetValue returns the Value field value
-func (o *SuspiciousString) GetValue() string {
+func (o *StringMatch) GetValue() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -56,7 +56,7 @@ func (o *SuspiciousString) GetValue() string {
 
 // GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-func (o *SuspiciousString) GetValueOk() (*string, bool) {
+func (o *StringMatch) GetValueOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,12 +64,12 @@ func (o *SuspiciousString) GetValueOk() (*string, bool) {
 }
 
 // SetValue sets field value
-func (o *SuspiciousString) SetValue(v string) {
+func (o *StringMatch) SetValue(v string) {
 	o.Value = v
 }
 
 // GetSubject returns the Subject field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SuspiciousString) GetSubject() Subject {
+func (o *StringMatch) GetSubject() Subject {
 	if o == nil || IsNil(o.Subject.Get()) {
 		var ret Subject
 		return ret
@@ -80,7 +80,7 @@ func (o *SuspiciousString) GetSubject() Subject {
 // GetSubjectOk returns a tuple with the Subject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SuspiciousString) GetSubjectOk() (*Subject, bool) {
+func (o *StringMatch) GetSubjectOk() (*Subject, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,7 +88,7 @@ func (o *SuspiciousString) GetSubjectOk() (*Subject, bool) {
 }
 
 // HasSubject returns a boolean if a field has been set.
-func (o *SuspiciousString) HasSubject() bool {
+func (o *StringMatch) HasSubject() bool {
 	if o != nil && o.Subject.IsSet() {
 		return true
 	}
@@ -97,20 +97,20 @@ func (o *SuspiciousString) HasSubject() bool {
 }
 
 // SetSubject gets a reference to the given NullableSubject and assigns it to the Subject field.
-func (o *SuspiciousString) SetSubject(v Subject) {
+func (o *StringMatch) SetSubject(v Subject) {
 	o.Subject.Set(&v)
 }
 // SetSubjectNil sets the value for Subject to be an explicit nil
-func (o *SuspiciousString) SetSubjectNil() {
+func (o *StringMatch) SetSubjectNil() {
 	o.Subject.Set(nil)
 }
 
 // UnsetSubject ensures that no value is present for Subject, not even an explicit nil
-func (o *SuspiciousString) UnsetSubject() {
+func (o *StringMatch) UnsetSubject() {
 	o.Subject.Unset()
 }
 
-func (o SuspiciousString) MarshalJSON() ([]byte, error) {
+func (o StringMatch) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -118,7 +118,7 @@ func (o SuspiciousString) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SuspiciousString) ToMap() (map[string]interface{}, error) {
+func (o StringMatch) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
 	if o.Subject.IsSet() {
@@ -132,7 +132,7 @@ func (o SuspiciousString) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *SuspiciousString) UnmarshalJSON(data []byte) (err error) {
+func (o *StringMatch) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -154,15 +154,15 @@ func (o *SuspiciousString) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varSuspiciousString := _SuspiciousString{}
+	varStringMatch := _StringMatch{}
 
-	err = json.Unmarshal(data, &varSuspiciousString)
+	err = json.Unmarshal(data, &varStringMatch)
 
 	if err != nil {
 		return err
 	}
 
-	*o = SuspiciousString(varSuspiciousString)
+	*o = StringMatch(varStringMatch)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -175,38 +175,38 @@ func (o *SuspiciousString) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableSuspiciousString struct {
-	value *SuspiciousString
+type NullableStringMatch struct {
+	value *StringMatch
 	isSet bool
 }
 
-func (v NullableSuspiciousString) Get() *SuspiciousString {
+func (v NullableStringMatch) Get() *StringMatch {
 	return v.value
 }
 
-func (v *NullableSuspiciousString) Set(val *SuspiciousString) {
+func (v *NullableStringMatch) Set(val *StringMatch) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSuspiciousString) IsSet() bool {
+func (v NullableStringMatch) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSuspiciousString) Unset() {
+func (v *NullableStringMatch) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSuspiciousString(val *SuspiciousString) *NullableSuspiciousString {
-	return &NullableSuspiciousString{value: val, isSet: true}
+func NewNullableStringMatch(val *StringMatch) *NullableStringMatch {
+	return &NullableStringMatch{value: val, isSet: true}
 }
 
-func (v NullableSuspiciousString) MarshalJSON() ([]byte, error) {
+func (v NullableStringMatch) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSuspiciousString) UnmarshalJSON(src []byte) error {
+func (v *NullableStringMatch) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
