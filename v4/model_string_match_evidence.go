@@ -14,28 +14,28 @@ import (
 	"fmt"
 )
 
-// checks if the SuspiciousStringEvidence type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SuspiciousStringEvidence{}
+// checks if the StringMatchEvidence type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StringMatchEvidence{}
 
-// SuspiciousStringEvidence Suspicious strings without demonstrated semantic use.
-type SuspiciousStringEvidence struct {
+// StringMatchEvidence String matches without demonstrated semantic use.
+type StringMatchEvidence struct {
 	EvidenceKind *string `json:"evidence_kind,omitempty"`
 	Kind *string `json:"kind,omitempty"`
 	Effect EvidenceEffect `json:"effect"`
 	Strength *string `json:"strength,omitempty"`
-	Strings []SuspiciousString `json:"strings"`
+	Strings []StringMatch `json:"strings"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _SuspiciousStringEvidence SuspiciousStringEvidence
+type _StringMatchEvidence StringMatchEvidence
 
-// NewSuspiciousStringEvidence instantiates a new SuspiciousStringEvidence object
+// NewStringMatchEvidence instantiates a new StringMatchEvidence object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSuspiciousStringEvidence(effect EvidenceEffect, strings []SuspiciousString) *SuspiciousStringEvidence {
-	this := SuspiciousStringEvidence{}
-	var evidenceKind string = "suspicious_string"
+func NewStringMatchEvidence(effect EvidenceEffect, strings []StringMatch) *StringMatchEvidence {
+	this := StringMatchEvidence{}
+	var evidenceKind string = "string_match"
 	this.EvidenceKind = &evidenceKind
 	var kind string = "deterministic_derivation"
 	this.Kind = &kind
@@ -46,12 +46,12 @@ func NewSuspiciousStringEvidence(effect EvidenceEffect, strings []SuspiciousStri
 	return &this
 }
 
-// NewSuspiciousStringEvidenceWithDefaults instantiates a new SuspiciousStringEvidence object
+// NewStringMatchEvidenceWithDefaults instantiates a new StringMatchEvidence object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSuspiciousStringEvidenceWithDefaults() *SuspiciousStringEvidence {
-	this := SuspiciousStringEvidence{}
-	var evidenceKind string = "suspicious_string"
+func NewStringMatchEvidenceWithDefaults() *StringMatchEvidence {
+	this := StringMatchEvidence{}
+	var evidenceKind string = "string_match"
 	this.EvidenceKind = &evidenceKind
 	var kind string = "deterministic_derivation"
 	this.Kind = &kind
@@ -61,7 +61,7 @@ func NewSuspiciousStringEvidenceWithDefaults() *SuspiciousStringEvidence {
 }
 
 // GetEvidenceKind returns the EvidenceKind field value if set, zero value otherwise.
-func (o *SuspiciousStringEvidence) GetEvidenceKind() string {
+func (o *StringMatchEvidence) GetEvidenceKind() string {
 	if o == nil || IsNil(o.EvidenceKind) {
 		var ret string
 		return ret
@@ -71,7 +71,7 @@ func (o *SuspiciousStringEvidence) GetEvidenceKind() string {
 
 // GetEvidenceKindOk returns a tuple with the EvidenceKind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SuspiciousStringEvidence) GetEvidenceKindOk() (*string, bool) {
+func (o *StringMatchEvidence) GetEvidenceKindOk() (*string, bool) {
 	if o == nil || IsNil(o.EvidenceKind) {
 		return nil, false
 	}
@@ -79,7 +79,7 @@ func (o *SuspiciousStringEvidence) GetEvidenceKindOk() (*string, bool) {
 }
 
 // HasEvidenceKind returns a boolean if a field has been set.
-func (o *SuspiciousStringEvidence) HasEvidenceKind() bool {
+func (o *StringMatchEvidence) HasEvidenceKind() bool {
 	if o != nil && !IsNil(o.EvidenceKind) {
 		return true
 	}
@@ -88,12 +88,12 @@ func (o *SuspiciousStringEvidence) HasEvidenceKind() bool {
 }
 
 // SetEvidenceKind gets a reference to the given string and assigns it to the EvidenceKind field.
-func (o *SuspiciousStringEvidence) SetEvidenceKind(v string) {
+func (o *StringMatchEvidence) SetEvidenceKind(v string) {
 	o.EvidenceKind = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *SuspiciousStringEvidence) GetKind() string {
+func (o *StringMatchEvidence) GetKind() string {
 	if o == nil || IsNil(o.Kind) {
 		var ret string
 		return ret
@@ -103,7 +103,7 @@ func (o *SuspiciousStringEvidence) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SuspiciousStringEvidence) GetKindOk() (*string, bool) {
+func (o *StringMatchEvidence) GetKindOk() (*string, bool) {
 	if o == nil || IsNil(o.Kind) {
 		return nil, false
 	}
@@ -111,7 +111,7 @@ func (o *SuspiciousStringEvidence) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *SuspiciousStringEvidence) HasKind() bool {
+func (o *StringMatchEvidence) HasKind() bool {
 	if o != nil && !IsNil(o.Kind) {
 		return true
 	}
@@ -120,12 +120,12 @@ func (o *SuspiciousStringEvidence) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *SuspiciousStringEvidence) SetKind(v string) {
+func (o *StringMatchEvidence) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetEffect returns the Effect field value
-func (o *SuspiciousStringEvidence) GetEffect() EvidenceEffect {
+func (o *StringMatchEvidence) GetEffect() EvidenceEffect {
 	if o == nil {
 		var ret EvidenceEffect
 		return ret
@@ -136,7 +136,7 @@ func (o *SuspiciousStringEvidence) GetEffect() EvidenceEffect {
 
 // GetEffectOk returns a tuple with the Effect field value
 // and a boolean to check if the value has been set.
-func (o *SuspiciousStringEvidence) GetEffectOk() (*EvidenceEffect, bool) {
+func (o *StringMatchEvidence) GetEffectOk() (*EvidenceEffect, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -144,12 +144,12 @@ func (o *SuspiciousStringEvidence) GetEffectOk() (*EvidenceEffect, bool) {
 }
 
 // SetEffect sets field value
-func (o *SuspiciousStringEvidence) SetEffect(v EvidenceEffect) {
+func (o *StringMatchEvidence) SetEffect(v EvidenceEffect) {
 	o.Effect = v
 }
 
 // GetStrength returns the Strength field value if set, zero value otherwise.
-func (o *SuspiciousStringEvidence) GetStrength() string {
+func (o *StringMatchEvidence) GetStrength() string {
 	if o == nil || IsNil(o.Strength) {
 		var ret string
 		return ret
@@ -159,7 +159,7 @@ func (o *SuspiciousStringEvidence) GetStrength() string {
 
 // GetStrengthOk returns a tuple with the Strength field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SuspiciousStringEvidence) GetStrengthOk() (*string, bool) {
+func (o *StringMatchEvidence) GetStrengthOk() (*string, bool) {
 	if o == nil || IsNil(o.Strength) {
 		return nil, false
 	}
@@ -167,7 +167,7 @@ func (o *SuspiciousStringEvidence) GetStrengthOk() (*string, bool) {
 }
 
 // HasStrength returns a boolean if a field has been set.
-func (o *SuspiciousStringEvidence) HasStrength() bool {
+func (o *StringMatchEvidence) HasStrength() bool {
 	if o != nil && !IsNil(o.Strength) {
 		return true
 	}
@@ -176,14 +176,14 @@ func (o *SuspiciousStringEvidence) HasStrength() bool {
 }
 
 // SetStrength gets a reference to the given string and assigns it to the Strength field.
-func (o *SuspiciousStringEvidence) SetStrength(v string) {
+func (o *StringMatchEvidence) SetStrength(v string) {
 	o.Strength = &v
 }
 
 // GetStrings returns the Strings field value
-func (o *SuspiciousStringEvidence) GetStrings() []SuspiciousString {
+func (o *StringMatchEvidence) GetStrings() []StringMatch {
 	if o == nil {
-		var ret []SuspiciousString
+		var ret []StringMatch
 		return ret
 	}
 
@@ -192,7 +192,7 @@ func (o *SuspiciousStringEvidence) GetStrings() []SuspiciousString {
 
 // GetStringsOk returns a tuple with the Strings field value
 // and a boolean to check if the value has been set.
-func (o *SuspiciousStringEvidence) GetStringsOk() ([]SuspiciousString, bool) {
+func (o *StringMatchEvidence) GetStringsOk() ([]StringMatch, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -200,11 +200,11 @@ func (o *SuspiciousStringEvidence) GetStringsOk() ([]SuspiciousString, bool) {
 }
 
 // SetStrings sets field value
-func (o *SuspiciousStringEvidence) SetStrings(v []SuspiciousString) {
+func (o *StringMatchEvidence) SetStrings(v []StringMatch) {
 	o.Strings = v
 }
 
-func (o SuspiciousStringEvidence) MarshalJSON() ([]byte, error) {
+func (o StringMatchEvidence) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -212,7 +212,7 @@ func (o SuspiciousStringEvidence) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SuspiciousStringEvidence) ToMap() (map[string]interface{}, error) {
+func (o StringMatchEvidence) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.EvidenceKind) {
 		toSerialize["evidence_kind"] = o.EvidenceKind
@@ -233,7 +233,7 @@ func (o SuspiciousStringEvidence) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *SuspiciousStringEvidence) UnmarshalJSON(data []byte) (err error) {
+func (o *StringMatchEvidence) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -256,15 +256,15 @@ func (o *SuspiciousStringEvidence) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varSuspiciousStringEvidence := _SuspiciousStringEvidence{}
+	varStringMatchEvidence := _StringMatchEvidence{}
 
-	err = json.Unmarshal(data, &varSuspiciousStringEvidence)
+	err = json.Unmarshal(data, &varStringMatchEvidence)
 
 	if err != nil {
 		return err
 	}
 
-	*o = SuspiciousStringEvidence(varSuspiciousStringEvidence)
+	*o = StringMatchEvidence(varStringMatchEvidence)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -280,38 +280,38 @@ func (o *SuspiciousStringEvidence) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableSuspiciousStringEvidence struct {
-	value *SuspiciousStringEvidence
+type NullableStringMatchEvidence struct {
+	value *StringMatchEvidence
 	isSet bool
 }
 
-func (v NullableSuspiciousStringEvidence) Get() *SuspiciousStringEvidence {
+func (v NullableStringMatchEvidence) Get() *StringMatchEvidence {
 	return v.value
 }
 
-func (v *NullableSuspiciousStringEvidence) Set(val *SuspiciousStringEvidence) {
+func (v *NullableStringMatchEvidence) Set(val *StringMatchEvidence) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSuspiciousStringEvidence) IsSet() bool {
+func (v NullableStringMatchEvidence) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSuspiciousStringEvidence) Unset() {
+func (v *NullableStringMatchEvidence) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSuspiciousStringEvidence(val *SuspiciousStringEvidence) *NullableSuspiciousStringEvidence {
-	return &NullableSuspiciousStringEvidence{value: val, isSet: true}
+func NewNullableStringMatchEvidence(val *StringMatchEvidence) *NullableStringMatchEvidence {
+	return &NullableStringMatchEvidence{value: val, isSet: true}
 }
 
-func (v NullableSuspiciousStringEvidence) MarshalJSON() ([]byte, error) {
+func (v NullableStringMatchEvidence) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSuspiciousStringEvidence) UnmarshalJSON(src []byte) error {
+func (v *NullableStringMatchEvidence) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

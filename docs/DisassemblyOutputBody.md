@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **GlobalVariables** | Pointer to **interface{}** |  | [optional] 
 **LocalVariables** | Pointer to **interface{}** |  | [optional] 
 **Params** | Pointer to **interface{}** |  | [optional] 
-**ReturnType** | Pointer to **NullableString** |  | [optional] 
+**ReturnType** | Pointer to **string** |  | [optional] 
 **Returns** | **bool** |  | 
 
 ## Methods
@@ -216,16 +216,6 @@ SetReturnType sets ReturnType field to given value.
 
 HasReturnType returns a boolean if a field has been set.
 
-### SetReturnTypeNil
-
-`func (o *DisassemblyOutputBody) SetReturnTypeNil(b bool)`
-
- SetReturnTypeNil sets the value for ReturnType to be an explicit nil
-
-### UnsetReturnType
-`func (o *DisassemblyOutputBody) UnsetReturnType()`
-
-UnsetReturnType ensures that no value is present for ReturnType, not even an explicit nil
 ### GetReturns
 
 `func (o *DisassemblyOutputBody) GetReturns() bool`

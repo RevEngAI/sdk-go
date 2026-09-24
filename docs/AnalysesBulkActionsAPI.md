@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**BulkAddAnalysisTags**](AnalysesBulkActionsAPI.md#BulkAddAnalysisTags) | **Patch** /v2/analyses/tags/add | Bulk Add Analysis Tags
 [**BulkDeleteAnalyses**](AnalysesBulkActionsAPI.md#BulkDeleteAnalyses) | **Patch** /v2/analyses/delete | Bulk Delete Analyses
+[**V3BatchDeleteAnalyses**](AnalysesBulkActionsAPI.md#V3BatchDeleteAnalyses) | **Post** /v3/analyses:batchDelete | Delete multiple analyses.
 
 
 
@@ -126,6 +127,70 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseDict**](BaseResponseDict.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3BatchDeleteAnalyses
+
+> V3BatchDeleteAnalyses(ctx).BulkDeleteAnalysesInputBody(bulkDeleteAnalysesInputBody).Execute()
+
+Delete multiple analyses.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	bulkDeleteAnalysesInputBody := *revengai.NewBulkDeleteAnalysesInputBody([]int64{int64(123)}) // BulkDeleteAnalysesInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.AnalysesBulkActionsAPI.V3BatchDeleteAnalyses(context.Background()).BulkDeleteAnalysesInputBody(bulkDeleteAnalysesInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesBulkActionsAPI.V3BatchDeleteAnalyses``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3BatchDeleteAnalysesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bulkDeleteAnalysesInputBody** | [**BulkDeleteAnalysesInputBody**](BulkDeleteAnalysesInputBody.md) |  | 
+
+### Return type
+
+ (empty response body)
 
 ### Authorization
 

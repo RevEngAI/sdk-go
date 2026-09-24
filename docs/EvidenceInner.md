@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **CallChain** | **[]int32** |  | 
 **Constants** | [**[]ReferencedConstant**](ReferencedConstant.md) |  | 
 **Calls** | [**[]ImportedApiCall**](ImportedApiCall.md) |  | 
-**Strings** | [**[]SuspiciousString**](SuspiciousString.md) |  | 
+**Strings** | [**[]StringMatch**](StringMatch.md) |  | 
 **Similarities** | [**[]FunctionSimilarity**](FunctionSimilarity.md) |  | 
 **Apis** | [**[]ImportedApi**](ImportedApi.md) |  | 
 **Summaries** | [**[]DecompilerSummary**](DecompilerSummary.md) |  | 
@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewEvidenceInner
 
-`func NewEvidenceInner(effect string, strength EvidenceStrength, callChain []int32, constants []ReferencedConstant, calls []ImportedApiCall, strings []SuspiciousString, similarities []FunctionSimilarity, apis []ImportedApi, summaries []DecompilerSummary, interpretations []ModelInterpretation, values []BytesConstant, ruleId string, description string, secretKind RuleKind, secret string, entropy float32, size int32, references []int32, ) *EvidenceInner`
+`func NewEvidenceInner(effect string, strength EvidenceStrength, callChain []int32, constants []ReferencedConstant, calls []ImportedApiCall, strings []StringMatch, similarities []FunctionSimilarity, apis []ImportedApi, summaries []DecompilerSummary, interpretations []ModelInterpretation, values []BytesConstant, ruleId string, description string, secretKind RuleKind, secret string, entropy float32, size int32, references []int32, ) *EvidenceInner`
 
 NewEvidenceInner instantiates a new EvidenceInner object
 This constructor will assign default values to properties that have it defined,
@@ -196,20 +196,20 @@ SetCalls sets Calls field to given value.
 
 ### GetStrings
 
-`func (o *EvidenceInner) GetStrings() []SuspiciousString`
+`func (o *EvidenceInner) GetStrings() []StringMatch`
 
 GetStrings returns the Strings field if non-nil, zero value otherwise.
 
 ### GetStringsOk
 
-`func (o *EvidenceInner) GetStringsOk() (*[]SuspiciousString, bool)`
+`func (o *EvidenceInner) GetStringsOk() (*[]StringMatch, bool)`
 
 GetStringsOk returns a tuple with the Strings field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStrings
 
-`func (o *EvidenceInner) SetStrings(v []SuspiciousString)`
+`func (o *EvidenceInner) SetStrings(v []StringMatch)`
 
 SetStrings sets Strings field to given value.
 

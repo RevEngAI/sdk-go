@@ -8,15 +8,20 @@ Name | Type | Description | Notes
 **BinaryId** | **int64** |  | 
 **BinaryName** | **string** |  | 
 **CreatedAt** | **time.Time** |  | 
+**DetectedArchitecture** | **string** | Detected instruction-set architecture; empty when unavailable | 
+**DetectedBinaryType** | **string** | Detected operating-system platform; empty when unavailable | 
 **IsSystemAnalysis** | **bool** |  | 
+**ModelName** | **string** | Name of the model the analysis ran on | 
 **OwnerId** | **int64** |  | 
 **Sha256Hash** | **string** |  | 
+**SuppliedArchitecture** | **string** | User-supplied instruction-set architecture; \&quot;AUTO\&quot; when not overridden | 
+**SuppliedBinaryType** | **string** | User-supplied operating-system platform; \&quot;AUTO\&quot; when not overridden | 
 
 ## Methods
 
 ### NewBinary
 
-`func NewBinary(analysisId int64, binaryId int64, binaryName string, createdAt time.Time, isSystemAnalysis bool, ownerId int64, sha256Hash string, ) *Binary`
+`func NewBinary(analysisId int64, binaryId int64, binaryName string, createdAt time.Time, detectedArchitecture string, detectedBinaryType string, isSystemAnalysis bool, modelName string, ownerId int64, sha256Hash string, suppliedArchitecture string, suppliedBinaryType string, ) *Binary`
 
 NewBinary instantiates a new Binary object
 This constructor will assign default values to properties that have it defined,
@@ -111,6 +116,46 @@ and a boolean to check if the value has been set.
 SetCreatedAt sets CreatedAt field to given value.
 
 
+### GetDetectedArchitecture
+
+`func (o *Binary) GetDetectedArchitecture() string`
+
+GetDetectedArchitecture returns the DetectedArchitecture field if non-nil, zero value otherwise.
+
+### GetDetectedArchitectureOk
+
+`func (o *Binary) GetDetectedArchitectureOk() (*string, bool)`
+
+GetDetectedArchitectureOk returns a tuple with the DetectedArchitecture field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetectedArchitecture
+
+`func (o *Binary) SetDetectedArchitecture(v string)`
+
+SetDetectedArchitecture sets DetectedArchitecture field to given value.
+
+
+### GetDetectedBinaryType
+
+`func (o *Binary) GetDetectedBinaryType() string`
+
+GetDetectedBinaryType returns the DetectedBinaryType field if non-nil, zero value otherwise.
+
+### GetDetectedBinaryTypeOk
+
+`func (o *Binary) GetDetectedBinaryTypeOk() (*string, bool)`
+
+GetDetectedBinaryTypeOk returns a tuple with the DetectedBinaryType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetectedBinaryType
+
+`func (o *Binary) SetDetectedBinaryType(v string)`
+
+SetDetectedBinaryType sets DetectedBinaryType field to given value.
+
+
 ### GetIsSystemAnalysis
 
 `func (o *Binary) GetIsSystemAnalysis() bool`
@@ -129,6 +174,26 @@ and a boolean to check if the value has been set.
 `func (o *Binary) SetIsSystemAnalysis(v bool)`
 
 SetIsSystemAnalysis sets IsSystemAnalysis field to given value.
+
+
+### GetModelName
+
+`func (o *Binary) GetModelName() string`
+
+GetModelName returns the ModelName field if non-nil, zero value otherwise.
+
+### GetModelNameOk
+
+`func (o *Binary) GetModelNameOk() (*string, bool)`
+
+GetModelNameOk returns a tuple with the ModelName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelName
+
+`func (o *Binary) SetModelName(v string)`
+
+SetModelName sets ModelName field to given value.
 
 
 ### GetOwnerId
@@ -169,6 +234,46 @@ and a boolean to check if the value has been set.
 `func (o *Binary) SetSha256Hash(v string)`
 
 SetSha256Hash sets Sha256Hash field to given value.
+
+
+### GetSuppliedArchitecture
+
+`func (o *Binary) GetSuppliedArchitecture() string`
+
+GetSuppliedArchitecture returns the SuppliedArchitecture field if non-nil, zero value otherwise.
+
+### GetSuppliedArchitectureOk
+
+`func (o *Binary) GetSuppliedArchitectureOk() (*string, bool)`
+
+GetSuppliedArchitectureOk returns a tuple with the SuppliedArchitecture field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppliedArchitecture
+
+`func (o *Binary) SetSuppliedArchitecture(v string)`
+
+SetSuppliedArchitecture sets SuppliedArchitecture field to given value.
+
+
+### GetSuppliedBinaryType
+
+`func (o *Binary) GetSuppliedBinaryType() string`
+
+GetSuppliedBinaryType returns the SuppliedBinaryType field if non-nil, zero value otherwise.
+
+### GetSuppliedBinaryTypeOk
+
+`func (o *Binary) GetSuppliedBinaryTypeOk() (*string, bool)`
+
+GetSuppliedBinaryTypeOk returns a tuple with the SuppliedBinaryType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppliedBinaryType
+
+`func (o *Binary) SetSuppliedBinaryType(v string)`
+
+SetSuppliedBinaryType sets SuppliedBinaryType field to given value.
 
 
 

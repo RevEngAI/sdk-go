@@ -24,7 +24,7 @@ type DisassemblyOutputBody struct {
 	GlobalVariables interface{} `json:"global_variables,omitempty"`
 	LocalVariables interface{} `json:"local_variables,omitempty"`
 	Params interface{} `json:"params,omitempty"`
-	ReturnType NullableString `json:"return_type,omitempty"`
+	ReturnType *string `json:"return_type,omitempty"`
 	Returns bool `json:"returns"`
 	AdditionalProperties map[string]interface{}
 }
@@ -206,46 +206,36 @@ func (o *DisassemblyOutputBody) SetParams(v interface{}) {
 	o.Params = v
 }
 
-// GetReturnType returns the ReturnType field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetReturnType returns the ReturnType field value if set, zero value otherwise.
 func (o *DisassemblyOutputBody) GetReturnType() string {
-	if o == nil || IsNil(o.ReturnType.Get()) {
+	if o == nil || IsNil(o.ReturnType) {
 		var ret string
 		return ret
 	}
-	return *o.ReturnType.Get()
+	return *o.ReturnType
 }
 
 // GetReturnTypeOk returns a tuple with the ReturnType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DisassemblyOutputBody) GetReturnTypeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ReturnType) {
 		return nil, false
 	}
-	return o.ReturnType.Get(), o.ReturnType.IsSet()
+	return o.ReturnType, true
 }
 
 // HasReturnType returns a boolean if a field has been set.
 func (o *DisassemblyOutputBody) HasReturnType() bool {
-	if o != nil && o.ReturnType.IsSet() {
+	if o != nil && !IsNil(o.ReturnType) {
 		return true
 	}
 
 	return false
 }
 
-// SetReturnType gets a reference to the given NullableString and assigns it to the ReturnType field.
+// SetReturnType gets a reference to the given string and assigns it to the ReturnType field.
 func (o *DisassemblyOutputBody) SetReturnType(v string) {
-	o.ReturnType.Set(&v)
-}
-// SetReturnTypeNil sets the value for ReturnType to be an explicit nil
-func (o *DisassemblyOutputBody) SetReturnTypeNil() {
-	o.ReturnType.Set(nil)
-}
-
-// UnsetReturnType ensures that no value is present for ReturnType, not even an explicit nil
-func (o *DisassemblyOutputBody) UnsetReturnType() {
-	o.ReturnType.Unset()
+	o.ReturnType = &v
 }
 
 // GetReturns returns the Returns field value
@@ -295,8 +285,8 @@ func (o DisassemblyOutputBody) ToMap() (map[string]interface{}, error) {
 	if o.Params != nil {
 		toSerialize["params"] = o.Params
 	}
-	if o.ReturnType.IsSet() {
-		toSerialize["return_type"] = o.ReturnType.Get()
+	if !IsNil(o.ReturnType) {
+		toSerialize["return_type"] = o.ReturnType
 	}
 	toSerialize["returns"] = o.Returns
 
