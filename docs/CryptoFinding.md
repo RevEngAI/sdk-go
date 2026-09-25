@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **FunctionName** | **string** | Name of the function the finding was reported in | 
 **FunctionSize** | **int64** | Size of the function in bytes | 
 **Libraries** | **[]string** | Distinct crypto libraries evidenced by this function | 
+**Verification** | Pointer to [**CryptoVerification**](CryptoVerification.md) | LLM verdict checking this finding against its decompilation. Present only when the run verified this finding. | [optional] 
 
 ## Methods
 
@@ -284,6 +285,31 @@ SetLibraries sets Libraries field to given value.
 `func (o *CryptoFinding) UnsetLibraries()`
 
 UnsetLibraries ensures that no value is present for Libraries, not even an explicit nil
+### GetVerification
+
+`func (o *CryptoFinding) GetVerification() CryptoVerification`
+
+GetVerification returns the Verification field if non-nil, zero value otherwise.
+
+### GetVerificationOk
+
+`func (o *CryptoFinding) GetVerificationOk() (*CryptoVerification, bool)`
+
+GetVerificationOk returns a tuple with the Verification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVerification
+
+`func (o *CryptoFinding) SetVerification(v CryptoVerification)`
+
+SetVerification sets Verification field to given value.
+
+### HasVerification
+
+`func (o *CryptoFinding) HasVerification() bool`
+
+HasVerification returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

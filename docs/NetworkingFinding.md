@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **NetworkCalls** | Pointer to [**[]NetworkingCall**](NetworkingCall.md) | Matches against names this function calls | [optional] 
 **Remote** | **bool** | Whether this function evidences remote communication rather than only supporting it | 
 **Sources** | **[]string** | Distinct networking sources evidenced by this function | 
+**Verification** | Pointer to [**NetworkingVerification**](NetworkingVerification.md) | LLM verdict checking this finding against its decompilation. Present only when the run verified this finding. | [optional] 
 
 ## Methods
 
@@ -305,6 +306,31 @@ SetSources sets Sources field to given value.
 `func (o *NetworkingFinding) UnsetSources()`
 
 UnsetSources ensures that no value is present for Sources, not even an explicit nil
+### GetVerification
+
+`func (o *NetworkingFinding) GetVerification() NetworkingVerification`
+
+GetVerification returns the Verification field if non-nil, zero value otherwise.
+
+### GetVerificationOk
+
+`func (o *NetworkingFinding) GetVerificationOk() (*NetworkingVerification, bool)`
+
+GetVerificationOk returns a tuple with the Verification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVerification
+
+`func (o *NetworkingFinding) SetVerification(v NetworkingVerification)`
+
+SetVerification sets Verification field to given value.
+
+### HasVerification
+
+`func (o *NetworkingFinding) HasVerification() bool`
+
+HasVerification returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

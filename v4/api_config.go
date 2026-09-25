@@ -37,6 +37,8 @@ General configuration endpoint
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetConfigRequest
+
+Deprecated
 */
 func (a *ConfigAPIService) GetConfig(ctx context.Context) ApiGetConfigRequest {
 	return ApiGetConfigRequest{
@@ -47,6 +49,7 @@ func (a *ConfigAPIService) GetConfig(ctx context.Context) ApiGetConfigRequest {
 
 // Execute executes the request
 //  @return BaseResponseConfigResponse
+// Deprecated
 func (a *ConfigAPIService) GetConfigExecute(r ApiGetConfigRequest) (*BaseResponseConfigResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

@@ -39,6 +39,8 @@ type CryptoFinding struct {
 	FunctionSize int64 `json:"function_size"`
 	// Distinct crypto libraries evidenced by this function
 	Libraries []string `json:"libraries"`
+	// LLM verdict checking this finding against its decompilation. Present only when the run verified this finding.
+	Verification *CryptoVerification `json:"verification,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -331,6 +333,38 @@ func (o *CryptoFinding) SetLibraries(v []string) {
 	o.Libraries = v
 }
 
+// GetVerification returns the Verification field value if set, zero value otherwise.
+func (o *CryptoFinding) GetVerification() CryptoVerification {
+	if o == nil || IsNil(o.Verification) {
+		var ret CryptoVerification
+		return ret
+	}
+	return *o.Verification
+}
+
+// GetVerificationOk returns a tuple with the Verification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CryptoFinding) GetVerificationOk() (*CryptoVerification, bool) {
+	if o == nil || IsNil(o.Verification) {
+		return nil, false
+	}
+	return o.Verification, true
+}
+
+// HasVerification returns a boolean if a field has been set.
+func (o *CryptoFinding) HasVerification() bool {
+	if o != nil && !IsNil(o.Verification) {
+		return true
+	}
+
+	return false
+}
+
+// SetVerification gets a reference to the given CryptoVerification and assigns it to the Verification field.
+func (o *CryptoFinding) SetVerification(v CryptoVerification) {
+	o.Verification = &v
+}
+
 func (o CryptoFinding) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -358,6 +392,9 @@ func (o CryptoFinding) ToMap() (map[string]interface{}, error) {
 	toSerialize["function_size"] = o.FunctionSize
 	if o.Libraries != nil {
 		toSerialize["libraries"] = o.Libraries
+	}
+	if !IsNil(o.Verification) {
+		toSerialize["verification"] = o.Verification
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -419,6 +456,7 @@ func (o *CryptoFinding) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "function_name")
 		delete(additionalProperties, "function_size")
 		delete(additionalProperties, "libraries")
+		delete(additionalProperties, "verification")
 		o.AdditionalProperties = additionalProperties
 	}
 

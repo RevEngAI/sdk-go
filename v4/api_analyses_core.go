@@ -388,6 +388,8 @@ Deletes an analysis based on the provided analysis ID.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiDeleteAnalysisRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) DeleteAnalysis(ctx context.Context, analysisId int32) ApiDeleteAnalysisRequest {
 	return ApiDeleteAnalysisRequest{
@@ -399,6 +401,7 @@ func (a *AnalysesCoreAPIService) DeleteAnalysis(ctx context.Context, analysisId 
 
 // Execute executes the request
 //  @return BaseResponseDict
+// Deprecated
 func (a *AnalysesCoreAPIService) DeleteAnalysisExecute(r ApiDeleteAnalysisRequest) (*BaseResponseDict, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
@@ -2661,6 +2664,8 @@ Given an binary ID gets the ID of an analysis
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param binaryId
  @return ApiLookupBinaryIdRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) LookupBinaryId(ctx context.Context, binaryId int32) ApiLookupBinaryIdRequest {
 	return ApiLookupBinaryIdRequest{
@@ -2672,6 +2677,7 @@ func (a *AnalysesCoreAPIService) LookupBinaryId(ctx context.Context, binaryId in
 
 // Execute executes the request
 //  @return interface{}
+// Deprecated
 func (a *AnalysesCoreAPIService) LookupBinaryIdExecute(r ApiLookupBinaryIdRequest) (interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -3294,6 +3300,8 @@ Updates analysis attributes (binary_name, analysis_scope). User must be the owne
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiUpdateAnalysisRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) UpdateAnalysis(ctx context.Context, analysisId int32) ApiUpdateAnalysisRequest {
 	return ApiUpdateAnalysisRequest{
@@ -3305,6 +3313,7 @@ func (a *AnalysesCoreAPIService) UpdateAnalysis(ctx context.Context, analysisId 
 
 // Execute executes the request
 //  @return BaseResponseAnalysisDetailResponse
+// Deprecated
 func (a *AnalysesCoreAPIService) UpdateAnalysisExecute(r ApiUpdateAnalysisRequest) (*BaseResponseAnalysisDetailResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
@@ -6437,6 +6446,181 @@ func (a *AnalysesCoreAPIService) V3QueueBinaryExportExecute(r ApiV3QueueBinaryEx
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiV3SearchTagsRequest struct {
+	ctx context.Context
+	ApiService *AnalysesCoreAPIService
+	partialName *string
+	limit *int64
+	offset *int64
+}
+
+// Partial or full tag name to search for, at least 3 characters
+func (r ApiV3SearchTagsRequest) PartialName(partialName string) ApiV3SearchTagsRequest {
+	r.partialName = &partialName
+	return r
+}
+
+// Maximum results to return
+func (r ApiV3SearchTagsRequest) Limit(limit int64) ApiV3SearchTagsRequest {
+	r.limit = &limit
+	return r
+}
+
+// Number of results to skip
+func (r ApiV3SearchTagsRequest) Offset(offset int64) ApiV3SearchTagsRequest {
+	r.offset = &offset
+	return r
+}
+
+func (r ApiV3SearchTagsRequest) Execute() (*SearchTagsOutputBody, *http.Response, error) {
+	return r.ApiService.V3SearchTagsExecute(r)
+}
+
+/*
+V3SearchTags Search tags
+
+Searches for tags by name. partial_name is required and must be at least 3 characters.
+
+**Error codes:**
+- `422` [`VALIDATION_FAILED`](/errors/VALIDATION_FAILED) — Validation Failed
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiV3SearchTagsRequest
+*/
+func (a *AnalysesCoreAPIService) V3SearchTags(ctx context.Context) ApiV3SearchTagsRequest {
+	return ApiV3SearchTagsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return SearchTagsOutputBody
+func (a *AnalysesCoreAPIService) V3SearchTagsExecute(r ApiV3SearchTagsRequest) (*SearchTagsOutputBody, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SearchTagsOutputBody
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3SearchTags")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/tags"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.partialName != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "partial_name", r.partialName, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	} else {
+		var defaultValue int64 = 10
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		r.limit = &defaultValue
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	} else {
+		var defaultValue int64 = 0
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", defaultValue, "form", "")
+		r.offset = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiV3UpdateAnalysisRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
@@ -6568,6 +6752,184 @@ func (a *AnalysesCoreAPIService) V3UpdateAnalysisExecute(r ApiV3UpdateAnalysisRe
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV3UpdateAnalysisTagsRequest struct {
+	ctx context.Context
+	ApiService *AnalysesCoreAPIService
+	analysisId int64
+	updateTagsInputBody *UpdateTagsInputBody
+}
+
+func (r ApiV3UpdateAnalysisTagsRequest) UpdateTagsInputBody(updateTagsInputBody UpdateTagsInputBody) ApiV3UpdateAnalysisTagsRequest {
+	r.updateTagsInputBody = &updateTagsInputBody
+	return r
+}
+
+func (r ApiV3UpdateAnalysisTagsRequest) Execute() (*AnalysisTagsOutputBody, *http.Response, error) {
+	return r.ApiService.V3UpdateAnalysisTagsExecute(r)
+}
+
+/*
+V3UpdateAnalysisTags Replace an analysis' tags.
+
+Replaces the analysis' binary's user tags (origin RevEng) with the given set. A tag recorded under any other origin, such as a heuristic detection sharing a name with a user tag, is left in place even when its name is absent from the request. Only the owner may call it.
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param analysisId Analysis ID
+ @return ApiV3UpdateAnalysisTagsRequest
+*/
+func (a *AnalysesCoreAPIService) V3UpdateAnalysisTags(ctx context.Context, analysisId int64) ApiV3UpdateAnalysisTagsRequest {
+	return ApiV3UpdateAnalysisTagsRequest{
+		ApiService: a,
+		ctx: ctx,
+		analysisId: analysisId,
+	}
+}
+
+// Execute executes the request
+//  @return AnalysisTagsOutputBody
+func (a *AnalysesCoreAPIService) V3UpdateAnalysisTagsExecute(r ApiV3UpdateAnalysisTagsRequest) (*AnalysisTagsOutputBody, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AnalysisTagsOutputBody
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3UpdateAnalysisTags")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/tags"
+	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.analysisId < 1 {
+		return localVarReturnValue, nil, reportError("analysisId must be greater than 1")
+	}
+	if r.updateTagsInputBody == nil {
+		return localVarReturnValue, nil, reportError("updateTagsInputBody is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateTagsInputBody
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v APIError

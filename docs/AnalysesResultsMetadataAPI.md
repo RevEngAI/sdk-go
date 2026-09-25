@@ -8,7 +8,9 @@ Method | HTTP request | Description
 [**GetCapabilities**](AnalysesResultsMetadataAPI.md#GetCapabilities) | **Get** /v2/analyses/{analysis_id}/capabilities | Gets the capabilities from the analysis
 [**GetFunctionsList**](AnalysesResultsMetadataAPI.md#GetFunctionsList) | **Get** /v2/analyses/{analysis_id}/functions/list | Gets functions from analysis
 [**GetTags**](AnalysesResultsMetadataAPI.md#GetTags) | **Get** /v2/analyses/{analysis_id}/tags | Get function tags with maliciousness score
+[**V3GetAnalysisXref**](AnalysesResultsMetadataAPI.md#V3GetAnalysisXref) | **Get** /v3/analyses/{analysis_id}/xrefs/{vaddr} | Look up xrefs by virtual address.
 [**V3ListAnalysisCapabilities**](AnalysesResultsMetadataAPI.md#V3ListAnalysisCapabilities) | **Get** /v3/analyses/{analysis_id}/capabilities | List the capabilities found in an analysis.
+[**V3ListAnalysisTags**](AnalysesResultsMetadataAPI.md#V3ListAnalysisTags) | **Get** /v3/analyses/{analysis_id}/tags | List the tags on an analysis.
 
 
 
@@ -304,6 +306,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V3GetAnalysisXref
+
+> AnalysisXrefOutputBody V3GetAnalysisXref(ctx, analysisId, vaddr).Execute()
+
+Look up xrefs by virtual address.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	vaddr := int64(789) // int64 | Virtual address to match against xrefs
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesResultsMetadataAPI.V3GetAnalysisXref(context.Background(), analysisId, vaddr).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesResultsMetadataAPI.V3GetAnalysisXref``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetAnalysisXref`: AnalysisXrefOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesResultsMetadataAPI.V3GetAnalysisXref`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+**vaddr** | **int64** | Virtual address to match against xrefs | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetAnalysisXrefRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**AnalysisXrefOutputBody**](AnalysisXrefOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V3ListAnalysisCapabilities
 
 > AnalysisCapabilitiesOutputBody V3ListAnalysisCapabilities(ctx, analysisId).Execute()
@@ -359,6 +434,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AnalysisCapabilitiesOutputBody**](AnalysisCapabilitiesOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3ListAnalysisTags
+
+> AnalysisTagsOutputBody V3ListAnalysisTags(ctx, analysisId).Execute()
+
+List the tags on an analysis.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesResultsMetadataAPI.V3ListAnalysisTags(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesResultsMetadataAPI.V3ListAnalysisTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3ListAnalysisTags`: AnalysisTagsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesResultsMetadataAPI.V3ListAnalysisTags`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3ListAnalysisTagsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AnalysisTagsOutputBody**](AnalysisTagsOutputBody.md)
 
 ### Authorization
 

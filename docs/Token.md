@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Source** | Pointer to **string** | Who chose this override. Response only; ignored in a request. | [optional] 
 **Value** | **string** | Name the token resolves to. An empty string in a request removes the override. | 
 
 ## Methods
@@ -24,6 +25,31 @@ will change when the set of required properties is changed
 NewTokenWithDefaults instantiates a new Token object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetSource
+
+`func (o *Token) GetSource() string`
+
+GetSource returns the Source field if non-nil, zero value otherwise.
+
+### GetSourceOk
+
+`func (o *Token) GetSourceOk() (*string, bool)`
+
+GetSourceOk returns a tuple with the Source field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSource
+
+`func (o *Token) SetSource(v string)`
+
+SetSource sets Source field to given value.
+
+### HasSource
+
+`func (o *Token) HasSource() bool`
+
+HasSource returns a boolean if a field has been set.
 
 ### GetValue
 

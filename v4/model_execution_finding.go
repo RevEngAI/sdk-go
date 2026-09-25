@@ -41,6 +41,8 @@ type ExecutionFinding struct {
 	FunctionSize int64 `json:"function_size"`
 	// Distinct execution sources evidenced by this function
 	Sources []string `json:"sources"`
+	// LLM verdict checking this finding against its decompilation. Present only when the run verified this finding.
+	Verification *ExecutionVerification `json:"verification,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -358,6 +360,38 @@ func (o *ExecutionFinding) SetSources(v []string) {
 	o.Sources = v
 }
 
+// GetVerification returns the Verification field value if set, zero value otherwise.
+func (o *ExecutionFinding) GetVerification() ExecutionVerification {
+	if o == nil || IsNil(o.Verification) {
+		var ret ExecutionVerification
+		return ret
+	}
+	return *o.Verification
+}
+
+// GetVerificationOk returns a tuple with the Verification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExecutionFinding) GetVerificationOk() (*ExecutionVerification, bool) {
+	if o == nil || IsNil(o.Verification) {
+		return nil, false
+	}
+	return o.Verification, true
+}
+
+// HasVerification returns a boolean if a field has been set.
+func (o *ExecutionFinding) HasVerification() bool {
+	if o != nil && !IsNil(o.Verification) {
+		return true
+	}
+
+	return false
+}
+
+// SetVerification gets a reference to the given ExecutionVerification and assigns it to the Verification field.
+func (o *ExecutionFinding) SetVerification(v ExecutionVerification) {
+	o.Verification = &v
+}
+
 func (o ExecutionFinding) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -386,6 +420,9 @@ func (o ExecutionFinding) ToMap() (map[string]interface{}, error) {
 	toSerialize["function_size"] = o.FunctionSize
 	if o.Sources != nil {
 		toSerialize["sources"] = o.Sources
+	}
+	if !IsNil(o.Verification) {
+		toSerialize["verification"] = o.Verification
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -449,6 +486,7 @@ func (o *ExecutionFinding) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "function_name")
 		delete(additionalProperties, "function_size")
 		delete(additionalProperties, "sources")
+		delete(additionalProperties, "verification")
 		o.AdditionalProperties = additionalProperties
 	}
 

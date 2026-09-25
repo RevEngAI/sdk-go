@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **LastName** | Pointer to **string** | Last name | [optional] 
 **Password** | **string** | Initial password | 
 **Role** | Pointer to **string** | User role (defaults to USER) | [optional] 
+**TeamId** | Pointer to **int64** | Existing team to add the user to, which also becomes their default team | [optional] 
 **Tier** | Pointer to **string** | User tier (defaults to ENTHUSIAST) | [optional] 
 **TimeZone** | Pointer to **string** | IANA time zone | [optional] 
 **Username** | **string** | Username | 
@@ -172,6 +173,31 @@ SetRole sets Role field to given value.
 `func (o *CreateUserInputBody) HasRole() bool`
 
 HasRole returns a boolean if a field has been set.
+
+### GetTeamId
+
+`func (o *CreateUserInputBody) GetTeamId() int64`
+
+GetTeamId returns the TeamId field if non-nil, zero value otherwise.
+
+### GetTeamIdOk
+
+`func (o *CreateUserInputBody) GetTeamIdOk() (*int64, bool)`
+
+GetTeamIdOk returns a tuple with the TeamId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeamId
+
+`func (o *CreateUserInputBody) SetTeamId(v int64)`
+
+SetTeamId sets TeamId field to given value.
+
+### HasTeamId
+
+`func (o *CreateUserInputBody) HasTeamId() bool`
+
+HasTeamId returns a boolean if a field has been set.
 
 ### GetTier
 

@@ -42,7 +42,9 @@ Method | HTTP request | Description
 [**V3ListExampleAnalyses**](AnalysesCoreAPI.md#V3ListExampleAnalyses) | **Get** /v3/analyses/examples | List example analyses
 [**V3LookupAnalysisByBinaryId**](AnalysesCoreAPI.md#V3LookupAnalysisByBinaryId) | **Get** /v3/analyses/lookup/{binary_id} | Look up the most recent analysis for a binary.
 [**V3QueueBinaryExport**](AnalysesCoreAPI.md#V3QueueBinaryExport) | **Post** /v3/analyses/{analysis_id}/binary-export | Queue a binary export
+[**V3SearchTags**](AnalysesCoreAPI.md#V3SearchTags) | **Get** /v3/tags | Search tags
 [**V3UpdateAnalysis**](AnalysesCoreAPI.md#V3UpdateAnalysis) | **Patch** /v3/analyses/{analysis_id} | Update an analysis.
+[**V3UpdateAnalysisTags**](AnalysesCoreAPI.md#V3UpdateAnalysisTags) | **Patch** /v3/analyses/{analysis_id}/tags | Replace an analysis&#39; tags.
 [**V3UpgradeAnalysisModel**](AnalysesCoreAPI.md#V3UpgradeAnalysisModel) | **Post** /v3/analyses/{analysis_id}/upgrade-model | Re-analyse on the latest model
 
 
@@ -2762,6 +2764,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V3SearchTags
+
+> SearchTagsOutputBody V3SearchTags(ctx).PartialName(partialName).Limit(limit).Offset(offset).Execute()
+
+Search tags
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	partialName := "partialName_example" // string | Partial or full tag name to search for, at least 3 characters (optional)
+	limit := int64(789) // int64 | Maximum results to return (optional) (default to 10)
+	offset := int64(789) // int64 | Number of results to skip (optional) (default to 0)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3SearchTags(context.Background()).PartialName(partialName).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3SearchTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3SearchTags`: SearchTagsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3SearchTags`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3SearchTagsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **partialName** | **string** | Partial or full tag name to search for, at least 3 characters | 
+ **limit** | **int64** | Maximum results to return | [default to 10]
+ **offset** | **int64** | Number of results to skip | [default to 0]
+
+### Return type
+
+[**SearchTagsOutputBody**](SearchTagsOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V3UpdateAnalysis
 
 > AnalysisDetailOutputBody V3UpdateAnalysis(ctx, analysisId).UpdateAnalysisInputBody(updateAnalysisInputBody).Execute()
@@ -2819,6 +2891,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AnalysisDetailOutputBody**](AnalysisDetailOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3UpdateAnalysisTags
+
+> AnalysisTagsOutputBody V3UpdateAnalysisTags(ctx, analysisId).UpdateTagsInputBody(updateTagsInputBody).Execute()
+
+Replace an analysis' tags.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	updateTagsInputBody := *revengai.NewUpdateTagsInputBody([]string{"Tags_example"}) // UpdateTagsInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3UpdateAnalysisTags(context.Background(), analysisId).UpdateTagsInputBody(updateTagsInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3UpdateAnalysisTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3UpdateAnalysisTags`: AnalysisTagsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3UpdateAnalysisTags`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3UpdateAnalysisTagsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateTagsInputBody** | [**UpdateTagsInputBody**](UpdateTagsInputBody.md) |  | 
+
+### Return type
+
+[**AnalysisTagsOutputBody**](AnalysisTagsOutputBody.md)
 
 ### Authorization
 

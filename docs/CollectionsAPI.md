@@ -817,7 +817,7 @@ Name | Type | Description  | Notes
 
 ## V3ListCollections
 
-> ListCollectionsOutputBody V3ListCollections(ctx).SearchTerm(searchTerm).Filters(filters).Limit(limit).Offset(offset).OrderBy(orderBy).Order(order).Execute()
+> ListCollectionsOutputBody V3ListCollections(ctx).SearchTerm(searchTerm).BinaryName(binaryName).BinarySha256(binarySha256).Tags(tags).UserIds(userIds).Filters(filters).Limit(limit).Offset(offset).OrderBy(orderBy).Order(order).Execute()
 
 List collections.
 
@@ -836,7 +836,11 @@ import (
 )
 
 func main() {
-	searchTerm := "searchTerm_example" // string |  (optional)
+	searchTerm := "searchTerm_example" // string | Partial or full collection name to search for (optional)
+	binaryName := "binaryName_example" // string | Only return Collections containing a Binary whose name contains this (optional)
+	binarySha256 := "binarySha256_example" // string | Only return Collections containing a Binary whose SHA-256 hash contains this (optional)
+	tags := []*string{"Inner_example"} // []*string | Only return Collections carrying at least one of these Tags (optional)
+	userIds := []int64{int64(123)} // []int64 | Restrict results to Collections owned by one of these user IDs (optional)
 	filters := []string{"Filters_example"} // []string |  (optional)
 	limit := int64(789) // int64 |  (optional) (default to 20)
 	offset := int64(789) // int64 |  (optional) (default to 0)
@@ -845,7 +849,7 @@ func main() {
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.CollectionsAPI.V3ListCollections(context.Background()).SearchTerm(searchTerm).Filters(filters).Limit(limit).Offset(offset).OrderBy(orderBy).Order(order).Execute()
+	resp, r, err := apiClient.CollectionsAPI.V3ListCollections(context.Background()).SearchTerm(searchTerm).BinaryName(binaryName).BinarySha256(binarySha256).Tags(tags).UserIds(userIds).Filters(filters).Limit(limit).Offset(offset).OrderBy(orderBy).Order(order).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CollectionsAPI.V3ListCollections``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -866,7 +870,11 @@ Other parameters are passed through a pointer to a apiV3ListCollectionsRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **searchTerm** | **string** |  | 
+ **searchTerm** | **string** | Partial or full collection name to search for | 
+ **binaryName** | **string** | Only return Collections containing a Binary whose name contains this | 
+ **binarySha256** | **string** | Only return Collections containing a Binary whose SHA-256 hash contains this | 
+ **tags** | **[]string** | Only return Collections carrying at least one of these Tags | 
+ **userIds** | **[]int64** | Restrict results to Collections owned by one of these user IDs | 
  **filters** | **[]string** |  | 
  **limit** | **int64** |  | [default to 20]
  **offset** | **int64** |  | [default to 0]
