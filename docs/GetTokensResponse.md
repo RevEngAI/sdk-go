@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **AiDecomp** | **string** | Tokenised AI-decompilation. Includes generated comments. Empty until a run has succeeded. | 
 **AnalysisId** | **int64** | Analysis the function belongs to. Scopes every data_type_id below. | 
 **PlaceholderToRenderedToken** | [**map[string]RenderedToken**](RenderedToken.md) | Each placeholder token mapped to the value the server would render in its place, and the record it refers to. Null until a run has succeeded. | 
-**PlaceholderToUserOverride** | [**map[string]Token**](Token.md) | The caller&#39;s own overrides, keyed by token. Null until a run has succeeded. | 
+**PlaceholderToUserOverride** | [**map[string]Token**](Token.md) | The overrides on this function, keyed by token, each carrying who chose it. Null until a run has succeeded. | 
 
 ## Methods
 

@@ -879,6 +879,8 @@ GetBinaryDieInfo Gets the die info of a binary
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param binaryId
  @return ApiGetBinaryDieInfoRequest
+
+Deprecated
 */
 func (a *BinariesAPIService) GetBinaryDieInfo(ctx context.Context, binaryId int32) ApiGetBinaryDieInfoRequest {
 	return ApiGetBinaryDieInfoRequest{
@@ -890,6 +892,7 @@ func (a *BinariesAPIService) GetBinaryDieInfo(ctx context.Context, binaryId int3
 
 // Execute executes the request
 //  @return BaseResponseListDieMatch
+// Deprecated
 func (a *BinariesAPIService) GetBinaryDieInfoExecute(r ApiGetBinaryDieInfoRequest) (*BaseResponseListDieMatch, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -1129,6 +1132,8 @@ GetBinaryRelatedStatus Gets the status of the unpack binary task for a binary
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param binaryId
  @return ApiGetBinaryRelatedStatusRequest
+
+Deprecated
 */
 func (a *BinariesAPIService) GetBinaryRelatedStatus(ctx context.Context, binaryId int32) ApiGetBinaryRelatedStatusRequest {
 	return ApiGetBinaryRelatedStatusRequest{
@@ -1140,6 +1145,7 @@ func (a *BinariesAPIService) GetBinaryRelatedStatus(ctx context.Context, binaryI
 
 // Execute executes the request
 //  @return BaseResponseBinariesRelatedStatusResponse
+// Deprecated
 func (a *BinariesAPIService) GetBinaryRelatedStatusExecute(r ApiGetBinaryRelatedStatusRequest) (*BaseResponseBinariesRelatedStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -1254,6 +1260,8 @@ GetRelatedBinaries Gets the related binaries of a binary.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param binaryId
  @return ApiGetRelatedBinariesRequest
+
+Deprecated
 */
 func (a *BinariesAPIService) GetRelatedBinaries(ctx context.Context, binaryId int32) ApiGetRelatedBinariesRequest {
 	return ApiGetRelatedBinariesRequest{
@@ -1265,6 +1273,7 @@ func (a *BinariesAPIService) GetRelatedBinaries(ctx context.Context, binaryId in
 
 // Execute executes the request
 //  @return BaseResponseChildBinariesResponse
+// Deprecated
 func (a *BinariesAPIService) GetRelatedBinariesExecute(r ApiGetRelatedBinariesRequest) (*BaseResponseChildBinariesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -1374,6 +1383,162 @@ func (a *BinariesAPIService) GetRelatedBinariesExecute(r ApiGetRelatedBinariesRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiV3DownloadBinaryZippedRequest struct {
+	ctx context.Context
+	ApiService *BinariesAPIService
+	binaryId int64
+}
+
+func (r ApiV3DownloadBinaryZippedRequest) Execute() (*http.Response, error) {
+	return r.ApiService.V3DownloadBinaryZippedExecute(r)
+}
+
+/*
+V3DownloadBinaryZipped Download a binary as a password-protected zip.
+
+Streams the binary's uploaded file back as a zip archive, encrypted with a fixed password (`infected`) that deters antivirus scanning in transit rather than protecting confidentiality. Only the binary's owner, or an admin/superadmin, may download it; an internally-managed account's binary can only be downloaded by a superadmin.
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param binaryId Binary ID
+ @return ApiV3DownloadBinaryZippedRequest
+*/
+func (a *BinariesAPIService) V3DownloadBinaryZipped(ctx context.Context, binaryId int64) ApiV3DownloadBinaryZippedRequest {
+	return ApiV3DownloadBinaryZippedRequest{
+		ApiService: a,
+		ctx: ctx,
+		binaryId: binaryId,
+	}
+}
+
+// Execute executes the request
+func (a *BinariesAPIService) V3DownloadBinaryZippedExecute(r ApiV3DownloadBinaryZippedRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BinariesAPIService.V3DownloadBinaryZipped")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/binaries/{binary_id}/download-zipped"
+	localVarPath = strings.Replace(localVarPath, "{"+"binary_id"+"}", url.PathEscape(parameterValueToString(r.binaryId, "binaryId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.binaryId < 1 {
+		return nil, reportError("binaryId must be greater than 1")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiV3GetBinaryDieInfoRequest struct {
 	ctx context.Context
 	ApiService *BinariesAPIService
@@ -1421,6 +1586,173 @@ func (a *BinariesAPIService) V3GetBinaryDieInfoExecute(r ApiV3GetBinaryDieInfoRe
 	}
 
 	localVarPath := localBasePath + "/v3/binaries/{binary_id}/die-info"
+	localVarPath = strings.Replace(localVarPath, "{"+"binary_id"+"}", url.PathEscape(parameterValueToString(r.binaryId, "binaryId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.binaryId < 1 {
+		return localVarReturnValue, nil, reportError("binaryId must be greater than 1")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV3GetBinaryExternalsRequest struct {
+	ctx context.Context
+	ApiService *BinariesAPIService
+	binaryId int64
+}
+
+func (r ApiV3GetBinaryExternalsRequest) Execute() (*GetBinaryExternalsOutputBody, *http.Response, error) {
+	return r.ApiService.V3GetBinaryExternalsExecute(r)
+}
+
+/*
+V3GetBinaryExternals Get third-party threat-intel lookups for a binary.
+
+Returns VirusTotal and MalwareBazaar lookup results for the binary's content hash. `externals` is null until at least one lookup has run.
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param binaryId Binary ID
+ @return ApiV3GetBinaryExternalsRequest
+*/
+func (a *BinariesAPIService) V3GetBinaryExternals(ctx context.Context, binaryId int64) ApiV3GetBinaryExternalsRequest {
+	return ApiV3GetBinaryExternalsRequest{
+		ApiService: a,
+		ctx: ctx,
+		binaryId: binaryId,
+	}
+}
+
+// Execute executes the request
+//  @return GetBinaryExternalsOutputBody
+func (a *BinariesAPIService) V3GetBinaryExternalsExecute(r ApiV3GetBinaryExternalsRequest) (*GetBinaryExternalsOutputBody, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetBinaryExternalsOutputBody
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BinariesAPIService.V3GetBinaryExternals")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/binaries/{binary_id}/externals"
 	localVarPath = strings.Replace(localVarPath, "{"+"binary_id"+"}", url.PathEscape(parameterValueToString(r.binaryId, "binaryId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1838,6 +2170,245 @@ func (a *BinariesAPIService) V3GetBinaryRelatedStatusExecute(r ApiV3GetBinaryRel
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV3SearchBinariesRequest struct {
+	ctx context.Context
+	ApiService *BinariesAPIService
+	partialName *string
+	partialSha256 *string
+	tags *[]*string
+	modelName *string
+	userFilesOnly *bool
+	excludeBinaryId *int64
+	userIds *[]int64
+	limit *int64
+	offset *int64
+}
+
+// Partial or full binary name to search for
+func (r ApiV3SearchBinariesRequest) PartialName(partialName string) ApiV3SearchBinariesRequest {
+	r.partialName = &partialName
+	return r
+}
+
+// Partial or full SHA-256 hash to search for
+func (r ApiV3SearchBinariesRequest) PartialSha256(partialSha256 string) ApiV3SearchBinariesRequest {
+	r.partialSha256 = &partialSha256
+	return r
+}
+
+// Restrict results to binaries carrying at least one of these tags
+func (r ApiV3SearchBinariesRequest) Tags(tags []*string) ApiV3SearchBinariesRequest {
+	r.tags = &tags
+	return r
+}
+
+// Restrict results to binaries analysed with this model
+func (r ApiV3SearchBinariesRequest) ModelName(modelName string) ApiV3SearchBinariesRequest {
+	r.modelName = &modelName
+	return r
+}
+
+// Restrict results to files the caller uploaded themself
+func (r ApiV3SearchBinariesRequest) UserFilesOnly(userFilesOnly bool) ApiV3SearchBinariesRequest {
+	r.userFilesOnly = &userFilesOnly
+	return r
+}
+
+// A binary ID to exclude from the results
+func (r ApiV3SearchBinariesRequest) ExcludeBinaryId(excludeBinaryId int64) ApiV3SearchBinariesRequest {
+	r.excludeBinaryId = &excludeBinaryId
+	return r
+}
+
+// Restrict results to binaries owned by one of these user IDs
+func (r ApiV3SearchBinariesRequest) UserIds(userIds []int64) ApiV3SearchBinariesRequest {
+	r.userIds = &userIds
+	return r
+}
+
+// Maximum results to return
+func (r ApiV3SearchBinariesRequest) Limit(limit int64) ApiV3SearchBinariesRequest {
+	r.limit = &limit
+	return r
+}
+
+// Number of results to skip
+func (r ApiV3SearchBinariesRequest) Offset(offset int64) ApiV3SearchBinariesRequest {
+	r.offset = &offset
+	return r
+}
+
+func (r ApiV3SearchBinariesRequest) Execute() (*SearchBinariesOutputBody, *http.Response, error) {
+	return r.ApiService.V3SearchBinariesExecute(r)
+}
+
+/*
+V3SearchBinaries Search binaries
+
+Searches for binaries visible to the caller. At least one of partial_name, partial_sha256, tags, or model_name must be provided.
+
+**Error codes:**
+- `422` [`VALIDATION_FAILED`](/errors/VALIDATION_FAILED) — Validation Failed
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiV3SearchBinariesRequest
+*/
+func (a *BinariesAPIService) V3SearchBinaries(ctx context.Context) ApiV3SearchBinariesRequest {
+	return ApiV3SearchBinariesRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return SearchBinariesOutputBody
+func (a *BinariesAPIService) V3SearchBinariesExecute(r ApiV3SearchBinariesRequest) (*SearchBinariesOutputBody, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SearchBinariesOutputBody
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BinariesAPIService.V3SearchBinaries")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/binaries"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.partialName != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "partial_name", r.partialName, "form", "")
+	}
+	if r.partialSha256 != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "partial_sha256", r.partialSha256, "form", "")
+	}
+	if r.tags != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "csv")
+	}
+	if r.modelName != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "model_name", r.modelName, "form", "")
+	}
+	if r.userFilesOnly != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "user_files_only", r.userFilesOnly, "form", "")
+	} else {
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "user_files_only", defaultValue, "form", "")
+		r.userFilesOnly = &defaultValue
+	}
+	if r.excludeBinaryId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "exclude_binary_id", r.excludeBinaryId, "form", "")
+	}
+	if r.userIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "user_ids", r.userIds, "form", "csv")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	} else {
+		var defaultValue int64 = 10
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		r.limit = &defaultValue
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	} else {
+		var defaultValue int64 = 0
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", defaultValue, "form", "")
+		r.offset = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v APIError

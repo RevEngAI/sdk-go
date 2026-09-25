@@ -25,7 +25,7 @@ type GetTokensResponse struct {
 	AnalysisId int64 `json:"analysis_id"`
 	// Each placeholder token mapped to the value the server would render in its place, and the record it refers to. Null until a run has succeeded.
 	PlaceholderToRenderedToken map[string]RenderedToken `json:"placeholder_to_rendered_token"`
-	// The caller's own overrides, keyed by token. Null until a run has succeeded.
+	// The overrides on this function, keyed by token, each carrying who chose it. Null until a run has succeeded.
 	PlaceholderToUserOverride map[string]Token `json:"placeholder_to_user_override"`
 	AdditionalProperties map[string]interface{}
 }

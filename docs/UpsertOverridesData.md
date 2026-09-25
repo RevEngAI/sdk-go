@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PlaceholderToUserOverride** | [**map[string]Token**](Token.md) | Every override on the function after applying this request, keyed by placeholder token. | 
+**PlaceholderToUserOverride** | [**map[string]Token**](Token.md) | Every override on the function after applying this request, keyed by placeholder token, each carrying who chose it. | 
 
 ## Methods
 

@@ -46,6 +46,8 @@ Creates a comment associated with a specified analysis).
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiCreateAnalysisCommentRequest
+
+Deprecated
 */
 func (a *AnalysesCommentsAPIService) CreateAnalysisComment(ctx context.Context, analysisId int32) ApiCreateAnalysisCommentRequest {
 	return ApiCreateAnalysisCommentRequest{
@@ -57,6 +59,7 @@ func (a *AnalysesCommentsAPIService) CreateAnalysisComment(ctx context.Context, 
 
 // Execute executes the request
 //  @return BaseResponseCommentResponse
+// Deprecated
 func (a *AnalysesCommentsAPIService) CreateAnalysisCommentExecute(r ApiCreateAnalysisCommentRequest) (*BaseResponseCommentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -191,6 +194,8 @@ Deletes an existing comment. Users can only delete their own comments.
  @param commentId
  @param analysisId
  @return ApiDeleteAnalysisCommentRequest
+
+Deprecated
 */
 func (a *AnalysesCommentsAPIService) DeleteAnalysisComment(ctx context.Context, commentId int32, analysisId int32) ApiDeleteAnalysisCommentRequest {
 	return ApiDeleteAnalysisCommentRequest{
@@ -203,6 +208,7 @@ func (a *AnalysesCommentsAPIService) DeleteAnalysisComment(ctx context.Context, 
 
 // Execute executes the request
 //  @return BaseResponseBool
+// Deprecated
 func (a *AnalysesCommentsAPIService) DeleteAnalysisCommentExecute(r ApiDeleteAnalysisCommentRequest) (*BaseResponseBool, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
@@ -345,6 +351,8 @@ Retrieves all comments created for a specific analysis. Only returns comments fo
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiGetAnalysisCommentsRequest
+
+Deprecated
 */
 func (a *AnalysesCommentsAPIService) GetAnalysisComments(ctx context.Context, analysisId int32) ApiGetAnalysisCommentsRequest {
 	return ApiGetAnalysisCommentsRequest{
@@ -356,6 +364,7 @@ func (a *AnalysesCommentsAPIService) GetAnalysisComments(ctx context.Context, an
 
 // Execute executes the request
 //  @return BaseResponseListCommentResponse
+// Deprecated
 func (a *AnalysesCommentsAPIService) GetAnalysisCommentsExecute(r ApiGetAnalysisCommentsRequest) (*BaseResponseListCommentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -480,6 +489,8 @@ Updates the content of an existing comment. Users can only update their own comm
  @param commentId
  @param analysisId
  @return ApiUpdateAnalysisCommentRequest
+
+Deprecated
 */
 func (a *AnalysesCommentsAPIService) UpdateAnalysisComment(ctx context.Context, commentId int32, analysisId int32) ApiUpdateAnalysisCommentRequest {
 	return ApiUpdateAnalysisCommentRequest{
@@ -492,6 +503,7 @@ func (a *AnalysesCommentsAPIService) UpdateAnalysisComment(ctx context.Context, 
 
 // Execute executes the request
 //  @return BaseResponseCommentResponse
+// Deprecated
 func (a *AnalysesCommentsAPIService) UpdateAnalysisCommentExecute(r ApiUpdateAnalysisCommentRequest) (*BaseResponseCommentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch

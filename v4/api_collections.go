@@ -1812,6 +1812,10 @@ type ApiV3ListCollectionsRequest struct {
 	ctx context.Context
 	ApiService *CollectionsAPIService
 	searchTerm *string
+	binaryName *string
+	binarySha256 *string
+	tags *[]*string
+	userIds *[]int64
 	filters *[]string
 	limit *int64
 	offset *int64
@@ -1819,8 +1823,33 @@ type ApiV3ListCollectionsRequest struct {
 	order *string
 }
 
+// Partial or full collection name to search for
 func (r ApiV3ListCollectionsRequest) SearchTerm(searchTerm string) ApiV3ListCollectionsRequest {
 	r.searchTerm = &searchTerm
+	return r
+}
+
+// Only return Collections containing a Binary whose name contains this
+func (r ApiV3ListCollectionsRequest) BinaryName(binaryName string) ApiV3ListCollectionsRequest {
+	r.binaryName = &binaryName
+	return r
+}
+
+// Only return Collections containing a Binary whose SHA-256 hash contains this
+func (r ApiV3ListCollectionsRequest) BinarySha256(binarySha256 string) ApiV3ListCollectionsRequest {
+	r.binarySha256 = &binarySha256
+	return r
+}
+
+// Only return Collections carrying at least one of these Tags
+func (r ApiV3ListCollectionsRequest) Tags(tags []*string) ApiV3ListCollectionsRequest {
+	r.tags = &tags
+	return r
+}
+
+// Restrict results to Collections owned by one of these user IDs
+func (r ApiV3ListCollectionsRequest) UserIds(userIds []int64) ApiV3ListCollectionsRequest {
+	r.userIds = &userIds
 	return r
 }
 
@@ -1856,7 +1885,7 @@ func (r ApiV3ListCollectionsRequest) Execute() (*ListCollectionsOutputBody, *htt
 /*
 V3ListCollections List collections.
 
-Lists collections accessible to the authenticated user. Supports search, filtering, ordering, and pagination.
+Lists collections accessible to the authenticated user. Supports search by collection name, contained binary name/SHA-256, tags, owner, filtering, ordering, and pagination.
 
 **Error codes:**
 - `422` [`VALIDATION_FAILED`](/errors/VALIDATION_FAILED) — Validation Failed
@@ -1894,6 +1923,18 @@ func (a *CollectionsAPIService) V3ListCollectionsExecute(r ApiV3ListCollectionsR
 
 	if r.searchTerm != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search_term", r.searchTerm, "form", "")
+	}
+	if r.binaryName != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "binary_name", r.binaryName, "form", "")
+	}
+	if r.binarySha256 != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "binary_sha256", r.binarySha256, "form", "")
+	}
+	if r.tags != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "csv")
+	}
+	if r.userIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "user_ids", r.userIds, "form", "csv")
 	}
 	if r.filters != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filters", r.filters, "form", "csv")

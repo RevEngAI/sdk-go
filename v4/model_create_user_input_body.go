@@ -31,6 +31,8 @@ type CreateUserInputBody struct {
 	Password string `json:"password"`
 	// User role (defaults to USER)
 	Role *string `json:"role,omitempty"`
+	// Existing team to add the user to, which also becomes their default team
+	TeamId *int64 `json:"team_id,omitempty"`
 	// User tier (defaults to ENTHUSIAST)
 	Tier *string `json:"tier,omitempty"`
 	// IANA time zone
@@ -238,6 +240,38 @@ func (o *CreateUserInputBody) SetRole(v string) {
 	o.Role = &v
 }
 
+// GetTeamId returns the TeamId field value if set, zero value otherwise.
+func (o *CreateUserInputBody) GetTeamId() int64 {
+	if o == nil || IsNil(o.TeamId) {
+		var ret int64
+		return ret
+	}
+	return *o.TeamId
+}
+
+// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateUserInputBody) GetTeamIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.TeamId) {
+		return nil, false
+	}
+	return o.TeamId, true
+}
+
+// HasTeamId returns a boolean if a field has been set.
+func (o *CreateUserInputBody) HasTeamId() bool {
+	if o != nil && !IsNil(o.TeamId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamId gets a reference to the given int64 and assigns it to the TeamId field.
+func (o *CreateUserInputBody) SetTeamId(v int64) {
+	o.TeamId = &v
+}
+
 // GetTier returns the Tier field value if set, zero value otherwise.
 func (o *CreateUserInputBody) GetTier() string {
 	if o == nil || IsNil(o.Tier) {
@@ -350,6 +384,9 @@ func (o CreateUserInputBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Role) {
 		toSerialize["role"] = o.Role
 	}
+	if !IsNil(o.TeamId) {
+		toSerialize["team_id"] = o.TeamId
+	}
 	if !IsNil(o.Tier) {
 		toSerialize["tier"] = o.Tier
 	}
@@ -408,6 +445,7 @@ func (o *CreateUserInputBody) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "last_name")
 		delete(additionalProperties, "password")
 		delete(additionalProperties, "role")
+		delete(additionalProperties, "team_id")
 		delete(additionalProperties, "tier")
 		delete(additionalProperties, "time_zone")
 		delete(additionalProperties, "username")

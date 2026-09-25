@@ -37,6 +37,8 @@ Gets active models available for analysis.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetModelsRequest
+
+Deprecated
 */
 func (a *ModelsAPIService) GetModels(ctx context.Context) ApiGetModelsRequest {
 	return ApiGetModelsRequest{
@@ -47,6 +49,7 @@ func (a *ModelsAPIService) GetModels(ctx context.Context) ApiGetModelsRequest {
 
 // Execute executes the request
 //  @return BaseResponseModelsResponse
+// Deprecated
 func (a *ModelsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*BaseResponseModelsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

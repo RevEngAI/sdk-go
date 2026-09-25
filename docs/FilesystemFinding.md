@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **FunctionSize** | **int64** | Size of the function in bytes | 
 **Modifies** | **bool** | Whether this function evidences modifying the filesystem rather than only observing it | 
 **Sources** | **[]string** | Distinct filesystem sources evidenced by this function | 
+**Verification** | Pointer to [**FilesystemVerification**](FilesystemVerification.md) | LLM verdict checking this finding against its decompilation. Present only when the run verified this finding. | [optional] 
 
 ## Methods
 
@@ -305,6 +306,31 @@ SetSources sets Sources field to given value.
 `func (o *FilesystemFinding) UnsetSources()`
 
 UnsetSources ensures that no value is present for Sources, not even an explicit nil
+### GetVerification
+
+`func (o *FilesystemFinding) GetVerification() FilesystemVerification`
+
+GetVerification returns the Verification field if non-nil, zero value otherwise.
+
+### GetVerificationOk
+
+`func (o *FilesystemFinding) GetVerificationOk() (*FilesystemVerification, bool)`
+
+GetVerificationOk returns a tuple with the Verification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVerification
+
+`func (o *FilesystemFinding) SetVerification(v FilesystemVerification)`
+
+SetVerification sets Verification field to given value.
+
+### HasVerification
+
+`func (o *FilesystemFinding) HasVerification() bool`
+
+HasVerification returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -41,6 +41,8 @@ type NetworkingFinding struct {
 	Remote bool `json:"remote"`
 	// Distinct networking sources evidenced by this function
 	Sources []string `json:"sources"`
+	// LLM verdict checking this finding against its decompilation. Present only when the run verified this finding.
+	Verification *NetworkingVerification `json:"verification,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -358,6 +360,38 @@ func (o *NetworkingFinding) SetSources(v []string) {
 	o.Sources = v
 }
 
+// GetVerification returns the Verification field value if set, zero value otherwise.
+func (o *NetworkingFinding) GetVerification() NetworkingVerification {
+	if o == nil || IsNil(o.Verification) {
+		var ret NetworkingVerification
+		return ret
+	}
+	return *o.Verification
+}
+
+// GetVerificationOk returns a tuple with the Verification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingFinding) GetVerificationOk() (*NetworkingVerification, bool) {
+	if o == nil || IsNil(o.Verification) {
+		return nil, false
+	}
+	return o.Verification, true
+}
+
+// HasVerification returns a boolean if a field has been set.
+func (o *NetworkingFinding) HasVerification() bool {
+	if o != nil && !IsNil(o.Verification) {
+		return true
+	}
+
+	return false
+}
+
+// SetVerification gets a reference to the given NetworkingVerification and assigns it to the Verification field.
+func (o *NetworkingFinding) SetVerification(v NetworkingVerification) {
+	o.Verification = &v
+}
+
 func (o NetworkingFinding) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -386,6 +420,9 @@ func (o NetworkingFinding) ToMap() (map[string]interface{}, error) {
 	toSerialize["remote"] = o.Remote
 	if o.Sources != nil {
 		toSerialize["sources"] = o.Sources
+	}
+	if !IsNil(o.Verification) {
+		toSerialize["verification"] = o.Verification
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -449,6 +486,7 @@ func (o *NetworkingFinding) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "network_calls")
 		delete(additionalProperties, "remote")
 		delete(additionalProperties, "sources")
+		delete(additionalProperties, "verification")
 		o.AdditionalProperties = additionalProperties
 	}
 

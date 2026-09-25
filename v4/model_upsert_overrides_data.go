@@ -19,7 +19,7 @@ var _ MappedNullable = &UpsertOverridesData{}
 
 // UpsertOverridesData struct for UpsertOverridesData
 type UpsertOverridesData struct {
-	// Every override on the function after applying this request, keyed by placeholder token.
+	// Every override on the function after applying this request, keyed by placeholder token, each carrying who chose it.
 	PlaceholderToUserOverride map[string]Token `json:"placeholder_to_user_override"`
 	AdditionalProperties map[string]interface{}
 }

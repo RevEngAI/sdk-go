@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**BulkAddAnalysisTags**](AnalysesBulkActionsAPI.md#BulkAddAnalysisTags) | **Patch** /v2/analyses/tags/add | Bulk Add Analysis Tags
 [**BulkDeleteAnalyses**](AnalysesBulkActionsAPI.md#BulkDeleteAnalyses) | **Patch** /v2/analyses/delete | Bulk Delete Analyses
+[**V3BatchAddAnalysisTags**](AnalysesBulkActionsAPI.md#V3BatchAddAnalysisTags) | **Post** /v3/analyses:batchAddTags | Add tags to multiple analyses.
 [**V3BatchDeleteAnalyses**](AnalysesBulkActionsAPI.md#V3BatchDeleteAnalyses) | **Post** /v3/analyses:batchDelete | Delete multiple analyses.
 
 
@@ -127,6 +128,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponseDict**](BaseResponseDict.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3BatchAddAnalysisTags
+
+> BulkAddTagsOutputBody V3BatchAddAnalysisTags(ctx).BulkAddTagsInputBody(bulkAddTagsInputBody).Execute()
+
+Add tags to multiple analyses.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	bulkAddTagsInputBody := *revengai.NewBulkAddTagsInputBody([]int64{int64(123)}, []string{"Tags_example"}) // BulkAddTagsInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesBulkActionsAPI.V3BatchAddAnalysisTags(context.Background()).BulkAddTagsInputBody(bulkAddTagsInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesBulkActionsAPI.V3BatchAddAnalysisTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3BatchAddAnalysisTags`: BulkAddTagsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesBulkActionsAPI.V3BatchAddAnalysisTags`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3BatchAddAnalysisTagsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bulkAddTagsInputBody** | [**BulkAddTagsInputBody**](BulkAddTagsInputBody.md) |  | 
+
+### Return type
+
+[**BulkAddTagsOutputBody**](BulkAddTagsOutputBody.md)
 
 ### Authorization
 

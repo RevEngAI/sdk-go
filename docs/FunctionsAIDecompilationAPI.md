@@ -18,6 +18,7 @@ Method | HTTP request | Description
 [**RegenerateAiDecompilationSummary**](FunctionsAIDecompilationAPI.md#RegenerateAiDecompilationSummary) | **Post** /v3/functions/{function_id}/ai-decompilation/summary | Regenerate AI decompilation summary
 [**StreamAiDecompilation**](FunctionsAIDecompilationAPI.md#StreamAiDecompilation) | **Get** /v3/functions/{function_id}/ai-decompilation/events | Stream live AI decompilation output (SSE)
 [**UpsertAiDecompilationRating**](FunctionsAIDecompilationAPI.md#UpsertAiDecompilationRating) | **Patch** /v2/functions/{function_id}/ai-decompilation/rating | Upsert rating for AI decompilation
+[**V3AcceptAiDecompilationTypeSuggestions**](FunctionsAIDecompilationAPI.md#V3AcceptAiDecompilationTypeSuggestions) | **Post** /v3/functions/{function_id}/ai-decompilation/type-suggestions/accept | Accept AI decompilation type suggestions
 [**V3GetAiDecompilationLineAttributions**](FunctionsAIDecompilationAPI.md#V3GetAiDecompilationLineAttributions) | **Get** /v3/functions/{function_id}/ai-decompilation/line-attributions | Get AI decompilation line attributions
 [**V3GetAiDecompilationTokens**](FunctionsAIDecompilationAPI.md#V3GetAiDecompilationTokens) | **Get** /v3/functions/{function_id}/ai-decompilation/tokens | Get AI decompilation tokens and user overrides
 [**V3GetAiDecompilationTypeSuggestions**](FunctionsAIDecompilationAPI.md#V3GetAiDecompilationTypeSuggestions) | **Get** /v3/functions/{function_id}/ai-decompilation/type-suggestions | Get AI decompilation type suggestions
@@ -997,6 +998,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BaseResponse**](BaseResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3AcceptAiDecompilationTypeSuggestions
+
+> AcceptTypeSuggestionsOutputBody V3AcceptAiDecompilationTypeSuggestions(ctx, functionId).AcceptTypeSuggestionsInputBody(acceptTypeSuggestionsInputBody).Execute()
+
+Accept AI decompilation type suggestions
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+	acceptTypeSuggestionsInputBody := *revengai.NewAcceptTypeSuggestionsInputBody([]string{"Keys_example"}) // AcceptTypeSuggestionsInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.V3AcceptAiDecompilationTypeSuggestions(context.Background(), functionId).AcceptTypeSuggestionsInputBody(acceptTypeSuggestionsInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.V3AcceptAiDecompilationTypeSuggestions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3AcceptAiDecompilationTypeSuggestions`: AcceptTypeSuggestionsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.V3AcceptAiDecompilationTypeSuggestions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3AcceptAiDecompilationTypeSuggestionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **acceptTypeSuggestionsInputBody** | [**AcceptTypeSuggestionsInputBody**](AcceptTypeSuggestionsInputBody.md) |  | 
+
+### Return type
+
+[**AcceptTypeSuggestionsOutputBody**](AcceptTypeSuggestionsOutputBody.md)
 
 ### Authorization
 

@@ -28,6 +28,7 @@ Method | HTTP request | Description
 [**ListImportedFunctions**](FunctionsCoreAPI.md#ListImportedFunctions) | **Get** /v3/analyses/{analysis_id}/imported-functions | List imported functions in an analysis
 [**StartFunctionsMatching**](FunctionsCoreAPI.md#StartFunctionsMatching) | **Post** /v3/functions/matches | Start function matching for an explicit set of functions
 [**V3CanonicalizeFunctionNames**](FunctionsCoreAPI.md#V3CanonicalizeFunctionNames) | **Post** /v3/functions/canonical-names | Canonicalize a batch of function names
+[**V3SearchFunctions**](FunctionsCoreAPI.md#V3SearchFunctions) | **Get** /v3/functions | Search functions
 
 
 
@@ -1715,6 +1716,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3SearchFunctions
+
+> SearchFunctionsOutputBody V3SearchFunctions(ctx).PartialName(partialName).ModelName(modelName).Limit(limit).Offset(offset).Execute()
+
+Search functions
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	partialName := "partialName_example" // string | Partial or full function name to search for (optional)
+	modelName := "modelName_example" // string | Restrict results to functions analysed with this model (optional)
+	limit := int64(789) // int64 | Maximum results to return (optional) (default to 10)
+	offset := int64(789) // int64 | Number of results to skip (optional) (default to 0)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsCoreAPI.V3SearchFunctions(context.Background()).PartialName(partialName).ModelName(modelName).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.V3SearchFunctions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3SearchFunctions`: SearchFunctionsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.V3SearchFunctions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3SearchFunctionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **partialName** | **string** | Partial or full function name to search for | 
+ **modelName** | **string** | Restrict results to functions analysed with this model | 
+ **limit** | **int64** | Maximum results to return | [default to 10]
+ **offset** | **int64** | Number of results to skip | [default to 0]
+
+### Return type
+
+[**SearchFunctionsOutputBody**](SearchFunctionsOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
