@@ -27,7 +27,6 @@ Method | HTTP request | Description
 [**UpdateAnalysis**](AnalysesCoreAPI.md#UpdateAnalysis) | **Patch** /v2/analyses/{analysis_id} | Update Analysis
 [**UpdateAnalysisTags**](AnalysesCoreAPI.md#UpdateAnalysisTags) | **Patch** /v2/analyses/{analysis_id}/tags | Update Analysis Tags
 [**UploadFile**](AnalysesCoreAPI.md#UploadFile) | **Post** /v2/upload | Upload File
-[**V3CreateAnalysis**](AnalysesCoreAPI.md#V3CreateAnalysis) | **Post** /v3/analyses | Create an analysis
 [**V3DeleteAnalysis**](AnalysesCoreAPI.md#V3DeleteAnalysis) | **Delete** /v3/analyses/{analysis_id} | Delete an analysis.
 [**V3DownloadBinaryExport**](AnalysesCoreAPI.md#V3DownloadBinaryExport) | **Get** /v3/analyses/{analysis_id}/binary-export | Download a binary export
 [**V3GetAnalysis**](AnalysesCoreAPI.md#V3GetAnalysis) | **Get** /v3/analyses/{analysis_id} | Get an analysis.
@@ -1686,74 +1685,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: multipart/form-data
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## V3CreateAnalysis
-
-> OperationCreateMetadataCreateResult V3CreateAnalysis(ctx).CreateRequest(createRequest).XRevEngApplication(xRevEngApplication).Execute()
-
-Create an analysis
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v4"
-)
-
-func main() {
-	createRequest := *revengai.NewCreateRequest("Filename_example", "Sha256Hash_example") // CreateRequest | 
-	xRevEngApplication := "xRevEngApplication_example" // string | Identifies the calling RevEng application. Recorded on the Analysis log. (optional)
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.V3CreateAnalysis(context.Background()).CreateRequest(createRequest).XRevEngApplication(xRevEngApplication).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3CreateAnalysis``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `V3CreateAnalysis`: OperationCreateMetadataCreateResult
-	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3CreateAnalysis`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiV3CreateAnalysisRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createRequest** | [**CreateRequest**](CreateRequest.md) |  | 
- **xRevEngApplication** | **string** | Identifies the calling RevEng application. Recorded on the Analysis log. | 
-
-### Return type
-
-[**OperationCreateMetadataCreateResult**](OperationCreateMetadataCreateResult.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
