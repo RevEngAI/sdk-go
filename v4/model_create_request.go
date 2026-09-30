@@ -27,7 +27,7 @@ type CreateRequest struct {
 	Filename string `json:"filename"`
 	Sha256Hash string `json:"sha_256_hash" validate:"regexp=^[a-fA-F0-9]{64}$"`
 	Symbols *Symbols `json:"symbols,omitempty"`
-	Tags []string `json:"tags,omitempty"`
+	Tags []*string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -297,9 +297,9 @@ func (o *CreateRequest) SetSymbols(v Symbols) {
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateRequest) GetTags() []string {
+func (o *CreateRequest) GetTags() []*string {
 	if o == nil {
-		var ret []string
+		var ret []*string
 		return ret
 	}
 	return o.Tags
@@ -308,7 +308,7 @@ func (o *CreateRequest) GetTags() []string {
 // GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateRequest) GetTagsOk() ([]string, bool) {
+func (o *CreateRequest) GetTagsOk() ([]*string, bool) {
 	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
@@ -324,8 +324,8 @@ func (o *CreateRequest) HasTags() bool {
 	return false
 }
 
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *CreateRequest) SetTags(v []string) {
+// SetTags gets a reference to the given []*string and assigns it to the Tags field.
+func (o *CreateRequest) SetTags(v []*string) {
 	o.Tags = v
 }
 

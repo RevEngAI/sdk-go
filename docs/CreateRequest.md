@@ -225,20 +225,20 @@ HasSymbols returns a boolean if a field has been set.
 
 ### GetTags
 
-`func (o *CreateRequest) GetTags() []string`
+`func (o *CreateRequest) GetTags() []*string`
 
 GetTags returns the Tags field if non-nil, zero value otherwise.
 
 ### GetTagsOk
 
-`func (o *CreateRequest) GetTagsOk() (*[]string, bool)`
+`func (o *CreateRequest) GetTagsOk() (*[]*string, bool)`
 
 GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTags
 
-`func (o *CreateRequest) SetTags(v []string)`
+`func (o *CreateRequest) SetTags(v []*string)`
 
 SetTags sets Tags field to given value.
 
