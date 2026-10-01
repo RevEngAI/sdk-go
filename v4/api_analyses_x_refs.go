@@ -42,6 +42,8 @@ GetXrefByVaddr [Beta] Look up xrefs by virtual address
  @param analysisId
  @param vaddr Virtual address to match against xrefs
  @return ApiGetXrefByVaddrRequest
+
+Deprecated
 */
 func (a *AnalysesXRefsAPIService) GetXrefByVaddr(ctx context.Context, analysisId int32, vaddr int32) ApiGetXrefByVaddrRequest {
 	return ApiGetXrefByVaddrRequest{
@@ -54,6 +56,7 @@ func (a *AnalysesXRefsAPIService) GetXrefByVaddr(ctx context.Context, analysisId
 
 // Execute executes the request
 //  @return BaseResponseXrefResponse
+// Deprecated
 func (a *AnalysesXRefsAPIService) GetXrefByVaddrExecute(r ApiGetXrefByVaddrRequest) (*BaseResponseXrefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

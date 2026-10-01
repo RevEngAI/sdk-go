@@ -38,6 +38,8 @@ CreateExternalTaskVt Pulls data from VirusTotal
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiCreateExternalTaskVtRequest
+
+Deprecated
 */
 func (a *ExternalSourcesAPIService) CreateExternalTaskVt(ctx context.Context, analysisId int32) ApiCreateExternalTaskVtRequest {
 	return ApiCreateExternalTaskVtRequest{
@@ -49,6 +51,7 @@ func (a *ExternalSourcesAPIService) CreateExternalTaskVt(ctx context.Context, an
 
 // Execute executes the request
 //  @return BaseResponseStr
+// Deprecated
 func (a *ExternalSourcesAPIService) CreateExternalTaskVtExecute(r ApiCreateExternalTaskVtRequest) (*BaseResponseStr, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -174,6 +177,8 @@ GetVtData Get VirusTotal data
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiGetVtDataRequest
+
+Deprecated
 */
 func (a *ExternalSourcesAPIService) GetVtData(ctx context.Context, analysisId int32) ApiGetVtDataRequest {
 	return ApiGetVtDataRequest{
@@ -185,6 +190,7 @@ func (a *ExternalSourcesAPIService) GetVtData(ctx context.Context, analysisId in
 
 // Execute executes the request
 //  @return BaseResponseExternalResponse
+// Deprecated
 func (a *ExternalSourcesAPIService) GetVtDataExecute(r ApiGetVtDataRequest) (*BaseResponseExternalResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -310,6 +316,8 @@ GetVtTaskStatus Check the status of VirusTotal data retrieval
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiGetVtTaskStatusRequest
+
+Deprecated
 */
 func (a *ExternalSourcesAPIService) GetVtTaskStatus(ctx context.Context, analysisId int32) ApiGetVtTaskStatusRequest {
 	return ApiGetVtTaskStatusRequest{
@@ -321,6 +329,7 @@ func (a *ExternalSourcesAPIService) GetVtTaskStatus(ctx context.Context, analysi
 
 // Execute executes the request
 //  @return BaseResponseTaskResponse
+// Deprecated
 func (a *ExternalSourcesAPIService) GetVtTaskStatusExecute(r ApiGetVtTaskStatusRequest) (*BaseResponseTaskResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

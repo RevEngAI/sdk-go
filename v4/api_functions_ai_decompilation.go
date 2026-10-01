@@ -933,6 +933,8 @@ GetAiDecompilationRating Get rating for AI decompilation
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param functionId The ID of the function for which to get the rating
  @return ApiGetAiDecompilationRatingRequest
+
+Deprecated
 */
 func (a *FunctionsAIDecompilationAPIService) GetAiDecompilationRating(ctx context.Context, functionId int64) ApiGetAiDecompilationRatingRequest {
 	return ApiGetAiDecompilationRatingRequest{
@@ -944,6 +946,7 @@ func (a *FunctionsAIDecompilationAPIService) GetAiDecompilationRating(ctx contex
 
 // Execute executes the request
 //  @return BaseResponseUnionGetAiDecompilationRatingResponseNoneType
+// Deprecated
 func (a *FunctionsAIDecompilationAPIService) GetAiDecompilationRatingExecute(r ApiGetAiDecompilationRatingRequest) (*BaseResponseUnionGetAiDecompilationRatingResponseNoneType, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -2247,6 +2250,8 @@ UpsertAiDecompilationRating Upsert rating for AI decompilation
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param functionId The ID of the function being rated
  @return ApiUpsertAiDecompilationRatingRequest
+
+Deprecated
 */
 func (a *FunctionsAIDecompilationAPIService) UpsertAiDecompilationRating(ctx context.Context, functionId int64) ApiUpsertAiDecompilationRatingRequest {
 	return ApiUpsertAiDecompilationRatingRequest{
@@ -2258,6 +2263,7 @@ func (a *FunctionsAIDecompilationAPIService) UpsertAiDecompilationRating(ctx con
 
 // Execute executes the request
 //  @return BaseResponse
+// Deprecated
 func (a *FunctionsAIDecompilationAPIService) UpsertAiDecompilationRatingExecute(r ApiUpsertAiDecompilationRatingRequest) (*BaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch

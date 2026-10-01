@@ -522,6 +522,8 @@ GetTags Get function tags with maliciousness score
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiGetTagsRequest
+
+Deprecated
 */
 func (a *AnalysesResultsMetadataAPIService) GetTags(ctx context.Context, analysisId int32) ApiGetTagsRequest {
 	return ApiGetTagsRequest{
@@ -533,6 +535,7 @@ func (a *AnalysesResultsMetadataAPIService) GetTags(ctx context.Context, analysi
 
 // Execute executes the request
 //  @return BaseResponseAnalysisTags
+// Deprecated
 func (a *AnalysesResultsMetadataAPIService) GetTagsExecute(r ApiGetTagsRequest) (*BaseResponseAnalysisTags, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

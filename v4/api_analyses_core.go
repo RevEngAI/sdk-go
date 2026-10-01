@@ -1015,6 +1015,8 @@ Returns three maps: a map of function ids to function addresses, it's inverse an
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiGetAnalysisFunctionMapRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) GetAnalysisFunctionMap(ctx context.Context, analysisId int32) ApiGetAnalysisFunctionMapRequest {
 	return ApiGetAnalysisFunctionMapRequest{
@@ -1026,6 +1028,7 @@ func (a *AnalysesCoreAPIService) GetAnalysisFunctionMap(ctx context.Context, ana
 
 // Execute executes the request
 //  @return BaseResponseAnalysisFunctionMapping
+// Deprecated
 func (a *AnalysesCoreAPIService) GetAnalysisFunctionMapExecute(r ApiGetAnalysisFunctionMapRequest) (*BaseResponseAnalysisFunctionMapping, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -1914,6 +1917,8 @@ Returns the dynamic execution report JSON for the analysis. Requires the task to
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
  @return ApiGetDynamicExecutionReportRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) GetDynamicExecutionReport(ctx context.Context, analysisId int64) ApiGetDynamicExecutionReportRequest {
 	return ApiGetDynamicExecutionReportRequest{
@@ -1925,6 +1930,7 @@ func (a *AnalysesCoreAPIService) GetDynamicExecutionReport(ctx context.Context, 
 
 // Execute executes the request
 //  @return AnalysisReport
+// Deprecated
 func (a *AnalysesCoreAPIService) GetDynamicExecutionReportExecute(r ApiGetDynamicExecutionReportRequest) (*AnalysisReport, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -2080,6 +2086,8 @@ Returns the status of the most recent dynamic execution task for the analysis. R
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
  @return ApiGetDynamicExecutionStatusRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) GetDynamicExecutionStatus(ctx context.Context, analysisId int64) ApiGetDynamicExecutionStatusRequest {
 	return ApiGetDynamicExecutionStatusRequest{
@@ -2091,6 +2099,7 @@ func (a *AnalysesCoreAPIService) GetDynamicExecutionStatus(ctx context.Context, 
 
 // Execute executes the request
 //  @return DynamicExecutionStatusResponse
+// Deprecated
 func (a *AnalysesCoreAPIService) GetDynamicExecutionStatusExecute(r ApiGetDynamicExecutionStatusRequest) (*DynamicExecutionStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -3441,6 +3450,8 @@ Updates analysis tags. User must be the owner.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiUpdateAnalysisTagsRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) UpdateAnalysisTags(ctx context.Context, analysisId int32) ApiUpdateAnalysisTagsRequest {
 	return ApiUpdateAnalysisTagsRequest{
@@ -3452,6 +3463,7 @@ func (a *AnalysesCoreAPIService) UpdateAnalysisTags(ctx context.Context, analysi
 
 // Execute executes the request
 //  @return BaseResponseAnalysisUpdateTagsResponse
+// Deprecated
 func (a *AnalysesCoreAPIService) UpdateAnalysisTagsExecute(r ApiUpdateAnalysisTagsRequest) (*BaseResponseAnalysisUpdateTagsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch

@@ -23,6 +23,8 @@ type DisassemblyOutputBody struct {
 	FunctionId int64 `json:"function_id"`
 	GlobalVariables interface{} `json:"global_variables,omitempty"`
 	LocalVariables interface{} `json:"local_variables,omitempty"`
+	// Instruction operands that reference a pointer slot, sorted by instruction_vaddr, target_vaddr, pointed_vaddr.
+	OperandXrefs []OperandXref `json:"operand_xrefs,omitempty"`
 	Params interface{} `json:"params,omitempty"`
 	ReturnType *string `json:"return_type,omitempty"`
 	Returns bool `json:"returns"`
@@ -173,6 +175,39 @@ func (o *DisassemblyOutputBody) SetLocalVariables(v interface{}) {
 	o.LocalVariables = v
 }
 
+// GetOperandXrefs returns the OperandXrefs field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DisassemblyOutputBody) GetOperandXrefs() []OperandXref {
+	if o == nil {
+		var ret []OperandXref
+		return ret
+	}
+	return o.OperandXrefs
+}
+
+// GetOperandXrefsOk returns a tuple with the OperandXrefs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DisassemblyOutputBody) GetOperandXrefsOk() ([]OperandXref, bool) {
+	if o == nil || IsNil(o.OperandXrefs) {
+		return nil, false
+	}
+	return o.OperandXrefs, true
+}
+
+// HasOperandXrefs returns a boolean if a field has been set.
+func (o *DisassemblyOutputBody) HasOperandXrefs() bool {
+	if o != nil && !IsNil(o.OperandXrefs) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperandXrefs gets a reference to the given []OperandXref and assigns it to the OperandXrefs field.
+func (o *DisassemblyOutputBody) SetOperandXrefs(v []OperandXref) {
+	o.OperandXrefs = v
+}
+
 // GetParams returns the Params field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DisassemblyOutputBody) GetParams() interface{} {
 	if o == nil {
@@ -282,6 +317,9 @@ func (o DisassemblyOutputBody) ToMap() (map[string]interface{}, error) {
 	if o.LocalVariables != nil {
 		toSerialize["local_variables"] = o.LocalVariables
 	}
+	if o.OperandXrefs != nil {
+		toSerialize["operand_xrefs"] = o.OperandXrefs
+	}
 	if o.Params != nil {
 		toSerialize["params"] = o.Params
 	}
@@ -337,6 +375,7 @@ func (o *DisassemblyOutputBody) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "function_id")
 		delete(additionalProperties, "global_variables")
 		delete(additionalProperties, "local_variables")
+		delete(additionalProperties, "operand_xrefs")
 		delete(additionalProperties, "params")
 		delete(additionalProperties, "return_type")
 		delete(additionalProperties, "returns")
