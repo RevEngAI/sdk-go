@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **FunctionId** | **int64** |  | 
 **GlobalVariables** | Pointer to **interface{}** |  | [optional] 
 **LocalVariables** | Pointer to **interface{}** |  | [optional] 
+**OperandXrefs** | Pointer to [**[]OperandXref**](OperandXref.md) | Instruction operands that reference a pointer slot, sorted by instruction_vaddr, target_vaddr, pointed_vaddr. | [optional] 
 **Params** | Pointer to **interface{}** |  | [optional] 
 **ReturnType** | Pointer to **string** |  | [optional] 
 **Returns** | **bool** |  | 
@@ -156,6 +157,41 @@ HasLocalVariables returns a boolean if a field has been set.
 `func (o *DisassemblyOutputBody) UnsetLocalVariables()`
 
 UnsetLocalVariables ensures that no value is present for LocalVariables, not even an explicit nil
+### GetOperandXrefs
+
+`func (o *DisassemblyOutputBody) GetOperandXrefs() []OperandXref`
+
+GetOperandXrefs returns the OperandXrefs field if non-nil, zero value otherwise.
+
+### GetOperandXrefsOk
+
+`func (o *DisassemblyOutputBody) GetOperandXrefsOk() (*[]OperandXref, bool)`
+
+GetOperandXrefsOk returns a tuple with the OperandXrefs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperandXrefs
+
+`func (o *DisassemblyOutputBody) SetOperandXrefs(v []OperandXref)`
+
+SetOperandXrefs sets OperandXrefs field to given value.
+
+### HasOperandXrefs
+
+`func (o *DisassemblyOutputBody) HasOperandXrefs() bool`
+
+HasOperandXrefs returns a boolean if a field has been set.
+
+### SetOperandXrefsNil
+
+`func (o *DisassemblyOutputBody) SetOperandXrefsNil(b bool)`
+
+ SetOperandXrefsNil sets the value for OperandXrefs to be an explicit nil
+
+### UnsetOperandXrefs
+`func (o *DisassemblyOutputBody) UnsetOperandXrefs()`
+
+UnsetOperandXrefs ensures that no value is present for OperandXrefs, not even an explicit nil
 ### GetParams
 
 `func (o *DisassemblyOutputBody) GetParams() interface{}`

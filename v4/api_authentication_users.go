@@ -38,6 +38,8 @@ GetUser Get a user's public information
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @return ApiGetUserRequest
+
+Deprecated
 */
 func (a *AuthenticationUsersAPIService) GetUser(ctx context.Context, userId int32) ApiGetUserRequest {
 	return ApiGetUserRequest{
@@ -49,6 +51,7 @@ func (a *AuthenticationUsersAPIService) GetUser(ctx context.Context, userId int3
 
 // Execute executes the request
 //  @return BaseResponseGetPublicUserResponse
+// Deprecated
 func (a *AuthenticationUsersAPIService) GetUserExecute(r ApiGetUserRequest) (*BaseResponseGetPublicUserResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -161,6 +164,8 @@ GetUserActivity Get auth user activity
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetUserActivityRequest
+
+Deprecated
 */
 func (a *AuthenticationUsersAPIService) GetUserActivity(ctx context.Context) ApiGetUserActivityRequest {
 	return ApiGetUserActivityRequest{
@@ -171,6 +176,7 @@ func (a *AuthenticationUsersAPIService) GetUserActivity(ctx context.Context) Api
 
 // Execute executes the request
 //  @return BaseResponseListUserActivityResponse
+// Deprecated
 func (a *AuthenticationUsersAPIService) GetUserActivityExecute(r ApiGetUserActivityRequest) (*BaseResponseListUserActivityResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -290,6 +296,8 @@ Submits feedback about the application and forwards it to the RevEng.ai project 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSubmitUserFeedbackRequest
+
+Deprecated
 */
 func (a *AuthenticationUsersAPIService) SubmitUserFeedback(ctx context.Context) ApiSubmitUserFeedbackRequest {
 	return ApiSubmitUserFeedbackRequest{
@@ -300,6 +308,7 @@ func (a *AuthenticationUsersAPIService) SubmitUserFeedback(ctx context.Context) 
 
 // Execute executes the request
 //  @return BaseResponse
+// Deprecated
 func (a *AuthenticationUsersAPIService) SubmitUserFeedbackExecute(r ApiSubmitUserFeedbackRequest) (*BaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost

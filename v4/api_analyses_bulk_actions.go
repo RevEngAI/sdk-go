@@ -43,6 +43,8 @@ Updates analysis tags for multiple analyses. User must be the owner.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiBulkAddAnalysisTagsRequest
+
+Deprecated
 */
 func (a *AnalysesBulkActionsAPIService) BulkAddAnalysisTags(ctx context.Context) ApiBulkAddAnalysisTagsRequest {
 	return ApiBulkAddAnalysisTagsRequest{
@@ -53,6 +55,7 @@ func (a *AnalysesBulkActionsAPIService) BulkAddAnalysisTags(ctx context.Context)
 
 // Execute executes the request
 //  @return BaseResponseAnalysisBulkAddTagsResponse
+// Deprecated
 func (a *AnalysesBulkActionsAPIService) BulkAddAnalysisTagsExecute(r ApiBulkAddAnalysisTagsRequest) (*BaseResponseAnalysisBulkAddTagsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch

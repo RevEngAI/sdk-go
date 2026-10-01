@@ -39,6 +39,8 @@ DownloadZippedBinary Downloads a zipped binary with password protection
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param binaryId
  @return ApiDownloadZippedBinaryRequest
+
+Deprecated
 */
 func (a *BinariesAPIService) DownloadZippedBinary(ctx context.Context, binaryId int32) ApiDownloadZippedBinaryRequest {
 	return ApiDownloadZippedBinaryRequest{
@@ -50,6 +52,7 @@ func (a *BinariesAPIService) DownloadZippedBinary(ctx context.Context, binaryId 
 
 // Execute executes the request
 //  @return *os.File
+// Deprecated
 func (a *BinariesAPIService) DownloadZippedBinaryExecute(r ApiDownloadZippedBinaryRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -754,6 +757,8 @@ GetBinaryDetails Gets the details of a binary
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param binaryId
  @return ApiGetBinaryDetailsRequest
+
+Deprecated
 */
 func (a *BinariesAPIService) GetBinaryDetails(ctx context.Context, binaryId int32) ApiGetBinaryDetailsRequest {
 	return ApiGetBinaryDetailsRequest{
@@ -765,6 +770,7 @@ func (a *BinariesAPIService) GetBinaryDetails(ctx context.Context, binaryId int3
 
 // Execute executes the request
 //  @return BaseResponseBinaryDetailsResponse
+// Deprecated
 func (a *BinariesAPIService) GetBinaryDetailsExecute(r ApiGetBinaryDetailsRequest) (*BaseResponseBinaryDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -1007,6 +1013,8 @@ GetBinaryExternals Gets the external details of a binary
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param binaryId
  @return ApiGetBinaryExternalsRequest
+
+Deprecated
 */
 func (a *BinariesAPIService) GetBinaryExternals(ctx context.Context, binaryId int32) ApiGetBinaryExternalsRequest {
 	return ApiGetBinaryExternalsRequest{
@@ -1018,6 +1026,7 @@ func (a *BinariesAPIService) GetBinaryExternals(ctx context.Context, binaryId in
 
 // Execute executes the request
 //  @return BaseResponseBinaryExternalsResponse
+// Deprecated
 func (a *BinariesAPIService) GetBinaryExternalsExecute(r ApiGetBinaryExternalsRequest) (*BaseResponseBinaryExternalsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

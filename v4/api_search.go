@@ -101,6 +101,8 @@ Searches for a specific binary
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSearchBinariesRequest
+
+Deprecated
 */
 func (a *SearchAPIService) SearchBinaries(ctx context.Context) ApiSearchBinariesRequest {
 	return ApiSearchBinariesRequest{
@@ -111,6 +113,7 @@ func (a *SearchAPIService) SearchBinaries(ctx context.Context) ApiSearchBinaries
 
 // Execute executes the request
 //  @return BaseResponseBinarySearchResponse
+// Deprecated
 func (a *SearchAPIService) SearchBinariesExecute(r ApiSearchBinariesRequest) (*BaseResponseBinarySearchResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -349,6 +352,8 @@ Searches for a specific collection
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSearchCollectionsRequest
+
+Deprecated
 */
 func (a *SearchAPIService) SearchCollections(ctx context.Context) ApiSearchCollectionsRequest {
 	return ApiSearchCollectionsRequest{
@@ -359,6 +364,7 @@ func (a *SearchAPIService) SearchCollections(ctx context.Context) ApiSearchColle
 
 // Execute executes the request
 //  @return BaseResponseCollectionSearchResponse
+// Deprecated
 func (a *SearchAPIService) SearchCollectionsExecute(r ApiSearchCollectionsRequest) (*BaseResponseCollectionSearchResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -570,6 +576,8 @@ Searches for a specific function
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSearchFunctionsRequest
+
+Deprecated
 */
 func (a *SearchAPIService) SearchFunctions(ctx context.Context) ApiSearchFunctionsRequest {
 	return ApiSearchFunctionsRequest{
@@ -580,6 +588,7 @@ func (a *SearchAPIService) SearchFunctions(ctx context.Context) ApiSearchFunctio
 
 // Execute executes the request
 //  @return BaseResponseFunctionSearchResponse
+// Deprecated
 func (a *SearchAPIService) SearchFunctionsExecute(r ApiSearchFunctionsRequest) (*BaseResponseFunctionSearchResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -734,6 +743,8 @@ Searches for tags by there name
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSearchTagsRequest
+
+Deprecated
 */
 func (a *SearchAPIService) SearchTags(ctx context.Context) ApiSearchTagsRequest {
 	return ApiSearchTagsRequest{
@@ -744,6 +755,7 @@ func (a *SearchAPIService) SearchTags(ctx context.Context) ApiSearchTagsRequest 
 
 // Execute executes the request
 //  @return BaseResponseTagSearchResponse
+// Deprecated
 func (a *SearchAPIService) SearchTagsExecute(r ApiSearchTagsRequest) (*BaseResponseTagSearchResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
