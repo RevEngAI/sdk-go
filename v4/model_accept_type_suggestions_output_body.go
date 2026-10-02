@@ -19,7 +19,7 @@ var _ MappedNullable = &AcceptTypeSuggestionsOutputBody{}
 
 // AcceptTypeSuggestionsOutputBody struct for AcceptTypeSuggestionsOutputBody
 type AcceptTypeSuggestionsOutputBody struct {
-	// One entry per requested suggestion, in request order.
+	// One entry per requested suggestion that had a shape to store, in request order.
 	Accepted []AcceptedType `json:"accepted"`
 	// The type each requested suggestion resolved to, plus every type minted to satisfy one, ordered by data_type_id.
 	DataTypes []DataTypeEntry `json:"data_types"`

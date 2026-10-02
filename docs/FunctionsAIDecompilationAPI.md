@@ -23,6 +23,8 @@ Method | HTTP request | Description
 [**V3GetAiDecompilationRating**](FunctionsAIDecompilationAPI.md#V3GetAiDecompilationRating) | **Get** /v3/functions/{function_id}/ai-decompilation/rating | Get AI decompilation rating
 [**V3GetAiDecompilationTokens**](FunctionsAIDecompilationAPI.md#V3GetAiDecompilationTokens) | **Get** /v3/functions/{function_id}/ai-decompilation/tokens | Get AI decompilation tokens and user overrides
 [**V3GetAiDecompilationTypeSuggestions**](FunctionsAIDecompilationAPI.md#V3GetAiDecompilationTypeSuggestions) | **Get** /v3/functions/{function_id}/ai-decompilation/type-suggestions | Get AI decompilation type suggestions
+[**V3GetAiDecompilationTypeSuggestionsStatus**](FunctionsAIDecompilationAPI.md#V3GetAiDecompilationTypeSuggestionsStatus) | **Get** /v3/functions/{function_id}/ai-decompilation/type-suggestions/status | Get type suggestion workflow status
+[**V3RegenerateAiDecompilationTypeSuggestions**](FunctionsAIDecompilationAPI.md#V3RegenerateAiDecompilationTypeSuggestions) | **Post** /v3/functions/{function_id}/ai-decompilation/type-suggestions | Regenerate AI decompilation type suggestions
 [**V3UpsertAiDecompilationOverrides**](FunctionsAIDecompilationAPI.md#V3UpsertAiDecompilationOverrides) | **Patch** /v3/functions/{function_id}/ai-decompilation/overrides | Upsert variable/function name overrides
 [**V3UpsertAiDecompilationRating**](FunctionsAIDecompilationAPI.md#V3UpsertAiDecompilationRating) | **Patch** /v3/functions/{function_id}/ai-decompilation/rating | Upsert AI decompilation rating
 
@@ -30,7 +32,7 @@ Method | HTTP request | Description
 
 ## CreateAiDecompilation
 
-> CreateAIDecompOutputBody CreateAiDecompilation(ctx, functionId).Temperature(temperature).TypeSuggestions(typeSuggestions).Execute()
+> CreateAIDecompOutputBody CreateAiDecompilation(ctx, functionId).Temperature(temperature).TypeSuggestions(typeSuggestions).ApplyTypes(applyTypes).Execute()
 
 Start AI decompilation
 
@@ -52,10 +54,11 @@ func main() {
 	functionId := int64(789) // int64 | Function ID
 	temperature := float64(1.2) // float64 | LLM temperature (0.0-1.0). Overrides the server default when set. Omit or set to -1 to use the server default. (optional) (default to -1)
 	typeSuggestions := true // bool | Ask the language model to name the suggested types and their members. Set to false to skip the model call; the statically derived layouts are still computed and stored. Cannot re-enable the pass when the server has it off. (optional) (default to true)
+	applyTypes := true // bool | Store the suggested types as data types of this function's analysis, with a source_type of AI_DECOMP. Set to false to leave them as suggestions only. Cannot re-enable the pass when the server has it off. (optional) (default to true)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsAIDecompilationAPI.CreateAiDecompilation(context.Background(), functionId).Temperature(temperature).TypeSuggestions(typeSuggestions).Execute()
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.CreateAiDecompilation(context.Background(), functionId).Temperature(temperature).TypeSuggestions(typeSuggestions).ApplyTypes(applyTypes).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.CreateAiDecompilation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -83,6 +86,7 @@ Name | Type | Description  | Notes
 
  **temperature** | **float64** | LLM temperature (0.0-1.0). Overrides the server default when set. Omit or set to -1 to use the server default. | [default to -1]
  **typeSuggestions** | **bool** | Ask the language model to name the suggested types and their members. Set to false to skip the model call; the statically derived layouts are still computed and stored. Cannot re-enable the pass when the server has it off. | [default to true]
+ **applyTypes** | **bool** | Store the suggested types as data types of this function&#39;s analysis, with a source_type of AI_DECOMP. Set to false to leave them as suggestions only. Cannot re-enable the pass when the server has it off. | [default to true]
 
 ### Return type
 
@@ -1352,6 +1356,148 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TypeSuggestionsData**](TypeSuggestionsData.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetAiDecompilationTypeSuggestionsStatus
+
+> WorkflowProgress V3GetAiDecompilationTypeSuggestionsStatus(ctx, functionId).Execute()
+
+Get type suggestion workflow status
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.V3GetAiDecompilationTypeSuggestionsStatus(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.V3GetAiDecompilationTypeSuggestionsStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetAiDecompilationTypeSuggestionsStatus`: WorkflowProgress
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.V3GetAiDecompilationTypeSuggestionsStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetAiDecompilationTypeSuggestionsStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**WorkflowProgress**](WorkflowProgress.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3RegenerateAiDecompilationTypeSuggestions
+
+> RegenerateOutputBody V3RegenerateAiDecompilationTypeSuggestions(ctx, functionId).ApplyTypes(applyTypes).Execute()
+
+Regenerate AI decompilation type suggestions
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+	applyTypes := true // bool | Store the regenerated types as data types of this function's analysis, with a source_type of AI_DECOMP. Set to false to leave them as suggestions only. Cannot re-enable the pass when the server has it off. (optional) (default to true)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.V3RegenerateAiDecompilationTypeSuggestions(context.Background(), functionId).ApplyTypes(applyTypes).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.V3RegenerateAiDecompilationTypeSuggestions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3RegenerateAiDecompilationTypeSuggestions`: RegenerateOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsAIDecompilationAPI.V3RegenerateAiDecompilationTypeSuggestions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3RegenerateAiDecompilationTypeSuggestionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **applyTypes** | **bool** | Store the regenerated types as data types of this function&#39;s analysis, with a source_type of AI_DECOMP. Set to false to leave them as suggestions only. Cannot re-enable the pass when the server has it off. | [default to true]
+
+### Return type
+
+[**RegenerateOutputBody**](RegenerateOutputBody.md)
 
 ### Authorization
 
