@@ -19,13 +19,15 @@ var _ MappedNullable = &SuggestedTypeView{}
 
 // SuggestedTypeView struct for SuggestedTypeView
 type SuggestedTypeView struct {
-	// Existing data type the members were accessed through. Null when nothing resolved to a row; never minted for a suggestion.
+	// The type this suggestion became: a newly minted data type holding its name and members. Once set, the suggestion's entities resolve through this id rather than data_type_id. Null when it has not been applied, either because the pass is off or because nothing gave the suggestion a shape to store.
+	AppliedDataTypeId *int64 `json:"applied_data_type_id,omitempty"`
+	// The type this suggestion is about: the existing data type the members were accessed through. Never modified by applying a suggestion. Null when nothing resolved to a row, which is what makes the suggestion a proposal.
 	DataTypeId *int64 `json:"data_type_id,omitempty"`
 	// Gaps between consecutive placed members, in offset order.
 	Holes []SuggestedHole `json:"holes"`
 	// Highest byte_offset+byte_size across the members. A lower bound on the type's size, not its size.
 	ImpliedSize *int64 `json:"implied_size,omitempty"`
-	// Identity of the suggestion: index:<data_type_id> where the access named a row, else token:<type_token>.
+	// Identity of the suggestion: index:<data_type_id> where the access named a row, type:<type_token> for a type with no observed members, else token:<type_token>. Do not infer data_type_id from the prefix: a type: key may carry one too.
 	Key string `json:"key"`
 	// Members in offset order, unplaced ones last.
 	Members []SuggestedMemberView `json:"members"`
@@ -59,6 +61,38 @@ func NewSuggestedTypeView(holes []SuggestedHole, key string, members []Suggested
 func NewSuggestedTypeViewWithDefaults() *SuggestedTypeView {
 	this := SuggestedTypeView{}
 	return &this
+}
+
+// GetAppliedDataTypeId returns the AppliedDataTypeId field value if set, zero value otherwise.
+func (o *SuggestedTypeView) GetAppliedDataTypeId() int64 {
+	if o == nil || IsNil(o.AppliedDataTypeId) {
+		var ret int64
+		return ret
+	}
+	return *o.AppliedDataTypeId
+}
+
+// GetAppliedDataTypeIdOk returns a tuple with the AppliedDataTypeId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SuggestedTypeView) GetAppliedDataTypeIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.AppliedDataTypeId) {
+		return nil, false
+	}
+	return o.AppliedDataTypeId, true
+}
+
+// HasAppliedDataTypeId returns a boolean if a field has been set.
+func (o *SuggestedTypeView) HasAppliedDataTypeId() bool {
+	if o != nil && !IsNil(o.AppliedDataTypeId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAppliedDataTypeId gets a reference to the given int64 and assigns it to the AppliedDataTypeId field.
+func (o *SuggestedTypeView) SetAppliedDataTypeId(v int64) {
+	o.AppliedDataTypeId = &v
 }
 
 // GetDataTypeId returns the DataTypeId field value if set, zero value otherwise.
@@ -299,6 +333,9 @@ func (o SuggestedTypeView) MarshalJSON() ([]byte, error) {
 
 func (o SuggestedTypeView) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AppliedDataTypeId) {
+		toSerialize["applied_data_type_id"] = o.AppliedDataTypeId
+	}
 	if !IsNil(o.DataTypeId) {
 		toSerialize["data_type_id"] = o.DataTypeId
 	}
@@ -365,6 +402,7 @@ func (o *SuggestedTypeView) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applied_data_type_id")
 		delete(additionalProperties, "data_type_id")
 		delete(additionalProperties, "holes")
 		delete(additionalProperties, "implied_size")

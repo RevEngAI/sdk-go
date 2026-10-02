@@ -26,6 +26,7 @@ type ServerSentEventsInner1 struct {
 	EventRenameApplied *EventRenameApplied
 	EventSourceDelta *EventSourceDelta
 	EventSourceReset *EventSourceReset
+	EventTypesApplied *EventTypesApplied
 	EventTypesSuggested *EventTypesSuggested
 	EventWarning *EventWarning
 }
@@ -90,6 +91,13 @@ func EventSourceDeltaAsServerSentEventsInner1(v *EventSourceDelta) ServerSentEve
 func EventSourceResetAsServerSentEventsInner1(v *EventSourceReset) ServerSentEventsInner1 {
 	return ServerSentEventsInner1{
 		EventSourceReset: v,
+	}
+}
+
+// EventTypesAppliedAsServerSentEventsInner1 is a convenience function that returns EventTypesApplied wrapped in ServerSentEventsInner1
+func EventTypesAppliedAsServerSentEventsInner1(v *EventTypesApplied) ServerSentEventsInner1 {
+	return ServerSentEventsInner1{
+		EventTypesApplied: v,
 	}
 }
 
@@ -265,6 +273,23 @@ func (dst *ServerSentEventsInner1) UnmarshalJSON(data []byte) error {
 		dst.EventSourceReset = nil
 	}
 
+	// try to unmarshal data into EventTypesApplied
+	err = newStrictDecoder(data).Decode(&dst.EventTypesApplied)
+	if err == nil {
+		jsonEventTypesApplied, _ := json.Marshal(dst.EventTypesApplied)
+		if string(jsonEventTypesApplied) == "{}" { // empty struct
+			dst.EventTypesApplied = nil
+		} else {
+			if err = validator.Validate(dst.EventTypesApplied); err != nil {
+				dst.EventTypesApplied = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.EventTypesApplied = nil
+	}
+
 	// try to unmarshal data into EventTypesSuggested
 	err = newStrictDecoder(data).Decode(&dst.EventTypesSuggested)
 	if err == nil {
@@ -310,6 +335,7 @@ func (dst *ServerSentEventsInner1) UnmarshalJSON(data []byte) error {
 		dst.EventRenameApplied = nil
 		dst.EventSourceDelta = nil
 		dst.EventSourceReset = nil
+		dst.EventTypesApplied = nil
 		dst.EventTypesSuggested = nil
 		dst.EventWarning = nil
 
@@ -357,6 +383,10 @@ func (src ServerSentEventsInner1) MarshalJSON() ([]byte, error) {
 
 	if src.EventSourceReset != nil {
 		return json.Marshal(&src.EventSourceReset)
+	}
+
+	if src.EventTypesApplied != nil {
+		return json.Marshal(&src.EventTypesApplied)
 	}
 
 	if src.EventTypesSuggested != nil {
@@ -411,6 +441,10 @@ func (obj *ServerSentEventsInner1) GetActualInstance() (interface{}) {
 		return obj.EventSourceReset
 	}
 
+	if obj.EventTypesApplied != nil {
+		return obj.EventTypesApplied
+	}
+
 	if obj.EventTypesSuggested != nil {
 		return obj.EventTypesSuggested
 	}
@@ -459,6 +493,10 @@ func (obj ServerSentEventsInner1) GetActualInstanceValue() (interface{}) {
 
 	if obj.EventSourceReset != nil {
 		return *obj.EventSourceReset
+	}
+
+	if obj.EventTypesApplied != nil {
+		return *obj.EventTypesApplied
 	}
 
 	if obj.EventTypesSuggested != nil {
