@@ -2956,6 +2956,8 @@ Re-queues an already uploaded analysis
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId
  @return ApiRequeueAnalysisRequest
+
+Deprecated
 */
 func (a *AnalysesCoreAPIService) RequeueAnalysis(ctx context.Context, analysisId int32) ApiRequeueAnalysisRequest {
 	return ApiRequeueAnalysisRequest{
@@ -2967,6 +2969,7 @@ func (a *AnalysesCoreAPIService) RequeueAnalysis(ctx context.Context, analysisId
 
 // Execute executes the request
 //  @return BaseResponseCreated
+// Deprecated
 func (a *AnalysesCoreAPIService) RequeueAnalysisExecute(r ApiRequeueAnalysisRequest) (*BaseResponseCreated, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
