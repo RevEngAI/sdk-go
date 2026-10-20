@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EvidenceKind** | Pointer to **string** |  | [optional] [default to "decompiler_summary"]
-**Kind** | Pointer to **string** |  | [optional] [default to "model_interpretation"]
-**Effect** | [**EvidenceEffect**](EvidenceEffect.md) |  | 
-**Strength** | Pointer to **string** |  | [optional] [default to "indirect"]
-**Summaries** | [**[]DecompilerSummary**](DecompilerSummary.md) |  | 
+**Effect** | **string** | Whether the evidence supports or refutes the finding. | 
+**EvidenceKind** | **string** | Kind of evidence. | 
+**Kind** | **string** | How the evidence was derived. | 
+**Strength** | **string** | How directly the evidence bears on the finding. | 
+**Summaries** | [**[]ReportCodeSummary**](ReportCodeSummary.md) | Summaries of the decompiled code. | 
 
 ## Methods
 
 ### NewDecompilerSummaryEvidence
 
-`func NewDecompilerSummaryEvidence(effect EvidenceEffect, summaries []DecompilerSummary, ) *DecompilerSummaryEvidence`
+`func NewDecompilerSummaryEvidence(effect string, evidenceKind string, kind string, strength string, summaries []ReportCodeSummary, ) *DecompilerSummaryEvidence`
 
 NewDecompilerSummaryEvidence instantiates a new DecompilerSummaryEvidence object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +28,26 @@ will change when the set of required properties is changed
 NewDecompilerSummaryEvidenceWithDefaults instantiates a new DecompilerSummaryEvidence object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetEffect
+
+`func (o *DecompilerSummaryEvidence) GetEffect() string`
+
+GetEffect returns the Effect field if non-nil, zero value otherwise.
+
+### GetEffectOk
+
+`func (o *DecompilerSummaryEvidence) GetEffectOk() (*string, bool)`
+
+GetEffectOk returns a tuple with the Effect field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEffect
+
+`func (o *DecompilerSummaryEvidence) SetEffect(v string)`
+
+SetEffect sets Effect field to given value.
+
 
 ### GetEvidenceKind
 
@@ -48,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetEvidenceKind sets EvidenceKind field to given value.
 
-### HasEvidenceKind
-
-`func (o *DecompilerSummaryEvidence) HasEvidenceKind() bool`
-
-HasEvidenceKind returns a boolean if a field has been set.
 
 ### GetKind
 
@@ -72,31 +87,6 @@ and a boolean to check if the value has been set.
 `func (o *DecompilerSummaryEvidence) SetKind(v string)`
 
 SetKind sets Kind field to given value.
-
-### HasKind
-
-`func (o *DecompilerSummaryEvidence) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
-
-### GetEffect
-
-`func (o *DecompilerSummaryEvidence) GetEffect() EvidenceEffect`
-
-GetEffect returns the Effect field if non-nil, zero value otherwise.
-
-### GetEffectOk
-
-`func (o *DecompilerSummaryEvidence) GetEffectOk() (*EvidenceEffect, bool)`
-
-GetEffectOk returns a tuple with the Effect field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEffect
-
-`func (o *DecompilerSummaryEvidence) SetEffect(v EvidenceEffect)`
-
-SetEffect sets Effect field to given value.
 
 
 ### GetStrength
@@ -118,28 +108,23 @@ and a boolean to check if the value has been set.
 
 SetStrength sets Strength field to given value.
 
-### HasStrength
-
-`func (o *DecompilerSummaryEvidence) HasStrength() bool`
-
-HasStrength returns a boolean if a field has been set.
 
 ### GetSummaries
 
-`func (o *DecompilerSummaryEvidence) GetSummaries() []DecompilerSummary`
+`func (o *DecompilerSummaryEvidence) GetSummaries() []ReportCodeSummary`
 
 GetSummaries returns the Summaries field if non-nil, zero value otherwise.
 
 ### GetSummariesOk
 
-`func (o *DecompilerSummaryEvidence) GetSummariesOk() (*[]DecompilerSummary, bool)`
+`func (o *DecompilerSummaryEvidence) GetSummariesOk() (*[]ReportCodeSummary, bool)`
 
 GetSummariesOk returns a tuple with the Summaries field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSummaries
 
-`func (o *DecompilerSummaryEvidence) SetSummaries(v []DecompilerSummary)`
+`func (o *DecompilerSummaryEvidence) SetSummaries(v []ReportCodeSummary)`
 
 SetSummaries sets Summaries field to given value.
 

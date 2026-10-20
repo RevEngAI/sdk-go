@@ -29,6 +29,7 @@ Method | HTTP request | Description
 [**StartFunctionsMatching**](FunctionsCoreAPI.md#StartFunctionsMatching) | **Post** /v3/functions/matches | Start function matching for an explicit set of functions
 [**V3CanonicalizeFunctionNames**](FunctionsCoreAPI.md#V3CanonicalizeFunctionNames) | **Post** /v3/functions/canonical-names | Canonicalize a batch of function names
 [**V3GetAnalysisFuncMaps**](FunctionsCoreAPI.md#V3GetAnalysisFuncMaps) | **Get** /v3/analyses/{analysis_id}/func-maps | Get function ID/address maps for an analysis
+[**V3ListFunctionGlobals**](FunctionsCoreAPI.md#V3ListFunctionGlobals) | **Get** /v3/functions/{function_id}/globals | List the global variables a function references.
 [**V3SearchFunctions**](FunctionsCoreAPI.md#V3SearchFunctions) | **Get** /v3/functions | Search functions
 
 
@@ -1779,6 +1780,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetFunctionMapsOutputBody**](GetFunctionMapsOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3ListFunctionGlobals
+
+> ListFunctionGlobalsOutputBody V3ListFunctionGlobals(ctx, functionId).Execute()
+
+List the global variables a function references.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsCoreAPI.V3ListFunctionGlobals(context.Background(), functionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.V3ListFunctionGlobals``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3ListFunctionGlobals`: ListFunctionGlobalsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.V3ListFunctionGlobals`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3ListFunctionGlobalsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ListFunctionGlobalsOutputBody**](ListFunctionGlobalsOutputBody.md)
 
 ### Authorization
 

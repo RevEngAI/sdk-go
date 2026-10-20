@@ -28,7 +28,7 @@ type OperationDynamicExecutionMetadataDynamicExecutionResult struct {
 	// API resource name.
 	Name string `json:"name"`
 	// Result, set only when done is true and the operation succeeded.
-	Response map[string]interface{} `json:"response,omitempty"`
+	Response *DynamicExecutionResult `json:"response,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -166,19 +166,19 @@ func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) SetName(v stri
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) GetResponse() map[string]interface{} {
+func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) GetResponse() DynamicExecutionResult {
 	if o == nil || IsNil(o.Response) {
-		var ret map[string]interface{}
+		var ret DynamicExecutionResult
 		return ret
 	}
-	return o.Response
+	return *o.Response
 }
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) GetResponseOk() (map[string]interface{}, bool) {
+func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) GetResponseOk() (*DynamicExecutionResult, bool) {
 	if o == nil || IsNil(o.Response) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Response, true
 }
@@ -192,9 +192,9 @@ func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) HasResponse() 
 	return false
 }
 
-// SetResponse gets a reference to the given map[string]interface{} and assigns it to the Response field.
-func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) SetResponse(v map[string]interface{}) {
-	o.Response = v
+// SetResponse gets a reference to the given DynamicExecutionResult and assigns it to the Response field.
+func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) SetResponse(v DynamicExecutionResult) {
+	o.Response = &v
 }
 
 func (o OperationDynamicExecutionMetadataDynamicExecutionResult) MarshalJSON() ([]byte, error) {

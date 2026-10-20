@@ -17,13 +17,18 @@ import (
 // checks if the StringMatchEvidence type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StringMatchEvidence{}
 
-// StringMatchEvidence String matches without demonstrated semantic use.
+// StringMatchEvidence struct for StringMatchEvidence
 type StringMatchEvidence struct {
-	EvidenceKind *string `json:"evidence_kind,omitempty"`
-	Kind *string `json:"kind,omitempty"`
-	Effect EvidenceEffect `json:"effect"`
-	Strength *string `json:"strength,omitempty"`
-	Strings []StringMatch `json:"strings"`
+	// Whether the evidence supports or refutes the finding.
+	Effect string `json:"effect"`
+	// Kind of evidence.
+	EvidenceKind string `json:"evidence_kind"`
+	// How the evidence was derived.
+	Kind string `json:"kind"`
+	// How directly the evidence bears on the finding.
+	Strength string `json:"strength"`
+	// The matched strings.
+	Strings []ReportStringMatch `json:"strings"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,15 +38,12 @@ type _StringMatchEvidence StringMatchEvidence
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStringMatchEvidence(effect EvidenceEffect, strings []StringMatch) *StringMatchEvidence {
+func NewStringMatchEvidence(effect string, evidenceKind string, kind string, strength string, strings []ReportStringMatch) *StringMatchEvidence {
 	this := StringMatchEvidence{}
-	var evidenceKind string = "string_match"
-	this.EvidenceKind = &evidenceKind
-	var kind string = "deterministic_derivation"
-	this.Kind = &kind
 	this.Effect = effect
-	var strength string = "indirect"
-	this.Strength = &strength
+	this.EvidenceKind = evidenceKind
+	this.Kind = kind
+	this.Strength = strength
 	this.Strings = strings
 	return &this
 }
@@ -51,83 +53,13 @@ func NewStringMatchEvidence(effect EvidenceEffect, strings []StringMatch) *Strin
 // but it doesn't guarantee that properties required by API are set
 func NewStringMatchEvidenceWithDefaults() *StringMatchEvidence {
 	this := StringMatchEvidence{}
-	var evidenceKind string = "string_match"
-	this.EvidenceKind = &evidenceKind
-	var kind string = "deterministic_derivation"
-	this.Kind = &kind
-	var strength string = "indirect"
-	this.Strength = &strength
 	return &this
 }
 
-// GetEvidenceKind returns the EvidenceKind field value if set, zero value otherwise.
-func (o *StringMatchEvidence) GetEvidenceKind() string {
-	if o == nil || IsNil(o.EvidenceKind) {
-		var ret string
-		return ret
-	}
-	return *o.EvidenceKind
-}
-
-// GetEvidenceKindOk returns a tuple with the EvidenceKind field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StringMatchEvidence) GetEvidenceKindOk() (*string, bool) {
-	if o == nil || IsNil(o.EvidenceKind) {
-		return nil, false
-	}
-	return o.EvidenceKind, true
-}
-
-// HasEvidenceKind returns a boolean if a field has been set.
-func (o *StringMatchEvidence) HasEvidenceKind() bool {
-	if o != nil && !IsNil(o.EvidenceKind) {
-		return true
-	}
-
-	return false
-}
-
-// SetEvidenceKind gets a reference to the given string and assigns it to the EvidenceKind field.
-func (o *StringMatchEvidence) SetEvidenceKind(v string) {
-	o.EvidenceKind = &v
-}
-
-// GetKind returns the Kind field value if set, zero value otherwise.
-func (o *StringMatchEvidence) GetKind() string {
-	if o == nil || IsNil(o.Kind) {
-		var ret string
-		return ret
-	}
-	return *o.Kind
-}
-
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StringMatchEvidence) GetKindOk() (*string, bool) {
-	if o == nil || IsNil(o.Kind) {
-		return nil, false
-	}
-	return o.Kind, true
-}
-
-// HasKind returns a boolean if a field has been set.
-func (o *StringMatchEvidence) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *StringMatchEvidence) SetKind(v string) {
-	o.Kind = &v
-}
-
 // GetEffect returns the Effect field value
-func (o *StringMatchEvidence) GetEffect() EvidenceEffect {
+func (o *StringMatchEvidence) GetEffect() string {
 	if o == nil {
-		var ret EvidenceEffect
+		var ret string
 		return ret
 	}
 
@@ -136,7 +68,7 @@ func (o *StringMatchEvidence) GetEffect() EvidenceEffect {
 
 // GetEffectOk returns a tuple with the Effect field value
 // and a boolean to check if the value has been set.
-func (o *StringMatchEvidence) GetEffectOk() (*EvidenceEffect, bool) {
+func (o *StringMatchEvidence) GetEffectOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -144,46 +76,86 @@ func (o *StringMatchEvidence) GetEffectOk() (*EvidenceEffect, bool) {
 }
 
 // SetEffect sets field value
-func (o *StringMatchEvidence) SetEffect(v EvidenceEffect) {
+func (o *StringMatchEvidence) SetEffect(v string) {
 	o.Effect = v
 }
 
-// GetStrength returns the Strength field value if set, zero value otherwise.
-func (o *StringMatchEvidence) GetStrength() string {
-	if o == nil || IsNil(o.Strength) {
+// GetEvidenceKind returns the EvidenceKind field value
+func (o *StringMatchEvidence) GetEvidenceKind() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Strength
+
+	return o.EvidenceKind
 }
 
-// GetStrengthOk returns a tuple with the Strength field value if set, nil otherwise
+// GetEvidenceKindOk returns a tuple with the EvidenceKind field value
 // and a boolean to check if the value has been set.
-func (o *StringMatchEvidence) GetStrengthOk() (*string, bool) {
-	if o == nil || IsNil(o.Strength) {
+func (o *StringMatchEvidence) GetEvidenceKindOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Strength, true
+	return &o.EvidenceKind, true
 }
 
-// HasStrength returns a boolean if a field has been set.
-func (o *StringMatchEvidence) HasStrength() bool {
-	if o != nil && !IsNil(o.Strength) {
-		return true
+// SetEvidenceKind sets field value
+func (o *StringMatchEvidence) SetEvidenceKind(v string) {
+	o.EvidenceKind = v
+}
+
+// GetKind returns the Kind field value
+func (o *StringMatchEvidence) GetKind() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	return false
+	return o.Kind
 }
 
-// SetStrength gets a reference to the given string and assigns it to the Strength field.
+// GetKindOk returns a tuple with the Kind field value
+// and a boolean to check if the value has been set.
+func (o *StringMatchEvidence) GetKindOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Kind, true
+}
+
+// SetKind sets field value
+func (o *StringMatchEvidence) SetKind(v string) {
+	o.Kind = v
+}
+
+// GetStrength returns the Strength field value
+func (o *StringMatchEvidence) GetStrength() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Strength
+}
+
+// GetStrengthOk returns a tuple with the Strength field value
+// and a boolean to check if the value has been set.
+func (o *StringMatchEvidence) GetStrengthOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Strength, true
+}
+
+// SetStrength sets field value
 func (o *StringMatchEvidence) SetStrength(v string) {
-	o.Strength = &v
+	o.Strength = v
 }
 
 // GetStrings returns the Strings field value
-func (o *StringMatchEvidence) GetStrings() []StringMatch {
+func (o *StringMatchEvidence) GetStrings() []ReportStringMatch {
 	if o == nil {
-		var ret []StringMatch
+		var ret []ReportStringMatch
 		return ret
 	}
 
@@ -192,7 +164,7 @@ func (o *StringMatchEvidence) GetStrings() []StringMatch {
 
 // GetStringsOk returns a tuple with the Strings field value
 // and a boolean to check if the value has been set.
-func (o *StringMatchEvidence) GetStringsOk() ([]StringMatch, bool) {
+func (o *StringMatchEvidence) GetStringsOk() ([]ReportStringMatch, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -200,7 +172,7 @@ func (o *StringMatchEvidence) GetStringsOk() ([]StringMatch, bool) {
 }
 
 // SetStrings sets field value
-func (o *StringMatchEvidence) SetStrings(v []StringMatch) {
+func (o *StringMatchEvidence) SetStrings(v []ReportStringMatch) {
 	o.Strings = v
 }
 
@@ -214,16 +186,10 @@ func (o StringMatchEvidence) MarshalJSON() ([]byte, error) {
 
 func (o StringMatchEvidence) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EvidenceKind) {
-		toSerialize["evidence_kind"] = o.EvidenceKind
-	}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
 	toSerialize["effect"] = o.Effect
-	if !IsNil(o.Strength) {
-		toSerialize["strength"] = o.Strength
-	}
+	toSerialize["evidence_kind"] = o.EvidenceKind
+	toSerialize["kind"] = o.Kind
+	toSerialize["strength"] = o.Strength
 	toSerialize["strings"] = o.Strings
 
 	for key, value := range o.AdditionalProperties {
@@ -239,6 +205,9 @@ func (o *StringMatchEvidence) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"effect",
+		"evidence_kind",
+		"kind",
+		"strength",
 		"strings",
 	}
 
@@ -269,9 +238,9 @@ func (o *StringMatchEvidence) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "effect")
 		delete(additionalProperties, "evidence_kind")
 		delete(additionalProperties, "kind")
-		delete(additionalProperties, "effect")
 		delete(additionalProperties, "strength")
 		delete(additionalProperties, "strings")
 		o.AdditionalProperties = additionalProperties

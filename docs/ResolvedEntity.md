@@ -25,16 +25,18 @@ Name | Type | Description | Notes
 **SuggestionConfidence** | **NullableString** |  | 
 **Token** | **NullableString** |  | 
 **TypeIndex** | **NullableInt64** |  | 
+**TypeSource** | **NullableString** |  | 
 **Vaddr** | **NullableInt64** |  | 
 **Value** | **NullableString** |  | 
 **ValueConfidence** | **NullableString** |  | 
+**ValueKind** | **NullableString** |  | 
 **ValueType** | **NullableString** |  | 
 
 ## Methods
 
 ### NewResolvedEntity
 
-`func NewResolvedEntity(addrToken NullableString, allAddrTokens []string, bitOffset NullableInt64, byteOffset NullableInt64, byteSize NullableInt64, count int64, dataTypeIndex NullableInt64, kind NullableString, name NullableString, nameSource string, needsNaming bool, provenance NullableString, resolvedName NullableString, suggestedType NullableString, suggestionConfidence NullableString, token NullableString, typeIndex NullableInt64, vaddr NullableInt64, value NullableString, valueConfidence NullableString, valueType NullableString, ) *ResolvedEntity`
+`func NewResolvedEntity(addrToken NullableString, allAddrTokens []string, bitOffset NullableInt64, byteOffset NullableInt64, byteSize NullableInt64, count int64, dataTypeIndex NullableInt64, kind NullableString, name NullableString, nameSource string, needsNaming bool, provenance NullableString, resolvedName NullableString, suggestedType NullableString, suggestionConfidence NullableString, token NullableString, typeIndex NullableInt64, typeSource NullableString, vaddr NullableInt64, value NullableString, valueConfidence NullableString, valueKind NullableString, valueType NullableString, ) *ResolvedEntity`
 
 NewResolvedEntity instantiates a new ResolvedEntity object
 This constructor will assign default values to properties that have it defined,
@@ -639,6 +641,36 @@ SetTypeIndex sets TypeIndex field to given value.
 `func (o *ResolvedEntity) UnsetTypeIndex()`
 
 UnsetTypeIndex ensures that no value is present for TypeIndex, not even an explicit nil
+### GetTypeSource
+
+`func (o *ResolvedEntity) GetTypeSource() string`
+
+GetTypeSource returns the TypeSource field if non-nil, zero value otherwise.
+
+### GetTypeSourceOk
+
+`func (o *ResolvedEntity) GetTypeSourceOk() (*string, bool)`
+
+GetTypeSourceOk returns a tuple with the TypeSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTypeSource
+
+`func (o *ResolvedEntity) SetTypeSource(v string)`
+
+SetTypeSource sets TypeSource field to given value.
+
+
+### SetTypeSourceNil
+
+`func (o *ResolvedEntity) SetTypeSourceNil(b bool)`
+
+ SetTypeSourceNil sets the value for TypeSource to be an explicit nil
+
+### UnsetTypeSource
+`func (o *ResolvedEntity) UnsetTypeSource()`
+
+UnsetTypeSource ensures that no value is present for TypeSource, not even an explicit nil
 ### GetVaddr
 
 `func (o *ResolvedEntity) GetVaddr() int64`
@@ -729,6 +761,36 @@ SetValueConfidence sets ValueConfidence field to given value.
 `func (o *ResolvedEntity) UnsetValueConfidence()`
 
 UnsetValueConfidence ensures that no value is present for ValueConfidence, not even an explicit nil
+### GetValueKind
+
+`func (o *ResolvedEntity) GetValueKind() string`
+
+GetValueKind returns the ValueKind field if non-nil, zero value otherwise.
+
+### GetValueKindOk
+
+`func (o *ResolvedEntity) GetValueKindOk() (*string, bool)`
+
+GetValueKindOk returns a tuple with the ValueKind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValueKind
+
+`func (o *ResolvedEntity) SetValueKind(v string)`
+
+SetValueKind sets ValueKind field to given value.
+
+
+### SetValueKindNil
+
+`func (o *ResolvedEntity) SetValueKindNil(b bool)`
+
+ SetValueKindNil sets the value for ValueKind to be an explicit nil
+
+### UnsetValueKind
+`func (o *ResolvedEntity) UnsetValueKind()`
+
+UnsetValueKind ensures that no value is present for ValueKind, not even an explicit nil
 ### GetValueType
 
 `func (o *ResolvedEntity) GetValueType() string`

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **DetectedArchitecture** | **string** | Detected instruction-set architecture; empty when unavailable | 
 **DetectedBinaryFormat** | **string** | Detected binary container format; empty when unavailable | 
 **DetectedBinaryType** | **string** | Detected operating-system platform; empty when unavailable | 
+**DetectedLanguage** | **string** | Detected source language; empty when unavailable | 
 **FunctionCount** | **int64** | Number of functions in the binary | 
 **IsAdvanced** | **bool** | True when the analysis was run in advanced mode | 
 **IsOwner** | **bool** | True when the caller is the analysis owner | 
@@ -34,7 +35,7 @@ Name | Type | Description | Notes
 
 ### NewAnalysisBasicInfoOutputBody
 
-`func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, binaryUuid string, creation time.Time, debug bool, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, modelUpgradeAvailable bool, ownerUsername string, sha256Hash string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, teamId int64, ) *AnalysisBasicInfoOutputBody`
+`func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, binaryUuid string, creation time.Time, debug bool, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, detectedLanguage string, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, modelUpgradeAvailable bool, ownerUsername string, sha256Hash string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, teamId int64, ) *AnalysisBasicInfoOutputBody`
 
 NewAnalysisBasicInfoOutputBody instantiates a new AnalysisBasicInfoOutputBody object
 This constructor will assign default values to properties that have it defined,
@@ -277,6 +278,26 @@ and a boolean to check if the value has been set.
 `func (o *AnalysisBasicInfoOutputBody) SetDetectedBinaryType(v string)`
 
 SetDetectedBinaryType sets DetectedBinaryType field to given value.
+
+
+### GetDetectedLanguage
+
+`func (o *AnalysisBasicInfoOutputBody) GetDetectedLanguage() string`
+
+GetDetectedLanguage returns the DetectedLanguage field if non-nil, zero value otherwise.
+
+### GetDetectedLanguageOk
+
+`func (o *AnalysisBasicInfoOutputBody) GetDetectedLanguageOk() (*string, bool)`
+
+GetDetectedLanguageOk returns a tuple with the DetectedLanguage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetectedLanguage
+
+`func (o *AnalysisBasicInfoOutputBody) SetDetectedLanguage(v string)`
+
+SetDetectedLanguage sets DetectedLanguage field to given value.
 
 
 ### GetFunctionCount

@@ -17,13 +17,18 @@ import (
 // checks if the KnownConstantEvidence type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &KnownConstantEvidence{}
 
-// KnownConstantEvidence A known constant whose semantic use has not been demonstrated.
+// KnownConstantEvidence struct for KnownConstantEvidence
 type KnownConstantEvidence struct {
-	EvidenceKind *string `json:"evidence_kind,omitempty"`
-	Kind *string `json:"kind,omitempty"`
-	Effect EvidenceEffect `json:"effect"`
-	Strength *string `json:"strength,omitempty"`
-	Values []BytesConstant `json:"values"`
+	// Whether the evidence supports or refutes the finding.
+	Effect string `json:"effect"`
+	// Kind of evidence.
+	EvidenceKind string `json:"evidence_kind"`
+	// How the evidence was derived.
+	Kind string `json:"kind"`
+	// How directly the evidence bears on the finding.
+	Strength string `json:"strength"`
+	// The well-known constants found in the binary.
+	Values []ReportBytesConstant `json:"values"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,15 +38,12 @@ type _KnownConstantEvidence KnownConstantEvidence
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKnownConstantEvidence(effect EvidenceEffect, values []BytesConstant) *KnownConstantEvidence {
+func NewKnownConstantEvidence(effect string, evidenceKind string, kind string, strength string, values []ReportBytesConstant) *KnownConstantEvidence {
 	this := KnownConstantEvidence{}
-	var evidenceKind string = "known_constant"
-	this.EvidenceKind = &evidenceKind
-	var kind string = "deterministic_derivation"
-	this.Kind = &kind
 	this.Effect = effect
-	var strength string = "indirect"
-	this.Strength = &strength
+	this.EvidenceKind = evidenceKind
+	this.Kind = kind
+	this.Strength = strength
 	this.Values = values
 	return &this
 }
@@ -51,83 +53,13 @@ func NewKnownConstantEvidence(effect EvidenceEffect, values []BytesConstant) *Kn
 // but it doesn't guarantee that properties required by API are set
 func NewKnownConstantEvidenceWithDefaults() *KnownConstantEvidence {
 	this := KnownConstantEvidence{}
-	var evidenceKind string = "known_constant"
-	this.EvidenceKind = &evidenceKind
-	var kind string = "deterministic_derivation"
-	this.Kind = &kind
-	var strength string = "indirect"
-	this.Strength = &strength
 	return &this
 }
 
-// GetEvidenceKind returns the EvidenceKind field value if set, zero value otherwise.
-func (o *KnownConstantEvidence) GetEvidenceKind() string {
-	if o == nil || IsNil(o.EvidenceKind) {
-		var ret string
-		return ret
-	}
-	return *o.EvidenceKind
-}
-
-// GetEvidenceKindOk returns a tuple with the EvidenceKind field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KnownConstantEvidence) GetEvidenceKindOk() (*string, bool) {
-	if o == nil || IsNil(o.EvidenceKind) {
-		return nil, false
-	}
-	return o.EvidenceKind, true
-}
-
-// HasEvidenceKind returns a boolean if a field has been set.
-func (o *KnownConstantEvidence) HasEvidenceKind() bool {
-	if o != nil && !IsNil(o.EvidenceKind) {
-		return true
-	}
-
-	return false
-}
-
-// SetEvidenceKind gets a reference to the given string and assigns it to the EvidenceKind field.
-func (o *KnownConstantEvidence) SetEvidenceKind(v string) {
-	o.EvidenceKind = &v
-}
-
-// GetKind returns the Kind field value if set, zero value otherwise.
-func (o *KnownConstantEvidence) GetKind() string {
-	if o == nil || IsNil(o.Kind) {
-		var ret string
-		return ret
-	}
-	return *o.Kind
-}
-
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KnownConstantEvidence) GetKindOk() (*string, bool) {
-	if o == nil || IsNil(o.Kind) {
-		return nil, false
-	}
-	return o.Kind, true
-}
-
-// HasKind returns a boolean if a field has been set.
-func (o *KnownConstantEvidence) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *KnownConstantEvidence) SetKind(v string) {
-	o.Kind = &v
-}
-
 // GetEffect returns the Effect field value
-func (o *KnownConstantEvidence) GetEffect() EvidenceEffect {
+func (o *KnownConstantEvidence) GetEffect() string {
 	if o == nil {
-		var ret EvidenceEffect
+		var ret string
 		return ret
 	}
 
@@ -136,7 +68,7 @@ func (o *KnownConstantEvidence) GetEffect() EvidenceEffect {
 
 // GetEffectOk returns a tuple with the Effect field value
 // and a boolean to check if the value has been set.
-func (o *KnownConstantEvidence) GetEffectOk() (*EvidenceEffect, bool) {
+func (o *KnownConstantEvidence) GetEffectOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -144,46 +76,86 @@ func (o *KnownConstantEvidence) GetEffectOk() (*EvidenceEffect, bool) {
 }
 
 // SetEffect sets field value
-func (o *KnownConstantEvidence) SetEffect(v EvidenceEffect) {
+func (o *KnownConstantEvidence) SetEffect(v string) {
 	o.Effect = v
 }
 
-// GetStrength returns the Strength field value if set, zero value otherwise.
-func (o *KnownConstantEvidence) GetStrength() string {
-	if o == nil || IsNil(o.Strength) {
+// GetEvidenceKind returns the EvidenceKind field value
+func (o *KnownConstantEvidence) GetEvidenceKind() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Strength
+
+	return o.EvidenceKind
 }
 
-// GetStrengthOk returns a tuple with the Strength field value if set, nil otherwise
+// GetEvidenceKindOk returns a tuple with the EvidenceKind field value
 // and a boolean to check if the value has been set.
-func (o *KnownConstantEvidence) GetStrengthOk() (*string, bool) {
-	if o == nil || IsNil(o.Strength) {
+func (o *KnownConstantEvidence) GetEvidenceKindOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Strength, true
+	return &o.EvidenceKind, true
 }
 
-// HasStrength returns a boolean if a field has been set.
-func (o *KnownConstantEvidence) HasStrength() bool {
-	if o != nil && !IsNil(o.Strength) {
-		return true
+// SetEvidenceKind sets field value
+func (o *KnownConstantEvidence) SetEvidenceKind(v string) {
+	o.EvidenceKind = v
+}
+
+// GetKind returns the Kind field value
+func (o *KnownConstantEvidence) GetKind() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	return false
+	return o.Kind
 }
 
-// SetStrength gets a reference to the given string and assigns it to the Strength field.
+// GetKindOk returns a tuple with the Kind field value
+// and a boolean to check if the value has been set.
+func (o *KnownConstantEvidence) GetKindOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Kind, true
+}
+
+// SetKind sets field value
+func (o *KnownConstantEvidence) SetKind(v string) {
+	o.Kind = v
+}
+
+// GetStrength returns the Strength field value
+func (o *KnownConstantEvidence) GetStrength() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Strength
+}
+
+// GetStrengthOk returns a tuple with the Strength field value
+// and a boolean to check if the value has been set.
+func (o *KnownConstantEvidence) GetStrengthOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Strength, true
+}
+
+// SetStrength sets field value
 func (o *KnownConstantEvidence) SetStrength(v string) {
-	o.Strength = &v
+	o.Strength = v
 }
 
 // GetValues returns the Values field value
-func (o *KnownConstantEvidence) GetValues() []BytesConstant {
+func (o *KnownConstantEvidence) GetValues() []ReportBytesConstant {
 	if o == nil {
-		var ret []BytesConstant
+		var ret []ReportBytesConstant
 		return ret
 	}
 
@@ -192,7 +164,7 @@ func (o *KnownConstantEvidence) GetValues() []BytesConstant {
 
 // GetValuesOk returns a tuple with the Values field value
 // and a boolean to check if the value has been set.
-func (o *KnownConstantEvidence) GetValuesOk() ([]BytesConstant, bool) {
+func (o *KnownConstantEvidence) GetValuesOk() ([]ReportBytesConstant, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -200,7 +172,7 @@ func (o *KnownConstantEvidence) GetValuesOk() ([]BytesConstant, bool) {
 }
 
 // SetValues sets field value
-func (o *KnownConstantEvidence) SetValues(v []BytesConstant) {
+func (o *KnownConstantEvidence) SetValues(v []ReportBytesConstant) {
 	o.Values = v
 }
 
@@ -214,16 +186,10 @@ func (o KnownConstantEvidence) MarshalJSON() ([]byte, error) {
 
 func (o KnownConstantEvidence) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EvidenceKind) {
-		toSerialize["evidence_kind"] = o.EvidenceKind
-	}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
 	toSerialize["effect"] = o.Effect
-	if !IsNil(o.Strength) {
-		toSerialize["strength"] = o.Strength
-	}
+	toSerialize["evidence_kind"] = o.EvidenceKind
+	toSerialize["kind"] = o.Kind
+	toSerialize["strength"] = o.Strength
 	toSerialize["values"] = o.Values
 
 	for key, value := range o.AdditionalProperties {
@@ -239,6 +205,9 @@ func (o *KnownConstantEvidence) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"effect",
+		"evidence_kind",
+		"kind",
+		"strength",
 		"values",
 	}
 
@@ -269,9 +238,9 @@ func (o *KnownConstantEvidence) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "effect")
 		delete(additionalProperties, "evidence_kind")
 		delete(additionalProperties, "kind")
-		delete(additionalProperties, "effect")
 		delete(additionalProperties, "strength")
 		delete(additionalProperties, "values")
 		o.AdditionalProperties = additionalProperties

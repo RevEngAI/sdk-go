@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EvidenceKind** | Pointer to **string** |  | [optional] [default to "referenced_constant"]
-**Kind** | Pointer to **string** |  | [optional] [default to "deterministic_derivation"]
-**Effect** | [**EvidenceEffect**](EvidenceEffect.md) |  | 
-**Strength** | Pointer to **string** |  | [optional] [default to "direct"]
-**Constants** | [**[]ReferencedConstant**](ReferencedConstant.md) |  | 
+**Constants** | [**[]ReportReferencedConstant**](ReportReferencedConstant.md) | The constants and where they are referenced. | 
+**Effect** | **string** | Whether the evidence supports or refutes the finding. | 
+**EvidenceKind** | **string** | Kind of evidence. | 
+**Kind** | **string** | How the evidence was derived. | 
+**Strength** | **string** | How directly the evidence bears on the finding. | 
 
 ## Methods
 
 ### NewReferencedConstantEvidence
 
-`func NewReferencedConstantEvidence(effect EvidenceEffect, constants []ReferencedConstant, ) *ReferencedConstantEvidence`
+`func NewReferencedConstantEvidence(constants []ReportReferencedConstant, effect string, evidenceKind string, kind string, strength string, ) *ReferencedConstantEvidence`
 
 NewReferencedConstantEvidence instantiates a new ReferencedConstantEvidence object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +28,46 @@ will change when the set of required properties is changed
 NewReferencedConstantEvidenceWithDefaults instantiates a new ReferencedConstantEvidence object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetConstants
+
+`func (o *ReferencedConstantEvidence) GetConstants() []ReportReferencedConstant`
+
+GetConstants returns the Constants field if non-nil, zero value otherwise.
+
+### GetConstantsOk
+
+`func (o *ReferencedConstantEvidence) GetConstantsOk() (*[]ReportReferencedConstant, bool)`
+
+GetConstantsOk returns a tuple with the Constants field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConstants
+
+`func (o *ReferencedConstantEvidence) SetConstants(v []ReportReferencedConstant)`
+
+SetConstants sets Constants field to given value.
+
+
+### GetEffect
+
+`func (o *ReferencedConstantEvidence) GetEffect() string`
+
+GetEffect returns the Effect field if non-nil, zero value otherwise.
+
+### GetEffectOk
+
+`func (o *ReferencedConstantEvidence) GetEffectOk() (*string, bool)`
+
+GetEffectOk returns a tuple with the Effect field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEffect
+
+`func (o *ReferencedConstantEvidence) SetEffect(v string)`
+
+SetEffect sets Effect field to given value.
+
 
 ### GetEvidenceKind
 
@@ -48,11 +88,6 @@ and a boolean to check if the value has been set.
 
 SetEvidenceKind sets EvidenceKind field to given value.
 
-### HasEvidenceKind
-
-`func (o *ReferencedConstantEvidence) HasEvidenceKind() bool`
-
-HasEvidenceKind returns a boolean if a field has been set.
 
 ### GetKind
 
@@ -73,31 +108,6 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
-### HasKind
-
-`func (o *ReferencedConstantEvidence) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
-
-### GetEffect
-
-`func (o *ReferencedConstantEvidence) GetEffect() EvidenceEffect`
-
-GetEffect returns the Effect field if non-nil, zero value otherwise.
-
-### GetEffectOk
-
-`func (o *ReferencedConstantEvidence) GetEffectOk() (*EvidenceEffect, bool)`
-
-GetEffectOk returns a tuple with the Effect field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEffect
-
-`func (o *ReferencedConstantEvidence) SetEffect(v EvidenceEffect)`
-
-SetEffect sets Effect field to given value.
-
 
 ### GetStrength
 
@@ -117,31 +127,6 @@ and a boolean to check if the value has been set.
 `func (o *ReferencedConstantEvidence) SetStrength(v string)`
 
 SetStrength sets Strength field to given value.
-
-### HasStrength
-
-`func (o *ReferencedConstantEvidence) HasStrength() bool`
-
-HasStrength returns a boolean if a field has been set.
-
-### GetConstants
-
-`func (o *ReferencedConstantEvidence) GetConstants() []ReferencedConstant`
-
-GetConstants returns the Constants field if non-nil, zero value otherwise.
-
-### GetConstantsOk
-
-`func (o *ReferencedConstantEvidence) GetConstantsOk() (*[]ReferencedConstant, bool)`
-
-GetConstantsOk returns a tuple with the Constants field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConstants
-
-`func (o *ReferencedConstantEvidence) SetConstants(v []ReferencedConstant)`
-
-SetConstants sets Constants field to given value.
 
 
 

@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EvidenceKind** | Pointer to **string** |  | [optional] [default to "call_chain"]
-**Kind** | Pointer to **string** |  | [optional] [default to "deterministic_derivation"]
-**Effect** | [**EvidenceEffect**](EvidenceEffect.md) |  | 
-**Strength** | Pointer to **string** |  | [optional] [default to "direct"]
-**CallChain** | **[]int32** |  | 
+**CallChain** | **[]int64** | Addresses along the call chain. | 
+**Effect** | **string** | Whether the evidence supports or refutes the finding. | 
+**EvidenceKind** | **string** | Kind of evidence. | 
+**Kind** | **string** | How the evidence was derived. | 
+**Strength** | **string** | How directly the evidence bears on the finding. | 
 
 ## Methods
 
 ### NewCallChainEvidence
 
-`func NewCallChainEvidence(effect EvidenceEffect, callChain []int32, ) *CallChainEvidence`
+`func NewCallChainEvidence(callChain []int64, effect string, evidenceKind string, kind string, strength string, ) *CallChainEvidence`
 
 NewCallChainEvidence instantiates a new CallChainEvidence object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +28,46 @@ will change when the set of required properties is changed
 NewCallChainEvidenceWithDefaults instantiates a new CallChainEvidence object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCallChain
+
+`func (o *CallChainEvidence) GetCallChain() []int64`
+
+GetCallChain returns the CallChain field if non-nil, zero value otherwise.
+
+### GetCallChainOk
+
+`func (o *CallChainEvidence) GetCallChainOk() (*[]int64, bool)`
+
+GetCallChainOk returns a tuple with the CallChain field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCallChain
+
+`func (o *CallChainEvidence) SetCallChain(v []int64)`
+
+SetCallChain sets CallChain field to given value.
+
+
+### GetEffect
+
+`func (o *CallChainEvidence) GetEffect() string`
+
+GetEffect returns the Effect field if non-nil, zero value otherwise.
+
+### GetEffectOk
+
+`func (o *CallChainEvidence) GetEffectOk() (*string, bool)`
+
+GetEffectOk returns a tuple with the Effect field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEffect
+
+`func (o *CallChainEvidence) SetEffect(v string)`
+
+SetEffect sets Effect field to given value.
+
 
 ### GetEvidenceKind
 
@@ -48,11 +88,6 @@ and a boolean to check if the value has been set.
 
 SetEvidenceKind sets EvidenceKind field to given value.
 
-### HasEvidenceKind
-
-`func (o *CallChainEvidence) HasEvidenceKind() bool`
-
-HasEvidenceKind returns a boolean if a field has been set.
 
 ### GetKind
 
@@ -73,31 +108,6 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
-### HasKind
-
-`func (o *CallChainEvidence) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
-
-### GetEffect
-
-`func (o *CallChainEvidence) GetEffect() EvidenceEffect`
-
-GetEffect returns the Effect field if non-nil, zero value otherwise.
-
-### GetEffectOk
-
-`func (o *CallChainEvidence) GetEffectOk() (*EvidenceEffect, bool)`
-
-GetEffectOk returns a tuple with the Effect field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEffect
-
-`func (o *CallChainEvidence) SetEffect(v EvidenceEffect)`
-
-SetEffect sets Effect field to given value.
-
 
 ### GetStrength
 
@@ -117,31 +127,6 @@ and a boolean to check if the value has been set.
 `func (o *CallChainEvidence) SetStrength(v string)`
 
 SetStrength sets Strength field to given value.
-
-### HasStrength
-
-`func (o *CallChainEvidence) HasStrength() bool`
-
-HasStrength returns a boolean if a field has been set.
-
-### GetCallChain
-
-`func (o *CallChainEvidence) GetCallChain() []int32`
-
-GetCallChain returns the CallChain field if non-nil, zero value otherwise.
-
-### GetCallChainOk
-
-`func (o *CallChainEvidence) GetCallChainOk() (*[]int32, bool)`
-
-GetCallChainOk returns a tuple with the CallChain field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCallChain
-
-`func (o *CallChainEvidence) SetCallChain(v []int32)`
-
-SetCallChain sets CallChain field to given value.
 
 
 

@@ -4,23 +4,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EvidenceKind** | Pointer to **string** |  | [optional] [default to "hardcoded_secret"]
-**Kind** | Pointer to **string** |  | [optional] [default to "deterministic_derivation"]
-**Effect** | Pointer to **string** |  | [optional] [default to "supports"]
-**Strength** | [**EvidenceStrength**](EvidenceStrength.md) |  | 
-**RuleId** | **string** |  | 
-**Description** | **string** |  | 
-**SecretKind** | [**RuleKind**](RuleKind.md) |  | 
-**Secret** | **string** |  | 
-**Entropy** | **float32** |  | 
-**Size** | **int32** |  | 
-**References** | **[]int32** |  | 
+**Description** | **string** | What the rule detects. | 
+**Effect** | **string** | Whether the evidence supports or refutes the finding. | 
+**Entropy** | **float64** | Shannon entropy of the secret, in bits per byte. | 
+**EvidenceKind** | **string** | Kind of evidence. | 
+**Kind** | **string** | How the evidence was derived. | 
+**References** | **[]int64** | Address of the secret in the binary&#39;s data. | 
+**RuleId** | **string** | Identifier of the secret-scanning rule that matched. | 
+**Secret** | **string** | The secret as it appears in the binary. | 
+**SecretKind** | **string** | Category of the secret. | 
+**Size** | **int64** | Size of the secret in bytes. | 
+**Strength** | **string** | How directly the evidence bears on the finding. | 
 
 ## Methods
 
 ### NewHardcodedSecretEvidence
 
-`func NewHardcodedSecretEvidence(strength EvidenceStrength, ruleId string, description string, secretKind RuleKind, secret string, entropy float32, size int32, references []int32, ) *HardcodedSecretEvidence`
+`func NewHardcodedSecretEvidence(description string, effect string, entropy float64, evidenceKind string, kind string, references []int64, ruleId string, secret string, secretKind string, size int64, strength string, ) *HardcodedSecretEvidence`
 
 NewHardcodedSecretEvidence instantiates a new HardcodedSecretEvidence object
 This constructor will assign default values to properties that have it defined,
@@ -35,55 +35,25 @@ NewHardcodedSecretEvidenceWithDefaults instantiates a new HardcodedSecretEvidenc
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetEvidenceKind
+### GetDescription
 
-`func (o *HardcodedSecretEvidence) GetEvidenceKind() string`
+`func (o *HardcodedSecretEvidence) GetDescription() string`
 
-GetEvidenceKind returns the EvidenceKind field if non-nil, zero value otherwise.
+GetDescription returns the Description field if non-nil, zero value otherwise.
 
-### GetEvidenceKindOk
+### GetDescriptionOk
 
-`func (o *HardcodedSecretEvidence) GetEvidenceKindOk() (*string, bool)`
+`func (o *HardcodedSecretEvidence) GetDescriptionOk() (*string, bool)`
 
-GetEvidenceKindOk returns a tuple with the EvidenceKind field if it's non-nil, zero value otherwise
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEvidenceKind
+### SetDescription
 
-`func (o *HardcodedSecretEvidence) SetEvidenceKind(v string)`
+`func (o *HardcodedSecretEvidence) SetDescription(v string)`
 
-SetEvidenceKind sets EvidenceKind field to given value.
+SetDescription sets Description field to given value.
 
-### HasEvidenceKind
-
-`func (o *HardcodedSecretEvidence) HasEvidenceKind() bool`
-
-HasEvidenceKind returns a boolean if a field has been set.
-
-### GetKind
-
-`func (o *HardcodedSecretEvidence) GetKind() string`
-
-GetKind returns the Kind field if non-nil, zero value otherwise.
-
-### GetKindOk
-
-`func (o *HardcodedSecretEvidence) GetKindOk() (*string, bool)`
-
-GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetKind
-
-`func (o *HardcodedSecretEvidence) SetKind(v string)`
-
-SetKind sets Kind field to given value.
-
-### HasKind
-
-`func (o *HardcodedSecretEvidence) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
 
 ### GetEffect
 
@@ -104,30 +74,85 @@ and a boolean to check if the value has been set.
 
 SetEffect sets Effect field to given value.
 
-### HasEffect
 
-`func (o *HardcodedSecretEvidence) HasEffect() bool`
+### GetEntropy
 
-HasEffect returns a boolean if a field has been set.
+`func (o *HardcodedSecretEvidence) GetEntropy() float64`
 
-### GetStrength
+GetEntropy returns the Entropy field if non-nil, zero value otherwise.
 
-`func (o *HardcodedSecretEvidence) GetStrength() EvidenceStrength`
+### GetEntropyOk
 
-GetStrength returns the Strength field if non-nil, zero value otherwise.
+`func (o *HardcodedSecretEvidence) GetEntropyOk() (*float64, bool)`
 
-### GetStrengthOk
-
-`func (o *HardcodedSecretEvidence) GetStrengthOk() (*EvidenceStrength, bool)`
-
-GetStrengthOk returns a tuple with the Strength field if it's non-nil, zero value otherwise
+GetEntropyOk returns a tuple with the Entropy field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStrength
+### SetEntropy
 
-`func (o *HardcodedSecretEvidence) SetStrength(v EvidenceStrength)`
+`func (o *HardcodedSecretEvidence) SetEntropy(v float64)`
 
-SetStrength sets Strength field to given value.
+SetEntropy sets Entropy field to given value.
+
+
+### GetEvidenceKind
+
+`func (o *HardcodedSecretEvidence) GetEvidenceKind() string`
+
+GetEvidenceKind returns the EvidenceKind field if non-nil, zero value otherwise.
+
+### GetEvidenceKindOk
+
+`func (o *HardcodedSecretEvidence) GetEvidenceKindOk() (*string, bool)`
+
+GetEvidenceKindOk returns a tuple with the EvidenceKind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEvidenceKind
+
+`func (o *HardcodedSecretEvidence) SetEvidenceKind(v string)`
+
+SetEvidenceKind sets EvidenceKind field to given value.
+
+
+### GetKind
+
+`func (o *HardcodedSecretEvidence) GetKind() string`
+
+GetKind returns the Kind field if non-nil, zero value otherwise.
+
+### GetKindOk
+
+`func (o *HardcodedSecretEvidence) GetKindOk() (*string, bool)`
+
+GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKind
+
+`func (o *HardcodedSecretEvidence) SetKind(v string)`
+
+SetKind sets Kind field to given value.
+
+
+### GetReferences
+
+`func (o *HardcodedSecretEvidence) GetReferences() []int64`
+
+GetReferences returns the References field if non-nil, zero value otherwise.
+
+### GetReferencesOk
+
+`func (o *HardcodedSecretEvidence) GetReferencesOk() (*[]int64, bool)`
+
+GetReferencesOk returns a tuple with the References field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReferences
+
+`func (o *HardcodedSecretEvidence) SetReferences(v []int64)`
+
+SetReferences sets References field to given value.
 
 
 ### GetRuleId
@@ -150,46 +175,6 @@ and a boolean to check if the value has been set.
 SetRuleId sets RuleId field to given value.
 
 
-### GetDescription
-
-`func (o *HardcodedSecretEvidence) GetDescription() string`
-
-GetDescription returns the Description field if non-nil, zero value otherwise.
-
-### GetDescriptionOk
-
-`func (o *HardcodedSecretEvidence) GetDescriptionOk() (*string, bool)`
-
-GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDescription
-
-`func (o *HardcodedSecretEvidence) SetDescription(v string)`
-
-SetDescription sets Description field to given value.
-
-
-### GetSecretKind
-
-`func (o *HardcodedSecretEvidence) GetSecretKind() RuleKind`
-
-GetSecretKind returns the SecretKind field if non-nil, zero value otherwise.
-
-### GetSecretKindOk
-
-`func (o *HardcodedSecretEvidence) GetSecretKindOk() (*RuleKind, bool)`
-
-GetSecretKindOk returns a tuple with the SecretKind field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSecretKind
-
-`func (o *HardcodedSecretEvidence) SetSecretKind(v RuleKind)`
-
-SetSecretKind sets SecretKind field to given value.
-
-
 ### GetSecret
 
 `func (o *HardcodedSecretEvidence) GetSecret() string`
@@ -210,64 +195,64 @@ and a boolean to check if the value has been set.
 SetSecret sets Secret field to given value.
 
 
-### GetEntropy
+### GetSecretKind
 
-`func (o *HardcodedSecretEvidence) GetEntropy() float32`
+`func (o *HardcodedSecretEvidence) GetSecretKind() string`
 
-GetEntropy returns the Entropy field if non-nil, zero value otherwise.
+GetSecretKind returns the SecretKind field if non-nil, zero value otherwise.
 
-### GetEntropyOk
+### GetSecretKindOk
 
-`func (o *HardcodedSecretEvidence) GetEntropyOk() (*float32, bool)`
+`func (o *HardcodedSecretEvidence) GetSecretKindOk() (*string, bool)`
 
-GetEntropyOk returns a tuple with the Entropy field if it's non-nil, zero value otherwise
+GetSecretKindOk returns a tuple with the SecretKind field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEntropy
+### SetSecretKind
 
-`func (o *HardcodedSecretEvidence) SetEntropy(v float32)`
+`func (o *HardcodedSecretEvidence) SetSecretKind(v string)`
 
-SetEntropy sets Entropy field to given value.
+SetSecretKind sets SecretKind field to given value.
 
 
 ### GetSize
 
-`func (o *HardcodedSecretEvidence) GetSize() int32`
+`func (o *HardcodedSecretEvidence) GetSize() int64`
 
 GetSize returns the Size field if non-nil, zero value otherwise.
 
 ### GetSizeOk
 
-`func (o *HardcodedSecretEvidence) GetSizeOk() (*int32, bool)`
+`func (o *HardcodedSecretEvidence) GetSizeOk() (*int64, bool)`
 
 GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSize
 
-`func (o *HardcodedSecretEvidence) SetSize(v int32)`
+`func (o *HardcodedSecretEvidence) SetSize(v int64)`
 
 SetSize sets Size field to given value.
 
 
-### GetReferences
+### GetStrength
 
-`func (o *HardcodedSecretEvidence) GetReferences() []int32`
+`func (o *HardcodedSecretEvidence) GetStrength() string`
 
-GetReferences returns the References field if non-nil, zero value otherwise.
+GetStrength returns the Strength field if non-nil, zero value otherwise.
 
-### GetReferencesOk
+### GetStrengthOk
 
-`func (o *HardcodedSecretEvidence) GetReferencesOk() (*[]int32, bool)`
+`func (o *HardcodedSecretEvidence) GetStrengthOk() (*string, bool)`
 
-GetReferencesOk returns a tuple with the References field if it's non-nil, zero value otherwise
+GetStrengthOk returns a tuple with the Strength field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetReferences
+### SetStrength
 
-`func (o *HardcodedSecretEvidence) SetReferences(v []int32)`
+`func (o *HardcodedSecretEvidence) SetStrength(v string)`
 
-SetReferences sets References field to given value.
+SetStrength sets Strength field to given value.
 
 
 

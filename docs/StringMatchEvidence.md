@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EvidenceKind** | Pointer to **string** |  | [optional] [default to "string_match"]
-**Kind** | Pointer to **string** |  | [optional] [default to "deterministic_derivation"]
-**Effect** | [**EvidenceEffect**](EvidenceEffect.md) |  | 
-**Strength** | Pointer to **string** |  | [optional] [default to "indirect"]
-**Strings** | [**[]StringMatch**](StringMatch.md) |  | 
+**Effect** | **string** | Whether the evidence supports or refutes the finding. | 
+**EvidenceKind** | **string** | Kind of evidence. | 
+**Kind** | **string** | How the evidence was derived. | 
+**Strength** | **string** | How directly the evidence bears on the finding. | 
+**Strings** | [**[]ReportStringMatch**](ReportStringMatch.md) | The matched strings. | 
 
 ## Methods
 
 ### NewStringMatchEvidence
 
-`func NewStringMatchEvidence(effect EvidenceEffect, strings []StringMatch, ) *StringMatchEvidence`
+`func NewStringMatchEvidence(effect string, evidenceKind string, kind string, strength string, strings []ReportStringMatch, ) *StringMatchEvidence`
 
 NewStringMatchEvidence instantiates a new StringMatchEvidence object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +28,26 @@ will change when the set of required properties is changed
 NewStringMatchEvidenceWithDefaults instantiates a new StringMatchEvidence object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetEffect
+
+`func (o *StringMatchEvidence) GetEffect() string`
+
+GetEffect returns the Effect field if non-nil, zero value otherwise.
+
+### GetEffectOk
+
+`func (o *StringMatchEvidence) GetEffectOk() (*string, bool)`
+
+GetEffectOk returns a tuple with the Effect field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEffect
+
+`func (o *StringMatchEvidence) SetEffect(v string)`
+
+SetEffect sets Effect field to given value.
+
 
 ### GetEvidenceKind
 
@@ -48,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetEvidenceKind sets EvidenceKind field to given value.
 
-### HasEvidenceKind
-
-`func (o *StringMatchEvidence) HasEvidenceKind() bool`
-
-HasEvidenceKind returns a boolean if a field has been set.
 
 ### GetKind
 
@@ -72,31 +87,6 @@ and a boolean to check if the value has been set.
 `func (o *StringMatchEvidence) SetKind(v string)`
 
 SetKind sets Kind field to given value.
-
-### HasKind
-
-`func (o *StringMatchEvidence) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
-
-### GetEffect
-
-`func (o *StringMatchEvidence) GetEffect() EvidenceEffect`
-
-GetEffect returns the Effect field if non-nil, zero value otherwise.
-
-### GetEffectOk
-
-`func (o *StringMatchEvidence) GetEffectOk() (*EvidenceEffect, bool)`
-
-GetEffectOk returns a tuple with the Effect field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEffect
-
-`func (o *StringMatchEvidence) SetEffect(v EvidenceEffect)`
-
-SetEffect sets Effect field to given value.
 
 
 ### GetStrength
@@ -118,28 +108,23 @@ and a boolean to check if the value has been set.
 
 SetStrength sets Strength field to given value.
 
-### HasStrength
-
-`func (o *StringMatchEvidence) HasStrength() bool`
-
-HasStrength returns a boolean if a field has been set.
 
 ### GetStrings
 
-`func (o *StringMatchEvidence) GetStrings() []StringMatch`
+`func (o *StringMatchEvidence) GetStrings() []ReportStringMatch`
 
 GetStrings returns the Strings field if non-nil, zero value otherwise.
 
 ### GetStringsOk
 
-`func (o *StringMatchEvidence) GetStringsOk() (*[]StringMatch, bool)`
+`func (o *StringMatchEvidence) GetStringsOk() (*[]ReportStringMatch, bool)`
 
 GetStringsOk returns a tuple with the Strings field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStrings
 
-`func (o *StringMatchEvidence) SetStrings(v []StringMatch)`
+`func (o *StringMatchEvidence) SetStrings(v []ReportStringMatch)`
 
 SetStrings sets Strings field to given value.
 

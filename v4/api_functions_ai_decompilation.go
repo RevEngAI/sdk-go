@@ -28,6 +28,7 @@ type ApiCreateAiDecompilationRequest struct {
 	functionId int64
 	temperature *float64
 	typeSuggestions *bool
+	naming *bool
 	applyTypes *bool
 }
 
@@ -40,6 +41,12 @@ func (r ApiCreateAiDecompilationRequest) Temperature(temperature float64) ApiCre
 // Ask the language model to name the suggested types and their members. Set to false to skip the model call; the statically derived layouts are still computed and stored. Cannot re-enable the pass when the server has it off.
 func (r ApiCreateAiDecompilationRequest) TypeSuggestions(typeSuggestions bool) ApiCreateAiDecompilationRequest {
 	r.typeSuggestions = &typeSuggestions
+	return r
+}
+
+// Ask the language model to name the placeholder variables. Set to false to skip the model call; the generic names are kept. Cannot re-enable the pass when the server has it off.
+func (r ApiCreateAiDecompilationRequest) Naming(naming bool) ApiCreateAiDecompilationRequest {
+	r.naming = &naming
 	return r
 }
 
@@ -56,10 +63,11 @@ func (r ApiCreateAiDecompilationRequest) Execute() (*CreateAIDecompOutputBody, *
 /*
 CreateAiDecompilation Start AI decompilation
 
-Begins the AI decompilation process for a function. Charges team credits and starts the workflow.
+Begins the AI decompilation process for a function. Charges team credits and starts the workflow. Replacing an existing completed decompilation requires write access to the analysis; any caller with read access can decompile a function that has no completed result.
 
 **Error codes:**
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `400` [`BAD_REQUEST`](/errors/BAD_REQUEST) — Bad Request
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `402` [`INSUFFICIENT_CREDITS`](/errors/INSUFFICIENT_CREDITS) — Insufficient Credits
@@ -114,6 +122,13 @@ func (a *FunctionsAIDecompilationAPIService) CreateAiDecompilationExecute(r ApiC
 		var defaultValue bool = true
 		parameterAddToHeaderOrQuery(localVarQueryParams, "type_suggestions", defaultValue, "form", "")
 		r.typeSuggestions = &defaultValue
+	}
+	if r.naming != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "naming", r.naming, "form", "")
+	} else {
+		var defaultValue bool = true
+		parameterAddToHeaderOrQuery(localVarQueryParams, "naming", defaultValue, "form", "")
+		r.naming = &defaultValue
 	}
 	if r.applyTypes != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "apply_types", r.applyTypes, "form", "")
@@ -208,6 +223,17 @@ func (a *FunctionsAIDecompilationAPIService) CreateAiDecompilationExecute(r ApiC
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 409 {
 			var v APIError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -269,7 +295,7 @@ func (r ApiDeleteAiDecompilationInlineCommentRequest) Execute() (*CommentsData, 
 /*
 DeleteAiDecompilationInlineComment Delete a single inline comment
 
-Removes the comment for the given line number. Requires comments to have been generated first.
+Removes the comment for the given line number. Requires write access to the analysis and comments to have been generated first.
 
 **Error codes:**
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
@@ -1579,7 +1605,7 @@ func (r ApiPatchAiDecompilationInlineCommentRequest) Execute() (*CommentsData, *
 /*
 PatchAiDecompilationInlineComment Update a single inline comment
 
-Merges a single line comment into the existing AI-generated inline comments. Requires comments to have been generated first.
+Merges a single line comment into the existing AI-generated inline comments. Requires write access to the analysis and comments to have been generated first.
 
 **Error codes:**
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
@@ -1751,7 +1777,7 @@ func (r ApiRegenerateAiDecompilationInlineCommentsRequest) Execute() (*Regenerat
 /*
 RegenerateAiDecompilationInlineComments Regenerate AI decompilation inline comments
 
-Starts a new inline comments generation workflow for the function. Requires an existing decompilation with a summary. Rejected while a decompilation is running: its naming and type-suggestion passes are still changing the identifiers the comments would reference. Poll the inline comments status endpoint, which reports PENDING until then.
+Starts a new inline comments generation workflow for the function. Requires write access to the analysis and an existing decompilation with a summary. Rejected while a decompilation is running: its naming and type-suggestion passes are still changing the identifiers the comments would reference. Poll the inline comments status endpoint, which reports PENDING until then.
 
 **Error codes:**
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
@@ -1942,7 +1968,7 @@ func (r ApiRegenerateAiDecompilationSummaryRequest) Execute() (*RegenerateOutput
 /*
 RegenerateAiDecompilationSummary Regenerate AI decompilation summary
 
-Starts a new summary generation workflow for the function. Requires an existing decompilation. Rejected while a decompilation is running: its naming and type-suggestion passes are still changing the identifiers a summary would describe. Poll the summary status endpoint, which reports PENDING until then.
+Starts a new summary generation workflow for the function. Requires write access to the analysis and an existing decompilation. Rejected while a decompilation is running: its naming and type-suggestion passes are still changing the identifiers a summary would describe. Poll the summary status endpoint, which reports PENDING until then.
 
 **Error codes:**
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
@@ -3448,7 +3474,7 @@ func (r ApiV3RegenerateAiDecompilationTypeSuggestionsRequest) Execute() (*Regene
 /*
 V3RegenerateAiDecompilationTypeSuggestions Regenerate AI decompilation type suggestions
 
-Starts a new type suggestion workflow for the function, discarding the suggestions already stored. Requires a successful decompilation; it re-runs only the type-naming pass, so it costs no decompilation credit. The regenerated types are stored as data types of the analysis unless `apply_types=false`; types a previous run stored are not removed. Rejected while a decompilation is running: it runs the same pass itself once its output settles. Poll the type-suggestions status endpoint, which reports PENDING until then, and read the result from the type-suggestions endpoint.
+Starts a new type suggestion workflow for the function, discarding the suggestions already stored. Requires write access to the analysis and a successful decompilation; it re-runs only the type-naming pass, so it costs no decompilation credit. The regenerated types are stored as data types of the analysis unless `apply_types=false`; types a previous run stored are not removed. Rejected while a decompilation is running: it runs the same pass itself once its output settles. Poll the type-suggestions status endpoint, which reports PENDING until then, and read the result from the type-suggestions endpoint.
 
 **Error codes:**
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
@@ -3641,7 +3667,7 @@ func (r ApiV3UpsertAiDecompilationOverridesRequest) Execute() (*UpsertOverridesD
 /*
 V3UpsertAiDecompilationOverrides Upsert variable/function name overrides
 
-Applies user-provided name overrides to placeholder tokens in the decompilation.
+Applies user-provided name overrides to placeholder tokens in the decompilation. Requires write access to the analysis.
 
 **Error codes:**
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied

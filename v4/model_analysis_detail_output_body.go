@@ -29,6 +29,8 @@ type AnalysisDetailOutputBody struct {
 	BinaryName string `json:"binary_name"`
 	BinarySize int64 `json:"binary_size"`
 	BinaryType string `json:"binary_type"`
+	// Number of capabilities in the latest capabilities agent result. Null when the agent has not produced a result
+	CapabilityCount NullableInt64 `json:"capability_count"`
 	Creation string `json:"creation"`
 	// URL to view this analysis in the dashboard
 	DashboardUrl string `json:"dashboard_url"`
@@ -36,7 +38,11 @@ type AnalysisDetailOutputBody struct {
 	ModelName string `json:"model_name"`
 	// Snapshot of the configuration the analysis was submitted with
 	RequestedConfig RequestedConfigBody `json:"requested_config"`
+	// Number of HIGH or CRITICAL findings in the latest security scan. Null when the scan has not produced a result
+	SecurityFindingCount NullableInt64 `json:"security_finding_count"`
 	Sha256Hash string `json:"sha_256_hash"`
+	// Software threat score from the latest triage result, from 0 to 1. Null when triage has not produced a result
+	ThreatScore NullableFloat64 `json:"threat_score"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -46,7 +52,7 @@ type _AnalysisDetailOutputBody AnalysisDetailOutputBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisDetailOutputBody(access AnalysisAccessBody, analysisId int64, analysisScope string, architecture string, autoRunAgents AutoRunAgentsBody, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int64, binaryType string, creation string, dashboardUrl string, debug bool, modelName string, requestedConfig RequestedConfigBody, sha256Hash string) *AnalysisDetailOutputBody {
+func NewAnalysisDetailOutputBody(access AnalysisAccessBody, analysisId int64, analysisScope string, architecture string, autoRunAgents AutoRunAgentsBody, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int64, binaryType string, capabilityCount NullableInt64, creation string, dashboardUrl string, debug bool, modelName string, requestedConfig RequestedConfigBody, securityFindingCount NullableInt64, sha256Hash string, threatScore NullableFloat64) *AnalysisDetailOutputBody {
 	this := AnalysisDetailOutputBody{}
 	this.Access = access
 	this.AnalysisId = analysisId
@@ -58,12 +64,15 @@ func NewAnalysisDetailOutputBody(access AnalysisAccessBody, analysisId int64, an
 	this.BinaryName = binaryName
 	this.BinarySize = binarySize
 	this.BinaryType = binaryType
+	this.CapabilityCount = capabilityCount
 	this.Creation = creation
 	this.DashboardUrl = dashboardUrl
 	this.Debug = debug
 	this.ModelName = modelName
 	this.RequestedConfig = requestedConfig
+	this.SecurityFindingCount = securityFindingCount
 	this.Sha256Hash = sha256Hash
+	this.ThreatScore = threatScore
 	return &this
 }
 
@@ -315,6 +324,32 @@ func (o *AnalysisDetailOutputBody) SetBinaryType(v string) {
 	o.BinaryType = v
 }
 
+// GetCapabilityCount returns the CapabilityCount field value
+// If the value is explicit nil, the zero value for int64 will be returned
+func (o *AnalysisDetailOutputBody) GetCapabilityCount() int64 {
+	if o == nil || o.CapabilityCount.Get() == nil {
+		var ret int64
+		return ret
+	}
+
+	return *o.CapabilityCount.Get()
+}
+
+// GetCapabilityCountOk returns a tuple with the CapabilityCount field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AnalysisDetailOutputBody) GetCapabilityCountOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CapabilityCount.Get(), o.CapabilityCount.IsSet()
+}
+
+// SetCapabilityCount sets field value
+func (o *AnalysisDetailOutputBody) SetCapabilityCount(v int64) {
+	o.CapabilityCount.Set(&v)
+}
+
 // GetCreation returns the Creation field value
 func (o *AnalysisDetailOutputBody) GetCreation() string {
 	if o == nil {
@@ -435,6 +470,32 @@ func (o *AnalysisDetailOutputBody) SetRequestedConfig(v RequestedConfigBody) {
 	o.RequestedConfig = v
 }
 
+// GetSecurityFindingCount returns the SecurityFindingCount field value
+// If the value is explicit nil, the zero value for int64 will be returned
+func (o *AnalysisDetailOutputBody) GetSecurityFindingCount() int64 {
+	if o == nil || o.SecurityFindingCount.Get() == nil {
+		var ret int64
+		return ret
+	}
+
+	return *o.SecurityFindingCount.Get()
+}
+
+// GetSecurityFindingCountOk returns a tuple with the SecurityFindingCount field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AnalysisDetailOutputBody) GetSecurityFindingCountOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SecurityFindingCount.Get(), o.SecurityFindingCount.IsSet()
+}
+
+// SetSecurityFindingCount sets field value
+func (o *AnalysisDetailOutputBody) SetSecurityFindingCount(v int64) {
+	o.SecurityFindingCount.Set(&v)
+}
+
 // GetSha256Hash returns the Sha256Hash field value
 func (o *AnalysisDetailOutputBody) GetSha256Hash() string {
 	if o == nil {
@@ -459,6 +520,32 @@ func (o *AnalysisDetailOutputBody) SetSha256Hash(v string) {
 	o.Sha256Hash = v
 }
 
+// GetThreatScore returns the ThreatScore field value
+// If the value is explicit nil, the zero value for float64 will be returned
+func (o *AnalysisDetailOutputBody) GetThreatScore() float64 {
+	if o == nil || o.ThreatScore.Get() == nil {
+		var ret float64
+		return ret
+	}
+
+	return *o.ThreatScore.Get()
+}
+
+// GetThreatScoreOk returns a tuple with the ThreatScore field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AnalysisDetailOutputBody) GetThreatScoreOk() (*float64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ThreatScore.Get(), o.ThreatScore.IsSet()
+}
+
+// SetThreatScore sets field value
+func (o *AnalysisDetailOutputBody) SetThreatScore(v float64) {
+	o.ThreatScore.Set(&v)
+}
+
 func (o AnalysisDetailOutputBody) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -479,12 +566,15 @@ func (o AnalysisDetailOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize["binary_name"] = o.BinaryName
 	toSerialize["binary_size"] = o.BinarySize
 	toSerialize["binary_type"] = o.BinaryType
+	toSerialize["capability_count"] = o.CapabilityCount.Get()
 	toSerialize["creation"] = o.Creation
 	toSerialize["dashboard_url"] = o.DashboardUrl
 	toSerialize["debug"] = o.Debug
 	toSerialize["model_name"] = o.ModelName
 	toSerialize["requested_config"] = o.RequestedConfig
+	toSerialize["security_finding_count"] = o.SecurityFindingCount.Get()
 	toSerialize["sha_256_hash"] = o.Sha256Hash
+	toSerialize["threat_score"] = o.ThreatScore.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -508,12 +598,15 @@ func (o *AnalysisDetailOutputBody) UnmarshalJSON(data []byte) (err error) {
 		"binary_name",
 		"binary_size",
 		"binary_type",
+		"capability_count",
 		"creation",
 		"dashboard_url",
 		"debug",
 		"model_name",
 		"requested_config",
+		"security_finding_count",
 		"sha_256_hash",
+		"threat_score",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -553,12 +646,15 @@ func (o *AnalysisDetailOutputBody) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "binary_name")
 		delete(additionalProperties, "binary_size")
 		delete(additionalProperties, "binary_type")
+		delete(additionalProperties, "capability_count")
 		delete(additionalProperties, "creation")
 		delete(additionalProperties, "dashboard_url")
 		delete(additionalProperties, "debug")
 		delete(additionalProperties, "model_name")
 		delete(additionalProperties, "requested_config")
+		delete(additionalProperties, "security_finding_count")
 		delete(additionalProperties, "sha_256_hash")
+		delete(additionalProperties, "threat_score")
 		o.AdditionalProperties = additionalProperties
 	}
 

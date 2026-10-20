@@ -19,7 +19,7 @@ var _ MappedNullable = &ReferencedConstant{}
 
 // ReferencedConstant struct for ReferencedConstant
 type ReferencedConstant struct {
-	Subject Subject `json:"subject"`
+	Subject NullableSubject `json:"subject"`
 	Value BytesConstant `json:"value"`
 	Display NullableDisplay `json:"display,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -31,7 +31,7 @@ type _ReferencedConstant ReferencedConstant
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReferencedConstant(subject Subject, value BytesConstant) *ReferencedConstant {
+func NewReferencedConstant(subject NullableSubject, value BytesConstant) *ReferencedConstant {
 	this := ReferencedConstant{}
 	this.Subject = subject
 	this.Value = value
@@ -47,27 +47,29 @@ func NewReferencedConstantWithDefaults() *ReferencedConstant {
 }
 
 // GetSubject returns the Subject field value
+// If the value is explicit nil, the zero value for Subject will be returned
 func (o *ReferencedConstant) GetSubject() Subject {
-	if o == nil {
+	if o == nil || o.Subject.Get() == nil {
 		var ret Subject
 		return ret
 	}
 
-	return o.Subject
+	return *o.Subject.Get()
 }
 
 // GetSubjectOk returns a tuple with the Subject field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ReferencedConstant) GetSubjectOk() (*Subject, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Subject, true
+	return o.Subject.Get(), o.Subject.IsSet()
 }
 
 // SetSubject sets field value
 func (o *ReferencedConstant) SetSubject(v Subject) {
-	o.Subject = v
+	o.Subject.Set(&v)
 }
 
 // GetValue returns the Value field value
@@ -146,7 +148,7 @@ func (o ReferencedConstant) MarshalJSON() ([]byte, error) {
 
 func (o ReferencedConstant) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["subject"] = o.Subject
+	toSerialize["subject"] = o.Subject.Get()
 	toSerialize["value"] = o.Value
 	if o.Display.IsSet() {
 		toSerialize["display"] = o.Display.Get()

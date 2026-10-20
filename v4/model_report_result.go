@@ -19,8 +19,10 @@ var _ MappedNullable = &ReportResult{}
 
 // ReportResult struct for ReportResult
 type ReportResult struct {
-	Findings interface{} `json:"findings"`
-	Meta interface{} `json:"meta"`
+	// The findings the agent reported, each with its supporting evidence.
+	Findings []ReportFinding `json:"findings"`
+	// Report-level metadata.
+	Meta ReportMeta `json:"meta"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,7 +32,7 @@ type _ReportResult ReportResult
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReportResult(findings interface{}, meta interface{}) *ReportResult {
+func NewReportResult(findings []ReportFinding, meta ReportMeta) *ReportResult {
 	this := ReportResult{}
 	this.Findings = findings
 	this.Meta = meta
@@ -46,10 +48,9 @@ func NewReportResultWithDefaults() *ReportResult {
 }
 
 // GetFindings returns the Findings field value
-// If the value is explicit nil, the zero value for interface{} will be returned
-func (o *ReportResult) GetFindings() interface{} {
+func (o *ReportResult) GetFindings() []ReportFinding {
 	if o == nil {
-		var ret interface{}
+		var ret []ReportFinding
 		return ret
 	}
 
@@ -58,24 +59,22 @@ func (o *ReportResult) GetFindings() interface{} {
 
 // GetFindingsOk returns a tuple with the Findings field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ReportResult) GetFindingsOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Findings) {
+func (o *ReportResult) GetFindingsOk() ([]ReportFinding, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return &o.Findings, true
+	return o.Findings, true
 }
 
 // SetFindings sets field value
-func (o *ReportResult) SetFindings(v interface{}) {
+func (o *ReportResult) SetFindings(v []ReportFinding) {
 	o.Findings = v
 }
 
 // GetMeta returns the Meta field value
-// If the value is explicit nil, the zero value for interface{} will be returned
-func (o *ReportResult) GetMeta() interface{} {
+func (o *ReportResult) GetMeta() ReportMeta {
 	if o == nil {
-		var ret interface{}
+		var ret ReportMeta
 		return ret
 	}
 
@@ -84,16 +83,15 @@ func (o *ReportResult) GetMeta() interface{} {
 
 // GetMetaOk returns a tuple with the Meta field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ReportResult) GetMetaOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Meta) {
+func (o *ReportResult) GetMetaOk() (*ReportMeta, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Meta, true
 }
 
 // SetMeta sets field value
-func (o *ReportResult) SetMeta(v interface{}) {
+func (o *ReportResult) SetMeta(v ReportMeta) {
 	o.Meta = v
 }
 
@@ -107,12 +105,8 @@ func (o ReportResult) MarshalJSON() ([]byte, error) {
 
 func (o ReportResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Findings != nil {
-		toSerialize["findings"] = o.Findings
-	}
-	if o.Meta != nil {
-		toSerialize["meta"] = o.Meta
-	}
+	toSerialize["findings"] = o.Findings
+	toSerialize["meta"] = o.Meta
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value

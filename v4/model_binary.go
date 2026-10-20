@@ -28,6 +28,8 @@ type Binary struct {
 	DetectedArchitecture string `json:"detected_architecture"`
 	// Detected operating-system platform; empty when unavailable
 	DetectedBinaryType string `json:"detected_binary_type"`
+	// Detected source language; empty when unavailable
+	DetectedLanguage string `json:"detected_language"`
 	IsSystemAnalysis bool `json:"is_system_analysis"`
 	// Name of the model the analysis ran on
 	ModelName string `json:"model_name"`
@@ -46,7 +48,7 @@ type _Binary Binary
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBinary(analysisId int64, binaryId int64, binaryName string, createdAt time.Time, detectedArchitecture string, detectedBinaryType string, isSystemAnalysis bool, modelName string, ownerId int64, sha256Hash string, suppliedArchitecture string, suppliedBinaryType string) *Binary {
+func NewBinary(analysisId int64, binaryId int64, binaryName string, createdAt time.Time, detectedArchitecture string, detectedBinaryType string, detectedLanguage string, isSystemAnalysis bool, modelName string, ownerId int64, sha256Hash string, suppliedArchitecture string, suppliedBinaryType string) *Binary {
 	this := Binary{}
 	this.AnalysisId = analysisId
 	this.BinaryId = binaryId
@@ -54,6 +56,7 @@ func NewBinary(analysisId int64, binaryId int64, binaryName string, createdAt ti
 	this.CreatedAt = createdAt
 	this.DetectedArchitecture = detectedArchitecture
 	this.DetectedBinaryType = detectedBinaryType
+	this.DetectedLanguage = detectedLanguage
 	this.IsSystemAnalysis = isSystemAnalysis
 	this.ModelName = modelName
 	this.OwnerId = ownerId
@@ -213,6 +216,30 @@ func (o *Binary) GetDetectedBinaryTypeOk() (*string, bool) {
 // SetDetectedBinaryType sets field value
 func (o *Binary) SetDetectedBinaryType(v string) {
 	o.DetectedBinaryType = v
+}
+
+// GetDetectedLanguage returns the DetectedLanguage field value
+func (o *Binary) GetDetectedLanguage() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.DetectedLanguage
+}
+
+// GetDetectedLanguageOk returns a tuple with the DetectedLanguage field value
+// and a boolean to check if the value has been set.
+func (o *Binary) GetDetectedLanguageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DetectedLanguage, true
+}
+
+// SetDetectedLanguage sets field value
+func (o *Binary) SetDetectedLanguage(v string) {
+	o.DetectedLanguage = v
 }
 
 // GetIsSystemAnalysis returns the IsSystemAnalysis field value
@@ -375,6 +402,7 @@ func (o Binary) ToMap() (map[string]interface{}, error) {
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["detected_architecture"] = o.DetectedArchitecture
 	toSerialize["detected_binary_type"] = o.DetectedBinaryType
+	toSerialize["detected_language"] = o.DetectedLanguage
 	toSerialize["is_system_analysis"] = o.IsSystemAnalysis
 	toSerialize["model_name"] = o.ModelName
 	toSerialize["owner_id"] = o.OwnerId
@@ -400,6 +428,7 @@ func (o *Binary) UnmarshalJSON(data []byte) (err error) {
 		"created_at",
 		"detected_architecture",
 		"detected_binary_type",
+		"detected_language",
 		"is_system_analysis",
 		"model_name",
 		"owner_id",
@@ -441,6 +470,7 @@ func (o *Binary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "detected_architecture")
 		delete(additionalProperties, "detected_binary_type")
+		delete(additionalProperties, "detected_language")
 		delete(additionalProperties, "is_system_analysis")
 		delete(additionalProperties, "model_name")
 		delete(additionalProperties, "owner_id")

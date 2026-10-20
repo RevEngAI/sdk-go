@@ -14,18 +14,21 @@ Name | Type | Description | Notes
 **BinaryName** | **string** |  | 
 **BinarySize** | **int64** |  | 
 **BinaryType** | **string** |  | 
+**CapabilityCount** | **NullableInt64** | Number of capabilities in the latest capabilities agent result. Null when the agent has not produced a result | 
 **Creation** | **string** |  | 
 **DashboardUrl** | **string** | URL to view this analysis in the dashboard | 
 **Debug** | **bool** |  | 
 **ModelName** | **string** |  | 
 **RequestedConfig** | [**RequestedConfigBody**](RequestedConfigBody.md) | Snapshot of the configuration the analysis was submitted with | 
+**SecurityFindingCount** | **NullableInt64** | Number of HIGH or CRITICAL findings in the latest security scan. Null when the scan has not produced a result | 
 **Sha256Hash** | **string** |  | 
+**ThreatScore** | **NullableFloat64** | Software threat score from the latest triage result, from 0 to 1. Null when triage has not produced a result | 
 
 ## Methods
 
 ### NewAnalysisDetailOutputBody
 
-`func NewAnalysisDetailOutputBody(access AnalysisAccessBody, analysisId int64, analysisScope string, architecture string, autoRunAgents AutoRunAgentsBody, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int64, binaryType string, creation string, dashboardUrl string, debug bool, modelName string, requestedConfig RequestedConfigBody, sha256Hash string, ) *AnalysisDetailOutputBody`
+`func NewAnalysisDetailOutputBody(access AnalysisAccessBody, analysisId int64, analysisScope string, architecture string, autoRunAgents AutoRunAgentsBody, binaryDynamic bool, binaryFormat string, binaryName string, binarySize int64, binaryType string, capabilityCount NullableInt64, creation string, dashboardUrl string, debug bool, modelName string, requestedConfig RequestedConfigBody, securityFindingCount NullableInt64, sha256Hash string, threatScore NullableFloat64, ) *AnalysisDetailOutputBody`
 
 NewAnalysisDetailOutputBody instantiates a new AnalysisDetailOutputBody object
 This constructor will assign default values to properties that have it defined,
@@ -240,6 +243,36 @@ and a boolean to check if the value has been set.
 SetBinaryType sets BinaryType field to given value.
 
 
+### GetCapabilityCount
+
+`func (o *AnalysisDetailOutputBody) GetCapabilityCount() int64`
+
+GetCapabilityCount returns the CapabilityCount field if non-nil, zero value otherwise.
+
+### GetCapabilityCountOk
+
+`func (o *AnalysisDetailOutputBody) GetCapabilityCountOk() (*int64, bool)`
+
+GetCapabilityCountOk returns a tuple with the CapabilityCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapabilityCount
+
+`func (o *AnalysisDetailOutputBody) SetCapabilityCount(v int64)`
+
+SetCapabilityCount sets CapabilityCount field to given value.
+
+
+### SetCapabilityCountNil
+
+`func (o *AnalysisDetailOutputBody) SetCapabilityCountNil(b bool)`
+
+ SetCapabilityCountNil sets the value for CapabilityCount to be an explicit nil
+
+### UnsetCapabilityCount
+`func (o *AnalysisDetailOutputBody) UnsetCapabilityCount()`
+
+UnsetCapabilityCount ensures that no value is present for CapabilityCount, not even an explicit nil
 ### GetCreation
 
 `func (o *AnalysisDetailOutputBody) GetCreation() string`
@@ -340,6 +373,36 @@ and a boolean to check if the value has been set.
 SetRequestedConfig sets RequestedConfig field to given value.
 
 
+### GetSecurityFindingCount
+
+`func (o *AnalysisDetailOutputBody) GetSecurityFindingCount() int64`
+
+GetSecurityFindingCount returns the SecurityFindingCount field if non-nil, zero value otherwise.
+
+### GetSecurityFindingCountOk
+
+`func (o *AnalysisDetailOutputBody) GetSecurityFindingCountOk() (*int64, bool)`
+
+GetSecurityFindingCountOk returns a tuple with the SecurityFindingCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecurityFindingCount
+
+`func (o *AnalysisDetailOutputBody) SetSecurityFindingCount(v int64)`
+
+SetSecurityFindingCount sets SecurityFindingCount field to given value.
+
+
+### SetSecurityFindingCountNil
+
+`func (o *AnalysisDetailOutputBody) SetSecurityFindingCountNil(b bool)`
+
+ SetSecurityFindingCountNil sets the value for SecurityFindingCount to be an explicit nil
+
+### UnsetSecurityFindingCount
+`func (o *AnalysisDetailOutputBody) UnsetSecurityFindingCount()`
+
+UnsetSecurityFindingCount ensures that no value is present for SecurityFindingCount, not even an explicit nil
 ### GetSha256Hash
 
 `func (o *AnalysisDetailOutputBody) GetSha256Hash() string`
@@ -360,6 +423,36 @@ and a boolean to check if the value has been set.
 SetSha256Hash sets Sha256Hash field to given value.
 
 
+### GetThreatScore
+
+`func (o *AnalysisDetailOutputBody) GetThreatScore() float64`
+
+GetThreatScore returns the ThreatScore field if non-nil, zero value otherwise.
+
+### GetThreatScoreOk
+
+`func (o *AnalysisDetailOutputBody) GetThreatScoreOk() (*float64, bool)`
+
+GetThreatScoreOk returns a tuple with the ThreatScore field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThreatScore
+
+`func (o *AnalysisDetailOutputBody) SetThreatScore(v float64)`
+
+SetThreatScore sets ThreatScore field to given value.
+
+
+### SetThreatScoreNil
+
+`func (o *AnalysisDetailOutputBody) SetThreatScoreNil(b bool)`
+
+ SetThreatScoreNil sets the value for ThreatScore to be an explicit nil
+
+### UnsetThreatScore
+`func (o *AnalysisDetailOutputBody) UnsetThreatScore()`
+
+UnsetThreatScore ensures that no value is present for ThreatScore, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
