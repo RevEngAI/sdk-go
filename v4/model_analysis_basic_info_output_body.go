@@ -42,6 +42,8 @@ type AnalysisBasicInfoOutputBody struct {
 	DetectedBinaryFormat string `json:"detected_binary_format"`
 	// Detected operating-system platform; empty when unavailable
 	DetectedBinaryType string `json:"detected_binary_type"`
+	// Detected source language; empty when unavailable
+	DetectedLanguage string `json:"detected_language"`
 	// Number of functions in the binary
 	FunctionCount int64 `json:"function_count"`
 	// True when the analysis was run in advanced mode
@@ -79,7 +81,7 @@ type _AnalysisBasicInfoOutputBody AnalysisBasicInfoOutputBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, binaryUuid string, creation time.Time, debug bool, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, modelUpgradeAvailable bool, ownerUsername string, sha256Hash string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, teamId int64) *AnalysisBasicInfoOutputBody {
+func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableInt64, binaryId int64, binaryName string, binarySize int64, binaryUuid string, creation time.Time, debug bool, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, detectedLanguage string, functionCount int64, isAdvanced bool, isOwner bool, isSystem bool, modelId int64, modelName string, modelUpgradeAvailable bool, ownerUsername string, sha256Hash string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, teamId int64) *AnalysisBasicInfoOutputBody {
 	this := AnalysisBasicInfoOutputBody{}
 	this.AnalysisScope = analysisScope
 	this.BaseAddress = baseAddress
@@ -92,6 +94,7 @@ func NewAnalysisBasicInfoOutputBody(analysisScope string, baseAddress NullableIn
 	this.DetectedArchitecture = detectedArchitecture
 	this.DetectedBinaryFormat = detectedBinaryFormat
 	this.DetectedBinaryType = detectedBinaryType
+	this.DetectedLanguage = detectedLanguage
 	this.FunctionCount = functionCount
 	this.IsAdvanced = isAdvanced
 	this.IsOwner = isOwner
@@ -380,6 +383,30 @@ func (o *AnalysisBasicInfoOutputBody) GetDetectedBinaryTypeOk() (*string, bool) 
 // SetDetectedBinaryType sets field value
 func (o *AnalysisBasicInfoOutputBody) SetDetectedBinaryType(v string) {
 	o.DetectedBinaryType = v
+}
+
+// GetDetectedLanguage returns the DetectedLanguage field value
+func (o *AnalysisBasicInfoOutputBody) GetDetectedLanguage() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.DetectedLanguage
+}
+
+// GetDetectedLanguageOk returns a tuple with the DetectedLanguage field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisBasicInfoOutputBody) GetDetectedLanguageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DetectedLanguage, true
+}
+
+// SetDetectedLanguage sets field value
+func (o *AnalysisBasicInfoOutputBody) SetDetectedLanguage(v string) {
+	o.DetectedLanguage = v
 }
 
 // GetFunctionCount returns the FunctionCount field value
@@ -747,6 +774,7 @@ func (o AnalysisBasicInfoOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize["detected_architecture"] = o.DetectedArchitecture
 	toSerialize["detected_binary_format"] = o.DetectedBinaryFormat
 	toSerialize["detected_binary_type"] = o.DetectedBinaryType
+	toSerialize["detected_language"] = o.DetectedLanguage
 	toSerialize["function_count"] = o.FunctionCount
 	toSerialize["is_advanced"] = o.IsAdvanced
 	toSerialize["is_owner"] = o.IsOwner
@@ -787,6 +815,7 @@ func (o *AnalysisBasicInfoOutputBody) UnmarshalJSON(data []byte) (err error) {
 		"detected_architecture",
 		"detected_binary_format",
 		"detected_binary_type",
+		"detected_language",
 		"function_count",
 		"is_advanced",
 		"is_owner",
@@ -840,6 +869,7 @@ func (o *AnalysisBasicInfoOutputBody) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "detected_architecture")
 		delete(additionalProperties, "detected_binary_format")
 		delete(additionalProperties, "detected_binary_type")
+		delete(additionalProperties, "detected_language")
 		delete(additionalProperties, "function_count")
 		delete(additionalProperties, "is_advanced")
 		delete(additionalProperties, "is_owner")

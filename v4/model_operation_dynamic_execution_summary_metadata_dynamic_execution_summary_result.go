@@ -28,7 +28,7 @@ type OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult struc
 	// API resource name.
 	Name string `json:"name"`
 	// Result, set only when done is true and the operation succeeded.
-	Response map[string]interface{} `json:"response,omitempty"`
+	Response *DynamicExecutionSummaryResult `json:"response,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -166,19 +166,19 @@ func (o *OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult) 
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult) GetResponse() map[string]interface{} {
+func (o *OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult) GetResponse() DynamicExecutionSummaryResult {
 	if o == nil || IsNil(o.Response) {
-		var ret map[string]interface{}
+		var ret DynamicExecutionSummaryResult
 		return ret
 	}
-	return o.Response
+	return *o.Response
 }
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult) GetResponseOk() (map[string]interface{}, bool) {
+func (o *OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult) GetResponseOk() (*DynamicExecutionSummaryResult, bool) {
 	if o == nil || IsNil(o.Response) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Response, true
 }
@@ -192,9 +192,9 @@ func (o *OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult) 
 	return false
 }
 
-// SetResponse gets a reference to the given map[string]interface{} and assigns it to the Response field.
-func (o *OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult) SetResponse(v map[string]interface{}) {
-	o.Response = v
+// SetResponse gets a reference to the given DynamicExecutionSummaryResult and assigns it to the Response field.
+func (o *OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult) SetResponse(v DynamicExecutionSummaryResult) {
+	o.Response = &v
 }
 
 func (o OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult) MarshalJSON() ([]byte, error) {

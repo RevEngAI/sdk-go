@@ -19,7 +19,7 @@ var _ MappedNullable = &DecompilerSummary{}
 
 // DecompilerSummary struct for DecompilerSummary
 type DecompilerSummary struct {
-	Subject Subject `json:"subject"`
+	Subject NullableSubject `json:"subject"`
 	Summary string `json:"summary"`
 	Reachability NullableCallChain `json:"reachability,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -31,7 +31,7 @@ type _DecompilerSummary DecompilerSummary
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDecompilerSummary(subject Subject, summary string) *DecompilerSummary {
+func NewDecompilerSummary(subject NullableSubject, summary string) *DecompilerSummary {
 	this := DecompilerSummary{}
 	this.Subject = subject
 	this.Summary = summary
@@ -47,27 +47,29 @@ func NewDecompilerSummaryWithDefaults() *DecompilerSummary {
 }
 
 // GetSubject returns the Subject field value
+// If the value is explicit nil, the zero value for Subject will be returned
 func (o *DecompilerSummary) GetSubject() Subject {
-	if o == nil {
+	if o == nil || o.Subject.Get() == nil {
 		var ret Subject
 		return ret
 	}
 
-	return o.Subject
+	return *o.Subject.Get()
 }
 
 // GetSubjectOk returns a tuple with the Subject field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DecompilerSummary) GetSubjectOk() (*Subject, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Subject, true
+	return o.Subject.Get(), o.Subject.IsSet()
 }
 
 // SetSubject sets field value
 func (o *DecompilerSummary) SetSubject(v Subject) {
-	o.Subject = v
+	o.Subject.Set(&v)
 }
 
 // GetSummary returns the Summary field value
@@ -146,7 +148,7 @@ func (o DecompilerSummary) MarshalJSON() ([]byte, error) {
 
 func (o DecompilerSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["subject"] = o.Subject
+	toSerialize["subject"] = o.Subject.Get()
 	toSerialize["summary"] = o.Summary
 	if o.Reachability.IsSet() {
 		toSerialize["reachability"] = o.Reachability.Get()

@@ -17,13 +17,18 @@ import (
 // checks if the CallChainEvidence type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CallChainEvidence{}
 
-// CallChainEvidence A concrete sequence of calls connecting program locations.
+// CallChainEvidence struct for CallChainEvidence
 type CallChainEvidence struct {
-	EvidenceKind *string `json:"evidence_kind,omitempty"`
-	Kind *string `json:"kind,omitempty"`
-	Effect EvidenceEffect `json:"effect"`
-	Strength *string `json:"strength,omitempty"`
-	CallChain []int32 `json:"call_chain"`
+	// Addresses along the call chain.
+	CallChain []int64 `json:"call_chain"`
+	// Whether the evidence supports or refutes the finding.
+	Effect string `json:"effect"`
+	// Kind of evidence.
+	EvidenceKind string `json:"evidence_kind"`
+	// How the evidence was derived.
+	Kind string `json:"kind"`
+	// How directly the evidence bears on the finding.
+	Strength string `json:"strength"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,16 +38,13 @@ type _CallChainEvidence CallChainEvidence
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCallChainEvidence(effect EvidenceEffect, callChain []int32) *CallChainEvidence {
+func NewCallChainEvidence(callChain []int64, effect string, evidenceKind string, kind string, strength string) *CallChainEvidence {
 	this := CallChainEvidence{}
-	var evidenceKind string = "call_chain"
-	this.EvidenceKind = &evidenceKind
-	var kind string = "deterministic_derivation"
-	this.Kind = &kind
-	this.Effect = effect
-	var strength string = "direct"
-	this.Strength = &strength
 	this.CallChain = callChain
+	this.Effect = effect
+	this.EvidenceKind = evidenceKind
+	this.Kind = kind
+	this.Strength = strength
 	return &this
 }
 
@@ -51,139 +53,13 @@ func NewCallChainEvidence(effect EvidenceEffect, callChain []int32) *CallChainEv
 // but it doesn't guarantee that properties required by API are set
 func NewCallChainEvidenceWithDefaults() *CallChainEvidence {
 	this := CallChainEvidence{}
-	var evidenceKind string = "call_chain"
-	this.EvidenceKind = &evidenceKind
-	var kind string = "deterministic_derivation"
-	this.Kind = &kind
-	var strength string = "direct"
-	this.Strength = &strength
 	return &this
 }
 
-// GetEvidenceKind returns the EvidenceKind field value if set, zero value otherwise.
-func (o *CallChainEvidence) GetEvidenceKind() string {
-	if o == nil || IsNil(o.EvidenceKind) {
-		var ret string
-		return ret
-	}
-	return *o.EvidenceKind
-}
-
-// GetEvidenceKindOk returns a tuple with the EvidenceKind field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CallChainEvidence) GetEvidenceKindOk() (*string, bool) {
-	if o == nil || IsNil(o.EvidenceKind) {
-		return nil, false
-	}
-	return o.EvidenceKind, true
-}
-
-// HasEvidenceKind returns a boolean if a field has been set.
-func (o *CallChainEvidence) HasEvidenceKind() bool {
-	if o != nil && !IsNil(o.EvidenceKind) {
-		return true
-	}
-
-	return false
-}
-
-// SetEvidenceKind gets a reference to the given string and assigns it to the EvidenceKind field.
-func (o *CallChainEvidence) SetEvidenceKind(v string) {
-	o.EvidenceKind = &v
-}
-
-// GetKind returns the Kind field value if set, zero value otherwise.
-func (o *CallChainEvidence) GetKind() string {
-	if o == nil || IsNil(o.Kind) {
-		var ret string
-		return ret
-	}
-	return *o.Kind
-}
-
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CallChainEvidence) GetKindOk() (*string, bool) {
-	if o == nil || IsNil(o.Kind) {
-		return nil, false
-	}
-	return o.Kind, true
-}
-
-// HasKind returns a boolean if a field has been set.
-func (o *CallChainEvidence) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *CallChainEvidence) SetKind(v string) {
-	o.Kind = &v
-}
-
-// GetEffect returns the Effect field value
-func (o *CallChainEvidence) GetEffect() EvidenceEffect {
-	if o == nil {
-		var ret EvidenceEffect
-		return ret
-	}
-
-	return o.Effect
-}
-
-// GetEffectOk returns a tuple with the Effect field value
-// and a boolean to check if the value has been set.
-func (o *CallChainEvidence) GetEffectOk() (*EvidenceEffect, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Effect, true
-}
-
-// SetEffect sets field value
-func (o *CallChainEvidence) SetEffect(v EvidenceEffect) {
-	o.Effect = v
-}
-
-// GetStrength returns the Strength field value if set, zero value otherwise.
-func (o *CallChainEvidence) GetStrength() string {
-	if o == nil || IsNil(o.Strength) {
-		var ret string
-		return ret
-	}
-	return *o.Strength
-}
-
-// GetStrengthOk returns a tuple with the Strength field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CallChainEvidence) GetStrengthOk() (*string, bool) {
-	if o == nil || IsNil(o.Strength) {
-		return nil, false
-	}
-	return o.Strength, true
-}
-
-// HasStrength returns a boolean if a field has been set.
-func (o *CallChainEvidence) HasStrength() bool {
-	if o != nil && !IsNil(o.Strength) {
-		return true
-	}
-
-	return false
-}
-
-// SetStrength gets a reference to the given string and assigns it to the Strength field.
-func (o *CallChainEvidence) SetStrength(v string) {
-	o.Strength = &v
-}
-
 // GetCallChain returns the CallChain field value
-func (o *CallChainEvidence) GetCallChain() []int32 {
+func (o *CallChainEvidence) GetCallChain() []int64 {
 	if o == nil {
-		var ret []int32
+		var ret []int64
 		return ret
 	}
 
@@ -192,7 +68,7 @@ func (o *CallChainEvidence) GetCallChain() []int32 {
 
 // GetCallChainOk returns a tuple with the CallChain field value
 // and a boolean to check if the value has been set.
-func (o *CallChainEvidence) GetCallChainOk() ([]int32, bool) {
+func (o *CallChainEvidence) GetCallChainOk() ([]int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -200,8 +76,104 @@ func (o *CallChainEvidence) GetCallChainOk() ([]int32, bool) {
 }
 
 // SetCallChain sets field value
-func (o *CallChainEvidence) SetCallChain(v []int32) {
+func (o *CallChainEvidence) SetCallChain(v []int64) {
 	o.CallChain = v
+}
+
+// GetEffect returns the Effect field value
+func (o *CallChainEvidence) GetEffect() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Effect
+}
+
+// GetEffectOk returns a tuple with the Effect field value
+// and a boolean to check if the value has been set.
+func (o *CallChainEvidence) GetEffectOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Effect, true
+}
+
+// SetEffect sets field value
+func (o *CallChainEvidence) SetEffect(v string) {
+	o.Effect = v
+}
+
+// GetEvidenceKind returns the EvidenceKind field value
+func (o *CallChainEvidence) GetEvidenceKind() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.EvidenceKind
+}
+
+// GetEvidenceKindOk returns a tuple with the EvidenceKind field value
+// and a boolean to check if the value has been set.
+func (o *CallChainEvidence) GetEvidenceKindOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.EvidenceKind, true
+}
+
+// SetEvidenceKind sets field value
+func (o *CallChainEvidence) SetEvidenceKind(v string) {
+	o.EvidenceKind = v
+}
+
+// GetKind returns the Kind field value
+func (o *CallChainEvidence) GetKind() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Kind
+}
+
+// GetKindOk returns a tuple with the Kind field value
+// and a boolean to check if the value has been set.
+func (o *CallChainEvidence) GetKindOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Kind, true
+}
+
+// SetKind sets field value
+func (o *CallChainEvidence) SetKind(v string) {
+	o.Kind = v
+}
+
+// GetStrength returns the Strength field value
+func (o *CallChainEvidence) GetStrength() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Strength
+}
+
+// GetStrengthOk returns a tuple with the Strength field value
+// and a boolean to check if the value has been set.
+func (o *CallChainEvidence) GetStrengthOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Strength, true
+}
+
+// SetStrength sets field value
+func (o *CallChainEvidence) SetStrength(v string) {
+	o.Strength = v
 }
 
 func (o CallChainEvidence) MarshalJSON() ([]byte, error) {
@@ -214,17 +186,11 @@ func (o CallChainEvidence) MarshalJSON() ([]byte, error) {
 
 func (o CallChainEvidence) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EvidenceKind) {
-		toSerialize["evidence_kind"] = o.EvidenceKind
-	}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
-	toSerialize["effect"] = o.Effect
-	if !IsNil(o.Strength) {
-		toSerialize["strength"] = o.Strength
-	}
 	toSerialize["call_chain"] = o.CallChain
+	toSerialize["effect"] = o.Effect
+	toSerialize["evidence_kind"] = o.EvidenceKind
+	toSerialize["kind"] = o.Kind
+	toSerialize["strength"] = o.Strength
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -238,8 +204,11 @@ func (o *CallChainEvidence) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"effect",
 		"call_chain",
+		"effect",
+		"evidence_kind",
+		"kind",
+		"strength",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -269,11 +238,11 @@ func (o *CallChainEvidence) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "call_chain")
+		delete(additionalProperties, "effect")
 		delete(additionalProperties, "evidence_kind")
 		delete(additionalProperties, "kind")
-		delete(additionalProperties, "effect")
 		delete(additionalProperties, "strength")
-		delete(additionalProperties, "call_chain")
 		o.AdditionalProperties = additionalProperties
 	}
 

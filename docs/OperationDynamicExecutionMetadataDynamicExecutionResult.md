@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Error** | Pointer to [**Status**](Status.md) | Failure detail, populated only when done is true and the operation failed. | [optional] 
 **Metadata** | Pointer to [**DynamicExecutionMetadata**](DynamicExecutionMetadata.md) | In-flight information and details. | [optional] 
 **Name** | **string** | API resource name. | 
-**Response** | Pointer to **map[string]interface{}** | Result, set only when done is true and the operation succeeded. | [optional] 
+**Response** | Pointer to [**DynamicExecutionResult**](DynamicExecutionResult.md) | Result, set only when done is true and the operation succeeded. | [optional] 
 
 ## Methods
 
@@ -121,20 +121,20 @@ SetName sets Name field to given value.
 
 ### GetResponse
 
-`func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) GetResponse() map[string]interface{}`
+`func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) GetResponse() DynamicExecutionResult`
 
 GetResponse returns the Response field if non-nil, zero value otherwise.
 
 ### GetResponseOk
 
-`func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) GetResponseOk() (*map[string]interface{}, bool)`
+`func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) GetResponseOk() (*DynamicExecutionResult, bool)`
 
 GetResponseOk returns a tuple with the Response field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResponse
 
-`func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) SetResponse(v map[string]interface{})`
+`func (o *OperationDynamicExecutionMetadataDynamicExecutionResult) SetResponse(v DynamicExecutionResult)`
 
 SetResponse sets Response field to given value.
 

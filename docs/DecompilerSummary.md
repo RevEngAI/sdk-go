@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Subject** | [**Subject**](Subject.md) |  | 
+**Subject** | [**NullableSubject**](Subject.md) |  | 
 **Summary** | **string** |  | 
 **Reachability** | Pointer to [**NullableCallChain**](CallChain.md) |  | [optional] 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewDecompilerSummary
 
-`func NewDecompilerSummary(subject Subject, summary string, ) *DecompilerSummary`
+`func NewDecompilerSummary(subject NullableSubject, summary string, ) *DecompilerSummary`
 
 NewDecompilerSummary instantiates a new DecompilerSummary object
 This constructor will assign default values to properties that have it defined,
@@ -47,6 +47,16 @@ and a boolean to check if the value has been set.
 SetSubject sets Subject field to given value.
 
 
+### SetSubjectNil
+
+`func (o *DecompilerSummary) SetSubjectNil(b bool)`
+
+ SetSubjectNil sets the value for Subject to be an explicit nil
+
+### UnsetSubject
+`func (o *DecompilerSummary) UnsetSubject()`
+
+UnsetSubject ensures that no value is present for Subject, not even an explicit nil
 ### GetSummary
 
 `func (o *DecompilerSummary) GetSummary() string`

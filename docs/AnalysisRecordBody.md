@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **DetectedArchitecture** | **string** | Detected instruction-set architecture; empty when unavailable | 
 **DetectedBinaryFormat** | **string** | Detected binary container format; empty when unavailable | 
 **DetectedBinaryType** | **string** | Detected operating-system platform; empty when unavailable | 
+**DetectedLanguage** | **string** | Detected source language; empty when unavailable | 
 **FunctionBoundariesHash** | **string** | Hash of the binary&#39;s provided function boundaries | 
 **IsOwner** | **bool** | True when the caller owns the analysis | 
 **ModelId** | **int64** | Model ID | 
@@ -31,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewAnalysisRecordBody
 
-`func NewAnalysisRecordBody(analysisId int64, analysisScope string, baseAddress int64, binaryId int64, binaryName string, binarySize int64, creation time.Time, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionBoundariesHash string, isOwner bool, modelId int64, modelName string, modelUpgradeAvailable bool, sha256Hash string, status string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, tags []AnalysisTagBody, username string, ) *AnalysisRecordBody`
+`func NewAnalysisRecordBody(analysisId int64, analysisScope string, baseAddress int64, binaryId int64, binaryName string, binarySize int64, creation time.Time, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, detectedLanguage string, functionBoundariesHash string, isOwner bool, modelId int64, modelName string, modelUpgradeAvailable bool, sha256Hash string, status string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, tags []AnalysisTagBody, username string, ) *AnalysisRecordBody`
 
 NewAnalysisRecordBody instantiates a new AnalysisRecordBody object
 This constructor will assign default values to properties that have it defined,
@@ -244,6 +245,26 @@ and a boolean to check if the value has been set.
 `func (o *AnalysisRecordBody) SetDetectedBinaryType(v string)`
 
 SetDetectedBinaryType sets DetectedBinaryType field to given value.
+
+
+### GetDetectedLanguage
+
+`func (o *AnalysisRecordBody) GetDetectedLanguage() string`
+
+GetDetectedLanguage returns the DetectedLanguage field if non-nil, zero value otherwise.
+
+### GetDetectedLanguageOk
+
+`func (o *AnalysisRecordBody) GetDetectedLanguageOk() (*string, bool)`
+
+GetDetectedLanguageOk returns a tuple with the DetectedLanguage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetectedLanguage
+
+`func (o *AnalysisRecordBody) SetDetectedLanguage(v string)`
+
+SetDetectedLanguage sets DetectedLanguage field to given value.
 
 
 ### GetFunctionBoundariesHash

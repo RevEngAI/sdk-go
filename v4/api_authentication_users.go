@@ -687,6 +687,144 @@ func (a *AuthenticationUsersAPIService) V3GetUserActivityExecute(r ApiV3GetUserA
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiV3ListUsersRequest struct {
+	ctx context.Context
+	ApiService *AuthenticationUsersAPIService
+	searchTerm *string
+}
+
+// Text the username contains (case-insensitive)
+func (r ApiV3ListUsersRequest) SearchTerm(searchTerm string) ApiV3ListUsersRequest {
+	r.searchTerm = &searchTerm
+	return r
+}
+
+func (r ApiV3ListUsersRequest) Execute() (*ListPublicUsersOutputBody, *http.Response, error) {
+	return r.ApiService.V3ListUsersExecute(r)
+}
+
+/*
+V3ListUsers Search users
+
+Returns up to 5 active users whose username contains the search term (case-insensitive), with their ID and username, ordered by username.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiV3ListUsersRequest
+*/
+func (a *AuthenticationUsersAPIService) V3ListUsers(ctx context.Context) ApiV3ListUsersRequest {
+	return ApiV3ListUsersRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ListPublicUsersOutputBody
+func (a *AuthenticationUsersAPIService) V3ListUsersExecute(r ApiV3ListUsersRequest) (*ListPublicUsersOutputBody, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListPublicUsersOutputBody
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuthenticationUsersAPIService.V3ListUsers")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/users"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.searchTerm == nil {
+		return localVarReturnValue, nil, reportError("searchTerm is required and must be specified")
+	}
+	if strlen(*r.searchTerm) < 3 {
+		return localVarReturnValue, nil, reportError("searchTerm must have at least 3 elements")
+	}
+	if strlen(*r.searchTerm) > 255 {
+		return localVarReturnValue, nil, reportError("searchTerm must have less than 255 elements")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "search_term", r.searchTerm, "form", "")
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiV3SubmitUserFeedbackRequest struct {
 	ctx context.Context
 	ApiService *AuthenticationUsersAPIService

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Subject** | [**Subject**](Subject.md) |  | 
+**Subject** | [**NullableSubject**](Subject.md) |  | 
 **Value** | [**BytesConstant**](BytesConstant.md) |  | 
 **Display** | Pointer to [**NullableDisplay**](Display.md) |  | [optional] 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewReferencedConstant
 
-`func NewReferencedConstant(subject Subject, value BytesConstant, ) *ReferencedConstant`
+`func NewReferencedConstant(subject NullableSubject, value BytesConstant, ) *ReferencedConstant`
 
 NewReferencedConstant instantiates a new ReferencedConstant object
 This constructor will assign default values to properties that have it defined,
@@ -47,6 +47,16 @@ and a boolean to check if the value has been set.
 SetSubject sets Subject field to given value.
 
 
+### SetSubjectNil
+
+`func (o *ReferencedConstant) SetSubjectNil(b bool)`
+
+ SetSubjectNil sets the value for Subject to be an explicit nil
+
+### UnsetSubject
+`func (o *ReferencedConstant) UnsetSubject()`
+
+UnsetSubject ensures that no value is present for Subject, not even an explicit nil
 ### GetValue
 
 `func (o *ReferencedConstant) GetValue() BytesConstant`

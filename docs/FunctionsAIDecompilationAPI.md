@@ -32,7 +32,7 @@ Method | HTTP request | Description
 
 ## CreateAiDecompilation
 
-> CreateAIDecompOutputBody CreateAiDecompilation(ctx, functionId).Temperature(temperature).TypeSuggestions(typeSuggestions).ApplyTypes(applyTypes).Execute()
+> CreateAIDecompOutputBody CreateAiDecompilation(ctx, functionId).Temperature(temperature).TypeSuggestions(typeSuggestions).Naming(naming).ApplyTypes(applyTypes).Execute()
 
 Start AI decompilation
 
@@ -54,11 +54,12 @@ func main() {
 	functionId := int64(789) // int64 | Function ID
 	temperature := float64(1.2) // float64 | LLM temperature (0.0-1.0). Overrides the server default when set. Omit or set to -1 to use the server default. (optional) (default to -1)
 	typeSuggestions := true // bool | Ask the language model to name the suggested types and their members. Set to false to skip the model call; the statically derived layouts are still computed and stored. Cannot re-enable the pass when the server has it off. (optional) (default to true)
+	naming := true // bool | Ask the language model to name the placeholder variables. Set to false to skip the model call; the generic names are kept. Cannot re-enable the pass when the server has it off. (optional) (default to true)
 	applyTypes := true // bool | Store the suggested types as data types of this function's analysis, with a source_type of AI_DECOMP. Set to false to leave them as suggestions only. Cannot re-enable the pass when the server has it off. (optional) (default to true)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsAIDecompilationAPI.CreateAiDecompilation(context.Background(), functionId).Temperature(temperature).TypeSuggestions(typeSuggestions).ApplyTypes(applyTypes).Execute()
+	resp, r, err := apiClient.FunctionsAIDecompilationAPI.CreateAiDecompilation(context.Background(), functionId).Temperature(temperature).TypeSuggestions(typeSuggestions).Naming(naming).ApplyTypes(applyTypes).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAIDecompilationAPI.CreateAiDecompilation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -86,6 +87,7 @@ Name | Type | Description  | Notes
 
  **temperature** | **float64** | LLM temperature (0.0-1.0). Overrides the server default when set. Omit or set to -1 to use the server default. | [default to -1]
  **typeSuggestions** | **bool** | Ask the language model to name the suggested types and their members. Set to false to skip the model call; the statically derived layouts are still computed and stored. Cannot re-enable the pass when the server has it off. | [default to true]
+ **naming** | **bool** | Ask the language model to name the placeholder variables. Set to false to skip the model call; the generic names are kept. Cannot re-enable the pass when the server has it off. | [default to true]
  **applyTypes** | **bool** | Store the suggested types as data types of this function&#39;s analysis, with a source_type of AI_DECOMP. Set to false to leave them as suggestions only. Cannot re-enable the pass when the server has it off. | [default to true]
 
 ### Return type

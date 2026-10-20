@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EvidenceKind** | Pointer to **string** |  | [optional] [default to "known_constant"]
-**Kind** | Pointer to **string** |  | [optional] [default to "deterministic_derivation"]
-**Effect** | [**EvidenceEffect**](EvidenceEffect.md) |  | 
-**Strength** | Pointer to **string** |  | [optional] [default to "indirect"]
-**Values** | [**[]BytesConstant**](BytesConstant.md) |  | 
+**Effect** | **string** | Whether the evidence supports or refutes the finding. | 
+**EvidenceKind** | **string** | Kind of evidence. | 
+**Kind** | **string** | How the evidence was derived. | 
+**Strength** | **string** | How directly the evidence bears on the finding. | 
+**Values** | [**[]ReportBytesConstant**](ReportBytesConstant.md) | The well-known constants found in the binary. | 
 
 ## Methods
 
 ### NewKnownConstantEvidence
 
-`func NewKnownConstantEvidence(effect EvidenceEffect, values []BytesConstant, ) *KnownConstantEvidence`
+`func NewKnownConstantEvidence(effect string, evidenceKind string, kind string, strength string, values []ReportBytesConstant, ) *KnownConstantEvidence`
 
 NewKnownConstantEvidence instantiates a new KnownConstantEvidence object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +28,26 @@ will change when the set of required properties is changed
 NewKnownConstantEvidenceWithDefaults instantiates a new KnownConstantEvidence object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetEffect
+
+`func (o *KnownConstantEvidence) GetEffect() string`
+
+GetEffect returns the Effect field if non-nil, zero value otherwise.
+
+### GetEffectOk
+
+`func (o *KnownConstantEvidence) GetEffectOk() (*string, bool)`
+
+GetEffectOk returns a tuple with the Effect field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEffect
+
+`func (o *KnownConstantEvidence) SetEffect(v string)`
+
+SetEffect sets Effect field to given value.
+
 
 ### GetEvidenceKind
 
@@ -48,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetEvidenceKind sets EvidenceKind field to given value.
 
-### HasEvidenceKind
-
-`func (o *KnownConstantEvidence) HasEvidenceKind() bool`
-
-HasEvidenceKind returns a boolean if a field has been set.
 
 ### GetKind
 
@@ -72,31 +87,6 @@ and a boolean to check if the value has been set.
 `func (o *KnownConstantEvidence) SetKind(v string)`
 
 SetKind sets Kind field to given value.
-
-### HasKind
-
-`func (o *KnownConstantEvidence) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
-
-### GetEffect
-
-`func (o *KnownConstantEvidence) GetEffect() EvidenceEffect`
-
-GetEffect returns the Effect field if non-nil, zero value otherwise.
-
-### GetEffectOk
-
-`func (o *KnownConstantEvidence) GetEffectOk() (*EvidenceEffect, bool)`
-
-GetEffectOk returns a tuple with the Effect field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEffect
-
-`func (o *KnownConstantEvidence) SetEffect(v EvidenceEffect)`
-
-SetEffect sets Effect field to given value.
 
 
 ### GetStrength
@@ -118,28 +108,23 @@ and a boolean to check if the value has been set.
 
 SetStrength sets Strength field to given value.
 
-### HasStrength
-
-`func (o *KnownConstantEvidence) HasStrength() bool`
-
-HasStrength returns a boolean if a field has been set.
 
 ### GetValues
 
-`func (o *KnownConstantEvidence) GetValues() []BytesConstant`
+`func (o *KnownConstantEvidence) GetValues() []ReportBytesConstant`
 
 GetValues returns the Values field if non-nil, zero value otherwise.
 
 ### GetValuesOk
 
-`func (o *KnownConstantEvidence) GetValuesOk() (*[]BytesConstant, bool)`
+`func (o *KnownConstantEvidence) GetValuesOk() (*[]ReportBytesConstant, bool)`
 
 GetValuesOk returns a tuple with the Values field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetValues
 
-`func (o *KnownConstantEvidence) SetValues(v []BytesConstant)`
+`func (o *KnownConstantEvidence) SetValues(v []ReportBytesConstant)`
 
 SetValues sets Values field to given value.
 

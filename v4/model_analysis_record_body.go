@@ -40,6 +40,8 @@ type AnalysisRecordBody struct {
 	DetectedBinaryFormat string `json:"detected_binary_format"`
 	// Detected operating-system platform; empty when unavailable
 	DetectedBinaryType string `json:"detected_binary_type"`
+	// Detected source language; empty when unavailable
+	DetectedLanguage string `json:"detected_language"`
 	// Hash of the binary's provided function boundaries
 	FunctionBoundariesHash string `json:"function_boundaries_hash"`
 	// True when the caller owns the analysis
@@ -73,7 +75,7 @@ type _AnalysisRecordBody AnalysisRecordBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisRecordBody(analysisId int64, analysisScope string, baseAddress int64, binaryId int64, binaryName string, binarySize int64, creation time.Time, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, functionBoundariesHash string, isOwner bool, modelId int64, modelName string, modelUpgradeAvailable bool, sha256Hash string, status string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, tags []AnalysisTagBody, username string) *AnalysisRecordBody {
+func NewAnalysisRecordBody(analysisId int64, analysisScope string, baseAddress int64, binaryId int64, binaryName string, binarySize int64, creation time.Time, detectedArchitecture string, detectedBinaryFormat string, detectedBinaryType string, detectedLanguage string, functionBoundariesHash string, isOwner bool, modelId int64, modelName string, modelUpgradeAvailable bool, sha256Hash string, status string, suppliedArchitecture string, suppliedBinaryFormat string, suppliedBinaryType string, tags []AnalysisTagBody, username string) *AnalysisRecordBody {
 	this := AnalysisRecordBody{}
 	this.AnalysisId = analysisId
 	this.AnalysisScope = analysisScope
@@ -85,6 +87,7 @@ func NewAnalysisRecordBody(analysisId int64, analysisScope string, baseAddress i
 	this.DetectedArchitecture = detectedArchitecture
 	this.DetectedBinaryFormat = detectedBinaryFormat
 	this.DetectedBinaryType = detectedBinaryType
+	this.DetectedLanguage = detectedLanguage
 	this.FunctionBoundariesHash = functionBoundariesHash
 	this.IsOwner = isOwner
 	this.ModelId = modelId
@@ -346,6 +349,30 @@ func (o *AnalysisRecordBody) GetDetectedBinaryTypeOk() (*string, bool) {
 // SetDetectedBinaryType sets field value
 func (o *AnalysisRecordBody) SetDetectedBinaryType(v string) {
 	o.DetectedBinaryType = v
+}
+
+// GetDetectedLanguage returns the DetectedLanguage field value
+func (o *AnalysisRecordBody) GetDetectedLanguage() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.DetectedLanguage
+}
+
+// GetDetectedLanguageOk returns a tuple with the DetectedLanguage field value
+// and a boolean to check if the value has been set.
+func (o *AnalysisRecordBody) GetDetectedLanguageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DetectedLanguage, true
+}
+
+// SetDetectedLanguage sets field value
+func (o *AnalysisRecordBody) SetDetectedLanguage(v string) {
+	o.DetectedLanguage = v
 }
 
 // GetFunctionBoundariesHash returns the FunctionBoundariesHash field value
@@ -658,6 +685,7 @@ func (o AnalysisRecordBody) ToMap() (map[string]interface{}, error) {
 	toSerialize["detected_architecture"] = o.DetectedArchitecture
 	toSerialize["detected_binary_format"] = o.DetectedBinaryFormat
 	toSerialize["detected_binary_type"] = o.DetectedBinaryType
+	toSerialize["detected_language"] = o.DetectedLanguage
 	toSerialize["function_boundaries_hash"] = o.FunctionBoundariesHash
 	toSerialize["is_owner"] = o.IsOwner
 	toSerialize["model_id"] = o.ModelId
@@ -695,6 +723,7 @@ func (o *AnalysisRecordBody) UnmarshalJSON(data []byte) (err error) {
 		"detected_architecture",
 		"detected_binary_format",
 		"detected_binary_type",
+		"detected_language",
 		"function_boundaries_hash",
 		"is_owner",
 		"model_id",
@@ -746,6 +775,7 @@ func (o *AnalysisRecordBody) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "detected_architecture")
 		delete(additionalProperties, "detected_binary_format")
 		delete(additionalProperties, "detected_binary_type")
+		delete(additionalProperties, "detected_language")
 		delete(additionalProperties, "function_boundaries_hash")
 		delete(additionalProperties, "is_owner")
 		delete(additionalProperties, "model_id")

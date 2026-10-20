@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**SubmitUserFeedback**](AuthenticationUsersAPI.md#SubmitUserFeedback) | **Post** /v2/users/feedback | Submit feedback about the application
 [**V3GetUser**](AuthenticationUsersAPI.md#V3GetUser) | **Get** /v3/users/{user_id} | Get a user&#39;s public information
 [**V3GetUserActivity**](AuthenticationUsersAPI.md#V3GetUserActivity) | **Get** /v3/users/activity | Get the caller&#39;s activity feed
+[**V3ListUsers**](AuthenticationUsersAPI.md#V3ListUsers) | **Get** /v3/users | Search users
 [**V3SubmitUserFeedback**](AuthenticationUsersAPI.md#V3SubmitUserFeedback) | **Post** /v3/users/feedback | Submit feedback
 
 
@@ -322,6 +323,72 @@ Other parameters are passed through a pointer to a apiV3GetUserActivityRequest s
 ### Return type
 
 [**GetUserActivityOutputBody**](GetUserActivityOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3ListUsers
+
+> ListPublicUsersOutputBody V3ListUsers(ctx).SearchTerm(searchTerm).Execute()
+
+Search users
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	searchTerm := "searchTerm_example" // string | Text the username contains (case-insensitive)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AuthenticationUsersAPI.V3ListUsers(context.Background()).SearchTerm(searchTerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationUsersAPI.V3ListUsers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3ListUsers`: ListPublicUsersOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AuthenticationUsersAPI.V3ListUsers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3ListUsersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **searchTerm** | **string** | Text the username contains (case-insensitive) | 
+
+### Return type
+
+[**ListPublicUsersOutputBody**](ListPublicUsersOutputBody.md)
 
 ### Authorization
 

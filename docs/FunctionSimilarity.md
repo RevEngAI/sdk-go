@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** |  | 
 **Similarity** | **float32** |  | 
-**Subject** | [**Subject**](Subject.md) |  | 
+**Subject** | [**NullableSubject**](Subject.md) |  | 
 
 ## Methods
 
 ### NewFunctionSimilarity
 
-`func NewFunctionSimilarity(name string, similarity float32, subject Subject, ) *FunctionSimilarity`
+`func NewFunctionSimilarity(name string, similarity float32, subject NullableSubject, ) *FunctionSimilarity`
 
 NewFunctionSimilarity instantiates a new FunctionSimilarity object
 This constructor will assign default values to properties that have it defined,
@@ -87,6 +87,16 @@ and a boolean to check if the value has been set.
 SetSubject sets Subject field to given value.
 
 
+### SetSubjectNil
+
+`func (o *FunctionSimilarity) SetSubjectNil(b bool)`
+
+ SetSubjectNil sets the value for Subject to be an explicit nil
+
+### UnsetSubject
+`func (o *FunctionSimilarity) UnsetSubject()`
+
+UnsetSubject ensures that no value is present for Subject, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

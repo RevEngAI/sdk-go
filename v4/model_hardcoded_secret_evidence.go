@@ -17,19 +17,30 @@ import (
 // checks if the HardcodedSecretEvidence type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HardcodedSecretEvidence{}
 
-// HardcodedSecretEvidence A hard-coded secret identified in the binary's data.
+// HardcodedSecretEvidence struct for HardcodedSecretEvidence
 type HardcodedSecretEvidence struct {
-	EvidenceKind *string `json:"evidence_kind,omitempty"`
-	Kind *string `json:"kind,omitempty"`
-	Effect *string `json:"effect,omitempty"`
-	Strength EvidenceStrength `json:"strength"`
-	RuleId string `json:"rule_id"`
+	// What the rule detects.
 	Description string `json:"description"`
-	SecretKind RuleKind `json:"secret_kind"`
+	// Whether the evidence supports or refutes the finding.
+	Effect string `json:"effect"`
+	// Shannon entropy of the secret, in bits per byte.
+	Entropy float64 `json:"entropy"`
+	// Kind of evidence.
+	EvidenceKind string `json:"evidence_kind"`
+	// How the evidence was derived.
+	Kind string `json:"kind"`
+	// Address of the secret in the binary's data.
+	References []int64 `json:"references"`
+	// Identifier of the secret-scanning rule that matched.
+	RuleId string `json:"rule_id"`
+	// The secret as it appears in the binary.
 	Secret string `json:"secret"`
-	Entropy float32 `json:"entropy"`
-	Size int32 `json:"size"`
-	References []int32 `json:"references"`
+	// Category of the secret.
+	SecretKind string `json:"secret_kind"`
+	// Size of the secret in bytes.
+	Size int64 `json:"size"`
+	// How directly the evidence bears on the finding.
+	Strength string `json:"strength"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,22 +50,19 @@ type _HardcodedSecretEvidence HardcodedSecretEvidence
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHardcodedSecretEvidence(strength EvidenceStrength, ruleId string, description string, secretKind RuleKind, secret string, entropy float32, size int32, references []int32) *HardcodedSecretEvidence {
+func NewHardcodedSecretEvidence(description string, effect string, entropy float64, evidenceKind string, kind string, references []int64, ruleId string, secret string, secretKind string, size int64, strength string) *HardcodedSecretEvidence {
 	this := HardcodedSecretEvidence{}
-	var evidenceKind string = "hardcoded_secret"
-	this.EvidenceKind = &evidenceKind
-	var kind string = "deterministic_derivation"
-	this.Kind = &kind
-	var effect string = "supports"
-	this.Effect = &effect
-	this.Strength = strength
-	this.RuleId = ruleId
 	this.Description = description
-	this.SecretKind = secretKind
-	this.Secret = secret
+	this.Effect = effect
 	this.Entropy = entropy
-	this.Size = size
+	this.EvidenceKind = evidenceKind
+	this.Kind = kind
 	this.References = references
+	this.RuleId = ruleId
+	this.Secret = secret
+	this.SecretKind = secretKind
+	this.Size = size
+	this.Strength = strength
 	return &this
 }
 
@@ -63,157 +71,7 @@ func NewHardcodedSecretEvidence(strength EvidenceStrength, ruleId string, descri
 // but it doesn't guarantee that properties required by API are set
 func NewHardcodedSecretEvidenceWithDefaults() *HardcodedSecretEvidence {
 	this := HardcodedSecretEvidence{}
-	var evidenceKind string = "hardcoded_secret"
-	this.EvidenceKind = &evidenceKind
-	var kind string = "deterministic_derivation"
-	this.Kind = &kind
-	var effect string = "supports"
-	this.Effect = &effect
 	return &this
-}
-
-// GetEvidenceKind returns the EvidenceKind field value if set, zero value otherwise.
-func (o *HardcodedSecretEvidence) GetEvidenceKind() string {
-	if o == nil || IsNil(o.EvidenceKind) {
-		var ret string
-		return ret
-	}
-	return *o.EvidenceKind
-}
-
-// GetEvidenceKindOk returns a tuple with the EvidenceKind field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *HardcodedSecretEvidence) GetEvidenceKindOk() (*string, bool) {
-	if o == nil || IsNil(o.EvidenceKind) {
-		return nil, false
-	}
-	return o.EvidenceKind, true
-}
-
-// HasEvidenceKind returns a boolean if a field has been set.
-func (o *HardcodedSecretEvidence) HasEvidenceKind() bool {
-	if o != nil && !IsNil(o.EvidenceKind) {
-		return true
-	}
-
-	return false
-}
-
-// SetEvidenceKind gets a reference to the given string and assigns it to the EvidenceKind field.
-func (o *HardcodedSecretEvidence) SetEvidenceKind(v string) {
-	o.EvidenceKind = &v
-}
-
-// GetKind returns the Kind field value if set, zero value otherwise.
-func (o *HardcodedSecretEvidence) GetKind() string {
-	if o == nil || IsNil(o.Kind) {
-		var ret string
-		return ret
-	}
-	return *o.Kind
-}
-
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *HardcodedSecretEvidence) GetKindOk() (*string, bool) {
-	if o == nil || IsNil(o.Kind) {
-		return nil, false
-	}
-	return o.Kind, true
-}
-
-// HasKind returns a boolean if a field has been set.
-func (o *HardcodedSecretEvidence) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *HardcodedSecretEvidence) SetKind(v string) {
-	o.Kind = &v
-}
-
-// GetEffect returns the Effect field value if set, zero value otherwise.
-func (o *HardcodedSecretEvidence) GetEffect() string {
-	if o == nil || IsNil(o.Effect) {
-		var ret string
-		return ret
-	}
-	return *o.Effect
-}
-
-// GetEffectOk returns a tuple with the Effect field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *HardcodedSecretEvidence) GetEffectOk() (*string, bool) {
-	if o == nil || IsNil(o.Effect) {
-		return nil, false
-	}
-	return o.Effect, true
-}
-
-// HasEffect returns a boolean if a field has been set.
-func (o *HardcodedSecretEvidence) HasEffect() bool {
-	if o != nil && !IsNil(o.Effect) {
-		return true
-	}
-
-	return false
-}
-
-// SetEffect gets a reference to the given string and assigns it to the Effect field.
-func (o *HardcodedSecretEvidence) SetEffect(v string) {
-	o.Effect = &v
-}
-
-// GetStrength returns the Strength field value
-func (o *HardcodedSecretEvidence) GetStrength() EvidenceStrength {
-	if o == nil {
-		var ret EvidenceStrength
-		return ret
-	}
-
-	return o.Strength
-}
-
-// GetStrengthOk returns a tuple with the Strength field value
-// and a boolean to check if the value has been set.
-func (o *HardcodedSecretEvidence) GetStrengthOk() (*EvidenceStrength, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Strength, true
-}
-
-// SetStrength sets field value
-func (o *HardcodedSecretEvidence) SetStrength(v EvidenceStrength) {
-	o.Strength = v
-}
-
-// GetRuleId returns the RuleId field value
-func (o *HardcodedSecretEvidence) GetRuleId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.RuleId
-}
-
-// GetRuleIdOk returns a tuple with the RuleId field value
-// and a boolean to check if the value has been set.
-func (o *HardcodedSecretEvidence) GetRuleIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RuleId, true
-}
-
-// SetRuleId sets field value
-func (o *HardcodedSecretEvidence) SetRuleId(v string) {
-	o.RuleId = v
 }
 
 // GetDescription returns the Description field value
@@ -240,28 +98,148 @@ func (o *HardcodedSecretEvidence) SetDescription(v string) {
 	o.Description = v
 }
 
-// GetSecretKind returns the SecretKind field value
-func (o *HardcodedSecretEvidence) GetSecretKind() RuleKind {
+// GetEffect returns the Effect field value
+func (o *HardcodedSecretEvidence) GetEffect() string {
 	if o == nil {
-		var ret RuleKind
+		var ret string
 		return ret
 	}
 
-	return o.SecretKind
+	return o.Effect
 }
 
-// GetSecretKindOk returns a tuple with the SecretKind field value
+// GetEffectOk returns a tuple with the Effect field value
 // and a boolean to check if the value has been set.
-func (o *HardcodedSecretEvidence) GetSecretKindOk() (*RuleKind, bool) {
+func (o *HardcodedSecretEvidence) GetEffectOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.SecretKind, true
+	return &o.Effect, true
 }
 
-// SetSecretKind sets field value
-func (o *HardcodedSecretEvidence) SetSecretKind(v RuleKind) {
-	o.SecretKind = v
+// SetEffect sets field value
+func (o *HardcodedSecretEvidence) SetEffect(v string) {
+	o.Effect = v
+}
+
+// GetEntropy returns the Entropy field value
+func (o *HardcodedSecretEvidence) GetEntropy() float64 {
+	if o == nil {
+		var ret float64
+		return ret
+	}
+
+	return o.Entropy
+}
+
+// GetEntropyOk returns a tuple with the Entropy field value
+// and a boolean to check if the value has been set.
+func (o *HardcodedSecretEvidence) GetEntropyOk() (*float64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Entropy, true
+}
+
+// SetEntropy sets field value
+func (o *HardcodedSecretEvidence) SetEntropy(v float64) {
+	o.Entropy = v
+}
+
+// GetEvidenceKind returns the EvidenceKind field value
+func (o *HardcodedSecretEvidence) GetEvidenceKind() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.EvidenceKind
+}
+
+// GetEvidenceKindOk returns a tuple with the EvidenceKind field value
+// and a boolean to check if the value has been set.
+func (o *HardcodedSecretEvidence) GetEvidenceKindOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.EvidenceKind, true
+}
+
+// SetEvidenceKind sets field value
+func (o *HardcodedSecretEvidence) SetEvidenceKind(v string) {
+	o.EvidenceKind = v
+}
+
+// GetKind returns the Kind field value
+func (o *HardcodedSecretEvidence) GetKind() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Kind
+}
+
+// GetKindOk returns a tuple with the Kind field value
+// and a boolean to check if the value has been set.
+func (o *HardcodedSecretEvidence) GetKindOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Kind, true
+}
+
+// SetKind sets field value
+func (o *HardcodedSecretEvidence) SetKind(v string) {
+	o.Kind = v
+}
+
+// GetReferences returns the References field value
+func (o *HardcodedSecretEvidence) GetReferences() []int64 {
+	if o == nil {
+		var ret []int64
+		return ret
+	}
+
+	return o.References
+}
+
+// GetReferencesOk returns a tuple with the References field value
+// and a boolean to check if the value has been set.
+func (o *HardcodedSecretEvidence) GetReferencesOk() ([]int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.References, true
+}
+
+// SetReferences sets field value
+func (o *HardcodedSecretEvidence) SetReferences(v []int64) {
+	o.References = v
+}
+
+// GetRuleId returns the RuleId field value
+func (o *HardcodedSecretEvidence) GetRuleId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.RuleId
+}
+
+// GetRuleIdOk returns a tuple with the RuleId field value
+// and a boolean to check if the value has been set.
+func (o *HardcodedSecretEvidence) GetRuleIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RuleId, true
+}
+
+// SetRuleId sets field value
+func (o *HardcodedSecretEvidence) SetRuleId(v string) {
+	o.RuleId = v
 }
 
 // GetSecret returns the Secret field value
@@ -288,34 +266,34 @@ func (o *HardcodedSecretEvidence) SetSecret(v string) {
 	o.Secret = v
 }
 
-// GetEntropy returns the Entropy field value
-func (o *HardcodedSecretEvidence) GetEntropy() float32 {
+// GetSecretKind returns the SecretKind field value
+func (o *HardcodedSecretEvidence) GetSecretKind() string {
 	if o == nil {
-		var ret float32
+		var ret string
 		return ret
 	}
 
-	return o.Entropy
+	return o.SecretKind
 }
 
-// GetEntropyOk returns a tuple with the Entropy field value
+// GetSecretKindOk returns a tuple with the SecretKind field value
 // and a boolean to check if the value has been set.
-func (o *HardcodedSecretEvidence) GetEntropyOk() (*float32, bool) {
+func (o *HardcodedSecretEvidence) GetSecretKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Entropy, true
+	return &o.SecretKind, true
 }
 
-// SetEntropy sets field value
-func (o *HardcodedSecretEvidence) SetEntropy(v float32) {
-	o.Entropy = v
+// SetSecretKind sets field value
+func (o *HardcodedSecretEvidence) SetSecretKind(v string) {
+	o.SecretKind = v
 }
 
 // GetSize returns the Size field value
-func (o *HardcodedSecretEvidence) GetSize() int32 {
+func (o *HardcodedSecretEvidence) GetSize() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -324,7 +302,7 @@ func (o *HardcodedSecretEvidence) GetSize() int32 {
 
 // GetSizeOk returns a tuple with the Size field value
 // and a boolean to check if the value has been set.
-func (o *HardcodedSecretEvidence) GetSizeOk() (*int32, bool) {
+func (o *HardcodedSecretEvidence) GetSizeOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -332,32 +310,32 @@ func (o *HardcodedSecretEvidence) GetSizeOk() (*int32, bool) {
 }
 
 // SetSize sets field value
-func (o *HardcodedSecretEvidence) SetSize(v int32) {
+func (o *HardcodedSecretEvidence) SetSize(v int64) {
 	o.Size = v
 }
 
-// GetReferences returns the References field value
-func (o *HardcodedSecretEvidence) GetReferences() []int32 {
+// GetStrength returns the Strength field value
+func (o *HardcodedSecretEvidence) GetStrength() string {
 	if o == nil {
-		var ret []int32
+		var ret string
 		return ret
 	}
 
-	return o.References
+	return o.Strength
 }
 
-// GetReferencesOk returns a tuple with the References field value
+// GetStrengthOk returns a tuple with the Strength field value
 // and a boolean to check if the value has been set.
-func (o *HardcodedSecretEvidence) GetReferencesOk() ([]int32, bool) {
+func (o *HardcodedSecretEvidence) GetStrengthOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.References, true
+	return &o.Strength, true
 }
 
-// SetReferences sets field value
-func (o *HardcodedSecretEvidence) SetReferences(v []int32) {
-	o.References = v
+// SetStrength sets field value
+func (o *HardcodedSecretEvidence) SetStrength(v string) {
+	o.Strength = v
 }
 
 func (o HardcodedSecretEvidence) MarshalJSON() ([]byte, error) {
@@ -370,23 +348,17 @@ func (o HardcodedSecretEvidence) MarshalJSON() ([]byte, error) {
 
 func (o HardcodedSecretEvidence) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EvidenceKind) {
-		toSerialize["evidence_kind"] = o.EvidenceKind
-	}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
-	if !IsNil(o.Effect) {
-		toSerialize["effect"] = o.Effect
-	}
-	toSerialize["strength"] = o.Strength
-	toSerialize["rule_id"] = o.RuleId
 	toSerialize["description"] = o.Description
-	toSerialize["secret_kind"] = o.SecretKind
-	toSerialize["secret"] = o.Secret
+	toSerialize["effect"] = o.Effect
 	toSerialize["entropy"] = o.Entropy
-	toSerialize["size"] = o.Size
+	toSerialize["evidence_kind"] = o.EvidenceKind
+	toSerialize["kind"] = o.Kind
 	toSerialize["references"] = o.References
+	toSerialize["rule_id"] = o.RuleId
+	toSerialize["secret"] = o.Secret
+	toSerialize["secret_kind"] = o.SecretKind
+	toSerialize["size"] = o.Size
+	toSerialize["strength"] = o.Strength
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -400,14 +372,17 @@ func (o *HardcodedSecretEvidence) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"strength",
-		"rule_id",
 		"description",
-		"secret_kind",
-		"secret",
+		"effect",
 		"entropy",
-		"size",
+		"evidence_kind",
+		"kind",
 		"references",
+		"rule_id",
+		"secret",
+		"secret_kind",
+		"size",
+		"strength",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -437,17 +412,17 @@ func (o *HardcodedSecretEvidence) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "effect")
+		delete(additionalProperties, "entropy")
 		delete(additionalProperties, "evidence_kind")
 		delete(additionalProperties, "kind")
-		delete(additionalProperties, "effect")
-		delete(additionalProperties, "strength")
-		delete(additionalProperties, "rule_id")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "secret_kind")
-		delete(additionalProperties, "secret")
-		delete(additionalProperties, "entropy")
-		delete(additionalProperties, "size")
 		delete(additionalProperties, "references")
+		delete(additionalProperties, "rule_id")
+		delete(additionalProperties, "secret")
+		delete(additionalProperties, "secret_kind")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "strength")
 		o.AdditionalProperties = additionalProperties
 	}
 

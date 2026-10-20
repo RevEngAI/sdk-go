@@ -21,7 +21,7 @@ var _ MappedNullable = &FunctionSimilarity{}
 type FunctionSimilarity struct {
 	Name string `json:"name"`
 	Similarity float32 `json:"similarity"`
-	Subject Subject `json:"subject"`
+	Subject NullableSubject `json:"subject"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +31,7 @@ type _FunctionSimilarity FunctionSimilarity
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFunctionSimilarity(name string, similarity float32, subject Subject) *FunctionSimilarity {
+func NewFunctionSimilarity(name string, similarity float32, subject NullableSubject) *FunctionSimilarity {
 	this := FunctionSimilarity{}
 	this.Name = name
 	this.Similarity = similarity
@@ -96,27 +96,29 @@ func (o *FunctionSimilarity) SetSimilarity(v float32) {
 }
 
 // GetSubject returns the Subject field value
+// If the value is explicit nil, the zero value for Subject will be returned
 func (o *FunctionSimilarity) GetSubject() Subject {
-	if o == nil {
+	if o == nil || o.Subject.Get() == nil {
 		var ret Subject
 		return ret
 	}
 
-	return o.Subject
+	return *o.Subject.Get()
 }
 
 // GetSubjectOk returns a tuple with the Subject field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FunctionSimilarity) GetSubjectOk() (*Subject, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Subject, true
+	return o.Subject.Get(), o.Subject.IsSet()
 }
 
 // SetSubject sets field value
 func (o *FunctionSimilarity) SetSubject(v Subject) {
-	o.Subject = v
+	o.Subject.Set(&v)
 }
 
 func (o FunctionSimilarity) MarshalJSON() ([]byte, error) {
@@ -131,7 +133,7 @@ func (o FunctionSimilarity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["similarity"] = o.Similarity
-	toSerialize["subject"] = o.Subject
+	toSerialize["subject"] = o.Subject.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value

@@ -17,13 +17,18 @@ import (
 // checks if the ModelInterpretationEvidence type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ModelInterpretationEvidence{}
 
-// ModelInterpretationEvidence LLM interpretations of observations.
+// ModelInterpretationEvidence struct for ModelInterpretationEvidence
 type ModelInterpretationEvidence struct {
-	EvidenceKind *string `json:"evidence_kind,omitempty"`
-	Kind *string `json:"kind,omitempty"`
-	Effect EvidenceEffect `json:"effect"`
-	Strength *EvidenceStrength `json:"strength,omitempty"`
-	Interpretations []ModelInterpretation `json:"interpretations"`
+	// Whether the evidence supports or refutes the finding.
+	Effect string `json:"effect"`
+	// Kind of evidence.
+	EvidenceKind string `json:"evidence_kind"`
+	// Interpretations of the code by an AI model.
+	Interpretations []ReportModelInterpretation `json:"interpretations"`
+	// How the evidence was derived.
+	Kind string `json:"kind"`
+	// How directly the evidence bears on the finding.
+	Strength string `json:"strength"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,16 +38,13 @@ type _ModelInterpretationEvidence ModelInterpretationEvidence
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModelInterpretationEvidence(effect EvidenceEffect, interpretations []ModelInterpretation) *ModelInterpretationEvidence {
+func NewModelInterpretationEvidence(effect string, evidenceKind string, interpretations []ReportModelInterpretation, kind string, strength string) *ModelInterpretationEvidence {
 	this := ModelInterpretationEvidence{}
-	var evidenceKind string = "model_interpretation"
-	this.EvidenceKind = &evidenceKind
-	var kind string = "model_interpretation"
-	this.Kind = &kind
 	this.Effect = effect
-	var strength EvidenceStrength = EVIDENCESTRENGTH_INDIRECT
-	this.Strength = &strength
+	this.EvidenceKind = evidenceKind
 	this.Interpretations = interpretations
+	this.Kind = kind
+	this.Strength = strength
 	return &this
 }
 
@@ -51,83 +53,13 @@ func NewModelInterpretationEvidence(effect EvidenceEffect, interpretations []Mod
 // but it doesn't guarantee that properties required by API are set
 func NewModelInterpretationEvidenceWithDefaults() *ModelInterpretationEvidence {
 	this := ModelInterpretationEvidence{}
-	var evidenceKind string = "model_interpretation"
-	this.EvidenceKind = &evidenceKind
-	var kind string = "model_interpretation"
-	this.Kind = &kind
-	var strength EvidenceStrength = EVIDENCESTRENGTH_INDIRECT
-	this.Strength = &strength
 	return &this
 }
 
-// GetEvidenceKind returns the EvidenceKind field value if set, zero value otherwise.
-func (o *ModelInterpretationEvidence) GetEvidenceKind() string {
-	if o == nil || IsNil(o.EvidenceKind) {
-		var ret string
-		return ret
-	}
-	return *o.EvidenceKind
-}
-
-// GetEvidenceKindOk returns a tuple with the EvidenceKind field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelInterpretationEvidence) GetEvidenceKindOk() (*string, bool) {
-	if o == nil || IsNil(o.EvidenceKind) {
-		return nil, false
-	}
-	return o.EvidenceKind, true
-}
-
-// HasEvidenceKind returns a boolean if a field has been set.
-func (o *ModelInterpretationEvidence) HasEvidenceKind() bool {
-	if o != nil && !IsNil(o.EvidenceKind) {
-		return true
-	}
-
-	return false
-}
-
-// SetEvidenceKind gets a reference to the given string and assigns it to the EvidenceKind field.
-func (o *ModelInterpretationEvidence) SetEvidenceKind(v string) {
-	o.EvidenceKind = &v
-}
-
-// GetKind returns the Kind field value if set, zero value otherwise.
-func (o *ModelInterpretationEvidence) GetKind() string {
-	if o == nil || IsNil(o.Kind) {
-		var ret string
-		return ret
-	}
-	return *o.Kind
-}
-
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelInterpretationEvidence) GetKindOk() (*string, bool) {
-	if o == nil || IsNil(o.Kind) {
-		return nil, false
-	}
-	return o.Kind, true
-}
-
-// HasKind returns a boolean if a field has been set.
-func (o *ModelInterpretationEvidence) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *ModelInterpretationEvidence) SetKind(v string) {
-	o.Kind = &v
-}
-
 // GetEffect returns the Effect field value
-func (o *ModelInterpretationEvidence) GetEffect() EvidenceEffect {
+func (o *ModelInterpretationEvidence) GetEffect() string {
 	if o == nil {
-		var ret EvidenceEffect
+		var ret string
 		return ret
 	}
 
@@ -136,7 +68,7 @@ func (o *ModelInterpretationEvidence) GetEffect() EvidenceEffect {
 
 // GetEffectOk returns a tuple with the Effect field value
 // and a boolean to check if the value has been set.
-func (o *ModelInterpretationEvidence) GetEffectOk() (*EvidenceEffect, bool) {
+func (o *ModelInterpretationEvidence) GetEffectOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -144,46 +76,38 @@ func (o *ModelInterpretationEvidence) GetEffectOk() (*EvidenceEffect, bool) {
 }
 
 // SetEffect sets field value
-func (o *ModelInterpretationEvidence) SetEffect(v EvidenceEffect) {
+func (o *ModelInterpretationEvidence) SetEffect(v string) {
 	o.Effect = v
 }
 
-// GetStrength returns the Strength field value if set, zero value otherwise.
-func (o *ModelInterpretationEvidence) GetStrength() EvidenceStrength {
-	if o == nil || IsNil(o.Strength) {
-		var ret EvidenceStrength
+// GetEvidenceKind returns the EvidenceKind field value
+func (o *ModelInterpretationEvidence) GetEvidenceKind() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.Strength
+
+	return o.EvidenceKind
 }
 
-// GetStrengthOk returns a tuple with the Strength field value if set, nil otherwise
+// GetEvidenceKindOk returns a tuple with the EvidenceKind field value
 // and a boolean to check if the value has been set.
-func (o *ModelInterpretationEvidence) GetStrengthOk() (*EvidenceStrength, bool) {
-	if o == nil || IsNil(o.Strength) {
+func (o *ModelInterpretationEvidence) GetEvidenceKindOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Strength, true
+	return &o.EvidenceKind, true
 }
 
-// HasStrength returns a boolean if a field has been set.
-func (o *ModelInterpretationEvidence) HasStrength() bool {
-	if o != nil && !IsNil(o.Strength) {
-		return true
-	}
-
-	return false
-}
-
-// SetStrength gets a reference to the given EvidenceStrength and assigns it to the Strength field.
-func (o *ModelInterpretationEvidence) SetStrength(v EvidenceStrength) {
-	o.Strength = &v
+// SetEvidenceKind sets field value
+func (o *ModelInterpretationEvidence) SetEvidenceKind(v string) {
+	o.EvidenceKind = v
 }
 
 // GetInterpretations returns the Interpretations field value
-func (o *ModelInterpretationEvidence) GetInterpretations() []ModelInterpretation {
+func (o *ModelInterpretationEvidence) GetInterpretations() []ReportModelInterpretation {
 	if o == nil {
-		var ret []ModelInterpretation
+		var ret []ReportModelInterpretation
 		return ret
 	}
 
@@ -192,7 +116,7 @@ func (o *ModelInterpretationEvidence) GetInterpretations() []ModelInterpretation
 
 // GetInterpretationsOk returns a tuple with the Interpretations field value
 // and a boolean to check if the value has been set.
-func (o *ModelInterpretationEvidence) GetInterpretationsOk() ([]ModelInterpretation, bool) {
+func (o *ModelInterpretationEvidence) GetInterpretationsOk() ([]ReportModelInterpretation, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -200,8 +124,56 @@ func (o *ModelInterpretationEvidence) GetInterpretationsOk() ([]ModelInterpretat
 }
 
 // SetInterpretations sets field value
-func (o *ModelInterpretationEvidence) SetInterpretations(v []ModelInterpretation) {
+func (o *ModelInterpretationEvidence) SetInterpretations(v []ReportModelInterpretation) {
 	o.Interpretations = v
+}
+
+// GetKind returns the Kind field value
+func (o *ModelInterpretationEvidence) GetKind() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Kind
+}
+
+// GetKindOk returns a tuple with the Kind field value
+// and a boolean to check if the value has been set.
+func (o *ModelInterpretationEvidence) GetKindOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Kind, true
+}
+
+// SetKind sets field value
+func (o *ModelInterpretationEvidence) SetKind(v string) {
+	o.Kind = v
+}
+
+// GetStrength returns the Strength field value
+func (o *ModelInterpretationEvidence) GetStrength() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Strength
+}
+
+// GetStrengthOk returns a tuple with the Strength field value
+// and a boolean to check if the value has been set.
+func (o *ModelInterpretationEvidence) GetStrengthOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Strength, true
+}
+
+// SetStrength sets field value
+func (o *ModelInterpretationEvidence) SetStrength(v string) {
+	o.Strength = v
 }
 
 func (o ModelInterpretationEvidence) MarshalJSON() ([]byte, error) {
@@ -214,17 +186,11 @@ func (o ModelInterpretationEvidence) MarshalJSON() ([]byte, error) {
 
 func (o ModelInterpretationEvidence) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EvidenceKind) {
-		toSerialize["evidence_kind"] = o.EvidenceKind
-	}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
 	toSerialize["effect"] = o.Effect
-	if !IsNil(o.Strength) {
-		toSerialize["strength"] = o.Strength
-	}
+	toSerialize["evidence_kind"] = o.EvidenceKind
 	toSerialize["interpretations"] = o.Interpretations
+	toSerialize["kind"] = o.Kind
+	toSerialize["strength"] = o.Strength
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -239,7 +205,10 @@ func (o *ModelInterpretationEvidence) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"effect",
+		"evidence_kind",
 		"interpretations",
+		"kind",
+		"strength",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -269,11 +238,11 @@ func (o *ModelInterpretationEvidence) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "evidence_kind")
-		delete(additionalProperties, "kind")
 		delete(additionalProperties, "effect")
-		delete(additionalProperties, "strength")
+		delete(additionalProperties, "evidence_kind")
 		delete(additionalProperties, "interpretations")
+		delete(additionalProperties, "kind")
+		delete(additionalProperties, "strength")
 		o.AdditionalProperties = additionalProperties
 	}
 

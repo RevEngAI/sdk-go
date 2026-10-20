@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewExample
 
-`func NewExample(analysisId int64, analysisScope string, binaryId int64, binaryName string, binarySize int64, creation time.Time, isOwner bool, modelId int64, sha256Hash string, status string, tags []string, username string, ) *Example`
+`func NewExample(analysisId int64, analysisScope string, binaryId int64, binaryName string, binarySize int64, creation time.Time, isOwner bool, modelId int64, sha256Hash string, status string, tags []*string, username string, ) *Example`
 
 NewExample instantiates a new Example object
 This constructor will assign default values to properties that have it defined,
@@ -238,20 +238,20 @@ SetStatus sets Status field to given value.
 
 ### GetTags
 
-`func (o *Example) GetTags() []string`
+`func (o *Example) GetTags() []*string`
 
 GetTags returns the Tags field if non-nil, zero value otherwise.
 
 ### GetTagsOk
 
-`func (o *Example) GetTagsOk() (*[]string, bool)`
+`func (o *Example) GetTagsOk() (*[]*string, bool)`
 
 GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTags
 
-`func (o *Example) SetTags(v []string)`
+`func (o *Example) SetTags(v []*string)`
 
 SetTags sets Tags field to given value.
 

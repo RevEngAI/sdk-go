@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **CreatedAt** | **time.Time** |  | 
 **DetectedArchitecture** | **string** | Detected instruction-set architecture; empty when unavailable | 
 **DetectedBinaryType** | **string** | Detected operating-system platform; empty when unavailable | 
+**DetectedLanguage** | **string** | Detected source language; empty when unavailable | 
 **IsSystemAnalysis** | **bool** |  | 
 **ModelName** | **string** | Name of the model the analysis ran on | 
 **OwnerId** | **int64** |  | 
@@ -21,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewBinary
 
-`func NewBinary(analysisId int64, binaryId int64, binaryName string, createdAt time.Time, detectedArchitecture string, detectedBinaryType string, isSystemAnalysis bool, modelName string, ownerId int64, sha256Hash string, suppliedArchitecture string, suppliedBinaryType string, ) *Binary`
+`func NewBinary(analysisId int64, binaryId int64, binaryName string, createdAt time.Time, detectedArchitecture string, detectedBinaryType string, detectedLanguage string, isSystemAnalysis bool, modelName string, ownerId int64, sha256Hash string, suppliedArchitecture string, suppliedBinaryType string, ) *Binary`
 
 NewBinary instantiates a new Binary object
 This constructor will assign default values to properties that have it defined,
@@ -154,6 +155,26 @@ and a boolean to check if the value has been set.
 `func (o *Binary) SetDetectedBinaryType(v string)`
 
 SetDetectedBinaryType sets DetectedBinaryType field to given value.
+
+
+### GetDetectedLanguage
+
+`func (o *Binary) GetDetectedLanguage() string`
+
+GetDetectedLanguage returns the DetectedLanguage field if non-nil, zero value otherwise.
+
+### GetDetectedLanguageOk
+
+`func (o *Binary) GetDetectedLanguageOk() (*string, bool)`
+
+GetDetectedLanguageOk returns a tuple with the DetectedLanguage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetectedLanguage
+
+`func (o *Binary) SetDetectedLanguage(v string)`
+
+SetDetectedLanguage sets DetectedLanguage field to given value.
 
 
 ### GetIsSystemAnalysis

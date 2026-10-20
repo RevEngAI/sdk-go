@@ -41,7 +41,7 @@ type Example struct {
 	// Analysis status
 	Status string `json:"status"`
 	// Tags associated with this binary
-	Tags []string `json:"tags"`
+	Tags []*string `json:"tags"`
 	// Username of the analysis owner
 	Username string `json:"username"`
 	AdditionalProperties map[string]interface{}
@@ -53,7 +53,7 @@ type _Example Example
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewExample(analysisId int64, analysisScope string, binaryId int64, binaryName string, binarySize int64, creation time.Time, isOwner bool, modelId int64, sha256Hash string, status string, tags []string, username string) *Example {
+func NewExample(analysisId int64, analysisScope string, binaryId int64, binaryName string, binarySize int64, creation time.Time, isOwner bool, modelId int64, sha256Hash string, status string, tags []*string, username string) *Example {
 	this := Example{}
 	this.AnalysisId = analysisId
 	this.AnalysisScope = analysisScope
@@ -319,10 +319,10 @@ func (o *Example) SetStatus(v string) {
 }
 
 // GetTags returns the Tags field value
-// If the value is explicit nil, the zero value for []string will be returned
-func (o *Example) GetTags() []string {
+// If the value is explicit nil, the zero value for []*string will be returned
+func (o *Example) GetTags() []*string {
 	if o == nil {
-		var ret []string
+		var ret []*string
 		return ret
 	}
 
@@ -332,7 +332,7 @@ func (o *Example) GetTags() []string {
 // GetTagsOk returns a tuple with the Tags field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Example) GetTagsOk() ([]string, bool) {
+func (o *Example) GetTagsOk() ([]*string, bool) {
 	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
@@ -340,7 +340,7 @@ func (o *Example) GetTagsOk() ([]string, bool) {
 }
 
 // SetTags sets field value
-func (o *Example) SetTags(v []string) {
+func (o *Example) SetTags(v []*string) {
 	o.Tags = v
 }
 

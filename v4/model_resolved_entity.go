@@ -40,9 +40,11 @@ type ResolvedEntity struct {
 	SuggestionConfidence NullableString `json:"suggestion_confidence"`
 	Token NullableString `json:"token"`
 	TypeIndex NullableInt64 `json:"type_index"`
+	TypeSource NullableString `json:"type_source"`
 	Vaddr NullableInt64 `json:"vaddr"`
 	Value NullableString `json:"value"`
 	ValueConfidence NullableString `json:"value_confidence"`
+	ValueKind NullableString `json:"value_kind"`
 	ValueType NullableString `json:"value_type"`
 	AdditionalProperties map[string]interface{}
 }
@@ -53,7 +55,7 @@ type _ResolvedEntity ResolvedEntity
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResolvedEntity(addrToken NullableString, allAddrTokens []string, bitOffset NullableInt64, byteOffset NullableInt64, byteSize NullableInt64, count int64, dataTypeIndex NullableInt64, kind NullableString, name NullableString, nameSource string, needsNaming bool, provenance NullableString, resolvedName NullableString, suggestedType NullableString, suggestionConfidence NullableString, token NullableString, typeIndex NullableInt64, vaddr NullableInt64, value NullableString, valueConfidence NullableString, valueType NullableString) *ResolvedEntity {
+func NewResolvedEntity(addrToken NullableString, allAddrTokens []string, bitOffset NullableInt64, byteOffset NullableInt64, byteSize NullableInt64, count int64, dataTypeIndex NullableInt64, kind NullableString, name NullableString, nameSource string, needsNaming bool, provenance NullableString, resolvedName NullableString, suggestedType NullableString, suggestionConfidence NullableString, token NullableString, typeIndex NullableInt64, typeSource NullableString, vaddr NullableInt64, value NullableString, valueConfidence NullableString, valueKind NullableString, valueType NullableString) *ResolvedEntity {
 	this := ResolvedEntity{}
 	this.AddrToken = addrToken
 	this.AllAddrTokens = allAddrTokens
@@ -72,9 +74,11 @@ func NewResolvedEntity(addrToken NullableString, allAddrTokens []string, bitOffs
 	this.SuggestionConfidence = suggestionConfidence
 	this.Token = token
 	this.TypeIndex = typeIndex
+	this.TypeSource = typeSource
 	this.Vaddr = vaddr
 	this.Value = value
 	this.ValueConfidence = valueConfidence
+	this.ValueKind = valueKind
 	this.ValueType = valueType
 	return &this
 }
@@ -661,6 +665,32 @@ func (o *ResolvedEntity) SetTypeIndex(v int64) {
 	o.TypeIndex.Set(&v)
 }
 
+// GetTypeSource returns the TypeSource field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *ResolvedEntity) GetTypeSource() string {
+	if o == nil || o.TypeSource.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.TypeSource.Get()
+}
+
+// GetTypeSourceOk returns a tuple with the TypeSource field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResolvedEntity) GetTypeSourceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TypeSource.Get(), o.TypeSource.IsSet()
+}
+
+// SetTypeSource sets field value
+func (o *ResolvedEntity) SetTypeSource(v string) {
+	o.TypeSource.Set(&v)
+}
+
 // GetVaddr returns the Vaddr field value
 // If the value is explicit nil, the zero value for int64 will be returned
 func (o *ResolvedEntity) GetVaddr() int64 {
@@ -739,6 +769,32 @@ func (o *ResolvedEntity) SetValueConfidence(v string) {
 	o.ValueConfidence.Set(&v)
 }
 
+// GetValueKind returns the ValueKind field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *ResolvedEntity) GetValueKind() string {
+	if o == nil || o.ValueKind.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.ValueKind.Get()
+}
+
+// GetValueKindOk returns a tuple with the ValueKind field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResolvedEntity) GetValueKindOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ValueKind.Get(), o.ValueKind.IsSet()
+}
+
+// SetValueKind sets field value
+func (o *ResolvedEntity) SetValueKind(v string) {
+	o.ValueKind.Set(&v)
+}
+
 // GetValueType returns the ValueType field value
 // If the value is explicit nil, the zero value for string will be returned
 func (o *ResolvedEntity) GetValueType() string {
@@ -806,9 +862,11 @@ func (o ResolvedEntity) ToMap() (map[string]interface{}, error) {
 	toSerialize["suggestion_confidence"] = o.SuggestionConfidence.Get()
 	toSerialize["token"] = o.Token.Get()
 	toSerialize["type_index"] = o.TypeIndex.Get()
+	toSerialize["type_source"] = o.TypeSource.Get()
 	toSerialize["vaddr"] = o.Vaddr.Get()
 	toSerialize["value"] = o.Value.Get()
 	toSerialize["value_confidence"] = o.ValueConfidence.Get()
+	toSerialize["value_kind"] = o.ValueKind.Get()
 	toSerialize["value_type"] = o.ValueType.Get()
 
 	for key, value := range o.AdditionalProperties {
@@ -840,9 +898,11 @@ func (o *ResolvedEntity) UnmarshalJSON(data []byte) (err error) {
 		"suggestion_confidence",
 		"token",
 		"type_index",
+		"type_source",
 		"vaddr",
 		"value",
 		"value_confidence",
+		"value_kind",
 		"value_type",
 	}
 
@@ -894,9 +954,11 @@ func (o *ResolvedEntity) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "suggestion_confidence")
 		delete(additionalProperties, "token")
 		delete(additionalProperties, "type_index")
+		delete(additionalProperties, "type_source")
 		delete(additionalProperties, "vaddr")
 		delete(additionalProperties, "value")
 		delete(additionalProperties, "value_confidence")
+		delete(additionalProperties, "value_kind")
 		delete(additionalProperties, "value_type")
 		o.AdditionalProperties = additionalProperties
 	}

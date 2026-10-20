@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EvidenceKind** | Pointer to **string** |  | [optional] [default to "function_similarity"]
-**Kind** | Pointer to **string** |  | [optional] [default to "deterministic_derivation"]
-**Effect** | [**EvidenceEffect**](EvidenceEffect.md) |  | 
-**Strength** | Pointer to **string** |  | [optional] [default to "indirect"]
-**Similarities** | [**[]FunctionSimilarity**](FunctionSimilarity.md) |  | 
+**Effect** | **string** | Whether the evidence supports or refutes the finding. | 
+**EvidenceKind** | **string** | Kind of evidence. | 
+**Kind** | **string** | How the evidence was derived. | 
+**Similarities** | [**[]ReportFunctionSimilarity**](ReportFunctionSimilarity.md) | The similar functions. | 
+**Strength** | **string** | How directly the evidence bears on the finding. | 
 
 ## Methods
 
 ### NewFunctionSimilarityEvidence
 
-`func NewFunctionSimilarityEvidence(effect EvidenceEffect, similarities []FunctionSimilarity, ) *FunctionSimilarityEvidence`
+`func NewFunctionSimilarityEvidence(effect string, evidenceKind string, kind string, similarities []ReportFunctionSimilarity, strength string, ) *FunctionSimilarityEvidence`
 
 NewFunctionSimilarityEvidence instantiates a new FunctionSimilarityEvidence object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +28,26 @@ will change when the set of required properties is changed
 NewFunctionSimilarityEvidenceWithDefaults instantiates a new FunctionSimilarityEvidence object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetEffect
+
+`func (o *FunctionSimilarityEvidence) GetEffect() string`
+
+GetEffect returns the Effect field if non-nil, zero value otherwise.
+
+### GetEffectOk
+
+`func (o *FunctionSimilarityEvidence) GetEffectOk() (*string, bool)`
+
+GetEffectOk returns a tuple with the Effect field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEffect
+
+`func (o *FunctionSimilarityEvidence) SetEffect(v string)`
+
+SetEffect sets Effect field to given value.
+
 
 ### GetEvidenceKind
 
@@ -48,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetEvidenceKind sets EvidenceKind field to given value.
 
-### HasEvidenceKind
-
-`func (o *FunctionSimilarityEvidence) HasEvidenceKind() bool`
-
-HasEvidenceKind returns a boolean if a field has been set.
 
 ### GetKind
 
@@ -73,30 +88,25 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
-### HasKind
 
-`func (o *FunctionSimilarityEvidence) HasKind() bool`
+### GetSimilarities
 
-HasKind returns a boolean if a field has been set.
+`func (o *FunctionSimilarityEvidence) GetSimilarities() []ReportFunctionSimilarity`
 
-### GetEffect
+GetSimilarities returns the Similarities field if non-nil, zero value otherwise.
 
-`func (o *FunctionSimilarityEvidence) GetEffect() EvidenceEffect`
+### GetSimilaritiesOk
 
-GetEffect returns the Effect field if non-nil, zero value otherwise.
+`func (o *FunctionSimilarityEvidence) GetSimilaritiesOk() (*[]ReportFunctionSimilarity, bool)`
 
-### GetEffectOk
-
-`func (o *FunctionSimilarityEvidence) GetEffectOk() (*EvidenceEffect, bool)`
-
-GetEffectOk returns a tuple with the Effect field if it's non-nil, zero value otherwise
+GetSimilaritiesOk returns a tuple with the Similarities field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEffect
+### SetSimilarities
 
-`func (o *FunctionSimilarityEvidence) SetEffect(v EvidenceEffect)`
+`func (o *FunctionSimilarityEvidence) SetSimilarities(v []ReportFunctionSimilarity)`
 
-SetEffect sets Effect field to given value.
+SetSimilarities sets Similarities field to given value.
 
 
 ### GetStrength
@@ -117,31 +127,6 @@ and a boolean to check if the value has been set.
 `func (o *FunctionSimilarityEvidence) SetStrength(v string)`
 
 SetStrength sets Strength field to given value.
-
-### HasStrength
-
-`func (o *FunctionSimilarityEvidence) HasStrength() bool`
-
-HasStrength returns a boolean if a field has been set.
-
-### GetSimilarities
-
-`func (o *FunctionSimilarityEvidence) GetSimilarities() []FunctionSimilarity`
-
-GetSimilarities returns the Similarities field if non-nil, zero value otherwise.
-
-### GetSimilaritiesOk
-
-`func (o *FunctionSimilarityEvidence) GetSimilaritiesOk() (*[]FunctionSimilarity, bool)`
-
-GetSimilaritiesOk returns a tuple with the Similarities field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSimilarities
-
-`func (o *FunctionSimilarityEvidence) SetSimilarities(v []FunctionSimilarity)`
-
-SetSimilarities sets Similarities field to given value.
 
 
 
