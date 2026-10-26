@@ -19,6 +19,8 @@ var _ MappedNullable = &RegisterUserInputBody{}
 
 // RegisterUserInputBody struct for RegisterUserInputBody
 type RegisterUserInputBody struct {
+	// Google reCAPTCHA token. Required when the deployment has reCAPTCHA enabled; ignored otherwise.
+	CaptchaToken *string `json:"captcha_token,omitempty"`
 	// Email address
 	Email string `json:"email" validate:"regexp=^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$"`
 	// First name
@@ -56,6 +58,38 @@ func NewRegisterUserInputBody(email string, firstName string, lastName string, p
 func NewRegisterUserInputBodyWithDefaults() *RegisterUserInputBody {
 	this := RegisterUserInputBody{}
 	return &this
+}
+
+// GetCaptchaToken returns the CaptchaToken field value if set, zero value otherwise.
+func (o *RegisterUserInputBody) GetCaptchaToken() string {
+	if o == nil || IsNil(o.CaptchaToken) {
+		var ret string
+		return ret
+	}
+	return *o.CaptchaToken
+}
+
+// GetCaptchaTokenOk returns a tuple with the CaptchaToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegisterUserInputBody) GetCaptchaTokenOk() (*string, bool) {
+	if o == nil || IsNil(o.CaptchaToken) {
+		return nil, false
+	}
+	return o.CaptchaToken, true
+}
+
+// HasCaptchaToken returns a boolean if a field has been set.
+func (o *RegisterUserInputBody) HasCaptchaToken() bool {
+	if o != nil && !IsNil(o.CaptchaToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetCaptchaToken gets a reference to the given string and assigns it to the CaptchaToken field.
+func (o *RegisterUserInputBody) SetCaptchaToken(v string) {
+	o.CaptchaToken = &v
 }
 
 // GetEmail returns the Email field value
@@ -220,6 +254,9 @@ func (o RegisterUserInputBody) MarshalJSON() ([]byte, error) {
 
 func (o RegisterUserInputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CaptchaToken) {
+		toSerialize["captcha_token"] = o.CaptchaToken
+	}
 	toSerialize["email"] = o.Email
 	toSerialize["first_name"] = o.FirstName
 	if !IsNil(o.InviteCode) {
@@ -275,6 +312,7 @@ func (o *RegisterUserInputBody) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "captcha_token")
 		delete(additionalProperties, "email")
 		delete(additionalProperties, "first_name")
 		delete(additionalProperties, "invite_code")

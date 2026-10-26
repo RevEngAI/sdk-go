@@ -1,10 +1,10 @@
-# APICombinationEvidence
+# ReportImportedAPICallEvidence
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Apis** | [**[]ReportImportedAPI**](ReportImportedAPI.md) | The APIs in the combination. | 
+**Calls** | [**[]ReportImportedAPICall**](ReportImportedAPICall.md) | The observed calls. | 
 **Effect** | **string** | Whether the evidence supports or refutes the finding. | 
 **EvidenceKind** | **string** | Kind of evidence. | 
 **Kind** | **string** | How the evidence was derived. | 
@@ -12,119 +12,119 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewAPICombinationEvidence
+### NewReportImportedAPICallEvidence
 
-`func NewAPICombinationEvidence(apis []ReportImportedAPI, effect string, evidenceKind string, kind string, strength string, ) *APICombinationEvidence`
+`func NewReportImportedAPICallEvidence(calls []ReportImportedAPICall, effect string, evidenceKind string, kind string, strength string, ) *ReportImportedAPICallEvidence`
 
-NewAPICombinationEvidence instantiates a new APICombinationEvidence object
+NewReportImportedAPICallEvidence instantiates a new ReportImportedAPICallEvidence object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewAPICombinationEvidenceWithDefaults
+### NewReportImportedAPICallEvidenceWithDefaults
 
-`func NewAPICombinationEvidenceWithDefaults() *APICombinationEvidence`
+`func NewReportImportedAPICallEvidenceWithDefaults() *ReportImportedAPICallEvidence`
 
-NewAPICombinationEvidenceWithDefaults instantiates a new APICombinationEvidence object
+NewReportImportedAPICallEvidenceWithDefaults instantiates a new ReportImportedAPICallEvidence object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetApis
+### GetCalls
 
-`func (o *APICombinationEvidence) GetApis() []ReportImportedAPI`
+`func (o *ReportImportedAPICallEvidence) GetCalls() []ReportImportedAPICall`
 
-GetApis returns the Apis field if non-nil, zero value otherwise.
+GetCalls returns the Calls field if non-nil, zero value otherwise.
 
-### GetApisOk
+### GetCallsOk
 
-`func (o *APICombinationEvidence) GetApisOk() (*[]ReportImportedAPI, bool)`
+`func (o *ReportImportedAPICallEvidence) GetCallsOk() (*[]ReportImportedAPICall, bool)`
 
-GetApisOk returns a tuple with the Apis field if it's non-nil, zero value otherwise
+GetCallsOk returns a tuple with the Calls field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetApis
+### SetCalls
 
-`func (o *APICombinationEvidence) SetApis(v []ReportImportedAPI)`
+`func (o *ReportImportedAPICallEvidence) SetCalls(v []ReportImportedAPICall)`
 
-SetApis sets Apis field to given value.
+SetCalls sets Calls field to given value.
 
 
 ### GetEffect
 
-`func (o *APICombinationEvidence) GetEffect() string`
+`func (o *ReportImportedAPICallEvidence) GetEffect() string`
 
 GetEffect returns the Effect field if non-nil, zero value otherwise.
 
 ### GetEffectOk
 
-`func (o *APICombinationEvidence) GetEffectOk() (*string, bool)`
+`func (o *ReportImportedAPICallEvidence) GetEffectOk() (*string, bool)`
 
 GetEffectOk returns a tuple with the Effect field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEffect
 
-`func (o *APICombinationEvidence) SetEffect(v string)`
+`func (o *ReportImportedAPICallEvidence) SetEffect(v string)`
 
 SetEffect sets Effect field to given value.
 
 
 ### GetEvidenceKind
 
-`func (o *APICombinationEvidence) GetEvidenceKind() string`
+`func (o *ReportImportedAPICallEvidence) GetEvidenceKind() string`
 
 GetEvidenceKind returns the EvidenceKind field if non-nil, zero value otherwise.
 
 ### GetEvidenceKindOk
 
-`func (o *APICombinationEvidence) GetEvidenceKindOk() (*string, bool)`
+`func (o *ReportImportedAPICallEvidence) GetEvidenceKindOk() (*string, bool)`
 
 GetEvidenceKindOk returns a tuple with the EvidenceKind field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEvidenceKind
 
-`func (o *APICombinationEvidence) SetEvidenceKind(v string)`
+`func (o *ReportImportedAPICallEvidence) SetEvidenceKind(v string)`
 
 SetEvidenceKind sets EvidenceKind field to given value.
 
 
 ### GetKind
 
-`func (o *APICombinationEvidence) GetKind() string`
+`func (o *ReportImportedAPICallEvidence) GetKind() string`
 
 GetKind returns the Kind field if non-nil, zero value otherwise.
 
 ### GetKindOk
 
-`func (o *APICombinationEvidence) GetKindOk() (*string, bool)`
+`func (o *ReportImportedAPICallEvidence) GetKindOk() (*string, bool)`
 
 GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKind
 
-`func (o *APICombinationEvidence) SetKind(v string)`
+`func (o *ReportImportedAPICallEvidence) SetKind(v string)`
 
 SetKind sets Kind field to given value.
 
 
 ### GetStrength
 
-`func (o *APICombinationEvidence) GetStrength() string`
+`func (o *ReportImportedAPICallEvidence) GetStrength() string`
 
 GetStrength returns the Strength field if non-nil, zero value otherwise.
 
 ### GetStrengthOk
 
-`func (o *APICombinationEvidence) GetStrengthOk() (*string, bool)`
+`func (o *ReportImportedAPICallEvidence) GetStrengthOk() (*string, bool)`
 
 GetStrengthOk returns a tuple with the Strength field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStrength
 
-`func (o *APICombinationEvidence) SetStrength(v string)`
+`func (o *ReportImportedAPICallEvidence) SetStrength(v string)`
 
 SetStrength sets Strength field to given value.
 

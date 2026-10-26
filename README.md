@@ -345,7 +345,6 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [APICombinationEvidence](docs/APICombinationEvidence.md)
  - [APIError](docs/APIError.md)
  - [AcceptTypeSuggestionsInputBody](docs/AcceptTypeSuggestionsInputBody.md)
  - [AcceptTypeSuggestionsOutputBody](docs/AcceptTypeSuggestionsOutputBody.md)
@@ -781,7 +780,6 @@ Class | Method | HTTP request | Description
  - [IconModel](docs/IconModel.md)
  - [ImportDynamicExecutionFileOutputBody](docs/ImportDynamicExecutionFileOutputBody.md)
  - [ImportModel](docs/ImportModel.md)
- - [ImportedAPICallEvidence](docs/ImportedAPICallEvidence.md)
  - [ImportedApi](docs/ImportedApi.md)
  - [ImportedApiCall](docs/ImportedApiCall.md)
  - [ImportedApiCallEvidence](docs/ImportedApiCallEvidence.md)
@@ -927,6 +925,7 @@ Class | Method | HTTP request | Description
  - [RenameUnnamedFunctionsMetadata](docs/RenameUnnamedFunctionsMetadata.md)
  - [RenameUnnamedFunctionsResult](docs/RenameUnnamedFunctionsResult.md)
  - [RenderedToken](docs/RenderedToken.md)
+ - [ReportAPICombinationEvidence](docs/ReportAPICombinationEvidence.md)
  - [ReportAnalysisBody](docs/ReportAnalysisBody.md)
  - [ReportAnalysisResponse](docs/ReportAnalysisResponse.md)
  - [ReportBytesConstant](docs/ReportBytesConstant.md)
@@ -938,6 +937,7 @@ Class | Method | HTTP request | Description
  - [ReportFunctionSimilarity](docs/ReportFunctionSimilarity.md)
  - [ReportImportedAPI](docs/ReportImportedAPI.md)
  - [ReportImportedAPICall](docs/ReportImportedAPICall.md)
+ - [ReportImportedAPICallEvidence](docs/ReportImportedAPICallEvidence.md)
  - [ReportInfo](docs/ReportInfo.md)
  - [ReportMeta](docs/ReportMeta.md)
  - [ReportModelInterpretation](docs/ReportModelInterpretation.md)
