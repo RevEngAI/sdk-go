@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CaptchaToken** | Pointer to **string** | Google reCAPTCHA token. Required when the deployment has reCAPTCHA enabled; ignored otherwise. | [optional] 
 **Email** | **string** | Email address | 
 **FirstName** | **string** | First name | 
 **InviteCode** | Pointer to **string** | Invite code from the registration email | [optional] 
@@ -29,6 +30,31 @@ will change when the set of required properties is changed
 NewRegisterUserInputBodyWithDefaults instantiates a new RegisterUserInputBody object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCaptchaToken
+
+`func (o *RegisterUserInputBody) GetCaptchaToken() string`
+
+GetCaptchaToken returns the CaptchaToken field if non-nil, zero value otherwise.
+
+### GetCaptchaTokenOk
+
+`func (o *RegisterUserInputBody) GetCaptchaTokenOk() (*string, bool)`
+
+GetCaptchaTokenOk returns a tuple with the CaptchaToken field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCaptchaToken
+
+`func (o *RegisterUserInputBody) SetCaptchaToken(v string)`
+
+SetCaptchaToken sets CaptchaToken field to given value.
+
+### HasCaptchaToken
+
+`func (o *RegisterUserInputBody) HasCaptchaToken() bool`
+
+HasCaptchaToken returns a boolean if a field has been set.
 
 ### GetEmail
 
