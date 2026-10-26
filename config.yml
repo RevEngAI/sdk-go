@@ -14,6 +14,10 @@ enumUnknownDefaultCase: true
 # for the optional `definition` property on the same schemas
 nameMappings:
   has_definition: DefinitionPresent
+# Schemas differing only by case from another schema collide once generated
+modelNameMappings:
+  APICombinationEvidence: ReportAPICombinationEvidence
+  ImportedAPICallEvidence: ReportImportedAPICallEvidence
 globalProperties:
   apiTests: "false"
   modelTests: "false"
