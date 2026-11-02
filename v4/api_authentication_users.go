@@ -687,6 +687,282 @@ func (a *AuthenticationUsersAPIService) V3GetUserActivityExecute(r ApiV3GetUserA
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiV3ListPrincipalsRequest struct {
+	ctx context.Context
+	ApiService *AuthenticationUsersAPIService
+	searchTerm *string
+}
+
+// Text the user&#39;s username or team&#39;s name contains (case-insensitive)
+func (r ApiV3ListPrincipalsRequest) SearchTerm(searchTerm string) ApiV3ListPrincipalsRequest {
+	r.searchTerm = &searchTerm
+	return r
+}
+
+func (r ApiV3ListPrincipalsRequest) Execute() (*ListPrincipalsOutputBody, *http.Response, error) {
+	return r.ApiService.V3ListPrincipalsExecute(r)
+}
+
+/*
+V3ListPrincipals Search users and teams
+
+Returns up to 5 matching users and up to 5 matching teams whose name contains the search term (case-insensitive), scoped to the caller's organisation using the same rules as the individual user and team search endpoints.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiV3ListPrincipalsRequest
+*/
+func (a *AuthenticationUsersAPIService) V3ListPrincipals(ctx context.Context) ApiV3ListPrincipalsRequest {
+	return ApiV3ListPrincipalsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ListPrincipalsOutputBody
+func (a *AuthenticationUsersAPIService) V3ListPrincipalsExecute(r ApiV3ListPrincipalsRequest) (*ListPrincipalsOutputBody, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListPrincipalsOutputBody
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuthenticationUsersAPIService.V3ListPrincipals")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/principals"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.searchTerm == nil {
+		return localVarReturnValue, nil, reportError("searchTerm is required and must be specified")
+	}
+	if strlen(*r.searchTerm) < 3 {
+		return localVarReturnValue, nil, reportError("searchTerm must have at least 3 elements")
+	}
+	if strlen(*r.searchTerm) > 255 {
+		return localVarReturnValue, nil, reportError("searchTerm must have less than 255 elements")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "search_term", r.searchTerm, "form", "")
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV3ListTeamsRequest struct {
+	ctx context.Context
+	ApiService *AuthenticationUsersAPIService
+	searchTerm *string
+}
+
+// Text the team name contains (case-insensitive)
+func (r ApiV3ListTeamsRequest) SearchTerm(searchTerm string) ApiV3ListTeamsRequest {
+	r.searchTerm = &searchTerm
+	return r
+}
+
+func (r ApiV3ListTeamsRequest) Execute() (*ListTeamsOutputBody, *http.Response, error) {
+	return r.ApiService.V3ListTeamsExecute(r)
+}
+
+/*
+V3ListTeams Search teams
+
+Returns up to 5 teams whose name contains the search term (case-insensitive). Returns every team in the caller's organisation, or — if the organisation is named "Internal" — only the teams the caller belongs to.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiV3ListTeamsRequest
+*/
+func (a *AuthenticationUsersAPIService) V3ListTeams(ctx context.Context) ApiV3ListTeamsRequest {
+	return ApiV3ListTeamsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ListTeamsOutputBody
+func (a *AuthenticationUsersAPIService) V3ListTeamsExecute(r ApiV3ListTeamsRequest) (*ListTeamsOutputBody, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListTeamsOutputBody
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuthenticationUsersAPIService.V3ListTeams")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/teams"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.searchTerm == nil {
+		return localVarReturnValue, nil, reportError("searchTerm is required and must be specified")
+	}
+	if strlen(*r.searchTerm) < 3 {
+		return localVarReturnValue, nil, reportError("searchTerm must have at least 3 elements")
+	}
+	if strlen(*r.searchTerm) > 255 {
+		return localVarReturnValue, nil, reportError("searchTerm must have less than 255 elements")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "search_term", r.searchTerm, "form", "")
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiV3ListUsersRequest struct {
 	ctx context.Context
 	ApiService *AuthenticationUsersAPIService
@@ -706,7 +982,7 @@ func (r ApiV3ListUsersRequest) Execute() (*ListPublicUsersOutputBody, *http.Resp
 /*
 V3ListUsers Search users
 
-Returns up to 5 active users whose username contains the search term (case-insensitive), with their ID and username, ordered by username.
+Returns up to 5 active users in the caller's organisation whose username contains the search term (case-insensitive), with their ID and username, ordered by username.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiV3ListUsersRequest

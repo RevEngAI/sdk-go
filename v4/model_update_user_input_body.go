@@ -22,6 +22,8 @@ type UpdateUserInputBody struct {
 	Email *string `json:"email,omitempty" validate:"regexp=^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$"`
 	// First name
 	FirstName *string `json:"first_name,omitempty"`
+	// Whether the user can authenticate (SUPERADMIN only)
+	IsActive *bool `json:"is_active,omitempty"`
 	// Last name
 	LastName *string `json:"last_name,omitempty"`
 	// User role (SUPERADMIN only)
@@ -116,6 +118,38 @@ func (o *UpdateUserInputBody) HasFirstName() bool {
 // SetFirstName gets a reference to the given string and assigns it to the FirstName field.
 func (o *UpdateUserInputBody) SetFirstName(v string) {
 	o.FirstName = &v
+}
+
+// GetIsActive returns the IsActive field value if set, zero value otherwise.
+func (o *UpdateUserInputBody) GetIsActive() bool {
+	if o == nil || IsNil(o.IsActive) {
+		var ret bool
+		return ret
+	}
+	return *o.IsActive
+}
+
+// GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateUserInputBody) GetIsActiveOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsActive) {
+		return nil, false
+	}
+	return o.IsActive, true
+}
+
+// HasIsActive returns a boolean if a field has been set.
+func (o *UpdateUserInputBody) HasIsActive() bool {
+	if o != nil && !IsNil(o.IsActive) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsActive gets a reference to the given bool and assigns it to the IsActive field.
+func (o *UpdateUserInputBody) SetIsActive(v bool) {
+	o.IsActive = &v
 }
 
 // GetLastName returns the LastName field value if set, zero value otherwise.
@@ -294,6 +328,9 @@ func (o UpdateUserInputBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FirstName) {
 		toSerialize["first_name"] = o.FirstName
 	}
+	if !IsNil(o.IsActive) {
+		toSerialize["is_active"] = o.IsActive
+	}
 	if !IsNil(o.LastName) {
 		toSerialize["last_name"] = o.LastName
 	}
@@ -333,6 +370,7 @@ func (o *UpdateUserInputBody) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "email")
 		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "is_active")
 		delete(additionalProperties, "last_name")
 		delete(additionalProperties, "role")
 		delete(additionalProperties, "tier")

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CompletedAt** | Pointer to **time.Time** | When this run last completed. Absent until status&#x3D;COMPLETED. | [optional] 
 **Messages** | [**[]ProgressMessage**](ProgressMessage.md) | Log messages emitted during execution | 
 **Percent** | **int64** | Overall completion as a percentage, weighted by step duration | 
 **Status** | **string** | Current workflow status | 
@@ -33,6 +34,31 @@ will change when the set of required properties is changed
 NewGetMatchesStatusOutputBodyWithDefaults instantiates a new GetMatchesStatusOutputBody object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCompletedAt
+
+`func (o *GetMatchesStatusOutputBody) GetCompletedAt() time.Time`
+
+GetCompletedAt returns the CompletedAt field if non-nil, zero value otherwise.
+
+### GetCompletedAtOk
+
+`func (o *GetMatchesStatusOutputBody) GetCompletedAtOk() (*time.Time, bool)`
+
+GetCompletedAtOk returns a tuple with the CompletedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompletedAt
+
+`func (o *GetMatchesStatusOutputBody) SetCompletedAt(v time.Time)`
+
+SetCompletedAt sets CompletedAt field to given value.
+
+### HasCompletedAt
+
+`func (o *GetMatchesStatusOutputBody) HasCompletedAt() bool`
+
+HasCompletedAt returns a boolean if a field has been set.
 
 ### GetMessages
 

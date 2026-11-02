@@ -11,6 +11,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"time"
 	"fmt"
 )
 
@@ -19,6 +20,8 @@ var _ MappedNullable = &GetMatchesStatusOutputBody{}
 
 // GetMatchesStatusOutputBody struct for GetMatchesStatusOutputBody
 type GetMatchesStatusOutputBody struct {
+	// When this run last completed. Absent until status=COMPLETED.
+	CompletedAt *time.Time `json:"completed_at,omitempty"`
 	// Log messages emitted during execution
 	Messages []ProgressMessage `json:"messages"`
 	// Overall completion as a percentage, weighted by step duration
@@ -66,6 +69,38 @@ func NewGetMatchesStatusOutputBody(messages []ProgressMessage, percent int64, st
 func NewGetMatchesStatusOutputBodyWithDefaults() *GetMatchesStatusOutputBody {
 	this := GetMatchesStatusOutputBody{}
 	return &this
+}
+
+// GetCompletedAt returns the CompletedAt field value if set, zero value otherwise.
+func (o *GetMatchesStatusOutputBody) GetCompletedAt() time.Time {
+	if o == nil || IsNil(o.CompletedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CompletedAt
+}
+
+// GetCompletedAtOk returns a tuple with the CompletedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetMatchesStatusOutputBody) GetCompletedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CompletedAt) {
+		return nil, false
+	}
+	return o.CompletedAt, true
+}
+
+// HasCompletedAt returns a boolean if a field has been set.
+func (o *GetMatchesStatusOutputBody) HasCompletedAt() bool {
+	if o != nil && !IsNil(o.CompletedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCompletedAt gets a reference to the given time.Time and assigns it to the CompletedAt field.
+func (o *GetMatchesStatusOutputBody) SetCompletedAt(v time.Time) {
+	o.CompletedAt = &v
 }
 
 // GetMessages returns the Messages field value
@@ -344,6 +379,9 @@ func (o GetMatchesStatusOutputBody) MarshalJSON() ([]byte, error) {
 
 func (o GetMatchesStatusOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CompletedAt) {
+		toSerialize["completed_at"] = o.CompletedAt
+	}
 	if o.Messages != nil {
 		toSerialize["messages"] = o.Messages
 	}
@@ -411,6 +449,7 @@ func (o *GetMatchesStatusOutputBody) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "completed_at")
 		delete(additionalProperties, "messages")
 		delete(additionalProperties, "percent")
 		delete(additionalProperties, "status")

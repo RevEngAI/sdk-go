@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedAt** | **time.Time** |  | 
 **Email** | **string** |  | 
+**IsActive** | **bool** | Inactive users cannot authenticate | 
 **Profile** | [**UserProfile**](UserProfile.md) |  | 
 **Role** | **string** |  | 
 **Tier** | Pointer to **string** |  | [optional] 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewUser
 
-`func NewUser(createdAt time.Time, email string, profile UserProfile, role string, userId int64, ) *User`
+`func NewUser(createdAt time.Time, email string, isActive bool, profile UserProfile, role string, userId int64, ) *User`
 
 NewUser instantiates a new User object
 This constructor will assign default values to properties that have it defined,
@@ -68,6 +69,26 @@ and a boolean to check if the value has been set.
 `func (o *User) SetEmail(v string)`
 
 SetEmail sets Email field to given value.
+
+
+### GetIsActive
+
+`func (o *User) GetIsActive() bool`
+
+GetIsActive returns the IsActive field if non-nil, zero value otherwise.
+
+### GetIsActiveOk
+
+`func (o *User) GetIsActiveOk() (*bool, bool)`
+
+GetIsActiveOk returns a tuple with the IsActive field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsActive
+
+`func (o *User) SetIsActive(v bool)`
+
+SetIsActive sets IsActive field to given value.
 
 
 ### GetProfile

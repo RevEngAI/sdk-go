@@ -19,15 +19,18 @@ var _ MappedNullable = &RequestedConfigBody{}
 
 // RequestedConfigBody struct for RequestedConfigBody
 type RequestedConfigBody struct {
-	// Whether the capabilities agent was requested
+	// Whether static capability extraction was requested
 	Capabilities bool `json:"capabilities"`
 	// Whether the functions pipeline was requested
 	Functions bool `json:"functions"`
+	// Operations requested to run automatically once the analysis completes
+	Operations []RequestedOperation `json:"operations"`
 	// Whether dynamic execution (sandbox) was requested
 	Sandbox bool `json:"sandbox"`
 	// Whether external-source scraping was requested
 	Scrape bool `json:"scrape"`
 	// Whether the triage agent was requested
+	// Deprecated
 	Triage bool `json:"triage"`
 	AdditionalProperties map[string]interface{}
 }
@@ -38,10 +41,11 @@ type _RequestedConfigBody RequestedConfigBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRequestedConfigBody(capabilities bool, functions bool, sandbox bool, scrape bool, triage bool) *RequestedConfigBody {
+func NewRequestedConfigBody(capabilities bool, functions bool, operations []RequestedOperation, sandbox bool, scrape bool, triage bool) *RequestedConfigBody {
 	this := RequestedConfigBody{}
 	this.Capabilities = capabilities
 	this.Functions = functions
+	this.Operations = operations
 	this.Sandbox = sandbox
 	this.Scrape = scrape
 	this.Triage = triage
@@ -104,6 +108,30 @@ func (o *RequestedConfigBody) SetFunctions(v bool) {
 	o.Functions = v
 }
 
+// GetOperations returns the Operations field value
+func (o *RequestedConfigBody) GetOperations() []RequestedOperation {
+	if o == nil {
+		var ret []RequestedOperation
+		return ret
+	}
+
+	return o.Operations
+}
+
+// GetOperationsOk returns a tuple with the Operations field value
+// and a boolean to check if the value has been set.
+func (o *RequestedConfigBody) GetOperationsOk() ([]RequestedOperation, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Operations, true
+}
+
+// SetOperations sets field value
+func (o *RequestedConfigBody) SetOperations(v []RequestedOperation) {
+	o.Operations = v
+}
+
 // GetSandbox returns the Sandbox field value
 func (o *RequestedConfigBody) GetSandbox() bool {
 	if o == nil {
@@ -153,6 +181,7 @@ func (o *RequestedConfigBody) SetScrape(v bool) {
 }
 
 // GetTriage returns the Triage field value
+// Deprecated
 func (o *RequestedConfigBody) GetTriage() bool {
 	if o == nil {
 		var ret bool
@@ -164,6 +193,7 @@ func (o *RequestedConfigBody) GetTriage() bool {
 
 // GetTriageOk returns a tuple with the Triage field value
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *RequestedConfigBody) GetTriageOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
@@ -172,6 +202,7 @@ func (o *RequestedConfigBody) GetTriageOk() (*bool, bool) {
 }
 
 // SetTriage sets field value
+// Deprecated
 func (o *RequestedConfigBody) SetTriage(v bool) {
 	o.Triage = v
 }
@@ -188,6 +219,7 @@ func (o RequestedConfigBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["capabilities"] = o.Capabilities
 	toSerialize["functions"] = o.Functions
+	toSerialize["operations"] = o.Operations
 	toSerialize["sandbox"] = o.Sandbox
 	toSerialize["scrape"] = o.Scrape
 	toSerialize["triage"] = o.Triage
@@ -206,6 +238,7 @@ func (o *RequestedConfigBody) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"capabilities",
 		"functions",
+		"operations",
 		"sandbox",
 		"scrape",
 		"triage",
@@ -240,6 +273,7 @@ func (o *RequestedConfigBody) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "capabilities")
 		delete(additionalProperties, "functions")
+		delete(additionalProperties, "operations")
 		delete(additionalProperties, "sandbox")
 		delete(additionalProperties, "scrape")
 		delete(additionalProperties, "triage")

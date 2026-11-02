@@ -21,13 +21,16 @@ var _ MappedNullable = &CreateRequest{}
 type CreateRequest struct {
 	AnalysisConfig *Config `json:"analysis_config,omitempty"`
 	AnalysisScope *string `json:"analysis_scope,omitempty"`
-	AutoRunAgents *AutoRunAgents `json:"auto_run_agents,omitempty"`
 	BinaryConfig *BinaryConfig `json:"binary_config,omitempty"`
 	DebugHash *string `json:"debug_hash,omitempty" validate:"regexp=^[a-fA-F0-9]{64}$"`
 	Filename string `json:"filename"`
+	// Adds the new analysis to this investigation, which you must own.
+	InvestigationId *int64 `json:"investigation_id,omitempty"`
+	// Operations to run automatically once the analysis completes. Each operation's prerequisites must also be requested.
+	Operations []RequestedOperation `json:"operations,omitempty"`
 	Sha256Hash string `json:"sha_256_hash" validate:"regexp=^[a-fA-F0-9]{64}$"`
 	Symbols *Symbols `json:"symbols,omitempty"`
-	Tags []*string `json:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -120,38 +123,6 @@ func (o *CreateRequest) SetAnalysisScope(v string) {
 	o.AnalysisScope = &v
 }
 
-// GetAutoRunAgents returns the AutoRunAgents field value if set, zero value otherwise.
-func (o *CreateRequest) GetAutoRunAgents() AutoRunAgents {
-	if o == nil || IsNil(o.AutoRunAgents) {
-		var ret AutoRunAgents
-		return ret
-	}
-	return *o.AutoRunAgents
-}
-
-// GetAutoRunAgentsOk returns a tuple with the AutoRunAgents field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateRequest) GetAutoRunAgentsOk() (*AutoRunAgents, bool) {
-	if o == nil || IsNil(o.AutoRunAgents) {
-		return nil, false
-	}
-	return o.AutoRunAgents, true
-}
-
-// HasAutoRunAgents returns a boolean if a field has been set.
-func (o *CreateRequest) HasAutoRunAgents() bool {
-	if o != nil && !IsNil(o.AutoRunAgents) {
-		return true
-	}
-
-	return false
-}
-
-// SetAutoRunAgents gets a reference to the given AutoRunAgents and assigns it to the AutoRunAgents field.
-func (o *CreateRequest) SetAutoRunAgents(v AutoRunAgents) {
-	o.AutoRunAgents = &v
-}
-
 // GetBinaryConfig returns the BinaryConfig field value if set, zero value otherwise.
 func (o *CreateRequest) GetBinaryConfig() BinaryConfig {
 	if o == nil || IsNil(o.BinaryConfig) {
@@ -240,6 +211,70 @@ func (o *CreateRequest) SetFilename(v string) {
 	o.Filename = v
 }
 
+// GetInvestigationId returns the InvestigationId field value if set, zero value otherwise.
+func (o *CreateRequest) GetInvestigationId() int64 {
+	if o == nil || IsNil(o.InvestigationId) {
+		var ret int64
+		return ret
+	}
+	return *o.InvestigationId
+}
+
+// GetInvestigationIdOk returns a tuple with the InvestigationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateRequest) GetInvestigationIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.InvestigationId) {
+		return nil, false
+	}
+	return o.InvestigationId, true
+}
+
+// HasInvestigationId returns a boolean if a field has been set.
+func (o *CreateRequest) HasInvestigationId() bool {
+	if o != nil && !IsNil(o.InvestigationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetInvestigationId gets a reference to the given int64 and assigns it to the InvestigationId field.
+func (o *CreateRequest) SetInvestigationId(v int64) {
+	o.InvestigationId = &v
+}
+
+// GetOperations returns the Operations field value if set, zero value otherwise.
+func (o *CreateRequest) GetOperations() []RequestedOperation {
+	if o == nil || IsNil(o.Operations) {
+		var ret []RequestedOperation
+		return ret
+	}
+	return o.Operations
+}
+
+// GetOperationsOk returns a tuple with the Operations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateRequest) GetOperationsOk() ([]RequestedOperation, bool) {
+	if o == nil || IsNil(o.Operations) {
+		return nil, false
+	}
+	return o.Operations, true
+}
+
+// HasOperations returns a boolean if a field has been set.
+func (o *CreateRequest) HasOperations() bool {
+	if o != nil && !IsNil(o.Operations) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperations gets a reference to the given []RequestedOperation and assigns it to the Operations field.
+func (o *CreateRequest) SetOperations(v []RequestedOperation) {
+	o.Operations = v
+}
+
 // GetSha256Hash returns the Sha256Hash field value
 func (o *CreateRequest) GetSha256Hash() string {
 	if o == nil {
@@ -297,9 +332,9 @@ func (o *CreateRequest) SetSymbols(v Symbols) {
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateRequest) GetTags() []*string {
+func (o *CreateRequest) GetTags() []string {
 	if o == nil {
-		var ret []*string
+		var ret []string
 		return ret
 	}
 	return o.Tags
@@ -308,7 +343,7 @@ func (o *CreateRequest) GetTags() []*string {
 // GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateRequest) GetTagsOk() ([]*string, bool) {
+func (o *CreateRequest) GetTagsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
@@ -324,8 +359,8 @@ func (o *CreateRequest) HasTags() bool {
 	return false
 }
 
-// SetTags gets a reference to the given []*string and assigns it to the Tags field.
-func (o *CreateRequest) SetTags(v []*string) {
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *CreateRequest) SetTags(v []string) {
 	o.Tags = v
 }
 
@@ -345,9 +380,6 @@ func (o CreateRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AnalysisScope) {
 		toSerialize["analysis_scope"] = o.AnalysisScope
 	}
-	if !IsNil(o.AutoRunAgents) {
-		toSerialize["auto_run_agents"] = o.AutoRunAgents
-	}
 	if !IsNil(o.BinaryConfig) {
 		toSerialize["binary_config"] = o.BinaryConfig
 	}
@@ -355,6 +387,12 @@ func (o CreateRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["debug_hash"] = o.DebugHash
 	}
 	toSerialize["filename"] = o.Filename
+	if !IsNil(o.InvestigationId) {
+		toSerialize["investigation_id"] = o.InvestigationId
+	}
+	if !IsNil(o.Operations) {
+		toSerialize["operations"] = o.Operations
+	}
 	toSerialize["sha_256_hash"] = o.Sha256Hash
 	if !IsNil(o.Symbols) {
 		toSerialize["symbols"] = o.Symbols
@@ -408,10 +446,11 @@ func (o *CreateRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "analysis_config")
 		delete(additionalProperties, "analysis_scope")
-		delete(additionalProperties, "auto_run_agents")
 		delete(additionalProperties, "binary_config")
 		delete(additionalProperties, "debug_hash")
 		delete(additionalProperties, "filename")
+		delete(additionalProperties, "investigation_id")
+		delete(additionalProperties, "operations")
 		delete(additionalProperties, "sha_256_hash")
 		delete(additionalProperties, "symbols")
 		delete(additionalProperties, "tags")

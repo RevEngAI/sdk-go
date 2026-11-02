@@ -17,6 +17,7 @@ import (
 
 // ServerSentEventsInner - struct for ServerSentEventsInner
 type ServerSentEventsInner struct {
+	EventAGENTRUNUPDATE *EventAGENTRUNUPDATE
 	EventCONTEXTCOMPACTED *EventCONTEXTCOMPACTED
 	EventRUNCANCELLED *EventRUNCANCELLED
 	EventRUNERROR *EventRUNERROR
@@ -34,6 +35,13 @@ type ServerSentEventsInner struct {
 	EventTOOLCALLRESULT *EventTOOLCALLRESULT
 	EventTOOLCALLSTART *EventTOOLCALLSTART
 	EventTOOLCONFIRMATIONREQUIRED *EventTOOLCONFIRMATIONREQUIRED
+}
+
+// EventAGENTRUNUPDATEAsServerSentEventsInner is a convenience function that returns EventAGENTRUNUPDATE wrapped in ServerSentEventsInner
+func EventAGENTRUNUPDATEAsServerSentEventsInner(v *EventAGENTRUNUPDATE) ServerSentEventsInner {
+	return ServerSentEventsInner{
+		EventAGENTRUNUPDATE: v,
+	}
 }
 
 // EventCONTEXTCOMPACTEDAsServerSentEventsInner is a convenience function that returns EventCONTEXTCOMPACTED wrapped in ServerSentEventsInner
@@ -160,6 +168,23 @@ func EventTOOLCONFIRMATIONREQUIREDAsServerSentEventsInner(v *EventTOOLCONFIRMATI
 func (dst *ServerSentEventsInner) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into EventAGENTRUNUPDATE
+	err = newStrictDecoder(data).Decode(&dst.EventAGENTRUNUPDATE)
+	if err == nil {
+		jsonEventAGENTRUNUPDATE, _ := json.Marshal(dst.EventAGENTRUNUPDATE)
+		if string(jsonEventAGENTRUNUPDATE) == "{}" { // empty struct
+			dst.EventAGENTRUNUPDATE = nil
+		} else {
+			if err = validator.Validate(dst.EventAGENTRUNUPDATE); err != nil {
+				dst.EventAGENTRUNUPDATE = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.EventAGENTRUNUPDATE = nil
+	}
+
 	// try to unmarshal data into EventCONTEXTCOMPACTED
 	err = newStrictDecoder(data).Decode(&dst.EventCONTEXTCOMPACTED)
 	if err == nil {
@@ -451,6 +476,7 @@ func (dst *ServerSentEventsInner) UnmarshalJSON(data []byte) error {
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.EventAGENTRUNUPDATE = nil
 		dst.EventCONTEXTCOMPACTED = nil
 		dst.EventRUNCANCELLED = nil
 		dst.EventRUNERROR = nil
@@ -479,6 +505,10 @@ func (dst *ServerSentEventsInner) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src ServerSentEventsInner) MarshalJSON() ([]byte, error) {
+	if src.EventAGENTRUNUPDATE != nil {
+		return json.Marshal(&src.EventAGENTRUNUPDATE)
+	}
+
 	if src.EventCONTEXTCOMPACTED != nil {
 		return json.Marshal(&src.EventCONTEXTCOMPACTED)
 	}
@@ -555,6 +585,10 @@ func (obj *ServerSentEventsInner) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
+	if obj.EventAGENTRUNUPDATE != nil {
+		return obj.EventAGENTRUNUPDATE
+	}
+
 	if obj.EventCONTEXTCOMPACTED != nil {
 		return obj.EventCONTEXTCOMPACTED
 	}
@@ -629,6 +663,10 @@ func (obj *ServerSentEventsInner) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj ServerSentEventsInner) GetActualInstanceValue() (interface{}) {
+	if obj.EventAGENTRUNUPDATE != nil {
+		return *obj.EventAGENTRUNUPDATE
+	}
+
 	if obj.EventCONTEXTCOMPACTED != nil {
 		return *obj.EventCONTEXTCOMPACTED
 	}

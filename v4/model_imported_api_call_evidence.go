@@ -14,11 +14,11 @@ import (
 	"fmt"
 )
 
-// checks if the ImportedApiCallEvidence type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ImportedApiCallEvidence{}
+// checks if the ImportedAPICallEvidence type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ImportedAPICallEvidence{}
 
-// ImportedApiCallEvidence Imported API calls observed in the program.
-type ImportedApiCallEvidence struct {
+// ImportedAPICallEvidence Imported API calls observed in the program.
+type ImportedAPICallEvidence struct {
 	EvidenceKind *string `json:"evidence_kind,omitempty"`
 	Kind *string `json:"kind,omitempty"`
 	Effect EvidenceEffect `json:"effect"`
@@ -27,14 +27,14 @@ type ImportedApiCallEvidence struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _ImportedApiCallEvidence ImportedApiCallEvidence
+type _ImportedAPICallEvidence ImportedAPICallEvidence
 
-// NewImportedApiCallEvidence instantiates a new ImportedApiCallEvidence object
+// NewImportedAPICallEvidence instantiates a new ImportedAPICallEvidence object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImportedApiCallEvidence(effect EvidenceEffect, calls []ImportedApiCall) *ImportedApiCallEvidence {
-	this := ImportedApiCallEvidence{}
+func NewImportedAPICallEvidence(effect EvidenceEffect, calls []ImportedApiCall) *ImportedAPICallEvidence {
+	this := ImportedAPICallEvidence{}
 	var evidenceKind string = "imported_api_call"
 	this.EvidenceKind = &evidenceKind
 	var kind string = "deterministic_derivation"
@@ -46,11 +46,11 @@ func NewImportedApiCallEvidence(effect EvidenceEffect, calls []ImportedApiCall) 
 	return &this
 }
 
-// NewImportedApiCallEvidenceWithDefaults instantiates a new ImportedApiCallEvidence object
+// NewImportedAPICallEvidenceWithDefaults instantiates a new ImportedAPICallEvidence object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewImportedApiCallEvidenceWithDefaults() *ImportedApiCallEvidence {
-	this := ImportedApiCallEvidence{}
+func NewImportedAPICallEvidenceWithDefaults() *ImportedAPICallEvidence {
+	this := ImportedAPICallEvidence{}
 	var evidenceKind string = "imported_api_call"
 	this.EvidenceKind = &evidenceKind
 	var kind string = "deterministic_derivation"
@@ -61,7 +61,7 @@ func NewImportedApiCallEvidenceWithDefaults() *ImportedApiCallEvidence {
 }
 
 // GetEvidenceKind returns the EvidenceKind field value if set, zero value otherwise.
-func (o *ImportedApiCallEvidence) GetEvidenceKind() string {
+func (o *ImportedAPICallEvidence) GetEvidenceKind() string {
 	if o == nil || IsNil(o.EvidenceKind) {
 		var ret string
 		return ret
@@ -71,7 +71,7 @@ func (o *ImportedApiCallEvidence) GetEvidenceKind() string {
 
 // GetEvidenceKindOk returns a tuple with the EvidenceKind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ImportedApiCallEvidence) GetEvidenceKindOk() (*string, bool) {
+func (o *ImportedAPICallEvidence) GetEvidenceKindOk() (*string, bool) {
 	if o == nil || IsNil(o.EvidenceKind) {
 		return nil, false
 	}
@@ -79,7 +79,7 @@ func (o *ImportedApiCallEvidence) GetEvidenceKindOk() (*string, bool) {
 }
 
 // HasEvidenceKind returns a boolean if a field has been set.
-func (o *ImportedApiCallEvidence) HasEvidenceKind() bool {
+func (o *ImportedAPICallEvidence) HasEvidenceKind() bool {
 	if o != nil && !IsNil(o.EvidenceKind) {
 		return true
 	}
@@ -88,12 +88,12 @@ func (o *ImportedApiCallEvidence) HasEvidenceKind() bool {
 }
 
 // SetEvidenceKind gets a reference to the given string and assigns it to the EvidenceKind field.
-func (o *ImportedApiCallEvidence) SetEvidenceKind(v string) {
+func (o *ImportedAPICallEvidence) SetEvidenceKind(v string) {
 	o.EvidenceKind = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *ImportedApiCallEvidence) GetKind() string {
+func (o *ImportedAPICallEvidence) GetKind() string {
 	if o == nil || IsNil(o.Kind) {
 		var ret string
 		return ret
@@ -103,7 +103,7 @@ func (o *ImportedApiCallEvidence) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ImportedApiCallEvidence) GetKindOk() (*string, bool) {
+func (o *ImportedAPICallEvidence) GetKindOk() (*string, bool) {
 	if o == nil || IsNil(o.Kind) {
 		return nil, false
 	}
@@ -111,7 +111,7 @@ func (o *ImportedApiCallEvidence) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *ImportedApiCallEvidence) HasKind() bool {
+func (o *ImportedAPICallEvidence) HasKind() bool {
 	if o != nil && !IsNil(o.Kind) {
 		return true
 	}
@@ -120,12 +120,12 @@ func (o *ImportedApiCallEvidence) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *ImportedApiCallEvidence) SetKind(v string) {
+func (o *ImportedAPICallEvidence) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetEffect returns the Effect field value
-func (o *ImportedApiCallEvidence) GetEffect() EvidenceEffect {
+func (o *ImportedAPICallEvidence) GetEffect() EvidenceEffect {
 	if o == nil {
 		var ret EvidenceEffect
 		return ret
@@ -136,7 +136,7 @@ func (o *ImportedApiCallEvidence) GetEffect() EvidenceEffect {
 
 // GetEffectOk returns a tuple with the Effect field value
 // and a boolean to check if the value has been set.
-func (o *ImportedApiCallEvidence) GetEffectOk() (*EvidenceEffect, bool) {
+func (o *ImportedAPICallEvidence) GetEffectOk() (*EvidenceEffect, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -144,12 +144,12 @@ func (o *ImportedApiCallEvidence) GetEffectOk() (*EvidenceEffect, bool) {
 }
 
 // SetEffect sets field value
-func (o *ImportedApiCallEvidence) SetEffect(v EvidenceEffect) {
+func (o *ImportedAPICallEvidence) SetEffect(v EvidenceEffect) {
 	o.Effect = v
 }
 
 // GetStrength returns the Strength field value if set, zero value otherwise.
-func (o *ImportedApiCallEvidence) GetStrength() string {
+func (o *ImportedAPICallEvidence) GetStrength() string {
 	if o == nil || IsNil(o.Strength) {
 		var ret string
 		return ret
@@ -159,7 +159,7 @@ func (o *ImportedApiCallEvidence) GetStrength() string {
 
 // GetStrengthOk returns a tuple with the Strength field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ImportedApiCallEvidence) GetStrengthOk() (*string, bool) {
+func (o *ImportedAPICallEvidence) GetStrengthOk() (*string, bool) {
 	if o == nil || IsNil(o.Strength) {
 		return nil, false
 	}
@@ -167,7 +167,7 @@ func (o *ImportedApiCallEvidence) GetStrengthOk() (*string, bool) {
 }
 
 // HasStrength returns a boolean if a field has been set.
-func (o *ImportedApiCallEvidence) HasStrength() bool {
+func (o *ImportedAPICallEvidence) HasStrength() bool {
 	if o != nil && !IsNil(o.Strength) {
 		return true
 	}
@@ -176,12 +176,12 @@ func (o *ImportedApiCallEvidence) HasStrength() bool {
 }
 
 // SetStrength gets a reference to the given string and assigns it to the Strength field.
-func (o *ImportedApiCallEvidence) SetStrength(v string) {
+func (o *ImportedAPICallEvidence) SetStrength(v string) {
 	o.Strength = &v
 }
 
 // GetCalls returns the Calls field value
-func (o *ImportedApiCallEvidence) GetCalls() []ImportedApiCall {
+func (o *ImportedAPICallEvidence) GetCalls() []ImportedApiCall {
 	if o == nil {
 		var ret []ImportedApiCall
 		return ret
@@ -192,7 +192,7 @@ func (o *ImportedApiCallEvidence) GetCalls() []ImportedApiCall {
 
 // GetCallsOk returns a tuple with the Calls field value
 // and a boolean to check if the value has been set.
-func (o *ImportedApiCallEvidence) GetCallsOk() ([]ImportedApiCall, bool) {
+func (o *ImportedAPICallEvidence) GetCallsOk() ([]ImportedApiCall, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -200,11 +200,11 @@ func (o *ImportedApiCallEvidence) GetCallsOk() ([]ImportedApiCall, bool) {
 }
 
 // SetCalls sets field value
-func (o *ImportedApiCallEvidence) SetCalls(v []ImportedApiCall) {
+func (o *ImportedAPICallEvidence) SetCalls(v []ImportedApiCall) {
 	o.Calls = v
 }
 
-func (o ImportedApiCallEvidence) MarshalJSON() ([]byte, error) {
+func (o ImportedAPICallEvidence) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -212,7 +212,7 @@ func (o ImportedApiCallEvidence) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ImportedApiCallEvidence) ToMap() (map[string]interface{}, error) {
+func (o ImportedAPICallEvidence) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.EvidenceKind) {
 		toSerialize["evidence_kind"] = o.EvidenceKind
@@ -233,7 +233,7 @@ func (o ImportedApiCallEvidence) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ImportedApiCallEvidence) UnmarshalJSON(data []byte) (err error) {
+func (o *ImportedAPICallEvidence) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -256,15 +256,15 @@ func (o *ImportedApiCallEvidence) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varImportedApiCallEvidence := _ImportedApiCallEvidence{}
+	varImportedAPICallEvidence := _ImportedAPICallEvidence{}
 
-	err = json.Unmarshal(data, &varImportedApiCallEvidence)
+	err = json.Unmarshal(data, &varImportedAPICallEvidence)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ImportedApiCallEvidence(varImportedApiCallEvidence)
+	*o = ImportedAPICallEvidence(varImportedAPICallEvidence)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -280,38 +280,38 @@ func (o *ImportedApiCallEvidence) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableImportedApiCallEvidence struct {
-	value *ImportedApiCallEvidence
+type NullableImportedAPICallEvidence struct {
+	value *ImportedAPICallEvidence
 	isSet bool
 }
 
-func (v NullableImportedApiCallEvidence) Get() *ImportedApiCallEvidence {
+func (v NullableImportedAPICallEvidence) Get() *ImportedAPICallEvidence {
 	return v.value
 }
 
-func (v *NullableImportedApiCallEvidence) Set(val *ImportedApiCallEvidence) {
+func (v *NullableImportedAPICallEvidence) Set(val *ImportedAPICallEvidence) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableImportedApiCallEvidence) IsSet() bool {
+func (v NullableImportedAPICallEvidence) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableImportedApiCallEvidence) Unset() {
+func (v *NullableImportedAPICallEvidence) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableImportedApiCallEvidence(val *ImportedApiCallEvidence) *NullableImportedApiCallEvidence {
-	return &NullableImportedApiCallEvidence{value: val, isSet: true}
+func NewNullableImportedAPICallEvidence(val *ImportedAPICallEvidence) *NullableImportedAPICallEvidence {
+	return &NullableImportedAPICallEvidence{value: val, isSet: true}
 }
 
-func (v NullableImportedApiCallEvidence) MarshalJSON() ([]byte, error) {
+func (v NullableImportedAPICallEvidence) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableImportedApiCallEvidence) UnmarshalJSON(src []byte) error {
+func (v *NullableImportedAPICallEvidence) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -19,8 +19,8 @@ var _ MappedNullable = &ListTeamsOutputBody{}
 
 // ListTeamsOutputBody struct for ListTeamsOutputBody
 type ListTeamsOutputBody struct {
-	Teams []Team `json:"teams"`
-	Total int64 `json:"total"`
+	// Up to 5 matching teams, ordered by name
+	Results []PublicTeamBody `json:"results"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,10 +30,9 @@ type _ListTeamsOutputBody ListTeamsOutputBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListTeamsOutputBody(teams []Team, total int64) *ListTeamsOutputBody {
+func NewListTeamsOutputBody(results []PublicTeamBody) *ListTeamsOutputBody {
 	this := ListTeamsOutputBody{}
-	this.Teams = teams
-	this.Total = total
+	this.Results = results
 	return &this
 }
 
@@ -45,54 +44,30 @@ func NewListTeamsOutputBodyWithDefaults() *ListTeamsOutputBody {
 	return &this
 }
 
-// GetTeams returns the Teams field value
-// If the value is explicit nil, the zero value for []Team will be returned
-func (o *ListTeamsOutputBody) GetTeams() []Team {
+// GetResults returns the Results field value
+// If the value is explicit nil, the zero value for []PublicTeamBody will be returned
+func (o *ListTeamsOutputBody) GetResults() []PublicTeamBody {
 	if o == nil {
-		var ret []Team
+		var ret []PublicTeamBody
 		return ret
 	}
 
-	return o.Teams
+	return o.Results
 }
 
-// GetTeamsOk returns a tuple with the Teams field value
+// GetResultsOk returns a tuple with the Results field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ListTeamsOutputBody) GetTeamsOk() ([]Team, bool) {
-	if o == nil || IsNil(o.Teams) {
+func (o *ListTeamsOutputBody) GetResultsOk() ([]PublicTeamBody, bool) {
+	if o == nil || IsNil(o.Results) {
 		return nil, false
 	}
-	return o.Teams, true
+	return o.Results, true
 }
 
-// SetTeams sets field value
-func (o *ListTeamsOutputBody) SetTeams(v []Team) {
-	o.Teams = v
-}
-
-// GetTotal returns the Total field value
-func (o *ListTeamsOutputBody) GetTotal() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.Total
-}
-
-// GetTotalOk returns a tuple with the Total field value
-// and a boolean to check if the value has been set.
-func (o *ListTeamsOutputBody) GetTotalOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Total, true
-}
-
-// SetTotal sets field value
-func (o *ListTeamsOutputBody) SetTotal(v int64) {
-	o.Total = v
+// SetResults sets field value
+func (o *ListTeamsOutputBody) SetResults(v []PublicTeamBody) {
+	o.Results = v
 }
 
 func (o ListTeamsOutputBody) MarshalJSON() ([]byte, error) {
@@ -105,10 +80,9 @@ func (o ListTeamsOutputBody) MarshalJSON() ([]byte, error) {
 
 func (o ListTeamsOutputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Teams != nil {
-		toSerialize["teams"] = o.Teams
+	if o.Results != nil {
+		toSerialize["results"] = o.Results
 	}
-	toSerialize["total"] = o.Total
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -122,8 +96,7 @@ func (o *ListTeamsOutputBody) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"teams",
-		"total",
+		"results",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -153,8 +126,7 @@ func (o *ListTeamsOutputBody) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "teams")
-		delete(additionalProperties, "total")
+		delete(additionalProperties, "results")
 		o.AdditionalProperties = additionalProperties
 	}
 

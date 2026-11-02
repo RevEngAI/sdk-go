@@ -23,7 +23,7 @@ type Team struct {
 	OrganisationId *int64 `json:"organisation_id,omitempty"`
 	Plan string `json:"plan"`
 	TeamId int64 `json:"team_id"`
-	TeamName string `json:"team_name"`
+	TeamName NullableString `json:"team_name"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,7 +33,7 @@ type _Team Team
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTeam(plan string, teamId int64, teamName string) *Team {
+func NewTeam(plan string, teamId int64, teamName NullableString) *Team {
 	this := Team{}
 	this.Plan = plan
 	this.TeamId = teamId
@@ -130,27 +130,29 @@ func (o *Team) SetTeamId(v int64) {
 }
 
 // GetTeamName returns the TeamName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *Team) GetTeamName() string {
-	if o == nil {
+	if o == nil || o.TeamName.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.TeamName
+	return *o.TeamName.Get()
 }
 
 // GetTeamNameOk returns a tuple with the TeamName field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Team) GetTeamNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.TeamName, true
+	return o.TeamName.Get(), o.TeamName.IsSet()
 }
 
 // SetTeamName sets field value
 func (o *Team) SetTeamName(v string) {
-	o.TeamName = v
+	o.TeamName.Set(&v)
 }
 
 func (o Team) MarshalJSON() ([]byte, error) {
@@ -168,7 +170,7 @@ func (o Team) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["plan"] = o.Plan
 	toSerialize["team_id"] = o.TeamId
-	toSerialize["team_name"] = o.TeamName
+	toSerialize["team_name"] = o.TeamName.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value

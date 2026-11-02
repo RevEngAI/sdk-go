@@ -6,17 +6,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ConversationUuid** | **string** |  | 
 **CreatedAt** | **time.Time** |  | 
-**Data** | **interface{}** |  | 
+**Data** | [**EventData**](EventData.md) |  | 
 **EventId** | **int64** |  | 
 **Role** | **int32** |  | 
 **TokensUsed** | **int64** |  | 
-**Type** | **int32** |  | 
+**Type** | **int32** | The event type, which decides the shape of data: 1 RUN_STARTED, 2 RUN_FINISHED, 3 RUN_ERROR, 4 STEP_STARTED, 5 STEP_FINISHED, 6 TEXT_MESSAGE_START, 7 TEXT_MESSAGE_CONTENT, 8 TEXT_MESSAGE_END, 9 TOOL_CALL_START, 10 TOOL_CALL_ARGS_DELTA, 11 TOOL_CALL_END, 12 TOOL_CALL_RESULT, 13 TITLE_UPDATED, 14 RUN_CANCELLED, 15 CONTEXT_COMPACTED, 16 TOOL_CONFIRMATION_REQUIRED, 19 TOOL_CALL_PROGRESS, 20 AGENT_RUN_UPDATE. | 
 
 ## Methods
 
 ### NewEvent
 
-`func NewEvent(conversationUuid string, createdAt time.Time, data interface{}, eventId int64, role int32, tokensUsed int64, type_ int32, ) *Event`
+`func NewEvent(conversationUuid string, createdAt time.Time, data EventData, eventId int64, role int32, tokensUsed int64, type_ int32, ) *Event`
 
 NewEvent instantiates a new Event object
 This constructor will assign default values to properties that have it defined,
@@ -73,34 +73,24 @@ SetCreatedAt sets CreatedAt field to given value.
 
 ### GetData
 
-`func (o *Event) GetData() interface{}`
+`func (o *Event) GetData() EventData`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *Event) GetDataOk() (*interface{}, bool)`
+`func (o *Event) GetDataOk() (*EventData, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *Event) SetData(v interface{})`
+`func (o *Event) SetData(v EventData)`
 
 SetData sets Data field to given value.
 
 
-### SetDataNil
-
-`func (o *Event) SetDataNil(b bool)`
-
- SetDataNil sets the value for Data to be an explicit nil
-
-### UnsetData
-`func (o *Event) UnsetData()`
-
-UnsetData ensures that no value is present for Data, not even an explicit nil
 ### GetEventId
 
 `func (o *Event) GetEventId() int64`

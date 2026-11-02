@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **CreatedAt** | **time.Time** |  | 
 **Enabled** | **bool** |  | 
 **IssuerUrl** | **NullableString** |  | 
-**JwksUri** | Pointer to **string** | JSON Web Key Set URI discovered from the issuer&#39;s OIDC configuration. Populated automatically during issuer registration. | [optional] 
+**JwksUri** | **string** | JSON Web Key Set URI discovered from the issuer&#39;s OIDC configuration. Populated automatically during issuer registration. | 
 **OrganisationId** | **int64** |  | 
 **OrganisationIssuerId** | **int64** |  | 
 **UpdatedAt** | **time.Time** |  | 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewOrganisationIssuer
 
-`func NewOrganisationIssuer(createdAt time.Time, enabled bool, issuerUrl NullableString, organisationId int64, organisationIssuerId int64, updatedAt time.Time, ) *OrganisationIssuer`
+`func NewOrganisationIssuer(createdAt time.Time, enabled bool, issuerUrl NullableString, jwksUri string, organisationId int64, organisationIssuerId int64, updatedAt time.Time, ) *OrganisationIssuer`
 
 NewOrganisationIssuer instantiates a new OrganisationIssuer object
 This constructor will assign default values to properties that have it defined,
@@ -146,11 +146,6 @@ and a boolean to check if the value has been set.
 
 SetJwksUri sets JwksUri field to given value.
 
-### HasJwksUri
-
-`func (o *OrganisationIssuer) HasJwksUri() bool`
-
-HasJwksUri returns a boolean if a field has been set.
 
 ### GetOrganisationId
 

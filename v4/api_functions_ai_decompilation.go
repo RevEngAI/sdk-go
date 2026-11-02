@@ -30,6 +30,8 @@ type ApiCreateAiDecompilationRequest struct {
 	typeSuggestions *bool
 	naming *bool
 	applyTypes *bool
+	repair *bool
+	refine *bool
 }
 
 // LLM temperature (0.0-1.0). Overrides the server default when set. Omit or set to -1 to use the server default.
@@ -53,6 +55,18 @@ func (r ApiCreateAiDecompilationRequest) Naming(naming bool) ApiCreateAiDecompil
 // Store the suggested types as data types of this function&#39;s analysis, with a source_type of AI_DECOMP. Set to false to leave them as suggestions only. Cannot re-enable the pass when the server has it off.
 func (r ApiCreateAiDecompilationRequest) ApplyTypes(applyTypes bool) ApiCreateAiDecompilationRequest {
 	r.applyTypes = &applyTypes
+	return r
+}
+
+// Ask a language model to replace any unmatched placeholders left in the decompilation with grounded code. Off unless requested: the pass spends several model calls on top of the decompilation, and declines outright unless it can ground every placeholder. Runs after the result is stored, so it amends a decompilation you can already read. Cannot enable the pass when the server has it off.
+func (r ApiCreateAiDecompilationRequest) Repair(repair bool) ApiCreateAiDecompilationRequest {
+	r.repair = &repair
+	return r
+}
+
+// Ask a language model to rebuild output the decompiler returned degenerate, truncated or empty, and output a requested repair pass declined. Off unless requested: the pass is a bounded tool loop that can spend a dozen model calls. Runs after the result is stored, so it amends a decompilation you can already read. Cannot enable the pass when the server has it off.
+func (r ApiCreateAiDecompilationRequest) Refine(refine bool) ApiCreateAiDecompilationRequest {
+	r.refine = &refine
 	return r
 }
 
@@ -136,6 +150,20 @@ func (a *FunctionsAIDecompilationAPIService) CreateAiDecompilationExecute(r ApiC
 		var defaultValue bool = true
 		parameterAddToHeaderOrQuery(localVarQueryParams, "apply_types", defaultValue, "form", "")
 		r.applyTypes = &defaultValue
+	}
+	if r.repair != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "repair", r.repair, "form", "")
+	} else {
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "repair", defaultValue, "form", "")
+		r.repair = &defaultValue
+	}
+	if r.refine != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "refine", r.refine, "form", "")
+	} else {
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "refine", defaultValue, "form", "")
+		r.refine = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

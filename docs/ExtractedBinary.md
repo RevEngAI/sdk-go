@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Filename** | **string** | Original filename inside the upload | 
-**Sha256Hash** | **string** | Content hash of the recovered binary | 
+**Sha256Hash** | **string** | Content hash of the recovered file | 
 **Size** | **int64** | File size (in bytes) | 
 
 ## Methods

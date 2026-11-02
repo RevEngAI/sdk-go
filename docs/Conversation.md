@@ -4,9 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Context** | Pointer to **interface{}** |  | [optional] 
+**Context** | Pointer to [**ConversationContext**](ConversationContext.md) | The analysis, and optionally the function, the conversation is about. Absent when it is about neither. | [optional] 
 **ConversationUuid** | **string** |  | 
 **CreatedAt** | **time.Time** |  | 
+**InvestigationId** | Pointer to **int64** | The investigation the conversation belongs to. Absent for a conversation outside any investigation. | [optional] 
 **Title** | **string** |  | 
 **UpdatedAt** | **time.Time** |  | 
 **UserId** | **int64** |  | 
@@ -32,20 +33,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetContext
 
-`func (o *Conversation) GetContext() interface{}`
+`func (o *Conversation) GetContext() ConversationContext`
 
 GetContext returns the Context field if non-nil, zero value otherwise.
 
 ### GetContextOk
 
-`func (o *Conversation) GetContextOk() (*interface{}, bool)`
+`func (o *Conversation) GetContextOk() (*ConversationContext, bool)`
 
 GetContextOk returns a tuple with the Context field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContext
 
-`func (o *Conversation) SetContext(v interface{})`
+`func (o *Conversation) SetContext(v ConversationContext)`
 
 SetContext sets Context field to given value.
 
@@ -55,16 +56,6 @@ SetContext sets Context field to given value.
 
 HasContext returns a boolean if a field has been set.
 
-### SetContextNil
-
-`func (o *Conversation) SetContextNil(b bool)`
-
- SetContextNil sets the value for Context to be an explicit nil
-
-### UnsetContext
-`func (o *Conversation) UnsetContext()`
-
-UnsetContext ensures that no value is present for Context, not even an explicit nil
 ### GetConversationUuid
 
 `func (o *Conversation) GetConversationUuid() string`
@@ -104,6 +95,31 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
+
+### GetInvestigationId
+
+`func (o *Conversation) GetInvestigationId() int64`
+
+GetInvestigationId returns the InvestigationId field if non-nil, zero value otherwise.
+
+### GetInvestigationIdOk
+
+`func (o *Conversation) GetInvestigationIdOk() (*int64, bool)`
+
+GetInvestigationIdOk returns a tuple with the InvestigationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInvestigationId
+
+`func (o *Conversation) SetInvestigationId(v int64)`
+
+SetInvestigationId sets InvestigationId field to given value.
+
+### HasInvestigationId
+
+`func (o *Conversation) HasInvestigationId() bool`
+
+HasInvestigationId returns a boolean if a field has been set.
 
 ### GetTitle
 

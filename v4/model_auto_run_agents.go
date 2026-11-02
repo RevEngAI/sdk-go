@@ -30,6 +30,8 @@ type _AutoRunAgents AutoRunAgents
 // will change when the set of required properties is changed
 func NewAutoRunAgents() *AutoRunAgents {
 	this := AutoRunAgents{}
+	var triage bool = false
+	this.Triage = &triage
 	return &this
 }
 
@@ -38,6 +40,8 @@ func NewAutoRunAgents() *AutoRunAgents {
 // but it doesn't guarantee that properties required by API are set
 func NewAutoRunAgentsWithDefaults() *AutoRunAgents {
 	this := AutoRunAgents{}
+	var triage bool = false
+	this.Triage = &triage
 	return &this
 }
 

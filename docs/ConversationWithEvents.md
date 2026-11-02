@@ -4,10 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Context** | Pointer to **interface{}** |  | [optional] 
+**Context** | Pointer to [**ConversationContext**](ConversationContext.md) | The analysis, and optionally the function, the conversation is about. Absent when it is about neither. | [optional] 
 **ConversationUuid** | **string** |  | 
 **CreatedAt** | **time.Time** |  | 
 **Events** | [**[]Event**](Event.md) |  | 
+**InvestigationId** | Pointer to **int64** | The investigation the conversation belongs to. Absent for a conversation outside any investigation. | [optional] 
 **Title** | **string** |  | 
 **UpdatedAt** | **time.Time** |  | 
 **UserId** | **int64** |  | 
@@ -33,20 +34,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetContext
 
-`func (o *ConversationWithEvents) GetContext() interface{}`
+`func (o *ConversationWithEvents) GetContext() ConversationContext`
 
 GetContext returns the Context field if non-nil, zero value otherwise.
 
 ### GetContextOk
 
-`func (o *ConversationWithEvents) GetContextOk() (*interface{}, bool)`
+`func (o *ConversationWithEvents) GetContextOk() (*ConversationContext, bool)`
 
 GetContextOk returns a tuple with the Context field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContext
 
-`func (o *ConversationWithEvents) SetContext(v interface{})`
+`func (o *ConversationWithEvents) SetContext(v ConversationContext)`
 
 SetContext sets Context field to given value.
 
@@ -56,16 +57,6 @@ SetContext sets Context field to given value.
 
 HasContext returns a boolean if a field has been set.
 
-### SetContextNil
-
-`func (o *ConversationWithEvents) SetContextNil(b bool)`
-
- SetContextNil sets the value for Context to be an explicit nil
-
-### UnsetContext
-`func (o *ConversationWithEvents) UnsetContext()`
-
-UnsetContext ensures that no value is present for Context, not even an explicit nil
 ### GetConversationUuid
 
 `func (o *ConversationWithEvents) GetConversationUuid() string`
@@ -136,6 +127,31 @@ SetEvents sets Events field to given value.
 `func (o *ConversationWithEvents) UnsetEvents()`
 
 UnsetEvents ensures that no value is present for Events, not even an explicit nil
+### GetInvestigationId
+
+`func (o *ConversationWithEvents) GetInvestigationId() int64`
+
+GetInvestigationId returns the InvestigationId field if non-nil, zero value otherwise.
+
+### GetInvestigationIdOk
+
+`func (o *ConversationWithEvents) GetInvestigationIdOk() (*int64, bool)`
+
+GetInvestigationIdOk returns a tuple with the InvestigationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInvestigationId
+
+`func (o *ConversationWithEvents) SetInvestigationId(v int64)`
+
+SetInvestigationId sets InvestigationId field to given value.
+
+### HasInvestigationId
+
+`func (o *ConversationWithEvents) HasInvestigationId() bool`
+
+HasInvestigationId returns a boolean if a field has been set.
+
 ### GetTitle
 
 `func (o *ConversationWithEvents) GetTitle() string`

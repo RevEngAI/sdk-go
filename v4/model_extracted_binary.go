@@ -21,7 +21,7 @@ var _ MappedNullable = &ExtractedBinary{}
 type ExtractedBinary struct {
 	// Original filename inside the upload
 	Filename string `json:"filename"`
-	// Content hash of the recovered binary
+	// Content hash of the recovered file
 	Sha256Hash string `json:"sha_256_hash"`
 	// File size (in bytes)
 	Size int64 `json:"size"`

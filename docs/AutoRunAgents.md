@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Triage** | Pointer to **bool** |  | [optional] 
+**Triage** | Pointer to **bool** |  | [optional] [default to false]
 
 ## Methods
 

@@ -17,11 +17,14 @@ import (
 // checks if the SseEventRunFinishedData type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SseEventRunFinishedData{}
 
-// SseEventRunFinishedData struct for SseEventRunFinishedData
+// SseEventRunFinishedData The event envelope, sent as the JSON of the SSE data line. Its type names the event, and its data is that event's payload.
 type SseEventRunFinishedData struct {
-	Data interface{} `json:"data"`
+	// The payload of the event named in type.
+	Data RunFinishedData `json:"data"`
+	// The stored event's ID, the same as the SSE id field. Pass the last one received as last_event_id to resume after a reconnection.
 	EventId int64 `json:"event_id"`
 	SourceRunId *string `json:"source_run_id,omitempty"`
+	// The event name, the same as the SSE event field.
 	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
@@ -32,7 +35,7 @@ type _SseEventRunFinishedData SseEventRunFinishedData
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSseEventRunFinishedData(data interface{}, eventId int64, type_ string) *SseEventRunFinishedData {
+func NewSseEventRunFinishedData(data RunFinishedData, eventId int64, type_ string) *SseEventRunFinishedData {
 	this := SseEventRunFinishedData{}
 	this.Data = data
 	this.EventId = eventId
@@ -49,10 +52,9 @@ func NewSseEventRunFinishedDataWithDefaults() *SseEventRunFinishedData {
 }
 
 // GetData returns the Data field value
-// If the value is explicit nil, the zero value for interface{} will be returned
-func (o *SseEventRunFinishedData) GetData() interface{} {
+func (o *SseEventRunFinishedData) GetData() RunFinishedData {
 	if o == nil {
-		var ret interface{}
+		var ret RunFinishedData
 		return ret
 	}
 
@@ -61,16 +63,15 @@ func (o *SseEventRunFinishedData) GetData() interface{} {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SseEventRunFinishedData) GetDataOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Data) {
+func (o *SseEventRunFinishedData) GetDataOk() (*RunFinishedData, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Data, true
 }
 
 // SetData sets field value
-func (o *SseEventRunFinishedData) SetData(v interface{}) {
+func (o *SseEventRunFinishedData) SetData(v RunFinishedData) {
 	o.Data = v
 }
 
@@ -164,9 +165,7 @@ func (o SseEventRunFinishedData) MarshalJSON() ([]byte, error) {
 
 func (o SseEventRunFinishedData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Data != nil {
-		toSerialize["data"] = o.Data
-	}
+	toSerialize["data"] = o.Data
 	toSerialize["event_id"] = o.EventId
 	if !IsNil(o.SourceRunId) {
 		toSerialize["source_run_id"] = o.SourceRunId

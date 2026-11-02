@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DefaultTeamId** | Pointer to **int64** | Default team ID | [optional] 
 **FirstName** | Pointer to **string** | First name | [optional] 
+**HideAiDecompilationComments** | Pointer to **bool** | Hide AI decompilation comments across the platform | [optional] 
 **HideExampleBinaries** | Pointer to **bool** | Hide the Examples tab in the analyses listing | [optional] 
 **LastName** | Pointer to **string** | Last name | [optional] 
 **TimeZone** | Pointer to **string** | IANA time zone | [optional] 
@@ -79,6 +80,31 @@ SetFirstName sets FirstName field to given value.
 `func (o *UpdateProfileInputBody) HasFirstName() bool`
 
 HasFirstName returns a boolean if a field has been set.
+
+### GetHideAiDecompilationComments
+
+`func (o *UpdateProfileInputBody) GetHideAiDecompilationComments() bool`
+
+GetHideAiDecompilationComments returns the HideAiDecompilationComments field if non-nil, zero value otherwise.
+
+### GetHideAiDecompilationCommentsOk
+
+`func (o *UpdateProfileInputBody) GetHideAiDecompilationCommentsOk() (*bool, bool)`
+
+GetHideAiDecompilationCommentsOk returns a tuple with the HideAiDecompilationComments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHideAiDecompilationComments
+
+`func (o *UpdateProfileInputBody) SetHideAiDecompilationComments(v bool)`
+
+SetHideAiDecompilationComments sets HideAiDecompilationComments field to given value.
+
+### HasHideAiDecompilationComments
+
+`func (o *UpdateProfileInputBody) HasHideAiDecompilationComments() bool`
+
+HasHideAiDecompilationComments returns a boolean if a field has been set.
 
 ### GetHideExampleBinaries
 

@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **OrganisationId** | Pointer to **int64** | Organisation this team belongs to, if any | [optional] 
 **Plan** | **string** |  | 
 **TeamId** | **int64** |  | 
-**TeamName** | **string** |  | 
+**TeamName** | **NullableString** |  | 
 
 ## Methods
 
 ### NewTeam
 
-`func NewTeam(plan string, teamId int64, teamName string, ) *Team`
+`func NewTeam(plan string, teamId int64, teamName NullableString, ) *Team`
 
 NewTeam instantiates a new Team object
 This constructor will assign default values to properties that have it defined,
@@ -113,6 +113,16 @@ and a boolean to check if the value has been set.
 SetTeamName sets TeamName field to given value.
 
 
+### SetTeamNameNil
+
+`func (o *Team) SetTeamNameNil(b bool)`
+
+ SetTeamNameNil sets the value for TeamName to be an explicit nil
+
+### UnsetTeamName
+`func (o *Team) UnsetTeamName()`
+
+UnsetTeamName ensures that no value is present for TeamName, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
