@@ -22,6 +22,8 @@ var _ MappedNullable = &User{}
 type User struct {
 	CreatedAt time.Time `json:"created_at"`
 	Email string `json:"email"`
+	// Inactive users cannot authenticate
+	IsActive bool `json:"is_active"`
 	Profile UserProfile `json:"profile"`
 	Role string `json:"role"`
 	Tier *string `json:"tier,omitempty"`
@@ -35,10 +37,11 @@ type _User User
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUser(createdAt time.Time, email string, profile UserProfile, role string, userId int64) *User {
+func NewUser(createdAt time.Time, email string, isActive bool, profile UserProfile, role string, userId int64) *User {
 	this := User{}
 	this.CreatedAt = createdAt
 	this.Email = email
+	this.IsActive = isActive
 	this.Profile = profile
 	this.Role = role
 	this.UserId = userId
@@ -99,6 +102,30 @@ func (o *User) GetEmailOk() (*string, bool) {
 // SetEmail sets field value
 func (o *User) SetEmail(v string) {
 	o.Email = v
+}
+
+// GetIsActive returns the IsActive field value
+func (o *User) GetIsActive() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsActive
+}
+
+// GetIsActiveOk returns a tuple with the IsActive field value
+// and a boolean to check if the value has been set.
+func (o *User) GetIsActiveOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsActive, true
+}
+
+// SetIsActive sets field value
+func (o *User) SetIsActive(v bool) {
+	o.IsActive = v
 }
 
 // GetProfile returns the Profile field value
@@ -217,6 +244,7 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["email"] = o.Email
+	toSerialize["is_active"] = o.IsActive
 	toSerialize["profile"] = o.Profile
 	toSerialize["role"] = o.Role
 	if !IsNil(o.Tier) {
@@ -238,6 +266,7 @@ func (o *User) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"created_at",
 		"email",
+		"is_active",
 		"profile",
 		"role",
 		"user_id",
@@ -272,6 +301,7 @@ func (o *User) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "email")
+		delete(additionalProperties, "is_active")
 		delete(additionalProperties, "profile")
 		delete(additionalProperties, "role")
 		delete(additionalProperties, "tier")

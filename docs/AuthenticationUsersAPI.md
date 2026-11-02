@@ -9,6 +9,8 @@ Method | HTTP request | Description
 [**SubmitUserFeedback**](AuthenticationUsersAPI.md#SubmitUserFeedback) | **Post** /v2/users/feedback | Submit feedback about the application
 [**V3GetUser**](AuthenticationUsersAPI.md#V3GetUser) | **Get** /v3/users/{user_id} | Get a user&#39;s public information
 [**V3GetUserActivity**](AuthenticationUsersAPI.md#V3GetUserActivity) | **Get** /v3/users/activity | Get the caller&#39;s activity feed
+[**V3ListPrincipals**](AuthenticationUsersAPI.md#V3ListPrincipals) | **Get** /v3/principals | Search users and teams
+[**V3ListTeams**](AuthenticationUsersAPI.md#V3ListTeams) | **Get** /v3/teams | Search teams
 [**V3ListUsers**](AuthenticationUsersAPI.md#V3ListUsers) | **Get** /v3/users | Search users
 [**V3SubmitUserFeedback**](AuthenticationUsersAPI.md#V3SubmitUserFeedback) | **Post** /v3/users/feedback | Submit feedback
 
@@ -323,6 +325,138 @@ Other parameters are passed through a pointer to a apiV3GetUserActivityRequest s
 ### Return type
 
 [**GetUserActivityOutputBody**](GetUserActivityOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3ListPrincipals
+
+> ListPrincipalsOutputBody V3ListPrincipals(ctx).SearchTerm(searchTerm).Execute()
+
+Search users and teams
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	searchTerm := "searchTerm_example" // string | Text the user's username or team's name contains (case-insensitive)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AuthenticationUsersAPI.V3ListPrincipals(context.Background()).SearchTerm(searchTerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationUsersAPI.V3ListPrincipals``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3ListPrincipals`: ListPrincipalsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AuthenticationUsersAPI.V3ListPrincipals`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3ListPrincipalsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **searchTerm** | **string** | Text the user&#39;s username or team&#39;s name contains (case-insensitive) | 
+
+### Return type
+
+[**ListPrincipalsOutputBody**](ListPrincipalsOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3ListTeams
+
+> ListTeamsOutputBody V3ListTeams(ctx).SearchTerm(searchTerm).Execute()
+
+Search teams
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	searchTerm := "searchTerm_example" // string | Text the team name contains (case-insensitive)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AuthenticationUsersAPI.V3ListTeams(context.Background()).SearchTerm(searchTerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationUsersAPI.V3ListTeams``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3ListTeams`: ListTeamsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AuthenticationUsersAPI.V3ListTeams`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3ListTeamsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **searchTerm** | **string** | Text the team name contains (case-insensitive) | 
+
+### Return type
+
+[**ListTeamsOutputBody**](ListTeamsOutputBody.md)
 
 ### Authorization
 

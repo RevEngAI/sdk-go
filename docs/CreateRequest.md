@@ -6,10 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AnalysisConfig** | Pointer to [**Config**](Config.md) |  | [optional] 
 **AnalysisScope** | Pointer to **string** |  | [optional] [default to "PRIVATE"]
-**AutoRunAgents** | Pointer to [**AutoRunAgents**](AutoRunAgents.md) |  | [optional] 
 **BinaryConfig** | Pointer to [**BinaryConfig**](BinaryConfig.md) |  | [optional] 
 **DebugHash** | Pointer to **string** |  | [optional] 
 **Filename** | **string** |  | 
+**InvestigationId** | Pointer to **int64** | Adds the new analysis to this investigation, which you must own. | [optional] 
+**Operations** | Pointer to [**[]RequestedOperation**](RequestedOperation.md) | Operations to run automatically once the analysis completes. Each operation&#39;s prerequisites must also be requested. | [optional] 
 **Sha256Hash** | **string** |  | 
 **Symbols** | Pointer to [**Symbols**](Symbols.md) |  | [optional] 
 **Tags** | Pointer to **[]string** |  | [optional] 
@@ -83,31 +84,6 @@ SetAnalysisScope sets AnalysisScope field to given value.
 
 HasAnalysisScope returns a boolean if a field has been set.
 
-### GetAutoRunAgents
-
-`func (o *CreateRequest) GetAutoRunAgents() AutoRunAgents`
-
-GetAutoRunAgents returns the AutoRunAgents field if non-nil, zero value otherwise.
-
-### GetAutoRunAgentsOk
-
-`func (o *CreateRequest) GetAutoRunAgentsOk() (*AutoRunAgents, bool)`
-
-GetAutoRunAgentsOk returns a tuple with the AutoRunAgents field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAutoRunAgents
-
-`func (o *CreateRequest) SetAutoRunAgents(v AutoRunAgents)`
-
-SetAutoRunAgents sets AutoRunAgents field to given value.
-
-### HasAutoRunAgents
-
-`func (o *CreateRequest) HasAutoRunAgents() bool`
-
-HasAutoRunAgents returns a boolean if a field has been set.
-
 ### GetBinaryConfig
 
 `func (o *CreateRequest) GetBinaryConfig() BinaryConfig`
@@ -178,6 +154,56 @@ and a boolean to check if the value has been set.
 SetFilename sets Filename field to given value.
 
 
+### GetInvestigationId
+
+`func (o *CreateRequest) GetInvestigationId() int64`
+
+GetInvestigationId returns the InvestigationId field if non-nil, zero value otherwise.
+
+### GetInvestigationIdOk
+
+`func (o *CreateRequest) GetInvestigationIdOk() (*int64, bool)`
+
+GetInvestigationIdOk returns a tuple with the InvestigationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInvestigationId
+
+`func (o *CreateRequest) SetInvestigationId(v int64)`
+
+SetInvestigationId sets InvestigationId field to given value.
+
+### HasInvestigationId
+
+`func (o *CreateRequest) HasInvestigationId() bool`
+
+HasInvestigationId returns a boolean if a field has been set.
+
+### GetOperations
+
+`func (o *CreateRequest) GetOperations() []RequestedOperation`
+
+GetOperations returns the Operations field if non-nil, zero value otherwise.
+
+### GetOperationsOk
+
+`func (o *CreateRequest) GetOperationsOk() (*[]RequestedOperation, bool)`
+
+GetOperationsOk returns a tuple with the Operations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperations
+
+`func (o *CreateRequest) SetOperations(v []RequestedOperation)`
+
+SetOperations sets Operations field to given value.
+
+### HasOperations
+
+`func (o *CreateRequest) HasOperations() bool`
+
+HasOperations returns a boolean if a field has been set.
+
 ### GetSha256Hash
 
 `func (o *CreateRequest) GetSha256Hash() string`
@@ -225,20 +251,20 @@ HasSymbols returns a boolean if a field has been set.
 
 ### GetTags
 
-`func (o *CreateRequest) GetTags() []*string`
+`func (o *CreateRequest) GetTags() []string`
 
 GetTags returns the Tags field if non-nil, zero value otherwise.
 
 ### GetTagsOk
 
-`func (o *CreateRequest) GetTagsOk() (*[]*string, bool)`
+`func (o *CreateRequest) GetTagsOk() (*[]string, bool)`
 
 GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTags
 
-`func (o *CreateRequest) SetTags(v []*string)`
+`func (o *CreateRequest) SetTags(v []string)`
 
 SetTags sets Tags field to given value.
 

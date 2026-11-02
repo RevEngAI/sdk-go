@@ -26,7 +26,7 @@ type OrganisationIssuer struct {
 	Enabled bool `json:"enabled"`
 	IssuerUrl NullableString `json:"issuer_url"`
 	// JSON Web Key Set URI discovered from the issuer's OIDC configuration. Populated automatically during issuer registration.
-	JwksUri *string `json:"jwks_uri,omitempty"`
+	JwksUri string `json:"jwks_uri"`
 	OrganisationId int64 `json:"organisation_id"`
 	OrganisationIssuerId int64 `json:"organisation_issuer_id"`
 	UpdatedAt time.Time `json:"updated_at"`
@@ -39,11 +39,12 @@ type _OrganisationIssuer OrganisationIssuer
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganisationIssuer(createdAt time.Time, enabled bool, issuerUrl NullableString, organisationId int64, organisationIssuerId int64, updatedAt time.Time) *OrganisationIssuer {
+func NewOrganisationIssuer(createdAt time.Time, enabled bool, issuerUrl NullableString, jwksUri string, organisationId int64, organisationIssuerId int64, updatedAt time.Time) *OrganisationIssuer {
 	this := OrganisationIssuer{}
 	this.CreatedAt = createdAt
 	this.Enabled = enabled
 	this.IssuerUrl = issuerUrl
+	this.JwksUri = jwksUri
 	this.OrganisationId = organisationId
 	this.OrganisationIssuerId = organisationIssuerId
 	this.UpdatedAt = updatedAt
@@ -164,36 +165,28 @@ func (o *OrganisationIssuer) SetIssuerUrl(v string) {
 	o.IssuerUrl.Set(&v)
 }
 
-// GetJwksUri returns the JwksUri field value if set, zero value otherwise.
+// GetJwksUri returns the JwksUri field value
 func (o *OrganisationIssuer) GetJwksUri() string {
-	if o == nil || IsNil(o.JwksUri) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.JwksUri
+
+	return o.JwksUri
 }
 
-// GetJwksUriOk returns a tuple with the JwksUri field value if set, nil otherwise
+// GetJwksUriOk returns a tuple with the JwksUri field value
 // and a boolean to check if the value has been set.
 func (o *OrganisationIssuer) GetJwksUriOk() (*string, bool) {
-	if o == nil || IsNil(o.JwksUri) {
+	if o == nil {
 		return nil, false
 	}
-	return o.JwksUri, true
+	return &o.JwksUri, true
 }
 
-// HasJwksUri returns a boolean if a field has been set.
-func (o *OrganisationIssuer) HasJwksUri() bool {
-	if o != nil && !IsNil(o.JwksUri) {
-		return true
-	}
-
-	return false
-}
-
-// SetJwksUri gets a reference to the given string and assigns it to the JwksUri field.
+// SetJwksUri sets field value
 func (o *OrganisationIssuer) SetJwksUri(v string) {
-	o.JwksUri = &v
+	o.JwksUri = v
 }
 
 // GetOrganisationId returns the OrganisationId field value
@@ -284,9 +277,7 @@ func (o OrganisationIssuer) ToMap() (map[string]interface{}, error) {
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["enabled"] = o.Enabled
 	toSerialize["issuer_url"] = o.IssuerUrl.Get()
-	if !IsNil(o.JwksUri) {
-		toSerialize["jwks_uri"] = o.JwksUri
-	}
+	toSerialize["jwks_uri"] = o.JwksUri
 	toSerialize["organisation_id"] = o.OrganisationId
 	toSerialize["organisation_issuer_id"] = o.OrganisationIssuerId
 	toSerialize["updated_at"] = o.UpdatedAt
@@ -306,6 +297,7 @@ func (o *OrganisationIssuer) UnmarshalJSON(data []byte) (err error) {
 		"created_at",
 		"enabled",
 		"issuer_url",
+		"jwks_uri",
 		"organisation_id",
 		"organisation_issuer_id",
 		"updated_at",

@@ -22,10 +22,11 @@ var _ MappedNullable = &Event{}
 type Event struct {
 	ConversationUuid string `json:"conversation_uuid"`
 	CreatedAt time.Time `json:"created_at"`
-	Data interface{} `json:"data"`
+	Data EventData `json:"data"`
 	EventId int64 `json:"event_id"`
 	Role int32 `json:"role"`
 	TokensUsed int64 `json:"tokens_used"`
+	// The event type, which decides the shape of data: 1 RUN_STARTED, 2 RUN_FINISHED, 3 RUN_ERROR, 4 STEP_STARTED, 5 STEP_FINISHED, 6 TEXT_MESSAGE_START, 7 TEXT_MESSAGE_CONTENT, 8 TEXT_MESSAGE_END, 9 TOOL_CALL_START, 10 TOOL_CALL_ARGS_DELTA, 11 TOOL_CALL_END, 12 TOOL_CALL_RESULT, 13 TITLE_UPDATED, 14 RUN_CANCELLED, 15 CONTEXT_COMPACTED, 16 TOOL_CONFIRMATION_REQUIRED, 19 TOOL_CALL_PROGRESS, 20 AGENT_RUN_UPDATE.
 	Type int32 `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
@@ -36,7 +37,7 @@ type _Event Event
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEvent(conversationUuid string, createdAt time.Time, data interface{}, eventId int64, role int32, tokensUsed int64, type_ int32) *Event {
+func NewEvent(conversationUuid string, createdAt time.Time, data EventData, eventId int64, role int32, tokensUsed int64, type_ int32) *Event {
 	this := Event{}
 	this.ConversationUuid = conversationUuid
 	this.CreatedAt = createdAt
@@ -105,10 +106,9 @@ func (o *Event) SetCreatedAt(v time.Time) {
 }
 
 // GetData returns the Data field value
-// If the value is explicit nil, the zero value for interface{} will be returned
-func (o *Event) GetData() interface{} {
+func (o *Event) GetData() EventData {
 	if o == nil {
-		var ret interface{}
+		var ret EventData
 		return ret
 	}
 
@@ -117,16 +117,15 @@ func (o *Event) GetData() interface{} {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Event) GetDataOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Data) {
+func (o *Event) GetDataOk() (*EventData, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Data, true
 }
 
 // SetData sets field value
-func (o *Event) SetData(v interface{}) {
+func (o *Event) SetData(v EventData) {
 	o.Data = v
 }
 
@@ -238,9 +237,7 @@ func (o Event) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["conversation_uuid"] = o.ConversationUuid
 	toSerialize["created_at"] = o.CreatedAt
-	if o.Data != nil {
-		toSerialize["data"] = o.Data
-	}
+	toSerialize["data"] = o.Data
 	toSerialize["event_id"] = o.EventId
 	toSerialize["role"] = o.Role
 	toSerialize["tokens_used"] = o.TokensUsed

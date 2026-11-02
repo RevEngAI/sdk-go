@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | **interface{}** |  | 
-**EventId** | **int64** |  | 
+**Data** | [**TextMessageStartData**](TextMessageStartData.md) | The payload of the event named in type. | 
+**EventId** | **int64** | The stored event&#39;s ID, the same as the SSE id field. Pass the last one received as last_event_id to resume after a reconnection. | 
 **SourceRunId** | Pointer to **string** |  | [optional] 
-**Type** | **string** |  | 
+**Type** | **string** | The event name, the same as the SSE event field. | 
 
 ## Methods
 
 ### NewSseEventTextMessageStartData
 
-`func NewSseEventTextMessageStartData(data interface{}, eventId int64, type_ string, ) *SseEventTextMessageStartData`
+`func NewSseEventTextMessageStartData(data TextMessageStartData, eventId int64, type_ string, ) *SseEventTextMessageStartData`
 
 NewSseEventTextMessageStartData instantiates a new SseEventTextMessageStartData object
 This constructor will assign default values to properties that have it defined,
@@ -30,34 +30,24 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *SseEventTextMessageStartData) GetData() interface{}`
+`func (o *SseEventTextMessageStartData) GetData() TextMessageStartData`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *SseEventTextMessageStartData) GetDataOk() (*interface{}, bool)`
+`func (o *SseEventTextMessageStartData) GetDataOk() (*TextMessageStartData, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *SseEventTextMessageStartData) SetData(v interface{})`
+`func (o *SseEventTextMessageStartData) SetData(v TextMessageStartData)`
 
 SetData sets Data field to given value.
 
 
-### SetDataNil
-
-`func (o *SseEventTextMessageStartData) SetDataNil(b bool)`
-
- SetDataNil sets the value for Data to be an explicit nil
-
-### UnsetData
-`func (o *SseEventTextMessageStartData) UnsetData()`
-
-UnsetData ensures that no value is present for Data, not even an explicit nil
 ### GetEventId
 
 `func (o *SseEventTextMessageStartData) GetEventId() int64`

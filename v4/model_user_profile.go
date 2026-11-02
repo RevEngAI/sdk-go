@@ -21,6 +21,7 @@ var _ MappedNullable = &UserProfile{}
 type UserProfile struct {
 	DefaultTeamId *int64 `json:"default_team_id,omitempty"`
 	FirstName string `json:"first_name"`
+	HideAiDecompilationComments bool `json:"hide_ai_decompilation_comments"`
 	HideExampleBinaries bool `json:"hide_example_binaries"`
 	LastName string `json:"last_name"`
 	TimeZone string `json:"time_zone"`
@@ -34,9 +35,10 @@ type _UserProfile UserProfile
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserProfile(firstName string, hideExampleBinaries bool, lastName string, timeZone string, username string) *UserProfile {
+func NewUserProfile(firstName string, hideAiDecompilationComments bool, hideExampleBinaries bool, lastName string, timeZone string, username string) *UserProfile {
 	this := UserProfile{}
 	this.FirstName = firstName
+	this.HideAiDecompilationComments = hideAiDecompilationComments
 	this.HideExampleBinaries = hideExampleBinaries
 	this.LastName = lastName
 	this.TimeZone = timeZone
@@ -106,6 +108,30 @@ func (o *UserProfile) GetFirstNameOk() (*string, bool) {
 // SetFirstName sets field value
 func (o *UserProfile) SetFirstName(v string) {
 	o.FirstName = v
+}
+
+// GetHideAiDecompilationComments returns the HideAiDecompilationComments field value
+func (o *UserProfile) GetHideAiDecompilationComments() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.HideAiDecompilationComments
+}
+
+// GetHideAiDecompilationCommentsOk returns a tuple with the HideAiDecompilationComments field value
+// and a boolean to check if the value has been set.
+func (o *UserProfile) GetHideAiDecompilationCommentsOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.HideAiDecompilationComments, true
+}
+
+// SetHideAiDecompilationComments sets field value
+func (o *UserProfile) SetHideAiDecompilationComments(v bool) {
+	o.HideAiDecompilationComments = v
 }
 
 // GetHideExampleBinaries returns the HideExampleBinaries field value
@@ -218,6 +244,7 @@ func (o UserProfile) ToMap() (map[string]interface{}, error) {
 		toSerialize["default_team_id"] = o.DefaultTeamId
 	}
 	toSerialize["first_name"] = o.FirstName
+	toSerialize["hide_ai_decompilation_comments"] = o.HideAiDecompilationComments
 	toSerialize["hide_example_binaries"] = o.HideExampleBinaries
 	toSerialize["last_name"] = o.LastName
 	toSerialize["time_zone"] = o.TimeZone
@@ -236,6 +263,7 @@ func (o *UserProfile) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"first_name",
+		"hide_ai_decompilation_comments",
 		"hide_example_binaries",
 		"last_name",
 		"time_zone",
@@ -271,6 +299,7 @@ func (o *UserProfile) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "default_team_id")
 		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "hide_ai_decompilation_comments")
 		delete(additionalProperties, "hide_example_binaries")
 		delete(additionalProperties, "last_name")
 		delete(additionalProperties, "time_zone")

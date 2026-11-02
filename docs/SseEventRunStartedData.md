@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | **interface{}** |  | 
-**EventId** | **int64** |  | 
+**Data** | [**RunStartedData**](RunStartedData.md) | The payload of the event named in type. | 
+**EventId** | **int64** | The stored event&#39;s ID, the same as the SSE id field. Pass the last one received as last_event_id to resume after a reconnection. | 
 **SourceRunId** | Pointer to **string** |  | [optional] 
-**Type** | **string** |  | 
+**Type** | **string** | The event name, the same as the SSE event field. | 
 
 ## Methods
 
 ### NewSseEventRunStartedData
 
-`func NewSseEventRunStartedData(data interface{}, eventId int64, type_ string, ) *SseEventRunStartedData`
+`func NewSseEventRunStartedData(data RunStartedData, eventId int64, type_ string, ) *SseEventRunStartedData`
 
 NewSseEventRunStartedData instantiates a new SseEventRunStartedData object
 This constructor will assign default values to properties that have it defined,
@@ -30,34 +30,24 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *SseEventRunStartedData) GetData() interface{}`
+`func (o *SseEventRunStartedData) GetData() RunStartedData`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *SseEventRunStartedData) GetDataOk() (*interface{}, bool)`
+`func (o *SseEventRunStartedData) GetDataOk() (*RunStartedData, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *SseEventRunStartedData) SetData(v interface{})`
+`func (o *SseEventRunStartedData) SetData(v RunStartedData)`
 
 SetData sets Data field to given value.
 
 
-### SetDataNil
-
-`func (o *SseEventRunStartedData) SetDataNil(b bool)`
-
- SetDataNil sets the value for Data to be an explicit nil
-
-### UnsetData
-`func (o *SseEventRunStartedData) UnsetData()`
-
-UnsetData ensures that no value is present for Data, not even an explicit nil
 ### GetEventId
 
 `func (o *SseEventRunStartedData) GetEventId() int64`

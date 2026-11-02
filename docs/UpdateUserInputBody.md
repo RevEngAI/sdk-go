@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Email** | Pointer to **string** | Email address | [optional] 
 **FirstName** | Pointer to **string** | First name | [optional] 
+**IsActive** | Pointer to **bool** | Whether the user can authenticate (SUPERADMIN only) | [optional] 
 **LastName** | Pointer to **string** | Last name | [optional] 
 **Role** | Pointer to **string** | User role (SUPERADMIN only) | [optional] 
 **Tier** | Pointer to **string** | User tier (SUPERADMIN only) | [optional] 
@@ -80,6 +81,31 @@ SetFirstName sets FirstName field to given value.
 `func (o *UpdateUserInputBody) HasFirstName() bool`
 
 HasFirstName returns a boolean if a field has been set.
+
+### GetIsActive
+
+`func (o *UpdateUserInputBody) GetIsActive() bool`
+
+GetIsActive returns the IsActive field if non-nil, zero value otherwise.
+
+### GetIsActiveOk
+
+`func (o *UpdateUserInputBody) GetIsActiveOk() (*bool, bool)`
+
+GetIsActiveOk returns a tuple with the IsActive field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsActive
+
+`func (o *UpdateUserInputBody) SetIsActive(v bool)`
+
+SetIsActive sets IsActive field to given value.
+
+### HasIsActive
+
+`func (o *UpdateUserInputBody) HasIsActive() bool`
+
+HasIsActive returns a boolean if a field has been set.
 
 ### GetLastName
 

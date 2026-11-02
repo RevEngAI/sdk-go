@@ -22,6 +22,8 @@ type DataTypeFunctionEntry struct {
 	FunctionId int64 `json:"function_id"`
 	// Current name of the function.
 	FunctionName string `json:"function_name"`
+	// How the function uses the type, each listed once, in alphabetical order: signature (its return type or a parameter type), inline (its AI decompilation names the type in its code), member (its AI decompilation reads a struct or union member of this type, or it references a global variable of this type).
+	UsageKinds []string `json:"usage_kinds"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,10 +33,11 @@ type _DataTypeFunctionEntry DataTypeFunctionEntry
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDataTypeFunctionEntry(functionId int64, functionName string) *DataTypeFunctionEntry {
+func NewDataTypeFunctionEntry(functionId int64, functionName string, usageKinds []string) *DataTypeFunctionEntry {
 	this := DataTypeFunctionEntry{}
 	this.FunctionId = functionId
 	this.FunctionName = functionName
+	this.UsageKinds = usageKinds
 	return &this
 }
 
@@ -94,6 +97,30 @@ func (o *DataTypeFunctionEntry) SetFunctionName(v string) {
 	o.FunctionName = v
 }
 
+// GetUsageKinds returns the UsageKinds field value
+func (o *DataTypeFunctionEntry) GetUsageKinds() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.UsageKinds
+}
+
+// GetUsageKindsOk returns a tuple with the UsageKinds field value
+// and a boolean to check if the value has been set.
+func (o *DataTypeFunctionEntry) GetUsageKindsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.UsageKinds, true
+}
+
+// SetUsageKinds sets field value
+func (o *DataTypeFunctionEntry) SetUsageKinds(v []string) {
+	o.UsageKinds = v
+}
+
 func (o DataTypeFunctionEntry) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -106,6 +133,7 @@ func (o DataTypeFunctionEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["function_id"] = o.FunctionId
 	toSerialize["function_name"] = o.FunctionName
+	toSerialize["usage_kinds"] = o.UsageKinds
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -121,6 +149,7 @@ func (o *DataTypeFunctionEntry) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"function_id",
 		"function_name",
+		"usage_kinds",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -152,6 +181,7 @@ func (o *DataTypeFunctionEntry) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "function_id")
 		delete(additionalProperties, "function_name")
+		delete(additionalProperties, "usage_kinds")
 		o.AdditionalProperties = additionalProperties
 	}
 

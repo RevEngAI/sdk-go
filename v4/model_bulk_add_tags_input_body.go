@@ -19,7 +19,7 @@ var _ MappedNullable = &BulkAddTagsInputBody{}
 
 // BulkAddTagsInputBody struct for BulkAddTagsInputBody
 type BulkAddTagsInputBody struct {
-	// IDs of the analyses to tag. The caller must own every one, or none are changed
+	// IDs of the analyses to tag. The caller must have write access to every one, or none are changed
 	AnalysisIds []int64 `json:"analysis_ids"`
 	// Tags to add. A binary that already carries a tag, under any origin, is left as-is for that name
 	Tags []string `json:"tags"`

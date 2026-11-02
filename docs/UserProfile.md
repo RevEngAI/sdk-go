@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DefaultTeamId** | Pointer to **int64** |  | [optional] 
 **FirstName** | **string** |  | 
+**HideAiDecompilationComments** | **bool** |  | 
 **HideExampleBinaries** | **bool** |  | 
 **LastName** | **string** |  | 
 **TimeZone** | **string** |  | 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewUserProfile
 
-`func NewUserProfile(firstName string, hideExampleBinaries bool, lastName string, timeZone string, username string, ) *UserProfile`
+`func NewUserProfile(firstName string, hideAiDecompilationComments bool, hideExampleBinaries bool, lastName string, timeZone string, username string, ) *UserProfile`
 
 NewUserProfile instantiates a new UserProfile object
 This constructor will assign default values to properties that have it defined,
@@ -73,6 +74,26 @@ and a boolean to check if the value has been set.
 `func (o *UserProfile) SetFirstName(v string)`
 
 SetFirstName sets FirstName field to given value.
+
+
+### GetHideAiDecompilationComments
+
+`func (o *UserProfile) GetHideAiDecompilationComments() bool`
+
+GetHideAiDecompilationComments returns the HideAiDecompilationComments field if non-nil, zero value otherwise.
+
+### GetHideAiDecompilationCommentsOk
+
+`func (o *UserProfile) GetHideAiDecompilationCommentsOk() (*bool, bool)`
+
+GetHideAiDecompilationCommentsOk returns a tuple with the HideAiDecompilationComments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHideAiDecompilationComments
+
+`func (o *UserProfile) SetHideAiDecompilationComments(v bool)`
+
+SetHideAiDecompilationComments sets HideAiDecompilationComments field to given value.
 
 
 ### GetHideExampleBinaries

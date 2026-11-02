@@ -20,11 +20,33 @@ var _ MappedNullable = &WorkflowDayBody{}
 // WorkflowDayBody struct for WorkflowDayBody
 type WorkflowDayBody struct {
 	// ANALYSE_CAPABILITIES agent-task stats for the day
-	AnalyseCapabilities AnalyseCapabilitiesBody `json:"analyse_capabilities"`
+	AnalyseCapabilities AgentCompletedBody `json:"analyse_capabilities"`
+	// CRYPTOGRAPHY agent-task stats for the day
+	CryptoScan AgentCompletedBody `json:"crypto_scan"`
+	// CRYPTOGRAPHY_BINARY agent-task stats for the day
+	CryptographyBinary AgentCompletedBody `json:"cryptography_binary"`
 	// Day this entry covers
 	Date string `json:"date"`
+	// EXECUTION agent-task stats for the day
+	ExecutionScan AgentCompletedBody `json:"execution_scan"`
+	// FILESYSTEM agent-task stats for the day
+	FilesystemScan AgentCompletedBody `json:"filesystem_scan"`
+	// NETWORKING agent-task stats for the day
+	NetworkingScan AgentCompletedBody `json:"networking_scan"`
+	// PROTOCOLS agent-task stats for the day
+	Protocols AgentCompletedBody `json:"protocols"`
+	// REMEDIATION agent-task stats for the day
+	Remediation AgentCompletedBody `json:"remediation"`
+	// RENAME_UNNAMED_FUNCTIONS agent-task stats for the day
+	RenameUnnamedFunctions AgentCompletedBody `json:"rename_unnamed_functions"`
 	// REPORT_ANALYSIS agent-task stats for the day
 	ReportAnalysis ReportAnalysisBody `json:"report_analysis"`
+	// SECRETS agent-task stats for the day
+	Secrets AgentCompletedBody `json:"secrets"`
+	// SECURITY_SCAN agent-task stats for the day
+	SecurityScan AgentCompletedBody `json:"security_scan"`
+	// TRIAGE agent-task stats for the day
+	Triage AgentCompletedBody `json:"triage"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,11 +56,22 @@ type _WorkflowDayBody WorkflowDayBody
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWorkflowDayBody(analyseCapabilities AnalyseCapabilitiesBody, date string, reportAnalysis ReportAnalysisBody) *WorkflowDayBody {
+func NewWorkflowDayBody(analyseCapabilities AgentCompletedBody, cryptoScan AgentCompletedBody, cryptographyBinary AgentCompletedBody, date string, executionScan AgentCompletedBody, filesystemScan AgentCompletedBody, networkingScan AgentCompletedBody, protocols AgentCompletedBody, remediation AgentCompletedBody, renameUnnamedFunctions AgentCompletedBody, reportAnalysis ReportAnalysisBody, secrets AgentCompletedBody, securityScan AgentCompletedBody, triage AgentCompletedBody) *WorkflowDayBody {
 	this := WorkflowDayBody{}
 	this.AnalyseCapabilities = analyseCapabilities
+	this.CryptoScan = cryptoScan
+	this.CryptographyBinary = cryptographyBinary
 	this.Date = date
+	this.ExecutionScan = executionScan
+	this.FilesystemScan = filesystemScan
+	this.NetworkingScan = networkingScan
+	this.Protocols = protocols
+	this.Remediation = remediation
+	this.RenameUnnamedFunctions = renameUnnamedFunctions
 	this.ReportAnalysis = reportAnalysis
+	this.Secrets = secrets
+	this.SecurityScan = securityScan
+	this.Triage = triage
 	return &this
 }
 
@@ -51,9 +84,9 @@ func NewWorkflowDayBodyWithDefaults() *WorkflowDayBody {
 }
 
 // GetAnalyseCapabilities returns the AnalyseCapabilities field value
-func (o *WorkflowDayBody) GetAnalyseCapabilities() AnalyseCapabilitiesBody {
+func (o *WorkflowDayBody) GetAnalyseCapabilities() AgentCompletedBody {
 	if o == nil {
-		var ret AnalyseCapabilitiesBody
+		var ret AgentCompletedBody
 		return ret
 	}
 
@@ -62,7 +95,7 @@ func (o *WorkflowDayBody) GetAnalyseCapabilities() AnalyseCapabilitiesBody {
 
 // GetAnalyseCapabilitiesOk returns a tuple with the AnalyseCapabilities field value
 // and a boolean to check if the value has been set.
-func (o *WorkflowDayBody) GetAnalyseCapabilitiesOk() (*AnalyseCapabilitiesBody, bool) {
+func (o *WorkflowDayBody) GetAnalyseCapabilitiesOk() (*AgentCompletedBody, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,8 +103,56 @@ func (o *WorkflowDayBody) GetAnalyseCapabilitiesOk() (*AnalyseCapabilitiesBody, 
 }
 
 // SetAnalyseCapabilities sets field value
-func (o *WorkflowDayBody) SetAnalyseCapabilities(v AnalyseCapabilitiesBody) {
+func (o *WorkflowDayBody) SetAnalyseCapabilities(v AgentCompletedBody) {
 	o.AnalyseCapabilities = v
+}
+
+// GetCryptoScan returns the CryptoScan field value
+func (o *WorkflowDayBody) GetCryptoScan() AgentCompletedBody {
+	if o == nil {
+		var ret AgentCompletedBody
+		return ret
+	}
+
+	return o.CryptoScan
+}
+
+// GetCryptoScanOk returns a tuple with the CryptoScan field value
+// and a boolean to check if the value has been set.
+func (o *WorkflowDayBody) GetCryptoScanOk() (*AgentCompletedBody, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CryptoScan, true
+}
+
+// SetCryptoScan sets field value
+func (o *WorkflowDayBody) SetCryptoScan(v AgentCompletedBody) {
+	o.CryptoScan = v
+}
+
+// GetCryptographyBinary returns the CryptographyBinary field value
+func (o *WorkflowDayBody) GetCryptographyBinary() AgentCompletedBody {
+	if o == nil {
+		var ret AgentCompletedBody
+		return ret
+	}
+
+	return o.CryptographyBinary
+}
+
+// GetCryptographyBinaryOk returns a tuple with the CryptographyBinary field value
+// and a boolean to check if the value has been set.
+func (o *WorkflowDayBody) GetCryptographyBinaryOk() (*AgentCompletedBody, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CryptographyBinary, true
+}
+
+// SetCryptographyBinary sets field value
+func (o *WorkflowDayBody) SetCryptographyBinary(v AgentCompletedBody) {
+	o.CryptographyBinary = v
 }
 
 // GetDate returns the Date field value
@@ -98,6 +179,150 @@ func (o *WorkflowDayBody) SetDate(v string) {
 	o.Date = v
 }
 
+// GetExecutionScan returns the ExecutionScan field value
+func (o *WorkflowDayBody) GetExecutionScan() AgentCompletedBody {
+	if o == nil {
+		var ret AgentCompletedBody
+		return ret
+	}
+
+	return o.ExecutionScan
+}
+
+// GetExecutionScanOk returns a tuple with the ExecutionScan field value
+// and a boolean to check if the value has been set.
+func (o *WorkflowDayBody) GetExecutionScanOk() (*AgentCompletedBody, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ExecutionScan, true
+}
+
+// SetExecutionScan sets field value
+func (o *WorkflowDayBody) SetExecutionScan(v AgentCompletedBody) {
+	o.ExecutionScan = v
+}
+
+// GetFilesystemScan returns the FilesystemScan field value
+func (o *WorkflowDayBody) GetFilesystemScan() AgentCompletedBody {
+	if o == nil {
+		var ret AgentCompletedBody
+		return ret
+	}
+
+	return o.FilesystemScan
+}
+
+// GetFilesystemScanOk returns a tuple with the FilesystemScan field value
+// and a boolean to check if the value has been set.
+func (o *WorkflowDayBody) GetFilesystemScanOk() (*AgentCompletedBody, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FilesystemScan, true
+}
+
+// SetFilesystemScan sets field value
+func (o *WorkflowDayBody) SetFilesystemScan(v AgentCompletedBody) {
+	o.FilesystemScan = v
+}
+
+// GetNetworkingScan returns the NetworkingScan field value
+func (o *WorkflowDayBody) GetNetworkingScan() AgentCompletedBody {
+	if o == nil {
+		var ret AgentCompletedBody
+		return ret
+	}
+
+	return o.NetworkingScan
+}
+
+// GetNetworkingScanOk returns a tuple with the NetworkingScan field value
+// and a boolean to check if the value has been set.
+func (o *WorkflowDayBody) GetNetworkingScanOk() (*AgentCompletedBody, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.NetworkingScan, true
+}
+
+// SetNetworkingScan sets field value
+func (o *WorkflowDayBody) SetNetworkingScan(v AgentCompletedBody) {
+	o.NetworkingScan = v
+}
+
+// GetProtocols returns the Protocols field value
+func (o *WorkflowDayBody) GetProtocols() AgentCompletedBody {
+	if o == nil {
+		var ret AgentCompletedBody
+		return ret
+	}
+
+	return o.Protocols
+}
+
+// GetProtocolsOk returns a tuple with the Protocols field value
+// and a boolean to check if the value has been set.
+func (o *WorkflowDayBody) GetProtocolsOk() (*AgentCompletedBody, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Protocols, true
+}
+
+// SetProtocols sets field value
+func (o *WorkflowDayBody) SetProtocols(v AgentCompletedBody) {
+	o.Protocols = v
+}
+
+// GetRemediation returns the Remediation field value
+func (o *WorkflowDayBody) GetRemediation() AgentCompletedBody {
+	if o == nil {
+		var ret AgentCompletedBody
+		return ret
+	}
+
+	return o.Remediation
+}
+
+// GetRemediationOk returns a tuple with the Remediation field value
+// and a boolean to check if the value has been set.
+func (o *WorkflowDayBody) GetRemediationOk() (*AgentCompletedBody, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Remediation, true
+}
+
+// SetRemediation sets field value
+func (o *WorkflowDayBody) SetRemediation(v AgentCompletedBody) {
+	o.Remediation = v
+}
+
+// GetRenameUnnamedFunctions returns the RenameUnnamedFunctions field value
+func (o *WorkflowDayBody) GetRenameUnnamedFunctions() AgentCompletedBody {
+	if o == nil {
+		var ret AgentCompletedBody
+		return ret
+	}
+
+	return o.RenameUnnamedFunctions
+}
+
+// GetRenameUnnamedFunctionsOk returns a tuple with the RenameUnnamedFunctions field value
+// and a boolean to check if the value has been set.
+func (o *WorkflowDayBody) GetRenameUnnamedFunctionsOk() (*AgentCompletedBody, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RenameUnnamedFunctions, true
+}
+
+// SetRenameUnnamedFunctions sets field value
+func (o *WorkflowDayBody) SetRenameUnnamedFunctions(v AgentCompletedBody) {
+	o.RenameUnnamedFunctions = v
+}
+
 // GetReportAnalysis returns the ReportAnalysis field value
 func (o *WorkflowDayBody) GetReportAnalysis() ReportAnalysisBody {
 	if o == nil {
@@ -122,6 +347,78 @@ func (o *WorkflowDayBody) SetReportAnalysis(v ReportAnalysisBody) {
 	o.ReportAnalysis = v
 }
 
+// GetSecrets returns the Secrets field value
+func (o *WorkflowDayBody) GetSecrets() AgentCompletedBody {
+	if o == nil {
+		var ret AgentCompletedBody
+		return ret
+	}
+
+	return o.Secrets
+}
+
+// GetSecretsOk returns a tuple with the Secrets field value
+// and a boolean to check if the value has been set.
+func (o *WorkflowDayBody) GetSecretsOk() (*AgentCompletedBody, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Secrets, true
+}
+
+// SetSecrets sets field value
+func (o *WorkflowDayBody) SetSecrets(v AgentCompletedBody) {
+	o.Secrets = v
+}
+
+// GetSecurityScan returns the SecurityScan field value
+func (o *WorkflowDayBody) GetSecurityScan() AgentCompletedBody {
+	if o == nil {
+		var ret AgentCompletedBody
+		return ret
+	}
+
+	return o.SecurityScan
+}
+
+// GetSecurityScanOk returns a tuple with the SecurityScan field value
+// and a boolean to check if the value has been set.
+func (o *WorkflowDayBody) GetSecurityScanOk() (*AgentCompletedBody, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SecurityScan, true
+}
+
+// SetSecurityScan sets field value
+func (o *WorkflowDayBody) SetSecurityScan(v AgentCompletedBody) {
+	o.SecurityScan = v
+}
+
+// GetTriage returns the Triage field value
+func (o *WorkflowDayBody) GetTriage() AgentCompletedBody {
+	if o == nil {
+		var ret AgentCompletedBody
+		return ret
+	}
+
+	return o.Triage
+}
+
+// GetTriageOk returns a tuple with the Triage field value
+// and a boolean to check if the value has been set.
+func (o *WorkflowDayBody) GetTriageOk() (*AgentCompletedBody, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Triage, true
+}
+
+// SetTriage sets field value
+func (o *WorkflowDayBody) SetTriage(v AgentCompletedBody) {
+	o.Triage = v
+}
+
 func (o WorkflowDayBody) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -133,8 +430,19 @@ func (o WorkflowDayBody) MarshalJSON() ([]byte, error) {
 func (o WorkflowDayBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["analyse_capabilities"] = o.AnalyseCapabilities
+	toSerialize["crypto_scan"] = o.CryptoScan
+	toSerialize["cryptography_binary"] = o.CryptographyBinary
 	toSerialize["date"] = o.Date
+	toSerialize["execution_scan"] = o.ExecutionScan
+	toSerialize["filesystem_scan"] = o.FilesystemScan
+	toSerialize["networking_scan"] = o.NetworkingScan
+	toSerialize["protocols"] = o.Protocols
+	toSerialize["remediation"] = o.Remediation
+	toSerialize["rename_unnamed_functions"] = o.RenameUnnamedFunctions
 	toSerialize["report_analysis"] = o.ReportAnalysis
+	toSerialize["secrets"] = o.Secrets
+	toSerialize["security_scan"] = o.SecurityScan
+	toSerialize["triage"] = o.Triage
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -149,8 +457,19 @@ func (o *WorkflowDayBody) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"analyse_capabilities",
+		"crypto_scan",
+		"cryptography_binary",
 		"date",
+		"execution_scan",
+		"filesystem_scan",
+		"networking_scan",
+		"protocols",
+		"remediation",
+		"rename_unnamed_functions",
 		"report_analysis",
+		"secrets",
+		"security_scan",
+		"triage",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -181,8 +500,19 @@ func (o *WorkflowDayBody) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "analyse_capabilities")
+		delete(additionalProperties, "crypto_scan")
+		delete(additionalProperties, "cryptography_binary")
 		delete(additionalProperties, "date")
+		delete(additionalProperties, "execution_scan")
+		delete(additionalProperties, "filesystem_scan")
+		delete(additionalProperties, "networking_scan")
+		delete(additionalProperties, "protocols")
+		delete(additionalProperties, "remediation")
+		delete(additionalProperties, "rename_unnamed_functions")
 		delete(additionalProperties, "report_analysis")
+		delete(additionalProperties, "secrets")
+		delete(additionalProperties, "security_scan")
+		delete(additionalProperties, "triage")
 		o.AdditionalProperties = additionalProperties
 	}
 

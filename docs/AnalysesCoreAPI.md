@@ -16,8 +16,6 @@ Method | HTTP request | Description
 [**GetAnalysisLogs**](AnalysesCoreAPI.md#GetAnalysisLogs) | **Get** /v2/analyses/{analysis_id}/logs | Gets the logs of an analysis
 [**GetAnalysisParams**](AnalysesCoreAPI.md#GetAnalysisParams) | **Get** /v2/analyses/{analysis_id}/params | Gets analysis param information
 [**GetAnalysisStatus**](AnalysesCoreAPI.md#GetAnalysisStatus) | **Get** /v2/analyses/{analysis_id}/status | Gets the status of an analysis
-[**GetDynamicExecutionReport**](AnalysesCoreAPI.md#GetDynamicExecutionReport) | **Get** /v2/analyses/{analysis_id}/dynamic-execution/report | Get dynamic execution report
-[**GetDynamicExecutionStatus**](AnalysesCoreAPI.md#GetDynamicExecutionStatus) | **Get** /v2/analyses/{analysis_id}/dynamic-execution/status | Get dynamic execution status
 [**InsertAnalysisLog**](AnalysesCoreAPI.md#InsertAnalysisLog) | **Post** /v2/analyses/{analysis_id}/logs | Insert a log entry for an analysis
 [**ListAnalyses**](AnalysesCoreAPI.md#ListAnalyses) | **Get** /v2/analyses/list | Gets the most recent analyses
 [**LookupBinaryId**](AnalysesCoreAPI.md#LookupBinaryId) | **Get** /v2/analyses/lookup/{binary_id} | Gets the analysis ID from binary ID
@@ -27,6 +25,7 @@ Method | HTTP request | Description
 [**UpdateAnalysis**](AnalysesCoreAPI.md#UpdateAnalysis) | **Patch** /v2/analyses/{analysis_id} | Update Analysis
 [**UpdateAnalysisTags**](AnalysesCoreAPI.md#UpdateAnalysisTags) | **Patch** /v2/analyses/{analysis_id}/tags | Update Analysis Tags
 [**UploadFile**](AnalysesCoreAPI.md#UploadFile) | **Post** /v2/upload | Upload File
+[**V3CreateAnalysis**](AnalysesCoreAPI.md#V3CreateAnalysis) | **Post** /v3/analyses | Create an analysis
 [**V3DeleteAnalysis**](AnalysesCoreAPI.md#V3DeleteAnalysis) | **Delete** /v3/analyses/{analysis_id} | Delete an analysis.
 [**V3DownloadBinaryExport**](AnalysesCoreAPI.md#V3DownloadBinaryExport) | **Get** /v3/analyses/{analysis_id}/binary-export | Download a binary export
 [**V3GetAnalysis**](AnalysesCoreAPI.md#V3GetAnalysis) | **Get** /v3/analyses/{analysis_id} | Get an analysis.
@@ -49,7 +48,9 @@ Method | HTTP request | Description
 [**V3GetDynamicExecutionSummary**](AnalysesCoreAPI.md#V3GetDynamicExecutionSummary) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/summary | Get the dynamic execution summary.
 [**V3GetDynamicExecutionSummaryOperation**](AnalysesCoreAPI.md#V3GetDynamicExecutionSummaryOperation) | **Get** /v3/operations/dynamic-execution-summary/{analysis_id} | Get a dynamic execution summary operation.
 [**V3GetDynamicExecutionWiresharkKeys**](AnalysesCoreAPI.md#V3GetDynamicExecutionWiresharkKeys) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/wireshark-keys | Download Wireshark TLS session keys.
+[**V3GrantAnalysisAccess**](AnalysesCoreAPI.md#V3GrantAnalysisAccess) | **Post** /v3/analyses/{analysis_id}/access-rules | Share an analysis with a user or team
 [**V3ListAnalyses**](AnalysesCoreAPI.md#V3ListAnalyses) | **Get** /v3/analyses | List analyses
+[**V3ListAnalysisAccessRules**](AnalysesCoreAPI.md#V3ListAnalysisAccessRules) | **Get** /v3/analyses/{analysis_id}/access-rules | List who an analysis is shared with
 [**V3ListAnalysisGlobals**](AnalysesCoreAPI.md#V3ListAnalysisGlobals) | **Get** /v3/analyses/{analysis_id}/globals | List the global variables in an analysis.
 [**V3ListAnalysisOperations**](AnalysesCoreAPI.md#V3ListAnalysisOperations) | **Get** /v3/analyses/{analysis_id}/operations | List the operations run on an analysis.
 [**V3ListDynamicExecutionScreenshots**](AnalysesCoreAPI.md#V3ListDynamicExecutionScreenshots) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/screenshots | List the screenshots captured during execution.
@@ -58,6 +59,7 @@ Method | HTTP request | Description
 [**V3LookupAnalysisByBinaryId**](AnalysesCoreAPI.md#V3LookupAnalysisByBinaryId) | **Get** /v3/analyses/lookup/{binary_id} | Look up the most recent analysis for a binary.
 [**V3QueueBinaryExport**](AnalysesCoreAPI.md#V3QueueBinaryExport) | **Post** /v3/analyses/{analysis_id}/binary-export | Queue a binary export
 [**V3RequeueAnalysis**](AnalysesCoreAPI.md#V3RequeueAnalysis) | **Post** /v3/analyses/{analysis_id}/requeue | Requeue an analysis
+[**V3RevokeAnalysisAccess**](AnalysesCoreAPI.md#V3RevokeAnalysisAccess) | **Delete** /v3/analyses/{analysis_id}/access-rules | Stop sharing an analysis with a user or team
 [**V3RunDynamicExecution**](AnalysesCoreAPI.md#V3RunDynamicExecution) | **Post** /v3/analyses/{analysis_id}/dynamic-execution:run | Trigger a dynamic execution run.
 [**V3RunDynamicExecutionSummary**](AnalysesCoreAPI.md#V3RunDynamicExecutionSummary) | **Post** /v3/analyses/{analysis_id}/dynamic-execution/summary:run | Regenerate the dynamic execution summary.
 [**V3SearchTags**](AnalysesCoreAPI.md#V3SearchTags) | **Get** /v3/tags | Search tags
@@ -912,146 +914,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetDynamicExecutionReport
-
-> AnalysisReport GetDynamicExecutionReport(ctx, analysisId).Execute()
-
-Get dynamic execution report
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v4"
-)
-
-func main() {
-	analysisId := int64(789) // int64 | Analysis ID
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.GetDynamicExecutionReport(context.Background(), analysisId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.GetDynamicExecutionReport``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetDynamicExecutionReport`: AnalysisReport
-	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.GetDynamicExecutionReport`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int64** | Analysis ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetDynamicExecutionReportRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**AnalysisReport**](AnalysisReport.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetDynamicExecutionStatus
-
-> DynamicExecutionStatusResponse GetDynamicExecutionStatus(ctx, analysisId).Execute()
-
-Get dynamic execution status
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v4"
-)
-
-func main() {
-	analysisId := int64(789) // int64 | Analysis ID
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.GetDynamicExecutionStatus(context.Background(), analysisId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.GetDynamicExecutionStatus``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetDynamicExecutionStatus`: DynamicExecutionStatusResponse
-	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.GetDynamicExecutionStatus`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int64** | Analysis ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetDynamicExecutionStatusRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**DynamicExecutionStatusResponse**](DynamicExecutionStatusResponse.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## InsertAnalysisLog
 
 > BaseResponse InsertAnalysisLog(ctx, analysisId).InsertAnalysisLogRequest(insertAnalysisLogRequest).Execute()
@@ -1705,6 +1567,74 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: multipart/form-data
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3CreateAnalysis
+
+> OperationCreateMetadataCreateResult V3CreateAnalysis(ctx).CreateRequest(createRequest).XRevEngApplication(xRevEngApplication).Execute()
+
+Create an analysis
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	createRequest := *revengai.NewCreateRequest("Filename_example", "Sha256Hash_example") // CreateRequest | 
+	xRevEngApplication := "xRevEngApplication_example" // string | Identifies the calling RevEng application. Recorded on the Analysis log. (optional)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3CreateAnalysis(context.Background()).CreateRequest(createRequest).XRevEngApplication(xRevEngApplication).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3CreateAnalysis``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3CreateAnalysis`: OperationCreateMetadataCreateResult
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3CreateAnalysis`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3CreateAnalysisRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createRequest** | [**CreateRequest**](CreateRequest.md) |  | 
+ **xRevEngApplication** | **string** | Identifies the calling RevEng application. Recorded on the Analysis log. | 
+
+### Return type
+
+[**OperationCreateMetadataCreateResult**](OperationCreateMetadataCreateResult.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -3271,6 +3201,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V3GrantAnalysisAccess
+
+> V3GrantAnalysisAccess(ctx, analysisId).GrantAccessInputBody(grantAccessInputBody).Execute()
+
+Share an analysis with a user or team
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	grantAccessInputBody := *revengai.NewGrantAccessInputBody("Permission_example") // GrantAccessInputBody | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.AnalysesCoreAPI.V3GrantAnalysisAccess(context.Background(), analysisId).GrantAccessInputBody(grantAccessInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GrantAnalysisAccess``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GrantAnalysisAccessRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **grantAccessInputBody** | [**GrantAccessInputBody**](GrantAccessInputBody.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V3ListAnalyses
 
 > ListAnalysesOutputBody V3ListAnalyses(ctx).SearchTerm(searchTerm).AnalysisScope(analysisScope).Status(status).ModelName(modelName).Usernames(usernames).Sha256Hash(sha256Hash).BinaryId(binaryId).Platform(platform).Architecture(architecture).PageSize(pageSize).NextPageToken(nextPageToken).OrderBy(orderBy).Order(order).Execute()
@@ -3293,7 +3293,7 @@ import (
 
 func main() {
 	searchTerm := "searchTerm_example" // string |  (optional)
-	analysisScope := []string{"AnalysisScope_example"} // []string | Leave empty to search your own, your team's and all public analyses (optional)
+	analysisScope := []string{"AnalysisScope_example"} // []string | Leave empty to search your own, your team's, all public analyses and those shared with you. SHARED_WITH_ME restricts to analyses another user or team gave you access to (optional)
 	status := []string{"Status_example"} // []string |  (optional)
 	modelName := []*string{"Inner_example"} // []*string |  (optional)
 	usernames := []*string{"Inner_example"} // []*string |  (optional)
@@ -3330,7 +3330,7 @@ Other parameters are passed through a pointer to a apiV3ListAnalysesRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **searchTerm** | **string** |  | 
- **analysisScope** | **[]string** | Leave empty to search your own, your team&#39;s and all public analyses | 
+ **analysisScope** | **[]string** | Leave empty to search your own, your team&#39;s, all public analyses and those shared with you. SHARED_WITH_ME restricts to analyses another user or team gave you access to | 
  **status** | **[]string** |  | 
  **modelName** | **[]string** |  | 
  **usernames** | **[]string** |  | 
@@ -3346,6 +3346,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ListAnalysesOutputBody**](ListAnalysesOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3ListAnalysisAccessRules
+
+> ListAccessRulesOutputBody V3ListAnalysisAccessRules(ctx, analysisId).Execute()
+
+List who an analysis is shared with
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3ListAnalysisAccessRules(context.Background(), analysisId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3ListAnalysisAccessRules``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3ListAnalysisAccessRules`: ListAccessRulesOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3ListAnalysisAccessRules`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3ListAnalysisAccessRulesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ListAccessRulesOutputBody**](ListAccessRulesOutputBody.md)
 
 ### Authorization
 
@@ -3932,6 +4002,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3RevokeAnalysisAccess
+
+> V3RevokeAnalysisAccess(ctx, analysisId).UserId(userId).TeamId(teamId).Execute()
+
+Stop sharing an analysis with a user or team
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	userId := int64(789) // int64 | The user to stop sharing with. Exactly one of user_id and team_id is required (optional)
+	teamId := int64(789) // int64 | The team to stop sharing with. Exactly one of user_id and team_id is required (optional)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.AnalysesCoreAPI.V3RevokeAnalysisAccess(context.Background(), analysisId).UserId(userId).TeamId(teamId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3RevokeAnalysisAccess``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3RevokeAnalysisAccessRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **userId** | **int64** | The user to stop sharing with. Exactly one of user_id and team_id is required | 
+ **teamId** | **int64** | The team to stop sharing with. Exactly one of user_id and team_id is required | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

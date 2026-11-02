@@ -40,7 +40,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the RevEng.AI API API vv4.74.3
+// APIClient manages communication with the RevEng.AI API API vv4.75.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -82,6 +82,8 @@ type APIClient struct {
 
 	IAMUsersAPI *IAMUsersAPIService
 
+	InvestigationsAPI *InvestigationsAPIService
+
 	ModelsAPI *ModelsAPIService
 
 	ReportsAPI *ReportsAPIService
@@ -122,6 +124,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.FunctionsCoreAPI = (*FunctionsCoreAPIService)(&c.common)
 	c.FunctionsRenamingHistoryAPI = (*FunctionsRenamingHistoryAPIService)(&c.common)
 	c.IAMUsersAPI = (*IAMUsersAPIService)(&c.common)
+	c.InvestigationsAPI = (*InvestigationsAPIService)(&c.common)
 	c.ModelsAPI = (*ModelsAPIService)(&c.common)
 	c.ReportsAPI = (*ReportsAPIService)(&c.common)
 	c.SearchAPI = (*SearchAPIService)(&c.common)

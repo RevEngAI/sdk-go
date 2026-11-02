@@ -22,6 +22,8 @@ type UpdateProfileInputBody struct {
 	DefaultTeamId *int64 `json:"default_team_id,omitempty"`
 	// First name
 	FirstName *string `json:"first_name,omitempty"`
+	// Hide AI decompilation comments across the platform
+	HideAiDecompilationComments *bool `json:"hide_ai_decompilation_comments,omitempty"`
 	// Hide the Examples tab in the analyses listing
 	HideExampleBinaries *bool `json:"hide_example_binaries,omitempty"`
 	// Last name
@@ -114,6 +116,38 @@ func (o *UpdateProfileInputBody) HasFirstName() bool {
 // SetFirstName gets a reference to the given string and assigns it to the FirstName field.
 func (o *UpdateProfileInputBody) SetFirstName(v string) {
 	o.FirstName = &v
+}
+
+// GetHideAiDecompilationComments returns the HideAiDecompilationComments field value if set, zero value otherwise.
+func (o *UpdateProfileInputBody) GetHideAiDecompilationComments() bool {
+	if o == nil || IsNil(o.HideAiDecompilationComments) {
+		var ret bool
+		return ret
+	}
+	return *o.HideAiDecompilationComments
+}
+
+// GetHideAiDecompilationCommentsOk returns a tuple with the HideAiDecompilationComments field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileInputBody) GetHideAiDecompilationCommentsOk() (*bool, bool) {
+	if o == nil || IsNil(o.HideAiDecompilationComments) {
+		return nil, false
+	}
+	return o.HideAiDecompilationComments, true
+}
+
+// HasHideAiDecompilationComments returns a boolean if a field has been set.
+func (o *UpdateProfileInputBody) HasHideAiDecompilationComments() bool {
+	if o != nil && !IsNil(o.HideAiDecompilationComments) {
+		return true
+	}
+
+	return false
+}
+
+// SetHideAiDecompilationComments gets a reference to the given bool and assigns it to the HideAiDecompilationComments field.
+func (o *UpdateProfileInputBody) SetHideAiDecompilationComments(v bool) {
+	o.HideAiDecompilationComments = &v
 }
 
 // GetHideExampleBinaries returns the HideExampleBinaries field value if set, zero value otherwise.
@@ -260,6 +294,9 @@ func (o UpdateProfileInputBody) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FirstName) {
 		toSerialize["first_name"] = o.FirstName
 	}
+	if !IsNil(o.HideAiDecompilationComments) {
+		toSerialize["hide_ai_decompilation_comments"] = o.HideAiDecompilationComments
+	}
 	if !IsNil(o.HideExampleBinaries) {
 		toSerialize["hide_example_binaries"] = o.HideExampleBinaries
 	}
@@ -296,6 +333,7 @@ func (o *UpdateProfileInputBody) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "default_team_id")
 		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "hide_ai_decompilation_comments")
 		delete(additionalProperties, "hide_example_binaries")
 		delete(additionalProperties, "last_name")
 		delete(additionalProperties, "time_zone")

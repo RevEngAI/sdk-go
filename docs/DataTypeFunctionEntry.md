@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FunctionId** | **int64** |  | 
 **FunctionName** | **string** | Current name of the function. | 
+**UsageKinds** | **[]string** | How the function uses the type, each listed once, in alphabetical order: signature (its return type or a parameter type), inline (its AI decompilation names the type in its code), member (its AI decompilation reads a struct or union member of this type, or it references a global variable of this type). | 
 
 ## Methods
 
 ### NewDataTypeFunctionEntry
 
-`func NewDataTypeFunctionEntry(functionId int64, functionName string, ) *DataTypeFunctionEntry`
+`func NewDataTypeFunctionEntry(functionId int64, functionName string, usageKinds []string, ) *DataTypeFunctionEntry`
 
 NewDataTypeFunctionEntry instantiates a new DataTypeFunctionEntry object
 This constructor will assign default values to properties that have it defined,
@@ -64,6 +65,26 @@ and a boolean to check if the value has been set.
 `func (o *DataTypeFunctionEntry) SetFunctionName(v string)`
 
 SetFunctionName sets FunctionName field to given value.
+
+
+### GetUsageKinds
+
+`func (o *DataTypeFunctionEntry) GetUsageKinds() []string`
+
+GetUsageKinds returns the UsageKinds field if non-nil, zero value otherwise.
+
+### GetUsageKindsOk
+
+`func (o *DataTypeFunctionEntry) GetUsageKindsOk() (*[]string, bool)`
+
+GetUsageKindsOk returns a tuple with the UsageKinds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsageKinds
+
+`func (o *DataTypeFunctionEntry) SetUsageKinds(v []string)`
+
+SetUsageKinds sets UsageKinds field to given value.
 
 
 

@@ -17,22 +17,22 @@ import (
 
 // EvidenceInner - struct for EvidenceInner
 type EvidenceInner struct {
-	ApiCombinationEvidence *ApiCombinationEvidence
+	APICombinationEvidence *APICombinationEvidence
 	CallChainEvidence *CallChainEvidence
 	DecompilerSummaryEvidence *DecompilerSummaryEvidence
 	FunctionSimilarityEvidence *FunctionSimilarityEvidence
 	HardcodedSecretEvidence *HardcodedSecretEvidence
-	ImportedApiCallEvidence *ImportedApiCallEvidence
+	ImportedAPICallEvidence *ImportedAPICallEvidence
 	KnownConstantEvidence *KnownConstantEvidence
 	ModelInterpretationEvidence *ModelInterpretationEvidence
 	ReferencedConstantEvidence *ReferencedConstantEvidence
 	StringMatchEvidence *StringMatchEvidence
 }
 
-// ApiCombinationEvidenceAsEvidenceInner is a convenience function that returns ApiCombinationEvidence wrapped in EvidenceInner
-func ApiCombinationEvidenceAsEvidenceInner(v *ApiCombinationEvidence) EvidenceInner {
+// APICombinationEvidenceAsEvidenceInner is a convenience function that returns APICombinationEvidence wrapped in EvidenceInner
+func APICombinationEvidenceAsEvidenceInner(v *APICombinationEvidence) EvidenceInner {
 	return EvidenceInner{
-		ApiCombinationEvidence: v,
+		APICombinationEvidence: v,
 	}
 }
 
@@ -64,10 +64,10 @@ func HardcodedSecretEvidenceAsEvidenceInner(v *HardcodedSecretEvidence) Evidence
 	}
 }
 
-// ImportedApiCallEvidenceAsEvidenceInner is a convenience function that returns ImportedApiCallEvidence wrapped in EvidenceInner
-func ImportedApiCallEvidenceAsEvidenceInner(v *ImportedApiCallEvidence) EvidenceInner {
+// ImportedAPICallEvidenceAsEvidenceInner is a convenience function that returns ImportedAPICallEvidence wrapped in EvidenceInner
+func ImportedAPICallEvidenceAsEvidenceInner(v *ImportedAPICallEvidence) EvidenceInner {
 	return EvidenceInner{
-		ImportedApiCallEvidence: v,
+		ImportedAPICallEvidence: v,
 	}
 }
 
@@ -104,21 +104,21 @@ func StringMatchEvidenceAsEvidenceInner(v *StringMatchEvidence) EvidenceInner {
 func (dst *EvidenceInner) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into ApiCombinationEvidence
-	err = newStrictDecoder(data).Decode(&dst.ApiCombinationEvidence)
+	// try to unmarshal data into APICombinationEvidence
+	err = newStrictDecoder(data).Decode(&dst.APICombinationEvidence)
 	if err == nil {
-		jsonApiCombinationEvidence, _ := json.Marshal(dst.ApiCombinationEvidence)
-		if string(jsonApiCombinationEvidence) == "{}" { // empty struct
-			dst.ApiCombinationEvidence = nil
+		jsonAPICombinationEvidence, _ := json.Marshal(dst.APICombinationEvidence)
+		if string(jsonAPICombinationEvidence) == "{}" { // empty struct
+			dst.APICombinationEvidence = nil
 		} else {
-			if err = validator.Validate(dst.ApiCombinationEvidence); err != nil {
-				dst.ApiCombinationEvidence = nil
+			if err = validator.Validate(dst.APICombinationEvidence); err != nil {
+				dst.APICombinationEvidence = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ApiCombinationEvidence = nil
+		dst.APICombinationEvidence = nil
 	}
 
 	// try to unmarshal data into CallChainEvidence
@@ -189,21 +189,21 @@ func (dst *EvidenceInner) UnmarshalJSON(data []byte) error {
 		dst.HardcodedSecretEvidence = nil
 	}
 
-	// try to unmarshal data into ImportedApiCallEvidence
-	err = newStrictDecoder(data).Decode(&dst.ImportedApiCallEvidence)
+	// try to unmarshal data into ImportedAPICallEvidence
+	err = newStrictDecoder(data).Decode(&dst.ImportedAPICallEvidence)
 	if err == nil {
-		jsonImportedApiCallEvidence, _ := json.Marshal(dst.ImportedApiCallEvidence)
-		if string(jsonImportedApiCallEvidence) == "{}" { // empty struct
-			dst.ImportedApiCallEvidence = nil
+		jsonImportedAPICallEvidence, _ := json.Marshal(dst.ImportedAPICallEvidence)
+		if string(jsonImportedAPICallEvidence) == "{}" { // empty struct
+			dst.ImportedAPICallEvidence = nil
 		} else {
-			if err = validator.Validate(dst.ImportedApiCallEvidence); err != nil {
-				dst.ImportedApiCallEvidence = nil
+			if err = validator.Validate(dst.ImportedAPICallEvidence); err != nil {
+				dst.ImportedAPICallEvidence = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ImportedApiCallEvidence = nil
+		dst.ImportedAPICallEvidence = nil
 	}
 
 	// try to unmarshal data into KnownConstantEvidence
@@ -276,12 +276,12 @@ func (dst *EvidenceInner) UnmarshalJSON(data []byte) error {
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.ApiCombinationEvidence = nil
+		dst.APICombinationEvidence = nil
 		dst.CallChainEvidence = nil
 		dst.DecompilerSummaryEvidence = nil
 		dst.FunctionSimilarityEvidence = nil
 		dst.HardcodedSecretEvidence = nil
-		dst.ImportedApiCallEvidence = nil
+		dst.ImportedAPICallEvidence = nil
 		dst.KnownConstantEvidence = nil
 		dst.ModelInterpretationEvidence = nil
 		dst.ReferencedConstantEvidence = nil
@@ -297,8 +297,8 @@ func (dst *EvidenceInner) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src EvidenceInner) MarshalJSON() ([]byte, error) {
-	if src.ApiCombinationEvidence != nil {
-		return json.Marshal(&src.ApiCombinationEvidence)
+	if src.APICombinationEvidence != nil {
+		return json.Marshal(&src.APICombinationEvidence)
 	}
 
 	if src.CallChainEvidence != nil {
@@ -317,8 +317,8 @@ func (src EvidenceInner) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.HardcodedSecretEvidence)
 	}
 
-	if src.ImportedApiCallEvidence != nil {
-		return json.Marshal(&src.ImportedApiCallEvidence)
+	if src.ImportedAPICallEvidence != nil {
+		return json.Marshal(&src.ImportedAPICallEvidence)
 	}
 
 	if src.KnownConstantEvidence != nil {
@@ -345,8 +345,8 @@ func (obj *EvidenceInner) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.ApiCombinationEvidence != nil {
-		return obj.ApiCombinationEvidence
+	if obj.APICombinationEvidence != nil {
+		return obj.APICombinationEvidence
 	}
 
 	if obj.CallChainEvidence != nil {
@@ -365,8 +365,8 @@ func (obj *EvidenceInner) GetActualInstance() (interface{}) {
 		return obj.HardcodedSecretEvidence
 	}
 
-	if obj.ImportedApiCallEvidence != nil {
-		return obj.ImportedApiCallEvidence
+	if obj.ImportedAPICallEvidence != nil {
+		return obj.ImportedAPICallEvidence
 	}
 
 	if obj.KnownConstantEvidence != nil {
@@ -391,8 +391,8 @@ func (obj *EvidenceInner) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj EvidenceInner) GetActualInstanceValue() (interface{}) {
-	if obj.ApiCombinationEvidence != nil {
-		return *obj.ApiCombinationEvidence
+	if obj.APICombinationEvidence != nil {
+		return *obj.APICombinationEvidence
 	}
 
 	if obj.CallChainEvidence != nil {
@@ -411,8 +411,8 @@ func (obj EvidenceInner) GetActualInstanceValue() (interface{}) {
 		return *obj.HardcodedSecretEvidence
 	}
 
-	if obj.ImportedApiCallEvidence != nil {
-		return *obj.ImportedApiCallEvidence
+	if obj.ImportedAPICallEvidence != nil {
+		return *obj.ImportedAPICallEvidence
 	}
 
 	if obj.KnownConstantEvidence != nil {

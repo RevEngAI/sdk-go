@@ -19,13 +19,13 @@ var _ MappedNullable = &ResultBody{}
 
 // ResultBody struct for ResultBody
 type ResultBody struct {
-	// Child binaries recovered from the extraction.
+	// Every file recovered from the extraction, binary or not.
 	Binaries []ExtractedBinary `json:"binaries"`
 	// Number of nested-archive extraction passes taken.
 	ExtractionDepth int64 `json:"extraction_depth"`
 	// Per-file extraction failures, keyed by filename.
 	FilenameToFailure map[string]ExtractionFailure `json:"filename_to_failure"`
-	// Files skipped because they were not recognised as binaries.
+	// Deprecated: always 0, every file is returned.
 	SkippedFiles int64 `json:"skipped_files"`
 	AdditionalProperties map[string]interface{}
 }

@@ -20,9 +20,12 @@ var _ MappedNullable = &Conversation{}
 
 // Conversation struct for Conversation
 type Conversation struct {
-	Context interface{} `json:"context,omitempty"`
+	// The analysis, and optionally the function, the conversation is about. Absent when it is about neither.
+	Context *ConversationContext `json:"context,omitempty"`
 	ConversationUuid string `json:"conversation_uuid"`
 	CreatedAt time.Time `json:"created_at"`
+	// The investigation the conversation belongs to. Absent for a conversation outside any investigation.
+	InvestigationId *int64 `json:"investigation_id,omitempty"`
 	Title string `json:"title"`
 	UpdatedAt time.Time `json:"updated_at"`
 	UserId int64 `json:"user_id"`
@@ -53,23 +56,22 @@ func NewConversationWithDefaults() *Conversation {
 	return &this
 }
 
-// GetContext returns the Context field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Conversation) GetContext() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetContext returns the Context field value if set, zero value otherwise.
+func (o *Conversation) GetContext() ConversationContext {
+	if o == nil || IsNil(o.Context) {
+		var ret ConversationContext
 		return ret
 	}
-	return o.Context
+	return *o.Context
 }
 
 // GetContextOk returns a tuple with the Context field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Conversation) GetContextOk() (*interface{}, bool) {
+func (o *Conversation) GetContextOk() (*ConversationContext, bool) {
 	if o == nil || IsNil(o.Context) {
 		return nil, false
 	}
-	return &o.Context, true
+	return o.Context, true
 }
 
 // HasContext returns a boolean if a field has been set.
@@ -81,9 +83,9 @@ func (o *Conversation) HasContext() bool {
 	return false
 }
 
-// SetContext gets a reference to the given interface{} and assigns it to the Context field.
-func (o *Conversation) SetContext(v interface{}) {
-	o.Context = v
+// SetContext gets a reference to the given ConversationContext and assigns it to the Context field.
+func (o *Conversation) SetContext(v ConversationContext) {
+	o.Context = &v
 }
 
 // GetConversationUuid returns the ConversationUuid field value
@@ -132,6 +134,38 @@ func (o *Conversation) GetCreatedAtOk() (*time.Time, bool) {
 // SetCreatedAt sets field value
 func (o *Conversation) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
+}
+
+// GetInvestigationId returns the InvestigationId field value if set, zero value otherwise.
+func (o *Conversation) GetInvestigationId() int64 {
+	if o == nil || IsNil(o.InvestigationId) {
+		var ret int64
+		return ret
+	}
+	return *o.InvestigationId
+}
+
+// GetInvestigationIdOk returns a tuple with the InvestigationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Conversation) GetInvestigationIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.InvestigationId) {
+		return nil, false
+	}
+	return o.InvestigationId, true
+}
+
+// HasInvestigationId returns a boolean if a field has been set.
+func (o *Conversation) HasInvestigationId() bool {
+	if o != nil && !IsNil(o.InvestigationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetInvestigationId gets a reference to the given int64 and assigns it to the InvestigationId field.
+func (o *Conversation) SetInvestigationId(v int64) {
+	o.InvestigationId = &v
 }
 
 // GetTitle returns the Title field value
@@ -216,11 +250,14 @@ func (o Conversation) MarshalJSON() ([]byte, error) {
 
 func (o Conversation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Context != nil {
+	if !IsNil(o.Context) {
 		toSerialize["context"] = o.Context
 	}
 	toSerialize["conversation_uuid"] = o.ConversationUuid
 	toSerialize["created_at"] = o.CreatedAt
+	if !IsNil(o.InvestigationId) {
+		toSerialize["investigation_id"] = o.InvestigationId
+	}
 	toSerialize["title"] = o.Title
 	toSerialize["updated_at"] = o.UpdatedAt
 	toSerialize["user_id"] = o.UserId
@@ -274,6 +311,7 @@ func (o *Conversation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "context")
 		delete(additionalProperties, "conversation_uuid")
 		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "investigation_id")
 		delete(additionalProperties, "title")
 		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "user_id")

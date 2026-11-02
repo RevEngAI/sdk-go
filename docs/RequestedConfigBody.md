@@ -4,8 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Capabilities** | **bool** | Whether the capabilities agent was requested | 
+**Capabilities** | **bool** | Whether static capability extraction was requested | 
 **Functions** | **bool** | Whether the functions pipeline was requested | 
+**Operations** | [**[]RequestedOperation**](RequestedOperation.md) | Operations requested to run automatically once the analysis completes | 
 **Sandbox** | **bool** | Whether dynamic execution (sandbox) was requested | 
 **Scrape** | **bool** | Whether external-source scraping was requested | 
 **Triage** | **bool** | Whether the triage agent was requested | 
@@ -14,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewRequestedConfigBody
 
-`func NewRequestedConfigBody(capabilities bool, functions bool, sandbox bool, scrape bool, triage bool, ) *RequestedConfigBody`
+`func NewRequestedConfigBody(capabilities bool, functions bool, operations []RequestedOperation, sandbox bool, scrape bool, triage bool, ) *RequestedConfigBody`
 
 NewRequestedConfigBody instantiates a new RequestedConfigBody object
 This constructor will assign default values to properties that have it defined,
@@ -67,6 +68,26 @@ and a boolean to check if the value has been set.
 `func (o *RequestedConfigBody) SetFunctions(v bool)`
 
 SetFunctions sets Functions field to given value.
+
+
+### GetOperations
+
+`func (o *RequestedConfigBody) GetOperations() []RequestedOperation`
+
+GetOperations returns the Operations field if non-nil, zero value otherwise.
+
+### GetOperationsOk
+
+`func (o *RequestedConfigBody) GetOperationsOk() (*[]RequestedOperation, bool)`
+
+GetOperationsOk returns a tuple with the Operations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperations
+
+`func (o *RequestedConfigBody) SetOperations(v []RequestedOperation)`
+
+SetOperations sets Operations field to given value.
 
 
 ### GetSandbox
