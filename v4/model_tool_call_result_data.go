@@ -18,6 +18,8 @@ var _ MappedNullable = &ToolCallResultData{}
 
 // ToolCallResultData struct for ToolCallResultData
 type ToolCallResultData struct {
+	BinaryName *string `json:"binary_name,omitempty"`
+	FunctionName *string `json:"function_name,omitempty"`
 	IsError *bool `json:"is_error,omitempty"`
 	Result *string `json:"result,omitempty"`
 	ToolCallId *string `json:"tool_call_id,omitempty"`
@@ -43,6 +45,70 @@ func NewToolCallResultData() *ToolCallResultData {
 func NewToolCallResultDataWithDefaults() *ToolCallResultData {
 	this := ToolCallResultData{}
 	return &this
+}
+
+// GetBinaryName returns the BinaryName field value if set, zero value otherwise.
+func (o *ToolCallResultData) GetBinaryName() string {
+	if o == nil || IsNil(o.BinaryName) {
+		var ret string
+		return ret
+	}
+	return *o.BinaryName
+}
+
+// GetBinaryNameOk returns a tuple with the BinaryName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ToolCallResultData) GetBinaryNameOk() (*string, bool) {
+	if o == nil || IsNil(o.BinaryName) {
+		return nil, false
+	}
+	return o.BinaryName, true
+}
+
+// HasBinaryName returns a boolean if a field has been set.
+func (o *ToolCallResultData) HasBinaryName() bool {
+	if o != nil && !IsNil(o.BinaryName) {
+		return true
+	}
+
+	return false
+}
+
+// SetBinaryName gets a reference to the given string and assigns it to the BinaryName field.
+func (o *ToolCallResultData) SetBinaryName(v string) {
+	o.BinaryName = &v
+}
+
+// GetFunctionName returns the FunctionName field value if set, zero value otherwise.
+func (o *ToolCallResultData) GetFunctionName() string {
+	if o == nil || IsNil(o.FunctionName) {
+		var ret string
+		return ret
+	}
+	return *o.FunctionName
+}
+
+// GetFunctionNameOk returns a tuple with the FunctionName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ToolCallResultData) GetFunctionNameOk() (*string, bool) {
+	if o == nil || IsNil(o.FunctionName) {
+		return nil, false
+	}
+	return o.FunctionName, true
+}
+
+// HasFunctionName returns a boolean if a field has been set.
+func (o *ToolCallResultData) HasFunctionName() bool {
+	if o != nil && !IsNil(o.FunctionName) {
+		return true
+	}
+
+	return false
+}
+
+// SetFunctionName gets a reference to the given string and assigns it to the FunctionName field.
+func (o *ToolCallResultData) SetFunctionName(v string) {
+	o.FunctionName = &v
 }
 
 // GetIsError returns the IsError field value if set, zero value otherwise.
@@ -216,6 +282,12 @@ func (o ToolCallResultData) MarshalJSON() ([]byte, error) {
 
 func (o ToolCallResultData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.BinaryName) {
+		toSerialize["binary_name"] = o.BinaryName
+	}
+	if !IsNil(o.FunctionName) {
+		toSerialize["function_name"] = o.FunctionName
+	}
 	if !IsNil(o.IsError) {
 		toSerialize["is_error"] = o.IsError
 	}
@@ -253,6 +325,8 @@ func (o *ToolCallResultData) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binary_name")
+		delete(additionalProperties, "function_name")
 		delete(additionalProperties, "is_error")
 		delete(additionalProperties, "result")
 		delete(additionalProperties, "tool_call_id")

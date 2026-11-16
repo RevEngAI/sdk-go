@@ -1,4 +1,4 @@
-# AppApiRestV2FunctionsTypesFunction
+# Function
 
 ## Properties
 
@@ -13,139 +13,139 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewAppApiRestV2FunctionsTypesFunction
+### NewFunction
 
-`func NewAppApiRestV2FunctionsTypesFunction(functionId int64, functionName string, functionMangledName string, functionVaddr int64, functionSize int32, debug bool, ) *AppApiRestV2FunctionsTypesFunction`
+`func NewFunction(functionId int64, functionName string, functionMangledName string, functionVaddr int64, functionSize int32, debug bool, ) *Function`
 
-NewAppApiRestV2FunctionsTypesFunction instantiates a new AppApiRestV2FunctionsTypesFunction object
+NewFunction instantiates a new Function object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewAppApiRestV2FunctionsTypesFunctionWithDefaults
+### NewFunctionWithDefaults
 
-`func NewAppApiRestV2FunctionsTypesFunctionWithDefaults() *AppApiRestV2FunctionsTypesFunction`
+`func NewFunctionWithDefaults() *Function`
 
-NewAppApiRestV2FunctionsTypesFunctionWithDefaults instantiates a new AppApiRestV2FunctionsTypesFunction object
+NewFunctionWithDefaults instantiates a new Function object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetFunctionId
 
-`func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionId() int64`
+`func (o *Function) GetFunctionId() int64`
 
 GetFunctionId returns the FunctionId field if non-nil, zero value otherwise.
 
 ### GetFunctionIdOk
 
-`func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionIdOk() (*int64, bool)`
+`func (o *Function) GetFunctionIdOk() (*int64, bool)`
 
 GetFunctionIdOk returns a tuple with the FunctionId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFunctionId
 
-`func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionId(v int64)`
+`func (o *Function) SetFunctionId(v int64)`
 
 SetFunctionId sets FunctionId field to given value.
 
 
 ### GetFunctionName
 
-`func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionName() string`
+`func (o *Function) GetFunctionName() string`
 
 GetFunctionName returns the FunctionName field if non-nil, zero value otherwise.
 
 ### GetFunctionNameOk
 
-`func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionNameOk() (*string, bool)`
+`func (o *Function) GetFunctionNameOk() (*string, bool)`
 
 GetFunctionNameOk returns a tuple with the FunctionName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFunctionName
 
-`func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionName(v string)`
+`func (o *Function) SetFunctionName(v string)`
 
 SetFunctionName sets FunctionName field to given value.
 
 
 ### GetFunctionMangledName
 
-`func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionMangledName() string`
+`func (o *Function) GetFunctionMangledName() string`
 
 GetFunctionMangledName returns the FunctionMangledName field if non-nil, zero value otherwise.
 
 ### GetFunctionMangledNameOk
 
-`func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionMangledNameOk() (*string, bool)`
+`func (o *Function) GetFunctionMangledNameOk() (*string, bool)`
 
 GetFunctionMangledNameOk returns a tuple with the FunctionMangledName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFunctionMangledName
 
-`func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionMangledName(v string)`
+`func (o *Function) SetFunctionMangledName(v string)`
 
 SetFunctionMangledName sets FunctionMangledName field to given value.
 
 
 ### GetFunctionVaddr
 
-`func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionVaddr() int64`
+`func (o *Function) GetFunctionVaddr() int64`
 
 GetFunctionVaddr returns the FunctionVaddr field if non-nil, zero value otherwise.
 
 ### GetFunctionVaddrOk
 
-`func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionVaddrOk() (*int64, bool)`
+`func (o *Function) GetFunctionVaddrOk() (*int64, bool)`
 
 GetFunctionVaddrOk returns a tuple with the FunctionVaddr field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFunctionVaddr
 
-`func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionVaddr(v int64)`
+`func (o *Function) SetFunctionVaddr(v int64)`
 
 SetFunctionVaddr sets FunctionVaddr field to given value.
 
 
 ### GetFunctionSize
 
-`func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionSize() int32`
+`func (o *Function) GetFunctionSize() int32`
 
 GetFunctionSize returns the FunctionSize field if non-nil, zero value otherwise.
 
 ### GetFunctionSizeOk
 
-`func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionSizeOk() (*int32, bool)`
+`func (o *Function) GetFunctionSizeOk() (*int32, bool)`
 
 GetFunctionSizeOk returns a tuple with the FunctionSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFunctionSize
 
-`func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionSize(v int32)`
+`func (o *Function) SetFunctionSize(v int32)`
 
 SetFunctionSize sets FunctionSize field to given value.
 
 
 ### GetDebug
 
-`func (o *AppApiRestV2FunctionsTypesFunction) GetDebug() bool`
+`func (o *Function) GetDebug() bool`
 
 GetDebug returns the Debug field if non-nil, zero value otherwise.
 
 ### GetDebugOk
 
-`func (o *AppApiRestV2FunctionsTypesFunction) GetDebugOk() (*bool, bool)`
+`func (o *Function) GetDebugOk() (*bool, bool)`
 
 GetDebugOk returns a tuple with the Debug field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDebug
 
-`func (o *AppApiRestV2FunctionsTypesFunction) SetDebug(v bool)`
+`func (o *Function) SetDebug(v bool)`
 
 SetDebug sets Debug field to given value.
 

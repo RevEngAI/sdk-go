@@ -46,7 +46,8 @@ type AnalysisBasicInfoOutputBody struct {
 	DetectedLanguage string `json:"detected_language"`
 	// Number of functions in the binary
 	FunctionCount int64 `json:"function_count"`
-	// True when the analysis was run in advanced mode
+	// Always false; advanced (DFG) analysis has been removed
+	// Deprecated
 	IsAdvanced bool `json:"is_advanced"`
 	// True when the caller is the analysis owner
 	IsOwner bool `json:"is_owner"`
@@ -434,6 +435,7 @@ func (o *AnalysisBasicInfoOutputBody) SetFunctionCount(v int64) {
 }
 
 // GetIsAdvanced returns the IsAdvanced field value
+// Deprecated
 func (o *AnalysisBasicInfoOutputBody) GetIsAdvanced() bool {
 	if o == nil {
 		var ret bool
@@ -445,6 +447,7 @@ func (o *AnalysisBasicInfoOutputBody) GetIsAdvanced() bool {
 
 // GetIsAdvancedOk returns a tuple with the IsAdvanced field value
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *AnalysisBasicInfoOutputBody) GetIsAdvancedOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
@@ -453,6 +456,7 @@ func (o *AnalysisBasicInfoOutputBody) GetIsAdvancedOk() (*bool, bool) {
 }
 
 // SetIsAdvanced sets field value
+// Deprecated
 func (o *AnalysisBasicInfoOutputBody) SetIsAdvanced(v bool) {
 	o.IsAdvanced = v
 }

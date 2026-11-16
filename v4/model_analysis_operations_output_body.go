@@ -19,7 +19,7 @@ var _ MappedNullable = &AnalysisOperationsOutputBody{}
 
 // AnalysisOperationsOutputBody struct for AnalysisOperationsOutputBody
 type AnalysisOperationsOutputBody struct {
-	// The analysis' static-analysis operation, followed by the latest run of each other operation started on its binary. Operations that have never run are omitted
+	// The analysis' static-analysis operation, followed by the latest run of each other operation started on its binary, then one dynamic-execution operation per sandbox run of the analysis, newest first. Operations that have never run are omitted
 	Operations []AnalysisOperationBody `json:"operations"`
 	AdditionalProperties map[string]interface{}
 }

@@ -21,7 +21,7 @@ var _ MappedNullable = &DynamicExecutionMetadata{}
 type DynamicExecutionMetadata struct {
 	// Sandbox status log messages captured during the run. Empty when none have been captured yet.
 	Logs AnalysisLogs `json:"logs"`
-	// Run status. UNINITIALISED means this analysis has never had a run triggered.
+	// Run status
 	Status string `json:"status"`
 	AdditionalProperties map[string]interface{}
 }

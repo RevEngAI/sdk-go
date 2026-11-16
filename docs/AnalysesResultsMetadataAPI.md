@@ -8,9 +8,11 @@ Method | HTTP request | Description
 [**GetCapabilities**](AnalysesResultsMetadataAPI.md#GetCapabilities) | **Get** /v2/analyses/{analysis_id}/capabilities | Gets the capabilities from the analysis
 [**GetFunctionsList**](AnalysesResultsMetadataAPI.md#GetFunctionsList) | **Get** /v2/analyses/{analysis_id}/functions/list | Gets functions from analysis
 [**GetTags**](AnalysesResultsMetadataAPI.md#GetTags) | **Get** /v2/analyses/{analysis_id}/tags | Get function tags with maliciousness score
+[**V3GetAnalysisFeedback**](AnalysesResultsMetadataAPI.md#V3GetAnalysisFeedback) | **Get** /v3/analyses/{analysis_id}/feedback/{type} | Get the caller&#39;s feedback on an analysis.
 [**V3GetAnalysisXref**](AnalysesResultsMetadataAPI.md#V3GetAnalysisXref) | **Get** /v3/analyses/{analysis_id}/xrefs/{vaddr} | Look up xrefs by virtual address.
 [**V3ListAnalysisCapabilities**](AnalysesResultsMetadataAPI.md#V3ListAnalysisCapabilities) | **Get** /v3/analyses/{analysis_id}/capabilities | List the capabilities found in an analysis.
 [**V3ListAnalysisTags**](AnalysesResultsMetadataAPI.md#V3ListAnalysisTags) | **Get** /v3/analyses/{analysis_id}/tags | List the tags on an analysis.
+[**V3UpsertAnalysisFeedback**](AnalysesResultsMetadataAPI.md#V3UpsertAnalysisFeedback) | **Put** /v3/analyses/{analysis_id}/feedback/{type} | Record feedback on an analysis.
 
 
 
@@ -306,6 +308,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V3GetAnalysisFeedback
+
+> RecordedFeedback V3GetAnalysisFeedback(ctx, analysisId, type_).Execute()
+
+Get the caller's feedback on an analysis.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	type_ := "type__example" // string | What the feedback is about
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesResultsMetadataAPI.V3GetAnalysisFeedback(context.Background(), analysisId, type_).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesResultsMetadataAPI.V3GetAnalysisFeedback``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetAnalysisFeedback`: RecordedFeedback
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesResultsMetadataAPI.V3GetAnalysisFeedback`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+**type_** | **string** | What the feedback is about | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetAnalysisFeedbackRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**RecordedFeedback**](RecordedFeedback.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V3GetAnalysisXref
 
 > AnalysisXrefOutputBody V3GetAnalysisXref(ctx, analysisId, vaddr).Execute()
@@ -512,6 +587,79 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3UpsertAnalysisFeedback
+
+> V3UpsertAnalysisFeedback(ctx, analysisId, type_).FeedbackSubmission(feedbackSubmission).Execute()
+
+Record feedback on an analysis.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	type_ := "type__example" // string | What the feedback is about
+	feedbackSubmission := *revengai.NewFeedbackSubmission("Sentiment_example") // FeedbackSubmission | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.AnalysesResultsMetadataAPI.V3UpsertAnalysisFeedback(context.Background(), analysisId, type_).FeedbackSubmission(feedbackSubmission).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesResultsMetadataAPI.V3UpsertAnalysisFeedback``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+**type_** | **string** | What the feedback is about | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3UpsertAnalysisFeedbackRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **feedbackSubmission** | [**FeedbackSubmission**](FeedbackSubmission.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

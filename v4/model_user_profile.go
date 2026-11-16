@@ -19,6 +19,7 @@ var _ MappedNullable = &UserProfile{}
 
 // UserProfile struct for UserProfile
 type UserProfile struct {
+	AgentChatLayout string `json:"agent_chat_layout"`
 	DefaultTeamId *int64 `json:"default_team_id,omitempty"`
 	FirstName string `json:"first_name"`
 	HideAiDecompilationComments bool `json:"hide_ai_decompilation_comments"`
@@ -35,8 +36,9 @@ type _UserProfile UserProfile
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserProfile(firstName string, hideAiDecompilationComments bool, hideExampleBinaries bool, lastName string, timeZone string, username string) *UserProfile {
+func NewUserProfile(agentChatLayout string, firstName string, hideAiDecompilationComments bool, hideExampleBinaries bool, lastName string, timeZone string, username string) *UserProfile {
 	this := UserProfile{}
+	this.AgentChatLayout = agentChatLayout
 	this.FirstName = firstName
 	this.HideAiDecompilationComments = hideAiDecompilationComments
 	this.HideExampleBinaries = hideExampleBinaries
@@ -52,6 +54,30 @@ func NewUserProfile(firstName string, hideAiDecompilationComments bool, hideExam
 func NewUserProfileWithDefaults() *UserProfile {
 	this := UserProfile{}
 	return &this
+}
+
+// GetAgentChatLayout returns the AgentChatLayout field value
+func (o *UserProfile) GetAgentChatLayout() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AgentChatLayout
+}
+
+// GetAgentChatLayoutOk returns a tuple with the AgentChatLayout field value
+// and a boolean to check if the value has been set.
+func (o *UserProfile) GetAgentChatLayoutOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AgentChatLayout, true
+}
+
+// SetAgentChatLayout sets field value
+func (o *UserProfile) SetAgentChatLayout(v string) {
+	o.AgentChatLayout = v
 }
 
 // GetDefaultTeamId returns the DefaultTeamId field value if set, zero value otherwise.
@@ -240,6 +266,7 @@ func (o UserProfile) MarshalJSON() ([]byte, error) {
 
 func (o UserProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["agent_chat_layout"] = o.AgentChatLayout
 	if !IsNil(o.DefaultTeamId) {
 		toSerialize["default_team_id"] = o.DefaultTeamId
 	}
@@ -262,6 +289,7 @@ func (o *UserProfile) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"agent_chat_layout",
 		"first_name",
 		"hide_ai_decompilation_comments",
 		"hide_example_binaries",
@@ -297,6 +325,7 @@ func (o *UserProfile) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "agent_chat_layout")
 		delete(additionalProperties, "default_team_id")
 		delete(additionalProperties, "first_name")
 		delete(additionalProperties, "hide_ai_decompilation_comments")

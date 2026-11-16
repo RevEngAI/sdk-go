@@ -21,6 +21,8 @@ var _ MappedNullable = &RenderedToken{}
 type RenderedToken struct {
 	// Data type this token names, or for a field the type that declares it. Scoped by the response's analysis_id.
 	DataTypeId *int64 `json:"data_type_id,omitempty"`
+	// Integer value of an enum the decompiler recovered a name for. Absent for an unnamed enum, which already renders as its value.
+	EnumValue *string `json:"enum_value,omitempty"`
 	// Function this token calls or names. Absent when the address reaches no function of this binary.
 	FunctionId *int64 `json:"function_id,omitempty"`
 	// Imported function this token calls. Set instead of function_id for an external call.
@@ -85,6 +87,38 @@ func (o *RenderedToken) HasDataTypeId() bool {
 // SetDataTypeId gets a reference to the given int64 and assigns it to the DataTypeId field.
 func (o *RenderedToken) SetDataTypeId(v int64) {
 	o.DataTypeId = &v
+}
+
+// GetEnumValue returns the EnumValue field value if set, zero value otherwise.
+func (o *RenderedToken) GetEnumValue() string {
+	if o == nil || IsNil(o.EnumValue) {
+		var ret string
+		return ret
+	}
+	return *o.EnumValue
+}
+
+// GetEnumValueOk returns a tuple with the EnumValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RenderedToken) GetEnumValueOk() (*string, bool) {
+	if o == nil || IsNil(o.EnumValue) {
+		return nil, false
+	}
+	return o.EnumValue, true
+}
+
+// HasEnumValue returns a boolean if a field has been set.
+func (o *RenderedToken) HasEnumValue() bool {
+	if o != nil && !IsNil(o.EnumValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnumValue gets a reference to the given string and assigns it to the EnumValue field.
+func (o *RenderedToken) SetEnumValue(v string) {
+	o.EnumValue = &v
 }
 
 // GetFunctionId returns the FunctionId field value if set, zero value otherwise.
@@ -244,6 +278,9 @@ func (o RenderedToken) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DataTypeId) {
 		toSerialize["data_type_id"] = o.DataTypeId
 	}
+	if !IsNil(o.EnumValue) {
+		toSerialize["enum_value"] = o.EnumValue
+	}
 	if !IsNil(o.FunctionId) {
 		toSerialize["function_id"] = o.FunctionId
 	}
@@ -300,6 +337,7 @@ func (o *RenderedToken) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "data_type_id")
+		delete(additionalProperties, "enum_value")
 		delete(additionalProperties, "function_id")
 		delete(additionalProperties, "imported_function_id")
 		delete(additionalProperties, "kind")

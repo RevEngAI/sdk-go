@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DataTypeId** | Pointer to **int64** | Data type this token names, or for a field the type that declares it. Scoped by the response&#39;s analysis_id. | [optional] 
+**EnumValue** | Pointer to **string** | Integer value of an enum the decompiler recovered a name for. Absent for an unnamed enum, which already renders as its value. | [optional] 
 **FunctionId** | Pointer to **int64** | Function this token calls or names. Absent when the address reaches no function of this binary. | [optional] 
 **ImportedFunctionId** | Pointer to **int64** | Imported function this token calls. Set instead of function_id for an external call. | [optional] 
 **Kind** | **string** | What the token names. | 
@@ -54,6 +55,31 @@ SetDataTypeId sets DataTypeId field to given value.
 `func (o *RenderedToken) HasDataTypeId() bool`
 
 HasDataTypeId returns a boolean if a field has been set.
+
+### GetEnumValue
+
+`func (o *RenderedToken) GetEnumValue() string`
+
+GetEnumValue returns the EnumValue field if non-nil, zero value otherwise.
+
+### GetEnumValueOk
+
+`func (o *RenderedToken) GetEnumValueOk() (*string, bool)`
+
+GetEnumValueOk returns a tuple with the EnumValue field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnumValue
+
+`func (o *RenderedToken) SetEnumValue(v string)`
+
+SetEnumValue sets EnumValue field to given value.
+
+### HasEnumValue
+
+`func (o *RenderedToken) HasEnumValue() bool`
+
+HasEnumValue returns a boolean if a field has been set.
 
 ### GetFunctionId
 

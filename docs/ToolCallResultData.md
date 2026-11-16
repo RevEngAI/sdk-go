@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BinaryName** | Pointer to **string** |  | [optional] 
+**FunctionName** | Pointer to **string** |  | [optional] 
 **IsError** | Pointer to **bool** |  | [optional] 
 **Result** | Pointer to **string** |  | [optional] 
 **ToolCallId** | Pointer to **string** |  | [optional] 
@@ -28,6 +30,56 @@ will change when the set of required properties is changed
 NewToolCallResultDataWithDefaults instantiates a new ToolCallResultData object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBinaryName
+
+`func (o *ToolCallResultData) GetBinaryName() string`
+
+GetBinaryName returns the BinaryName field if non-nil, zero value otherwise.
+
+### GetBinaryNameOk
+
+`func (o *ToolCallResultData) GetBinaryNameOk() (*string, bool)`
+
+GetBinaryNameOk returns a tuple with the BinaryName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBinaryName
+
+`func (o *ToolCallResultData) SetBinaryName(v string)`
+
+SetBinaryName sets BinaryName field to given value.
+
+### HasBinaryName
+
+`func (o *ToolCallResultData) HasBinaryName() bool`
+
+HasBinaryName returns a boolean if a field has been set.
+
+### GetFunctionName
+
+`func (o *ToolCallResultData) GetFunctionName() string`
+
+GetFunctionName returns the FunctionName field if non-nil, zero value otherwise.
+
+### GetFunctionNameOk
+
+`func (o *ToolCallResultData) GetFunctionNameOk() (*string, bool)`
+
+GetFunctionNameOk returns a tuple with the FunctionName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFunctionName
+
+`func (o *ToolCallResultData) SetFunctionName(v string)`
+
+SetFunctionName sets FunctionName field to given value.
+
+### HasFunctionName
+
+`func (o *ToolCallResultData) HasFunctionName() bool`
+
+HasFunctionName returns a boolean if a field has been set.
 
 ### GetIsError
 

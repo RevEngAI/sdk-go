@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **ScrapeThirdPartyConfig** | Pointer to [**ScrapeThirdPartyConfig**](ScrapeThirdPartyConfig.md) | Settings to scrape third party sources | [optional] 
 **GenerateCapabilities** | Pointer to **bool** | A configuration option for generating capabilities of a binary | [optional] [default to false]
 **NoCache** | Pointer to **bool** | When enabled, skips using cached data within the processing. | [optional] [default to false]
-**AdvancedAnalysis** | Pointer to **bool** | Enables an advanced security analysis. | [optional] [default to false]
 **SandboxConfig** | Pointer to [**SandboxOptions**](SandboxOptions.md) | Including a sandbox config enables the dynamic execution sandbox | [optional] 
 
 ## Methods
@@ -103,31 +102,6 @@ SetNoCache sets NoCache field to given value.
 `func (o *AnalysisConfig) HasNoCache() bool`
 
 HasNoCache returns a boolean if a field has been set.
-
-### GetAdvancedAnalysis
-
-`func (o *AnalysisConfig) GetAdvancedAnalysis() bool`
-
-GetAdvancedAnalysis returns the AdvancedAnalysis field if non-nil, zero value otherwise.
-
-### GetAdvancedAnalysisOk
-
-`func (o *AnalysisConfig) GetAdvancedAnalysisOk() (*bool, bool)`
-
-GetAdvancedAnalysisOk returns a tuple with the AdvancedAnalysis field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAdvancedAnalysis
-
-`func (o *AnalysisConfig) SetAdvancedAnalysis(v bool)`
-
-SetAdvancedAnalysis sets AdvancedAnalysis field to given value.
-
-### HasAdvancedAnalysis
-
-`func (o *AnalysisConfig) HasAdvancedAnalysis() bool`
-
-HasAdvancedAnalysis returns a boolean if a field has been set.
 
 ### GetSandboxConfig
 

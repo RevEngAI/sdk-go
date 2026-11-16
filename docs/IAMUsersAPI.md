@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## GetMe
 
-> User GetMe(ctx).Execute()
+> CurrentUser GetMe(ctx).Execute()
 
 Get current user
 
@@ -38,7 +38,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `IAMUsersAPI.GetMe``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetMe`: User
+	// response from `GetMe`: CurrentUser
 	fmt.Fprintf(os.Stdout, "Response from `IAMUsersAPI.GetMe`: %v\n", resp)
 }
 ```
@@ -54,7 +54,7 @@ Other parameters are passed through a pointer to a apiGetMeRequest struct via th
 
 ### Return type
 
-[**User**](User.md)
+[**CurrentUser**](CurrentUser.md)
 
 ### Authorization
 

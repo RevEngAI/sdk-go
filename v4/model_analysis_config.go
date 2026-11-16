@@ -24,8 +24,6 @@ type AnalysisConfig struct {
 	GenerateCapabilities *bool `json:"generate_capabilities,omitempty"`
 	// When enabled, skips using cached data within the processing.
 	NoCache *bool `json:"no_cache,omitempty"`
-	// Enables an advanced security analysis.
-	AdvancedAnalysis *bool `json:"advanced_analysis,omitempty"`
 	// Including a sandbox config enables the dynamic execution sandbox
 	SandboxConfig *SandboxOptions `json:"sandbox_config,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -43,8 +41,6 @@ func NewAnalysisConfig() *AnalysisConfig {
 	this.GenerateCapabilities = &generateCapabilities
 	var noCache bool = false
 	this.NoCache = &noCache
-	var advancedAnalysis bool = false
-	this.AdvancedAnalysis = &advancedAnalysis
 	return &this
 }
 
@@ -57,8 +53,6 @@ func NewAnalysisConfigWithDefaults() *AnalysisConfig {
 	this.GenerateCapabilities = &generateCapabilities
 	var noCache bool = false
 	this.NoCache = &noCache
-	var advancedAnalysis bool = false
-	this.AdvancedAnalysis = &advancedAnalysis
 	return &this
 }
 
@@ -158,38 +152,6 @@ func (o *AnalysisConfig) SetNoCache(v bool) {
 	o.NoCache = &v
 }
 
-// GetAdvancedAnalysis returns the AdvancedAnalysis field value if set, zero value otherwise.
-func (o *AnalysisConfig) GetAdvancedAnalysis() bool {
-	if o == nil || IsNil(o.AdvancedAnalysis) {
-		var ret bool
-		return ret
-	}
-	return *o.AdvancedAnalysis
-}
-
-// GetAdvancedAnalysisOk returns a tuple with the AdvancedAnalysis field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AnalysisConfig) GetAdvancedAnalysisOk() (*bool, bool) {
-	if o == nil || IsNil(o.AdvancedAnalysis) {
-		return nil, false
-	}
-	return o.AdvancedAnalysis, true
-}
-
-// HasAdvancedAnalysis returns a boolean if a field has been set.
-func (o *AnalysisConfig) HasAdvancedAnalysis() bool {
-	if o != nil && !IsNil(o.AdvancedAnalysis) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdvancedAnalysis gets a reference to the given bool and assigns it to the AdvancedAnalysis field.
-func (o *AnalysisConfig) SetAdvancedAnalysis(v bool) {
-	o.AdvancedAnalysis = &v
-}
-
 // GetSandboxConfig returns the SandboxConfig field value if set, zero value otherwise.
 func (o *AnalysisConfig) GetSandboxConfig() SandboxOptions {
 	if o == nil || IsNil(o.SandboxConfig) {
@@ -241,9 +203,6 @@ func (o AnalysisConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NoCache) {
 		toSerialize["no_cache"] = o.NoCache
 	}
-	if !IsNil(o.AdvancedAnalysis) {
-		toSerialize["advanced_analysis"] = o.AdvancedAnalysis
-	}
 	if !IsNil(o.SandboxConfig) {
 		toSerialize["sandbox_config"] = o.SandboxConfig
 	}
@@ -272,7 +231,6 @@ func (o *AnalysisConfig) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scrape_third_party_config")
 		delete(additionalProperties, "generate_capabilities")
 		delete(additionalProperties, "no_cache")
-		delete(additionalProperties, "advanced_analysis")
 		delete(additionalProperties, "sandbox_config")
 		o.AdditionalProperties = additionalProperties
 	}

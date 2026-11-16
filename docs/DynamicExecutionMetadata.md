@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Logs** | [**AnalysisLogs**](AnalysisLogs.md) | Sandbox status log messages captured during the run. Empty when none have been captured yet. | 
-**Status** | **string** | Run status. UNINITIALISED means this analysis has never had a run triggered. | 
+**Status** | **string** | Run status | 
 
 ## Methods
 

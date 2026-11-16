@@ -6,8 +6,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddFunctionCallee**](FunctionsCoreAPI.md#AddFunctionCallee) | **Post** /v3/functions/{function_id}/callees | Add a callee to a function
 [**AddUserStringToFunction**](FunctionsCoreAPI.md#AddUserStringToFunction) | **Post** /v3/functions/{function_id}/user-provided-strings | Add a user-provided string to a function.
-[**GetAnalysisStrings**](FunctionsCoreAPI.md#GetAnalysisStrings) | **Get** /v2/analyses/{analysis_id}/functions/strings | Get string information found in the Analysis
-[**GetAnalysisStringsStatus**](FunctionsCoreAPI.md#GetAnalysisStringsStatus) | **Get** /v2/analyses/{analysis_id}/functions/strings/status | Get string processing state for the Analysis
 [**GetFunctionBlocks**](FunctionsCoreAPI.md#GetFunctionBlocks) | **Get** /v2/functions/{function_id}/blocks | Get disassembly blocks related to the function
 [**GetFunctionBlocks_0**](FunctionsCoreAPI.md#GetFunctionBlocks_0) | **Get** /v3/functions/{function_id}/blocks | Get function disassembly
 [**GetFunctionCalleesCallers**](FunctionsCoreAPI.md#GetFunctionCalleesCallers) | **Get** /v2/functions/{function_id}/callees_callers | Get list of functions that call or are called by the specified function
@@ -18,8 +16,7 @@ Method | HTTP request | Description
 [**GetFunctionDetails**](FunctionsCoreAPI.md#GetFunctionDetails) | **Get** /v2/functions/{function_id} | Get function details
 [**GetFunctionDetails_0**](FunctionsCoreAPI.md#GetFunctionDetails_0) | **Get** /v3/functions/{function_id} | Get function details
 [**GetFunctionIndirectCallSites**](FunctionsCoreAPI.md#GetFunctionIndirectCallSites) | **Get** /v3/functions/{function_id}/indirect-call-sites | Get indirect call sites for a function
-[**GetFunctionStrings**](FunctionsCoreAPI.md#GetFunctionStrings) | **Get** /v2/functions/{function_id}/strings | Get string information found in the function
-[**GetFunctionStrings_0**](FunctionsCoreAPI.md#GetFunctionStrings_0) | **Get** /v3/functions/{function_id}/strings | List strings for a function.
+[**GetFunctionStrings**](FunctionsCoreAPI.md#GetFunctionStrings) | **Get** /v3/functions/{function_id}/strings | List strings for a function.
 [**GetFunctionsCalleesCallers**](FunctionsCoreAPI.md#GetFunctionsCalleesCallers) | **Get** /v3/functions/callees-callers | Get callees and callers for many functions
 [**GetFunctionsMatches**](FunctionsCoreAPI.md#GetFunctionsMatches) | **Get** /v3/functions/matches | Get function-matching results for an explicit set of functions
 [**GetFunctionsMatchingStatus**](FunctionsCoreAPI.md#GetFunctionsMatchingStatus) | **Get** /v3/functions/matches/status | Get function-matching status for an explicit set of functions
@@ -29,8 +26,10 @@ Method | HTTP request | Description
 [**StartFunctionsMatching**](FunctionsCoreAPI.md#StartFunctionsMatching) | **Post** /v3/functions/matches | Start function matching for an explicit set of functions
 [**V3CanonicalizeFunctionNames**](FunctionsCoreAPI.md#V3CanonicalizeFunctionNames) | **Post** /v3/functions/canonical-names | Canonicalize a batch of function names
 [**V3GetAnalysisFuncMaps**](FunctionsCoreAPI.md#V3GetAnalysisFuncMaps) | **Get** /v3/analyses/{analysis_id}/func-maps | Get function ID/address maps for an analysis
+[**V3GetFunctionFeedback**](FunctionsCoreAPI.md#V3GetFunctionFeedback) | **Get** /v3/functions/{function_id}/feedback/{type} | Get the caller&#39;s feedback on a function.
 [**V3ListFunctionGlobals**](FunctionsCoreAPI.md#V3ListFunctionGlobals) | **Get** /v3/functions/{function_id}/globals | List the global variables a function references.
 [**V3SearchFunctions**](FunctionsCoreAPI.md#V3SearchFunctions) | **Get** /v3/functions | Search functions
+[**V3UpsertFunctionFeedback**](FunctionsCoreAPI.md#V3UpsertFunctionFeedback) | **Put** /v3/functions/{function_id}/feedback/{type} | Record feedback on a function.
 
 
 
@@ -171,158 +170,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetAnalysisStrings
-
-> BaseResponseAnalysisStringsResponse GetAnalysisStrings(ctx, analysisId).Page(page).PageSize(pageSize).Search(search).FunctionSearch(functionSearch).OrderBy(orderBy).SortOrder(sortOrder).Execute()
-
-Get string information found in the Analysis
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v4"
-)
-
-func main() {
-	analysisId := int32(56) // int32 | 
-	page := int32(56) // int32 | The page number to retrieve. (optional) (default to 1)
-	pageSize := int32(56) // int32 | Number of items per page. (optional) (default to 100)
-	search := "search_example" // string | Search is applied to string value (optional)
-	functionSearch := "functionSearch_example" // string | Search is applied to function names (optional)
-	orderBy := "orderBy_example" // string | Order by field (optional) (default to "value")
-	sortOrder := "sortOrder_example" // string | Sort order for the results (optional) (default to "ASC")
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsCoreAPI.GetAnalysisStrings(context.Background(), analysisId).Page(page).PageSize(pageSize).Search(search).FunctionSearch(functionSearch).OrderBy(orderBy).SortOrder(sortOrder).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.GetAnalysisStrings``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetAnalysisStrings`: BaseResponseAnalysisStringsResponse
-	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.GetAnalysisStrings`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int32** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetAnalysisStringsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **page** | **int32** | The page number to retrieve. | [default to 1]
- **pageSize** | **int32** | Number of items per page. | [default to 100]
- **search** | **string** | Search is applied to string value | 
- **functionSearch** | **string** | Search is applied to function names | 
- **orderBy** | **string** | Order by field | [default to &quot;value&quot;]
- **sortOrder** | **string** | Sort order for the results | [default to &quot;ASC&quot;]
-
-### Return type
-
-[**BaseResponseAnalysisStringsResponse**](BaseResponseAnalysisStringsResponse.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetAnalysisStringsStatus
-
-> BaseResponseAnalysisStringsStatusResponse GetAnalysisStringsStatus(ctx, analysisId).Execute()
-
-Get string processing state for the Analysis
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v4"
-)
-
-func main() {
-	analysisId := int32(56) // int32 | 
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsCoreAPI.GetAnalysisStringsStatus(context.Background(), analysisId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.GetAnalysisStringsStatus``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetAnalysisStringsStatus`: BaseResponseAnalysisStringsStatusResponse
-	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.GetAnalysisStringsStatus`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int32** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetAnalysisStringsStatusRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**BaseResponseAnalysisStringsStatusResponse**](BaseResponseAnalysisStringsStatusResponse.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -1020,83 +867,7 @@ Name | Type | Description  | Notes
 
 ## GetFunctionStrings
 
-> BaseResponseFunctionStringsResponse GetFunctionStrings(ctx, functionId).Page(page).PageSize(pageSize).Search(search).Execute()
-
-Get string information found in the function
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v4"
-)
-
-func main() {
-	functionId := int32(56) // int32 | 
-	page := int32(56) // int32 | The page number to retrieve. (optional) (default to 1)
-	pageSize := int32(56) // int32 | Number of items per page. (optional) (default to 100)
-	search := "search_example" // string | Search is applied to string value (optional)
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsCoreAPI.GetFunctionStrings(context.Background(), functionId).Page(page).PageSize(pageSize).Search(search).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.GetFunctionStrings``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetFunctionStrings`: BaseResponseFunctionStringsResponse
-	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.GetFunctionStrings`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**functionId** | **int32** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetFunctionStringsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **page** | **int32** | The page number to retrieve. | [default to 1]
- **pageSize** | **int32** | Number of items per page. | [default to 100]
- **search** | **string** | Search is applied to string value | 
-
-### Return type
-
-[**BaseResponseFunctionStringsResponse**](BaseResponseFunctionStringsResponse.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetFunctionStrings_0
-
-> ListFunctionStringsOutputBody GetFunctionStrings_0(ctx, functionId).Page(page).PageSize(pageSize).Search(search).Execute()
+> ListFunctionStringsOutputBody GetFunctionStrings(ctx, functionId).Page(page).PageSize(pageSize).Search(search).Execute()
 
 List strings for a function.
 
@@ -1122,13 +893,13 @@ func main() {
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionsCoreAPI.GetFunctionStrings_0(context.Background(), functionId).Page(page).PageSize(pageSize).Search(search).Execute()
+	resp, r, err := apiClient.FunctionsCoreAPI.GetFunctionStrings(context.Background(), functionId).Page(page).PageSize(pageSize).Search(search).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.GetFunctionStrings_0``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.GetFunctionStrings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFunctionStrings_0`: ListFunctionStringsOutputBody
-	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.GetFunctionStrings_0`: %v\n", resp)
+	// response from `GetFunctionStrings`: ListFunctionStringsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.GetFunctionStrings`: %v\n", resp)
 }
 ```
 
@@ -1142,7 +913,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetFunctionStrings_5Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetFunctionStringsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -1795,6 +1566,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V3GetFunctionFeedback
+
+> RecordedFeedback V3GetFunctionFeedback(ctx, functionId, type_).Execute()
+
+Get the caller's feedback on a function.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+	type_ := "type__example" // string | What the feedback is about
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.FunctionsCoreAPI.V3GetFunctionFeedback(context.Background(), functionId, type_).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.V3GetFunctionFeedback``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetFunctionFeedback`: RecordedFeedback
+	fmt.Fprintf(os.Stdout, "Response from `FunctionsCoreAPI.V3GetFunctionFeedback`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+**type_** | **string** | What the feedback is about | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetFunctionFeedbackRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**RecordedFeedback**](RecordedFeedback.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V3ListFunctionGlobals
 
 > ListFunctionGlobalsOutputBody V3ListFunctionGlobals(ctx, functionId).Execute()
@@ -1930,6 +1774,79 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3UpsertFunctionFeedback
+
+> V3UpsertFunctionFeedback(ctx, functionId, type_).FeedbackSubmission(feedbackSubmission).Execute()
+
+Record feedback on a function.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	functionId := int64(789) // int64 | Function ID
+	type_ := "type__example" // string | What the feedback is about
+	feedbackSubmission := *revengai.NewFeedbackSubmission("Sentiment_example") // FeedbackSubmission | 
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.FunctionsCoreAPI.V3UpsertFunctionFeedback(context.Background(), functionId, type_).FeedbackSubmission(feedbackSubmission).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FunctionsCoreAPI.V3UpsertFunctionFeedback``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**functionId** | **int64** | Function ID | 
+**type_** | **string** | What the feedback is about | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3UpsertFunctionFeedbackRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **feedbackSubmission** | [**FeedbackSubmission**](FeedbackSubmission.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

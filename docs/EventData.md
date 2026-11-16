@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **ToolArgs** | Pointer to **string** |  | [optional] 
 **ToolCallId** | Pointer to **string** |  | [optional] 
 **ToolName** | Pointer to **string** |  | [optional] 
+**BinaryName** | **string** |  | 
+**FunctionName** | Pointer to **string** |  | [optional] 
 **IsError** | Pointer to **bool** |  | [optional] 
 **Result** | Pointer to **string** |  | [optional] 
 **Updated** | Pointer to [**[]EntityUpdate**](EntityUpdate.md) |  | [optional] 
@@ -28,7 +30,6 @@ Name | Type | Description | Notes
 **Message** | Pointer to **string** |  | [optional] 
 **Agent** | [**AgentRunUpdateAgent**](AgentRunUpdateAgent.md) |  | 
 **AnalysisId** | **int64** | The earliest-added analysis of the file in the investigation that the conversation&#39;s starter may see. | 
-**BinaryName** | **string** |  | 
 **Card** | Pointer to [**AgentRunUpdateCard**](AgentRunUpdateCard.md) | A summary of the agent&#39;s result. Absent until the run is done, and when its result cannot be summarised. | [optional] 
 **CreatedAt** | **time.Time** |  | 
 **InvestigationId** | **int64** |  | 
@@ -39,7 +40,7 @@ Name | Type | Description | Notes
 
 ### NewEventData
 
-`func NewEventData(error_ string, agent AgentRunUpdateAgent, analysisId int64, binaryName string, createdAt time.Time, investigationId int64, taskId string, updatedAt time.Time, ) *EventData`
+`func NewEventData(error_ string, binaryName string, agent AgentRunUpdateAgent, analysisId int64, createdAt time.Time, investigationId int64, taskId string, updatedAt time.Time, ) *EventData`
 
 NewEventData instantiates a new EventData object
 This constructor will assign default values to properties that have it defined,
@@ -374,6 +375,51 @@ SetToolName sets ToolName field to given value.
 
 HasToolName returns a boolean if a field has been set.
 
+### GetBinaryName
+
+`func (o *EventData) GetBinaryName() string`
+
+GetBinaryName returns the BinaryName field if non-nil, zero value otherwise.
+
+### GetBinaryNameOk
+
+`func (o *EventData) GetBinaryNameOk() (*string, bool)`
+
+GetBinaryNameOk returns a tuple with the BinaryName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBinaryName
+
+`func (o *EventData) SetBinaryName(v string)`
+
+SetBinaryName sets BinaryName field to given value.
+
+
+### GetFunctionName
+
+`func (o *EventData) GetFunctionName() string`
+
+GetFunctionName returns the FunctionName field if non-nil, zero value otherwise.
+
+### GetFunctionNameOk
+
+`func (o *EventData) GetFunctionNameOk() (*string, bool)`
+
+GetFunctionNameOk returns a tuple with the FunctionName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFunctionName
+
+`func (o *EventData) SetFunctionName(v string)`
+
+SetFunctionName sets FunctionName field to given value.
+
+### HasFunctionName
+
+`func (o *EventData) HasFunctionName() bool`
+
+HasFunctionName returns a boolean if a field has been set.
+
 ### GetIsError
 
 `func (o *EventData) GetIsError() bool`
@@ -637,26 +683,6 @@ and a boolean to check if the value has been set.
 `func (o *EventData) SetAnalysisId(v int64)`
 
 SetAnalysisId sets AnalysisId field to given value.
-
-
-### GetBinaryName
-
-`func (o *EventData) GetBinaryName() string`
-
-GetBinaryName returns the BinaryName field if non-nil, zero value otherwise.
-
-### GetBinaryNameOk
-
-`func (o *EventData) GetBinaryNameOk() (*string, bool)`
-
-GetBinaryNameOk returns a tuple with the BinaryName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBinaryName
-
-`func (o *EventData) SetBinaryName(v string)`
-
-SetBinaryName sets BinaryName field to given value.
 
 
 ### GetCard

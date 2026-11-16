@@ -9,8 +9,6 @@ Name | Type | Description | Notes
 **GlobalVariables** | Pointer to **interface{}** |  | [optional] 
 **LocalVariables** | Pointer to **interface{}** |  | [optional] 
 **OperandXrefs** | Pointer to [**[]OperandXref**](OperandXref.md) | Instruction operands that reference a pointer slot, sorted by instruction_vaddr, target_vaddr, pointed_vaddr. | [optional] 
-**Params** | Pointer to **interface{}** |  | [optional] 
-**ReturnType** | Pointer to **string** |  | [optional] 
 **Returns** | **bool** |  | 
 
 ## Methods
@@ -192,66 +190,6 @@ HasOperandXrefs returns a boolean if a field has been set.
 `func (o *DisassemblyOutputBody) UnsetOperandXrefs()`
 
 UnsetOperandXrefs ensures that no value is present for OperandXrefs, not even an explicit nil
-### GetParams
-
-`func (o *DisassemblyOutputBody) GetParams() interface{}`
-
-GetParams returns the Params field if non-nil, zero value otherwise.
-
-### GetParamsOk
-
-`func (o *DisassemblyOutputBody) GetParamsOk() (*interface{}, bool)`
-
-GetParamsOk returns a tuple with the Params field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetParams
-
-`func (o *DisassemblyOutputBody) SetParams(v interface{})`
-
-SetParams sets Params field to given value.
-
-### HasParams
-
-`func (o *DisassemblyOutputBody) HasParams() bool`
-
-HasParams returns a boolean if a field has been set.
-
-### SetParamsNil
-
-`func (o *DisassemblyOutputBody) SetParamsNil(b bool)`
-
- SetParamsNil sets the value for Params to be an explicit nil
-
-### UnsetParams
-`func (o *DisassemblyOutputBody) UnsetParams()`
-
-UnsetParams ensures that no value is present for Params, not even an explicit nil
-### GetReturnType
-
-`func (o *DisassemblyOutputBody) GetReturnType() string`
-
-GetReturnType returns the ReturnType field if non-nil, zero value otherwise.
-
-### GetReturnTypeOk
-
-`func (o *DisassemblyOutputBody) GetReturnTypeOk() (*string, bool)`
-
-GetReturnTypeOk returns a tuple with the ReturnType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReturnType
-
-`func (o *DisassemblyOutputBody) SetReturnType(v string)`
-
-SetReturnType sets ReturnType field to given value.
-
-### HasReturnType
-
-`func (o *DisassemblyOutputBody) HasReturnType() bool`
-
-HasReturnType returns a boolean if a field has been set.
-
 ### GetReturns
 
 `func (o *DisassemblyOutputBody) GetReturns() bool`

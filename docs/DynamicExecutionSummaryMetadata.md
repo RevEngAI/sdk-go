@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | **string** | Status of the most recent summary attempt. UNINITIALISED means no summary has been attempted for this analysis. | 
+**Status** | **string** | Status of the run&#39;s most recent summary attempt. UNINITIALISED means no summary has been attempted for the run. | 
 
 ## Methods
 
