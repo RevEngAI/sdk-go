@@ -25,8 +25,6 @@ type DisassemblyOutputBody struct {
 	LocalVariables interface{} `json:"local_variables,omitempty"`
 	// Instruction operands that reference a pointer slot, sorted by instruction_vaddr, target_vaddr, pointed_vaddr.
 	OperandXrefs []OperandXref `json:"operand_xrefs,omitempty"`
-	Params interface{} `json:"params,omitempty"`
-	ReturnType *string `json:"return_type,omitempty"`
 	Returns bool `json:"returns"`
 	AdditionalProperties map[string]interface{}
 }
@@ -208,71 +206,6 @@ func (o *DisassemblyOutputBody) SetOperandXrefs(v []OperandXref) {
 	o.OperandXrefs = v
 }
 
-// GetParams returns the Params field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DisassemblyOutputBody) GetParams() interface{} {
-	if o == nil {
-		var ret interface{}
-		return ret
-	}
-	return o.Params
-}
-
-// GetParamsOk returns a tuple with the Params field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DisassemblyOutputBody) GetParamsOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Params) {
-		return nil, false
-	}
-	return &o.Params, true
-}
-
-// HasParams returns a boolean if a field has been set.
-func (o *DisassemblyOutputBody) HasParams() bool {
-	if o != nil && !IsNil(o.Params) {
-		return true
-	}
-
-	return false
-}
-
-// SetParams gets a reference to the given interface{} and assigns it to the Params field.
-func (o *DisassemblyOutputBody) SetParams(v interface{}) {
-	o.Params = v
-}
-
-// GetReturnType returns the ReturnType field value if set, zero value otherwise.
-func (o *DisassemblyOutputBody) GetReturnType() string {
-	if o == nil || IsNil(o.ReturnType) {
-		var ret string
-		return ret
-	}
-	return *o.ReturnType
-}
-
-// GetReturnTypeOk returns a tuple with the ReturnType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DisassemblyOutputBody) GetReturnTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.ReturnType) {
-		return nil, false
-	}
-	return o.ReturnType, true
-}
-
-// HasReturnType returns a boolean if a field has been set.
-func (o *DisassemblyOutputBody) HasReturnType() bool {
-	if o != nil && !IsNil(o.ReturnType) {
-		return true
-	}
-
-	return false
-}
-
-// SetReturnType gets a reference to the given string and assigns it to the ReturnType field.
-func (o *DisassemblyOutputBody) SetReturnType(v string) {
-	o.ReturnType = &v
-}
-
 // GetReturns returns the Returns field value
 func (o *DisassemblyOutputBody) GetReturns() bool {
 	if o == nil {
@@ -319,12 +252,6 @@ func (o DisassemblyOutputBody) ToMap() (map[string]interface{}, error) {
 	}
 	if o.OperandXrefs != nil {
 		toSerialize["operand_xrefs"] = o.OperandXrefs
-	}
-	if o.Params != nil {
-		toSerialize["params"] = o.Params
-	}
-	if !IsNil(o.ReturnType) {
-		toSerialize["return_type"] = o.ReturnType
 	}
 	toSerialize["returns"] = o.Returns
 
@@ -376,8 +303,6 @@ func (o *DisassemblyOutputBody) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "global_variables")
 		delete(additionalProperties, "local_variables")
 		delete(additionalProperties, "operand_xrefs")
-		delete(additionalProperties, "params")
-		delete(additionalProperties, "return_type")
 		delete(additionalProperties, "returns")
 		o.AdditionalProperties = additionalProperties
 	}

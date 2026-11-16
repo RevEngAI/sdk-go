@@ -6242,7 +6242,7 @@ func (r ApiV3RunCapabilitiesRequest) Execute() (*OperationMetadataCapabilitiesRe
 /*
 V3RunCapabilities Run the capabilities agent.
 
-Starts the capabilities agent, which attributes behavioural capabilities to individual functions, and returns the operation to poll for its outcome. Returns 409 while a run is already in progress for this analysis.
+Starts the capabilities agent, which attributes behavioural capabilities to individual functions, and returns the operation to poll for its outcome. Returns 409 until the analysis is Complete, or while a run is already in progress for this analysis.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -6250,6 +6250,7 @@ Starts the capabilities agent, which attributes behavioural capabilities to indi
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `402` [`INSUFFICIENT_CREDITS`](/errors/INSUFFICIENT_CREDITS) — Insufficient Credits
 - `409` [`OPERATION_PREREQUISITE_NOT_MET`](/errors/OPERATION_PREREQUISITE_NOT_MET) — Operation Prerequisite Not Met
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -6631,13 +6632,14 @@ func (r ApiV3RunCryptoScanRequest) Execute() (*OperationCryptoScanMetadataCrypto
 /*
 V3RunCryptoScan Run the crypto-scan agent.
 
-Starts an agent that name-matches the analysis' functions and their callees against known crypto-library APIs, and returns the operation to poll for its outcome. Purely name-based — never triggers AI decompilation, so it costs no credits and runs in seconds. Returns 409 while a run is already in progress for this analysis.
+Starts an agent that name-matches the analysis' functions and their callees against known crypto-library APIs, and returns the operation to poll for its outcome. Purely name-based — never triggers AI decompilation, so it costs no credits and runs in seconds. Returns 409 until the analysis is Complete, or while a run is already in progress for this analysis.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `409` [`OPERATION_PREREQUISITE_NOT_MET`](/errors/OPERATION_PREREQUISITE_NOT_MET) — Operation Prerequisite Not Met
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -6816,7 +6818,7 @@ func (r ApiV3RunCryptographyRequest) Execute() (*OperationMetadataReportResult, 
 /*
 V3RunCryptography Run the cryptography agent.
 
-Starts the cryptography agent, which identifies cryptographic operations in the binary and reports its findings, and returns the operation to poll for its outcome. Returns 409 while a run is already in progress for this analysis.
+Starts the cryptography agent, which identifies cryptographic operations in the binary and reports its findings, and returns the operation to poll for its outcome. Returns 409 until the analysis is Complete, or while a run is already in progress for this analysis.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -6824,6 +6826,7 @@ Starts the cryptography agent, which identifies cryptographic operations in the 
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `402` [`INSUFFICIENT_CREDITS`](/errors/INSUFFICIENT_CREDITS) — Insufficient Credits
 - `409` [`OPERATION_PREREQUISITE_NOT_MET`](/errors/OPERATION_PREREQUISITE_NOT_MET) — Operation Prerequisite Not Met
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -7216,13 +7219,14 @@ func (r ApiV3RunExecutionScanRequest) Execute() (*OperationExecutionScanMetadata
 /*
 V3RunExecutionScan Run the execution-scan agent.
 
-Starts an agent that name-matches the analysis' functions and their callees against known code-execution APIs, and returns the operation to poll for its outcome. Returns 409 while a run is already in progress for this analysis.
+Starts an agent that name-matches the analysis' functions and their callees against known code-execution APIs, and returns the operation to poll for its outcome. Returns 409 until the analysis is Complete, or while a run is already in progress for this analysis.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `409` [`OPERATION_PREREQUISITE_NOT_MET`](/errors/OPERATION_PREREQUISITE_NOT_MET) — Operation Prerequisite Not Met
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -7609,13 +7613,14 @@ func (r ApiV3RunFilesystemScanRequest) Execute() (*OperationFilesystemScanMetada
 /*
 V3RunFilesystemScan Run the filesystem-scan agent.
 
-Starts an agent that name-matches the analysis' functions and their callees against known filesystem/system APIs, and returns the operation to poll for its outcome.
+Starts an agent that name-matches the analysis' functions and their callees against known filesystem/system APIs, and returns the operation to poll for its outcome. Returns 409 until the analysis is Complete.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `409` [`OPERATION_PREREQUISITE_NOT_MET`](/errors/OPERATION_PREREQUISITE_NOT_MET) — Operation Prerequisite Not Met
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -8002,13 +8007,14 @@ func (r ApiV3RunNetworkingScanRequest) Execute() (*OperationNetworkingScanMetada
 /*
 V3RunNetworkingScan Run the networking-scan agent.
 
-Starts an agent that name-matches the analysis' functions and their callees against known networking APIs, and returns the operation to poll for its outcome.
+Starts an agent that name-matches the analysis' functions and their callees against known networking APIs, and returns the operation to poll for its outcome. Returns 409 until the analysis is Complete.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `409` [`OPERATION_PREREQUISITE_NOT_MET`](/errors/OPERATION_PREREQUISITE_NOT_MET) — Operation Prerequisite Not Met
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -8187,7 +8193,7 @@ func (r ApiV3RunProtocolsRequest) Execute() (*OperationMetadataReportResult, *ht
 /*
 V3RunProtocols Run the protocols agent.
 
-Starts the protocols agent, which identifies the network and data protocols the binary implements, and returns the operation to poll for its outcome. Returns 409 while a run is already in progress for this analysis.
+Starts the protocols agent, which identifies the network and data protocols the binary implements, and returns the operation to poll for its outcome. Returns 409 until the analysis is Complete, or while a run is already in progress for this analysis.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -8195,6 +8201,7 @@ Starts the protocols agent, which identifies the network and data protocols the 
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `402` [`INSUFFICIENT_CREDITS`](/errors/INSUFFICIENT_CREDITS) — Insufficient Credits
 - `409` [`OPERATION_PREREQUISITE_NOT_MET`](/errors/OPERATION_PREREQUISITE_NOT_MET) — Operation Prerequisite Not Met
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -8379,7 +8386,7 @@ func (r ApiV3RunRemediationRequest) Execute() (*OperationMetadataRemediationResu
 /*
 V3RunRemediation Run the remediation agent.
 
-Starts the remediation agent, which generates YARA, Snort and STIX detection rules for the binary, and returns the operation to poll for its outcome. Returns 409 while a run is already in progress for this analysis.
+Starts the remediation agent, which generates YARA, Snort and STIX detection rules for the binary, and returns the operation to poll for its outcome. Returns 409 until the analysis is Complete, or while a run is already in progress for this analysis.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -8387,6 +8394,7 @@ Starts the remediation agent, which generates YARA, Snort and STIX detection rul
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `402` [`INSUFFICIENT_CREDITS`](/errors/INSUFFICIENT_CREDITS) — Insufficient Credits
 - `409` [`OPERATION_PREREQUISITE_NOT_MET`](/errors/OPERATION_PREREQUISITE_NOT_MET) — Operation Prerequisite Not Met
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -8571,7 +8579,7 @@ func (r ApiV3RunReportAnalysisRequest) Execute() (*OperationMetadataThreatReport
 /*
 V3RunReportAnalysis Run the report-analysis agent.
 
-Starts the report-analysis agent, which produces a combined threat report — summary, software type, attack flow, indicators of compromise, MITRE ATT&CK techniques and a YARA rule — and returns the operation to poll for its outcome. Returns 409 while a run is already in progress for this analysis.
+Starts the report-analysis agent, which produces a combined threat report — summary, software type, attack flow, indicators of compromise, MITRE ATT&CK techniques and a YARA rule — and returns the operation to poll for its outcome. Returns 409 until the analysis is Complete, or while a run is already in progress for this analysis.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -8579,6 +8587,7 @@ Starts the report-analysis agent, which produces a combined threat report — su
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `402` [`INSUFFICIENT_CREDITS`](/errors/INSUFFICIENT_CREDITS) — Insufficient Credits
 - `409` [`OPERATION_PREREQUISITE_NOT_MET`](/errors/OPERATION_PREREQUISITE_NOT_MET) — Operation Prerequisite Not Met
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -8763,7 +8772,7 @@ func (r ApiV3RunSecretsRequest) Execute() (*OperationMetadataReportResult, *http
 /*
 V3RunSecrets Run the secrets agent.
 
-Starts the secrets agent, which finds credentials and other hardcoded secrets in the binary, and returns the operation to poll for its outcome. Returns 409 while a run is already in progress for this analysis.
+Starts the secrets agent, which finds credentials and other hardcoded secrets in the binary, and returns the operation to poll for its outcome. Returns 409 until the analysis is Complete, or while a run is already in progress for this analysis.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -8771,6 +8780,7 @@ Starts the secrets agent, which finds credentials and other hardcoded secrets in
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `402` [`INSUFFICIENT_CREDITS`](/errors/INSUFFICIENT_CREDITS) — Insufficient Credits
 - `409` [`OPERATION_PREREQUISITE_NOT_MET`](/errors/OPERATION_PREREQUISITE_NOT_MET) — Operation Prerequisite Not Met
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -8961,13 +8971,14 @@ func (r ApiV3RunSecurityScanRequest) Execute() (*OperationSecurityScanMetadataSe
 /*
 V3RunSecurityScan Run the security-scan agent.
 
-Starts an agent that decompiles the analysis' functions and runs a security scan over the decompiled source, and returns the operation to poll for its outcome. Each function costs an AI decompilation, so a whole-analysis run can be expensive — use `max_functions_to_scan` to bound it. Returns 409 while a run is already in progress for this analysis.
+Starts an agent that decompiles the analysis' functions and runs a security scan over the decompiled source, and returns the operation to poll for its outcome. Each function costs an AI decompilation, so a whole-analysis run can be expensive — use `max_functions_to_scan` to bound it. Returns 409 until the analysis is Complete, or while a run is already in progress for this analysis.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `402` [`INSUFFICIENT_CREDITS`](/errors/INSUFFICIENT_CREDITS) — Insufficient Credits
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -9157,7 +9168,7 @@ func (r ApiV3RunTriageRequest) Execute() (*OperationMetadataTriageResult, *http.
 /*
 V3RunTriage Run the triage agent.
 
-Starts the triage agent, which scores the binary and each of its functions for maliciousness, and returns the operation to poll for its outcome. Unlike the other binary agents this one is not gated on subscription tier. Returns 409 while a run is already in progress for this analysis.
+Starts the triage agent, which scores the binary and each of its functions for maliciousness, and returns the operation to poll for its outcome. Unlike the other binary agents this one is not gated on subscription tier. Returns 409 until the analysis is Complete, or while a run is already in progress for this analysis.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -9165,6 +9176,7 @@ Starts the triage agent, which scores the binary and each of its functions for m
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `402` [`INSUFFICIENT_CREDITS`](/errors/INSUFFICIENT_CREDITS) — Insufficient Credits
 - `409` [`OPERATION_PREREQUISITE_NOT_MET`](/errors/OPERATION_PREREQUISITE_NOT_MET) — Operation Prerequisite Not Met
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -9355,13 +9367,14 @@ func (r ApiV3TriggerRenameUnnamedFunctionsRequest) Execute() (*StatusBody, *http
 /*
 V3TriggerRenameUnnamedFunctions Run the rename-unnamed-functions agent.
 
-Starts an agent that renames the analysis' unnamed functions from their AI decompilations. Each function costs an AI decompilation, so a whole-analysis run can be expensive — use `limit` to bound it. Returns 409 while a run is already in progress for this analysis.
+Starts an agent that renames the analysis' unnamed functions from their AI decompilations. Each function costs an AI decompilation, so a whole-analysis run can be expensive — use `limit` to bound it. Returns 409 until the analysis is Complete, or while a run is already in progress for this analysis.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `402` [`INSUFFICIENT_CREDITS`](/errors/INSUFFICIENT_CREDITS) — Insufficient Credits
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID

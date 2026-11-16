@@ -19,7 +19,7 @@ var _ MappedNullable = &DynamicExecutionSummaryMetadata{}
 
 // DynamicExecutionSummaryMetadata struct for DynamicExecutionSummaryMetadata
 type DynamicExecutionSummaryMetadata struct {
-	// Status of the most recent summary attempt. UNINITIALISED means no summary has been attempted for this analysis.
+	// Status of the run's most recent summary attempt. UNINITIALISED means no summary has been attempted for the run.
 	Status string `json:"status"`
 	AdditionalProperties map[string]interface{}
 }

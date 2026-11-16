@@ -43,11 +43,12 @@ func (r ApiAddUserStringToAnalysisRequest) Execute() (map[string]interface{}, *h
 /*
 AddUserStringToAnalysis Add a user-provided string to an analysis.
 
-Attaches a user-provided string to an analysis at the given virtual address. The string is stored with source `USER` and complements strings discovered automatically during analysis.
+Attaches a user-provided string to an analysis at the given virtual address. The string is stored with source `USER` and complements strings discovered automatically during analysis. Returns 409 until the analysis is Complete.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -156,6 +157,17 @@ func (a *AnalysesCoreAPIService) AddUserStringToAnalysisExecute(r ApiAddUserStri
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v APIError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -2457,147 +2469,6 @@ func (a *AnalysesCoreAPIService) LookupBinaryIdExecute(r ApiLookupBinaryIdReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPutAnalysisStringsRequest struct {
-	ctx context.Context
-	ApiService *AnalysesCoreAPIService
-	analysisId int32
-	putAnalysisStringsRequest *PutAnalysisStringsRequest
-}
-
-func (r ApiPutAnalysisStringsRequest) PutAnalysisStringsRequest(putAnalysisStringsRequest PutAnalysisStringsRequest) ApiPutAnalysisStringsRequest {
-	r.putAnalysisStringsRequest = &putAnalysisStringsRequest
-	return r
-}
-
-func (r ApiPutAnalysisStringsRequest) Execute() (*BaseResponse, *http.Response, error) {
-	return r.ApiService.PutAnalysisStringsExecute(r)
-}
-
-/*
-PutAnalysisStrings Add strings to the analysis
-
-Add strings to the analysis. Rejects if any string already exists at the given vaddr.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param analysisId
- @return ApiPutAnalysisStringsRequest
-
-Deprecated
-*/
-func (a *AnalysesCoreAPIService) PutAnalysisStrings(ctx context.Context, analysisId int32) ApiPutAnalysisStringsRequest {
-	return ApiPutAnalysisStringsRequest{
-		ApiService: a,
-		ctx: ctx,
-		analysisId: analysisId,
-	}
-}
-
-// Execute executes the request
-//  @return BaseResponse
-// Deprecated
-func (a *AnalysesCoreAPIService) PutAnalysisStringsExecute(r ApiPutAnalysisStringsRequest) (*BaseResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BaseResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.PutAnalysisStrings")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/analyses/{analysis_id}/strings"
-	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.putAnalysisStringsRequest == nil {
-		return localVarReturnValue, nil, reportError("putAnalysisStringsRequest is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.putAnalysisStringsRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APIKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v BaseResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiRequeueAnalysisRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
@@ -2789,12 +2660,13 @@ func (r ApiStartAnalysisFunctionMatchingRequest) Execute() (*StartMatchingOutput
 /*
 StartAnalysisFunctionMatching Start function matching for an analysis
 
-Dispatches the function-matching workflow against every function in the analysis. Returns immediately. Poll the status endpoint for progress; fetch results from the matches endpoint when status=COMPLETED.
+Dispatches the function-matching workflow against every function in the analysis. Returns immediately. Poll the status endpoint for progress; fetch results from the matches endpoint when status=COMPLETED. Returns 409 until the analysis is Complete.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
 - `400` [`BAD_REQUEST`](/errors/BAD_REQUEST) — Bad Request
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
@@ -2914,6 +2786,17 @@ func (a *AnalysesCoreAPIService) StartAnalysisFunctionMatchingExecute(r ApiStart
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v APIError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -3601,6 +3484,193 @@ func (a *AnalysesCoreAPIService) V3CreateAnalysisExecute(r ApiV3CreateAnalysisRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 413 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV3CreateDynamicExecutionRunRequest struct {
+	ctx context.Context
+	ApiService *AnalysesCoreAPIService
+	analysisId int64
+	runDynamicExecutionInputBody *RunDynamicExecutionInputBody
+}
+
+func (r ApiV3CreateDynamicExecutionRunRequest) RunDynamicExecutionInputBody(runDynamicExecutionInputBody RunDynamicExecutionInputBody) ApiV3CreateDynamicExecutionRunRequest {
+	r.runDynamicExecutionInputBody = &runDynamicExecutionInputBody
+	return r
+}
+
+func (r ApiV3CreateDynamicExecutionRunRequest) Execute() (*OperationDynamicExecutionMetadataDynamicExecutionResult, *http.Response, error) {
+	return r.ApiService.V3CreateDynamicExecutionRunExecute(r)
+}
+
+/*
+V3CreateDynamicExecutionRun Start a dynamic execution run.
+
+Starts a new sandbox run of the analysis's binary, alongside any runs already in progress, and returns the run's operation to poll for its outcome.
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+- `400` [`BAD_REQUEST`](/errors/BAD_REQUEST) — Bad Request
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param analysisId Analysis ID
+ @return ApiV3CreateDynamicExecutionRunRequest
+*/
+func (a *AnalysesCoreAPIService) V3CreateDynamicExecutionRun(ctx context.Context, analysisId int64) ApiV3CreateDynamicExecutionRunRequest {
+	return ApiV3CreateDynamicExecutionRunRequest{
+		ApiService: a,
+		ctx: ctx,
+		analysisId: analysisId,
+	}
+}
+
+// Execute executes the request
+//  @return OperationDynamicExecutionMetadataDynamicExecutionResult
+func (a *AnalysesCoreAPIService) V3CreateDynamicExecutionRunExecute(r ApiV3CreateDynamicExecutionRunRequest) (*OperationDynamicExecutionMetadataDynamicExecutionResult, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *OperationDynamicExecutionMetadataDynamicExecutionResult
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3CreateDynamicExecutionRun")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/runs"
+	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.analysisId < 1 {
+		return localVarReturnValue, nil, reportError("analysisId must be greater than 1")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.runDynamicExecutionInputBody
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v APIError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -5744,542 +5814,10 @@ func (a *AnalysesCoreAPIService) V3GetBinaryExportOperationExecute(r ApiV3GetBin
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV3GetDynamicExecutionArtifactRequest struct {
-	ctx context.Context
-	ApiService *AnalysesCoreAPIService
-	analysisId int64
-	sha256 string
-	filename *string
-}
-
-// Optional name for the downloaded file (inside the zip and as the download filename). Defaults to the SHA-256 when omitted.
-func (r ApiV3GetDynamicExecutionArtifactRequest) Filename(filename string) ApiV3GetDynamicExecutionArtifactRequest {
-	r.filename = &filename
-	return r
-}
-
-func (r ApiV3GetDynamicExecutionArtifactRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V3GetDynamicExecutionArtifactExecute(r)
-}
-
-/*
-V3GetDynamicExecutionArtifact Download an artifact.
-
-Streams a file extracted during execution (filesystem, memory, or network), addressed by the SHA-256 referenced by `artifacts[].sha256` in the dynamic execution report. The response is a password-protected zip (password: `infected`).
-
-**Error codes:**
-- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
-- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
-- `409` [`DYNAMIC_EXECUTION_INCOMPLETE`](/errors/DYNAMIC_EXECUTION_INCOMPLETE) — Dynamic Execution Incomplete
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param analysisId Analysis ID
- @param sha256 SHA-256 hex digest of the artifact
- @return ApiV3GetDynamicExecutionArtifactRequest
-*/
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionArtifact(ctx context.Context, analysisId int64, sha256 string) ApiV3GetDynamicExecutionArtifactRequest {
-	return ApiV3GetDynamicExecutionArtifactRequest{
-		ApiService: a,
-		ctx: ctx,
-		analysisId: analysisId,
-		sha256: sha256,
-	}
-}
-
-// Execute executes the request
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionArtifactExecute(r ApiV3GetDynamicExecutionArtifactRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionArtifact")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/artifacts/{sha256}"
-	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"sha256"+"}", url.PathEscape(parameterValueToString(r.sha256, "sha256")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.analysisId < 1 {
-		return nil, reportError("analysisId must be greater than 1")
-	}
-
-	if r.filename != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filename", r.filename, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APIKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiV3GetDynamicExecutionLogsDownloadRequest struct {
-	ctx context.Context
-	ApiService *AnalysesCoreAPIService
-	analysisId int64
-}
-
-func (r ApiV3GetDynamicExecutionLogsDownloadRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V3GetDynamicExecutionLogsDownloadExecute(r)
-}
-
-/*
-V3GetDynamicExecutionLogsDownload Download the execution logs archive.
-
-Streams a ZIP archive of the sandbox logs collected during execution. Requires the run to be COMPLETED. Returns 404 if no logs were captured.
-
-**Error codes:**
-- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
-- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
-- `409` [`DYNAMIC_EXECUTION_INCOMPLETE`](/errors/DYNAMIC_EXECUTION_INCOMPLETE) — Dynamic Execution Incomplete
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param analysisId Analysis ID
- @return ApiV3GetDynamicExecutionLogsDownloadRequest
-*/
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionLogsDownload(ctx context.Context, analysisId int64) ApiV3GetDynamicExecutionLogsDownloadRequest {
-	return ApiV3GetDynamicExecutionLogsDownloadRequest{
-		ApiService: a,
-		ctx: ctx,
-		analysisId: analysisId,
-	}
-}
-
-// Execute executes the request
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionLogsDownloadExecute(r ApiV3GetDynamicExecutionLogsDownloadRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionLogsDownload")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/logs/download"
-	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.analysisId < 1 {
-		return nil, reportError("analysisId must be greater than 1")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APIKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiV3GetDynamicExecutionMemdumpRequest struct {
-	ctx context.Context
-	ApiService *AnalysesCoreAPIService
-	analysisId int64
-	sha256 string
-	filename *string
-}
-
-// Optional name for the downloaded file (inside the zip and as the download filename). Defaults to the SHA-256 when omitted.
-func (r ApiV3GetDynamicExecutionMemdumpRequest) Filename(filename string) ApiV3GetDynamicExecutionMemdumpRequest {
-	r.filename = &filename
-	return r
-}
-
-func (r ApiV3GetDynamicExecutionMemdumpRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V3GetDynamicExecutionMemdumpExecute(r)
-}
-
-/*
-V3GetDynamicExecutionMemdump Download a memory dump.
-
-Streams the memory dump for a SHA-256 referenced by `memdumps[].dumps[].sha256` in the dynamic execution report. The response is a password-protected zip (password: `infected`).
-
-**Error codes:**
-- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
-- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
-- `409` [`DYNAMIC_EXECUTION_INCOMPLETE`](/errors/DYNAMIC_EXECUTION_INCOMPLETE) — Dynamic Execution Incomplete
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param analysisId Analysis ID
- @param sha256 SHA-256 hex digest of the artifact
- @return ApiV3GetDynamicExecutionMemdumpRequest
-*/
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionMemdump(ctx context.Context, analysisId int64, sha256 string) ApiV3GetDynamicExecutionMemdumpRequest {
-	return ApiV3GetDynamicExecutionMemdumpRequest{
-		ApiService: a,
-		ctx: ctx,
-		analysisId: analysisId,
-		sha256: sha256,
-	}
-}
-
-// Execute executes the request
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionMemdumpExecute(r ApiV3GetDynamicExecutionMemdumpRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionMemdump")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/memdumps/{sha256}"
-	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"sha256"+"}", url.PathEscape(parameterValueToString(r.sha256, "sha256")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.analysisId < 1 {
-		return nil, reportError("analysisId must be greater than 1")
-	}
-
-	if r.filename != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filename", r.filename, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APIKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
 type ApiV3GetDynamicExecutionOperationRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
-	analysisId int64
+	runId string
 }
 
 func (r ApiV3GetDynamicExecutionOperationRequest) Execute() (*OperationDynamicExecutionMetadataDynamicExecutionResult, *http.Response, error) {
@@ -6289,21 +5827,21 @@ func (r ApiV3GetDynamicExecutionOperationRequest) Execute() (*OperationDynamicEx
 /*
 V3GetDynamicExecutionOperation Get a dynamic execution operation.
 
-Returns the current state of the most recently triggered dynamic execution run for this analysis.
+Returns the current state of a dynamic execution run. Returns 404 for an unknown run.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param analysisId Analysis ID
+ @param runId Dynamic execution run ID
  @return ApiV3GetDynamicExecutionOperationRequest
 */
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionOperation(ctx context.Context, analysisId int64) ApiV3GetDynamicExecutionOperationRequest {
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionOperation(ctx context.Context, runId string) ApiV3GetDynamicExecutionOperationRequest {
 	return ApiV3GetDynamicExecutionOperationRequest{
 		ApiService: a,
 		ctx: ctx,
-		analysisId: analysisId,
+		runId: runId,
 	}
 }
 
@@ -6322,8 +5860,179 @@ func (a *AnalysesCoreAPIService) V3GetDynamicExecutionOperationExecute(r ApiV3Ge
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/operations/dynamic-execution/{analysis_id}"
+	localVarPath := localBasePath + "/v3/operations/dynamic-execution/{run_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"run_id"+"}", url.PathEscape(parameterValueToString(r.runId, "runId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if strlen(r.runId) > 64 {
+		return localVarReturnValue, nil, reportError("runId must have less than 64 elements")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV3GetDynamicExecutionRunRequest struct {
+	ctx context.Context
+	ApiService *AnalysesCoreAPIService
+	analysisId int64
+	runId string
+}
+
+func (r ApiV3GetDynamicExecutionRunRequest) Execute() (*DynamicExecutionRun, *http.Response, error) {
+	return r.ApiService.V3GetDynamicExecutionRunExecute(r)
+}
+
+/*
+V3GetDynamicExecutionRun Get a dynamic execution run.
+
+Returns the run's status and the parameters it was started with. An archive password is never returned, only whether one was given.
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param analysisId Analysis ID
+ @param runId Dynamic execution run ID
+ @return ApiV3GetDynamicExecutionRunRequest
+*/
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRun(ctx context.Context, analysisId int64, runId string) ApiV3GetDynamicExecutionRunRequest {
+	return ApiV3GetDynamicExecutionRunRequest{
+		ApiService: a,
+		ctx: ctx,
+		analysisId: analysisId,
+		runId: runId,
+	}
+}
+
+// Execute executes the request
+//  @return DynamicExecutionRun
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunExecute(r ApiV3GetDynamicExecutionRunRequest) (*DynamicExecutionRun, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DynamicExecutionRun
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionRun")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"run_id"+"}", url.PathEscape(parameterValueToString(r.runId, "runId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -6443,20 +6152,29 @@ func (a *AnalysesCoreAPIService) V3GetDynamicExecutionOperationExecute(r ApiV3Ge
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV3GetDynamicExecutionPcapRequest struct {
+type ApiV3GetDynamicExecutionRunArtifactRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
 	analysisId int64
+	runId string
+	sha256 string
+	filename *string
 }
 
-func (r ApiV3GetDynamicExecutionPcapRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V3GetDynamicExecutionPcapExecute(r)
+// Optional name for the downloaded file (inside the zip and as the download filename). Defaults to the SHA-256 when omitted.
+func (r ApiV3GetDynamicExecutionRunArtifactRequest) Filename(filename string) ApiV3GetDynamicExecutionRunArtifactRequest {
+	r.filename = &filename
+	return r
+}
+
+func (r ApiV3GetDynamicExecutionRunArtifactRequest) Execute() (*http.Response, error) {
+	return r.ApiService.V3GetDynamicExecutionRunArtifactExecute(r)
 }
 
 /*
-V3GetDynamicExecutionPcap Download the network capture.
+V3GetDynamicExecutionRunArtifact Download a run's artifact.
 
-Streams the pcap of the analysis VM's traffic. Returns 404 if no pcap was captured.
+Streams a file extracted during execution (filesystem, memory, or network), addressed by the SHA-256 referenced by `artifacts[].sha256` in the run's report. The response is a password-protected zip (password: `infected`).
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -6465,31 +6183,212 @@ Streams the pcap of the analysis VM's traffic. Returns 404 if no pcap was captur
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
- @return ApiV3GetDynamicExecutionPcapRequest
+ @param runId Dynamic execution run ID
+ @param sha256 SHA-256 hex digest of the artifact
+ @return ApiV3GetDynamicExecutionRunArtifactRequest
 */
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionPcap(ctx context.Context, analysisId int64) ApiV3GetDynamicExecutionPcapRequest {
-	return ApiV3GetDynamicExecutionPcapRequest{
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunArtifact(ctx context.Context, analysisId int64, runId string, sha256 string) ApiV3GetDynamicExecutionRunArtifactRequest {
+	return ApiV3GetDynamicExecutionRunArtifactRequest{
 		ApiService: a,
 		ctx: ctx,
 		analysisId: analysisId,
+		runId: runId,
+		sha256: sha256,
 	}
 }
 
 // Execute executes the request
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionPcapExecute(r ApiV3GetDynamicExecutionPcapRequest) (*http.Response, error) {
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunArtifactExecute(r ApiV3GetDynamicExecutionRunArtifactRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionPcap")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionRunArtifact")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/pcap"
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/artifacts/{sha256}"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"run_id"+"}", url.PathEscape(parameterValueToString(r.runId, "runId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sha256"+"}", url.PathEscape(parameterValueToString(r.sha256, "sha256")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.analysisId < 1 {
+		return nil, reportError("analysisId must be greater than 1")
+	}
+
+	if r.filename != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filename", r.filename, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiV3GetDynamicExecutionRunLogsDownloadRequest struct {
+	ctx context.Context
+	ApiService *AnalysesCoreAPIService
+	analysisId int64
+	runId string
+}
+
+func (r ApiV3GetDynamicExecutionRunLogsDownloadRequest) Execute() (*http.Response, error) {
+	return r.ApiService.V3GetDynamicExecutionRunLogsDownloadExecute(r)
+}
+
+/*
+V3GetDynamicExecutionRunLogsDownload Download a run's execution logs archive.
+
+Streams a ZIP archive of the sandbox logs collected during the run. Requires the run to be COMPLETED. Returns 404 if no logs were captured.
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+- `409` [`DYNAMIC_EXECUTION_INCOMPLETE`](/errors/DYNAMIC_EXECUTION_INCOMPLETE) — Dynamic Execution Incomplete
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param analysisId Analysis ID
+ @param runId Dynamic execution run ID
+ @return ApiV3GetDynamicExecutionRunLogsDownloadRequest
+*/
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunLogsDownload(ctx context.Context, analysisId int64, runId string) ApiV3GetDynamicExecutionRunLogsDownloadRequest {
+	return ApiV3GetDynamicExecutionRunLogsDownloadRequest{
+		ApiService: a,
+		ctx: ctx,
+		analysisId: analysisId,
+		runId: runId,
+	}
+}
+
+// Execute executes the request
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunLogsDownloadExecute(r ApiV3GetDynamicExecutionRunLogsDownloadRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionRunLogsDownload")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/logs/download"
+	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"run_id"+"}", url.PathEscape(parameterValueToString(r.runId, "runId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -6611,20 +6510,29 @@ func (a *AnalysesCoreAPIService) V3GetDynamicExecutionPcapExecute(r ApiV3GetDyna
 	return localVarHTTPResponse, nil
 }
 
-type ApiV3GetDynamicExecutionReportRequest struct {
+type ApiV3GetDynamicExecutionRunMemdumpRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
 	analysisId int64
+	runId string
+	sha256 string
+	filename *string
 }
 
-func (r ApiV3GetDynamicExecutionReportRequest) Execute() (*AnalysisReport, *http.Response, error) {
-	return r.ApiService.V3GetDynamicExecutionReportExecute(r)
+// Optional name for the downloaded file (inside the zip and as the download filename). Defaults to the SHA-256 when omitted.
+func (r ApiV3GetDynamicExecutionRunMemdumpRequest) Filename(filename string) ApiV3GetDynamicExecutionRunMemdumpRequest {
+	r.filename = &filename
+	return r
+}
+
+func (r ApiV3GetDynamicExecutionRunMemdumpRequest) Execute() (*http.Response, error) {
+	return r.ApiService.V3GetDynamicExecutionRunMemdumpExecute(r)
 }
 
 /*
-V3GetDynamicExecutionReport Get the dynamic execution report.
+V3GetDynamicExecutionRunMemdump Download a run's memory dump.
 
-Returns the dynamic execution report JSON for the analysis. Requires the run to be COMPLETED.
+Streams the memory dump for a SHA-256 referenced by `memdumps[].dumps[].sha256` in the run's report. The response is a password-protected zip (password: `infected`).
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -6633,19 +6541,371 @@ Returns the dynamic execution report JSON for the analysis. Requires the run to 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
- @return ApiV3GetDynamicExecutionReportRequest
+ @param runId Dynamic execution run ID
+ @param sha256 SHA-256 hex digest of the artifact
+ @return ApiV3GetDynamicExecutionRunMemdumpRequest
 */
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionReport(ctx context.Context, analysisId int64) ApiV3GetDynamicExecutionReportRequest {
-	return ApiV3GetDynamicExecutionReportRequest{
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunMemdump(ctx context.Context, analysisId int64, runId string, sha256 string) ApiV3GetDynamicExecutionRunMemdumpRequest {
+	return ApiV3GetDynamicExecutionRunMemdumpRequest{
 		ApiService: a,
 		ctx: ctx,
 		analysisId: analysisId,
+		runId: runId,
+		sha256: sha256,
+	}
+}
+
+// Execute executes the request
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunMemdumpExecute(r ApiV3GetDynamicExecutionRunMemdumpRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionRunMemdump")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/memdumps/{sha256}"
+	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"run_id"+"}", url.PathEscape(parameterValueToString(r.runId, "runId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sha256"+"}", url.PathEscape(parameterValueToString(r.sha256, "sha256")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.analysisId < 1 {
+		return nil, reportError("analysisId must be greater than 1")
+	}
+
+	if r.filename != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filename", r.filename, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiV3GetDynamicExecutionRunPcapRequest struct {
+	ctx context.Context
+	ApiService *AnalysesCoreAPIService
+	analysisId int64
+	runId string
+}
+
+func (r ApiV3GetDynamicExecutionRunPcapRequest) Execute() (*http.Response, error) {
+	return r.ApiService.V3GetDynamicExecutionRunPcapExecute(r)
+}
+
+/*
+V3GetDynamicExecutionRunPcap Download a run's network capture.
+
+Streams the pcap of the analysis VM's traffic during the run. Returns 404 if no pcap was captured.
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+- `409` [`DYNAMIC_EXECUTION_INCOMPLETE`](/errors/DYNAMIC_EXECUTION_INCOMPLETE) — Dynamic Execution Incomplete
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param analysisId Analysis ID
+ @param runId Dynamic execution run ID
+ @return ApiV3GetDynamicExecutionRunPcapRequest
+*/
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunPcap(ctx context.Context, analysisId int64, runId string) ApiV3GetDynamicExecutionRunPcapRequest {
+	return ApiV3GetDynamicExecutionRunPcapRequest{
+		ApiService: a,
+		ctx: ctx,
+		analysisId: analysisId,
+		runId: runId,
+	}
+}
+
+// Execute executes the request
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunPcapExecute(r ApiV3GetDynamicExecutionRunPcapRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionRunPcap")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/pcap"
+	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"run_id"+"}", url.PathEscape(parameterValueToString(r.runId, "runId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.analysisId < 1 {
+		return nil, reportError("analysisId must be greater than 1")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiV3GetDynamicExecutionRunReportRequest struct {
+	ctx context.Context
+	ApiService *AnalysesCoreAPIService
+	analysisId int64
+	runId string
+}
+
+func (r ApiV3GetDynamicExecutionRunReportRequest) Execute() (*AnalysisReport, *http.Response, error) {
+	return r.ApiService.V3GetDynamicExecutionRunReportExecute(r)
+}
+
+/*
+V3GetDynamicExecutionRunReport Get a run's dynamic execution report.
+
+Returns the run's dynamic execution report JSON. Requires the run to be COMPLETED.
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+- `409` [`DYNAMIC_EXECUTION_INCOMPLETE`](/errors/DYNAMIC_EXECUTION_INCOMPLETE) — Dynamic Execution Incomplete
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param analysisId Analysis ID
+ @param runId Dynamic execution run ID
+ @return ApiV3GetDynamicExecutionRunReportRequest
+*/
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunReport(ctx context.Context, analysisId int64, runId string) ApiV3GetDynamicExecutionRunReportRequest {
+	return ApiV3GetDynamicExecutionRunReportRequest{
+		ApiService: a,
+		ctx: ctx,
+		analysisId: analysisId,
+		runId: runId,
 	}
 }
 
 // Execute executes the request
 //  @return AnalysisReport
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionReportExecute(r ApiV3GetDynamicExecutionReportRequest) (*AnalysisReport, *http.Response, error) {
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunReportExecute(r ApiV3GetDynamicExecutionRunReportRequest) (*AnalysisReport, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -6653,13 +6913,14 @@ func (a *AnalysesCoreAPIService) V3GetDynamicExecutionReportExecute(r ApiV3GetDy
 		localVarReturnValue  *AnalysisReport
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionReport")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionRunReport")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/report"
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/report"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"run_id"+"}", url.PathEscape(parameterValueToString(r.runId, "runId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -6790,21 +7051,22 @@ func (a *AnalysesCoreAPIService) V3GetDynamicExecutionReportExecute(r ApiV3GetDy
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV3GetDynamicExecutionScreenshotRequest struct {
+type ApiV3GetDynamicExecutionRunScreenshotRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
 	analysisId int64
+	runId string
 	index int64
 }
 
-func (r ApiV3GetDynamicExecutionScreenshotRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V3GetDynamicExecutionScreenshotExecute(r)
+func (r ApiV3GetDynamicExecutionRunScreenshotRequest) Execute() (*http.Response, error) {
+	return r.ApiService.V3GetDynamicExecutionRunScreenshotExecute(r)
 }
 
 /*
-V3GetDynamicExecutionScreenshot Download a screenshot.
+V3GetDynamicExecutionRunScreenshot Download a run's screenshot.
 
-Streams one screenshot, 1-indexed as listed by the screenshots endpoint. Requires the run to be COMPLETED.
+Streams one screenshot, 1-indexed as listed by the run's screenshots endpoint. Requires the run to be COMPLETED.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -6813,33 +7075,36 @@ Streams one screenshot, 1-indexed as listed by the screenshots endpoint. Require
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
+ @param runId Dynamic execution run ID
  @param index Index of the screenshot, as listed by the screenshots endpoint
- @return ApiV3GetDynamicExecutionScreenshotRequest
+ @return ApiV3GetDynamicExecutionRunScreenshotRequest
 */
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionScreenshot(ctx context.Context, analysisId int64, index int64) ApiV3GetDynamicExecutionScreenshotRequest {
-	return ApiV3GetDynamicExecutionScreenshotRequest{
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunScreenshot(ctx context.Context, analysisId int64, runId string, index int64) ApiV3GetDynamicExecutionRunScreenshotRequest {
+	return ApiV3GetDynamicExecutionRunScreenshotRequest{
 		ApiService: a,
 		ctx: ctx,
 		analysisId: analysisId,
+		runId: runId,
 		index: index,
 	}
 }
 
 // Execute executes the request
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionScreenshotExecute(r ApiV3GetDynamicExecutionScreenshotRequest) (*http.Response, error) {
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunScreenshotExecute(r ApiV3GetDynamicExecutionRunScreenshotRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionScreenshot")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionRunScreenshot")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/screenshots/{index}"
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/screenshots/{index}"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"run_id"+"}", url.PathEscape(parameterValueToString(r.runId, "runId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"index"+"}", url.PathEscape(parameterValueToString(r.index, "index")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -6965,18 +7230,19 @@ func (a *AnalysesCoreAPIService) V3GetDynamicExecutionScreenshotExecute(r ApiV3G
 	return localVarHTTPResponse, nil
 }
 
-type ApiV3GetDynamicExecutionSummaryRequest struct {
+type ApiV3GetDynamicExecutionRunSummaryRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
 	analysisId int64
+	runId string
 }
 
-func (r ApiV3GetDynamicExecutionSummaryRequest) Execute() (*DynamicExecutionSummary, *http.Response, error) {
-	return r.ApiService.V3GetDynamicExecutionSummaryExecute(r)
+func (r ApiV3GetDynamicExecutionRunSummaryRequest) Execute() (*DynamicExecutionSummary, *http.Response, error) {
+	return r.ApiService.V3GetDynamicExecutionRunSummaryExecute(r)
 }
 
 /*
-V3GetDynamicExecutionSummary Get the dynamic execution summary.
+V3GetDynamicExecutionRunSummary Get a run's dynamic execution summary.
 
 Returns the LLM-generated Markdown summary of the run. Requires the run to be COMPLETED. Returns 404 if no summary has been generated.
 
@@ -6987,19 +7253,21 @@ Returns the LLM-generated Markdown summary of the run. Requires the run to be CO
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
- @return ApiV3GetDynamicExecutionSummaryRequest
+ @param runId Dynamic execution run ID
+ @return ApiV3GetDynamicExecutionRunSummaryRequest
 */
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionSummary(ctx context.Context, analysisId int64) ApiV3GetDynamicExecutionSummaryRequest {
-	return ApiV3GetDynamicExecutionSummaryRequest{
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunSummary(ctx context.Context, analysisId int64, runId string) ApiV3GetDynamicExecutionRunSummaryRequest {
+	return ApiV3GetDynamicExecutionRunSummaryRequest{
 		ApiService: a,
 		ctx: ctx,
 		analysisId: analysisId,
+		runId: runId,
 	}
 }
 
 // Execute executes the request
 //  @return DynamicExecutionSummary
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionSummaryExecute(r ApiV3GetDynamicExecutionSummaryRequest) (*DynamicExecutionSummary, *http.Response, error) {
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunSummaryExecute(r ApiV3GetDynamicExecutionRunSummaryRequest) (*DynamicExecutionSummary, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -7007,13 +7275,14 @@ func (a *AnalysesCoreAPIService) V3GetDynamicExecutionSummaryExecute(r ApiV3GetD
 		localVarReturnValue  *DynamicExecutionSummary
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionSummary")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionRunSummary")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/summary"
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/summary"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"run_id"+"}", url.PathEscape(parameterValueToString(r.runId, "runId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -7144,187 +7413,21 @@ func (a *AnalysesCoreAPIService) V3GetDynamicExecutionSummaryExecute(r ApiV3GetD
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV3GetDynamicExecutionSummaryOperationRequest struct {
+type ApiV3GetDynamicExecutionRunWiresharkKeysRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
 	analysisId int64
+	runId string
 }
 
-func (r ApiV3GetDynamicExecutionSummaryOperationRequest) Execute() (*OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult, *http.Response, error) {
-	return r.ApiService.V3GetDynamicExecutionSummaryOperationExecute(r)
-}
-
-/*
-V3GetDynamicExecutionSummaryOperation Get a dynamic execution summary operation.
-
-Returns the state of the most recent summary attempt for this analysis, whether made by its run or by a regenerate.
-
-**Error codes:**
-- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
-- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param analysisId Analysis ID
- @return ApiV3GetDynamicExecutionSummaryOperationRequest
-*/
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionSummaryOperation(ctx context.Context, analysisId int64) ApiV3GetDynamicExecutionSummaryOperationRequest {
-	return ApiV3GetDynamicExecutionSummaryOperationRequest{
-		ApiService: a,
-		ctx: ctx,
-		analysisId: analysisId,
-	}
-}
-
-// Execute executes the request
-//  @return OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionSummaryOperationExecute(r ApiV3GetDynamicExecutionSummaryOperationRequest) (*OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionSummaryOperation")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v3/operations/dynamic-execution-summary/{analysis_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.analysisId < 1 {
-		return localVarReturnValue, nil, reportError("analysisId must be greater than 1")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APIKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiV3GetDynamicExecutionWiresharkKeysRequest struct {
-	ctx context.Context
-	ApiService *AnalysesCoreAPIService
-	analysisId int64
-}
-
-func (r ApiV3GetDynamicExecutionWiresharkKeysRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V3GetDynamicExecutionWiresharkKeysExecute(r)
+func (r ApiV3GetDynamicExecutionRunWiresharkKeysRequest) Execute() (*http.Response, error) {
+	return r.ApiService.V3GetDynamicExecutionRunWiresharkKeysExecute(r)
 }
 
 /*
-V3GetDynamicExecutionWiresharkKeys Download Wireshark TLS session keys.
+V3GetDynamicExecutionRunWiresharkKeys Download a run's Wireshark TLS session keys.
 
-Returns the Wireshark-format TLS session key log for decrypting HTTPS traffic in the pcap. Returns 404 if no keys were captured.
+Returns the Wireshark-format TLS session key log for decrypting HTTPS traffic in the run's pcap. Returns 404 if no keys were captured.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -7333,31 +7436,34 @@ Returns the Wireshark-format TLS session key log for decrypting HTTPS traffic in
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
- @return ApiV3GetDynamicExecutionWiresharkKeysRequest
+ @param runId Dynamic execution run ID
+ @return ApiV3GetDynamicExecutionRunWiresharkKeysRequest
 */
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionWiresharkKeys(ctx context.Context, analysisId int64) ApiV3GetDynamicExecutionWiresharkKeysRequest {
-	return ApiV3GetDynamicExecutionWiresharkKeysRequest{
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunWiresharkKeys(ctx context.Context, analysisId int64, runId string) ApiV3GetDynamicExecutionRunWiresharkKeysRequest {
+	return ApiV3GetDynamicExecutionRunWiresharkKeysRequest{
 		ApiService: a,
 		ctx: ctx,
 		analysisId: analysisId,
+		runId: runId,
 	}
 }
 
 // Execute executes the request
-func (a *AnalysesCoreAPIService) V3GetDynamicExecutionWiresharkKeysExecute(r ApiV3GetDynamicExecutionWiresharkKeysRequest) (*http.Response, error) {
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionRunWiresharkKeysExecute(r ApiV3GetDynamicExecutionRunWiresharkKeysRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionWiresharkKeys")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionRunWiresharkKeys")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/wireshark-keys"
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/wireshark-keys"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"run_id"+"}", url.PathEscape(parameterValueToString(r.runId, "runId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -7477,6 +7583,173 @@ func (a *AnalysesCoreAPIService) V3GetDynamicExecutionWiresharkKeysExecute(r Api
 	}
 
 	return localVarHTTPResponse, nil
+}
+
+type ApiV3GetDynamicExecutionSummaryOperationRequest struct {
+	ctx context.Context
+	ApiService *AnalysesCoreAPIService
+	runId string
+}
+
+func (r ApiV3GetDynamicExecutionSummaryOperationRequest) Execute() (*OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult, *http.Response, error) {
+	return r.ApiService.V3GetDynamicExecutionSummaryOperationExecute(r)
+}
+
+/*
+V3GetDynamicExecutionSummaryOperation Get a dynamic execution summary operation.
+
+Returns the state of a run's most recent summary attempt, whether made by the run itself or by a regenerate. Returns 404 for an unknown run.
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param runId Dynamic execution run ID
+ @return ApiV3GetDynamicExecutionSummaryOperationRequest
+*/
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionSummaryOperation(ctx context.Context, runId string) ApiV3GetDynamicExecutionSummaryOperationRequest {
+	return ApiV3GetDynamicExecutionSummaryOperationRequest{
+		ApiService: a,
+		ctx: ctx,
+		runId: runId,
+	}
+}
+
+// Execute executes the request
+//  @return OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult
+func (a *AnalysesCoreAPIService) V3GetDynamicExecutionSummaryOperationExecute(r ApiV3GetDynamicExecutionSummaryOperationRequest) (*OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3GetDynamicExecutionSummaryOperation")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/operations/dynamic-execution-summary/{run_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"run_id"+"}", url.PathEscape(parameterValueToString(r.runId, "runId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if strlen(r.runId) > 64 {
+		return localVarReturnValue, nil, reportError("runId must have less than 64 elements")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiV3GrantAnalysisAccessRequest struct {
@@ -8409,7 +8682,7 @@ func (r ApiV3ListAnalysisOperationsRequest) Execute() (*AnalysisOperationsOutput
 /*
 V3ListAnalysisOperations List the operations run on an analysis.
 
-Returns the analysis' `static-analysis` operation, followed by the latest run of each other operation started on its binary: the binary agents, the script-agent scans and dynamic execution. The `static-analysis` operation is always included, even when no other operations have run. Each entry's `name` is the operation's resource name, polled at `/v3/{name}`. Other operations that have never run are omitted.
+Returns the analysis' `static-analysis` operation, followed by the latest run of each other operation started on its binary (the binary agents and the script-agent scans), then one `dynamic-execution` operation per sandbox run of the analysis, newest first. The `static-analysis` operation is always included, even when no other operations have run. Each entry's `name` is the operation's resource name, polled at `/v3/{name}`. Other operations that have never run are omitted.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -8563,20 +8836,21 @@ func (a *AnalysesCoreAPIService) V3ListAnalysisOperationsExecute(r ApiV3ListAnal
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV3ListDynamicExecutionScreenshotsRequest struct {
+type ApiV3ListDynamicExecutionRunScreenshotsRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
 	analysisId int64
+	runId string
 }
 
-func (r ApiV3ListDynamicExecutionScreenshotsRequest) Execute() (*ScreenshotsIndex, *http.Response, error) {
-	return r.ApiService.V3ListDynamicExecutionScreenshotsExecute(r)
+func (r ApiV3ListDynamicExecutionRunScreenshotsRequest) Execute() (*ScreenshotsIndex, *http.Response, error) {
+	return r.ApiService.V3ListDynamicExecutionRunScreenshotsExecute(r)
 }
 
 /*
-V3ListDynamicExecutionScreenshots List the screenshots captured during execution.
+V3ListDynamicExecutionRunScreenshots List a run's screenshots.
 
-Returns the screenshots captured from the analysis VM, in capture order. Requires the run to be COMPLETED. Returns an empty list when the run captured none.
+Returns the screenshots captured from the analysis VM during the run, in capture order. Requires the run to be COMPLETED. Returns an empty list when the run captured none.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -8585,19 +8859,21 @@ Returns the screenshots captured from the analysis VM, in capture order. Require
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
- @return ApiV3ListDynamicExecutionScreenshotsRequest
+ @param runId Dynamic execution run ID
+ @return ApiV3ListDynamicExecutionRunScreenshotsRequest
 */
-func (a *AnalysesCoreAPIService) V3ListDynamicExecutionScreenshots(ctx context.Context, analysisId int64) ApiV3ListDynamicExecutionScreenshotsRequest {
-	return ApiV3ListDynamicExecutionScreenshotsRequest{
+func (a *AnalysesCoreAPIService) V3ListDynamicExecutionRunScreenshots(ctx context.Context, analysisId int64, runId string) ApiV3ListDynamicExecutionRunScreenshotsRequest {
+	return ApiV3ListDynamicExecutionRunScreenshotsRequest{
 		ApiService: a,
 		ctx: ctx,
 		analysisId: analysisId,
+		runId: runId,
 	}
 }
 
 // Execute executes the request
 //  @return ScreenshotsIndex
-func (a *AnalysesCoreAPIService) V3ListDynamicExecutionScreenshotsExecute(r ApiV3ListDynamicExecutionScreenshotsRequest) (*ScreenshotsIndex, *http.Response, error) {
+func (a *AnalysesCoreAPIService) V3ListDynamicExecutionRunScreenshotsExecute(r ApiV3ListDynamicExecutionRunScreenshotsRequest) (*ScreenshotsIndex, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -8605,13 +8881,14 @@ func (a *AnalysesCoreAPIService) V3ListDynamicExecutionScreenshotsExecute(r ApiV
 		localVarReturnValue  *ScreenshotsIndex
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3ListDynamicExecutionScreenshots")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3ListDynamicExecutionRunScreenshots")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/screenshots"
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/screenshots"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"run_id"+"}", url.PathEscape(parameterValueToString(r.runId, "runId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -8696,6 +8973,173 @@ func (a *AnalysesCoreAPIService) V3ListDynamicExecutionScreenshotsExecute(r ApiV
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV3ListDynamicExecutionRunsRequest struct {
+	ctx context.Context
+	ApiService *AnalysesCoreAPIService
+	analysisId int64
+}
+
+func (r ApiV3ListDynamicExecutionRunsRequest) Execute() (*ListDynamicExecutionRunsOutputBody, *http.Response, error) {
+	return r.ApiService.V3ListDynamicExecutionRunsExecute(r)
+}
+
+/*
+V3ListDynamicExecutionRuns List the dynamic execution runs.
+
+Returns every dynamic execution run of the analysis, newest first, with its status and the parameters it was started with. An archive password is never returned, only whether one was given.
+
+**Error codes:**
+- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
+- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param analysisId Analysis ID
+ @return ApiV3ListDynamicExecutionRunsRequest
+*/
+func (a *AnalysesCoreAPIService) V3ListDynamicExecutionRuns(ctx context.Context, analysisId int64) ApiV3ListDynamicExecutionRunsRequest {
+	return ApiV3ListDynamicExecutionRunsRequest{
+		ApiService: a,
+		ctx: ctx,
+		analysisId: analysisId,
+	}
+}
+
+// Execute executes the request
+//  @return ListDynamicExecutionRunsOutputBody
+func (a *AnalysesCoreAPIService) V3ListDynamicExecutionRunsExecute(r ApiV3ListDynamicExecutionRunsRequest) (*ListDynamicExecutionRunsOutputBody, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListDynamicExecutionRunsOutputBody
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3ListDynamicExecutionRuns")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/runs"
+	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.analysisId < 1 {
+		return localVarReturnValue, nil, reportError("analysisId must be greater than 1")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v APIError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -9753,242 +10197,45 @@ func (a *AnalysesCoreAPIService) V3RevokeAnalysisAccessExecute(r ApiV3RevokeAnal
 	return localVarHTTPResponse, nil
 }
 
-type ApiV3RunDynamicExecutionRequest struct {
+type ApiV3RunDynamicExecutionRunSummaryRequest struct {
 	ctx context.Context
 	ApiService *AnalysesCoreAPIService
 	analysisId int64
-	runDynamicExecutionInputBody *RunDynamicExecutionInputBody
+	runId string
 }
 
-func (r ApiV3RunDynamicExecutionRequest) RunDynamicExecutionInputBody(runDynamicExecutionInputBody RunDynamicExecutionInputBody) ApiV3RunDynamicExecutionRequest {
-	r.runDynamicExecutionInputBody = &runDynamicExecutionInputBody
-	return r
-}
-
-func (r ApiV3RunDynamicExecutionRequest) Execute() (*OperationDynamicExecutionMetadataDynamicExecutionResult, *http.Response, error) {
-	return r.ApiService.V3RunDynamicExecutionExecute(r)
+func (r ApiV3RunDynamicExecutionRunSummaryRequest) Execute() (*OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult, *http.Response, error) {
+	return r.ApiService.V3RunDynamicExecutionRunSummaryExecute(r)
 }
 
 /*
-V3RunDynamicExecution Trigger a dynamic execution run.
+V3RunDynamicExecutionRunSummary Regenerate a run's dynamic execution summary.
 
-Submits the analysis's binary to the sandbox and returns the operation to poll for its outcome. Returns 409 while a run is already in progress for this analysis.
+Starts a new LLM summary of the completed run and returns the run's summary operation to poll. The new summary replaces the stored one once it succeeds. Only the analysis owner may regenerate. Returns 409 while the run is incomplete or a summary is already in progress.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
-- `400` [`BAD_REQUEST`](/errors/BAD_REQUEST) — Bad Request
-- `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param analysisId Analysis ID
- @return ApiV3RunDynamicExecutionRequest
-*/
-func (a *AnalysesCoreAPIService) V3RunDynamicExecution(ctx context.Context, analysisId int64) ApiV3RunDynamicExecutionRequest {
-	return ApiV3RunDynamicExecutionRequest{
-		ApiService: a,
-		ctx: ctx,
-		analysisId: analysisId,
-	}
-}
-
-// Execute executes the request
-//  @return OperationDynamicExecutionMetadataDynamicExecutionResult
-func (a *AnalysesCoreAPIService) V3RunDynamicExecutionExecute(r ApiV3RunDynamicExecutionRequest) (*OperationDynamicExecutionMetadataDynamicExecutionResult, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OperationDynamicExecutionMetadataDynamicExecutionResult
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3RunDynamicExecution")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution:run"
-	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.analysisId < 1 {
-		return localVarReturnValue, nil, reportError("analysisId must be greater than 1")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.runDynamicExecutionInputBody
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APIKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiV3RunDynamicExecutionSummaryRequest struct {
-	ctx context.Context
-	ApiService *AnalysesCoreAPIService
-	analysisId int64
-}
-
-func (r ApiV3RunDynamicExecutionSummaryRequest) Execute() (*OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult, *http.Response, error) {
-	return r.ApiService.V3RunDynamicExecutionSummaryExecute(r)
-}
-
-/*
-V3RunDynamicExecutionSummary Regenerate the dynamic execution summary.
-
-Starts a new LLM summary of the analysis's completed run and returns the operation to poll. The new summary replaces the stored one once it succeeds. Only the analysis owner may regenerate. Returns 409 while the run is incomplete or a summary is already in progress.
-
-**Error codes:**
-- `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
-- `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
-- `400` [`BAD_REQUEST`](/errors/BAD_REQUEST) — Bad Request
 - `409` [`CONFLICT`](/errors/CONFLICT) — Conflict
 - `409` [`DYNAMIC_EXECUTION_INCOMPLETE`](/errors/DYNAMIC_EXECUTION_INCOMPLETE) — Dynamic Execution Incomplete
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID
- @return ApiV3RunDynamicExecutionSummaryRequest
+ @param runId Dynamic execution run ID
+ @return ApiV3RunDynamicExecutionRunSummaryRequest
 */
-func (a *AnalysesCoreAPIService) V3RunDynamicExecutionSummary(ctx context.Context, analysisId int64) ApiV3RunDynamicExecutionSummaryRequest {
-	return ApiV3RunDynamicExecutionSummaryRequest{
+func (a *AnalysesCoreAPIService) V3RunDynamicExecutionRunSummary(ctx context.Context, analysisId int64, runId string) ApiV3RunDynamicExecutionRunSummaryRequest {
+	return ApiV3RunDynamicExecutionRunSummaryRequest{
 		ApiService: a,
 		ctx: ctx,
 		analysisId: analysisId,
+		runId: runId,
 	}
 }
 
 // Execute executes the request
 //  @return OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult
-func (a *AnalysesCoreAPIService) V3RunDynamicExecutionSummaryExecute(r ApiV3RunDynamicExecutionSummaryRequest) (*OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult, *http.Response, error) {
+func (a *AnalysesCoreAPIService) V3RunDynamicExecutionRunSummaryExecute(r ApiV3RunDynamicExecutionRunSummaryRequest) (*OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -9996,13 +10243,14 @@ func (a *AnalysesCoreAPIService) V3RunDynamicExecutionSummaryExecute(r ApiV3RunD
 		localVarReturnValue  *OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3RunDynamicExecutionSummary")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalysesCoreAPIService.V3RunDynamicExecutionRunSummary")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/summary:run"
+	localVarPath := localBasePath + "/v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/summary:run"
 	localVarPath = strings.Replace(localVarPath, "{"+"analysis_id"+"}", url.PathEscape(parameterValueToString(r.analysisId, "analysisId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"run_id"+"}", url.PathEscape(parameterValueToString(r.runId, "runId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -10063,17 +10311,6 @@ func (a *AnalysesCoreAPIService) V3RunDynamicExecutionSummaryExecute(r ApiV3RunD
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v APIError
@@ -10529,13 +10766,14 @@ func (r ApiV3UpdateAnalysisGlobalRequest) Execute() (*GlobalVariable, *http.Resp
 /*
 V3UpdateAnalysisGlobal Edit a global variable.
 
-Renames a global, assigns it an analysis data type, or both. Each field the request sets stamps its own provenance `USER`, which a later re-extraction carries forward instead of overwriting. A name another global in the analysis already holds is rejected.
+Renames a global, assigns it an analysis data type, or both. Each field the request sets stamps its own provenance `USER`, which a later re-extraction carries forward instead of overwriting. A name another global in the analysis already holds is rejected. Returns 409 until the analysis is Complete.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
 - `403` [`ACCESS_DENIED`](/errors/ACCESS_DENIED) — Access Denied
 - `400` [`BAD_REQUEST`](/errors/BAD_REQUEST) — Bad Request
 - `409` [`ALREADY_EXISTS`](/errors/ALREADY_EXISTS) — Already Exists
+- `409` [`ANALYSIS_NOT_READY`](/errors/ANALYSIS_NOT_READY) — Analysis Not Ready
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param analysisId Analysis ID

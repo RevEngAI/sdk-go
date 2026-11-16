@@ -26,14 +26,14 @@ type ApiGetMeRequest struct {
 	ApiService *IAMUsersAPIService
 }
 
-func (r ApiGetMeRequest) Execute() (*User, *http.Response, error) {
+func (r ApiGetMeRequest) Execute() (*CurrentUser, *http.Response, error) {
 	return r.ApiService.GetMeExecute(r)
 }
 
 /*
 GetMe Get current user
 
-Returns the authenticated user's own information.
+Returns the authenticated user's own information, and how they sign in.
 
 **Error codes:**
 - `404` [`NOT_FOUND`](/errors/NOT_FOUND) — Not Found
@@ -49,13 +49,13 @@ func (a *IAMUsersAPIService) GetMe(ctx context.Context) ApiGetMeRequest {
 }
 
 // Execute executes the request
-//  @return User
-func (a *IAMUsersAPIService) GetMeExecute(r ApiGetMeRequest) (*User, *http.Response, error) {
+//  @return CurrentUser
+func (a *IAMUsersAPIService) GetMeExecute(r ApiGetMeRequest) (*CurrentUser, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *User
+		localVarReturnValue  *CurrentUser
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersAPIService.GetMe")

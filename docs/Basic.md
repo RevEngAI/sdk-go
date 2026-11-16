@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **IsOwner** | **bool** | Whether the current user is the owner | 
 **Debug** | **bool** | Whether the current analysis was analysed with debug symbols | 
 **FunctionCount** | **int32** | The number of functions in the binary | 
-**IsAdvanced** | **bool** | Whether the analysis was advanced | 
+**IsAdvanced** | Pointer to **bool** | Always false; advanced (DFG) analysis has been removed | [optional] [default to false]
 **BaseAddress** | **NullableInt32** |  | 
 **BinaryUuid** | Pointer to **NullableString** |  | [optional] 
 **SequencerVersion** | Pointer to **NullableString** |  | [optional] 
@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewBasic
 
-`func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time.Time, sha256Hash string, modelName string, modelId int32, ownerUsername string, isSystem bool, analysisScope string, isOwner bool, debug bool, functionCount int32, isAdvanced bool, baseAddress NullableInt32, teamId int32, ) *Basic`
+`func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time.Time, sha256Hash string, modelName string, modelId int32, ownerUsername string, isSystem bool, analysisScope string, isOwner bool, debug bool, functionCount int32, baseAddress NullableInt32, teamId int32, ) *Basic`
 
 NewBasic instantiates a new Basic object
 This constructor will assign default values to properties that have it defined,
@@ -321,6 +321,11 @@ and a boolean to check if the value has been set.
 
 SetIsAdvanced sets IsAdvanced field to given value.
 
+### HasIsAdvanced
+
+`func (o *Basic) HasIsAdvanced() bool`
+
+HasIsAdvanced returns a boolean if a field has been set.
 
 ### GetBaseAddress
 

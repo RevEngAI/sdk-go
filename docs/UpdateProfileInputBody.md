@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AgentChatLayout** | Pointer to **string** | Agent chat layout: floating over the page, or fixed below it | [optional] 
 **DefaultTeamId** | Pointer to **int64** | Default team ID | [optional] 
 **FirstName** | Pointer to **string** | First name | [optional] 
 **HideAiDecompilationComments** | Pointer to **bool** | Hide AI decompilation comments across the platform | [optional] 
@@ -30,6 +31,31 @@ will change when the set of required properties is changed
 NewUpdateProfileInputBodyWithDefaults instantiates a new UpdateProfileInputBody object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAgentChatLayout
+
+`func (o *UpdateProfileInputBody) GetAgentChatLayout() string`
+
+GetAgentChatLayout returns the AgentChatLayout field if non-nil, zero value otherwise.
+
+### GetAgentChatLayoutOk
+
+`func (o *UpdateProfileInputBody) GetAgentChatLayoutOk() (*string, bool)`
+
+GetAgentChatLayoutOk returns a tuple with the AgentChatLayout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAgentChatLayout
+
+`func (o *UpdateProfileInputBody) SetAgentChatLayout(v string)`
+
+SetAgentChatLayout sets AgentChatLayout field to given value.
+
+### HasAgentChatLayout
+
+`func (o *UpdateProfileInputBody) HasAgentChatLayout() bool`
+
+HasAgentChatLayout returns a boolean if a field has been set.
 
 ### GetDefaultTeamId
 

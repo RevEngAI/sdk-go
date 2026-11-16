@@ -20,7 +20,7 @@ var _ MappedNullable = &AnalysisFunctions{}
 // AnalysisFunctions struct for AnalysisFunctions
 type AnalysisFunctions struct {
 	// The functions associated with the analysis
-	Functions []AppApiRestV2FunctionsTypesFunction `json:"functions"`
+	Functions []Function `json:"functions"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,7 +30,7 @@ type _AnalysisFunctions AnalysisFunctions
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnalysisFunctions(functions []AppApiRestV2FunctionsTypesFunction) *AnalysisFunctions {
+func NewAnalysisFunctions(functions []Function) *AnalysisFunctions {
 	this := AnalysisFunctions{}
 	this.Functions = functions
 	return &this
@@ -45,9 +45,9 @@ func NewAnalysisFunctionsWithDefaults() *AnalysisFunctions {
 }
 
 // GetFunctions returns the Functions field value
-func (o *AnalysisFunctions) GetFunctions() []AppApiRestV2FunctionsTypesFunction {
+func (o *AnalysisFunctions) GetFunctions() []Function {
 	if o == nil {
-		var ret []AppApiRestV2FunctionsTypesFunction
+		var ret []Function
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *AnalysisFunctions) GetFunctions() []AppApiRestV2FunctionsTypesFunction 
 
 // GetFunctionsOk returns a tuple with the Functions field value
 // and a boolean to check if the value has been set.
-func (o *AnalysisFunctions) GetFunctionsOk() ([]AppApiRestV2FunctionsTypesFunction, bool) {
+func (o *AnalysisFunctions) GetFunctionsOk() ([]Function, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *AnalysisFunctions) GetFunctionsOk() ([]AppApiRestV2FunctionsTypesFuncti
 }
 
 // SetFunctions sets field value
-func (o *AnalysisFunctions) SetFunctions(v []AppApiRestV2FunctionsTypesFunction) {
+func (o *AnalysisFunctions) SetFunctions(v []Function) {
 	o.Functions = v
 }
 

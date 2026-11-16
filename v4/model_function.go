@@ -14,11 +14,11 @@ import (
 	"fmt"
 )
 
-// checks if the AppApiRestV2FunctionsTypesFunction type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AppApiRestV2FunctionsTypesFunction{}
+// checks if the Function type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Function{}
 
-// AppApiRestV2FunctionsTypesFunction struct for AppApiRestV2FunctionsTypesFunction
-type AppApiRestV2FunctionsTypesFunction struct {
+// Function struct for Function
+type Function struct {
 	// Function id
 	FunctionId int64 `json:"function_id"`
 	// Demangled name of the function
@@ -34,14 +34,14 @@ type AppApiRestV2FunctionsTypesFunction struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _AppApiRestV2FunctionsTypesFunction AppApiRestV2FunctionsTypesFunction
+type _Function Function
 
-// NewAppApiRestV2FunctionsTypesFunction instantiates a new AppApiRestV2FunctionsTypesFunction object
+// NewFunction instantiates a new Function object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAppApiRestV2FunctionsTypesFunction(functionId int64, functionName string, functionMangledName string, functionVaddr int64, functionSize int32, debug bool) *AppApiRestV2FunctionsTypesFunction {
-	this := AppApiRestV2FunctionsTypesFunction{}
+func NewFunction(functionId int64, functionName string, functionMangledName string, functionVaddr int64, functionSize int32, debug bool) *Function {
+	this := Function{}
 	this.FunctionId = functionId
 	this.FunctionName = functionName
 	this.FunctionMangledName = functionMangledName
@@ -51,16 +51,16 @@ func NewAppApiRestV2FunctionsTypesFunction(functionId int64, functionName string
 	return &this
 }
 
-// NewAppApiRestV2FunctionsTypesFunctionWithDefaults instantiates a new AppApiRestV2FunctionsTypesFunction object
+// NewFunctionWithDefaults instantiates a new Function object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAppApiRestV2FunctionsTypesFunctionWithDefaults() *AppApiRestV2FunctionsTypesFunction {
-	this := AppApiRestV2FunctionsTypesFunction{}
+func NewFunctionWithDefaults() *Function {
+	this := Function{}
 	return &this
 }
 
 // GetFunctionId returns the FunctionId field value
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionId() int64 {
+func (o *Function) GetFunctionId() int64 {
 	if o == nil {
 		var ret int64
 		return ret
@@ -71,7 +71,7 @@ func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionId() int64 {
 
 // GetFunctionIdOk returns a tuple with the FunctionId field value
 // and a boolean to check if the value has been set.
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionIdOk() (*int64, bool) {
+func (o *Function) GetFunctionIdOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -79,12 +79,12 @@ func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionIdOk() (*int64, bool) {
 }
 
 // SetFunctionId sets field value
-func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionId(v int64) {
+func (o *Function) SetFunctionId(v int64) {
 	o.FunctionId = v
 }
 
 // GetFunctionName returns the FunctionName field value
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionName() string {
+func (o *Function) GetFunctionName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -95,7 +95,7 @@ func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionName() string {
 
 // GetFunctionNameOk returns a tuple with the FunctionName field value
 // and a boolean to check if the value has been set.
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionNameOk() (*string, bool) {
+func (o *Function) GetFunctionNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,12 +103,12 @@ func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionNameOk() (*string, bool)
 }
 
 // SetFunctionName sets field value
-func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionName(v string) {
+func (o *Function) SetFunctionName(v string) {
 	o.FunctionName = v
 }
 
 // GetFunctionMangledName returns the FunctionMangledName field value
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionMangledName() string {
+func (o *Function) GetFunctionMangledName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -119,7 +119,7 @@ func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionMangledName() string {
 
 // GetFunctionMangledNameOk returns a tuple with the FunctionMangledName field value
 // and a boolean to check if the value has been set.
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionMangledNameOk() (*string, bool) {
+func (o *Function) GetFunctionMangledNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -127,12 +127,12 @@ func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionMangledNameOk() (*string
 }
 
 // SetFunctionMangledName sets field value
-func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionMangledName(v string) {
+func (o *Function) SetFunctionMangledName(v string) {
 	o.FunctionMangledName = v
 }
 
 // GetFunctionVaddr returns the FunctionVaddr field value
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionVaddr() int64 {
+func (o *Function) GetFunctionVaddr() int64 {
 	if o == nil {
 		var ret int64
 		return ret
@@ -143,7 +143,7 @@ func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionVaddr() int64 {
 
 // GetFunctionVaddrOk returns a tuple with the FunctionVaddr field value
 // and a boolean to check if the value has been set.
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionVaddrOk() (*int64, bool) {
+func (o *Function) GetFunctionVaddrOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -151,12 +151,12 @@ func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionVaddrOk() (*int64, bool)
 }
 
 // SetFunctionVaddr sets field value
-func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionVaddr(v int64) {
+func (o *Function) SetFunctionVaddr(v int64) {
 	o.FunctionVaddr = v
 }
 
 // GetFunctionSize returns the FunctionSize field value
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionSize() int32 {
+func (o *Function) GetFunctionSize() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -167,7 +167,7 @@ func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionSize() int32 {
 
 // GetFunctionSizeOk returns a tuple with the FunctionSize field value
 // and a boolean to check if the value has been set.
-func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionSizeOk() (*int32, bool) {
+func (o *Function) GetFunctionSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -175,12 +175,12 @@ func (o *AppApiRestV2FunctionsTypesFunction) GetFunctionSizeOk() (*int32, bool) 
 }
 
 // SetFunctionSize sets field value
-func (o *AppApiRestV2FunctionsTypesFunction) SetFunctionSize(v int32) {
+func (o *Function) SetFunctionSize(v int32) {
 	o.FunctionSize = v
 }
 
 // GetDebug returns the Debug field value
-func (o *AppApiRestV2FunctionsTypesFunction) GetDebug() bool {
+func (o *Function) GetDebug() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -191,7 +191,7 @@ func (o *AppApiRestV2FunctionsTypesFunction) GetDebug() bool {
 
 // GetDebugOk returns a tuple with the Debug field value
 // and a boolean to check if the value has been set.
-func (o *AppApiRestV2FunctionsTypesFunction) GetDebugOk() (*bool, bool) {
+func (o *Function) GetDebugOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -199,11 +199,11 @@ func (o *AppApiRestV2FunctionsTypesFunction) GetDebugOk() (*bool, bool) {
 }
 
 // SetDebug sets field value
-func (o *AppApiRestV2FunctionsTypesFunction) SetDebug(v bool) {
+func (o *Function) SetDebug(v bool) {
 	o.Debug = v
 }
 
-func (o AppApiRestV2FunctionsTypesFunction) MarshalJSON() ([]byte, error) {
+func (o Function) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -211,7 +211,7 @@ func (o AppApiRestV2FunctionsTypesFunction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AppApiRestV2FunctionsTypesFunction) ToMap() (map[string]interface{}, error) {
+func (o Function) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["function_id"] = o.FunctionId
 	toSerialize["function_name"] = o.FunctionName
@@ -227,7 +227,7 @@ func (o AppApiRestV2FunctionsTypesFunction) ToMap() (map[string]interface{}, err
 	return toSerialize, nil
 }
 
-func (o *AppApiRestV2FunctionsTypesFunction) UnmarshalJSON(data []byte) (err error) {
+func (o *Function) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -254,15 +254,15 @@ func (o *AppApiRestV2FunctionsTypesFunction) UnmarshalJSON(data []byte) (err err
 		}
 	}
 
-	varAppApiRestV2FunctionsTypesFunction := _AppApiRestV2FunctionsTypesFunction{}
+	varFunction := _Function{}
 
-	err = json.Unmarshal(data, &varAppApiRestV2FunctionsTypesFunction)
+	err = json.Unmarshal(data, &varFunction)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AppApiRestV2FunctionsTypesFunction(varAppApiRestV2FunctionsTypesFunction)
+	*o = Function(varFunction)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -279,38 +279,38 @@ func (o *AppApiRestV2FunctionsTypesFunction) UnmarshalJSON(data []byte) (err err
 	return err
 }
 
-type NullableAppApiRestV2FunctionsTypesFunction struct {
-	value *AppApiRestV2FunctionsTypesFunction
+type NullableFunction struct {
+	value *Function
 	isSet bool
 }
 
-func (v NullableAppApiRestV2FunctionsTypesFunction) Get() *AppApiRestV2FunctionsTypesFunction {
+func (v NullableFunction) Get() *Function {
 	return v.value
 }
 
-func (v *NullableAppApiRestV2FunctionsTypesFunction) Set(val *AppApiRestV2FunctionsTypesFunction) {
+func (v *NullableFunction) Set(val *Function) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAppApiRestV2FunctionsTypesFunction) IsSet() bool {
+func (v NullableFunction) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAppApiRestV2FunctionsTypesFunction) Unset() {
+func (v *NullableFunction) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAppApiRestV2FunctionsTypesFunction(val *AppApiRestV2FunctionsTypesFunction) *NullableAppApiRestV2FunctionsTypesFunction {
-	return &NullableAppApiRestV2FunctionsTypesFunction{value: val, isSet: true}
+func NewNullableFunction(val *Function) *NullableFunction {
+	return &NullableFunction{value: val, isSet: true}
 }
 
-func (v NullableAppApiRestV2FunctionsTypesFunction) MarshalJSON() ([]byte, error) {
+func (v NullableFunction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAppApiRestV2FunctionsTypesFunction) UnmarshalJSON(src []byte) error {
+func (v *NullableFunction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -19,13 +19,13 @@ Method | HTTP request | Description
 [**InsertAnalysisLog**](AnalysesCoreAPI.md#InsertAnalysisLog) | **Post** /v2/analyses/{analysis_id}/logs | Insert a log entry for an analysis
 [**ListAnalyses**](AnalysesCoreAPI.md#ListAnalyses) | **Get** /v2/analyses/list | Gets the most recent analyses
 [**LookupBinaryId**](AnalysesCoreAPI.md#LookupBinaryId) | **Get** /v2/analyses/lookup/{binary_id} | Gets the analysis ID from binary ID
-[**PutAnalysisStrings**](AnalysesCoreAPI.md#PutAnalysisStrings) | **Put** /v2/analyses/{analysis_id}/strings | Add strings to the analysis
 [**RequeueAnalysis**](AnalysesCoreAPI.md#RequeueAnalysis) | **Post** /v2/analyses/{analysis_id}/requeue | Requeue Analysis
 [**StartAnalysisFunctionMatching**](AnalysesCoreAPI.md#StartAnalysisFunctionMatching) | **Post** /v3/analyses/{analysis_id}/functions/matches | Start function matching for an analysis
 [**UpdateAnalysis**](AnalysesCoreAPI.md#UpdateAnalysis) | **Patch** /v2/analyses/{analysis_id} | Update Analysis
 [**UpdateAnalysisTags**](AnalysesCoreAPI.md#UpdateAnalysisTags) | **Patch** /v2/analyses/{analysis_id}/tags | Update Analysis Tags
 [**UploadFile**](AnalysesCoreAPI.md#UploadFile) | **Post** /v2/upload | Upload File
 [**V3CreateAnalysis**](AnalysesCoreAPI.md#V3CreateAnalysis) | **Post** /v3/analyses | Create an analysis
+[**V3CreateDynamicExecutionRun**](AnalysesCoreAPI.md#V3CreateDynamicExecutionRun) | **Post** /v3/analyses/{analysis_id}/dynamic-execution/runs | Start a dynamic execution run.
 [**V3DeleteAnalysis**](AnalysesCoreAPI.md#V3DeleteAnalysis) | **Delete** /v3/analyses/{analysis_id} | Delete an analysis.
 [**V3DownloadBinaryExport**](AnalysesCoreAPI.md#V3DownloadBinaryExport) | **Get** /v3/analyses/{analysis_id}/binary-export | Download a binary export
 [**V3GetAnalysis**](AnalysesCoreAPI.md#V3GetAnalysis) | **Get** /v3/analyses/{analysis_id} | Get an analysis.
@@ -38,30 +38,31 @@ Method | HTTP request | Description
 [**V3GetAnalysisStrings**](AnalysesCoreAPI.md#V3GetAnalysisStrings) | **Get** /v3/analyses/{analysis_id}/functions/strings | List strings for an analysis.
 [**V3GetAnalysisStringsStatus**](AnalysesCoreAPI.md#V3GetAnalysisStringsStatus) | **Get** /v3/analyses/{analysis_id}/functions/strings/status | Get the string-extraction status for an analysis.
 [**V3GetBinaryExportOperation**](AnalysesCoreAPI.md#V3GetBinaryExportOperation) | **Get** /v3/operations/binary-export/{task_id} | Get a binary export operation
-[**V3GetDynamicExecutionArtifact**](AnalysesCoreAPI.md#V3GetDynamicExecutionArtifact) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/artifacts/{sha256} | Download an artifact.
-[**V3GetDynamicExecutionLogsDownload**](AnalysesCoreAPI.md#V3GetDynamicExecutionLogsDownload) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/logs/download | Download the execution logs archive.
-[**V3GetDynamicExecutionMemdump**](AnalysesCoreAPI.md#V3GetDynamicExecutionMemdump) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/memdumps/{sha256} | Download a memory dump.
-[**V3GetDynamicExecutionOperation**](AnalysesCoreAPI.md#V3GetDynamicExecutionOperation) | **Get** /v3/operations/dynamic-execution/{analysis_id} | Get a dynamic execution operation.
-[**V3GetDynamicExecutionPcap**](AnalysesCoreAPI.md#V3GetDynamicExecutionPcap) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/pcap | Download the network capture.
-[**V3GetDynamicExecutionReport**](AnalysesCoreAPI.md#V3GetDynamicExecutionReport) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/report | Get the dynamic execution report.
-[**V3GetDynamicExecutionScreenshot**](AnalysesCoreAPI.md#V3GetDynamicExecutionScreenshot) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/screenshots/{index} | Download a screenshot.
-[**V3GetDynamicExecutionSummary**](AnalysesCoreAPI.md#V3GetDynamicExecutionSummary) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/summary | Get the dynamic execution summary.
-[**V3GetDynamicExecutionSummaryOperation**](AnalysesCoreAPI.md#V3GetDynamicExecutionSummaryOperation) | **Get** /v3/operations/dynamic-execution-summary/{analysis_id} | Get a dynamic execution summary operation.
-[**V3GetDynamicExecutionWiresharkKeys**](AnalysesCoreAPI.md#V3GetDynamicExecutionWiresharkKeys) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/wireshark-keys | Download Wireshark TLS session keys.
+[**V3GetDynamicExecutionOperation**](AnalysesCoreAPI.md#V3GetDynamicExecutionOperation) | **Get** /v3/operations/dynamic-execution/{run_id} | Get a dynamic execution operation.
+[**V3GetDynamicExecutionRun**](AnalysesCoreAPI.md#V3GetDynamicExecutionRun) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id} | Get a dynamic execution run.
+[**V3GetDynamicExecutionRunArtifact**](AnalysesCoreAPI.md#V3GetDynamicExecutionRunArtifact) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/artifacts/{sha256} | Download a run&#39;s artifact.
+[**V3GetDynamicExecutionRunLogsDownload**](AnalysesCoreAPI.md#V3GetDynamicExecutionRunLogsDownload) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/logs/download | Download a run&#39;s execution logs archive.
+[**V3GetDynamicExecutionRunMemdump**](AnalysesCoreAPI.md#V3GetDynamicExecutionRunMemdump) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/memdumps/{sha256} | Download a run&#39;s memory dump.
+[**V3GetDynamicExecutionRunPcap**](AnalysesCoreAPI.md#V3GetDynamicExecutionRunPcap) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/pcap | Download a run&#39;s network capture.
+[**V3GetDynamicExecutionRunReport**](AnalysesCoreAPI.md#V3GetDynamicExecutionRunReport) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/report | Get a run&#39;s dynamic execution report.
+[**V3GetDynamicExecutionRunScreenshot**](AnalysesCoreAPI.md#V3GetDynamicExecutionRunScreenshot) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/screenshots/{index} | Download a run&#39;s screenshot.
+[**V3GetDynamicExecutionRunSummary**](AnalysesCoreAPI.md#V3GetDynamicExecutionRunSummary) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/summary | Get a run&#39;s dynamic execution summary.
+[**V3GetDynamicExecutionRunWiresharkKeys**](AnalysesCoreAPI.md#V3GetDynamicExecutionRunWiresharkKeys) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/wireshark-keys | Download a run&#39;s Wireshark TLS session keys.
+[**V3GetDynamicExecutionSummaryOperation**](AnalysesCoreAPI.md#V3GetDynamicExecutionSummaryOperation) | **Get** /v3/operations/dynamic-execution-summary/{run_id} | Get a dynamic execution summary operation.
 [**V3GrantAnalysisAccess**](AnalysesCoreAPI.md#V3GrantAnalysisAccess) | **Post** /v3/analyses/{analysis_id}/access-rules | Share an analysis with a user or team
 [**V3ListAnalyses**](AnalysesCoreAPI.md#V3ListAnalyses) | **Get** /v3/analyses | List analyses
 [**V3ListAnalysisAccessRules**](AnalysesCoreAPI.md#V3ListAnalysisAccessRules) | **Get** /v3/analyses/{analysis_id}/access-rules | List who an analysis is shared with
 [**V3ListAnalysisGlobals**](AnalysesCoreAPI.md#V3ListAnalysisGlobals) | **Get** /v3/analyses/{analysis_id}/globals | List the global variables in an analysis.
 [**V3ListAnalysisOperations**](AnalysesCoreAPI.md#V3ListAnalysisOperations) | **Get** /v3/analyses/{analysis_id}/operations | List the operations run on an analysis.
-[**V3ListDynamicExecutionScreenshots**](AnalysesCoreAPI.md#V3ListDynamicExecutionScreenshots) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/screenshots | List the screenshots captured during execution.
+[**V3ListDynamicExecutionRunScreenshots**](AnalysesCoreAPI.md#V3ListDynamicExecutionRunScreenshots) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/screenshots | List a run&#39;s screenshots.
+[**V3ListDynamicExecutionRuns**](AnalysesCoreAPI.md#V3ListDynamicExecutionRuns) | **Get** /v3/analyses/{analysis_id}/dynamic-execution/runs | List the dynamic execution runs.
 [**V3ListExampleAnalyses**](AnalysesCoreAPI.md#V3ListExampleAnalyses) | **Get** /v3/analyses/examples | List example analyses
 [**V3ListGlobalFunctions**](AnalysesCoreAPI.md#V3ListGlobalFunctions) | **Get** /v3/analyses/{analysis_id}/globals/{vaddr}/functions | List the functions referencing a global variable.
 [**V3LookupAnalysisByBinaryId**](AnalysesCoreAPI.md#V3LookupAnalysisByBinaryId) | **Get** /v3/analyses/lookup/{binary_id} | Look up the most recent analysis for a binary.
 [**V3QueueBinaryExport**](AnalysesCoreAPI.md#V3QueueBinaryExport) | **Post** /v3/analyses/{analysis_id}/binary-export | Queue a binary export
 [**V3RequeueAnalysis**](AnalysesCoreAPI.md#V3RequeueAnalysis) | **Post** /v3/analyses/{analysis_id}/requeue | Requeue an analysis
 [**V3RevokeAnalysisAccess**](AnalysesCoreAPI.md#V3RevokeAnalysisAccess) | **Delete** /v3/analyses/{analysis_id}/access-rules | Stop sharing an analysis with a user or team
-[**V3RunDynamicExecution**](AnalysesCoreAPI.md#V3RunDynamicExecution) | **Post** /v3/analyses/{analysis_id}/dynamic-execution:run | Trigger a dynamic execution run.
-[**V3RunDynamicExecutionSummary**](AnalysesCoreAPI.md#V3RunDynamicExecutionSummary) | **Post** /v3/analyses/{analysis_id}/dynamic-execution/summary:run | Regenerate the dynamic execution summary.
+[**V3RunDynamicExecutionRunSummary**](AnalysesCoreAPI.md#V3RunDynamicExecutionRunSummary) | **Post** /v3/analyses/{analysis_id}/dynamic-execution/runs/{run_id}/summary:run | Regenerate a run&#39;s dynamic execution summary.
 [**V3SearchTags**](AnalysesCoreAPI.md#V3SearchTags) | **Get** /v3/tags | Search tags
 [**V3UpdateAnalysis**](AnalysesCoreAPI.md#V3UpdateAnalysis) | **Patch** /v3/analyses/{analysis_id} | Update an analysis.
 [**V3UpdateAnalysisGlobal**](AnalysesCoreAPI.md#V3UpdateAnalysisGlobal) | **Patch** /v3/analyses/{analysis_id}/globals/{vaddr} | Edit a global variable.
@@ -1142,78 +1143,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PutAnalysisStrings
-
-> BaseResponse PutAnalysisStrings(ctx, analysisId).PutAnalysisStringsRequest(putAnalysisStringsRequest).Execute()
-
-Add strings to the analysis
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v4"
-)
-
-func main() {
-	analysisId := int32(56) // int32 | 
-	putAnalysisStringsRequest := *revengai.NewPutAnalysisStringsRequest([]revengai.AnalysisStringInput{*revengai.NewAnalysisStringInput("Value_example", int32(123), revengai.StringSource("SYSTEM"))}) // PutAnalysisStringsRequest | 
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.PutAnalysisStrings(context.Background(), analysisId).PutAnalysisStringsRequest(putAnalysisStringsRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.PutAnalysisStrings``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PutAnalysisStrings`: BaseResponse
-	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.PutAnalysisStrings`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int32** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPutAnalysisStringsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **putAnalysisStringsRequest** | [**PutAnalysisStringsRequest**](PutAnalysisStringsRequest.md) |  | 
-
-### Return type
-
-[**BaseResponse**](BaseResponse.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## RequeueAnalysis
 
 > BaseResponseCreated RequeueAnalysis(ctx, analysisId).ReAnalysisForm(reAnalysisForm).XRevEngApplication(xRevEngApplication).Execute()
@@ -1627,6 +1556,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OperationCreateMetadataCreateResult**](OperationCreateMetadataCreateResult.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3CreateDynamicExecutionRun
+
+> OperationDynamicExecutionMetadataDynamicExecutionResult V3CreateDynamicExecutionRun(ctx, analysisId).RunDynamicExecutionInputBody(runDynamicExecutionInputBody).Execute()
+
+Start a dynamic execution run.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	runDynamicExecutionInputBody := *revengai.NewRunDynamicExecutionInputBody() // RunDynamicExecutionInputBody |  (optional)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3CreateDynamicExecutionRun(context.Background(), analysisId).RunDynamicExecutionInputBody(runDynamicExecutionInputBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3CreateDynamicExecutionRun``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3CreateDynamicExecutionRun`: OperationDynamicExecutionMetadataDynamicExecutionResult
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3CreateDynamicExecutionRun`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3CreateDynamicExecutionRunRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **runDynamicExecutionInputBody** | [**RunDynamicExecutionInputBody**](RunDynamicExecutionInputBody.md) |  | 
+
+### Return type
+
+[**OperationDynamicExecutionMetadataDynamicExecutionResult**](OperationDynamicExecutionMetadataDynamicExecutionResult.md)
 
 ### Authorization
 
@@ -2500,223 +2501,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V3GetDynamicExecutionArtifact
-
-> V3GetDynamicExecutionArtifact(ctx, analysisId, sha256).Filename(filename).Execute()
-
-Download an artifact.
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v4"
-)
-
-func main() {
-	analysisId := int64(789) // int64 | Analysis ID
-	sha256 := "sha256_example" // string | SHA-256 hex digest of the artifact
-	filename := "filename_example" // string | Optional name for the downloaded file (inside the zip and as the download filename). Defaults to the SHA-256 when omitted. (optional)
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionArtifact(context.Background(), analysisId, sha256).Filename(filename).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionArtifact``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int64** | Analysis ID | 
-**sha256** | **string** | SHA-256 hex digest of the artifact | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiV3GetDynamicExecutionArtifactRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **filename** | **string** | Optional name for the downloaded file (inside the zip and as the download filename). Defaults to the SHA-256 when omitted. | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## V3GetDynamicExecutionLogsDownload
-
-> V3GetDynamicExecutionLogsDownload(ctx, analysisId).Execute()
-
-Download the execution logs archive.
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v4"
-)
-
-func main() {
-	analysisId := int64(789) // int64 | Analysis ID
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionLogsDownload(context.Background(), analysisId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionLogsDownload``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int64** | Analysis ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiV3GetDynamicExecutionLogsDownloadRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## V3GetDynamicExecutionMemdump
-
-> V3GetDynamicExecutionMemdump(ctx, analysisId, sha256).Filename(filename).Execute()
-
-Download a memory dump.
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v4"
-)
-
-func main() {
-	analysisId := int64(789) // int64 | Analysis ID
-	sha256 := "sha256_example" // string | SHA-256 hex digest of the artifact
-	filename := "filename_example" // string | Optional name for the downloaded file (inside the zip and as the download filename). Defaults to the SHA-256 when omitted. (optional)
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionMemdump(context.Background(), analysisId, sha256).Filename(filename).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionMemdump``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int64** | Analysis ID | 
-**sha256** | **string** | SHA-256 hex digest of the artifact | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiV3GetDynamicExecutionMemdumpRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **filename** | **string** | Optional name for the downloaded file (inside the zip and as the download filename). Defaults to the SHA-256 when omitted. | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## V3GetDynamicExecutionOperation
 
-> OperationDynamicExecutionMetadataDynamicExecutionResult V3GetDynamicExecutionOperation(ctx, analysisId).Execute()
+> OperationDynamicExecutionMetadataDynamicExecutionResult V3GetDynamicExecutionOperation(ctx, runId).Execute()
 
 Get a dynamic execution operation.
 
@@ -2735,11 +2522,11 @@ import (
 )
 
 func main() {
-	analysisId := int64(789) // int64 | Analysis ID
+	runId := "runId_example" // string | Dynamic execution run ID
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionOperation(context.Background(), analysisId).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionOperation(context.Background(), runId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionOperation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2755,7 +2542,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int64** | Analysis ID | 
+**runId** | **string** | Dynamic execution run ID | 
 
 ### Other Parameters
 
@@ -2784,11 +2571,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V3GetDynamicExecutionPcap
+## V3GetDynamicExecutionRun
 
-> V3GetDynamicExecutionPcap(ctx, analysisId).Execute()
+> DynamicExecutionRun V3GetDynamicExecutionRun(ctx, analysisId, runId).Execute()
 
-Download the network capture.
+Get a dynamic execution run.
 
 
 
@@ -2806,12 +2593,88 @@ import (
 
 func main() {
 	analysisId := int64(789) // int64 | Analysis ID
+	runId := "runId_example" // string | Dynamic execution run ID
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionPcap(context.Background(), analysisId).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionRun(context.Background(), analysisId, runId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionPcap``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionRun``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetDynamicExecutionRun`: DynamicExecutionRun
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3GetDynamicExecutionRun`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+**runId** | **string** | Dynamic execution run ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetDynamicExecutionRunRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**DynamicExecutionRun**](DynamicExecutionRun.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetDynamicExecutionRunArtifact
+
+> V3GetDynamicExecutionRunArtifact(ctx, analysisId, runId, sha256).Filename(filename).Execute()
+
+Download a run's artifact.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	runId := "runId_example" // string | Dynamic execution run ID
+	sha256 := "sha256_example" // string | SHA-256 hex digest of the artifact
+	filename := "filename_example" // string | Optional name for the downloaded file (inside the zip and as the download filename). Defaults to the SHA-256 when omitted. (optional)
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionRunArtifact(context.Background(), analysisId, runId, sha256).Filename(filename).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionRunArtifact``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -2824,14 +2687,90 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **analysisId** | **int64** | Analysis ID | 
+**runId** | **string** | Dynamic execution run ID | 
+**sha256** | **string** | SHA-256 hex digest of the artifact | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV3GetDynamicExecutionPcapRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiV3GetDynamicExecutionRunArtifactRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
+
+
+ **filename** | **string** | Optional name for the downloaded file (inside the zip and as the download filename). Defaults to the SHA-256 when omitted. | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetDynamicExecutionRunLogsDownload
+
+> V3GetDynamicExecutionRunLogsDownload(ctx, analysisId, runId).Execute()
+
+Download a run's execution logs archive.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	runId := "runId_example" // string | Dynamic execution run ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionRunLogsDownload(context.Background(), analysisId, runId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionRunLogsDownload``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+**runId** | **string** | Dynamic execution run ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetDynamicExecutionRunLogsDownloadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 
 ### Return type
@@ -2852,11 +2791,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V3GetDynamicExecutionReport
+## V3GetDynamicExecutionRunMemdump
 
-> AnalysisReport V3GetDynamicExecutionReport(ctx, analysisId).Execute()
+> V3GetDynamicExecutionRunMemdump(ctx, analysisId, runId, sha256).Filename(filename).Execute()
 
-Get the dynamic execution report.
+Download a run's memory dump.
 
 
 
@@ -2874,16 +2813,17 @@ import (
 
 func main() {
 	analysisId := int64(789) // int64 | Analysis ID
+	runId := "runId_example" // string | Dynamic execution run ID
+	sha256 := "sha256_example" // string | SHA-256 hex digest of the artifact
+	filename := "filename_example" // string | Optional name for the downloaded file (inside the zip and as the download filename). Defaults to the SHA-256 when omitted. (optional)
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionReport(context.Background(), analysisId).Execute()
+	r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionRunMemdump(context.Background(), analysisId, runId, sha256).Filename(filename).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionRunMemdump``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V3GetDynamicExecutionReport`: AnalysisReport
-	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3GetDynamicExecutionReport`: %v\n", resp)
 }
 ```
 
@@ -2894,14 +2834,163 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **analysisId** | **int64** | Analysis ID | 
+**runId** | **string** | Dynamic execution run ID | 
+**sha256** | **string** | SHA-256 hex digest of the artifact | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV3GetDynamicExecutionReportRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiV3GetDynamicExecutionRunMemdumpRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
+
+
+ **filename** | **string** | Optional name for the downloaded file (inside the zip and as the download filename). Defaults to the SHA-256 when omitted. | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetDynamicExecutionRunPcap
+
+> V3GetDynamicExecutionRunPcap(ctx, analysisId, runId).Execute()
+
+Download a run's network capture.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	runId := "runId_example" // string | Dynamic execution run ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionRunPcap(context.Background(), analysisId, runId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionRunPcap``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+**runId** | **string** | Dynamic execution run ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetDynamicExecutionRunPcapRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3GetDynamicExecutionRunReport
+
+> AnalysisReport V3GetDynamicExecutionRunReport(ctx, analysisId, runId).Execute()
+
+Get a run's dynamic execution report.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	runId := "runId_example" // string | Dynamic execution run ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionRunReport(context.Background(), analysisId, runId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionRunReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3GetDynamicExecutionRunReport`: AnalysisReport
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3GetDynamicExecutionRunReport`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+**runId** | **string** | Dynamic execution run ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetDynamicExecutionRunReportRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 
 ### Return type
@@ -2922,11 +3011,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V3GetDynamicExecutionScreenshot
+## V3GetDynamicExecutionRunScreenshot
 
-> V3GetDynamicExecutionScreenshot(ctx, analysisId, index).Execute()
+> V3GetDynamicExecutionRunScreenshot(ctx, analysisId, runId, index).Execute()
 
-Download a screenshot.
+Download a run's screenshot.
 
 
 
@@ -2944,13 +3033,14 @@ import (
 
 func main() {
 	analysisId := int64(789) // int64 | Analysis ID
+	runId := "runId_example" // string | Dynamic execution run ID
 	index := int64(789) // int64 | Index of the screenshot, as listed by the screenshots endpoint
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionScreenshot(context.Background(), analysisId, index).Execute()
+	r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionRunScreenshot(context.Background(), analysisId, runId, index).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionScreenshot``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionRunScreenshot``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -2963,15 +3053,17 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **analysisId** | **int64** | Analysis ID | 
+**runId** | **string** | Dynamic execution run ID | 
 **index** | **int64** | Index of the screenshot, as listed by the screenshots endpoint | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV3GetDynamicExecutionScreenshotRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiV3GetDynamicExecutionRunScreenshotRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
 
 
@@ -2993,11 +3085,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V3GetDynamicExecutionSummary
+## V3GetDynamicExecutionRunSummary
 
-> DynamicExecutionSummary V3GetDynamicExecutionSummary(ctx, analysisId).Execute()
+> DynamicExecutionSummary V3GetDynamicExecutionRunSummary(ctx, analysisId, runId).Execute()
 
-Get the dynamic execution summary.
+Get a run's dynamic execution summary.
 
 
 
@@ -3015,16 +3107,17 @@ import (
 
 func main() {
 	analysisId := int64(789) // int64 | Analysis ID
+	runId := "runId_example" // string | Dynamic execution run ID
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionSummary(context.Background(), analysisId).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionRunSummary(context.Background(), analysisId, runId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionSummary``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionRunSummary``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V3GetDynamicExecutionSummary`: DynamicExecutionSummary
-	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3GetDynamicExecutionSummary`: %v\n", resp)
+	// response from `V3GetDynamicExecutionRunSummary`: DynamicExecutionSummary
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3GetDynamicExecutionRunSummary`: %v\n", resp)
 }
 ```
 
@@ -3035,14 +3128,16 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **analysisId** | **int64** | Analysis ID | 
+**runId** | **string** | Dynamic execution run ID | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV3GetDynamicExecutionSummaryRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiV3GetDynamicExecutionRunSummaryRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
 
 ### Return type
@@ -3063,9 +3158,80 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V3GetDynamicExecutionRunWiresharkKeys
+
+> V3GetDynamicExecutionRunWiresharkKeys(ctx, analysisId, runId).Execute()
+
+Download a run's Wireshark TLS session keys.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	runId := "runId_example" // string | Dynamic execution run ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionRunWiresharkKeys(context.Background(), analysisId, runId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionRunWiresharkKeys``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+**runId** | **string** | Dynamic execution run ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3GetDynamicExecutionRunWiresharkKeysRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V3GetDynamicExecutionSummaryOperation
 
-> OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult V3GetDynamicExecutionSummaryOperation(ctx, analysisId).Execute()
+> OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult V3GetDynamicExecutionSummaryOperation(ctx, runId).Execute()
 
 Get a dynamic execution summary operation.
 
@@ -3084,11 +3250,11 @@ import (
 )
 
 func main() {
-	analysisId := int64(789) // int64 | Analysis ID
+	runId := "runId_example" // string | Dynamic execution run ID
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionSummaryOperation(context.Background(), analysisId).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionSummaryOperation(context.Background(), runId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionSummaryOperation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3104,7 +3270,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int64** | Analysis ID | 
+**runId** | **string** | Dynamic execution run ID | 
 
 ### Other Parameters
 
@@ -3118,74 +3284,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult**](OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## V3GetDynamicExecutionWiresharkKeys
-
-> V3GetDynamicExecutionWiresharkKeys(ctx, analysisId).Execute()
-
-Download Wireshark TLS session keys.
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v4"
-)
-
-func main() {
-	analysisId := int64(789) // int64 | Analysis ID
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	r, err := apiClient.AnalysesCoreAPI.V3GetDynamicExecutionWiresharkKeys(context.Background(), analysisId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3GetDynamicExecutionWiresharkKeys``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int64** | Analysis ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiV3GetDynamicExecutionWiresharkKeysRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
 
 ### Authorization
 
@@ -3589,11 +3687,84 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V3ListDynamicExecutionScreenshots
+## V3ListDynamicExecutionRunScreenshots
 
-> ScreenshotsIndex V3ListDynamicExecutionScreenshots(ctx, analysisId).Execute()
+> ScreenshotsIndex V3ListDynamicExecutionRunScreenshots(ctx, analysisId, runId).Execute()
 
-List the screenshots captured during execution.
+List a run's screenshots.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	analysisId := int64(789) // int64 | Analysis ID
+	runId := "runId_example" // string | Dynamic execution run ID
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.AnalysesCoreAPI.V3ListDynamicExecutionRunScreenshots(context.Background(), analysisId, runId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3ListDynamicExecutionRunScreenshots``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3ListDynamicExecutionRunScreenshots`: ScreenshotsIndex
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3ListDynamicExecutionRunScreenshots`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**analysisId** | **int64** | Analysis ID | 
+**runId** | **string** | Dynamic execution run ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3ListDynamicExecutionRunScreenshotsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**ScreenshotsIndex**](ScreenshotsIndex.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3ListDynamicExecutionRuns
+
+> ListDynamicExecutionRunsOutputBody V3ListDynamicExecutionRuns(ctx, analysisId).Execute()
+
+List the dynamic execution runs.
 
 
 
@@ -3614,13 +3785,13 @@ func main() {
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.V3ListDynamicExecutionScreenshots(context.Background(), analysisId).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.V3ListDynamicExecutionRuns(context.Background(), analysisId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3ListDynamicExecutionScreenshots``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3ListDynamicExecutionRuns``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V3ListDynamicExecutionScreenshots`: ScreenshotsIndex
-	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3ListDynamicExecutionScreenshots`: %v\n", resp)
+	// response from `V3ListDynamicExecutionRuns`: ListDynamicExecutionRunsOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3ListDynamicExecutionRuns`: %v\n", resp)
 }
 ```
 
@@ -3634,7 +3805,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV3ListDynamicExecutionScreenshotsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiV3ListDynamicExecutionRunsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -3643,7 +3814,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ScreenshotsIndex**](ScreenshotsIndex.md)
+[**ListDynamicExecutionRunsOutputBody**](ListDynamicExecutionRunsOutputBody.md)
 
 ### Authorization
 
@@ -4081,83 +4252,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V3RunDynamicExecution
+## V3RunDynamicExecutionRunSummary
 
-> OperationDynamicExecutionMetadataDynamicExecutionResult V3RunDynamicExecution(ctx, analysisId).RunDynamicExecutionInputBody(runDynamicExecutionInputBody).Execute()
+> OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult V3RunDynamicExecutionRunSummary(ctx, analysisId, runId).Execute()
 
-Trigger a dynamic execution run.
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	revengai "github.com/RevEngAI/sdk-go/v4"
-)
-
-func main() {
-	analysisId := int64(789) // int64 | Analysis ID
-	runDynamicExecutionInputBody := *revengai.NewRunDynamicExecutionInputBody() // RunDynamicExecutionInputBody |  (optional)
-
-	configuration := revengai.NewConfiguration()
-	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.V3RunDynamicExecution(context.Background(), analysisId).RunDynamicExecutionInputBody(runDynamicExecutionInputBody).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3RunDynamicExecution``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `V3RunDynamicExecution`: OperationDynamicExecutionMetadataDynamicExecutionResult
-	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3RunDynamicExecution`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**analysisId** | **int64** | Analysis ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiV3RunDynamicExecutionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **runDynamicExecutionInputBody** | [**RunDynamicExecutionInputBody**](RunDynamicExecutionInputBody.md) |  | 
-
-### Return type
-
-[**OperationDynamicExecutionMetadataDynamicExecutionResult**](OperationDynamicExecutionMetadataDynamicExecutionResult.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## V3RunDynamicExecutionSummary
-
-> OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult V3RunDynamicExecutionSummary(ctx, analysisId).Execute()
-
-Regenerate the dynamic execution summary.
+Regenerate a run's dynamic execution summary.
 
 
 
@@ -4175,16 +4274,17 @@ import (
 
 func main() {
 	analysisId := int64(789) // int64 | Analysis ID
+	runId := "runId_example" // string | Dynamic execution run ID
 
 	configuration := revengai.NewConfiguration()
 	apiClient := revengai.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalysesCoreAPI.V3RunDynamicExecutionSummary(context.Background(), analysisId).Execute()
+	resp, r, err := apiClient.AnalysesCoreAPI.V3RunDynamicExecutionRunSummary(context.Background(), analysisId, runId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3RunDynamicExecutionSummary``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `AnalysesCoreAPI.V3RunDynamicExecutionRunSummary``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V3RunDynamicExecutionSummary`: OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult
-	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3RunDynamicExecutionSummary`: %v\n", resp)
+	// response from `V3RunDynamicExecutionRunSummary`: OperationDynamicExecutionSummaryMetadataDynamicExecutionSummaryResult
+	fmt.Fprintf(os.Stdout, "Response from `AnalysesCoreAPI.V3RunDynamicExecutionRunSummary`: %v\n", resp)
 }
 ```
 
@@ -4195,14 +4295,16 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **analysisId** | **int64** | Analysis ID | 
+**runId** | **string** | Dynamic execution run ID | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV3RunDynamicExecutionSummaryRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiV3RunDynamicExecutionRunSummaryRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
 
 ### Return type

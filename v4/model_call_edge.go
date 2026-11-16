@@ -29,6 +29,8 @@ type CallEdge struct {
 	// Imported function ID for an external callee, resolved via the thunk/stub address.
 	ImportedFunctionId *int64 `json:"imported_function_id,omitempty"`
 	IsExternal bool `json:"is_external"`
+	// Who found the edge: SYSTEM for the analysis, AI_AGENT for a call AI decompilation recovered that the analysis missed.
+	Source string `json:"source"`
 	ThunkedVaddr *int64 `json:"thunked_vaddr,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -39,12 +41,13 @@ type _CallEdge CallEdge
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCallEdge(calleeVaddr int64, callerFunctionId int64, callerVaddr int64, isExternal bool) *CallEdge {
+func NewCallEdge(calleeVaddr int64, callerFunctionId int64, callerVaddr int64, isExternal bool, source string) *CallEdge {
 	this := CallEdge{}
 	this.CalleeVaddr = calleeVaddr
 	this.CallerFunctionId = callerFunctionId
 	this.CallerVaddr = callerVaddr
 	this.IsExternal = isExternal
+	this.Source = source
 	return &this
 }
 
@@ -280,6 +283,30 @@ func (o *CallEdge) SetIsExternal(v bool) {
 	o.IsExternal = v
 }
 
+// GetSource returns the Source field value
+func (o *CallEdge) GetSource() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Source
+}
+
+// GetSourceOk returns a tuple with the Source field value
+// and a boolean to check if the value has been set.
+func (o *CallEdge) GetSourceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Source, true
+}
+
+// SetSource sets field value
+func (o *CallEdge) SetSource(v string) {
+	o.Source = v
+}
+
 // GetThunkedVaddr returns the ThunkedVaddr field value if set, zero value otherwise.
 func (o *CallEdge) GetThunkedVaddr() int64 {
 	if o == nil || IsNil(o.ThunkedVaddr) {
@@ -338,6 +365,7 @@ func (o CallEdge) ToMap() (map[string]interface{}, error) {
 		toSerialize["imported_function_id"] = o.ImportedFunctionId
 	}
 	toSerialize["is_external"] = o.IsExternal
+	toSerialize["source"] = o.Source
 	if !IsNil(o.ThunkedVaddr) {
 		toSerialize["thunked_vaddr"] = o.ThunkedVaddr
 	}
@@ -358,6 +386,7 @@ func (o *CallEdge) UnmarshalJSON(data []byte) (err error) {
 		"caller_function_id",
 		"caller_vaddr",
 		"is_external",
+		"source",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -395,6 +424,7 @@ func (o *CallEdge) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "caller_vaddr")
 		delete(additionalProperties, "imported_function_id")
 		delete(additionalProperties, "is_external")
+		delete(additionalProperties, "source")
 		delete(additionalProperties, "thunked_vaddr")
 		o.AdditionalProperties = additionalProperties
 	}

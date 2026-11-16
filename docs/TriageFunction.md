@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Address** | **int64** | Virtual address of the function | 
 **Capabilities** | **[]string** | Capability categories the function exhibits | 
+**CapabilityImplementations** | Pointer to [**[]CapabilityImplementation**](CapabilityImplementation.md) | How the function implements each assigned capability. Absent when the run did not record any. | [optional] 
 **Id** | **int64** | ID of the function | 
 **Score** | **float64** | Maliciousness score for the function, 0 to 1 | 
 **Summary** | **string** | What the function does | 
@@ -79,6 +80,41 @@ SetCapabilities sets Capabilities field to given value.
 `func (o *TriageFunction) UnsetCapabilities()`
 
 UnsetCapabilities ensures that no value is present for Capabilities, not even an explicit nil
+### GetCapabilityImplementations
+
+`func (o *TriageFunction) GetCapabilityImplementations() []CapabilityImplementation`
+
+GetCapabilityImplementations returns the CapabilityImplementations field if non-nil, zero value otherwise.
+
+### GetCapabilityImplementationsOk
+
+`func (o *TriageFunction) GetCapabilityImplementationsOk() (*[]CapabilityImplementation, bool)`
+
+GetCapabilityImplementationsOk returns a tuple with the CapabilityImplementations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapabilityImplementations
+
+`func (o *TriageFunction) SetCapabilityImplementations(v []CapabilityImplementation)`
+
+SetCapabilityImplementations sets CapabilityImplementations field to given value.
+
+### HasCapabilityImplementations
+
+`func (o *TriageFunction) HasCapabilityImplementations() bool`
+
+HasCapabilityImplementations returns a boolean if a field has been set.
+
+### SetCapabilityImplementationsNil
+
+`func (o *TriageFunction) SetCapabilityImplementationsNil(b bool)`
+
+ SetCapabilityImplementationsNil sets the value for CapabilityImplementations to be an explicit nil
+
+### UnsetCapabilityImplementations
+`func (o *TriageFunction) UnsetCapabilityImplementations()`
+
+UnsetCapabilityImplementations ensures that no value is present for CapabilityImplementations, not even an explicit nil
 ### GetId
 
 `func (o *TriageFunction) GetId() int64`

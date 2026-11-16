@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Functions** | [**[]AppApiRestV2FunctionsTypesFunction**](AppApiRestV2FunctionsTypesFunction.md) | The functions associated with the analysis | 
+**Functions** | [**[]Function**](Function.md) | The functions associated with the analysis | 
 
 ## Methods
 
 ### NewAnalysisFunctions
 
-`func NewAnalysisFunctions(functions []AppApiRestV2FunctionsTypesFunction, ) *AnalysisFunctions`
+`func NewAnalysisFunctions(functions []Function, ) *AnalysisFunctions`
 
 NewAnalysisFunctions instantiates a new AnalysisFunctions object
 This constructor will assign default values to properties that have it defined,
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetFunctions
 
-`func (o *AnalysisFunctions) GetFunctions() []AppApiRestV2FunctionsTypesFunction`
+`func (o *AnalysisFunctions) GetFunctions() []Function`
 
 GetFunctions returns the Functions field if non-nil, zero value otherwise.
 
 ### GetFunctionsOk
 
-`func (o *AnalysisFunctions) GetFunctionsOk() (*[]AppApiRestV2FunctionsTypesFunction, bool)`
+`func (o *AnalysisFunctions) GetFunctionsOk() (*[]Function, bool)`
 
 GetFunctionsOk returns a tuple with the Functions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFunctions
 
-`func (o *AnalysisFunctions) SetFunctions(v []AppApiRestV2FunctionsTypesFunction)`
+`func (o *AnalysisFunctions) SetFunctions(v []Function)`
 
 SetFunctions sets Functions field to given value.
 

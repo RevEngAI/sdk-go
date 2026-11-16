@@ -18,6 +18,8 @@ var _ MappedNullable = &UpdateProfileInputBody{}
 
 // UpdateProfileInputBody struct for UpdateProfileInputBody
 type UpdateProfileInputBody struct {
+	// Agent chat layout: floating over the page, or fixed below it
+	AgentChatLayout *string `json:"agent_chat_layout,omitempty"`
 	// Default team ID
 	DefaultTeamId *int64 `json:"default_team_id,omitempty"`
 	// First name
@@ -52,6 +54,38 @@ func NewUpdateProfileInputBody() *UpdateProfileInputBody {
 func NewUpdateProfileInputBodyWithDefaults() *UpdateProfileInputBody {
 	this := UpdateProfileInputBody{}
 	return &this
+}
+
+// GetAgentChatLayout returns the AgentChatLayout field value if set, zero value otherwise.
+func (o *UpdateProfileInputBody) GetAgentChatLayout() string {
+	if o == nil || IsNil(o.AgentChatLayout) {
+		var ret string
+		return ret
+	}
+	return *o.AgentChatLayout
+}
+
+// GetAgentChatLayoutOk returns a tuple with the AgentChatLayout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileInputBody) GetAgentChatLayoutOk() (*string, bool) {
+	if o == nil || IsNil(o.AgentChatLayout) {
+		return nil, false
+	}
+	return o.AgentChatLayout, true
+}
+
+// HasAgentChatLayout returns a boolean if a field has been set.
+func (o *UpdateProfileInputBody) HasAgentChatLayout() bool {
+	if o != nil && !IsNil(o.AgentChatLayout) {
+		return true
+	}
+
+	return false
+}
+
+// SetAgentChatLayout gets a reference to the given string and assigns it to the AgentChatLayout field.
+func (o *UpdateProfileInputBody) SetAgentChatLayout(v string) {
+	o.AgentChatLayout = &v
 }
 
 // GetDefaultTeamId returns the DefaultTeamId field value if set, zero value otherwise.
@@ -288,6 +322,9 @@ func (o UpdateProfileInputBody) MarshalJSON() ([]byte, error) {
 
 func (o UpdateProfileInputBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AgentChatLayout) {
+		toSerialize["agent_chat_layout"] = o.AgentChatLayout
+	}
 	if !IsNil(o.DefaultTeamId) {
 		toSerialize["default_team_id"] = o.DefaultTeamId
 	}
@@ -331,6 +368,7 @@ func (o *UpdateProfileInputBody) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "agent_chat_layout")
 		delete(additionalProperties, "default_team_id")
 		delete(additionalProperties, "first_name")
 		delete(additionalProperties, "hide_ai_decompilation_comments")

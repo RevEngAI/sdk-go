@@ -19,6 +19,7 @@ Method | HTTP request | Description
 [**V3GetBinaryExternals**](BinariesAPI.md#V3GetBinaryExternals) | **Get** /v3/binaries/{binary_id}/externals | Get third-party threat-intel lookups for a binary.
 [**V3GetBinaryRelated**](BinariesAPI.md#V3GetBinaryRelated) | **Get** /v3/binaries/{binary_id}/related | Get the binaries related to this one by unpacking.
 [**V3GetBinaryRelatedStatus**](BinariesAPI.md#V3GetBinaryRelatedStatus) | **Get** /v3/binaries/{binary_id}/related/status | Get the archive-unpacking status for a binary.
+[**V3ListMalwareFamilies**](BinariesAPI.md#V3ListMalwareFamilies) | **Get** /v3/malware-families | Look up the malware families of binaries in the RevEng.AI malware corpus.
 [**V3SearchBinaries**](BinariesAPI.md#V3SearchBinaries) | **Get** /v3/binaries | Search binaries
 [**V3UploadFile**](BinariesAPI.md#V3UploadFile) | **Post** /v3/upload | Upload a file.
 
@@ -1041,6 +1042,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetRelatedStatusOutputBody**](GetRelatedStatusOutputBody.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3ListMalwareFamilies
+
+> ListMalwareFamiliesOutputBody V3ListMalwareFamilies(ctx).BinaryIds(binaryIds).Execute()
+
+Look up the malware families of binaries in the RevEng.AI malware corpus.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	revengai "github.com/RevEngAI/sdk-go/v4"
+)
+
+func main() {
+	binaryIds := []int64{int64(123)} // []int64 | Binaries to look up, typically those a function-matching run found in the malware corpus.
+
+	configuration := revengai.NewConfiguration()
+	apiClient := revengai.NewAPIClient(configuration)
+	resp, r, err := apiClient.BinariesAPI.V3ListMalwareFamilies(context.Background()).BinaryIds(binaryIds).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `BinariesAPI.V3ListMalwareFamilies``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V3ListMalwareFamilies`: ListMalwareFamiliesOutputBody
+	fmt.Fprintf(os.Stdout, "Response from `BinariesAPI.V3ListMalwareFamilies`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV3ListMalwareFamiliesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **binaryIds** | **[]int64** | Binaries to look up, typically those a function-matching run found in the malware corpus. | 
+
+### Return type
+
+[**ListMalwareFamiliesOutputBody**](ListMalwareFamiliesOutputBody.md)
 
 ### Authorization
 

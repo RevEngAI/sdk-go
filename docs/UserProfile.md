@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AgentChatLayout** | **string** |  | 
 **DefaultTeamId** | Pointer to **int64** |  | [optional] 
 **FirstName** | **string** |  | 
 **HideAiDecompilationComments** | **bool** |  | 
@@ -16,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewUserProfile
 
-`func NewUserProfile(firstName string, hideAiDecompilationComments bool, hideExampleBinaries bool, lastName string, timeZone string, username string, ) *UserProfile`
+`func NewUserProfile(agentChatLayout string, firstName string, hideAiDecompilationComments bool, hideExampleBinaries bool, lastName string, timeZone string, username string, ) *UserProfile`
 
 NewUserProfile instantiates a new UserProfile object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +31,26 @@ will change when the set of required properties is changed
 NewUserProfileWithDefaults instantiates a new UserProfile object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAgentChatLayout
+
+`func (o *UserProfile) GetAgentChatLayout() string`
+
+GetAgentChatLayout returns the AgentChatLayout field if non-nil, zero value otherwise.
+
+### GetAgentChatLayoutOk
+
+`func (o *UserProfile) GetAgentChatLayoutOk() (*string, bool)`
+
+GetAgentChatLayoutOk returns a tuple with the AgentChatLayout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAgentChatLayout
+
+`func (o *UserProfile) SetAgentChatLayout(v string)`
+
+SetAgentChatLayout sets AgentChatLayout field to given value.
+
 
 ### GetDefaultTeamId
 

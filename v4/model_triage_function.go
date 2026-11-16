@@ -23,6 +23,8 @@ type TriageFunction struct {
 	Address int64 `json:"address"`
 	// Capability categories the function exhibits
 	Capabilities []string `json:"capabilities"`
+	// How the function implements each assigned capability. Absent when the run did not record any.
+	CapabilityImplementations []CapabilityImplementation `json:"capability_implementations,omitempty"`
 	// ID of the function
 	Id int64 `json:"id"`
 	// Maliciousness score for the function, 0 to 1
@@ -104,6 +106,39 @@ func (o *TriageFunction) GetCapabilitiesOk() ([]string, bool) {
 // SetCapabilities sets field value
 func (o *TriageFunction) SetCapabilities(v []string) {
 	o.Capabilities = v
+}
+
+// GetCapabilityImplementations returns the CapabilityImplementations field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TriageFunction) GetCapabilityImplementations() []CapabilityImplementation {
+	if o == nil {
+		var ret []CapabilityImplementation
+		return ret
+	}
+	return o.CapabilityImplementations
+}
+
+// GetCapabilityImplementationsOk returns a tuple with the CapabilityImplementations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TriageFunction) GetCapabilityImplementationsOk() ([]CapabilityImplementation, bool) {
+	if o == nil || IsNil(o.CapabilityImplementations) {
+		return nil, false
+	}
+	return o.CapabilityImplementations, true
+}
+
+// HasCapabilityImplementations returns a boolean if a field has been set.
+func (o *TriageFunction) HasCapabilityImplementations() bool {
+	if o != nil && !IsNil(o.CapabilityImplementations) {
+		return true
+	}
+
+	return false
+}
+
+// SetCapabilityImplementations gets a reference to the given []CapabilityImplementation and assigns it to the CapabilityImplementations field.
+func (o *TriageFunction) SetCapabilityImplementations(v []CapabilityImplementation) {
+	o.CapabilityImplementations = v
 }
 
 // GetId returns the Id field value
@@ -192,6 +227,9 @@ func (o TriageFunction) ToMap() (map[string]interface{}, error) {
 	if o.Capabilities != nil {
 		toSerialize["capabilities"] = o.Capabilities
 	}
+	if o.CapabilityImplementations != nil {
+		toSerialize["capability_implementations"] = o.CapabilityImplementations
+	}
 	toSerialize["id"] = o.Id
 	toSerialize["score"] = o.Score
 	toSerialize["summary"] = o.Summary
@@ -244,6 +282,7 @@ func (o *TriageFunction) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "address")
 		delete(additionalProperties, "capabilities")
+		delete(additionalProperties, "capability_implementations")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "score")
 		delete(additionalProperties, "summary")

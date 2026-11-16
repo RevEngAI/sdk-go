@@ -46,8 +46,9 @@ type Basic struct {
 	Debug bool `json:"debug"`
 	// The number of functions in the binary
 	FunctionCount int32 `json:"function_count"`
-	// Whether the analysis was advanced
-	IsAdvanced bool `json:"is_advanced"`
+	// Always false; advanced (DFG) analysis has been removed
+	// Deprecated
+	IsAdvanced *bool `json:"is_advanced,omitempty"`
 	BaseAddress NullableInt32 `json:"base_address"`
 	BinaryUuid NullableString `json:"binary_uuid,omitempty"`
 	SequencerVersion NullableString `json:"sequencer_version,omitempty"`
@@ -62,7 +63,7 @@ type _Basic Basic
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time.Time, sha256Hash string, modelName string, modelId int32, ownerUsername string, isSystem bool, analysisScope string, isOwner bool, debug bool, functionCount int32, isAdvanced bool, baseAddress NullableInt32, teamId int32) *Basic {
+func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time.Time, sha256Hash string, modelName string, modelId int32, ownerUsername string, isSystem bool, analysisScope string, isOwner bool, debug bool, functionCount int32, baseAddress NullableInt32, teamId int32) *Basic {
 	this := Basic{}
 	this.BinaryId = binaryId
 	this.BinaryName = binaryName
@@ -77,7 +78,8 @@ func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time
 	this.IsOwner = isOwner
 	this.Debug = debug
 	this.FunctionCount = functionCount
-	this.IsAdvanced = isAdvanced
+	var isAdvanced bool = false
+	this.IsAdvanced = &isAdvanced
 	this.BaseAddress = baseAddress
 	this.TeamId = teamId
 	return &this
@@ -88,6 +90,8 @@ func NewBasic(binaryId int32, binaryName string, binarySize int32, creation time
 // but it doesn't guarantee that properties required by API are set
 func NewBasicWithDefaults() *Basic {
 	this := Basic{}
+	var isAdvanced bool = false
+	this.IsAdvanced = &isAdvanced
 	return &this
 }
 
@@ -403,28 +407,39 @@ func (o *Basic) SetFunctionCount(v int32) {
 	o.FunctionCount = v
 }
 
-// GetIsAdvanced returns the IsAdvanced field value
+// GetIsAdvanced returns the IsAdvanced field value if set, zero value otherwise.
+// Deprecated
 func (o *Basic) GetIsAdvanced() bool {
-	if o == nil {
+	if o == nil || IsNil(o.IsAdvanced) {
 		var ret bool
 		return ret
 	}
-
-	return o.IsAdvanced
+	return *o.IsAdvanced
 }
 
-// GetIsAdvancedOk returns a tuple with the IsAdvanced field value
+// GetIsAdvancedOk returns a tuple with the IsAdvanced field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Basic) GetIsAdvancedOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IsAdvanced) {
 		return nil, false
 	}
-	return &o.IsAdvanced, true
+	return o.IsAdvanced, true
 }
 
-// SetIsAdvanced sets field value
+// HasIsAdvanced returns a boolean if a field has been set.
+func (o *Basic) HasIsAdvanced() bool {
+	if o != nil && !IsNil(o.IsAdvanced) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsAdvanced gets a reference to the given bool and assigns it to the IsAdvanced field.
+// Deprecated
 func (o *Basic) SetIsAdvanced(v bool) {
-	o.IsAdvanced = v
+	o.IsAdvanced = &v
 }
 
 // GetBaseAddress returns the BaseAddress field value
@@ -584,7 +599,9 @@ func (o Basic) ToMap() (map[string]interface{}, error) {
 	toSerialize["is_owner"] = o.IsOwner
 	toSerialize["debug"] = o.Debug
 	toSerialize["function_count"] = o.FunctionCount
-	toSerialize["is_advanced"] = o.IsAdvanced
+	if !IsNil(o.IsAdvanced) {
+		toSerialize["is_advanced"] = o.IsAdvanced
+	}
 	toSerialize["base_address"] = o.BaseAddress.Get()
 	if o.BinaryUuid.IsSet() {
 		toSerialize["binary_uuid"] = o.BinaryUuid.Get()
@@ -619,7 +636,6 @@ func (o *Basic) UnmarshalJSON(data []byte) (err error) {
 		"is_owner",
 		"debug",
 		"function_count",
-		"is_advanced",
 		"base_address",
 		"team_id",
 	}

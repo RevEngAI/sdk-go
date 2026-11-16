@@ -12,13 +12,14 @@ Name | Type | Description | Notes
 **CallerVaddr** | **int64** | Entry vaddr of the caller function (joined from function_t). | 
 **ImportedFunctionId** | Pointer to **int64** | Imported function ID for an external callee, resolved via the thunk/stub address. | [optional] 
 **IsExternal** | **bool** |  | 
+**Source** | **string** | Who found the edge: SYSTEM for the analysis, AI_AGENT for a call AI decompilation recovered that the analysis missed. | 
 **ThunkedVaddr** | Pointer to **int64** |  | [optional] 
 
 ## Methods
 
 ### NewCallEdge
 
-`func NewCallEdge(calleeVaddr int64, callerFunctionId int64, callerVaddr int64, isExternal bool, ) *CallEdge`
+`func NewCallEdge(calleeVaddr int64, callerFunctionId int64, callerVaddr int64, isExternal bool, source string, ) *CallEdge`
 
 NewCallEdge instantiates a new CallEdge object
 This constructor will assign default values to properties that have it defined,
@@ -211,6 +212,26 @@ and a boolean to check if the value has been set.
 `func (o *CallEdge) SetIsExternal(v bool)`
 
 SetIsExternal sets IsExternal field to given value.
+
+
+### GetSource
+
+`func (o *CallEdge) GetSource() string`
+
+GetSource returns the Source field if non-nil, zero value otherwise.
+
+### GetSourceOk
+
+`func (o *CallEdge) GetSourceOk() (*string, bool)`
+
+GetSourceOk returns a tuple with the Source field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSource
+
+`func (o *CallEdge) SetSource(v string)`
+
+SetSource sets Source field to given value.
 
 
 ### GetThunkedVaddr
